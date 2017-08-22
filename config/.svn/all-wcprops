@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/Technology/!svn/ver/42705/ManagementPlatform/OperationManagement/trunk/OperationManagement/config
+END
+redis.properties
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/redis.properties
+END
+spring-mvc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/spring-mvc.xml
+END
+applicationcontext-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/applicationcontext-spring.xml
+END
+securityFilter.properties
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/securityFilter.properties
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/Technology/!svn/ver/42705/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/log4j.properties
+END
+mybatis-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/mybatis-config.xml
+END
+app.properties
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/app.properties
+END
+generatorConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/Technology/!svn/ver/25121/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/generatorConfig.xml
+END
+jdbc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/Technology/!svn/ver/29961/ManagementPlatform/OperationManagement/trunk/OperationManagement/config/jdbc.properties
+END

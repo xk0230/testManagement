@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.ClsClassroomMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.ClsClassroom">
+    <id column="CLS_CLASSROOM_ID" jdbcType="VARCHAR" property="clsClassroomId" />
+    <result column="ROOM_NAME" jdbcType="VARCHAR" property="roomName" />
+    <result column="ROOM_TYPE" jdbcType="VARCHAR" property="roomType" />
+    <result column="CLS_SCHOOL_ID" jdbcType="VARCHAR" property="clsSchoolId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CONTACT_PERSON_NAME" jdbcType="VARCHAR" property="contactPersonName" />
+    <result column="CONTACT_PERSON_PHONE" jdbcType="VARCHAR" property="contactPersonPhone" />
+    <result column="TEAMVIEWID" jdbcType="VARCHAR" property="teamviewid" />
+    <result column="TEAMVIEWPSD" jdbcType="VARCHAR" property="teamviewpsd" />
+    <result column="ZXKT_SERVICE" jdbcType="VARCHAR" property="zxktService" />
+    <result column="ZXKT_USER_NAME_PSD" jdbcType="VARCHAR" property="zxktUserNamePsd" />
+    <result column="DBCJ_VERSION" jdbcType="VARCHAR" property="dbcjVersion" />
+    <result column="PROJECT_VERSION" jdbcType="VARCHAR" property="projectVersion" />
+    <result column="IMPLEMENTATION_PROGRESS" jdbcType="VARCHAR" property="implementationProgress" />
+    <result column="IMPLEMENTATION_TIME_BEGIN" jdbcType="TIMESTAMP" property="implementationTimeBegin" />
+    <result column="IMPLEMENTATION_TIME_END" jdbcType="TIMESTAMP" property="implementationTimeEnd" />
+    <result column="ZCSB_NUM" jdbcType="VARCHAR" property="zcsbNum" />
+    <result column="PRODUCT_WARRANTY_PERIOD" jdbcType="VARCHAR" property="productWarrantyPeriod" />
+    <result column="JGPT_ADDRESS" jdbcType="VARCHAR" property="jgptAddress" />
+    <result column="JGPT_SERVICE" jdbcType="VARCHAR" property="jgptService" />
+    <result column="JGPT_NAME_PSD" jdbcType="VARCHAR" property="jgptNamePsd" />
+    <result column="SERVICE_INFO" jdbcType="VARCHAR" property="serviceInfo" />
+    <result column="NET_INFO" jdbcType="VARCHAR" property="netInfo" />
+    <result column="BLACKBOARD" jdbcType="VARCHAR" property="blackboard" />
+    <result column="PLATFORM" jdbcType="VARCHAR" property="platform" />
+    <result column="BBT_INFO" jdbcType="VARCHAR" property="bbtInfo" />
+    <result column="IS_SIGN" jdbcType="CHAR" property="isSign" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="IS_TRAIN" jdbcType="CHAR" property="isTrain" />
+    <result column="TRAIN_TEACHER" jdbcType="VARCHAR" property="trainTeacher" />
+    <result column="IS_CHECK" jdbcType="CHAR" property="isCheck" />
+    <result column="TRAIN_TIME" jdbcType="TIMESTAMP" property="trainTime" />
+    <result column="IS_START" jdbcType="CHAR" property="isStart" />
+    <result column="REMARK" jdbcType="CHAR" property="remark" />
+    <result column="clsSchoolName" jdbcType="VARCHAR" property="clsSchoolName" />
+    <result column="schoolArea" jdbcType="VARCHAR" property="schoolArea" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectName" />
+    <result column="projectId" jdbcType="VARCHAR" property="projectId" />
+    <result column="projectArea" jdbcType="VARCHAR" property="projectArea" />
+    <result column="TESTER_NAME" jdbcType="VARCHAR" property="testerName" />
+    <result column="TESTER_TIME" jdbcType="TIMESTAMP" property="testerTime" />
+    <result column="TESTER_REMARK" jdbcType="VARCHAR" property="testerRemark" />
+    <result column="HELP_TESTER_NAME" jdbcType="VARCHAR" property="helpTesterName" />
+    <result column="HELP_TESTER_TIME" jdbcType="TIMESTAMP" property="helpTesterTime" />
+    <result column="HELP_TESTER_REMARK" jdbcType="VARCHAR" property="helpTesterRemark" />
+    <result column="HELP_TESTER_RESULT" jdbcType="VARCHAR" property="helpTesterResult" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="explorationTime" jdbcType="TIMESTAMP" property="explorationTime" />
+    <result column="inspectProcess" jdbcType="VARCHAR" property="inspectProcess" />
+    <result column="explorationProcess" jdbcType="DECIMAL" property="explorationProcess" />
+    <result column="installProcess" jdbcType="DECIMAL" property="installProcess" />
+    <result column="installUserName" jdbcType="DECIMAL" property="installUserName" />
+  </resultMap>
+  
+  <sql id="pageTop">
+		select * from (select t.*,rownum as r from(
+	</sql>
+	<sql id="pageBottom">
+	<![CDATA[
+		) t) t1 where t1.r > #{start} and t1.r <= #{end}
+		]]>
+	</sql>
+  
+  
+  <sql id="Base_Column_List">
+    CLS_CLASSROOM_ID, ROOM_NAME, ROOM_TYPE, CLS_SCHOOL_ID, CREATE_TIME, CREATE_USER, 
+	TEAMVIEWID, TEAMVIEWPSD, ZXKT_SERVICE, 
+    ZXKT_USER_NAME_PSD, DBCJ_VERSION, PROJECT_VERSION, IMPLEMENTATION_PROGRESS, IMPLEMENTATION_TIME_BEGIN, 
+    IMPLEMENTATION_TIME_END, ZCSB_NUM, PRODUCT_WARRANTY_PERIOD, JGPT_ADDRESS, JGPT_SERVICE, 
+    JGPT_NAME_PSD, SERVICE_INFO, NET_INFO, BLACKBOARD, PLATFORM, BBT_INFO, IS_SIGN, STATUS, 
+    IS_TRAIN, TRAIN_TEACHER, IS_CHECK, TRAIN_TIME, IS_START, REMARK, TESTER_NAME, TESTER_TIME, 
+    TESTER_REMARK, HELP_TESTER_NAME, HELP_TESTER_TIME, HELP_TESTER_REMARK, HELP_TESTER_RESULT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    t.*,
+       cs.school_name   clsSchoolName,
+       bat.area_path    schoolArea,
+       pro.project_name projectName,
+       bap.area_path	projectArea,
+       pro.project_id projectId,
+       cs.contact CONTACT_PERSON_NAME,
+       cs.phone CONTACT_PERSON_PHONE,
+       au.REALNAME installUserName
+  from CLS_CLASSROOM t
+  left join cls_school cs
+    on t.cls_school_id = cs.cls_school_id
+  left join base_area bat
+    on bat.base_area_id = cs.base_area_id
+  left join project pro
+    on pro.project_id = cs.project_id
+  left join base_area bap
+	on pro.base_area_id = bap.base_area_id
+  left join ADMIN_USER au 
+    on t.install_user = au.ADMIN_USER_ID
+    where CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CLS_CLASSROOM
+    where CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.ClsClassroom">
+    insert into CLS_CLASSROOM (CLS_CLASSROOM_ID, ROOM_NAME, ROOM_TYPE, 
+      CLS_SCHOOL_ID, CREATE_TIME, CREATE_USER, 
+      TEAMVIEWID, TEAMVIEWPSD, ZXKT_SERVICE, 
+      ZXKT_USER_NAME_PSD, DBCJ_VERSION, PROJECT_VERSION, 
+      IMPLEMENTATION_PROGRESS, IMPLEMENTATION_TIME_BEGIN, 
+      IMPLEMENTATION_TIME_END, ZCSB_NUM, PRODUCT_WARRANTY_PERIOD, 
+      JGPT_ADDRESS, JGPT_SERVICE, JGPT_NAME_PSD, 
+      SERVICE_INFO, NET_INFO, BLACKBOARD, 
+      PLATFORM, BBT_INFO, IS_SIGN, 
+      STATUS, IS_TRAIN, TRAIN_TEACHER, 
+      IS_CHECK, TRAIN_TIME, IS_START, 
+      REMARK, TESTER_NAME, TESTER_TIME, 
+      TESTER_REMARK, HELP_TESTER_NAME, HELP_TESTER_TIME, 
+      HELP_TESTER_REMARK, HELP_TESTER_RESULT)
+    values (#{clsClassroomId,jdbcType=VARCHAR}, #{roomName,jdbcType=VARCHAR}, #{roomType,jdbcType=VARCHAR}, 
+      #{clsSchoolId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{contactPersonName,jdbcType=VARCHAR}, #{contactPersonPhone,jdbcType=VARCHAR}, 
+      #{teamviewid,jdbcType=VARCHAR}, #{teamviewpsd,jdbcType=VARCHAR}, #{zxktService,jdbcType=VARCHAR}, 
+      #{zxktUserNamePsd,jdbcType=VARCHAR}, #{dbcjVersion,jdbcType=VARCHAR}, #{projectVersion,jdbcType=VARCHAR}, 
+      #{implementationProgress,jdbcType=VARCHAR}, #{implementationTimeBegin,jdbcType=TIMESTAMP}, 
+      #{implementationTimeEnd,jdbcType=TIMESTAMP}, #{zcsbNum,jdbcType=VARCHAR}, #{productWarrantyPeriod,jdbcType=VARCHAR}, 
+      #{jgptAddress,jdbcType=VARCHAR}, #{jgptService,jdbcType=VARCHAR}, #{jgptNamePsd,jdbcType=VARCHAR}, 
+      #{serviceInfo,jdbcType=VARCHAR}, #{netInfo,jdbcType=VARCHAR}, #{blackboard,jdbcType=VARCHAR}, 
+      #{platform,jdbcType=VARCHAR}, #{bbtInfo,jdbcType=VARCHAR}, #{isSign,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{isTrain,jdbcType=VARCHAR}, #{trainTeacher,jdbcType=VARCHAR}, 
+      #{isCheck,jdbcType=VARCHAR}, #{trainTime,jdbcType=TIMESTAMP}, #{isStart,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{testerName,jdbcType=VARCHAR}, #{testerTime,jdbcType=TIMESTAMP}, 
+      #{testerRemark,jdbcType=VARCHAR}, #{helpTesterName,jdbcType=VARCHAR}, #{helpTesterTime,jdbcType=TIMESTAMP}, 
+      #{helpTesterRemark,jdbcType=VARCHAR}, #{helpTesterResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.ClsClassroom">
+    insert into CLS_CLASSROOM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clsClassroomId != null">
+        CLS_CLASSROOM_ID,
+      </if>
+      <if test="roomName != null">
+        ROOM_NAME,
+      </if>
+      <if test="roomType != null">
+        ROOM_TYPE,
+      </if>
+      <if test="clsSchoolId != null">
+        CLS_SCHOOL_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="teamviewid != null">
+        TEAMVIEWID,
+      </if>
+      <if test="teamviewpsd != null">
+        TEAMVIEWPSD,
+      </if>
+      <if test="zxktService != null">
+        ZXKT_SERVICE,
+      </if>
+      <if test="zxktUserNamePsd != null">
+        ZXKT_USER_NAME_PSD,
+      </if>
+      <if test="dbcjVersion != null">
+        DBCJ_VERSION,
+      </if>
+      <if test="projectVersion != null">
+        PROJECT_VERSION,
+      </if>
+      <if test="implementationProgress != null">
+        IMPLEMENTATION_PROGRESS,
+      </if>
+      <if test="implementationTimeBegin != null">
+        IMPLEMENTATION_TIME_BEGIN,
+      </if>
+      <if test="implementationTimeEnd != null">
+        IMPLEMENTATION_TIME_END,
+      </if>
+      <if test="zcsbNum != null">
+        ZCSB_NUM,
+      </if>
+      <if test="productWarrantyPeriod != null">
+        PRODUCT_WARRANTY_PERIOD,
+      </if>
+      <if test="jgptAddress != null">
+        JGPT_ADDRESS,
+      </if>
+      <if test="jgptService != null">
+        JGPT_SERVICE,
+      </if>
+      <if test="jgptNamePsd != null">
+        JGPT_NAME_PSD,
+      </if>
+      <if test="serviceInfo != null">
+        SERVICE_INFO,
+      </if>
+      <if test="netInfo != null">
+        NET_INFO,
+      </if>
+      <if test="blackboard != null">
+        BLACKBOARD,
+      </if>
+      <if test="platform != null">
+        PLATFORM,
+      </if>
+      <if test="bbtInfo != null">
+        BBT_INFO,
+      </if>
+      <if test="isSign != null">
+        IS_SIGN,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isTrain != null">
+        IS_TRAIN,
+      </if>
+      <if test="trainTeacher != null">
+        TRAIN_TEACHER,
+      </if>
+      <if test="isCheck != null">
+        IS_CHECK,
+      </if>
+      <if test="trainTime != null">
+        TRAIN_TIME,
+      </if>
+      <if test="isStart != null">
+        IS_START,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="testerName != null">
+        TESTER_NAME,
+      </if>
+      <if test="testerTime != null">
+        TESTER_TIME,
+      </if>
+      <if test="testerRemark != null">
+        TESTER_REMARK,
+      </if>
+      <if test="helpTesterName != null">
+        HELP_TESTER_NAME,
+      </if>
+      <if test="helpTesterTime != null">
+        HELP_TESTER_TIME,
+      </if>
+      <if test="helpTesterRemark != null">
+        HELP_TESTER_REMARK,
+      </if>
+      <if test="helpTesterResult != null">
+        HELP_TESTER_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clsClassroomId != null">
+        #{clsClassroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="roomName != null">
+        #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomType != null">
+        #{roomType,jdbcType=VARCHAR},
+      </if>
+      <if test="clsSchoolId != null">
+        #{clsSchoolId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonName != null">
+        #{contactPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhone != null">
+        #{contactPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="teamviewid != null">
+        #{teamviewid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamviewpsd != null">
+        #{teamviewpsd,jdbcType=VARCHAR},
+      </if>
+      <if test="zxktService != null">
+        #{zxktService,jdbcType=VARCHAR},
+      </if>
+      <if test="zxktUserNamePsd != null">
+        #{zxktUserNamePsd,jdbcType=VARCHAR},
+      </if>
+      <if test="dbcjVersion != null">
+        #{dbcjVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="projectVersion != null">
+        #{projectVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="implementationProgress != null">
+        #{implementationProgress,jdbcType=VARCHAR},
+      </if>
+      <if test="implementationTimeBegin != null">
+        #{implementationTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="implementationTimeEnd != null">
+        #{implementationTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zcsbNum != null">
+        #{zcsbNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productWarrantyPeriod != null">
+        #{productWarrantyPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptAddress != null">
+        #{jgptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptService != null">
+        #{jgptService,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptNamePsd != null">
+        #{jgptNamePsd,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null">
+        #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="netInfo != null">
+        #{netInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="blackboard != null">
+        #{blackboard,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="bbtInfo != null">
+        #{bbtInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isSign != null">
+        #{isSign,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isTrain != null">
+        #{isTrain,jdbcType=VARCHAR},
+      </if>
+      <if test="trainTeacher != null">
+        #{trainTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null">
+        #{isCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="trainTime != null">
+        #{trainTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isStart != null">
+        #{isStart,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="testerName != null">
+        #{testerName,jdbcType=VARCHAR},
+      </if>
+      <if test="testerTime != null">
+        #{testerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testerRemark != null">
+        #{testerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="helpTesterName != null">
+        #{helpTesterName,jdbcType=VARCHAR},
+      </if>
+      <if test="helpTesterTime != null">
+        #{helpTesterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="helpTesterRemark != null">
+        #{helpTesterRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="helpTesterResult != null">
+        #{helpTesterResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.ClsClassroom">
+    update CLS_CLASSROOM
+    <set>
+      <if test="roomName != null">
+        ROOM_NAME = #{roomName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomType != null">
+        ROOM_TYPE = #{roomType,jdbcType=VARCHAR},
+      </if>
+      <if test="clsSchoolId != null">
+        CLS_SCHOOL_ID = #{clsSchoolId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="teamviewid != null">
+        TEAMVIEWID = #{teamviewid,jdbcType=VARCHAR},
+      </if>
+      <if test="teamviewpsd != null">
+        TEAMVIEWPSD = #{teamviewpsd,jdbcType=VARCHAR},
+      </if>
+      <if test="zxktService != null">
+        ZXKT_SERVICE = #{zxktService,jdbcType=VARCHAR},
+      </if>
+      <if test="zxktUserNamePsd != null">
+        ZXKT_USER_NAME_PSD = #{zxktUserNamePsd,jdbcType=VARCHAR},
+      </if>
+      <if test="dbcjVersion != null">
+        DBCJ_VERSION = #{dbcjVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="projectVersion != null">
+        PROJECT_VERSION = #{projectVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="implementationProgress != null">
+        IMPLEMENTATION_PROGRESS = #{implementationProgress,jdbcType=VARCHAR},
+      </if>
+      <!-- 安装 -->
+      <if test="type == 'CLASSROOM_DETAIL' ">
+        IMPLEMENTATION_TIME_BEGIN = #{implementationTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type == 'CLASSROOM_DETAIL' ">
+        IMPLEMENTATION_TIME_END = #{implementationTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zcsbNum != null">
+        ZCSB_NUM = #{zcsbNum,jdbcType=VARCHAR},
+      </if>
+      <if test="productWarrantyPeriod != null">
+        PRODUCT_WARRANTY_PERIOD = #{productWarrantyPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptAddress != null">
+        JGPT_ADDRESS = #{jgptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptService != null">
+        JGPT_SERVICE = #{jgptService,jdbcType=VARCHAR},
+      </if>
+      <if test="jgptNamePsd != null">
+        JGPT_NAME_PSD = #{jgptNamePsd,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null">
+        SERVICE_INFO = #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="netInfo != null">
+        NET_INFO = #{netInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="blackboard != null">
+        BLACKBOARD = #{blackboard,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        PLATFORM = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="bbtInfo != null">
+        BBT_INFO = #{bbtInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isSign != null">
+        IS_SIGN = #{isSign,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isTrain != null">
+        IS_TRAIN = #{isTrain,jdbcType=VARCHAR},
+      </if>
+      <if test="trainTeacher != null">
+        TRAIN_TEACHER = #{trainTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null">
+        IS_CHECK = #{isCheck,jdbcType=VARCHAR},
+      </if>
+      <!-- 调试 -->
+      <if test="type == 'CLASSROOM_DETAIL'">
+        TRAIN_TIME = #{trainTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isStart != null">
+        IS_START = #{isStart,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="testerName != null">
+        TESTER_NAME = #{testerName,jdbcType=VARCHAR},
+      </if>
+      <!-- 调试 -->
+      <if test="type == 'CLASSROOM_INSPECT'">
+        TESTER_TIME = #{testerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testerRemark != null">
+        TESTER_REMARK = #{testerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="helpTesterName != null">
+        HELP_TESTER_NAME = #{helpTesterName,jdbcType=VARCHAR},
+      </if>
+   	  <!-- 调试 -->
+      <if test="type == 'CLASSROOM_INSPECT'">
+        HELP_TESTER_TIME = #{helpTesterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="helpTesterRemark != null">
+        HELP_TESTER_REMARK = #{helpTesterRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="helpTesterResult != null">
+        HELP_TESTER_RESULT = #{helpTesterResult,jdbcType=VARCHAR},
+      </if>
+      <if test="installUser != null">
+        INSTALL_USER = #{installUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.ClsClassroom">
+    update CLS_CLASSROOM
+    set ROOM_NAME = #{roomName,jdbcType=VARCHAR},
+      ROOM_TYPE = #{roomType,jdbcType=VARCHAR},
+      CLS_SCHOOL_ID = #{clsSchoolId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      TEAMVIEWID = #{teamviewid,jdbcType=VARCHAR},
+      TEAMVIEWPSD = #{teamviewpsd,jdbcType=VARCHAR},
+      ZXKT_SERVICE = #{zxktService,jdbcType=VARCHAR},
+      ZXKT_USER_NAME_PSD = #{zxktUserNamePsd,jdbcType=VARCHAR},
+      DBCJ_VERSION = #{dbcjVersion,jdbcType=VARCHAR},
+      PROJECT_VERSION = #{projectVersion,jdbcType=VARCHAR},
+      IMPLEMENTATION_PROGRESS = #{implementationProgress,jdbcType=VARCHAR},
+      IMPLEMENTATION_TIME_BEGIN = #{implementationTimeBegin,jdbcType=TIMESTAMP},
+      IMPLEMENTATION_TIME_END = #{implementationTimeEnd,jdbcType=TIMESTAMP},
+      ZCSB_NUM = #{zcsbNum,jdbcType=VARCHAR},
+      PRODUCT_WARRANTY_PERIOD = #{productWarrantyPeriod,jdbcType=VARCHAR},
+      JGPT_ADDRESS = #{jgptAddress,jdbcType=VARCHAR},
+      JGPT_SERVICE = #{jgptService,jdbcType=VARCHAR},
+      JGPT_NAME_PSD = #{jgptNamePsd,jdbcType=VARCHAR},
+      SERVICE_INFO = #{serviceInfo,jdbcType=VARCHAR},
+      NET_INFO = #{netInfo,jdbcType=VARCHAR},
+      BLACKBOARD = #{blackboard,jdbcType=VARCHAR},
+      PLATFORM = #{platform,jdbcType=VARCHAR},
+      BBT_INFO = #{bbtInfo,jdbcType=VARCHAR},
+      IS_SIGN = #{isSign,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IS_TRAIN = #{isTrain,jdbcType=VARCHAR},
+      TRAIN_TEACHER = #{trainTeacher,jdbcType=VARCHAR},
+      IS_CHECK = #{isCheck,jdbcType=VARCHAR},
+      TRAIN_TIME = #{trainTime,jdbcType=TIMESTAMP},
+      IS_START = #{isStart,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      TESTER_NAME = #{testerName,jdbcType=VARCHAR},
+      TESTER_TIME = #{testerTime,jdbcType=TIMESTAMP},
+      TESTER_REMARK = #{testerRemark,jdbcType=VARCHAR},
+      HELP_TESTER_NAME = #{helpTesterName,jdbcType=VARCHAR},
+      HELP_TESTER_TIME = #{helpTesterTime,jdbcType=TIMESTAMP},
+      HELP_TESTER_REMARK = #{helpTesterRemark,jdbcType=VARCHAR},
+      HELP_TESTER_RESULT = #{helpTesterResult,jdbcType=VARCHAR}
+    where CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR}
+  </update>
+<!--  ////////////////////////////////////////////////////////////////-->
+ <select id="getClassRoomPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+  select clsSchoolName, schoolArea, projectName, CONTACT_PERSON_NAME, CONTACT_PERSON_PHONE,update_time,
+  CLS_CLASSROOM_ID,ROOM_NAME,ROOM_TYPE,CLS_SCHOOL_ID,
+  <if test='map.isExplore == null and map.isExplore == ""'>
+  CREATE_TIME,CREATE_USER,TEAMVIEWID,TEAMVIEWPSD,ZXKT_SERVICE,
+  ZXKT_USER_NAME_PSD,DBCJ_VERSION,PROJECT_VERSION,IMPLEMENTATION_PROGRESS,IMPLEMENTATION_TIME_BEGIN,IMPLEMENTATION_TIME_END,
+  ZCSB_NUM,PRODUCT_WARRANTY_PERIOD,JGPT_ADDRESS,JGPT_SERVICE,JGPT_NAME_PSD,SERVICE_INFO,NET_INFO,BLACKBOARD,
+  PLATFORM,BBT_INFO,IS_SIGN,STATUS,IS_TRAIN,TRAIN_TEACHER,IS_CHECK,TRAIN_TIME,IS_START,REMARK,TESTER_NAME,
+  TESTER_TIME,TESTER_REMARK,HELP_TESTER_NAME,HELP_TESTER_TIME,HELP_TESTER_REMARK,HELP_TESTER_RESULT,
+  </if>
+  <if test='map.isExplore != null and map.isExplore != "" and map.isExplore == "explore"'>
+    explorationTime,
+  </if>
+  explorationProcess ||'%' explorationProcess, 
+  installProcess ||'%' installProcess,   
+  inspectProcess||'%' inspectProcess
+  from 
+  (select  
+       t.CLS_CLASSROOM_ID,t.ROOM_NAME,t.ROOM_TYPE,t.CLS_SCHOOL_ID,
+       <if test='map.isExplore == null and map.isExplore == ""'>
+       t.CREATE_TIME,t.CREATE_USER,
+       t.TEAMVIEWID,t.TEAMVIEWPSD,t.ZXKT_SERVICE,
+       t.ZXKT_USER_NAME_PSD,t.DBCJ_VERSION,t.PROJECT_VERSION,t.IMPLEMENTATION_PROGRESS,
+       t.IMPLEMENTATION_TIME_BEGIN,t.IMPLEMENTATION_TIME_END,
+       t.ZCSB_NUM,t.PRODUCT_WARRANTY_PERIOD,t.JGPT_ADDRESS,
+       t.JGPT_SERVICE,t.JGPT_NAME_PSD,t.SERVICE_INFO,t.NET_INFO,
+       t.BLACKBOARD,t.PLATFORM,t.BBT_INFO,t.IS_SIGN,t.STATUS,t.IS_TRAIN,t.TRAIN_TEACHER,t.IS_CHECK,
+       t.TRAIN_TIME,t.IS_START,t.REMARK,t.TESTER_NAME,
+       t.TESTER_TIME,t.TESTER_REMARK,t.HELP_TESTER_NAME,t.HELP_TESTER_TIME,t.HELP_TESTER_REMARK,
+       t.HELP_TESTER_RESULT,
+       </if>
+       cs.school_name   clsSchoolName,
+       bat.area_path    schoolArea,
+       pro.project_name projectName,
+       cs.contact CONTACT_PERSON_NAME,
+       cs.phone CONTACT_PERSON_PHONE,
+       NVL(t.EXPLORATION_PROCESS, 0)  as  explorationProcess,
+       NVL(t.INSTALL_PROCESS, 0)      as   installProcess,
+       t.update_time,
+       <if test='map.isExplore != null and map.isExplore != "" and map.isExplore == "explore"'>  
+        (select max(cd.update_time) update_time
+           from classroom_inspect_detail cd
+           where cd.cls_classroom_id = t.cls_classroom_id
+           and cd.update_time is not null
+         ) explorationTime,
+       </if>       
+       NVL(t.inspect_process,0)       as  inspectProcess
+  from CLS_CLASSROOM t
+  left join cls_school cs
+    on t.cls_school_id = cs.cls_school_id
+  left join base_area bat
+    on bat.base_area_id = cs.base_area_id
+  left join project pro
+    on pro.project_id = cs.project_id
+ where 1=1 
+ 	<if test="map.clsSchoolAreaId !=null and map.clsSchoolAreaId !='' and map.clsSchoolAreaId != '-1'">
+	   and cs.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{map.clsSchoolAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="map.projectAreaId !=null and map.projectAreaId !='' and map.projectAreaId != '-1'">
+	   and pro.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{map.projectAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="map.clsSchoolName !=null and map.clsSchoolName !=''">
+   		and cs.school_name like '%' || #{map.clsSchoolName} || '%' ESCAPE '/'
+    </if>
+    <if test="map.projectName !=null and map.projectName !=''">
+   		and pro.project_name like '%' || #{map.projectName} || '%' ESCAPE '/'
+   	</if>
+   	
+   	<if test="map.implementationProgress !=null and map.implementationProgress !=''">
+   		and t.IMPLEMENTATION_PROGRESS = #{map.implementationProgress}
+   	</if>
+   	<if test="map.isTrain !=null and map.isTrain !=''">
+   		and t.IS_TRAIN = #{map.isTrain}
+   	</if>
+   	<if test="map.isStart !=null and map.isStart !=''">
+   		and t.IS_START = #{map.isStart}
+   	</if>
+   	 order by 
+   	<if test="map.sortDesc !=null and map.sortDesc!='' and map.sortDesc=='ASC' ">
+   	    inspectProcess ASC,
+   	</if>
+   	<if test="map.sortDesc !=null and map.sortDesc!='' and map.sortDesc=='DESC' ">
+   	    inspectProcess DESC,
+   	</if>
+   	<if test="map.installDesc !=null and map.installDesc!='' and map.installDesc== 'ASC'">
+   	    installProcess ASC,
+   	</if>
+   	<if test="map.installDesc !=null and map.installDesc!='' and map.installDesc== 'DESC'">
+   	    installProcess DESC,
+   	</if>
+   	<if test="map.updateDesc !=null and map.updateDesc!='' and map.updateDesc== 'ASC'">
+   	    t.update_time ASC,
+   	</if>
+   	<if test="map.updateDesc !=null and map.updateDesc!='' and map.updateDesc== 'DESC'">
+   	    t.update_time DESC,
+   	</if>
+   	 <if test="map.updateDesc ==null or map.updateDesc ==''">
+        t.update_time DESC,
+    </if>
+     t.CLS_CLASSROOM_ID
+   	) 
+   	
+   	
+  </select>
+  
+  <!--  表单 导出操作-->
+   <select id="getClassRoomList" parameterType="map" resultMap="BaseResultMap">
+ select clsSchoolName, schoolArea, projectName, CONTACT_PERSON_NAME, CONTACT_PERSON_PHONE,update_time,
+  CLS_CLASSROOM_ID,ROOM_NAME,ROOM_TYPE,CLS_SCHOOL_ID,
+  <if test='isExplore == null and isExplore == ""'>
+  CREATE_TIME,CREATE_USER,TEAMVIEWID,TEAMVIEWPSD,ZXKT_SERVICE,
+  ZXKT_USER_NAME_PSD,DBCJ_VERSION,PROJECT_VERSION,IMPLEMENTATION_PROGRESS,IMPLEMENTATION_TIME_BEGIN,IMPLEMENTATION_TIME_END,
+  ZCSB_NUM,PRODUCT_WARRANTY_PERIOD,JGPT_ADDRESS,JGPT_SERVICE,JGPT_NAME_PSD,SERVICE_INFO,NET_INFO,BLACKBOARD,
+  PLATFORM,BBT_INFO,IS_SIGN,STATUS,IS_TRAIN,TRAIN_TEACHER,IS_CHECK,TRAIN_TIME,IS_START,REMARK,TESTER_NAME,
+  TESTER_TIME,TESTER_REMARK,HELP_TESTER_NAME,HELP_TESTER_TIME,HELP_TESTER_REMARK,HELP_TESTER_RESULT,
+  </if>
+  explorationProcess ||'%' explorationProcess,
+  <if test='isExplore != null and isExplore != "" and isExplore == "explore"'>
+    explorationTime, 
+  </if>
+  installProcess ||'%' installProcess,   
+  inspectProcess||'%' inspectProcess
+  
+  
+  from (select 
+       t.CLS_CLASSROOM_ID,t.ROOM_NAME,t.ROOM_TYPE,t.CLS_SCHOOL_ID,t.CREATE_TIME,t.CREATE_USER,
+       <if test='isExplore == null and isExplore == ""'>
+       t.TEAMVIEWID,t.TEAMVIEWPSD,t.ZXKT_SERVICE,
+       t.ZXKT_USER_NAME_PSD,t.DBCJ_VERSION,t.PROJECT_VERSION,t.IMPLEMENTATION_PROGRESS,
+       t.IMPLEMENTATION_TIME_BEGIN,t.IMPLEMENTATION_TIME_END,
+       t.ZCSB_NUM,t.PRODUCT_WARRANTY_PERIOD,t.JGPT_ADDRESS,
+       t.JGPT_SERVICE,t.JGPT_NAME_PSD,t.SERVICE_INFO,t.NET_INFO,
+       t.BLACKBOARD,t.PLATFORM,t.BBT_INFO,t.IS_SIGN,t.STATUS,t.IS_TRAIN,t.TRAIN_TEACHER,t.IS_CHECK,
+       t.TRAIN_TIME,t.IS_START,t.REMARK,t.TESTER_NAME,
+       t.TESTER_TIME,t.TESTER_REMARK,t.HELP_TESTER_NAME,t.HELP_TESTER_TIME,t.HELP_TESTER_REMARK,
+       t.HELP_TESTER_RESULT,
+       </if>
+       cs.school_name   clsSchoolName,
+       bat.area_path    schoolArea,
+       pro.project_name projectName,
+       cs.contact CONTACT_PERSON_NAME,
+       cs.phone CONTACT_PERSON_PHONE,
+       <if test='isExplore != null and isExplore != "" and isExplore == "explore"'>
+         (select max(cd.update_time) update_time
+           from classroom_inspect_detail cd
+           where cd.cls_classroom_id = t.cls_classroom_id
+           and cd.update_time is not null
+         ) explorationTime,
+       </if>
+       NVL(t.EXPLORATION_PROCESS, 0)  as  explorationProcess,
+       NVL(t.INSTALL_PROCESS, 0)      as   installProcess,
+       t.update_time,       
+       NVL(t.inspect_process, 0)      as   inspectProcess
+  from CLS_CLASSROOM t
+  left join cls_school cs
+    on t.cls_school_id = cs.cls_school_id
+  left join base_area bat
+    on bat.base_area_id = cs.base_area_id
+  left join project pro
+    on pro.project_id = cs.project_id
+ where 1=1 
+ 	<if test="clsSchoolAreaId !=null and clsSchoolAreaId !='' and clsSchoolAreaId != '-1'">
+	   and cs.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{clsSchoolAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="projectAreaId !=null and projectAreaId!='' and projectAreaId != '-1'">
+	   and pro.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{projectAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="clsSchoolName !=null and clsSchoolName !=''">
+   		and cs.school_name like '%' || #{clsSchoolName} || '%' ESCAPE '/'
+    </if>
+    <if test="projectName !=null and projectName !=''">
+   		and pro.project_name like '%' || #{projectName} || '%' ESCAPE '/'
+   	</if>
+   	
+   	<if test="implementationProgress !=null and implementationProgress !=''">
+   		and t.IMPLEMENTATION_PROGRESS = #{implementationProgress}
+   	</if>
+   	<if test="isTrain !=null and isTrain !=''">
+   		and t.IS_TRAIN = #{isTrain}
+   	</if>
+   	<if test="isStart !=null and isStart !=''">
+   		and t.IS_START = #{isStart}
+   	</if>
+     order by
+    
+   	<if test="sortDesc !=null and sortDesc!='' and sortDesc=='ASC' ">
+   	    inspectProcess ASC,
+   	</if>
+   	<if test="sortDesc !=null and sortDesc!='' and sortDesc=='DESC' ">
+   	    inspectProcess DESC,
+   	</if>
+    <if test="installDesc !=null and installDesc!='' and installDesc== 'ASC'">
+   	    installProcess ASC,
+   	</if>
+   	<if test="installDesc !=null and installDesc!='' and installDesc== 'DESC'">
+   	    installProcess DESC,
+   	</if>
+   	<if test="updateDesc !=null and updateDesc!='' and updateDesc== 'ASC'">
+   	    t.update_time ASC,
+   	</if>
+   	<if test="updateDesc !=null and updateDesc!='' and updateDesc== 'DESC'">
+   	    t.update_time DESC,
+   	</if>
+   	 <if test="updateDesc ==null or updateDesc ==''">
+        t.update_time DESC,
+     </if>
+   	  t.CLS_CLASSROOM_ID
+   	) 
+  </select>
+  
+  
+  <!-- 根据项目id查询教室数量 -->
+  <select id="getClassRoomCountByProjectId" parameterType="map" resultType="Integer">
+    
+     select count(1)
+     
+     from cls_classroom  clsr
+     
+     left join  cls_school cls 
+       on cls.cls_school_id=clsr.cls_school_id
+     
+     left join project p
+       on p.project_id=cls.project_id
+       
+     where  
+           p.project_id=#{projectId} and  cls.delete_flag='N'
+  </select>
+  
+  <!-- 根据项目id查询教室列表 -->
+  <select id="getClassRoomsByProjectIdPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+ 
+    select roomName,roomType,clsSchoolName,schoolArea,inspectProcess|| '%' inspectProcess from(
+     
+       select 
+      	clsr.room_name  as roomName,
+      	clsr.room_type  as roomType,
+      	cls.school_name  as clsSchoolName,
+      	ba.area_path    as  schoolArea,
+      	nvl(clsr.inspect_process,0)  as inspectProcess
+     
+   
+     from cls_classroom  clsr
+  
+     left join cls_school cls   
+       on  cls.cls_school_id=clsr.cls_school_id
+   
+     left join  project  p  
+       on  p.project_id=cls.project_id
+   
+     left join base_area  ba    
+       on    ba.base_area_id=cls.base_area_id
+      
+     where  p.project_id = #{map.projectId}
+       and  cls.delete_flag='N'
+    
+    order by 
+    <if test="map.sortDesc !=null and map.sortDesc!='' and map.sortDesc=='ASC' ">
+   	      inspectProcess ASC ,
+   	</if>
+    <if test="map.sortDesc !=null and map.sortDesc!='' and  map.sortDesc=='DESC' ">
+   	      inspectProcess DESC ,
+    </if>
+    clsr.update_time DESC,clsr.cls_classroom_id
+   	)
+   
+  </select>
+  
+  <select id="getEnvirCountByRoomId" parameterType="String" resultType="Integer">
+     select count(1)
+     from  environment_survey e
+     where  e.cls_classroom_id=#{classroomId}
+  </select>
+  
+  <delete id="deleteEnvirByRoomId" parameterType="String">
+       delete from environment_survey e
+       where e.cls_classroom_id=#{classroomId}
+  </delete>
+  
+  <delete id="deleteAttachByRoomId" parameterType="String">
+       delete  from attachment a
+       where a.relationship_id=(
+           select  e.envir_survey_id    from  environment_survey  e   
+            where e.cls_classroom_id=#{classroomId})
+  </delete>
+  
+  <update id="updateExplorationPress">
+   begin 
+   
+  	update cls_classroom cc set cc.exploration_process = (select trunc((nvl2(SCHOOL_CONTACT, 1, 0) *
+             nvl2(e.SCHOOL_CONTACT_PHONE, 1, 0) *
+             nvl2(e.BUSINESS_CONTACT, 1, 0) *
+             nvl2(e.BUSINESS_CONTACT_PHONE, 1, 0) *
+             nvl2(e.CLASSROOM_LENGTH, 1, 0) * nvl2(CLASSROOM_WIDTH, 1, 0) *
+             nvl2(e.CLASSROOM_HEIGHT, 1, 0) * nvl2(CLASSROOM_ELSE, 1, 0) *
+             nvl2(e.CLASSROOM_IS_VOLTAGE, 1, 0) *
+             nvl2(e.CLASSROOM_IS_PROWER, 1, 0) *
+             nvl2(e.CLASSROOM_IS_LIGHT, 1, 0) *
+             nvl2(e.CLASSROOM_IS_CURTAIN, 1, 0) *
+             nvl2(e.CLASSROOM_IS_AIR_CONDITION, 1, 0) *
+             nvl2(e.CLASSROOM_IS_CONDOLETOP, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_BALCKBOARD, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_PROJECTOR, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_PLATFORM, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_CONTROL, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_WHITEBOARD, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_TV, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_BANBANTONG, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_TEACHERCAMERA, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_STUDENTCAMERA, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_MICR, 1, 0) *
+             nvl2(e.EQUIPMENT_IS_SHOWPLAT, 1, 0) *
+             nvl2(e.EQUIP_IS_SOUND, 1, 0) * nvl2(EQUIP_NETEQUIP, 1, 0) *
+             nvl2(e.SCHOOL_HEAD, 1, 0) * nvl2(SCHOOL_TIME, 1, 0) *
+             nvl2(e.INVEST_PERSONNEL, 1, 0) * nvl2(INVEST_TIME, 1, 0) *
+             nvl2(e.SERVER_IS_EXIST, 1, 0) * nvl2(EQUIP_IS_NET, 1, 0) *
+             nvl2(e.EQUIP_IS_FACTORY, 1, 0) * nvl2(t.num, 1, 0)) / 1 * 100,
+             2) press
+  from ENVIRONMENT_SURVEY e
+  left join (select count(*) num, at.relationship_id
+               from attachment at
+              where at.type = 'EnvironmentSurvey'
+              group by at.relationship_id) t on e.envir_survey_id = t.relationship_id where e.cls_classroom_id = cc.cls_classroom_id) 
+              where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR};
+              
+              
+   update cls_school csu
+   set (csu.exploration_process) =
+       (
+        select trunc(avg(nvl(cc.exploration_process, 0)), 2)
+          from cls_school cs
+          left join cls_classroom cc
+            on cc.cls_school_id = cs.cls_school_id
+         group by cs.cls_school_id
+        having cs.cls_school_id = csu.cls_school_id ) where csu.cls_school_id = (select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR});
+        
+   update project csu
+   set csu.exploration_process =
+       (select trunc(avg(nvl(cc.exploration_process, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = 
+        (select  cs2.project_id from cls_school cs2 where cs2.cls_school_id=( select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR} ));
+       end;
+  </update>
+  
+  <update id="updateInstallPress">
+  	begin
+  		update cls_classroom cc set INSTALL_PROCESS = (
+  select 
+       trunc((
+       nvl2(TEAMVIEWID, 1, 0) 
+       + nvl2(TEAMVIEWPSD, 1, 0)
+       + nvl2(ZXKT_SERVICE, 1, 0)
+       + nvl2(ZXKT_USER_NAME_PSD, 1, 0)
+       + nvl2(DBCJ_VERSION, 1, 0)
+       + nvl2(PROJECT_VERSION, 1, 0)
+       + nvl2(IMPLEMENTATION_PROGRESS, 1, 0)
+       + nvl2(IMPLEMENTATION_TIME_BEGIN, 1, 0)
+       + nvl2(IMPLEMENTATION_TIME_END, 1, 0)
+       + nvl2(ZCSB_NUM, 1, 0)
+       + nvl2(PRODUCT_WARRANTY_PERIOD, 1, 0)
+       + nvl2(JGPT_ADDRESS, 1, 0)
+       + nvl2(JGPT_SERVICE, 1, 0)
+       + nvl2(JGPT_NAME_PSD, 1, 0)
+       + nvl2(SERVICE_INFO, 1, 0)
+       + nvl2(NET_INFO, 1, 0)
+       + nvl2(BLACKBOARD, 1, 0)
+       + nvl2(PLATFORM, 1, 0)
+       + nvl2(BBT_INFO, 1, 0)
+       + nvl2(IS_SIGN, 1, 0)
+       + nvl2(STATUS, 1, 0)
+       + nvl2(IS_TRAIN, 1, 0)
+       + nvl2(TRAIN_TEACHER, 1, 0)
+       + nvl2(IS_CHECK, 1, 0)
+       + nvl2(TRAIN_TIME, 1, 0)
+       + nvl2(IS_START, 1, 0)
+       + nvl2(t.num, 1, 0)
+       ) 
+       / 27 * 100,2) press
+  from cls_classroom  left join (  select count(*) num,at.relationship_id from attachment at where at.type = 'CLASSROOM_DETAIL' group by at.relationship_id) t 
+  on cls_classroom_id = t.relationship_id  where cls_classroom_id =cc.cls_classroom_id
+  
+  ) where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR};
+  
+  	update cls_school csu
+   set (csu.INSTALL_PROCESS) =
+       (
+        select trunc(avg(nvl(cc.INSTALL_PROCESS, 0)), 2)
+          from cls_school cs
+          left join cls_classroom cc
+            on cc.cls_school_id = cs.cls_school_id
+         group by cs.cls_school_id
+        having cs.cls_school_id = csu.cls_school_id ) where csu.cls_school_id = (select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR});
+        
+   update project csu
+   set csu.INSTALL_PROCESS =
+       (select trunc(avg(nvl(cc.INSTALL_PROCESS, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = 
+        (select  cs2.project_id from cls_school cs2 where cs2.cls_school_id=( select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR} ));
+  
+  	end;
+  </update>
+  
+  <update id="updateInspectPress">
+  	begin
+  		update cls_classroom cc set cc.inspect_process =  (select process from (select distinct n.cls_classroom_id,
+                trunc((sum(nvl2(n.result, 1, 0))
+                      over(partition by n.cls_classroom_id)
+                      +nvl2(t.num,1,0)
+                      +nvl2(cc.TESTER_NAME,1,0)
+                      +nvl2(cc.TESTER_TIME,1,0)
+                      +nvl2(cc.HELP_TESTER_NAME,1,0)
+                      +nvl2(cc.HELP_TESTER_TIME,1,0)  
+                      +nvl2(cc.HELP_TESTER_RESULT,1,0)                     
+                      )
+                       / (count(1)
+                      over(partition by n.cls_classroom_id)+6)* 100,
+                      2)  process
+  from classroom_inspect_detail n left join (
+         select count(*) num, at.relationship_id
+               from attachment at
+              where at.type = 'CLASSROOM_INSPECT'
+              group by at.relationship_id
+  )  t on n.cls_classroom_id = t.relationship_id left join cls_classroom cc on cc.cls_classroom_id = n.cls_classroom_id)t where t.cls_classroom_id = cc.cls_classroom_id)
+   where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR};
+   
+   update cls_school csu
+   set (csu.inspect_process) =
+       (
+        select trunc(avg(nvl(cc.inspect_process, 0)), 2)
+          from cls_school cs
+          left join cls_classroom cc
+            on cc.cls_school_id = cs.cls_school_id
+         group by cs.cls_school_id
+        having cs.cls_school_id = csu.cls_school_id ) where csu.cls_school_id = (select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR});
+        
+   update project csu
+   set csu.inspect_process =
+       (select trunc(avg(nvl(cc.inspect_process, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = 
+        (select  cs2.project_id from cls_school cs2 where cs2.cls_school_id=( select cc.cls_school_id from cls_classroom cc where cc.cls_classroom_id = #{clsClassroomId,jdbcType=VARCHAR} ));
+  	
+  	end;
+  </update>
+</mapper>

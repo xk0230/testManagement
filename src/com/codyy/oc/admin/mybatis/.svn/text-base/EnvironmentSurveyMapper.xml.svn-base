@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.EnvironmentSurveyMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.EnvironmentSurvey" >
+    <id column="ENVIR_SURVEY_ID" property="envirSurveyId" jdbcType="VARCHAR" />
+    <result column="CLS_CLASSROOM_ID" property="clsClassroomId" jdbcType="VARCHAR" />
+    <result column="SCHOOL_CONTACT" property="schoolContact" jdbcType="VARCHAR" />
+    <result column="SCHOOL_CONTACT_PHONE" property="schoolContactPhone" jdbcType="VARCHAR" />
+    <result column="BUSINESS_CONTACT" property="businessContact" jdbcType="VARCHAR" />
+    <result column="BUSINESS_CONTACT_PHONE" property="businessContactPhone" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_LENGTH" property="classroomLength" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_WIDTH" property="classroomWidth" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_HEIGHT" property="classroomHeight" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_ELSE" property="classroomElse" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_VOLTAGE" property="classroomIsVoltage" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_PROWER" property="classroomIsPrower" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_LIGHT" property="classroomIsLight" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_CURTAIN" property="classroomIsCurtain" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_AIR_CONDITION" property="classroomIsAirCondition" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_IS_CONDOLETOP" property="classroomIsCondoletop" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_REMARK" property="classroomRemark" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_BALCKBOARD" property="equipmentIsBalckboard" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_BACKBOARD" property="equipmentBackboard" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_PROJECTOR" property="equipmentIsProjector" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_PROJECTOR" property="equipmentProjector" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_PLATFORM" property="equipmentIsPlatform" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_PLATFORM" property="equipmentPlatform" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_CONTROL" property="equipmentIsControl" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_CONTROL" property="equipmentControl" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_WHITEBOARD" property="equipmentIsWhiteboard" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_WHITEBOARD" property="equipmentWhiteboard" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_TV" property="equipmentIsTv" jdbcType="VARCHAR" />
+    <result column="EQUIPEMENT_TV" property="equipementTv" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_BANBANTONG" property="equipmentIsBanbantong" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_BANBANTONG" property="equipmentBanbantong" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_TEACHERCAMERA" property="equipmentIsTeachercamera" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_TEACHCAMERA" property="equipmentTeachcamera" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_STUDENTCAMERA" property="equipmentIsStudentcamera" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_STUDENTCAMERA" property="equipmentStudentcamera" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_MICR" property="equipmentIsMicr" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_MICR" property="equipmentMicr" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_SOUND" property="equipmentIsSound" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_SHOWPLAT" property="equipmentIsShowplat" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_ROUTER" property="equipmentIsRouter" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_IS_SWTICH" property="equipmentIsSwtich" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_NETWORK" property="equipmentNetwork" jdbcType="VARCHAR" />
+    <result column="EQUIPMENT_REMARK" property="equipmentRemark" jdbcType="VARCHAR" />
+    <result column="NETWORK_BOARDBAND" property="networkBoardband" jdbcType="VARCHAR" />
+    <result column="NETWORK_IS_ENVIR" property="networkIsEnvir" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_UPLOAD" property="networkTestUpload" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_DOWNLOAD" property="networkTestDownload" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_MIRROR_UPLOAD" property="networkTestMirrorUpload" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_MIRROR_DOWNLOAD" property="networkTestMirrorDownload" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_FTP_UPLOAD" property="networkTestFtpUpload" jdbcType="VARCHAR" />
+    <result column="NETWORK_TEST_FTP_DOWNLOAD" property="networkTestFtpDownload" jdbcType="VARCHAR" />
+    <result column="NETWORK_REMARK" property="networkRemark" jdbcType="VARCHAR" />
+    <result column="SERVER_IS_EXIST" property="serverIsExist" jdbcType="VARCHAR" />
+    <result column="SERVER_MEMORY" property="serverMemory" jdbcType="VARCHAR" />
+    <result column="SERVER_TYPENO" property="serverTypeno" jdbcType="VARCHAR" />
+    <result column="SERVER_HARDDISK" property="serverHarddisk" jdbcType="VARCHAR" />
+    <result column="SERVER_CPU" property="serverCpu" jdbcType="VARCHAR" />
+    <result column="SERVER_OS" property="serverOs" jdbcType="VARCHAR" />
+    <result column="SERVER_REMARK" property="serverRemark" jdbcType="VARCHAR" />
+    <result column="FACTORY_FIRST_EQUIPLIST" property="factoryFirstEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_FIRST_LINE" property="factoryFirstLine" jdbcType="VARCHAR" />
+    <result column="FACTORY_SECOND_EQUIPLIST" property="factorySecondEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_SECOND_LINE" property="factorySecondLine" jdbcType="VARCHAR" />
+    <result column="FACTORY_THIRD_EQUIPLIST" property="factoryThirdEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_THIRD_LINE" property="factoryThirdLine" jdbcType="VARCHAR" />
+    <result column="FACTORY_FOURTH_EQUIPLIST" property="factoryFourthEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_FOURTH_LINE" property="factoryFourthLine" jdbcType="VARCHAR" />
+    <result column="FACTORY_FIFTH_EQUIPLIST" property="factoryFifthEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_FIFTH_LINE" property="factoryFifthLine" jdbcType="VARCHAR" />
+    <result column="FACTORY_SIXTH_EQUIPLIST" property="factorySixthEquiplist" jdbcType="VARCHAR" />
+    <result column="FACTORY_SIXTH_LINE" property="factorySixthLine" jdbcType="VARCHAR" />
+    <result column="SCHOOL_HEAD" property="schoolHead" jdbcType="VARCHAR" />
+    <result column="SCHOOL_TIME" property="schoolTime" jdbcType="OTHER" />
+    <result column="INVEST_PERSONNEL" property="investPersonnel" jdbcType="VARCHAR" />
+    <result column="INVEST_TIME" property="investTime" jdbcType="OTHER" />
+    <result column="UPDATE_TIME" property="updateTime"/>
+    <result column="EQUIP_IS_SOUND" property="equipIsSound" jdbcType="VARCHAR" />
+    <result column="EQUIP_SHOWPLAT" property="equipShowPlat" jdbcType="VARCHAR" />
+    <result column="EQUIP_NETEQUIP" property="equipNetEquip" jdbcType="VARCHAR"  />
+    <result column="EQUIP_IS_NET" property="equipIsNet" jdbcType="VARCHAR" />
+    <result column="EQUIP_IS_FACTORY" property="equipIsFactory" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ENVIR_SURVEY_ID, CLS_CLASSROOM_ID, SCHOOL_CONTACT, SCHOOL_CONTACT_PHONE, BUSINESS_CONTACT, 
+    BUSINESS_CONTACT_PHONE, CLASSROOM_LENGTH, CLASSROOM_WIDTH, CLASSROOM_HEIGHT,CLASSROOM_ELSE,CLASSROOM_IS_VOLTAGE, 
+    CLASSROOM_IS_PROWER, CLASSROOM_IS_LIGHT, CLASSROOM_IS_CURTAIN, CLASSROOM_IS_AIR_CONDITION, 
+    CLASSROOM_IS_CONDOLETOP, CLASSROOM_REMARK, EQUIPMENT_IS_BALCKBOARD, EQUIPMENT_BACKBOARD, 
+    EQUIPMENT_IS_PROJECTOR, EQUIPMENT_PROJECTOR, EQUIPMENT_IS_PLATFORM, EQUIPMENT_PLATFORM, 
+    EQUIPMENT_IS_CONTROL, EQUIPMENT_CONTROL, EQUIPMENT_IS_WHITEBOARD, EQUIPMENT_WHITEBOARD, 
+    EQUIPMENT_IS_TV, EQUIPEMENT_TV, EQUIPMENT_IS_BANBANTONG, EQUIPMENT_BANBANTONG, EQUIPMENT_IS_TEACHERCAMERA, 
+    EQUIPMENT_TEACHCAMERA, EQUIPMENT_IS_STUDENTCAMERA, EQUIPMENT_STUDENTCAMERA, EQUIPMENT_IS_MICR, 
+    EQUIPMENT_MICR, EQUIPMENT_IS_SOUND, EQUIPMENT_IS_SHOWPLAT, EQUIPMENT_IS_ROUTER, EQUIPMENT_IS_SWTICH, 
+    EQUIPMENT_NETWORK, EQUIPMENT_REMARK, NETWORK_BOARDBAND, NETWORK_IS_ENVIR, NETWORK_TEST_UPLOAD, 
+    NETWORK_TEST_DOWNLOAD, NETWORK_TEST_MIRROR_UPLOAD, NETWORK_TEST_MIRROR_DOWNLOAD, 
+    NETWORK_TEST_FTP_UPLOAD, NETWORK_TEST_FTP_DOWNLOAD, NETWORK_REMARK, SERVER_IS_EXIST, 
+    SERVER_MEMORY, SERVER_TYPENO, SERVER_HARDDISK, SERVER_CPU, SERVER_OS, SERVER_REMARK, 
+    FACTORY_FIRST_EQUIPLIST, FACTORY_FIRST_LINE, FACTORY_SECOND_EQUIPLIST, FACTORY_SECOND_LINE, 
+    FACTORY_THIRD_EQUIPLIST, FACTORY_THIRD_LINE, FACTORY_FOURTH_EQUIPLIST, FACTORY_FOURTH_LINE, 
+    FACTORY_FIFTH_EQUIPLIST, FACTORY_FIFTH_LINE, FACTORY_SIXTH_EQUIPLIST, FACTORY_SIXTH_LINE, 
+    SCHOOL_HEAD, SCHOOL_TIME, INVEST_PERSONNEL, INVEST_TIME,EQUIP_IS_SOUND,EQUIP_SHOWPLAT,
+    EQUIP_NETEQUIP,EQUIP_IS_NET,EQUIP_IS_FACTORY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ENVIRONMENT_SURVEY
+    where ENVIR_SURVEY_ID = #{envirSurveyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ENVIRONMENT_SURVEY
+    where ENVIR_SURVEY_ID = #{envirSurveyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.EnvironmentSurvey" >
+    insert into ENVIRONMENT_SURVEY (ENVIR_SURVEY_ID, CLS_CLASSROOM_ID, SCHOOL_CONTACT, 
+      SCHOOL_CONTACT_PHONE, BUSINESS_CONTACT, BUSINESS_CONTACT_PHONE, 
+      CLASSROOM_LENGTH, CLASSROOM_WIDTH, CLASSROOM_HEIGHT,CLASSROOM_ELSE,
+      CLASSROOM_IS_VOLTAGE, CLASSROOM_IS_PROWER, 
+      CLASSROOM_IS_LIGHT, CLASSROOM_IS_CURTAIN, CLASSROOM_IS_AIR_CONDITION, 
+      CLASSROOM_IS_CONDOLETOP, CLASSROOM_REMARK, 
+      EQUIPMENT_IS_BALCKBOARD, EQUIPMENT_BACKBOARD, 
+      EQUIPMENT_IS_PROJECTOR, EQUIPMENT_PROJECTOR, 
+      EQUIPMENT_IS_PLATFORM, EQUIPMENT_PLATFORM, 
+      EQUIPMENT_IS_CONTROL, EQUIPMENT_CONTROL, EQUIPMENT_IS_WHITEBOARD, 
+      EQUIPMENT_WHITEBOARD, EQUIPMENT_IS_TV, EQUIPEMENT_TV, 
+      EQUIPMENT_IS_BANBANTONG, EQUIPMENT_BANBANTONG, 
+      EQUIPMENT_IS_TEACHERCAMERA, EQUIPMENT_TEACHCAMERA, 
+      EQUIPMENT_IS_STUDENTCAMERA, EQUIPMENT_STUDENTCAMERA, 
+      EQUIPMENT_IS_MICR, EQUIPMENT_MICR, EQUIPMENT_IS_SOUND, 
+      EQUIPMENT_IS_SHOWPLAT, EQUIPMENT_IS_ROUTER, 
+      EQUIPMENT_IS_SWTICH, EQUIPMENT_NETWORK, EQUIPMENT_REMARK, 
+      NETWORK_BOARDBAND, NETWORK_IS_ENVIR, NETWORK_TEST_UPLOAD, 
+      NETWORK_TEST_DOWNLOAD, NETWORK_TEST_MIRROR_UPLOAD, 
+      NETWORK_TEST_MIRROR_DOWNLOAD, NETWORK_TEST_FTP_UPLOAD, 
+      NETWORK_TEST_FTP_DOWNLOAD, NETWORK_REMARK, 
+      SERVER_IS_EXIST, SERVER_MEMORY, SERVER_TYPENO, 
+      SERVER_HARDDISK, SERVER_CPU, SERVER_OS, 
+      SERVER_REMARK, FACTORY_FIRST_EQUIPLIST, FACTORY_FIRST_LINE, 
+      FACTORY_SECOND_EQUIPLIST, FACTORY_SECOND_LINE, 
+      FACTORY_THIRD_EQUIPLIST, FACTORY_THIRD_LINE, 
+      FACTORY_FOURTH_EQUIPLIST, FACTORY_FOURTH_LINE, 
+      FACTORY_FIFTH_EQUIPLIST, FACTORY_FIFTH_LINE, 
+      FACTORY_SIXTH_EQUIPLIST, FACTORY_SIXTH_LINE, 
+      SCHOOL_HEAD, SCHOOL_TIME, INVEST_PERSONNEL, 
+      INVEST_TIME)
+    values (#{envirSurveyId,jdbcType=VARCHAR}, #{clsClassroomId,jdbcType=VARCHAR}, #{schoolContact,jdbcType=VARCHAR}, 
+      #{schoolContactPhone,jdbcType=VARCHAR}, #{businessContact,jdbcType=VARCHAR}, #{businessContactPhone,jdbcType=VARCHAR}, 
+      #{classroomLength,jdbcType=VARCHAR}, #{classroomWidth,jdbcType=VARCHAR}, #{classroomHeight,jdbcType=VARCHAR}, #{classroomElse,jdbcType=VARCHAR}, 
+      #{classroomIsVoltage,jdbcType=VARCHAR}, #{classroomIsPrower,jdbcType=VARCHAR}, 
+      #{classroomIsLight,jdbcType=VARCHAR}, #{classroomIsCurtain,jdbcType=VARCHAR}, #{classroomIsAirCondition,jdbcType=VARCHAR}, 
+      #{classroomIsCondoletop,jdbcType=VARCHAR}, #{classroomRemark,jdbcType=VARCHAR}, 
+      #{equipmentIsBalckboard,jdbcType=VARCHAR}, #{equipmentBackboard,jdbcType=VARCHAR}, 
+      #{equipmentIsProjector,jdbcType=VARCHAR}, #{equipmentProjector,jdbcType=VARCHAR}, 
+      #{equipmentIsPlatform,jdbcType=VARCHAR}, #{equipmentPlatform,jdbcType=VARCHAR}, 
+      #{equipmentIsControl,jdbcType=VARCHAR}, #{equipmentControl,jdbcType=VARCHAR}, #{equipmentIsWhiteboard,jdbcType=VARCHAR}, 
+      #{equipmentWhiteboard,jdbcType=VARCHAR}, #{equipmentIsTv,jdbcType=VARCHAR}, #{equipementTv,jdbcType=VARCHAR}, 
+      #{equipmentIsBanbantong,jdbcType=VARCHAR}, #{equipmentBanbantong,jdbcType=VARCHAR}, 
+      #{equipmentIsTeachercamera,jdbcType=VARCHAR}, #{equipmentTeachcamera,jdbcType=VARCHAR}, 
+      #{equipmentIsStudentcamera,jdbcType=VARCHAR}, #{equipmentStudentcamera,jdbcType=VARCHAR}, 
+      #{equipmentIsMicr,jdbcType=VARCHAR}, #{equipmentMicr,jdbcType=VARCHAR}, #{equipmentIsSound,jdbcType=VARCHAR}, 
+      #{equipmentIsShowplat,jdbcType=VARCHAR}, #{equipmentIsRouter,jdbcType=VARCHAR}, 
+      #{equipmentIsSwtich,jdbcType=VARCHAR}, #{equipmentNetwork,jdbcType=VARCHAR}, #{equipmentRemark,jdbcType=VARCHAR}, 
+      #{networkBoardband,jdbcType=VARCHAR}, #{networkIsEnvir,jdbcType=VARCHAR}, #{networkTestUpload,jdbcType=VARCHAR}, 
+      #{networkTestDownload,jdbcType=VARCHAR}, #{networkTestMirrorUpload,jdbcType=VARCHAR}, 
+      #{networkTestMirrorDownload,jdbcType=VARCHAR}, #{networkTestFtpUpload,jdbcType=VARCHAR}, 
+      #{networkTestFtpDownload,jdbcType=VARCHAR}, #{networkRemark,jdbcType=VARCHAR}, 
+      #{serverIsExist,jdbcType=VARCHAR}, #{serverMemory,jdbcType=VARCHAR}, #{serverTypeno,jdbcType=VARCHAR}, 
+      #{serverHarddisk,jdbcType=VARCHAR}, #{serverCpu,jdbcType=VARCHAR}, #{serverOs,jdbcType=VARCHAR}, 
+      #{serverRemark,jdbcType=VARCHAR}, #{factoryFirstEquiplist,jdbcType=VARCHAR}, #{factoryFirstLine,jdbcType=VARCHAR}, 
+      #{factorySecondEquiplist,jdbcType=VARCHAR}, #{factorySecondLine,jdbcType=VARCHAR}, 
+      #{factoryThirdEquiplist,jdbcType=VARCHAR}, #{factoryThirdLine,jdbcType=VARCHAR}, 
+      #{factoryFourthEquiplist,jdbcType=VARCHAR}, #{factoryFourthLine,jdbcType=VARCHAR}, 
+      #{factoryFifthEquiplist,jdbcType=VARCHAR}, #{factoryFifthLine,jdbcType=VARCHAR}, 
+      #{factorySixthEquiplist,jdbcType=VARCHAR}, #{factorySixthLine,jdbcType=VARCHAR}, 
+      #{schoolHead,jdbcType=VARCHAR}, #{schoolTime,jdbcType=OTHER}, #{investPersonnel,jdbcType=VARCHAR}, 
+      #{investTime,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.EnvironmentSurvey" >
+    insert into ENVIRONMENT_SURVEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="envirSurveyId != null" >
+        ENVIR_SURVEY_ID,
+      </if>
+      <if test="clsClassroomId != null" >
+        CLS_CLASSROOM_ID,
+      </if>
+      <if test="schoolContact != null" >
+        SCHOOL_CONTACT,
+      </if>
+      <if test="schoolContactPhone != null" >
+        SCHOOL_CONTACT_PHONE,
+      </if>
+      <if test="businessContact != null" >
+        BUSINESS_CONTACT,
+      </if>
+      <if test="businessContactPhone != null" >
+        BUSINESS_CONTACT_PHONE,
+      </if>
+      <if test="classroomLength != null" >
+        CLASSROOM_LENGTH,
+      </if>
+      <if test="classroomWidth != null" >
+        CLASSROOM_WIDTH,
+      </if>
+      <if test="classroomHeight != null" >
+        CLASSROOM_HEIGHT,
+      </if>
+      <if test="classroomElse != null" >
+        CLASSROOM_ELSE,
+      </if>
+      <if test="classroomIsVoltage != null" >
+        CLASSROOM_IS_VOLTAGE,
+      </if>
+      <if test="classroomIsPrower != null" >
+        CLASSROOM_IS_PROWER,
+      </if>
+      <if test="classroomIsLight != null" >
+        CLASSROOM_IS_LIGHT,
+      </if>
+      <if test="classroomIsCurtain != null" >
+        CLASSROOM_IS_CURTAIN,
+      </if>
+      <if test="classroomIsAirCondition != null" >
+        CLASSROOM_IS_AIR_CONDITION,
+      </if>
+      <if test="classroomIsCondoletop != null" >
+        CLASSROOM_IS_CONDOLETOP,
+      </if>
+      <if test="classroomRemark != null" >
+        CLASSROOM_REMARK,
+      </if>
+      <if test="equipmentIsBalckboard != null" >
+        EQUIPMENT_IS_BALCKBOARD,
+      </if>
+      <if test="equipmentBackboard != null" >
+        EQUIPMENT_BACKBOARD,
+      </if>
+      <if test="equipmentIsProjector != null" >
+        EQUIPMENT_IS_PROJECTOR,
+      </if>
+      <if test="equipmentProjector != null" >
+        EQUIPMENT_PROJECTOR,
+      </if>
+      <if test="equipmentIsPlatform != null" >
+        EQUIPMENT_IS_PLATFORM,
+      </if>
+      <if test="equipmentPlatform != null" >
+        EQUIPMENT_PLATFORM,
+      </if>
+      <if test="equipmentIsControl != null" >
+        EQUIPMENT_IS_CONTROL,
+      </if>
+      <if test="equipmentControl != null" >
+        EQUIPMENT_CONTROL,
+      </if>
+      <if test="equipmentIsWhiteboard != null" >
+        EQUIPMENT_IS_WHITEBOARD,
+      </if>
+      <if test="equipmentWhiteboard != null" >
+        EQUIPMENT_WHITEBOARD,
+      </if>
+      <if test="equipmentIsTv != null" >
+        EQUIPMENT_IS_TV,
+      </if>
+      <if test="equipementTv != null" >
+        EQUIPEMENT_TV,
+      </if>
+      <if test="equipmentIsBanbantong != null" >
+        EQUIPMENT_IS_BANBANTONG,
+      </if>
+      <if test="equipmentBanbantong != null" >
+        EQUIPMENT_BANBANTONG,
+      </if>
+      <if test="equipmentIsTeachercamera != null" >
+        EQUIPMENT_IS_TEACHERCAMERA,
+      </if>
+      <if test="equipmentTeachcamera != null" >
+        EQUIPMENT_TEACHCAMERA,
+      </if>
+      <if test="equipmentIsStudentcamera != null" >
+        EQUIPMENT_IS_STUDENTCAMERA,
+      </if>
+      <if test="equipmentStudentcamera != null" >
+        EQUIPMENT_STUDENTCAMERA,
+      </if>
+      <if test="equipmentIsMicr != null" >
+        EQUIPMENT_IS_MICR,
+      </if>
+      <if test="equipmentMicr != null" >
+        EQUIPMENT_MICR,
+      </if>
+      <if test="equipmentIsSound != null" >
+        EQUIPMENT_IS_SOUND,
+      </if>
+      <if test="equipmentIsShowplat != null" >
+        EQUIPMENT_IS_SHOWPLAT,
+      </if>
+      <if test="equipmentIsRouter != null" >
+        EQUIPMENT_IS_ROUTER,
+      </if>
+      <if test="equipmentIsSwtich != null" >
+        EQUIPMENT_IS_SWTICH,
+      </if>
+      <if test="equipmentNetwork != null" >
+        EQUIPMENT_NETWORK,
+      </if>
+      <if test="equipmentRemark != null" >
+        EQUIPMENT_REMARK,
+      </if>
+      <if test="networkBoardband != null" >
+        NETWORK_BOARDBAND,
+      </if>
+      <if test="networkIsEnvir != null" >
+        NETWORK_IS_ENVIR,
+      </if>
+      <if test="networkTestUpload != null" >
+        NETWORK_TEST_UPLOAD,
+      </if>
+      <if test="networkTestDownload != null" >
+        NETWORK_TEST_DOWNLOAD,
+      </if>
+      <if test="networkTestMirrorUpload != null" >
+        NETWORK_TEST_MIRROR_UPLOAD,
+      </if>
+      <if test="networkTestMirrorDownload != null" >
+        NETWORK_TEST_MIRROR_DOWNLOAD,
+      </if>
+      <if test="networkTestFtpUpload != null" >
+        NETWORK_TEST_FTP_UPLOAD,
+      </if>
+      <if test="networkTestFtpDownload != null" >
+        NETWORK_TEST_FTP_DOWNLOAD,
+      </if>
+      <if test="networkRemark != null" >
+        NETWORK_REMARK,
+      </if>
+      <if test="serverIsExist != null" >
+        SERVER_IS_EXIST,
+      </if>
+      <if test="serverMemory != null" >
+        SERVER_MEMORY,
+      </if>
+      <if test="serverTypeno != null" >
+        SERVER_TYPENO,
+      </if>
+      <if test="serverHarddisk != null" >
+        SERVER_HARDDISK,
+      </if>
+      <if test="serverCpu != null" >
+        SERVER_CPU,
+      </if>
+      <if test="serverOs != null" >
+        SERVER_OS,
+      </if>
+      <if test="serverRemark != null" >
+        SERVER_REMARK,
+      </if>
+      <if test="factoryFirstEquiplist != null" >
+        FACTORY_FIRST_EQUIPLIST,
+      </if>
+      <if test="factoryFirstLine != null" >
+        FACTORY_FIRST_LINE,
+      </if>
+      <if test="factorySecondEquiplist != null" >
+        FACTORY_SECOND_EQUIPLIST,
+      </if>
+      <if test="factorySecondLine != null" >
+        FACTORY_SECOND_LINE,
+      </if>
+      <if test="factoryThirdEquiplist != null" >
+        FACTORY_THIRD_EQUIPLIST,
+      </if>
+      <if test="factoryThirdLine != null" >
+        FACTORY_THIRD_LINE,
+      </if>
+      <if test="factoryFourthEquiplist != null" >
+        FACTORY_FOURTH_EQUIPLIST,
+      </if>
+      <if test="factoryFourthLine != null" >
+        FACTORY_FOURTH_LINE,
+      </if>
+      <if test="factoryFifthEquiplist != null" >
+        FACTORY_FIFTH_EQUIPLIST,
+      </if>
+      <if test="factoryFifthLine != null" >
+        FACTORY_FIFTH_LINE,
+      </if>
+      <if test="factorySixthEquiplist != null" >
+        FACTORY_SIXTH_EQUIPLIST,
+      </if>
+      <if test="factorySixthLine != null" >
+        FACTORY_SIXTH_LINE,
+      </if>
+      <if test="schoolHead != null" >
+        SCHOOL_HEAD,
+      </if>
+      <if test="schoolTime != null" >
+        SCHOOL_TIME,
+      </if>
+      <if test="investPersonnel != null" >
+        INVEST_PERSONNEL,
+      </if>
+      <if test="investTime != null" >
+        INVEST_TIME,
+      </if>
+      <if test="updateTime != null" >
+       UPDATE_TIME,
+      </if>
+       <if test="equipIsSound != null" >
+       EQUIP_IS_SOUND,
+      </if>
+       <if test="equipShowPlat != null" >
+       EQUIP_SHOWPLAT,
+      </if>
+       <if test="equipNetEquip != null" >
+       EQUIP_NETEQUIP,
+      </if>
+       <if test="equipIsNet != null" >
+       EQUIP_IS_NET,
+      </if>
+       <if test="equipIsFactory != null" >
+       EQUIP_IS_FACTORY
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="envirSurveyId != null" >
+        #{envirSurveyId,jdbcType=VARCHAR},
+      </if>
+      <if test="clsClassroomId != null" >
+        #{clsClassroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolContact != null" >
+        #{schoolContact,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolContactPhone != null" >
+        #{schoolContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContact != null" >
+        #{businessContact,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContactPhone != null" >
+        #{businessContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomLength != null" >
+        #{classroomLength,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomWidth != null" >
+        #{classroomWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomHeight != null" >
+        #{classroomHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomElse != null" >
+        #{classroomElse,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsVoltage != null" >
+        #{classroomIsVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsPrower != null" >
+        #{classroomIsPrower,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsLight != null" >
+        #{classroomIsLight,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsCurtain != null" >
+        #{classroomIsCurtain,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsAirCondition != null" >
+        #{classroomIsAirCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsCondoletop != null" >
+        #{classroomIsCondoletop,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomRemark != null" >
+        #{classroomRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsBalckboard != null" >
+        #{equipmentIsBalckboard,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentBackboard != null" >
+        #{equipmentBackboard,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsProjector != null" >
+        #{equipmentIsProjector,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentProjector != null" >
+        #{equipmentProjector,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsPlatform != null" >
+        #{equipmentIsPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentPlatform != null" >
+        #{equipmentPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsControl != null" >
+        #{equipmentIsControl,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentControl != null" >
+        #{equipmentControl,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsWhiteboard != null" >
+        #{equipmentIsWhiteboard,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentWhiteboard != null" >
+        #{equipmentWhiteboard,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsTv != null" >
+        #{equipmentIsTv,jdbcType=VARCHAR},
+      </if>
+      <if test="equipementTv != null" >
+        #{equipementTv,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsBanbantong != null" >
+        #{equipmentIsBanbantong,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentBanbantong != null" >
+        #{equipmentBanbantong,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsTeachercamera != null" >
+        #{equipmentIsTeachercamera,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentTeachcamera != null" >
+        #{equipmentTeachcamera,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsStudentcamera != null" >
+        #{equipmentIsStudentcamera,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentStudentcamera != null" >
+        #{equipmentStudentcamera,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsMicr != null" >
+        #{equipmentIsMicr,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentMicr != null" >
+        #{equipmentMicr,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsSound != null" >
+        #{equipmentIsSound,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsShowplat != null" >
+        #{equipmentIsShowplat,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsRouter != null" >
+        #{equipmentIsRouter,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsSwtich != null" >
+        #{equipmentIsSwtich,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNetwork != null" >
+        #{equipmentNetwork,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentRemark != null" >
+        #{equipmentRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="networkBoardband != null" >
+        #{networkBoardband,jdbcType=VARCHAR},
+      </if>
+      <if test="networkIsEnvir != null" >
+        #{networkIsEnvir,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestUpload != null" >
+        #{networkTestUpload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestDownload != null" >
+        #{networkTestDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestMirrorUpload != null" >
+        #{networkTestMirrorUpload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestMirrorDownload != null" >
+        #{networkTestMirrorDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestFtpUpload != null" >
+        #{networkTestFtpUpload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkTestFtpDownload != null" >
+        #{networkTestFtpDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="networkRemark != null" >
+        #{networkRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="serverIsExist != null" >
+        #{serverIsExist,jdbcType=VARCHAR},
+      </if>
+      <if test="serverMemory != null" >
+        #{serverMemory,jdbcType=VARCHAR},
+      </if>
+      <if test="serverTypeno != null" >
+        #{serverTypeno,jdbcType=VARCHAR},
+      </if>
+      <if test="serverHarddisk != null" >
+        #{serverHarddisk,jdbcType=VARCHAR},
+      </if>
+      <if test="serverCpu != null" >
+        #{serverCpu,jdbcType=VARCHAR},
+      </if>
+      <if test="serverOs != null" >
+        #{serverOs,jdbcType=VARCHAR},
+      </if>
+      <if test="serverRemark != null" >
+        #{serverRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFirstEquiplist != null" >
+        #{factoryFirstEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFirstLine != null" >
+        #{factoryFirstLine,jdbcType=VARCHAR},
+      </if>
+      <if test="factorySecondEquiplist != null" >
+        #{factorySecondEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factorySecondLine != null" >
+        #{factorySecondLine,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryThirdEquiplist != null" >
+        #{factoryThirdEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryThirdLine != null" >
+        #{factoryThirdLine,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFourthEquiplist != null" >
+        #{factoryFourthEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFourthLine != null" >
+        #{factoryFourthLine,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFifthEquiplist != null" >
+        #{factoryFifthEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryFifthLine != null" >
+        #{factoryFifthLine,jdbcType=VARCHAR},
+      </if>
+      <if test="factorySixthEquiplist != null" >
+        #{factorySixthEquiplist,jdbcType=VARCHAR},
+      </if>
+      <if test="factorySixthLine != null" >
+        #{factorySixthLine,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolHead != null" >
+        #{schoolHead,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolTime != null">
+        #{schoolTime,jdbcType=OTHER},
+      </if>
+      <if test="investPersonnel != null" >
+        #{investPersonnel,jdbcType=VARCHAR},
+      </if>
+       <if test="investTime != null">
+        #{investTime,jdbcType=OTHER},
+      </if>
+      <if test="updateTime != null" >
+       #{updateTime},
+      </if>
+      <if test="equipIsSound != null" >
+        #{equipIsSound,jdbcType=VARCHAR},
+      </if>
+       <if test="equipShowPlat != null" >
+        #{equipShowPlat,jdbcType=VARCHAR},
+      </if>
+       <if test="equipNetEquip != null" >
+        #{equipNetEquip,jdbcType=VARCHAR},
+      </if>
+       <if test="equipIsNet != null" >
+        #{equipIsNet,jdbcType=VARCHAR},
+      </if>
+       <if test="equipIsFactory != null" >
+        #{equipIsFactory,jdbcType=VARCHAR}
+      </if> 
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.EnvironmentSurvey" >
+    update ENVIRONMENT_SURVEY
+    <set>
+      <if test="clsClassroomId != null" >
+        CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolContact != null" >
+        SCHOOL_CONTACT = #{schoolContact,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolContactPhone != null" >
+        SCHOOL_CONTACT_PHONE = #{schoolContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContact != null" >
+        BUSINESS_CONTACT = #{businessContact,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContactPhone != null" >
+        BUSINESS_CONTACT_PHONE = #{businessContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomLength != null" >
+        CLASSROOM_LENGTH = #{classroomLength,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomWidth != null" >
+        CLASSROOM_WIDTH = #{classroomWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomHeight != null" >
+        CLASSROOM_HEIGHT = #{classroomHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomElse != null" >
+        CLASSROOM_ELSE = #{classroomElse,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsVoltage != null" >
+        CLASSROOM_IS_VOLTAGE = #{classroomIsVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsPrower != null" >
+        CLASSROOM_IS_PROWER = #{classroomIsPrower,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsLight != null" >
+        CLASSROOM_IS_LIGHT = #{classroomIsLight,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsCurtain != null" >
+        CLASSROOM_IS_CURTAIN = #{classroomIsCurtain,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsAirCondition != null" >
+        CLASSROOM_IS_AIR_CONDITION = #{classroomIsAirCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomIsCondoletop != null" >
+        CLASSROOM_IS_CONDOLETOP = #{classroomIsCondoletop,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomRemark != null" >
+        CLASSROOM_REMARK = #{classroomRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentIsBalckboard != null" >
+        EQUIPMENT_IS_BALCKBOARD = #{equipmentIsBalckboard,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_BACKBOARD = #{equipmentBackboard,jdbcType=VARCHAR},
+        
+      <if test="equipmentIsProjector != null" >
+        EQUIPMENT_IS_PROJECTOR = #{equipmentIsProjector,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_PROJECTOR = #{equipmentProjector,jdbcType=VARCHAR},
+     
+      <if test="equipmentIsPlatform != null" >
+        EQUIPMENT_IS_PLATFORM = #{equipmentIsPlatform,jdbcType=VARCHAR},
+      </if>
+      
+        EQUIPMENT_PLATFORM = #{equipmentPlatform,jdbcType=VARCHAR},
+      
+      <if test="equipmentIsControl != null" >
+        EQUIPMENT_IS_CONTROL = #{equipmentIsControl,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_CONTROL = #{equipmentControl,jdbcType=VARCHAR},
+      
+      <if test="equipmentIsWhiteboard != null" >
+        EQUIPMENT_IS_WHITEBOARD = #{equipmentIsWhiteboard,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_WHITEBOARD = #{equipmentWhiteboard,jdbcType=VARCHAR},
+     
+      <if test="equipmentIsTv != null" >
+        EQUIPMENT_IS_TV = #{equipmentIsTv,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPEMENT_TV = #{equipementTv,jdbcType=VARCHAR},
+     
+      <if test="equipmentIsBanbantong != null" >
+        EQUIPMENT_IS_BANBANTONG = #{equipmentIsBanbantong,jdbcType=VARCHAR},
+      </if>
+      
+        EQUIPMENT_BANBANTONG = #{equipmentBanbantong,jdbcType=VARCHAR},
+      
+      <if test="equipmentIsTeachercamera != null" >
+        EQUIPMENT_IS_TEACHERCAMERA = #{equipmentIsTeachercamera,jdbcType=VARCHAR},
+      </if>
+      
+        EQUIPMENT_TEACHCAMERA = #{equipmentTeachcamera,jdbcType=VARCHAR},
+     
+      <if test="equipmentIsStudentcamera != null" >
+        EQUIPMENT_IS_STUDENTCAMERA = #{equipmentIsStudentcamera,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_STUDENTCAMERA = #{equipmentStudentcamera,jdbcType=VARCHAR},
+      
+      <if test="equipmentIsMicr != null" >
+        EQUIPMENT_IS_MICR = #{equipmentIsMicr,jdbcType=VARCHAR},
+      </if>
+      
+        EQUIPMENT_MICR = #{equipmentMicr,jdbcType=VARCHAR},
+      
+     
+        EQUIPMENT_IS_SOUND = #{equipmentIsSound,jdbcType=VARCHAR},
+      
+      <if test="equipmentIsShowplat != null" >
+        EQUIPMENT_IS_SHOWPLAT = #{equipmentIsShowplat,jdbcType=VARCHAR},
+      </if>
+     
+        EQUIPMENT_IS_ROUTER = #{equipmentIsRouter,jdbcType=VARCHAR},
+    
+    
+        EQUIPMENT_IS_SWTICH = #{equipmentIsSwtich,jdbcType=VARCHAR},
+    
+     
+        EQUIPMENT_NETWORK = #{equipmentNetwork,jdbcType=VARCHAR},
+     
+      <if test="equipmentRemark != null" >
+        EQUIPMENT_REMARK = #{equipmentRemark,jdbcType=VARCHAR},
+      </if>
+   
+        NETWORK_BOARDBAND = #{networkBoardband,jdbcType=VARCHAR},
+      
+      
+        NETWORK_IS_ENVIR = #{networkIsEnvir,jdbcType=VARCHAR},
+     
+      
+        NETWORK_TEST_UPLOAD = #{networkTestUpload,jdbcType=VARCHAR},
+     
+        NETWORK_TEST_DOWNLOAD = #{networkTestDownload,jdbcType=VARCHAR},
+     
+      
+        NETWORK_TEST_MIRROR_UPLOAD = #{networkTestMirrorUpload,jdbcType=VARCHAR},
+      
+        NETWORK_TEST_MIRROR_DOWNLOAD = #{networkTestMirrorDownload,jdbcType=VARCHAR},
+     
+        NETWORK_TEST_FTP_UPLOAD = #{networkTestFtpUpload,jdbcType=VARCHAR},
+     
+        NETWORK_TEST_FTP_DOWNLOAD = #{networkTestFtpDownload,jdbcType=VARCHAR},
+      
+        NETWORK_REMARK = #{networkRemark,jdbcType=VARCHAR},
+     
+      <if test="serverIsExist != null" >
+        SERVER_IS_EXIST = #{serverIsExist,jdbcType=VARCHAR},
+      </if>
+    
+        SERVER_MEMORY = #{serverMemory,jdbcType=VARCHAR},
+     
+        SERVER_TYPENO = #{serverTypeno,jdbcType=VARCHAR},
+      
+        SERVER_HARDDISK = #{serverHarddisk,jdbcType=VARCHAR},
+      
+        SERVER_CPU = #{serverCpu,jdbcType=VARCHAR},
+     
+        SERVER_OS = #{serverOs,jdbcType=VARCHAR},
+      
+        SERVER_REMARK = #{serverRemark,jdbcType=VARCHAR},
+     
+    
+        FACTORY_FIRST_EQUIPLIST = #{factoryFirstEquiplist,jdbcType=VARCHAR},
+     
+        FACTORY_FIRST_LINE = #{factoryFirstLine,jdbcType=VARCHAR},
+      
+        FACTORY_SECOND_EQUIPLIST = #{factorySecondEquiplist,jdbcType=VARCHAR},
+     
+        FACTORY_SECOND_LINE = #{factorySecondLine,jdbcType=VARCHAR},
+     
+        FACTORY_THIRD_EQUIPLIST = #{factoryThirdEquiplist,jdbcType=VARCHAR},
+      
+        FACTORY_THIRD_LINE = #{factoryThirdLine,jdbcType=VARCHAR},
+     
+        FACTORY_FOURTH_EQUIPLIST = #{factoryFourthEquiplist,jdbcType=VARCHAR},
+     
+        FACTORY_FOURTH_LINE = #{factoryFourthLine,jdbcType=VARCHAR},
+    
+        FACTORY_FIFTH_EQUIPLIST = #{factoryFifthEquiplist,jdbcType=VARCHAR},
+     
+        FACTORY_FIFTH_LINE = #{factoryFifthLine,jdbcType=VARCHAR},
+     
+        FACTORY_SIXTH_EQUIPLIST = #{factorySixthEquiplist,jdbcType=VARCHAR},
+    
+        FACTORY_SIXTH_LINE = #{factorySixthLine,jdbcType=VARCHAR},
+      
+      <if test="schoolHead != null" >
+        SCHOOL_HEAD = #{schoolHead,jdbcType=VARCHAR},
+      </if>
+      
+        SCHOOL_TIME = #{schoolTime,jdbcType=TIMESTAMP},
+    
+      <if test="investPersonnel != null" >
+        INVEST_PERSONNEL = #{investPersonnel,jdbcType=VARCHAR},
+      </if>
+      
+        INVEST_TIME = #{investTime,jdbcType=TIMESTAMP},
+     
+       <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="equipIsSound != null" >
+        EQUIP_IS_SOUND = #{equipIsSound,jdbcType=VARCHAR},
+      </if>
+      
+        EQUIP_SHOWPLAT = #{equipShowPlat,jdbcType=VARCHAR},
+     
+       <if test="equipNetEquip != null" >
+       EQUIP_NETEQUIP = #{equipNetEquip,jdbcType=VARCHAR},
+      </if>
+       <if test="equipIsNet != null" >
+        EQUIP_IS_NET = #{equipIsNet,jdbcType=VARCHAR},
+      </if>
+       <if test="equipIsFactory != null" >
+        EQUIP_IS_FACTORY = #{equipIsFactory,jdbcType=VARCHAR}
+      </if> 
+    </set>
+    where ENVIR_SURVEY_ID = #{envirSurveyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateEnvirSurvey" parameterType="String" >
+    update ENVIRONMENT_SURVEY
+    set 
+      CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR},
+      SCHOOL_CONTACT = #{schoolContact,jdbcType=VARCHAR},
+      SCHOOL_CONTACT_PHONE = #{schoolContactPhone,jdbcType=VARCHAR},
+      BUSINESS_CONTACT = #{businessContact,jdbcType=VARCHAR},
+      BUSINESS_CONTACT_PHONE = #{businessContactPhone,jdbcType=VARCHAR},
+      CLASSROOM_LENGTH = #{classroomLength,jdbcType=VARCHAR},
+      CLASSROOM_WIDTH = #{classroomWidth,jdbcType=VARCHAR},
+      CLASSROOM_HEIGHT = #{classroomHeight,jdbcType=VARCHAR},
+      CLASSROOM_ELSE = #{classroomElse,jdbcType=VARCHAR},
+      CLASSROOM_IS_VOLTAGE = #{classroomIsVoltage,jdbcType=VARCHAR},
+      CLASSROOM_IS_PROWER = #{classroomIsPrower,jdbcType=VARCHAR},
+      CLASSROOM_IS_LIGHT = #{classroomIsLight,jdbcType=VARCHAR},
+      CLASSROOM_IS_CURTAIN = #{classroomIsCurtain,jdbcType=VARCHAR},
+      CLASSROOM_IS_AIR_CONDITION = #{classroomIsAirCondition,jdbcType=VARCHAR},
+      CLASSROOM_IS_CONDOLETOP = #{classroomIsCondoletop,jdbcType=VARCHAR},
+      CLASSROOM_REMARK = #{classroomRemark,jdbcType=VARCHAR},
+      EQUIPMENT_IS_BALCKBOARD = #{equipmentIsBalckboard,jdbcType=VARCHAR},
+      EQUIPMENT_BACKBOARD = #{equipmentBackboard,jdbcType=VARCHAR},
+      EQUIPMENT_IS_PROJECTOR = #{equipmentIsProjector,jdbcType=VARCHAR},
+      EQUIPMENT_PROJECTOR = #{equipmentProjector,jdbcType=VARCHAR},
+      EQUIPMENT_IS_PLATFORM = #{equipmentIsPlatform,jdbcType=VARCHAR},
+      EQUIPMENT_PLATFORM = #{equipmentPlatform,jdbcType=VARCHAR},
+      EQUIPMENT_IS_CONTROL = #{equipmentIsControl,jdbcType=VARCHAR},
+      EQUIPMENT_CONTROL = #{equipmentControl,jdbcType=VARCHAR},
+      EQUIPMENT_IS_WHITEBOARD = #{equipmentIsWhiteboard,jdbcType=VARCHAR},
+      EQUIPMENT_WHITEBOARD = #{equipmentWhiteboard,jdbcType=VARCHAR},
+      EQUIPMENT_IS_TV = #{equipmentIsTv,jdbcType=VARCHAR},
+      EQUIPEMENT_TV = #{equipementTv,jdbcType=VARCHAR},
+      EQUIPMENT_IS_BANBANTONG = #{equipmentIsBanbantong,jdbcType=VARCHAR},
+      EQUIPMENT_BANBANTONG = #{equipmentBanbantong,jdbcType=VARCHAR},
+      EQUIPMENT_IS_TEACHERCAMERA = #{equipmentIsTeachercamera,jdbcType=VARCHAR},
+      EQUIPMENT_TEACHCAMERA = #{equipmentTeachcamera,jdbcType=VARCHAR},
+      EQUIPMENT_IS_STUDENTCAMERA = #{equipmentIsStudentcamera,jdbcType=VARCHAR},
+      EQUIPMENT_STUDENTCAMERA = #{equipmentStudentcamera,jdbcType=VARCHAR},
+      EQUIPMENT_IS_MICR = #{equipmentIsMicr,jdbcType=VARCHAR},
+      EQUIPMENT_MICR = #{equipmentMicr,jdbcType=VARCHAR},
+      EQUIPMENT_IS_SOUND = #{equipmentIsSound,jdbcType=VARCHAR},
+      EQUIPMENT_IS_SHOWPLAT = #{equipmentIsShowplat,jdbcType=VARCHAR},
+      EQUIPMENT_IS_ROUTER = #{equipmentIsRouter,jdbcType=VARCHAR},
+      EQUIPMENT_IS_SWTICH = #{equipmentIsSwtich,jdbcType=VARCHAR},
+      EQUIPMENT_NETWORK = #{equipmentNetwork,jdbcType=VARCHAR},
+      EQUIPMENT_REMARK = #{equipmentRemark,jdbcType=VARCHAR},
+      NETWORK_BOARDBAND = #{networkBoardband,jdbcType=VARCHAR},
+      NETWORK_IS_ENVIR = #{networkIsEnvir,jdbcType=VARCHAR},
+      NETWORK_TEST_UPLOAD = #{networkTestUpload,jdbcType=VARCHAR},
+      NETWORK_TEST_DOWNLOAD = #{networkTestDownload,jdbcType=VARCHAR},
+      NETWORK_TEST_MIRROR_UPLOAD = #{networkTestMirrorUpload,jdbcType=VARCHAR},
+      NETWORK_TEST_MIRROR_DOWNLOAD = #{networkTestMirrorDownload,jdbcType=VARCHAR},
+      NETWORK_TEST_FTP_UPLOAD = #{networkTestFtpUpload,jdbcType=VARCHAR},
+      NETWORK_TEST_FTP_DOWNLOAD = #{networkTestFtpDownload,jdbcType=VARCHAR},
+      NETWORK_REMARK = #{networkRemark,jdbcType=VARCHAR},
+      SERVER_IS_EXIST = #{serverIsExist,jdbcType=VARCHAR},
+      SERVER_MEMORY = #{serverMemory,jdbcType=VARCHAR},
+      SERVER_TYPENO = #{serverTypeno,jdbcType=VARCHAR},
+      SERVER_HARDDISK = #{serverHarddisk,jdbcType=VARCHAR},
+      SERVER_CPU = #{serverCpu,jdbcType=VARCHAR},
+      SERVER_OS = #{serverOs,jdbcType=VARCHAR},
+      SERVER_REMARK = #{serverRemark,jdbcType=VARCHAR},
+      FACTORY_FIRST_EQUIPLIST = #{factoryFirstEquiplist,jdbcType=VARCHAR},
+      FACTORY_FIRST_LINE = #{factoryFirstLine,jdbcType=VARCHAR},
+      FACTORY_SECOND_EQUIPLIST = #{factorySecondEquiplist,jdbcType=VARCHAR},
+      FACTORY_SECOND_LINE = #{factorySecondLine,jdbcType=VARCHAR},
+      FACTORY_THIRD_EQUIPLIST = #{factoryThirdEquiplist,jdbcType=VARCHAR},
+      FACTORY_THIRD_LINE = #{factoryThirdLine,jdbcType=VARCHAR},
+      FACTORY_FOURTH_EQUIPLIST = #{factoryFourthEquiplist,jdbcType=VARCHAR},
+      FACTORY_FOURTH_LINE = #{factoryFourthLine,jdbcType=VARCHAR},
+      FACTORY_FIFTH_EQUIPLIST = #{factoryFifthEquiplist,jdbcType=VARCHAR},
+      FACTORY_FIFTH_LINE = #{factoryFifthLine,jdbcType=VARCHAR},
+      FACTORY_SIXTH_EQUIPLIST = #{factorySixthEquiplist,jdbcType=VARCHAR},
+      FACTORY_SIXTH_LINE = #{factorySixthLine,jdbcType=VARCHAR},
+      SCHOOL_HEAD = #{schoolHead,jdbcType=VARCHAR},
+      SCHOOL_TIME = #{schoolTime,jdbcType=OTHER},
+      INVEST_PERSONNEL = #{investPersonnel,jdbcType=VARCHAR},
+      INVEST_TIME = #{investTime,jdbcType=OTHER},
+      UPDATE_TIME =#{updateTime}
+    where ENVIR_SURVEY_ID = #{envirSurveyId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getEnvirSurvey" parameterType="String" resultMap="BaseResultMap">
+      select e.*
+      from ENVIRONMENT_SURVEY e 
+      where e.CLS_CLASSROOM_ID=#{classroomId}
+  </select>
+  
+</mapper>

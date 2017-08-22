@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller
+END
+WorkOderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/48514/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/WorkOderController.java
+END
+AreaLevelController.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AreaLevelController.java
+END
+ProjectManagerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ProjectManagerController.java
+END
+AdminPermissionController.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AdminPermissionController.java
+END
+ClassRoomController.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ClassRoomController.java
+END
+SupplierController.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/SupplierController.java
+END
+ProjectRelationUserController.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/Technology/!svn/ver/44231/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ProjectRelationUserController.java
+END
+AdminRoleManagerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AdminRoleManagerController.java
+END
+ClassRoomEnvirController.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ClassRoomEnvirController.java
+END
+RegionalResourceController.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/RegionalResourceController.java
+END
+AreaController.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AreaController.java
+END
+LoginController.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/27760/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/LoginController.java
+END
+MaintenanceOrder.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/MaintenanceOrder.java
+END
+ManagerCenterController.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ManagerCenterController.java
+END
+MapController.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/MapController.java
+END
+TestController.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/TestController.java
+END
+UseAbleController.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/44485/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/UseAbleController.java
+END
+UploadApkController.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/UploadApkController.java
+END
+SchoolManagerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svn/Technology/!svn/ver/45609/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/SchoolManagerController.java
+END
+AdminUserManagerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AdminUserManagerController.java
+END
+PersonSignController.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/48658/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/PersonSignController.java
+END
+ClassRoomInspectController.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/Technology/!svn/ver/48084/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/ClassRoomInspectController.java
+END
+AdminAppController.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/controller/AdminAppController.java
+END

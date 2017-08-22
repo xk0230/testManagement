@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.RegionalResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.RegionalResource" >
+    <id column="REGIONAL_RESOURCE_ID" property="regionalResourceId" jdbcType="VARCHAR" />
+    <result column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_NAME" property="contactPersonName" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_JOB" property="contactPersonJob" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_PHONE" property="contactPersonPhone" jdbcType="VARCHAR" />
+    <result column="SERVICE_CONTENT" property="serviceContent" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <association property="baseArea" column="BASE_AREA_ID" select="selectAreaById"/>
+    <association property="num" column="REGIONAL_RESOURCE_ID" select="selecAllProjCount"/>
+    
+   
+  </resultMap>
+  
+  <resultMap id="area" type="com.codyy.oc.admin.entity.BaseArea">
+   <id column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR"/>
+   <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"/>
+   <result column="AREA_PATH" property="areaPath" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  
+  <resultMap id="projects" type="com.codyy.oc.admin.entity.Project">
+    <id column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="PROJECT_CODE" property="projectCode" jdbcType="VARCHAR" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <result column="supplyName" property="supplyName" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  
+    <resultMap id="regionalResource" type="com.codyy.oc.admin.entity.RegionalResource" >
+    <id column="REGIONAL_RESOURCE_ID" property="regionalResourceId" jdbcType="VARCHAR" />
+    <result column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_NAME" property="contactPersonName" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_JOB" property="contactPersonJob" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_PHONE" property="contactPersonPhone" jdbcType="VARCHAR" />
+    <result column="SERVICE_CONTENT" property="serviceContent" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+     <association property="baseArea" column="BASE_AREA_ID" select="selectArePathById"/>
+  </resultMap>
+  
+  <!-- 根据提供商地区的资源的id来获取项目的项目编码和项目名称-->
+  <select id="selcProjPageList" parameterType="com.codyy.commons.page.Page" resultMap="projects">
+      select r.PROJECT_ID, p.PROJECT_CODE,p.PROJECT_NAME,g.name supplyName from reg_r_project r left join project p
+      on r.PROJECT_ID=p.PROJECT_ID left join regional_resource g on g.regional_resource_id=r.regional_resource_id 
+      where  r.REGIONAL_RESOURCE_ID=#{map.areaResurce_Id}
+  </select>
+  
+  <!--  
+     select r.PROJECT_ID, p.PROJECT_CODE,p.PROJECT_NAME from reg_r_project r inner join project p
+      on r.PROJECT_ID=p.PROJECT_ID where r.REGIONAL_RESOURCE_ID=#{regionalResourceId} 
+  -->
+  <!-- 根据资源的id来获取项目的id以及项目的名称-->
+  <select id="selcProById" parameterType="java.lang.String" resultMap="projects">
+      select r.PROJECT_ID, p.PROJECT_CODE,p.PROJECT_NAME from reg_r_project r inner join project p
+      on r.PROJECT_ID=p.PROJECT_ID where r.REGIONAL_RESOURCE_ID=#{regionalResourceId} 
+      
+  </select>
+  
+  <!-- 根据资源的id来获取资源对象(用于资源编辑操作)    ResultMap中已经有封装好的区域对象了-->
+  <select id="selcRegResById" parameterType="java.lang.String" resultMap="regionalResource">
+      select REGIONAL_RESOURCE_ID,BASE_AREA_ID,ADDRESS,CONTACT_PERSON_NAME,CONTACT_PERSON_JOB,
+    CONTACT_PERSON_PHONE,SERVICE_CONTENT,REMARK,TYPE,NAME from regional_resource where 
+     REGIONAL_RESOURCE_ID=#{regionalResourceId}   
+  </select>
+  
+  <select id="selectArePathById" resultMap="area">
+    select AREA_PATH from base_area where BASE_AREA_ID=#{BASE_AREA_ID}
+  </select>
+  
+   <select id="selectAreaById" resultMap="area">
+    select PARENT_ID,AREA_PATH from base_area where BASE_AREA_ID=#{BASE_AREA_ID}
+  </select>
+  
+  <!-- 查询每个提供商对应的项目个数-->
+  <select id="selecAllProjCount" resultType="java.lang.Integer">
+      select count(1) from REG_R_PROJECT where REGIONAL_RESOURCE_ID=#{REGIONAL_RESOURCE_ID}
+        and PROJECT_ID!='-'
+  </select>
+  
+
+  
+  <sql id="Base_Column_List" >
+    REGIONAL_RESOURCE_ID,BASE_AREA_ID,ADDRESS,CONTACT_PERSON_NAME,CONTACT_PERSON_JOB,CONTACT_PERSON_PHONE,
+    SERVICE_CONTENT,REMARK,TYPE,NAME
+  </sql>
+  
+  <!-- 添加区域资源信息-->
+  <insert id="insertAreaResource" parameterType="com.codyy.oc.admin.entity.RegionalResource" >
+  
+       insert into regional_resource(REGIONAL_RESOURCE_ID,BASE_AREA_ID,ADDRESS,CONTACT_PERSON_NAME,
+        CONTACT_PERSON_JOB,CONTACT_PERSON_PHONE,SERVICE_CONTENT,REMARK,TYPE,NAME,CREATE_USER,CREATE_TIME) values(
+          <if test="regionalResourceId==null">
+              '-',
+          </if>
+          <if test="regionalResourceId!=null and regionalResourceId!=''">
+              #{regionalResourceId},
+          </if>
+          <if test="baseAreaId==null">
+              '-',
+          </if>
+          <if test="baseAreaId!=null and baseAreaId!='' and baseAreaId!='-1'">
+              #{baseAreaId},
+          </if>
+          <if test="address==null">
+              '-',
+          </if>
+          <if test="address!=null and address!=''">
+              #{address},
+          </if>
+           <if test="contactPersonName==null">
+              '-',
+          </if>
+          <if test="contactPersonName!=null and contactPersonName!=''">
+             #{contactPersonName},
+          </if>
+          <if test="contactPersonJob==null">
+              '-',
+          </if>
+          <if test="contactPersonJob!=null and contactPersonJob!=''">
+            #{contactPersonJob},
+          </if>
+          <if test="contactPersonPhone==null">
+              '-',
+          </if>
+          <if test="contactPersonPhone!=null and contactPersonPhone!=''">
+           #{contactPersonPhone},
+          </if>
+           <if test="serviceContent==null">
+              '-',
+          </if>
+          <if test="serviceContent!=null and serviceContent!=''">
+           #{serviceContent},
+          </if>
+          <if test="remark==null or remark ==''">
+              '-',
+          </if>
+          <if test="remark!=null and remark!=''">
+           #{remark},
+          </if>
+          <if test="type==null">
+              '-',
+          </if>
+          <if test="type!=null and type!=''">
+           #{type},
+          </if>
+          <if test="name==null">
+              '--'
+          </if>
+          <if test="name!=null and name!=''">
+           #{name},
+          </if>
+          <if test="create_User!=null and create_User!=''">
+          #{create_User},
+          </if>
+          <if test="create_Time!=null and create_Time!=''">
+          #{create_Time}
+          </if>
+          
+        ) 
+  
+       <!--  insert into regional_resource(REGIONAL_RESOURCE_ID,BASE_AREA_ID,ADDRESS,CONTACT_PERSON_NAME,
+        CONTACT_PERSON_JOB,CONTACT_PERSON_PHONE,SERVICE_CONTENT,REMARK,TYPE,NAME) values(
+          #{regionalResourceId},#{baseAreaId},#{address},#{contactPersonName},#{contactPersonJob},
+          #{contactPersonPhone},#{serviceContent},#{remark},#{type},#{name}
+        ) -->
+  </insert>
+  
+  
+  <!-- 多条件查询区域资源信息     模糊查询-->
+  <select id="selectAreaResourcePageList" resultMap="BaseResultMap" parameterType="com.codyy.commons.page.Page" >
+        select distinct  r.REGIONAL_RESOURCE_ID,r.BASE_AREA_ID,r.CREATE_TIME, r.ADDRESS,r.CONTACT_PERSON_NAME,
+      r.CONTACT_PERSON_JOB,r.CONTACT_PERSON_PHONE,r.SERVICE_CONTENT,r.REMARK,r.TYPE,r.NAME
+	  from regional_resource r 
+	  left join base_area b on r.base_area_id = b.base_area_id
+	  left join (select  r.PROJECT_ID,g.regional_resource_id rId, p.PROJECT_CODE,p.PROJECT_NAME pName,g.name supplyName from reg_r_project r left join project p
+      on r.PROJECT_ID=p.PROJECT_ID left join regional_resource g on g.regional_resource_id=r.regional_resource_id ) pr on
+      rId=r.REGIONAL_RESOURCE_ID
+      
+	  where 1=1
+      
+     <if test="map.baseAreaId != null and map.baseAreaId != '' and map.baseAreaId != '-1'">
+      and  r.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{map.baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)	
+     </if>
+    
+     <if test="map.name!= null and map.name != ''">
+        and NAME like '%' || #{map.name} || '%' ESCAPE '/'
+    </if>
+    <if test="map.type != null and map.type != '' and map.type!='-1'">
+    	and TYPE = #{map.type}
+    </if>
+    <if test="map.contactPersonName != null and map.contactPersonName != ''">
+    	and CONTACT_PERSON_NAME like '%' || #{map.contactPersonName} || '%' ESCAPE '/'
+    </if>
+    
+     <if test="map.contactPersonPhone != null and map.contactPersonPhone != ''">
+    	and CONTACT_PERSON_PHONE like '%' || #{map.contactPersonPhone} || '%' ESCAPE '/'
+    </if>
+    <if test="map.projectName!=null and map.projectName!=''">
+
+       and pName like '%' || #{map.projectName} || '%' ESCAPE '/'
+     </if> 
+     order by r.CREATE_TIME DESC
+  </select>
+ 
+  <!-- 根据id来删除区域的id-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from REGIONAL_RESOURCE
+    where REGIONAL_RESOURCE_ID = #{regionalResourceId}
+  </delete>
+  
+  
+  <!-- 编辑指定id的 区域资源信息-->
+  <update id="updateRegResource"   parameterType="com.codyy.oc.admin.entity.RegionalResource" >
+   update REGIONAL_RESOURCE
+   <set >
+      <if test="baseAreaId != null and baseAreaId !=''" >
+          BASE_AREA_ID=#{baseAreaId},
+      </if>
+      <if test="address != null and address !=''" >
+          ADDRESS=#{address},
+      </if>
+      <if test="contactPersonName != null and contactPersonName !=''" >
+         CONTACT_PERSON_NAME=#{contactPersonName},
+      </if>
+      <if test="contactPersonJob != null and contactPersonJob !=''" >
+         CONTACT_PERSON_JOB=#{contactPersonJob},
+      </if>
+      <if test="contactPersonPhone != null and contactPersonPhone !=''" >
+         CONTACT_PERSON_PHONE=#{contactPersonPhone},
+      </if>
+      <if test="name != null and name !=''" >
+         NAME=#{name},
+      </if>
+      <if test="serviceContent != null and serviceContent !=''" >
+          SERVICE_CONTENT=#{serviceContent},
+      </if>
+         REMARK=#{remark},
+      <if test="type != null and type !=''" >
+         TYPE=#{type},
+      </if>
+    </set>
+     where REGIONAL_RESOURCE_ID = #{regionalResourceId}
+  </update>
+  
+  <!-- 导出区域资源列表数据-->
+  <select id="exportRegionalResource" parameterType="map" resultMap="BaseResultMap">
+           select distinct r.REGIONAL_RESOURCE_ID,r.BASE_AREA_ID, r.ADDRESS,r.CONTACT_PERSON_NAME,r.CREATE_TIME,
+      r.CONTACT_PERSON_JOB,r.CONTACT_PERSON_PHONE,r.SERVICE_CONTENT,r.REMARK,r.TYPE,r.NAME
+  from regional_resource r left join base_area b on r.base_area_id = b.base_area_id
+  
+      left join (select  r.PROJECT_ID,g.regional_resource_id rId, p.PROJECT_CODE,p.PROJECT_NAME pName,g.name supplyName from reg_r_project r left join project p
+      on r.PROJECT_ID=p.PROJECT_ID left join regional_resource g on g.regional_resource_id=r.regional_resource_id ) pr on
+      rId=r.REGIONAL_RESOURCE_ID
+      where 1=1
+      
+     <if test="baseAreaId != null and baseAreaId != '' and baseAreaId != '-1'">
+      and  r.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)	
+     </if>
+    
+     <if test="name!= null and name != ''">
+        and NAME like '%' || #{name} || '%' ESCAPE '/'
+    </if>
+    <if test="type != null and type != '' and type!='-1'">
+    	and TYPE = #{type}
+    </if>
+    <if test="contactPersonName != null and contactPersonName != ''">
+    	and CONTACT_PERSON_NAME like '%' || #{contactPersonName} || '%' ESCAPE '/'
+    </if>
+    
+     <if test="contactPersonPhone != null and contactPersonPhone != ''">
+    	and CONTACT_PERSON_PHONE like '%' || #{contactPersonPhone} || '%' ESCAPE '/'
+    </if>
+    <if test="projectName!=null and projectName!=''">
+
+       and pName like '%' || #{projectName} || '%' ESCAPE '/'
+     </if> 
+     order by r.CREATE_TIME DESC
+  </select>
+  
+  <!-- 
+  
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.RegionalResource" >
+    insert into REGIONAL_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="regionalResourceId != null" >
+        REGIONAL_RESOURCE_ID,
+      </if>
+      <if test="baseAreaId != null" >
+        BASE_AREA_ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="contactPersonName != null" >
+        CONTACT_PERSON_NAME,
+      </if>
+      <if test="contactPersonJob != null" >
+        CONTACT_PERSON_JOB,
+      </if>
+      <if test="contactPersonPhone != null" >
+        CONTACT_PERSON_PHONE,
+      </if>
+      <if test="registeredCapital != null" >
+        REGISTERED_CAPITAL,
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="regionalResourceId != null" >
+        #{regionalResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="baseAreaId != null" >
+        #{baseAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonName != null" >
+        #{contactPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJob != null" >
+        #{contactPersonJob,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhone != null" >
+        #{contactPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        #{registeredCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceContent != null" >
+        #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.RegionalResource" >
+    update REGIONAL_RESOURCE
+    <set >
+      <if test="baseAreaId != null" >
+        BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonName != null" >
+        CONTACT_PERSON_NAME = #{contactPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJob != null" >
+        CONTACT_PERSON_JOB = #{contactPersonJob,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhone != null" >
+        CONTACT_PERSON_PHONE = #{contactPersonPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        REGISTERED_CAPITAL = #{registeredCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REGIONAL_RESOURCE_ID = #{regionalResourceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.RegionalResource" >
+    update REGIONAL_RESOURCE
+    set BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONTACT_PERSON_NAME = #{contactPersonName,jdbcType=VARCHAR},
+      CONTACT_PERSON_JOB = #{contactPersonJob,jdbcType=VARCHAR},
+      CONTACT_PERSON_PHONE = #{contactPersonPhone,jdbcType=VARCHAR},
+      REGISTERED_CAPITAL = #{registeredCapital,jdbcType=DECIMAL},
+      SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR}
+    where REGIONAL_RESOURCE_ID = #{regionalResourceId,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

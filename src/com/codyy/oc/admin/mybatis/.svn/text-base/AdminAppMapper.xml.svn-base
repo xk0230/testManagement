@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminAppMapper">
+	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminApp">
+		<id column="ADMIN_APP_ID" property="adminAppId" jdbcType="VARCHAR" />
+		<result column="APP_TYPE" property="appType" jdbcType="VARCHAR" />
+		<result column="APP_VERSION" property="appVersion" jdbcType="VARCHAR" />
+		<result column="APP_DESC" property="appDesc" jdbcType="VARCHAR" />
+		<result column="CURRENT_VERSION" property="currentVersion"
+			jdbcType="CHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="ANDROID_FILE" property="androidFile" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ADMIN_APP_ID, APP_TYPE, APP_VERSION, APP_DESC, CURRENT_VERSION, URL, ANDROID_FILE,
+		CREATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ADMIN_APP
+		where ADMIN_APP_ID = #{adminAppId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from ADMIN_APP
+		where ADMIN_APP_ID = #{adminAppId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		insert into ADMIN_APP (ADMIN_APP_ID, APP_TYPE, APP_VERSION,
+		APP_DESC, CURRENT_VERSION, URL,
+		ANDROID_FILE, CREATE_TIME)
+		values (#{adminAppId,jdbcType=VARCHAR}, #{appType,jdbcType=VARCHAR},
+		#{appVersion,jdbcType=VARCHAR},
+		#{appDesc,jdbcType=VARCHAR}, #{currentVersion,jdbcType=CHAR}, #{url,jdbcType=VARCHAR},
+		#{androidFile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		insert into ADMIN_APP
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="adminAppId != null">
+				ADMIN_APP_ID,
+			</if>
+			<if test="appType != null">
+				APP_TYPE,
+			</if>
+			<if test="appVersion != null">
+				APP_VERSION,
+			</if>
+			<if test="appDesc != null">
+				APP_DESC,
+			</if>
+			<if test="currentVersion != null">
+				CURRENT_VERSION,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="androidFile != null">
+				ANDROID_FILE,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="adminAppId != null">
+				#{adminAppId,jdbcType=VARCHAR},
+			</if>
+			<if test="appType != null">
+				#{appType,jdbcType=VARCHAR},
+			</if>
+			<if test="appVersion != null">
+				#{appVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="appDesc != null">
+				#{appDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="currentVersion != null">
+				#{currentVersion,jdbcType=CHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="androidFile != null">
+				#{androidFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		update ADMIN_APP
+		<set>
+			<if test="appType != null">
+				APP_TYPE = #{appType,jdbcType=VARCHAR},
+			</if>
+			<if test="appVersion != null">
+				APP_VERSION = #{appVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="appDesc != null">
+				APP_DESC = #{appDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="currentVersion != null">
+				CURRENT_VERSION = #{currentVersion,jdbcType=CHAR},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="androidFile != null">
+				ANDROID_FILE = #{androidFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ADMIN_APP_ID = #{adminAppId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		update ADMIN_APP
+		set APP_TYPE = #{appType,jdbcType=VARCHAR},
+		APP_VERSION = #{appVersion,jdbcType=VARCHAR},
+		APP_DESC = #{appDesc,jdbcType=VARCHAR},
+		CURRENT_VERSION = #{currentVersion,jdbcType=CHAR},
+		URL = #{url,jdbcType=VARCHAR},
+		ANDROID_FILE = #{androidFile,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+		where ADMIN_APP_ID = #{adminAppId,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateToHistoryByAppType" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		update ADMIN_APP set CURRENT_VERSION ='N' where  CURRENT_VERSION='Y' and APP_TYPE =#{appType} 
+	</update>
+	<update id="updateToCurrentVersionById" parameterType="string">
+		update ADMIN_APP set CURRENT_VERSION ='Y' where ADMIN_APP_ID =#{value}
+	</update>
+	
+	<select id="listByType" resultMap="BaseResultMap" parameterType="string">
+		select
+			<include refid="Base_Column_List" />
+			from ADMIN_APP
+			where APP_TYPE = #{value} order by create_time DESC
+	</select>
+	<select id="exits" resultMap="BaseResultMap" parameterType="com.codyy.oc.admin.entity.AdminApp">
+		select
+			<include refid="Base_Column_List" />
+			from ADMIN_APP
+			where APP_TYPE = #{appType} and APP_VERSION=#{appVersion}
+	</select>
+</mapper>

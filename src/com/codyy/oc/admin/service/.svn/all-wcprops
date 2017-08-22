@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/Technology/!svn/ver/49025/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service
+END
+MaintenanceOrderService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/MaintenanceOrderService.java
+END
+UploadApkService.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/UploadApkService.java
+END
+AdminUserManagerService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AdminUserManagerService.java
+END
+RegRProjectService.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/RegRProjectService.java
+END
+SchoolService.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/48913/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/SchoolService.java
+END
+QualificationService.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/QualificationService.java
+END
+AttachmentService.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AttachmentService.java
+END
+AdminAppService.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AdminAppService.java
+END
+AreaLevelService.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AreaLevelService.java
+END
+AdminUserPermissionService.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AdminUserPermissionService.java
+END
+SignService.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/48661/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/SignService.java
+END
+AdminPermissionService.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/45424/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AdminPermissionService.java
+END
+ClassRoomService.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/49025/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/ClassRoomService.java
+END
+BaseAreaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/45424/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/BaseAreaService.java
+END
+SupplierService.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/45609/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/SupplierService.java
+END
+AdminRoleManagerService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/AdminRoleManagerService.java
+END
+WorkerOrderService.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/48699/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/WorkerOrderService.java
+END
+ProjectService.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/48913/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/ProjectService.java
+END
+RegionalResourceService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/RegionalResourceService.java
+END
+BaseUserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/BaseUserService.java
+END
+SupplierRProjectService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/45664/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/service/SupplierRProjectService.java
+END

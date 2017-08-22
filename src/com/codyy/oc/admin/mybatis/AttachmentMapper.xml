@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Attachment" >
+    <id column="ATTACHMENT_ID" property="attachmentId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ATTACHMENT_URL" property="attachment_Url" jdbcType="VARCHAR" />
+    <result column="RELATIONSHIP_ID" property="relationShipId" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime"/>
+    <collection property="quaList" ofType="com.codyy.oc.admin.entity.Attachment"/>
+  </resultMap>
+  
+  
+  <!-- 添加附件表 -->
+  <insert id="addAttachment" parameterType="list">
+       insert into ATTACHMENT (ATTACHMENT_ID,NAME,ATTACHMENT_URL,RELATIONSHIP_ID,REMARK,TYPE,CREATE_TIME)
+     <foreach collection="list" item="item" open="(" close=")" separator="union all">
+		select 	
+     
+        #{item.attachmentId},
+     
+        #{item.name},
+      
+        #{item.attachment_Url},
+     
+        #{item.relationShipId},
+     
+        #{item.remark},
+    
+        #{item.type},
+     
+        #{item.createTime}
+     
+      	from dual
+	  </foreach>
+
+  </insert>  
+  
+  <select id="getAttachByRelationshipId"  parameterType="String" resultMap="BaseResultMap">
+      select a.*
+        from  attachment  a
+        where  a.relationship_id=#{relationShipId}
+  </select>
+  <select id="getAttachByRelationshipIdsPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+      select a.*
+        from  attachment  a
+        where  a.relationship_id=#{map.relationShipId}
+  </select>
+  
+  
+  <!--  -->
+  <delete id="deleteAttachment" parameterType="String">
+      delete  
+      from attachment a
+      where  a.relationship_id=#{relationShipId}
+  </delete>
+  
+  <delete id="deleteAttachments" parameterType="String">
+      delete  
+      from attachment a
+      where  a.relationship_id=#{relationShipId} and TYPE='baozhang'
+  </delete>
+  
+  <!-- 删除现场维修编辑的指定图片-->
+  <delete id="deleteAttachmentByPicName" parameterType="com.codyy.oc.admin.entity.Attachment">
+      delete  
+      from attachment a
+      where  a.relationship_id=#{relationShipId} and ATTACHMENT_URL=#{attachment_Url}
+  </delete>
+  
+
+  <insert id="insertQualification" parameterType="java.util.List">	
+	          insert into ATTACHMENT(ATTACHMENT_ID,RELATIONSHIP_ID,NAME,ATTACHMENT_URL,CREATE_TIME,TYPE,REMARK)
+	           <foreach collection="quaLi" item="fujian" open="(" close=")" separator="union all">
+					select 
+					    sys_guid(),
+					    #{fujian.relationShipId},
+						#{fujian.name},
+						#{fujian.attachment_Url},
+						#{fujian.create_time},
+						#{fujian.type},
+						#{fujian.remark}
+					from dual
+		     </foreach>
+	</insert>
+	
+	<!-- 根据传来的教室编号和类型来获取对应的附件集合-->
+	<select id="classRoomDetailBycId" parameterType="com.codyy.oc.admin.entity.Type" resultType="com.codyy.oc.admin.entity.Attachment">
+	      select NAME, ATTACHMENT_URL,REMARK from ATTACHMENT where RELATIONSHIP_ID=#{classRoomId} and TYPE=#{type} 
+	</select>
+	
+	
+	
+	
+	<!--  根据集成商的id来删除对应资质表中的多条信息-->
+	<delete id="deleteQualiBysuId" parameterType="java.lang.String">
+	     delete from ATTACHMENT where RELATIONSHIP_ID=#{relationShipId}
+	</delete>
+	
+	<!-- 删除开发进度对应附件表中的所有数据-->
+	<delete id="delClassRoomDetail" parameterType="com.codyy.oc.admin.entity.Type">
+	     delete from ATTACHMENT where RELATIONSHIP_ID=#{classRoomId} and TYPE=#{type}
+	</delete>
+	
+	<!-- 根据用户的id来获取本用户对应所有资质的集合-->
+	<select id="qualifiListBySuId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.Attachment" >
+	      select NAME, ATTACHMENT_URL from ATTACHMENT where RELATIONSHIP_ID=#{relationShipId}
+	</select>
+	
+	<!-- 根据集成商的id查询出集成商对应的所有资质集合并实现分页显示-->
+	<select id="qualificatListPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.Attachment" >
+	      select NAME, ATTACHMENT_URL from ATTACHMENT where RELATIONSHIP_ID=#{map.relationShipId} 
+	</select>
+	
+	<!-- 上传Apk包-->
+	<insert id="insertApk" parameterType="com.codyy.oc.admin.entity.UploadAndroidApk">
+	   insert into ADMIN_APP_ANDROID (ADMIN_APP_ANDROID_ID,CREATETIME,VERSIONNAME,VERSIONCODE,UPDATEMESSAGE,DOWNURL)
+           values(#{androidAppId},#{createTime},#{versionName},#{versionCode},#{updateMessage},#{downUrl})
+	</insert>
+	
+  <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from QUALIFICATION
+    where QUALIFICATION_ID = #{qualificationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from QUALIFICATION
+    where QUALIFICATION_ID = #{qualificationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Qualification" >
+    insert into QUALIFICATION (QUALIFICATION_ID, SUPPLIER_ID, NAME, 
+      ATTACHMENT)
+    values (#{qualificationId,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{attachment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Qualification" >
+    insert into QUALIFICATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qualificationId != null" >
+        QUALIFICATION_ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="attachment != null" >
+        ATTACHMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qualificationId != null" >
+        #{qualificationId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Qualification" >
+    update QUALIFICATION
+    <set >
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null" >
+        ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where QUALIFICATION_ID = #{qualificationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Qualification" >
+    update QUALIFICATION
+    set SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+    where QUALIFICATION_ID = #{qualificationId,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

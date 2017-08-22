@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.ProjectMapper">
+  
+   <sql id="pageTop">
+		select * from (select t.*,rownum as r from(
+	</sql>
+	<sql id="pageBottom">
+	<![CDATA[
+		) t) t1 where t1.r > #{start} and t1.r <= #{end}
+		]]>
+	</sql>
+  
+  
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Project">
+    <id column="PROJECT_ID" jdbcType="VARCHAR" property="projectId" />
+    <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+    <result column="PROJECT_CODE" jdbcType="VARCHAR" property="projectCode" />
+    <result column="MANAGER_ID" jdbcType="VARCHAR" property="managerId" />
+    <result column="DELETE_FLAG" jdbcType="CHAR" property="deleteFlag" />
+    <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+    <result column="BASE_AREA_ID" jdbcType="VARCHAR" property="baseAreaId" />
+    <result column="managerName" jdbcType="VARCHAR" property="managerName" />
+    <result column="managerContact" jdbcType="VARCHAR" property="managerContact" />
+    <association property="baseArea" select="selecArea" column="BASE_AREA_ID"/>
+  </resultMap>
+  
+  <resultMap type="com.codyy.oc.admin.entity.BaseArea" id="areaMap">
+     <id column="BASE_AREA_ID" property="baseAreaId"/>
+     <result column="AREA_PATH" property="areaPath"/>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    PROJECT_ID, PROJECT_NAME, PROJECT_CODE, MANAGER_ID, DELETE_FLAG, CREATE_USER_ID, 
+    BASE_AREA_ID
+  </sql>
+  
+  <!-- 根据地区的编号来获得地区的名称-->
+  <select id="selecArea" resultMap="areaMap" >
+      select BASE_AREA_ID,AREA_PATH from BASE_AREA where BASE_AREA_ID=#{BASE_AREA_ID}
+  </select>
+  
+  <!-- 获取项目所在区域 -->
+  <select id="getProjectByArea" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  p.PROJECT_ID, p.PROJECT_NAME, p.PROJECT_CODE, p.MANAGER_ID, p.DELETE_FLAG, p.CREATE_USER_ID, 
+    p.BASE_AREA_ID,u.realname as managerName,u.contact as managerContact
+ 	 from project p
+ 	 left join ADMIN_USER u on p.manager_id=u.admin_user_id
+ 	where p.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{areaId,jdbcType=VARCHAR}
+        connect by prior b.base_area_id = b.parent_id) and p.delete_flag = 'N'
+  </select>
+  
+
+  <select id="checkProjectIsExist"  parameterType="com.codyy.oc.admin.entity.Project" resultType="Integer">
+        select count(1)
+        from project p 
+        where  p.delete_flag='N' and (p.project_code=#{projectCode}
+        or p.project_name=#{projectName})
+   
+   
+  </select>
+   <!-- 添加项目列表-->
+   <insert id="addProject" parameterType="com.codyy.oc.admin.entity.Project" >
+      insert into PROJECT 
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="projectId != null" >
+          PROJECT_ID,
+        </if>
+        <if test="projectName != null" >
+          PROJECT_NAME,
+        </if>
+        <if test="projectCode != null" >
+           PROJECT_CODE,
+        </if>
+        <if test="managerId != null" >
+          MANAGER_ID,
+        </if>
+        <if test="deleteFlag != null" >
+          DELETE_FLAG,
+        </if>
+        <if test="createUserId != null" >
+          CREATE_USER_ID,
+        </if>
+        <if test="baseAreaId !=null">
+          Base_Area_Id,
+        </if>
+         <if test="createTime!=null">
+          CREATE_TIME,
+         </if>
+         <if test="planBeginTime != null">
+           PLAN_BEGIN_TIME,
+         </if>
+         <if test="planEndTime != null">
+           PLAN_END_TIME,
+         </if>
+         <if test="implementBeginTime != null">
+           IMPLEMENTATION_BEGIN_TIME,
+         </if>
+         <if test="implementEndTime != null">
+           IMPLEMENTATION_END_TIME,
+         </if>
+          <if test="updateTime!=null">
+           UPDATE_TIME
+         </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+         <if test="projectId != null" >
+           #{projectId,jdbcType=VARCHAR},
+         </if>
+         <if test="projectName != null" >
+           #{projectName,jdbcType=VARCHAR},
+         </if>
+         <if test="projectCode != null" >
+           #{projectCode,jdbcType=VARCHAR},
+         </if>
+         <if test="managerId != null" >
+           #{managerId,jdbcType=VARCHAR},
+         </if>
+         <if test="deleteFlag != null" >
+           #{deleteFlag,jdbcType=CHAR},
+         </if>
+         <if test="createUserId != null" >
+           #{createUserId,jdbcType=VARCHAR},
+         </if>
+         <if test="baseAreaId !=null">
+           #{baseAreaId,jdbcType=VARCHAR},
+         </if>
+          <if test="createTime!=null">
+           #{createTime},
+         </if>
+         <if test="planBeginTime != null">
+            #{planBeginTime},
+         </if>
+         <if test="planEndTime != null">
+            #{planEndTime},
+         </if>
+         <if test="implementBeginTime != null">
+            #{implementBeginTime},
+         </if>
+         <if test="implementEndTime != null">
+            #{implementEndTime},
+         </if>
+         <if test="updateTime!=null">
+           #{updateTime}
+         </if>
+      </trim>
+   </insert>
+   
+   
+   <!-- 根据项目ID获取相关工程师 -->
+   <select id="getEngineerList" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
+         select 
+            a.admin_user_id  as adminUserId,
+            a.realname       as realName,
+            a.contact        as contact
+         from  project_r_user pr
+         left join  admin_user a  on  pr.admin_user_id=a.admin_user_id
+         where pr.project_id=#{projectId}
+   </select>
+   
+   
+   
+   <!-- 添加项目-工程师 -->
+   <insert id="addProjectRelationUser" parameterType="list">
+      insert into  PROJECT_R_USER (PROJECT_R_USER_ID,PROJECT_ID,ADMIN_USER_ID) 
+      
+      <foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select 
+				#{items.projectRelationUserId} ,
+				#{items.projectId},
+				#{items.adminUserId} 
+			from dual
+		</foreach>
+   
+   </insert>
+   
+   <!-- 根据项目编号获取项目 -->
+   <select id="getProjectById" parameterType="String" resultType="com.codyy.oc.admin.entity.Project">
+      select 
+       p.PROJECT_ID           as  projectId, 
+       p.PROJECT_NAME         as  projectName, 
+       p.PROJECT_CODE         as  projectCode,
+       p.MANAGER_ID           as  managerId,
+       ba.area_path           as  areaPath,
+       p.plan_begin_time      as  planBeginTime,
+       p.plan_end_time        as  planEndTime,
+       p.implementation_begin_time  as implementBeginTime,
+       p.implementation_end_time    as implementEndTime
+      
+      from PROJECT p
+      left join   base_area ba
+            on ba.base_area_id = p.base_area_id
+      where PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+   </select>
+   
+   <!-- 获取项目-用户关系数据 -->
+   <select id="getProjectRelationUser" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
+      select a.admin_user_id as adminUserId,a.realname as realName
+        from  PROJECT_R_USER r
+        left join PROJECT  p         on  p.project_id=r.project_id
+        left join ADMIN_USER a       on  a.admin_user_id=r.admin_user_id
+      where r.project_id=#{projectId}
+        
+   </select>
+   
+   <!-- 查询并选择项目列表  并可按区域进行查询-->
+   <select id="projPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+   
+      select  p.PROJECT_ID,p.PROJECT_NAME,p.PROJECT_CODE, p.BASE_AREA_ID from project p left join  
+      base_area b on p.base_area_id = b.base_area_id  where 1=1
+      <if test="map.baseAreaId!=null and map.baseAreaId!='' and map.baseAreaId!='-1'">  
+       and  p.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{map.baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)
+      </if>
+      <if test="map.projName!=null and map.projName!=''">
+      and PROJECT_NAME like '%' || #{map.projName} || '%' ESCAPE '/'
+      </if>
+       
+   </select>
+   
+   <!-- 更新项目 -->
+   <update id="updateProject" parameterType="com.codyy.oc.admin.entity.Project">
+    update PROJECT
+    set 
+      PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+      PROJECT_CODE = #{projectCode,jdbcType=VARCHAR},
+      MANAGER_ID = #{managerId,jdbcType=VARCHAR},
+      plan_begin_time = #{planBeginTime},
+      plan_end_time = #{planEndTime},
+      implementation_begin_time = #{implementBeginTime},
+      implementation_end_time = #{implementEndTime}
+    where 
+      PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+   </update>
+   
+   <!-- 查看项目下是否有学校 -->
+   <select id="getProjectRelationSchool" parameterType="String" resultType="Integer">
+      select count(1)
+      from cls_school cls
+      left join project p  on p.project_id=cls.project_id
+      where  cls.project_id=#{projectId} and cls.delete_flag='N'
+   </select>
+   
+   <!-- 逻辑删除项目 -->
+   <update id="deleteProject" parameterType="String">
+       update  project p
+       set  p.delete_flag='Y'
+       where p.project_id=#{projectId}
+   </update>
+   
+   
+   <!-- 判断工程师是否已分配到学校 -->
+   <select id="checkSchoolEngsExist" parameterType="map" resultType="Integer">
+        
+      select count(1) from( 
+        
+        select clsr.admin_user_id
+        
+        from  cls_school_r_user   clsr
+        
+        left join  cls_school  cls      on  cls.cls_school_id=clsr.cls_school_id
+        
+        left join  admin_user au        on   au.admin_user_id=clsr.admin_user_id
+        
+        where cls.project_id=#{projectId} and cls.delete_flag='N'
+        
+        minus
+          <foreach collection="users" index="index" item="item" open="(" separator="union all" close=")">   
+               select 
+                  #{item.adminUserId}
+               from dual
+         </foreach> 
+         
+      )
+   </select>
+   
+   <!-- 获取学校下工程师数量 -->
+   <select id="getSchoolCountByProjectId" parameterType="String" resultType="Integer">
+      select count(1)
+      
+      from cls_school_r_user  clsr
+      
+      left join cls_school cls  on cls.cls_school_id=clsr.cls_school_id
+      
+      where cls.project_id=#{projectId} and cls.delete_flag='N'
+   </select>
+   
+   <!-- 批量删除项目-用户关系数量 -->
+   <delete id="deleteProjectRelationUser" parameterType="java.util.List">
+      delete from PROJECT_R_USER
+      where PROJECT_ID in
+      <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+        #{item.projectId}   
+     </foreach>  
+   </delete>
+   
+   <!--获取项目数量-->
+   <select id="getProjectCount" parameterType="java.util.Map" resultType="Integer">
+       select count(1)
+       from  project p
+       where 1=1
+       and delete_flag = 'N'  
+       <if test="provinceId!=null and provinceId!='' and provinceId!='-1'">
+         and  p.base_area_id in (
+               select b.base_area_id
+               from base_area b
+               start with b.base_area_id =#{provinceId}
+               connect by prior b.base_area_id = b.parent_id
+		 )
+       </if>
+       <if test="projectName!=null and projectName!=''">
+          and   p.project_name like '%' || #{projectName} || '%' ESCAPE '/'
+       </if>
+       <if test="managerName!=null and managerName!=''">
+          and  p.manager_id=(
+                 select a.admin_user_id
+                 from admin_user a
+                 where a.admin_user_id=p.manager_id   
+                 and   a.realname  like '%' || #{managerName} || '%' ESCAPE '/'
+          )
+       </if>
+   </select>
+   
+   <!-- 获取项目列表 -->
+   <select id="getProjectPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.view.ProjectView">
+        
+         select  
+           projectId, projectCode, projectName,schoolCount,classCount,engineerCount, managerName,
+           areaName, explorationProcess||'%' explorationProcess, 
+           installProcess ||'%' installProcess, inspectProcess||'%' inspectProcess,
+           updateTime
+         from(
+              
+            select 
+             p.project_id        projectId,
+             p.project_code      projectCode,
+             p.project_name      projectName,
+             bat.area_path       areaName,
+             nvl(t1.schoolCount,0)      schoolCount,
+             nvl(t2.classCount,0)       classCount,
+             nvl(t3.engineerCount,0)    engineerCount,
+             au.realname         managerName,
+             nvl(p.inspect_process, 0)          inspectProcess,
+             nvl(p.EXPLORATION_PROCESS, 0)   explorationProcess,
+             nvl(p.INSTALL_PROCESS, 0)       installProcess,
+             p.update_time                   updateTime
+              
+                   
+          
+          from  project p 
+          left join base_area bat
+           on bat.base_area_id = p.base_area_id
+           
+          left join (
+          
+             select 
+                cls.project_id,
+                count(1) as schoolCount 
+             from cls_school cls 
+             
+             where cls.delete_flag='N' 
+             
+             
+             group by cls.project_id
+          
+          ) t1
+          on t1.project_id = p.project_id
+          
+          left join (
+             select  cs.project_id, 
+                 count(1) as classCount
+              from  cls_classroom  clsc 
+              
+               left join cls_school cs
+                on cs.cls_school_id=clsc.cls_school_id
+               where  cs.delete_flag='N'
+               group by cs.project_id
+          
+          )t2
+           on t2.project_id = p.project_id   
+           
+         left join (
+            select 
+              pru.project_id,
+               count(1) as engineerCount
+            from  project_r_user pru
+            group by pru.project_id
+         )t3     
+ 
+       on t3.project_id = p.project_id
+        
+       left join admin_user  au
+         on au.admin_user_id=p.manager_id
+         
+       where 1=1   
+          and p.delete_flag = 'N'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+             
+        <if test="map.provinceId!=null and map.provinceId!='' and map.provinceId!='-1'">
+         and  p.base_area_id in (
+               select b.base_area_id
+               from base_area b
+               start with b.base_area_id =#{map.provinceId}
+               connect by prior b.base_area_id = b.parent_id
+          )
+       </if>
+       <if test="map.projectName!=null and map.projectName!=''">
+          and   p.project_name like '%' || #{map.projectName} || '%' ESCAPE '/'
+       </if>
+       <if test="map.managerName!=null and map.managerName!=''">
+          and  p.manager_id=(
+                select a.admin_user_id
+                from admin_user a
+                where a.admin_user_id=p.manager_id   
+                and   a.realname  like '%' || #{map.managerName} || '%' ESCAPE '/'
+          )
+        </if>
+         order by 
+        <if test="map.sortDesc !=null and map.sortDesc!='' and map.sortDesc=='ASC' ">
+   	       inspectProcess ASC,
+   	    </if>
+   	    <if test="map.sortDesc !=null and map.sortDesc!='' and map.sortDesc=='DESC' ">
+   	       inspectProcess DESC,
+   	    </if>
+   	    <if test="map.explorationDesc !=null and map.explorationDesc!='' and map.explorationDesc== 'ASC'">
+   	       explorationProcess ASC,
+   	    </if>
+   	     <if test="map.explorationDesc !=null and map.explorationDesc!='' and map.explorationDesc== 'DESC'">
+   	       explorationProcess DESC,
+   	    </if>
+   	    <if test="map.installDesc !=null and map.installDesc!='' and map.installDesc== 'ASC'">
+   	       installProcess ASC,
+   	    </if>
+   	      <if test="map.installDesc !=null and map.installDesc!='' and map.installDesc== 'DESC'">
+   	       installProcess DESC,
+   	    </if>
+   	    <if test="map.updateDesc !=null and map.updateDesc!='' and map.updateDesc== 'ASC'">
+   	       updateTime ASC,
+   	    </if>
+   	      <if test="map.updateDesc !=null and map.updateDesc!='' and map.updateDesc== 'DESC'">
+   	       updateTime DESC,
+   	    </if>
+   	    <if test="map.updateDesc == null or map.updateDesc ==''">
+           updateTime DESC,
+        </if>
+   	     p.project_id
+   	  )
+   	 
+   </select>
+   
+   <!-- 导出项目列表 -->
+   <select id="exportProjectList" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.ProjectView">
+       
+       select  projectId,projectCode,projectName,schoolCount,classCount,engineerCount,managerName,areaName,
+              explorationProcess||'%' explorationProcess, 
+           installProcess ||'%' installProcess, inspectProcess||'%' inspectProcess,
+           updateTime
+       from(
+        
+           select 
+             p.project_id        projectId,
+             p.project_code      projectCode,
+             p.project_name      projectName,
+             bat.area_path       areaName,
+           nvl(t1.schoolCount,0)      schoolCount,
+           nvl(t2.classCount,0)       classCount,
+           nvl(t3.engineerCount,0)    engineerCount,
+           au.realname         managerName,
+           nvl(p.inspect_process, 0)          inspectProcess,
+           nvl(p.EXPLORATION_PROCESS, 0)   explorationProcess,
+           nvl(p.INSTALL_PROCESS, 0)       installProcess,
+           p.update_time                   updateTime
+              
+                   
+          
+          from  project p 
+          left join base_area bat
+           on bat.base_area_id = p.base_area_id
+           
+           left join (
+          
+             select 
+                cls.project_id,
+                count(1) as schoolCount 
+             from cls_school cls 
+             
+             where cls.delete_flag='N' 
+             
+             
+             group by cls.project_id
+          
+          ) t1
+          on t1.project_id = p.project_id
+          
+          left join (
+             select  cs.project_id, 
+                 count(1) as classCount
+              from  cls_classroom  clsc 
+              
+               left join cls_school cs
+                on cs.cls_school_id=clsc.cls_school_id
+               where  cs.delete_flag='N'
+               group by cs.project_id
+          
+          )t2
+           on t2.project_id = p.project_id   
+           
+         left join (
+            select 
+              pru.project_id,
+               count(1) as engineerCount
+            from  project_r_user pru
+            group by pru.project_id
+         )t3     
+ 
+       on t3.project_id = p.project_id
+        
+       left join admin_user  au
+         on au.admin_user_id=p.manager_id
+         
+       where 1=1   
+          and p.delete_flag = 'N'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+             
+        <if test="provinceId!=null and provinceId!='' and provinceId!='-1'">
+         and  p.base_area_id in (
+               select b.base_area_id
+               from base_area b
+               start with b.base_area_id =#{provinceId}
+               connect by prior b.base_area_id = b.parent_id
+          )
+       </if>
+       <if test="projectName!=null and projectName!=''">
+          and   p.project_name like '%' || #{projectName} || '%' ESCAPE '/'
+       </if>
+       <if test="managerName!=null and managerName!=''">
+          and  p.manager_id=(
+                select a.admin_user_id
+                from admin_user a
+                where a.admin_user_id=p.manager_id   
+                and   a.realname  like '%' || #{managerName} || '%' ESCAPE '/'
+          )
+        </if>
+        order by
+        <if test="sortDesc !=null and sortDesc!='' and sortDesc=='ASC' ">
+   	       inspectProcess ASC,
+   	    </if>
+   	    <if test="sortDesc !=null and sortDesc!='' and sortDesc=='DESC' ">
+   	       inspectProcess DESC,
+   	    </if>
+   	    <if test="explorationDesc !=null and explorationDesc!='' and explorationDesc== 'ASC'">
+   	       explorationProcess ASC,
+   	    </if>
+   	     <if test="explorationDesc !=null and explorationDesc!='' and explorationDesc== 'DESC'">
+   	       explorationProcess DESC,
+   	    </if>
+   	    <if test="installDesc !=null and installDesc!='' and installDesc== 'ASC'">
+   	       installProcess ASC,
+   	    </if>
+   	      <if test="installDesc !=null and installDesc!='' and installDesc== 'DESC'">
+   	       installProcess DESC,
+   	    </if>
+   	    <if test="updateDesc !=null and updateDesc!='' and updateDesc== 'ASC'">
+   	       updateTime ASC,
+   	    </if>
+   	      <if test="updateDesc !=null and updateDesc!='' and updateDesc== 'DESC'">
+   	       updateTime DESC,
+   	    </if>
+   	     <if test="updateDesc ==null or updateDesc ==''">
+           updateTime DESC,
+        </if>
+   	    p.project_id
+   	    )
+   </select>
+   
+   
+   <!-- 根据项目id获取工程师数量 -->
+   <select id="getEngineerCountByProjectId" parameterType="map" resultType="Integer">
+         select count(1)
+         from admin_user a
+         left join project_r_user pr   on  pr.admin_user_id=a.admin_user_id
+         where pr.project_id=#{projectId}
+   </select>
+   
+   <!-- 根据项目id获取工程师并分页 -->
+   <select id="getEngineerByProjectIdPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
+     
+       select 
+            a.admin_user_id  as adminUserId,
+            a.realname       as realName,
+            NVL(a.contact,'-')        as contact
+         from  project_r_user pr
+         left join  admin_user a  on  pr.admin_user_id=a.admin_user_id
+         where pr.project_id=#{map.projectId}
+   
+   </select>
+   
+   <!-- 判断工程师数量 -->
+   <select id="checkEngsExit"  parameterType="String" resultType="Integer">
+          select count(1)
+          from admin_user a
+          left join project_r_user pr on pr.admin_user_id=a.admin_user_id
+          where pr.project_id=#{projectId}
+   </select>
+   
+   <!-- 删除工程师 -->
+   <delete id="deletePRUserById" parameterType="String">
+     delete from project_r_user pr
+     where pr.project_id=#{projectId}
+   </delete>
+   
+   
+  <update id="updateExplorationPress">
+  	update project csu
+   set csu.exploration_process =
+       (select trunc(avg(nvl(cc.exploration_process, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateInstallPress">
+  update project csu
+   set csu.INSTALL_PROCESS =
+       (select trunc(avg(nvl(cc.INSTALL_PROCESS, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = #{id,jdbcType=VARCHAR}
+  </update>
+    
+    <update id="updateInspectPress">
+   update project csu
+   set csu.inspect_process =
+       (select trunc(avg(nvl(cc.inspect_process, 0)), 2)
+          from project cs
+          left join cls_school cc
+            on cc.project_id = cs.project_id
+         group by cs.project_id,cc.DELETE_FLAG
+        having cs.project_id = csu.project_id and cc.DELETE_FLAG='N') 
+        where csu.project_id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

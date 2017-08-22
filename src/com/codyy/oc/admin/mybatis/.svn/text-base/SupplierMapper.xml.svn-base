@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Supplier" >
+    <id column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+    <result column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_NAME_ONE" property="contactPersonNameOne" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_JOB_ONE" property="contactPersonJobOne" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_PHONE_ONE" property="contactPersonPhoneOne" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_NAME_TWO" property="contactPersonNameTwo" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_JOB_TWO" property="contactPersonJobTwo" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_PHONE_TWO" property="contactPersonPhoneTwo" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_NAME_THREE" property="contactPersonNameThree" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_JOB_THREE" property="contactPersonJobThree" jdbcType="VARCHAR" />
+    <result column="CONTACT_PERSON_PHONE_THREE" property="contactPersonPhoneThree" jdbcType="VARCHAR" />
+    <result column="REGISTERED_CAPITAL" property="registeredCapital" jdbcType="DECIMAL" />
+    <result column="SERVICE_CONTENT" property="serviceContent" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION" property="qualification" jdbcType="VARCHAR"/>
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <association property="countNum" select="selecNum" column="SUPPLIER_ID"/>
+    <association property="baseArea" select="selecArea" column="BASE_AREA_ID"/>
+    <association property="countContactNum" select="selecContactNum" column="SUPPLIER_ID"/>
+  </resultMap>
+  
+  <resultMap id="baseArea" type="com.codyy.oc.admin.entity.BaseArea">
+    <id property="baseAreaId" column="BASE_AREA_ID"/>
+    <result property="areaPath" column="AREA_PATH"/>
+  </resultMap>
+  
+   <resultMap id="projects" type="com.codyy.oc.admin.entity.Project">
+    <id column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="PROJECT_CODE" property="projectCode" jdbcType="VARCHAR" />
+    <result column="PROJECT_NAME" property="projectName" jdbcType="VARCHAR" />
+    <result column="supplyName" property="supplyName" jdbcType="VARCHAR"/>
+   </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    SUPPLIER_ID, BASE_AREA_ID, ADDRESS, CONTACT_PERSON_NAME_ONE, CONTACT_PERSON_JOB_ONE, 
+    CONTACT_PERSON_PHONE_ONE, CONTACT_PERSON_NAME_TWO, CONTACT_PERSON_JOB_TWO, CONTACT_PERSON_PHONE_TWO, 
+    CONTACT_PERSON_NAME_THREE, CONTACT_PERSON_JOB_THREE, CONTACT_PERSON_PHONE_THREE, 
+    REGISTERED_CAPITAL, SERVICE_CONTENT, NAME,QUALIFICATION
+  </sql>
+  
+   <!-- 实现集成商的多重条件查询操作-->
+<!--  
+  <select id="selecMulitiesPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+  
+    select r.SUPPLIER_ID,r.BASE_AREA_ID, r.ADDRESS,r.CONTACT_PERSON_NAME_ONE,
+      r.CONTACT_PERSON_JOB_ONE,r.CONTACT_PERSON_PHONE_ONE,r.CONTACT_PERSON_NAME_TWO,
+      r.CONTACT_PERSON_JOB_TWO,r.CONTACT_PERSON_PHONE_TWO,r.CONTACT_PERSON_NAME_THREE,
+      r.CONTACT_PERSON_JOB_THREE,r.CONTACT_PERSON_PHONE_THREE,r.REGISTERED_CAPITAL,r.SERVICE_CONTENT,
+      r.QUALIFICATION,r.NAME 
+    from SUPPLIER r left join base_area b on r.base_area_id = b.base_area_id
+      where 1=1
+    <if test="map.baseAreaId != null and map.baseAreaId != '' and map.baseAreaId != '-1'">
+      and  r.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{map.baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)	
+     </if>
+      
+     
+  </select> -->
+  
+  
+  
+  
+  <!-- 统计每个集成商的联系人的个数-->
+  <select id="selecContactNum" resultType="java.lang.String">
+     select 
+      
+       (case
+         when t.contact_person_name_one is not null or t.CONTACT_PERSON_JOB_ONE is not null or t.CONTACT_PERSON_PHONE_ONE is not null then
+          1
+         else
+          0
+       end) + (case
+         when t.contact_person_name_two is not null or t.CONTACT_PERSON_JOB_TWO is not null or t.CONTACT_PERSON_PHONE_TWO is not null  then
+          1
+         else
+          0
+       end)+ (case
+         when t.contact_person_name_three is not null or t.CONTACT_PERSON_JOB_THREE is not null or t.CONTACT_PERSON_PHONE_THREE is not null  then
+          1
+         else
+          0
+       end)
+  from supplier t where supplier_id=#{SUPPLIER_ID}
+  </select>
+  
+  <!-- 获得点击联系人总数后的联系人列表-->
+  <select id="contactPersonList" parameterType="java.lang.String" resultMap="BaseResultMap">
+  
+     select CONTACT_PERSON_NAME_ONE,CONTACT_PERSON_JOB_ONE,CONTACT_PERSON_PHONE_ONE,
+            CONTACT_PERSON_NAME_TWO,CONTACT_PERSON_JOB_TWO,CONTACT_PERSON_PHONE_TWO,
+            CONTACT_PERSON_NAME_THREE,CONTACT_PERSON_JOB_THREE,CONTACT_PERSON_PHONE_THREE
+            from SUPPLIER where SUPPLIER_ID=#{supplierId}
+  </select>
+  
+  
+  <!-- 根据集成商的id来获取本集成商所获得的所有合作项目-->
+  <select id="supplierProPageList" resultMap="projects" parameterType="com.codyy.commons.page.Page">
+       select r.PROJECT_ID, p.PROJECT_CODE,p.PROJECT_NAME from SUPPLIER_R_PROJECT r inner join project p
+      on r.PROJECT_ID=p.PROJECT_ID where r.SUPPLIER_ID=#{map.supplierId} 
+  </select>
+  
+  
+  
+  
+  <!--  根据用户的id来获取本用户的合作项目的个数-->
+  <select id="selecNum" resultType="java.lang.String">
+      select count(1) from SUPPLIER_R_PROJECT where SUPPLIER_ID=#{SUPPLIER_ID}
+      and PROJECT_ID!='-'
+  </select>
+  
+  
+  <!-- 获得集成商的信息列表(实现多重查询操作)-->
+  <select id="selcSupplierPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+      select r.SUPPLIER_ID,r.BASE_AREA_ID, r.ADDRESS,r.CREATE_TIME,r.CONTACT_PERSON_NAME_ONE,
+      r.CONTACT_PERSON_JOB_ONE,r.CONTACT_PERSON_PHONE_ONE,r.CONTACT_PERSON_NAME_TWO,
+      r.CONTACT_PERSON_JOB_TWO,r.CONTACT_PERSON_PHONE_TWO,r.CONTACT_PERSON_NAME_THREE,
+      r.CONTACT_PERSON_JOB_THREE,r.CONTACT_PERSON_PHONE_THREE,r.REGISTERED_CAPITAL,r.SERVICE_CONTENT,
+      r.QUALIFICATION,r.NAME 
+    from SUPPLIER r left join base_area b on r.base_area_id = b.base_area_id
+      where 1=1
+      <if test="map.baseAreaId != null and map.baseAreaId != '' and map.baseAreaId != '-1'">
+      and  r.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{map.baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)	
+      </if>
+      <if test="map.name != null and map.name != ''">
+    	and r.NAME like '%' || #{map.name} || '%' ESCAPE '/'
+      </if>
+      <if test="map.qualification != null and map.qualification != ''">
+    	and r.QUALIFICATION =#{map.qualification}
+      </if>
+      <if test="map.contactName != null and map.contactName != ''">
+    	and (r.CONTACT_PERSON_NAME_ONE like '%' || #{map.contactName} || '%' ESCAPE '/' 
+    	or (r.CONTACT_PERSON_NAME_TWO like '%' || #{map.contactName} || '%' ESCAPE '/')
+    	or (r.CONTACT_PERSON_NAME_THREE like '%' || #{map.contactName} || '%' ESCAPE '/'))
+      </if>
+      <if test="map.contactPhone != null and map.contactPhone != ''">
+    	and (r.CONTACT_PERSON_PHONE_ONE like '%' || #{map.contactPhone} || '%' ESCAPE '/'
+    	or (r.CONTACT_PERSON_PHONE_TWO like '%' || #{map.contactPhone} || '%' ESCAPE '/')
+    	or (r.CONTACT_PERSON_PHONE_THREE like '%' || #{map.contactPhone} || '%' ESCAPE '/'))
+      </if>
+      
+      <if test="map.leftData != null and map.leftData != ''">
+      	<![CDATA[ 
+          and r.REGISTERED_CAPITAL>=#{map.leftData} 
+        ]]>
+      </if>
+      <if test="map.rightData != null and map.rightData != ''">
+        <![CDATA[ 
+          and r.REGISTERED_CAPITAL<=#{map.rightData}
+        ]]>
+      </if>
+       
+      order by r.CREATE_TIME DESC
+  
+  </select>
+  
+  
+  <!--  根据多重条件导出查出的列表-->
+  <select id="getExportSupplierList" parameterType="map" resultMap="BaseResultMap">
+  
+       select r.SUPPLIER_ID,r.BASE_AREA_ID, r.ADDRESS,r.CONTACT_PERSON_NAME_ONE,r.CREATE_TIME,
+      r.CONTACT_PERSON_JOB_ONE,r.CONTACT_PERSON_PHONE_ONE,r.CONTACT_PERSON_NAME_TWO,
+      r.CONTACT_PERSON_JOB_TWO,r.CONTACT_PERSON_PHONE_TWO,r.CONTACT_PERSON_NAME_THREE,
+      r.CONTACT_PERSON_JOB_THREE,r.CONTACT_PERSON_PHONE_THREE,r.REGISTERED_CAPITAL,r.SERVICE_CONTENT,
+      r.QUALIFICATION,r.NAME 
+    from SUPPLIER r left join base_area b on r.base_area_id = b.base_area_id
+      where 1=1
+      <if test="baseAreaId != null and baseAreaId != '' and baseAreaId != '-1'">
+      and  r.base_area_id in
+       (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{baseAreaId}
+        connect by prior b.base_area_id = b.parent_id)	
+      </if>
+      <if test="name != null and name != ''">
+    	and r.NAME like '%' || #{name} || '%' ESCAPE '/'
+      </if>
+      <if test="qualification != null and qualification != ''">
+    	and r.QUALIFICATION =#{qualification}
+      </if>
+      <if test="contactName != null and contactName != ''">
+    	and (r.CONTACT_PERSON_NAME_ONE like '%' || #{contactName} || '%' ESCAPE '/' 
+    	or (r.CONTACT_PERSON_NAME_TWO like '%' || #{contactName} || '%' ESCAPE '/')
+    	or (r.CONTACT_PERSON_NAME_THREE like '%' || #{contactName} || '%' ESCAPE '/'))
+      </if>
+      <if test="contactPhone != null and contactPhone != ''">
+    	and (r.CONTACT_PERSON_PHONE_ONE like '%' || #{contactPhone} || '%' ESCAPE '/'
+    	or (r.CONTACT_PERSON_PHONE_TWO like '%' || #{contactPhone} || '%' ESCAPE '/')
+    	or (r.CONTACT_PERSON_PHONE_THREE like '%' || #{contactPhone} || '%' ESCAPE '/'))
+      </if>
+      <if test="leftData != null and leftData != '' and rightData != null and rightData != '' and rightData>leftData and rightData>0 and leftData>0 ">
+    	and (r.REGISTERED_CAPITAL&gt;#{leftData} and r.REGISTERED_CAPITAL&lt;#{rightData})
+      </if>
+       order by r.CREATE_TIME DESC
+  </select>
+  
+  <!-- 根据传来的地区编号获得地区的名字 assocation的column属性-->
+  <select id="selecArea" resultMap="baseArea">
+     select BASE_AREA_ID,AREA_PATH from BASE_AREA where BASE_AREA_ID=#{BASE_AREA_ID}
+  </select>
+  
+  
+  <!-- 根据集成商的id来查询集成商的基本信息-->
+  <select id="selcSuppById" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select 
+     <include refid="Base_Column_List" />
+     from SUPPLIER where SUPPLIER_ID=#{supplierId}
+  </select>
+  
+  
+<!--   <resultMap id="projects" type="com.codyy.oc.admin.entity.Project">
+     <id column="PROJECT_ID" property="projectId"/>
+     <result column="PROJECT_CODE" property="projectCode"/>
+     <result column="PROJECT_NAME" property="projectName"/>
+  </resultMap>
+   -->
+  <!-- 获得集成商选中的所有项目-->
+  <select id="selcProjListBySuId" parameterType="java.lang.String" resultMap="projects">
+       select p.PROJECT_ID,p.PROJECT_CODE, p.PROJECT_NAME from SUPPLIER_R_PROJECT s inner join PROJECT p 
+      on s.PROJECT_ID=p.PROJECT_ID where s.SUPPLIER_ID=#{supplierId}
+  </select>
+  
+  <!--  根据集成商的id来删除集成商信息-->
+  <delete id="delSupplierById" parameterType="java.lang.String">
+     delete from SUPPLIER where SUPPLIER_ID=#{supplierId}
+  </delete>
+  
+  <!-- 添加集成商操作    每次截掉最后一个逗号-->
+ <insert id="insertSupplier" parameterType="com.codyy.oc.admin.entity.Supplier" >
+    insert into SUPPLIER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="baseAreaId != null" >
+        BASE_AREA_ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="contactPersonNameOne != null" >
+        CONTACT_PERSON_NAME_ONE,
+      </if>
+      <if test="contactPersonJobOne != null" >
+        CONTACT_PERSON_JOB_ONE,
+      </if>
+      <if test="contactPersonPhoneOne != null" >
+        CONTACT_PERSON_PHONE_ONE,
+      </if>
+      <if test="contactPersonNameTwo != null and contactPersonNameTwo != '第二联系人'" >
+        CONTACT_PERSON_NAME_TWO,
+      </if>
+      <if test="contactPersonJobTwo != null and contactPersonJobTwo != '职位'" >
+        CONTACT_PERSON_JOB_TWO,
+      </if>
+      <if test="contactPersonPhoneTwo != null and contactPersonPhoneTwo != '联系方式'" >
+        CONTACT_PERSON_PHONE_TWO,
+      </if>
+      <if test="contactPersonNameThree != null and contactPersonNameThree != '第三联系人'" >
+        CONTACT_PERSON_NAME_THREE,
+      </if>
+      <if test="contactPersonJobThree != null and contactPersonJobThree != '职位'" >
+        CONTACT_PERSON_JOB_THREE,
+      </if>
+      <if test="contactPersonPhoneThree != null and contactPersonPhoneThree != '联系方式'" >
+        CONTACT_PERSON_PHONE_THREE,
+      </if>
+      <if test="registeredCapital != null" >
+        REGISTERED_CAPITAL,
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="qualification != null" >
+        QUALIFICATION,
+      </if>
+      <if test="create_Time!=null">
+        CREATE_TIME,
+      </if>
+      <if test="create_User!=null">
+        CREATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="baseAreaId != null" >
+        #{baseAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameOne != null and contactPersonNameOne != '第一联系人'" >
+        #{contactPersonNameOne},
+      </if>
+      <if test="contactPersonJobOne != null and contactPersonJobOne != '职位'" >
+        #{contactPersonJobOne},
+      </if>
+      <if test="contactPersonPhoneOne != null and contactPersonPhoneOne != '联系方式'" >
+        #{contactPersonPhoneOne},
+      </if>
+      <if test="contactPersonNameTwo != null and contactPersonNameTwo !='第二联系人'" >
+        #{contactPersonNameTwo},
+      </if>
+      <if test="contactPersonJobTwo != null and contactPersonJobTwo != '职位'" >
+        #{contactPersonJobTwo},
+      </if>
+      <if test="contactPersonPhoneTwo != null and contactPersonPhoneTwo != '联系方式'" >
+        #{contactPersonPhoneTwo},
+      </if>
+      <if test="contactPersonNameThree != null and contactPersonNameThree != '第三联系人'" >
+        #{contactPersonNameThree},
+      </if>
+      <if test="contactPersonJobThree != null and contactPersonJobThree != '职位'" >
+        #{contactPersonJobThree},
+      </if>
+      <if test="contactPersonPhoneThree != null and contactPersonPhoneThree != '联系方式'" >
+        #{contactPersonPhoneThree},
+      </if>
+      <if test="registeredCapital != null" >
+        #{registeredCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceContent != null" >
+        #{serviceContent},
+      </if>
+      <if test="name != null" >
+        #{name},
+      </if>
+      <if test="qualification != null" >
+        #{qualification},
+      </if>
+      <if test="create_Time!=null">
+        #{create_Time},
+      </if>
+      <if test="create_User!=null">
+        #{create_User},
+      </if>
+    </trim>
+  </insert>
+  
+<!-- 修改集成商的基本信息-->
+  <update id="updateSupplier"   parameterType="com.codyy.oc.admin.entity.Supplier" >
+   update SUPPLIER
+   <set >
+      <if test="baseAreaId != null and baseAreaId !=''" >
+          BASE_AREA_ID=#{baseAreaId},
+      </if>
+      <if test="address != null and address !=''" >
+          ADDRESS=#{address},
+      </if>
+     <!--  <if test="contactPersonNameOne != null and contactPersonNameOne !=''" > -->
+         CONTACT_PERSON_NAME_ONE=#{contactPersonNameOne},
+     <!--  </if> -->
+      <!-- <if test="contactPersonJobOne != null and contactPersonJobOne !=''" > -->
+         CONTACT_PERSON_JOB_ONE=#{contactPersonJobOne},
+     <!--  </if> -->
+     <!--  <if test="contactPersonPhoneOne != null and contactPersonPhoneOne !=''" > -->
+         CONTACT_PERSON_PHONE_ONE=#{contactPersonPhoneOne},
+      <!-- </if> -->
+     <!--  <if test="contactPersonNameTwo != null and contactPersonNameTwo !=''" > -->
+         CONTACT_PERSON_NAME_TWO=#{contactPersonNameTwo},
+      <!-- </if> -->
+      <!-- <if test="contactPersonJobTwo != null and contactPersonJobTwo !=''" > -->
+         CONTACT_PERSON_JOB_TWO=#{contactPersonJobTwo},
+      <!-- </if> -->
+     <!--  <if test="contactPersonPhoneTwo != null and contactPersonPhoneTwo !=''" > -->
+         CONTACT_PERSON_PHONE_TWO=#{contactPersonPhoneTwo},
+     <!--  </if> -->
+      <!-- <if test="contactPersonNameThree != null and contactPersonNameThree !=''" > -->
+         CONTACT_PERSON_NAME_THREE=#{contactPersonNameThree},
+     <!--  </if> -->
+     <!--  <if test="contactPersonJobThree != null and contactPersonJobThree !=''" > -->
+         CONTACT_PERSON_JOB_THREE=#{contactPersonJobThree},
+      <!-- </if> -->
+     <!--  <if test="contactPersonPhoneThree != null and contactPersonPhoneThree !=''" > -->
+         CONTACT_PERSON_PHONE_THREE=#{contactPersonPhoneThree},
+     <!--  </if> -->
+      <if test="registeredCapital != null and registeredCapital !=''" >
+          REGISTERED_CAPITAL=#{registeredCapital},
+      </if>
+      <if test="serviceContent != null and serviceContent !=''" >
+         SERVICE_CONTENT=#{serviceContent},
+      </if>
+      <if test="name != null and name !=''" >
+         NAME=#{name},
+      </if>
+      <if test="qualification != null and qualification !=''" >
+         QUALIFICATION=#{qualification},
+      </if>
+    </set>
+     where SUPPLIER_ID = #{supplierId}
+  </update>
+  
+  
+ <!--  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SUPPLIER
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </delete> -->
+  
+  <!-- <insert id="insertSupplier" parameterType="com.codyy.oc.admin.entity.Supplier" >
+    insert into SUPPLIER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+      <if test="baseAreaId != null" >
+        BASE_AREA_ID,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="contactPersonNameOne != null" >
+        CONTACT_PERSON_NAME_ONE,
+      </if>
+      <if test="contactPersonJobOne != null" >
+        CONTACT_PERSON_JOB_ONE,
+      </if>
+      <if test="contactPersonPhoneOne != null" >
+        CONTACT_PERSON_PHONE_ONE,
+      </if>
+      <if test="contactPersonNameTwo != null" >
+        CONTACT_PERSON_NAME_TWO,
+      </if>
+      <if test="contactPersonJobTwo != null" >
+        CONTACT_PERSON_JOB_TWO,
+      </if>
+      <if test="contactPersonPhoneTwo != null" >
+        CONTACT_PERSON_PHONE_TWO,
+      </if>
+      <if test="contactPersonNameThree != null" >
+        CONTACT_PERSON_NAME_THREE,
+      </if>
+      <if test="contactPersonJobThree != null" >
+        CONTACT_PERSON_JOB_THREE,
+      </if>
+      <if test="contactPersonPhoneThree != null" >
+        CONTACT_PERSON_PHONE_THREE,
+      </if>
+      <if test="registeredCapital != null" >
+        REGISTERED_CAPITAL,
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="baseAreaId != null" >
+        #{baseAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameOne != null" >
+        #{contactPersonNameOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobOne != null" >
+        #{contactPersonJobOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneOne != null" >
+        #{contactPersonPhoneOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameTwo != null" >
+        #{contactPersonNameTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobTwo != null" >
+        #{contactPersonJobTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneTwo != null" >
+        #{contactPersonPhoneTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameThree != null" >
+        #{contactPersonNameThree,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobThree != null" >
+        #{contactPersonJobThree,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneThree != null" >
+        #{contactPersonPhoneThree,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        #{registeredCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceContent != null" >
+        #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Supplier" >
+    update SUPPLIER
+    <set >
+      <if test="baseAreaId != null" >
+        BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameOne != null" >
+        CONTACT_PERSON_NAME_ONE = #{contactPersonNameOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobOne != null" >
+        CONTACT_PERSON_JOB_ONE = #{contactPersonJobOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneOne != null" >
+        CONTACT_PERSON_PHONE_ONE = #{contactPersonPhoneOne,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameTwo != null" >
+        CONTACT_PERSON_NAME_TWO = #{contactPersonNameTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobTwo != null" >
+        CONTACT_PERSON_JOB_TWO = #{contactPersonJobTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneTwo != null" >
+        CONTACT_PERSON_PHONE_TWO = #{contactPersonPhoneTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonNameThree != null" >
+        CONTACT_PERSON_NAME_THREE = #{contactPersonNameThree,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonJobThree != null" >
+        CONTACT_PERSON_JOB_THREE = #{contactPersonJobThree,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPersonPhoneThree != null" >
+        CONTACT_PERSON_PHONE_THREE = #{contactPersonPhoneThree,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null" >
+        REGISTERED_CAPITAL = #{registeredCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Supplier" >
+    update SUPPLIER
+    set BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONTACT_PERSON_NAME_ONE = #{contactPersonNameOne,jdbcType=VARCHAR},
+      CONTACT_PERSON_JOB_ONE = #{contactPersonJobOne,jdbcType=VARCHAR},
+      CONTACT_PERSON_PHONE_ONE = #{contactPersonPhoneOne,jdbcType=VARCHAR},
+      CONTACT_PERSON_NAME_TWO = #{contactPersonNameTwo,jdbcType=VARCHAR},
+      CONTACT_PERSON_JOB_TWO = #{contactPersonJobTwo,jdbcType=VARCHAR},
+      CONTACT_PERSON_PHONE_TWO = #{contactPersonPhoneTwo,jdbcType=VARCHAR},
+      CONTACT_PERSON_NAME_THREE = #{contactPersonNameThree,jdbcType=VARCHAR},
+      CONTACT_PERSON_JOB_THREE = #{contactPersonJobThree,jdbcType=VARCHAR},
+      CONTACT_PERSON_PHONE_THREE = #{contactPersonPhoneThree,jdbcType=VARCHAR},
+      REGISTERED_CAPITAL = #{registeredCapital,jdbcType=DECIMAL},
+      SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR}
+    where SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

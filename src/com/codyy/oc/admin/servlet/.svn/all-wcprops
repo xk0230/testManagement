@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/Technology/!svn/ver/45425/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet
+END
+AndroidFileUploadHttpSessionListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/Technology/!svn/ver/45425/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet/AndroidFileUploadHttpSessionListener.java
+END
+AndroidFileUploadUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet/AndroidFileUploadUtil.java
+END
+AndroidServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet/AndroidServlet.java
+END
+AndroidConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet/AndroidConfig.java
+END
+AndroidUploadServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/servlet/AndroidUploadServlet.java
+END

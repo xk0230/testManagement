@@ -1,0 +1,6 @@
+security.transferchars=<>&
+ajaxupload.maxfilesize=800000
+image.folder=N:\images
+android.folder=N:\android
+onlineClass.monitor=http://localhost:8080/OnlineClass
+

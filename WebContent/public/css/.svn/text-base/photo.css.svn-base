@@ -1,0 +1,199 @@
+@charset "utf-8";
+
+.fbPhotoSnowlift {
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 9999;
+	height: 100%;
+}
+
+/*�Ŵ�ǰ�ı���*/
+.fbPhotoSnowliftInner {
+	position: absolute;
+    width: 100%;
+	height: 100%;
+}
+.fbPhotoSnowliftContainer {
+	position: relative;
+	min-width: 860px;
+	margin: 0 auto;
+	outline: none;
+}
+.fbPhotoSnowlift .fbPhotoSnowliftWrapper {
+	
+	opacity: 0.95;
+	filter: Alpha(opacity=95);
+	height: 100%;
+	max-height: 2048px;
+	min-height: 520px;
+	position: relative;
+	text-align: center;
+	-moz-user-select: none;
+	margin: 0 auto;
+}
+/*�Ŵ��ı���*/
+.fbPhotoSnowliftFullScreenSeparator, .fbPhotoSnowliftFullScreen {
+	display: none;
+}
+.fbPhotoSnowlift .fullScreenSwitch {
+	display: none;
+	right: 20px;
+	padding: 5px;
+	position: absolute;
+	top: 20px;
+	z-index: 1;
+}
+.fbPhotoSnowlift .fullScreenSwitch a {
+	height: 13px;
+	opacity: 0;
+	-moz-transition: opacity .3s;
+	width: 13px;
+}
+.fullScreenAvailable #fbPhotoSnowliftFullScreenSwitch {
+	display: none;
+}
+.fullScreenAvailable #fbPhotoSnowliftFullScreenSwitch {
+	background-image: url(../img/picdetail/fullScreen.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	display: block
+}
+.fbPhotoSnowlift .snowliftPager {
+	line-height: 1.28;
+}
+.fbPhotoSnowlift .snowliftPager {
+	display: none;
+	height: 100%;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	-moz-transition: opacity .2s;
+	width: 27px;
+	z-index: 1;
+}
+.fbPhotoSnowlift .snowliftPager.prev{
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	left: 0;
+}
+.fbPhotoSnowlift .snowliftPager.next {
+	border-bottom-left-radius: 4px;
+	border-top-left-radius: 4px;
+	right: 0;
+}
+.fbPhotoSnowlift .snowliftPager i {
+	display: block;
+	height: 100%;
+	width: 27px;
+	float: left;
+}
+.fbPhotoSnowlift .snowliftPager.prev i {
+	background-image: url(../img/picdetail/prev.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	cursor: pointer;
+	margin-left: 28px;
+}
+.fbPhotoSnowlift .snowliftPager.next i {
+	background-image: url(../img/picdetail/next.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+	cursor: pointer;
+	float: right;
+	margin-right: 28px;
+}
+.fbPhotoSnowlift .snowliftFixedPagers .snowliftPager i {
+	margin-top: -22px;
+	position: absolute;
+	top: 50%;
+}
+.fbPhotoSnowlift .snowliftFixedPagers .snowliftPager.prev i {
+	left: 10px;
+}
+.fbPhotoSnowlift .snowliftFixedPagers .snowliftPager.next i {
+	right: 10px;
+}
+#fbPhotoSnowliftFullScreenClose, .dataLoading .fullScreenSwitch.fbPhotoSnowliftFullScreen, .showVideo .fullScreenSwitch.fbPhotoSnowliftFullScreen {
+	display: none;
+}
+.fbPhotoSnowliftIsFullScreen #fbPhotoSnowliftFullScreenClose {
+	background-image: url(../img/picdetail/fullClose.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	display: block;
+	width: 15px;
+	height: 15px;
+}
+.fbPhotoSnowliftIsFullScreen #fbPhotoSnowliftClose, .fbPhotoSnowliftIsFullScreen  #fbPhotoSnowliftFullScreenSwitch, #fbPhotoSnowliftFullScreenClose{
+	display: none;
+}
+.fbPhotoSnowliftIsFullScreen #fbPhotoSnowliftFullScreenClose {
+	display: block;
+}
+.fbPhotoSnowliftPopup {
+	margin: 20px auto 0;
+	background-color: #000;
+	padding: 10px;
+}
+.fbPhotoSnowlift .rhc {
+	height: 100%;
+	width: 300px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	word-wrap: break-word;
+	background: #7e76b2;
+}
+.fbPhotoSnowlift.pagingActivated .snowliftOverlay, .fbPhotoSnowlift.taggingMode .snowliftOverlay {
+	opacity: 1;
+}
+.fbPhotoSnowlift.pagingActivated .snowliftPager {
+	opacity: 1;
+}
+.fbPhotoSnowlift .snowliftFixedPagers .snowliftPager: hover, .fbPhotoSnowlift.pagingActivated .snowliftPager.hilightPager {
+	opacity: 1;
+}
+.fbPhotoSnowlift .fullScreenSwitch.fullScreenNUX a, .fbPhotoSnowlift.pagingActivated .fullScreenSwitch a, .fbPhotoSnowlift.taggingMode .fullScreenSwitch a {
+	opacity: .5;
+}
+.fbPhotoSnowlift.pagingActivated .fullScreenSwitch a: hover {
+	opacity: 1;
+}
+.g-ifc-wrap:after, .g-ifc-wrap-after{
+	content:'';height:100%;width:0;display:inline-block;*display:inline;*zoom:1;margin-left:-5px;font-size:0;vertical-align:middle;
+}
+.g-ifc-item {
+	display:inline-block;*display:inline;*zoom:1;vertical-align:middle;
+}
+
+.fbPhotoSnowliftOuter {
+	background: none repeat scroll 0 0 rgb(0, 0, 0);
+	opacity: 0.9;
+	filter:alpha(opacity=90);  
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+#fbPhotoSnowliftClose {
+	background-image: url(../img/picdetail/close.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	height: 30px;
+	overflow: hidden;
+	position: absolute;
+	right: -35px;
+	text-indent: -100px;
+	top: -25px;
+	width: 30px;
+	z-index: 100;
+}
+.fbPhotoSnowliftImgWrapper {
+	background-color: #000;
+}

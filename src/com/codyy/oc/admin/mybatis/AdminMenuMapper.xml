@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminMenuMapper" >
+
+	<select id="getUserAdminMenu" resultType="com.codyy.oc.admin.entity.AdminMenu" parameterType="java.lang.String">
+		select am.admin_menu_id as adminMenuId,am.menu_name as menuName,am.parent_id as parentId,am.menu_level as menuLevel,am.url as url,am.menu_order as menuOrder
+		from admin_menu am start with  am.admin_menu_id in (
+			select ap.admin_menu_id
+			from admin_permission ap,admin_role_r_permission arp,admin_user_r_role aur
+			where
+			arp.admin_permission_id = ap.admin_permission_id
+			and aur.admin_role_id = arp.admin_role_id
+			and aur.admin_user_id = #{adminUserId}
+			union
+            select apuser.admin_menu_id
+               from admin_user_r_permission aurp
+               left join admin_permission apuser
+                 on aurp.admin_permission_id = apuser.admin_permission_id
+            where aurp.admin_user_id = #{adminUserId}
+		) connect by prior AM.parent_id = am.admin_menu_id
+	</select>
+
+</mapper>

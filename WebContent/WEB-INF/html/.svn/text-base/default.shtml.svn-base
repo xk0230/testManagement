@@ -1,0 +1,53 @@
+<!--#include virtual="common/meta.shtml"-->
+<title>后台管理系统</title>   
+</head>
+<body>
+<!--#include virtual="common/header.shtml"-->
+<div id="menuTree">
+<!--#include virtual="common/side.shtml"-->
+</div>
+<div id="main">
+	<iframe scrolling="yes" frameborder="0" id="mainFrame" src="module/content1.shtml" name="mainFrame" name="main"> </iframe>
+</div>
+<script type='text/javascript'>
+	function clickTop(i) {
+		$(".currMenu").removeClass("currMenu");
+		$(".icon_"+i).addClass("currMenu");
+		$('.menu > ul:visible').addClass("hide");
+		$('.menu > ul:eq('+i+')').removeClass("hide");
+		$('.menu > ul:eq('+i+') ul:eq(0) a:eq(0)').addClass('tabon').click();
+	}
+
+	function clickLeft(t) {
+		var url = 'module/content1.shtml?a='+t;
+		$('#mainFrame').attr("src",url); 
+	}
+
+	$(document).ready(function(){
+
+	$(".quit").click(function(){
+		Win.confirm({html:"<p class='noticeWrap'><span>确定退出吗？</span></p>",mask:true},function(){
+			location.href='/'
+		},function(){});
+	});
+
+	$(".menu .menusub li a").on('click', function() {
+		$(".menu .menusub li a").removeClass('tabon');
+		$(this).addClass('tabon');
+		$(".menu ul li.menulist .menutree1").removeClass('asdfon');
+		$(this).parent().parent().parent().find(".menutree1").addClass("asdfon");
+	});
+
+	$(".menu ul li a").on('click', function() {
+		var thisa = $(this);
+		$(this).parent().parent().find(".menusub").slideToggle(100,function(){
+			if ($(this).css("display") == "block") {
+				thisa.removeClass("plus").addClass("mius");
+			} else
+			thisa.removeClass("mius").addClass("plus");
+		});
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso
+END
+SessionUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/SessionUser.java
+END
+SessionUserThreadLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/SessionUserThreadLocal.java
+END
+TokenServlet.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/TokenServlet.java
+END
+SsoConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/SsoConfig.java
+END
+LoginCheckFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/LoginCheckFilter.java
+END
+SignUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/commons/com/codyy/oc/commons/sso/SignUtil.java
+END

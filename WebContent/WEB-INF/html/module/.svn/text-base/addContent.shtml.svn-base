@@ -1,0 +1,62 @@
+<!--#include virtual="../common/meta.shtml"-->
+<script>
+var domid = frameElement.getAttribute("domid");
+</script>
+</head>
+<body>
+<!-- ============================================== -->
+<!-- 
+	module name: 通用列表结构
+	1.使用class名：commonWrap；
+	2.另ul增加class名：commonUL；
+	2.左右结构，左侧label使用class名：text；右侧span使用class名:cont
+	3.需要在右侧增加间距，使用class名：mr20、mr50; 20标识20px
+	4.内部居中使用class名:center;
+	5.如果是iframe引用。通过frameElement.getAttribute("domid")可获取自身在父级中的节点。可用来关闭自身
+ -->
+	<div class="commonWrap">
+		<ul class="commonUL">
+			<li>
+		        <label class="text">账号名称：</label>
+		        <span class="cont">
+		        	 <input type="text" name="uid" class="mr20" />
+			       	  默认密码： 666666
+		        </span>
+	       	</li>
+	       	<li>
+		        <label class="text">备注：</label>
+		        <span class="cont">
+		        	<input type="text" name="xxx"  />
+		        </span>
+	       	</li>
+	       	<li>
+		        <label class="text">姓名：</label>
+		        <span class="cont">
+			        <input type="text" name="xxx" class="mr20" />
+			        <label>联系电话：</label>
+			        <input type="text" name="xxx"  />
+		         </span>
+	       	</li>
+	       	<li>
+		        <label class="text">角色：</label>
+		        <span class="cont">
+			       	<label><input type="checkbox" name="xx1" />系统管理员</label>
+			       	<label><input type="checkbox" name="xx2" />报修管理员</label>
+			       	<label><input type="checkbox" name="xx3" />配置管理员</label>
+			       	<label><input type="checkbox" name="xx4" />报修管理员</label>
+			       	<label><input type="checkbox" name="xx5" />配置管理员</label>
+		        </span>
+	       	</li>
+	       	<li class="center">
+	       		<input type="button" class="submit btn mr10" onclick="closeMe()" value="确定" />
+	       		<input type="button" class="btn btnGreen" onclick="closeMe()" value="取消" />
+	       	</li>
+		</ul>
+	</div>
+</body>
+<script>
+	function closeMe(){
+		parent.Win.wins[domid].close();
+	}
+</script>
+</html>

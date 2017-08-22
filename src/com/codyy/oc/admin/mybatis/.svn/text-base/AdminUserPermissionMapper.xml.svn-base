@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminUserPermissionMapper" >
+
+	<insert id="insertUserPernission" parameterType="com.codyy.oc.admin.entity.AdminUserPermission">
+	
+	          insert into admin_user_r_permission(ADMIN_PERMISSION_ID,ADMIN_USER_ID)
+	           <foreach collection="functionList" item="items" open="(" close=")" separator="union all">
+					select 
+						#{items},
+						#{adminUserId}
+					from dual
+		     </foreach>
+	</insert>
+	
+	
+	<!-- 通过传来的用户id来删除本用户对应的所有权限-->
+	<delete id="deleteUserPermissionById" parameterType="java.lang.String">
+	     
+	     delete from admin_user_r_permission where ADMIN_USER_ID=#{adminUserId}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.RegRProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.RegRProject" >
+    <id column="REG_R_PROJECT_ID" property="regRProjectId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="REGIONAL_RESOURCE_ID" property="regionalResourceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REG_R_PROJECT_ID, PROJECT_ID, REGIONAL_RESOURCE_ID
+  </sql>
+ 
+    <!--sys_guid()是oracle自己产生uuid的函数  -->
+   	<insert id="insertRegRProject" parameterType="com.codyy.oc.admin.entity.RegRProject">
+	            insert into reg_r_project(REG_R_PROJECT_ID,PROJECT_ID,REGIONAL_RESOURCE_ID)
+	          <foreach collection="projectIdList" item="items" open="(" close=")" separator="union all">
+					select 
+					    sys_guid(),
+					    <if test="items==null">
+					      '-',
+					    </if>
+					    <if test="items!=null">
+					      #{items},
+					    </if>
+						#{regionalResourceId}
+					from dual
+		     </foreach>
+	</insert>
+	
+	<!-- 删除资源id对应资源项目关系表中的所有记录-->
+	<delete id="delResouceRProjectByResId" parameterType="java.lang.String">
+	    delete from reg_r_project where REGIONAL_RESOURCE_ID=#{regionalResourceId}
+	</delete>
+
+</mapper>

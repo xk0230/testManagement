@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template
+END
+orgUserImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/orgUserImportTemplate.xls
+END
+schoolUserImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/schoolUserImportTemplate.xls
+END
+malguideImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/malguideImportTemplate.xls
+END
+schoolImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/schoolImportTemplate.xls
+END
+teaUserImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/teaUserImportTemplate.xls
+END
+classroomImportTemplate.xls
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/template/classroomImportTemplate.xls
+END

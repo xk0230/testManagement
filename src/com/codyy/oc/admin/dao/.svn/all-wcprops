@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao
+END
+AdminUserPermissionMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminUserPermissionMapper.java
+END
+SignMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/SignMapper.java
+END
+AdminPermissionMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminPermissionMapper.java
+END
+BaseAreaMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/BaseAreaMapper.java
+END
+ProjectRelationUserMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/45423/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/ProjectRelationUserMapper.java
+END
+SupplierMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/SupplierMapper.java
+END
+ClsClassroomMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/43581/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/ClsClassroomMapper.java
+END
+ProjectMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/ProjectMapper.java
+END
+RegionalResourceMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/RegionalResourceMapper.java
+END
+BaseUserMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/23122/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/BaseUserMapper.java
+END
+AdminRoleMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminRoleMapper.java
+END
+CommonsMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Technology/!svn/ver/44485/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/CommonsMapper.java
+END
+ClassroomInspectDetailMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/ClassroomInspectDetailMapper.java
+END
+SupplierRProjectMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/SupplierRProjectMapper.java
+END
+AdminMenuMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminMenuMapper.java
+END
+MaintenanceOrderMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/48485/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/MaintenanceOrderMapper.java
+END
+BaseConfigAreaLevelMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/BaseConfigAreaLevelMapper.java
+END
+EnvironmentSurveyMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/24692/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/EnvironmentSurveyMapper.java
+END
+RegRProjectMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/RegRProjectMapper.java
+END
+AdminUserMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminUserMapper.java
+END
+AttachmentMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/45548/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AttachmentMapper.java
+END
+AdminAppMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/AdminAppMapper.java
+END
+ClsSchoolMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/45423/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/dao/ClsSchoolMapper.java
+END

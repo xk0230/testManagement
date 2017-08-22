@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis
+END
+ClassroomInspectDetailMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/Technology/!svn/ver/24692/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/ClassroomInspectDetailMapper.xml
+END
+CommonsMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/49680/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/CommonsMapper.xml
+END
+SupplierRProjectMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/25705/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/SupplierRProjectMapper.xml
+END
+AdminMenuMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/23075/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminMenuMapper.xml
+END
+MaintenanceOrderMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/48674/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/MaintenanceOrderMapper.xml
+END
+BaseConfigAreaLevelMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/BaseConfigAreaLevelMapper.xml
+END
+EnvironmentSurveyMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/43806/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/EnvironmentSurveyMapper.xml
+END
+RegRProjectMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/25705/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/RegRProjectMapper.xml
+END
+AdminUserMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/37552/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminUserMapper.xml
+END
+AttachmentMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/48088/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AttachmentMapper.xml
+END
+AdminAppMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminAppMapper.xml
+END
+ClsSchoolMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/44908/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/ClsSchoolMapper.xml
+END
+SignMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/SignMapper.xml
+END
+AdminUserPermissionMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/23176/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminUserPermissionMapper.xml
+END
+AdminPermissionMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/26674/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminPermissionMapper.xml
+END
+BaseAreaMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/25675/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/BaseAreaMapper.xml
+END
+ProjectRelationUserMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/23566/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/ProjectRelationUserMapper.xml
+END
+SupplierMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/32255/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/SupplierMapper.xml
+END
+ClsClassroomMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/49064/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/ClsClassroomMapper.xml
+END
+ProjectMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/44908/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/ProjectMapper.xml
+END
+RegionalResourceMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/Technology/!svn/ver/48485/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/RegionalResourceMapper.xml
+END
+BaseUserMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/Technology/!svn/ver/23122/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/BaseUserMapper.xml
+END
+AdminRoleMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/mybatis/AdminRoleMapper.xml
+END

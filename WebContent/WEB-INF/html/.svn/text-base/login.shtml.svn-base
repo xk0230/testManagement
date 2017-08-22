@@ -1,0 +1,43 @@
+<!--#include virtual="common/meta.shtml"-->
+<title>后台管理系统-管理登录</title>   
+<script src="/public/js/basiccheck.js"></script>
+</head>
+<body class="adminSchool">
+<div class="container">
+	<div class="wrap">
+		<div class="textBg"><img src="/public/img/login/text.png" /></div>	
+		<div class="box">
+			<form id="loginForm" name="LoginForm"  method="post" >
+				<p><input  type="text" name="account" class="nameValue" placeholder="帐号" needcheck nullmsg="请输入用户名!" limit="6,20"  limitmsg="用户名长度不符！" ></p>
+				<p><input  type="password" name="password"  class="nameValue" placeholder="密码" needcheck nullmsg="请输入密码!" limit="6,20"  limitmsg="密码长度不符！"></p>
+				<p class="initBtn" >
+					<input class="startBtn btn" type="submit" value="登录" />
+				</p>
+			</form>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="footerInner">
+			<p>版权所有&copy;2007-2015 阔地教育科技有限公司</p>
+			<div class="footerBox">
+				<img src="/public/img/common/logo.gif" />
+				<img src="/public/img/login/contact.gif" />
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	new BasicCheck({
+		form: $id("loginForm"),
+		ajaxReq : function(){
+			$.post('/admin.php?a=login',$("#loginForm").serialize(),function(){
+				
+			});
+		},
+		warm : function(o,msg){
+			Win.alert(msg);
+		}
+	});
+</script>
+</body>
+</html>

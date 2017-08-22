@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.BaseConfigAreaLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.BaseConfigAreaLevel" >
+    <id column="BASE_CONFIG_AREA_LEVEL_ID" property="baseConfigAreaLevelId" jdbcType="VARCHAR" />
+    <result column="AREA_LEVEL" property="areaLevel" jdbcType="DECIMAL" />
+    <result column="LEVEL_TITLE" property="levelTitle" jdbcType="VARCHAR" />
+    <result column="MOBILE_TITLE" property="mobileTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BASE_CONFIG_AREA_LEVEL_ID, AREA_LEVEL, LEVEL_TITLE, MOBILE_TITLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASE_CONFIG_AREA_LEVEL
+    where BASE_CONFIG_AREA_LEVEL_ID = #{baseConfigAreaLevelId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BASE_CONFIG_AREA_LEVEL
+    where BASE_CONFIG_AREA_LEVEL_ID = #{baseConfigAreaLevelId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.BaseConfigAreaLevel" >
+    insert into BASE_CONFIG_AREA_LEVEL (BASE_CONFIG_AREA_LEVEL_ID, AREA_LEVEL, 
+      LEVEL_TITLE, MOBILE_TITLE)
+    values (#{baseConfigAreaLevelId,jdbcType=VARCHAR}, #{areaLevel,jdbcType=DECIMAL}, 
+      #{levelTitle,jdbcType=VARCHAR}, #{mobileTitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.BaseConfigAreaLevel" >
+    insert into BASE_CONFIG_AREA_LEVEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="baseConfigAreaLevelId != null" >
+        BASE_CONFIG_AREA_LEVEL_ID,
+      </if>
+      <if test="areaLevel != null" >
+        AREA_LEVEL,
+      </if>
+      <if test="levelTitle != null" >
+        LEVEL_TITLE,
+      </if>
+      <if test="mobileTitle != null" >
+        MOBILE_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="baseConfigAreaLevelId != null" >
+        #{baseConfigAreaLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLevel != null" >
+        #{areaLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTitle != null" >
+        #{levelTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTitle != null" >
+        #{mobileTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.BaseConfigAreaLevel" >
+    update BASE_CONFIG_AREA_LEVEL
+    <set >
+      <if test="areaLevel != null" >
+        AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="levelTitle != null" >
+        LEVEL_TITLE = #{levelTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTitle != null" >
+        MOBILE_TITLE = #{mobileTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BASE_CONFIG_AREA_LEVEL_ID = #{baseConfigAreaLevelId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.BaseConfigAreaLevel" >
+    update BASE_CONFIG_AREA_LEVEL
+    set AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL},
+      LEVEL_TITLE = #{levelTitle,jdbcType=VARCHAR},
+      MOBILE_TITLE = #{mobileTitle,jdbcType=VARCHAR}
+    where BASE_CONFIG_AREA_LEVEL_ID = #{baseConfigAreaLevelId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASE_CONFIG_AREA_LEVEL order by AREA_LEVEL
+  </select>
+  
+  <select id="selectByAreaLevel" resultMap="BaseResultMap" parameterType="com.codyy.oc.admin.entity.BaseConfigAreaLevel">
+    select 
+    <include refid="Base_Column_List" />
+    from BASE_CONFIG_AREA_LEVEL
+    where 1=1
+    <if test="areaLevel != null and areaLevel != ''">
+    	and AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL}
+    </if>
+    <if test="levelTitle != null and levelTitle != ''">
+    	and LEVEL_TITLE = #{levelTitle,jdbcType=VARCHAR}
+    </if>
+    <if test="mobileTitle != null and mobileTitle != ''">
+    	and MOBILE_TITLE = #{mobileTitle,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.MaintenanceOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.MaintenanceOrder" >
+    <id column="MAINTENANCE_ORDER_ID" property="maintenanceOrderId" jdbcType="VARCHAR" />
+    <result column="CLS_SCHOOL_ID" property="clsSchoolId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="CONCAT" property="concat" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_CALLS_TIME" property="customerCallsTime" jdbcType="TIMESTAMP" />
+    <result column="LABOR_PROCESS_TIME" property="laborProcessTime" jdbcType="TIMESTAMP" />
+    <result column="TASK_TIME" property="taskTime" jdbcType="TIMESTAMP" />
+    <result column="DOOR_MAINTENANCE" property="doorMaintenance" jdbcType="TIMESTAMP" />
+    <result column="SOLVING_TIME" property="solvingTime" jdbcType="TIMESTAMP" />
+    <result column="RETURN_VISIT" property="returnVisit" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <association property="clsSchool" column="CLS_SCHOOL_ID" select="selSchPro"/>
+    <collection property="statucList" column="CLS_SCHOOL_ID" ofType="com.codyy.oc.admin.entity.NewStatus" select="selNewStatus"/>
+  </resultMap>
+
+  <resultMap id="schoolMap" type="com.codyy.oc.admin.entity.ClsSchool">
+     <id column="CLS_SCHOOL_ID" jdbcType="VARCHAR" property="clsSchoolId" />
+    <result column="BASE_AREA_ID" jdbcType="VARCHAR" property="baseAreaId" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="projectId" />
+    <result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+    <result column="CONTACT" jdbcType="VARCHAR" property="contact" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="DELETE_FLAG" jdbcType="CHAR" property="deleteFlag" />
+    <association property="areaPath" column="BASE_AREA_ID" select="selecArea"/>
+    <association property="projectName" column="PROJECT_ID" select="selcProject"/>
+  </resultMap>
+  
+  <resultMap id="orderMap" type="com.codyy.oc.admin.view.OrderDetailView">
+    <id column="orderId" jdbcType="VARCHAR" property="orderId" />
+    <result  column="problem" jdbcType="VARCHAR" property="problem"/>
+    <result  column="create_user" jdbcType="VARCHAR" property="createUserId"/>
+    <result column="problem_solving" jdbcType="VARCHAR" property="problemSolving" />
+    <result  column="order_Num" jdbcType="VARCHAR" property="order_Num"/>
+    <result column="orderPhone" jdbcType="VARCHAR" property="orderPhone" />
+    <result column="orderConcat" jdbcType="VARCHAR" property="orderConcat" />
+    <result column="orderCall" jdbcType="TIMESTAMP" property="orderCall" />
+    <result column="orderProcess" jdbcType="TIMESTAMP" property="orderProcess" />
+    <result column="orderTask" jdbcType="TIMESTAMP" property="orderTask" />
+    <result column="orderDoor" jdbcType="TIMESTAMP" property="orderDoor" />
+    <result column="orderSolve" jdbcType="TIMESTAMP" property="orderSolve" />
+    <result column="orderVisit" jdbcType="TIMESTAMP" property="orderVisit" />
+    <result column="orderRemark" jdbcType="VARCHAR" property="orderRemark" />
+    <result column="orderAddr" jdbcType="VARCHAR" property="orderAddr" />
+    <result column="schoolName" jdbcType="VARCHAR" property="schoolName" />
+    <result column="schoolConcat" jdbcType="VARCHAR" property="schoolConcat" />
+    <result column="schoolPhone" jdbcType="VARCHAR" property="schoolPhone" />
+    <result column="schoolArea" jdbcType="VARCHAR" property="schoolArea" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectName" />
+    <result column="projectArea" jdbcType="VARCHAR" property="projectArea" />
+    <result column="projectManager" jdbcType="VARCHAR" property="projectManager" />
+    <result column="projectConcat" jdbcType="VARCHAR" property="projectConcat" />
+    <result column="equipName" jdbcType="VARCHAR" property="equipName" />
+    <result column="equipTime" jdbcType="TIMESTAMP" property="equipTime" />
+    <association column="create_user" property="realName" javaType="java.lang.String" select="getRealName"/>
+    <collection property="equpList" ofType="com.codyy.oc.admin.entity.Equipment" column="orderId" select="selEquip"/>
+    <collection property="problemTypeList" ofType="com.codyy.oc.admin.view.ProblemTypeView" column="orderId" select="getProblemTypeList"/>
+  </resultMap>
+  
+  <!-- 最新新状态-->
+   <resultMap id="status" type="com.codyy.oc.admin.entity.NewStatus">
+      <result column="maxdate" property="maxDate"/>
+      <result column="maxdatestr" property="maxDateStr"/>
+   </resultMap>
+  
+  <!--  获得最新的状态-->
+  <select id="selNewStatus" resultMap="status">
+      select 
+       case mt.maxdate when to_date('0001-01-01', 'yyyy-MM-dd') then null else mt.maxdate end maxdate ,
+       case maxdate
+         when m.return_visit then
+          '售后回访'
+         when m.solving_time then
+          '问题解决'
+         when m.door_maintenance then
+          '上门维修'
+         when m.task_time then
+          '任务分配'
+         when m.labor_process_time then
+          '派工流程'
+         when m.customer_calls_time then
+          '客户来电'
+          else '-'
+       end maxdatestr
+  from MAINTENANCE_ORDER m
+  left join (select t.maintenance_order_id,
+                    greatest(nvl(t.customer_calls_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.labor_process_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.task_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.door_maintenance,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.solving_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.return_visit,
+                                 to_date('0001-01-01', 'yyyy-MM-dd'))) maxdate
+               from MAINTENANCE_ORDER t) mt
+    on m.maintenance_order_id = mt.maintenance_order_id
+  </select>
+  
+  
+  <select id="selEquip" resultType="com.codyy.oc.admin.entity.Equipment">
+     select NAME,DELIVERY_TIME,exmpess_company as expressCompany,express_num as expressNum from EQUIPMENT_DELIVERY where MAINTENANCE_ORDER_ID=#{orderId}
+  </select>
+  
+  <!-- 获得指定工单存在的所有问题类型-->
+  <select id="getProblemTypeList" resultType="com.codyy.oc.admin.view.ProblemTypeView">
+      select me.problem_type_id as problemId,ty.problem_type_name as problemName from PROBLEM_TYPE_R_MAINTENANCE me 
+  left join  PROBLEM_TYPE ty on me.problem_type_id=ty.problem_type_id where me.maintenance_order_id=#{orderId}
+  </select>
+  
+  <!-- 获得创建工单的用户的名字-->
+  <select id="getRealName" resultType="java.lang.String">
+        select u.realname from admin_user u where u.admin_user_id=#{create_user}
+  </select>
+
+  <sql id="Base_Column_List" >
+    MAINTENANCE_ORDER_ID, CLS_SCHOOL_ID, CREATE_USER, CREATE_TIME, ORDER_NUM, ADDRESS, 
+    CONCAT, PHONE, "CUSTOMER_CALLS_TIME", LABOR_PROCESS_TIME, TASK_TIME, DOOR_MAINTENANCE, 
+    SOLVING_TIME, RETURN_VISIT, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+
+   </select>
+ <!--  <select id="mainOrderPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+    select  MAINTENANCE_ORDER_ID, CLS_SCHOOL_ID, CREATE_USER, CREATE_TIME, ORDER_NUM, ADDRESS, 
+    CONCAT, PHONE, LABOR_PROCESS_TIME, TASK_TIME, DOOR_MAINTENANCE, 
+    SOLVING_TIME, RETURN_VISIT, REMARK from MAINTENANCE_ORDER
+  </select> -->
+ 
+  <select id="selSchPro" resultMap="schoolMap">
+      select BASE_AREA_ID,PROJECT_ID,SCHOOL_NAME from CLS_SCHOOL where CLS_SCHOOL_ID=#{CLS_SCHOOL_ID}
+  </select>
+  <select id="selecArea" resultType="java.lang.String">
+      select AREA_PATH areaPath  from BASE_AREA where BASE_AREA_ID=#{BASE_AREA_ID}
+  </select>
+  <select id="selcProject" resultType="java.lang.String">
+      select PROJECT_NAME projectName from PROJECT where PROJECT_ID=#{PROJECT_ID}
+  </select>
+  
+  
+  
+  
+  <!-- 查询单号资源详情m.CUSTOMER_ CALLS_TIME orderCall,-->
+  <select id="getDetail" parameterType="java.lang.String" resultMap="orderMap">
+        select
+      m.create_user, 
+      m.problem as problem,
+      m.problem_solving as problemSolving,
+      m.MAINTENANCE_ORDER_ID orderId,
+      m.ORDER_NUM order_Num, 
+      m.concat  orderConcat,
+      m.customer_calls_time orderCall,
+      m.phone orderPhone,
+      m.LABOR_PROCESS_TIME  orderProcess,
+      m.TASK_TIME orderTask,
+      m.DOOR_MAINTENANCE orderDoor,
+      m.remark orderRemark,
+      m.SOLVING_TIME orderSolve,
+      m.RETURN_VISIT orderVisit,
+      m.address orderAddr,
+      c.school_name schoolName,
+      m.concat schoolConcat,
+      m.phone schoolPhone,
+      b.area_path schoolArea,
+      p.project_name projectName,
+      r.area_path projectArea,
+      u.realname projectManager,
+      u.contact projectConcat
+      from MAINTENANCE_ORDER m
+      left join CLS_SCHOOL c on c.cls_school_id=m.cls_school_id
+      left join BASE_AREA b on c.base_area_id=b.base_area_id
+      left join PROJECT p on c.project_id=p.project_id 
+      left join  BASE_AREA r  on r.base_area_id=p.base_area_id 
+      left join ADMIN_USER u on u.admin_user_id=p.manager_id
+      where m.MAINTENANCE_ORDER_ID=#{orderId}
+  </select>
+ 
+ 
+ <resultMap id="attachmentMap" type="com.codyy.oc.admin.entity.Attachment">
+    <id column="ATTACHMENT_ID" jdbcType="VARCHAR" property="attachmentId" />
+    <result column="RELATIONSHIP_ID" jdbcType="VARCHAR" property="relationShipId" />
+    <result  column="NAME" jdbcType="VARCHAR" property="name"/>
+    <result column="ATTACHMENT_URL" jdbcType="VARCHAR" property="attachment_Url" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="create_time" />
+ </resultMap> 
+  
+  <select id="getOrderAttachmentById" parameterType="java.lang.String" resultMap="attachmentMap">
+     select NAME,ATTACHMENT_URL from ATTACHMENT where RELATIONSHIP_ID=#{relationShipId} and TYPE='baozhang'
+  </select>
+  
+  <!-- 插入工单附件-->
+  <insert id="insertAttachment" parameterType="com.codyy.oc.admin.entity.Attachment">
+      insert into ATTACHMENT(ATTACHMENT_ID,NAME,ATTACHMENT_URL,RELATIONSHIP_ID,CREATE_TIME,TYPE)
+      values(#{attachmentId},#{name},#{attachment_Url},#{relationShipId},#{create_time},#{type})
+  </insert>
+  
+  <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MAINTENANCE_ORDER
+    where MAINTENANCE_ORDER_ID = #{maintenanceOrderId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.MaintenanceOrder" >
+    insert into MAINTENANCE_ORDER (MAINTENANCE_ORDER_ID, CLS_SCHOOL_ID, 
+      CREATE_USER, CREATE_TIME, ORDER_NUM, 
+      ADDRESS, CONCAT, PHONE, 
+      CUSTOMER_CALLS_TIME, LABOR_PROCESS_TIME, 
+      TASK_TIME, DOOR_MAINTENANCE, SOLVING_TIME, 
+      RETURN_VISIT, REMARK)
+    values (#{maintenanceOrderId,jdbcType=VARCHAR}, #{clsSchoolId,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{orderNum,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{concat,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{customerCallsTime,jdbcType=TIMESTAMP}, #{laborProcessTime,jdbcType=TIMESTAMP}, 
+      #{taskTime,jdbcType=TIMESTAMP}, #{doorMaintenance,jdbcType=TIMESTAMP}, #{solvingTime,jdbcType=TIMESTAMP}, 
+      #{returnVisit,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  -->
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.MaintenanceOrder" >
+    insert into MAINTENANCE_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="maintenanceOrderId != null" >
+        MAINTENANCE_ORDER_ID,
+      </if>
+      <if test="clsSchoolId != null" >
+        CLS_SCHOOL_ID,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="concat != null" >
+        CONCAT,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="customerCallsTime != null" >
+        CUSTOMER_CALLS_TIME,
+      </if>
+      <if test="laborProcessTime != null" >
+        LABOR_PROCESS_TIME,
+      </if>
+      <if test="taskTime != null" >
+        TASK_TIME,
+      </if>
+      <if test="doorMaintenance != null" >
+        DOOR_MAINTENANCE,
+      </if>
+      <if test="solvingTime != null" >
+        SOLVING_TIME,
+      </if>
+      <if test="returnVisit != null" >
+        RETURN_VISIT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="problemDescrip != null" >
+        problem,
+      </if>
+      <if test="problemResolveDescrip != null" >
+        problem_solving,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="maintenanceOrderId != null" >
+        #{maintenanceOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="clsSchoolId != null" >
+        #{clsSchoolId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="concat != null" >
+        #{concat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCallsTime != null" >
+        #{customerCallsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="laborProcessTime != null" >
+        #{laborProcessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskTime != null" >
+        #{taskTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doorMaintenance != null" >
+        #{doorMaintenance,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solvingTime != null" >
+        #{solvingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnVisit != null" >
+        #{returnVisit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="problemDescrip != null" >
+        #{problemDescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="problemResolveDescrip != null" >
+        #{problemResolveDescrip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.MaintenanceOrder" >
+    update MAINTENANCE_ORDER
+    <set >
+      <if test="clsSchoolId != null" >
+        CLS_SCHOOL_ID = #{clsSchoolId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="concat != null" >
+        CONCAT = #{concat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="problemDescrip != null" >
+        PROBLEM = #{problemDescrip,jdbcType=VARCHAR},
+      </if>
+     
+        CUSTOMER_CALLS_TIME = #{customerCallsTime,jdbcType=TIMESTAMP},
+     
+        LABOR_PROCESS_TIME = #{laborProcessTime,jdbcType=TIMESTAMP},
+    
+     
+        TASK_TIME = #{taskTime,jdbcType=TIMESTAMP},
+     
+        DOOR_MAINTENANCE = #{doorMaintenance,jdbcType=TIMESTAMP},
+     
+        SOLVING_TIME = #{solvingTime,jdbcType=TIMESTAMP},
+     
+        RETURN_VISIT = #{returnVisit,jdbcType=TIMESTAMP},
+    
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MAINTENANCE_ORDER_ID = #{maintenanceOrderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.MaintenanceOrder" >
+    update MAINTENANCE_ORDER
+    set CLS_SCHOOL_ID = #{clsSchoolId,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CONCAT = #{concat,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      CUSTOMER_CALLS_TIME = #{customerCallsTime,jdbcType=TIMESTAMP},
+      LABOR_PROCESS_TIME = #{laborProcessTime,jdbcType=TIMESTAMP},
+      TASK_TIME = #{taskTime,jdbcType=TIMESTAMP},
+      DOOR_MAINTENANCE = #{doorMaintenance,jdbcType=TIMESTAMP},
+      SOLVING_TIME = #{solvingTime,jdbcType=TIMESTAMP},
+      RETURN_VISIT = #{returnVisit,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where MAINTENANCE_ORDER_ID = #{maintenanceOrderId,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 添加工程师-工单 -->
+  <insert id="addUserROrder" parameterType="list">
+       insert into  user_r_order (user_r_order_id,admin_user_id,maintenance_order_id) 
+      
+      <foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select 
+				#{items.userROrderId} ,
+				#{items.adminUserId},
+				#{items.maintenanceOrderId} 
+			from dual
+		</foreach>
+  </insert>
+  
+  <!-- 添加设备寄送表 -->
+  <insert id="addEquipDelivery" parameterType="list">
+        insert into  equipment_delivery (equipment_delivery_id,maintenance_order_id,name,delivery_time,EXMPESS_COMPANY,EXPRESS_NUM) 
+      
+      <foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select 
+				#{items.equipmentDeliveryId} ,
+				#{items.maintenanceOrderId},
+				#{items.name},
+				#{items.deliveryTime,jdbcType=TIMESTAMP},
+				#{items.expressCompany},
+				#{items.expressNum}
+			from dual
+		</foreach>
+  
+  
+  
+  </insert>
+  <!-- 检测单号是否唯一 -->
+  <select id="checkOrderNum" parameterType="String" resultType="Integer">
+       select count(1)
+       from maintenance_order  m
+       where  m.order_num=#{orderNum}
+  </select>
+  
+  
+  
+  
+  
+  
+  <!-- 封装列表信息-->
+  <resultMap id="showOrderMap" type="com.codyy.oc.admin.view.showOrderView">
+    <id column="MAINTENANCE_ORDER_ID" jdbcType="VARCHAR" property="maintenance_Order_Id" />
+    <result column="CONCAT" jdbcType="VARCHAR" property="concat" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="schArea" jdbcType="VARCHAR" property="schArea" />
+    <result column="project_name" jdbcType="VARCHAR" property="project_name" />
+    <result column="school_name" jdbcType="VARCHAR" property="school_name" />
+    <result column="proArea" jdbcType="VARCHAR" property="proArea" />
+    <result column="maxdatestr" jdbcType="VARCHAR" property="maxdatestr" />
+    <result column="maxdate" jdbcType="TIMESTAMP" property="maxdate" />
+    <result column="ORDER_NUM" jdbcType="VARCHAR" property="order_Num"/>
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ATTACHMENT_URL" jdbcType="VARCHAR" property="attachment_Url" />
+  </resultMap>
+  
+  <!-- 查询现场维修的列表-->
+  <select id="reparingOrderPageList" resultMap="showOrderMap" parameterType="com.codyy.commons.page.Page">
+       select r.MAINTENANCE_ORDER_ID,r.ORDER_NUM,r.CONCAT,r.PHONE,r.REMARK,c.school_name,b.area_path schArea,
+        p.project_name,pa.area_path proArea,status.maxdatestr,status.maxdate,name,attachment_url
+    from MAINTENANCE_ORDER r
+      left join CLS_SCHOOL c on  r.cls_school_id=c.cls_school_id
+      left join base_area b on c.base_area_id = b.base_area_id
+      left join PROJECT p on p.project_id=c.project_id
+      left join base_area pa on p.base_area_id=pa.base_area_id
+      left join (select a.NAME name, a.ATTACHMENT_URL attachment_url, a.RELATIONSHIP_ID relId 
+      from ATTACHMENT a where a.TYPE='baozhang'
+       
+      )attach on relId=r.MAINTENANCE_ORDER_ID
+      
+      left join (select 
+       m.maintenance_order_id ssId,
+       case mt.maxdate
+         when to_date('0001-01-01', 'yyyy-MM-dd') 
+          then null else mt.maxdate end maxdate ,
+       case maxdate
+         when m.return_visit then
+          '售后回访'
+         when m.solving_time then
+          '问题解决'
+         when m.door_maintenance then
+          '上门维修'
+         when m.task_time then
+          '任务分配'
+         when m.labor_process_time then
+          '派工流程'
+         when m.customer_calls_time then
+          '客户来电'
+          else '-'
+       end maxdatestr 
+  from MAINTENANCE_ORDER m
+  left join (select t.maintenance_order_id,
+                    greatest(nvl(t.customer_calls_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.labor_process_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.task_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.door_maintenance,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.solving_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.return_visit,
+                                 to_date('0001-01-01', 'yyyy-MM-dd'))) maxdate
+               from MAINTENANCE_ORDER t) mt
+    on m.maintenance_order_id = mt.maintenance_order_id) status on ssId=r.maintenance_order_id
+    left join (select 
+        a.admin_user_id   as   adminUserId,
+        a.realname        as    realName,
+        a.contact         as    contact,
+        uro.maintenance_order_id as mainOrderId
+      from  admin_user  a
+      left join  user_r_order  uro   on  uro.admin_user_id=a.admin_user_id)g on g.mainOrderId=r.maintenance_order_id
+      where g.adminUserId=#{map.userId}
+      <if test="map.statusName!=null and map.statusName!=''">
+          and  status.maxdatestr=#{map.statusName}
+      </if>
+      <if test="map.proArea!=null and map.proArea!='' and map.proArea!='-1'">
+          and  p.base_area_id in
+         (select b.base_area_id
+          from base_area b
+         start with b.base_area_id =#{map.proArea}
+        connect by prior b.base_area_id = b.parent_id)
+      </if>
+      
+      <if test="map.schArea!=null and map.schArea!='' and map.schArea!='-1'">
+          and  c.base_area_id in
+         (select b.base_area_id
+          from base_area b
+         start with b.base_area_id =#{map.schArea}
+        connect by prior b.base_area_id = b.parent_id)
+      </if>
+        
+      <if test="map.project_name!=null and map.project_name!=''">
+         and p.project_name like '%' || #{map.project_name} || '%' ESCAPE '/'
+      </if>
+      <if test="map.concat!=null and map.concat!=''">
+         and r.CONCAT like '%' || #{map.concat} || '%' ESCAPE '/'
+      </if>
+      <if test="map.phone!=null and map.phone!=''">
+         and r.PHONE like '%' || #{map.phone} || '%' ESCAPE '/'
+      </if>
+      <if test="map.school_name!=null and map.school_name!=''">
+         and c.school_name like '%' || #{map.school_name} || '%' ESCAPE '/'
+      </if>
+      order by r.create_time DESC
+  </select>
+  
+  
+  <!-- 封装列表信息-->
+  <resultMap id="workOrderMap" type="com.codyy.oc.admin.view.WorkOrderView">
+    <id column="maintenanceOrderId" jdbcType="VARCHAR" property="maintenanceOrderId" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="schoolPath" jdbcType="VARCHAR" property="schoolPath" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectName" />
+    <result column="schoolName" jdbcType="VARCHAR" property="schoolName" />
+    <result column="maxdatestr" jdbcType="VARCHAR" property="maxdatestr" />
+    <result column="maxdate" jdbcType="TIMESTAMP" property="maxdate" />
+    <result column="orderNum" jdbcType="VARCHAR" property="orderNum" />
+    <result column="engineer" jdbcType="VARCHAR" property="engineer" />
+    <result column="attachmentId" jdbcType="VARCHAR" property="attachmentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="numcount" jdbcType="VARCHAR" property="numcount" />
+    <result column="attachmentURL" jdbcType="VARCHAR" property="attachmentURL" />
+    <association column="create_user" property="submitRealName" javaType="java.lang.String" select="getRealName"/>
+    <association column="maintenanceOrderId" property="equipNum" javaType="java.lang.Integer" select="getEquipNum"/>
+  </resultMap>
+  
+    <!-- 对应工单的设备个数-->
+  <select id="getEquipNum" resultType="java.lang.Integer">
+    select count(1) from equipment_delivery y where y.maintenance_order_id=#{MAINTENANCE_ORDER_ID}
+  </select>
+  
+  <!-- 获取工单列表 -->
+  <select id="getWorkOrderPageList" parameterType="com.codyy.commons.page.Page" resultMap="workOrderMap">
+    select * from (select 
+      m.MAINTENANCE_ORDER_ID      as maintenanceOrderId,
+      m.concat                    as contact,
+      m.phone                     as phone,
+      m.remark                    as REMARK,
+      m.create_user,
+     (select 
+           wm_concat(NVL(au.realname,'-')) engineer
+      from MAINTENANCE_ORDER   mo
+                           
+       left join user_r_order uro
+            on uro.MAINTENANCE_ORDER_ID =mo.MAINTENANCE_ORDER_ID
+       left join admin_user au
+            on au.admin_user_id = uro.admin_user_id
+        where mo.maintenance_order_id=m.maintenance_order_id
+      ) engineer,
+     cls.school_name   as   schoolName,
+     bat.area_path     as   schoolPath,
+     p.project_name    as    projectName,
+     m.order_num       as    orderNum,
+     (select count(1) from attachment a where a.relationship_id=m.maintenance_order_id and a.type='image')  as numcount,
+     a.attachment_id    as attachmentId,
+     a.name            as name,
+     a.attachment_url   as attachmentURL,
+     status.maxdate    as maxdate,
+     status.maxdatestr as maxdatestr
+     
+  from  MAINTENANCE_ORDER m
+  left join cls_school cls
+    on cls.cls_school_id = m.cls_school_id
+  left join base_area bat
+    on bat.base_area_id = cls.base_area_id
+  left join  project  p
+     on cls.project_id=p.project_id 
+  left join ATTACHMENT a
+     on  a.relationship_id=m.maintenance_order_id and a.TYPE = #{map.type}
+     
+  left join  (select 
+       t.maintenance_order_id ssId,
+       case mt.maxdate
+         when to_date('0001-01-01', 'yyyy-MM-dd') 
+          then null else mt.maxdate end maxdate ,
+       case maxdate
+         when t.return_visit then
+          '售后回访'
+         when t.solving_time then
+          '问题解决'
+         when t.door_maintenance then
+          '上门维修'
+         when t.task_time then
+          '任务分配'
+         when t.labor_process_time then
+          '派工流程'
+         when t.customer_calls_time then
+          '客户来电'
+          else '-'
+       end maxdatestr 
+  from MAINTENANCE_ORDER t
+     
+  left join  (select t.maintenance_order_id,
+                    greatest(nvl(t.customer_calls_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.labor_process_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.task_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.door_maintenance,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.solving_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.return_visit,
+                                 to_date('0001-01-01', 'yyyy-MM-dd'))) maxdate
+               from MAINTENANCE_ORDER t) mt
+     on t.maintenance_order_id =mt.maintenance_order_id)  status on ssId=m.maintenance_order_id
+ where 1=1 
+ 
+  
+ 
+ 	<if test="map.clsSchoolAreaId !=null and map.clsSchoolAreaId!='' and map.clsSchoolAreaId != '-1'">
+	   and cls.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{map.clsSchoolAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="map.projectAreaId !=null and map.projectAreaId !='' and map.projectAreaId != '-1'">
+	   and p.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{map.projectAreaId,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="map.clsSchoolName !=null and map.clsSchoolName !=''">
+   		and cls.school_name like '%' || #{map.clsSchoolName} || '%' ESCAPE '/'
+    </if>
+    <if test="map.projectName !=null and map.projectName !=''">
+   		and p.project_name like '%' || #{map.projectName} || '%' ESCAPE '/'
+   	</if>
+   	 
+   	<if test="map.isState !=null and map.isState !=''">
+   		and status.maxdatestr = #{map.isState}
+   	</if>
+   	<if test="map.contact !=null and map.contact !=''">
+   		and m.concat like '%' || #{map.contact} || '%' ESCAPE '/'
+   	</if>
+    <if test="map.phone!=null and map.phone!=''">
+   		and m.phone like '%' || #{map.phone} || '%' ESCAPE '/'
+   	</if>
+ group by  m.MAINTENANCE_ORDER_ID,m.concat, m.phone,cls.school_name, m.remark,m.create_user,bat.area_path, p.project_name,m.order_num,a.attachment_id,a.name,a.attachment_url,m.create_time,status.maxdate,status.maxdatestr
+ 
+ order by m.create_time desc)  
+    <if test="map.repair != null and map.repair != ''">
+   		where engineer like '%' || #{map.repair} || '%' ESCAPE '/'
+   	</if>
+   
+  </select>
+  
+  <!-- 导出工单列表 -->
+  <select id="exportWorkOrderList" parameterType="map" resultMap="workOrderMap">
+      select * from ( select 
+           
+      m.MAINTENANCE_ORDER_ID  as  maintenanceOrderId,
+      m.concat    as   contact,
+      m.phone     as      phone,
+      m.remark    as   remark,
+      m.create_user,
+      cls.school_name  as   schoolName,
+      bat.area_path    as   schoolPath,
+     (select 
+          wm_concat(NVL(au.realname,'-')) engineer
+                                  
+       from MAINTENANCE_ORDER   mo
+                           
+       left join user_r_order uro
+         on uro.MAINTENANCE_ORDER_ID =mo.MAINTENANCE_ORDER_ID
+       left join admin_user au
+         on au.admin_user_id = uro.admin_user_id
+       where mo.maintenance_order_id=m.maintenance_order_id
+      ) engineer,
+     p.project_name    as    projectName,
+     m.order_num       as    orderNum,
+     status.maxdate ,  
+     status.maxdatestr  
+
+  
+  from  MAINTENANCE_ORDER m
+  left join cls_school cls
+    on cls.cls_school_id = m.cls_school_id
+  left join base_area bat
+    on bat.base_area_id = cls.base_area_id
+  left join  project  p
+     on cls.project_id=p.project_id 
+     
+  left join  (select 
+       t.maintenance_order_id ssId,
+       case mt.maxdate
+         when to_date('0001-01-01', 'yyyy-MM-dd') 
+          then null else mt.maxdate end maxdate ,
+       case maxdate
+         when t.return_visit then
+          '售后回访'
+         when t.solving_time then
+          '问题解决'
+         when t.door_maintenance then
+          '上门维修'
+         when t.task_time then
+          '任务分配'
+         when t.labor_process_time then
+          '派工流程'
+         when t.customer_calls_time then
+          '客户来电'
+          else '-'
+       end maxdatestr 
+  from MAINTENANCE_ORDER t
+     
+  left join  (select t.maintenance_order_id,
+                    greatest(nvl(t.customer_calls_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.labor_process_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.task_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.door_maintenance,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.solving_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.return_visit,
+                                 to_date('0001-01-01', 'yyyy-MM-dd'))) maxdate
+               from MAINTENANCE_ORDER t) mt
+     on t.maintenance_order_id =mt.maintenance_order_id)  status on ssId=m.maintenance_order_id
+ where 1=1 
+
+ 	<if test="clsSchoolAreaId !=null and clsSchoolAreaId !='' and clsSchoolAreaId != '-1'">
+	   and cls.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{clsSchoolAreaId}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="projectAreaId !=null and projectAreaId !='' and projectAreaId != '-1'">
+	   and p.base_area_id in
+	       (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{projectAreaId}
+	        connect by prior b.base_area_id = b.parent_id)
+    </if>
+    <if test="clsSchoolName !=null and clsSchoolName !=''">
+   		and cls.school_name like '%' || #{clsSchoolName} || '%' ESCAPE '/'
+    </if>
+    <if test="projectName !=null and projectName !=''">
+   		and p.project_name like '%' || #{projectName} || '%' ESCAPE '/'
+   	</if>
+   	 
+   	<if test="isState !=null and isState !=''">
+   		and status.maxdatestr = #{isState}
+   	</if>
+   	<if test="contact !=null and contact !=''">
+   		and m.concat like '%' || #{contact} || '%' ESCAPE '/'
+   	</if>
+    <if test="phone!=null and phone!=''">
+   		and m.phone like '%' || #{phone} || '%' ESCAPE '/'
+   	</if>
+    group by  m.MAINTENANCE_ORDER_ID,m.concat, m.phone,cls.school_name, m.remark,m.create_user,bat.area_path, p.project_name,m.order_num,m.create_time,status.maxdate,status.maxdatestr
+ 
+    order by m.create_time desc)
+    <if test="repair !=null and repair !=''">
+   	 	  where engineer like '%' || #{repair} || '%' ESCAPE '/'
+   	</if>
+   
+  </select>
+
+  <!--  导出现场维修列表-->
+   <select id="exportReparing" resultMap="showOrderMap" parameterType="map">
+       
+    select r.MAINTENANCE_ORDER_ID,r.ORDER_NUM,r.CONCAT,r.PHONE,r.REMARK,c.school_name,b.area_path schArea,
+        p.project_name,pa.area_path proArea,status.maxdatestr,status.maxdate,name,attachment_url
+    from MAINTENANCE_ORDER r
+      left join CLS_SCHOOL c on  r.cls_school_id=c.cls_school_id
+      left join base_area b on c.base_area_id = b.base_area_id
+      left join PROJECT p on p.project_id=c.project_id
+      left join base_area pa on p.base_area_id=pa.base_area_id
+      left join (select a.NAME name, a.ATTACHMENT_URL attachment_url, a.RELATIONSHIP_ID relId 
+      from ATTACHMENT a where a.TYPE='baozhang'
+       
+      )attach on relId=r.MAINTENANCE_ORDER_ID
+      
+      left join (select 
+       m.maintenance_order_id ssId,
+       case mt.maxdate
+         when to_date('0001-01-01', 'yyyy-MM-dd') 
+          then null else mt.maxdate end maxdate ,
+       case maxdate
+         when m.return_visit then
+          '售后回访'
+         when m.solving_time then
+          '问题解决'
+         when m.door_maintenance then
+          '上门维修'
+         when m.task_time then
+          '任务分配'
+         when m.labor_process_time then
+          '派工流程'
+         when m.customer_calls_time then
+          '客户来电'
+          else '-'
+       end maxdatestr 
+  from MAINTENANCE_ORDER m
+  left join (select t.maintenance_order_id,
+                    greatest(nvl(t.customer_calls_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.labor_process_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.task_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.door_maintenance,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.solving_time,
+                                 to_date('0001-01-01', 'yyyy-MM-dd')),
+                             nvl(t.return_visit,
+                                 to_date('0001-01-01', 'yyyy-MM-dd'))) maxdate
+               from MAINTENANCE_ORDER t) mt
+    on m.maintenance_order_id = mt.maintenance_order_id) status on ssId=r.maintenance_order_id
+    left join (select 
+        a.admin_user_id   as   adminUserId,
+        a.realname        as    realName,
+        a.contact         as    contact,
+        uro.maintenance_order_id as mainOrderId
+      from  admin_user  a
+      left join  user_r_order  uro   on  uro.admin_user_id=a.admin_user_id)g on g.mainOrderId=r.maintenance_order_id
+      where  g.adminUserId=#{userId}
+    
+      <if test="statusName!=null and statusName!=''">
+          and  status.maxdatestr=#{statusName}
+      </if>
+      <if test="proArea!=null and proArea!='' and proArea!='-1'">
+          and  p.base_area_id in
+         (select b.base_area_id
+          from base_area b
+         start with b.base_area_id =#{proArea}
+        connect by prior b.base_area_id = b.parent_id)
+      </if>
+      
+      <if test="schArea!=null and schArea!='' and schArea!='-1'">
+          and  c.base_area_id in
+         (select b.base_area_id
+          from base_area b
+         start with b.base_area_id =#{schArea}
+        connect by prior b.base_area_id = b.parent_id)
+      </if>
+        
+      <if test="project_name!=null and project_name!=''">
+         and p.project_name like '%' || #{project_name} || '%' ESCAPE '/'
+      </if>
+      <if test="concat!=null and concat!=''">
+         and r.CONCAT like '%' || #{concat} || '%' ESCAPE '/'
+      </if>
+      <if test="phone!=null and phone!=''">
+         and r.PHONE like '%' || #{phone} || '%' ESCAPE '/'
+      </if>
+      <if test="school_name!=null and school_name!=''">
+         and c.school_name like '%' || #{school_name} || '%' ESCAPE '/'
+      </if>
+      order by r.create_time DESC
+   </select>
+   
+   
+   <!-- 获取工单信息 -->
+   <select id="getWorkOrderById" parameterType="String" resultType="com.codyy.oc.admin.view.WorkOrderView">
+      select 
+      m.problem as problem,
+      m.problem_solving as problemResolvDesc,
+      m.MAINTENANCE_ORDER_ID maintenanceOrderId,
+      m.ORDER_NUM orderNum, 
+      m.concat  contact,
+      m.phone   phone,
+      m.CUSTOMER_CALLS_TIME   customerCallsTime,
+      m.LABOR_PROCESS_TIME  laborProcessTime,
+      m.TASK_TIME taskTime,
+      m.DOOR_MAINTENANCE doorMaintenance,
+      m.remark remark,
+      m.SOLVING_TIME solvingTime,
+      m.RETURN_VISIT returnVisit,
+      m.address address,
+      b.area_path schoolPath,
+      p.project_id   projectId,
+      p.project_name projectName,
+      r.area_path projectPath,
+      c.cls_school_id   clsSchoolId,
+      c.school_name     schoolName
+      
+      
+      from maintenance_order m
+      
+      left join CLS_SCHOOL c on c.cls_school_id=m.cls_school_id
+      left join BASE_AREA b on c.base_area_id=b.base_area_id
+      left join PROJECT p on c.project_id=p.project_id 
+      left join  BASE_AREA r  on r.base_area_id=p.base_area_id
+     
+      
+      where  m.maintenance_order_id=#{maintenanceOrderId}
+   </select>
+   
+   <!-- 获取工程师信息 -->
+   <select id="getUserROrder" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
+      select 
+        a.admin_user_id   as   adminUserId,
+        a.realname        as    realName,
+        a.contact         as    contact
+      from  admin_user  a
+      left join  user_r_order  uro   on  uro.admin_user_id=a.admin_user_id
+      where uro.maintenance_order_id=#{maintenanceOrderId}
+   
+   </select>
+   
+   <!-- 获取设备寄送信息 -->
+   <select id="getEquipDelivery" parameterType="String" resultType="com.codyy.oc.admin.entity.EquipmentDelivery">
+      select 
+         e.equipment_delivery_id  as equipmentDeliveryId,
+         e.name     as   name,
+         e.delivery_time   as  deliveryTime,
+          e.exmpess_company as expressCompany,
+         e.express_num as expressNum
+     from equipment_delivery  e
+     where  e.maintenance_order_id=#{maintennanceOrderId}
+   </select>
+   <!-- 获取工程师 -->
+   <select id="getEngineersById" parameterType="list" resultType="com.codyy.oc.admin.entity.AdminUser">
+        select 
+          a.admin_user_id   as   adminUserId,
+          a.realname        as    realName,
+          a.contact         as    contact
+        from admin_user a
+        where a.admin_user_id   in
+     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+        #{item}   
+     </foreach> 
+   </select>
+   
+   <!-- 删除工程-工单 -->
+   <delete id="deleteUserROrder" parameterType="String">
+       delete  from user_r_order   uro
+       where uro.maintenance_order_id=#{maintenanceOrderId}
+   
+   </delete>
+  
+   
+   <!-- 删除设备寄送 -->
+   <delete id="deleteEquipDelivery" parameterType="String">
+       delete from  equipment_delivery   eq
+       where  eq.maintenance_order_id=#{maintenanceOrderId}
+   </delete>
+   
+   <delete id="deleteWorkOrder" parameterType="String">
+        delete from  maintenance_order   m
+        where  m.maintenance_order_id=#{maintenanceOrderId}
+   </delete>
+   
+   <!-- 获取附近表信息 -->
+   <select id="downloadPicture" parameterType="map"  resultType="com.codyy.oc.admin.entity.Attachment">
+       select  
+       a.attachment_id as  attachmentId,
+       a.name          as  name,
+       a.attachment_url  as  attachment_Url,
+       a.relationship_id  as relationShipId,
+       a.REMARK as remark
+       from attachment a
+       left join maintenance_order   m
+          on  m.maintenance_order_id=a.relationship_id
+           
+       where  m.maintenance_order_id=#{maintenanceOrderId}
+       and a.type=#{type}
+   </select>
+   
+   <!-- 获取图片 -->
+   <select id="getPicturesPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.Attachment">
+        select  
+       a.attachment_id as  attachmentId,
+       a.name          as  name,
+       a.attachment_url  as  attachment_Url,
+       a.relationship_id  as relationShipId,
+       a.remark           as  remark
+       
+       from attachment a
+       left join maintenance_order   m
+          on  m.maintenance_order_id=a.relationship_id
+           
+       where  m.maintenance_order_id=#{map.maintenanceOrderId}
+       and a.type=#{map.type}
+   </select>
+   
+   <!-- 编辑图片信息-->
+   <update id="editPicMark" parameterType="com.codyy.oc.admin.view.AttachmentView">
+       update ATTACHMENT set REMARK=#{remark} where RELATIONSHIP_ID=#{relationship_Id} and ATTACHMENT_URL=#{attachment_Url}
+   </update>
+   
+   <!-- 通过学校id 判断是否有工单 -->
+   <select id="checkWorkOrderBySchoolId" parameterType="String" resultType="Integer">
+        select count(1)
+        from maintenance_order m
+        where m.cls_school_id=#{clsSchoolId}
+   </select>
+   
+   <!-- 判断工程师信息 -->
+   <select id="checkUserROrder" parameterType="String" resultType="Integer">
+        select count(1)
+        from user_r_order   uro
+       where uro.maintenance_order_id=#{maintenanceOrderId}
+   </select>
+   
+   <select id="checkEquipDelivery" parameterType="String" resultType="Integer">
+       select count(1)
+       from equipment_delivery  e
+       where  e.maintenance_order_id=#{maintennanceOrderId}
+   </select>
+   
+   <!-- 获取工单中的工程师 -->
+   <select id="getEngineerPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
+       select
+			au.admin_user_id as adminUserId,
+			au.username as userName,
+			au.realname as realName,
+			NVL(au.contact,'-') as contact,
+			au.position as position,
+			au.locked   as locked
+		from admin_user au
+		where 1 = 1
+			<if test="map.realName != null and map.realName !=''">
+				and au.realname like '%' || #{map.realName} || '%' ESCAPE '/'
+			</if>
+			<if test="map.state != null and map.state !='' and map.state !='-1' ">
+				and au.locked=#{map.state}
+			</if>
+			 <if test="map.projectId != null and map.projectId!='' ">
+				and (au.admin_user_id in (
+				               select a.admin_user_id from  user_r_order ur
+                                       left join  admin_user a 
+                                            on ur.admin_user_id=a.admin_user_id
+                                            
+                                       left join  maintenance_order  mr
+                                            on  ur.maintenance_order_id=mr.maintenance_order_id
+                                       left join  cls_school cls
+                                            on   cls.cls_school_id=mr.cls_school_id
+                                            where  cls.project_id=#{map.projectId}
+                                            and  a.locked='Y')
+                                    
+
+				     or au.locked='N')
+			</if>
+			order by au.create_time DESC
+   </select>
+   
+   <!-- 查询出工单所有的问题类型-->
+   <select id="selecProblemType" resultType="com.codyy.oc.admin.view.ProblemTypeView">
+      select ty.problem_type_id as problemId,ty.problem_type_name as problemName from PROBLEM_TYPE ty
+   </select>
+   <!--自动生成工单号-->
+   <select id="getOrderNum" resultType="java.lang.String">
+      select 'BX' || to_char(sysdate, 'YYYYMMDDhh24mi') ||
+         trim(to_char(nvl(max(substr(t.order_num, 11, 3)), '000') + 1, '000'))
+       from maintenance_order t
+      where t.order_num like 'BX' || to_char(sysdate, 'YYYYMMDDhh24mi') || '%'
+   </select>
+   
+<!-- 给指定的工单添加存在的问题类型-->
+  <insert id="insertProblemType" parameterType="list">
+       insert into  PROBLEM_TYPE_R_MAINTENANCE (problem_type_r_maintenance_id,maintenance_order_id,problem_type_id)  
+      <foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select 
+				#{items.problemRMainTenanceId} ,
+				#{items.maintennanceOrderId},
+				#{items.problemType} 
+			from dual
+		</foreach>
+  </insert>
+  
+  <!-- 现场维修的编辑操作-->
+  <update id="updateRepair" parameterType="com.codyy.oc.admin.view.RepairView">
+       update maintenance_order m set m.task_time=#{taskAssginment},m.door_maintenance=#{outdoors},
+       m.solving_time=#{quesResolve},m.problem_solving=#{problemResolve} where m.maintenance_order_id=#{orderId} 
+  </update>
+  
+  <!-- 添加工单的时候显示所加工单的项目经理-->
+   <select id="getManagerByOrderId" resultType="com.codyy.oc.admin.view.MgOrderView" parameterType="java.lang.String">
+     select u.realname as managerName,u.contact as managerContact from  maintenance_order m 
+     left join CLS_SCHOOL c  on m.cls_school_id=c.cls_school_id
+     left join PROJECT p on c.project_id=p.project_id
+     left join ADMIN_USER u on p.manager_id=u.admin_user_id where m.maintenance_order_id=#{orderId}
+  </select>
+  
+  <!-- 对学校进行搜索并实现信息回填-->
+  <select id="searchSchoolPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.view.SearchSchoolInfoView">
+      select sc.school_name as schoolName,e.area_path as schoolPath,sc.cls_school_id as schoolId,p.project_name as projectName,
+      sc.project_id as projectId,e.area_id_path as schoolAreaPathId,e.area_path as schoolAreaPath,f.area_path as projAreaPath,
+      f.area_id_path as projAreaPathId  from cls_school sc
+           left join base_area e on sc.base_area_id=e.base_area_id
+           left join project p on sc.project_id=p.project_id 
+           left join base_area f on f.base_area_id=p.base_area_id where sc.delete_flag='N'
+           <if test="map.projId!='' and map.projId!='-1' and map.projId!=null">
+            and sc.project_id=#{map.projId}
+           </if>
+           <if test="map.schoolName!='' and map.schoolName!=null">
+             and sc.school_name like '%' || #{map.schoolName} || '%' ESCAPE '/'
+           </if>
+           <if test="map.schoolArea != null and map.schoolArea !='' and map.schoolArea !='-1'">
+	  	   and sc.base_area_id in
+	        (select b.base_area_id
+	          from base_area b
+	         start with b.base_area_id = #{map.schoolArea,jdbcType=VARCHAR}
+	        connect by prior b.base_area_id = b.parent_id)
+	      </if>
+	      
+  </select>
+  
+ <!-- 获得指定工单存在的所有问题类型-->
+  <select id="getProbTypeByOrderId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.view.ProblemTypeView">
+      select me.problem_type_id as problemId,ty.problem_type_name as problemName from PROBLEM_TYPE_R_MAINTENANCE me 
+  left join  PROBLEM_TYPE ty on me.problem_type_id=ty.problem_type_id where me.maintenance_order_id=#{orderId}
+  </select>
+  <!-- 获取工单提交人名字-->
+  <select id="getOrderSumitter" parameterType="java.lang.String" resultType="java.lang.String">
+       select u.realname from maintenance_order od left join admin_user u on od.create_user=u.admin_user_id
+      where od.maintenance_order_id=#{orderId} 
+  </select>
+  
+  <!-- 删除指定工单对应的所有问题类型-->
+  <delete id="deleProblemById" parameterType="java.lang.String">
+      delete from PROBLEM_TYPE_R_MAINTENANCE ce where ce.maintenance_order_id=#{orderId}
+  </delete>
+  
+  <!-- 删除工单前获取签到记录 -->
+  <select id="getSignCountByOrderId" parameterType="java.lang.String" resultType="Integer">
+    select count(1) 
+    from sign s 
+    where s.maintenance_order_id = #{maintenanceOrderId}
+  </select>
+ 
+</mapper>

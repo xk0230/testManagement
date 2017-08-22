@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminUserMapper" >
+
+    <sql id="pageTop">
+		select * from (select t.*,rownum as r from(
+	</sql>
+	<sql id="pageBottom">
+	<![CDATA[
+		) t) t1 where t1.r > #{start} and t1.r <= #{end}
+		]]>
+	</sql>
+	
+	<!-- 根据传来的id来删除用户的所有信息-->
+	<delete id="deleteAdminUsersById" parameterType="java.lang.String">
+	     delete from admin_user where ADMIN_USER_ID=#{adminUserId}
+	</delete>
+	
+	
+	<!-- 验证注册用户-->
+	<select id="selUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	          select * from admin_user t where t.username=#{userName}
+	</select>
+	
+	<!--  修改操作中验证用户-->
+	<select id="checkSelUpteName" parameterType="com.codyy.oc.admin.entity.AdminUser" resultMap="BaseResultMap">
+	          select * from admin_user t where t.username=#{userName} and t.admin_user_id=#{adminUserId}
+	</select>
+	
+	
+	<!-- 添加用户AdminUser表-->
+	<insert id="insertAdminUser" parameterType="com.codyy.oc.admin.entity.AdminUser" >
+	    insert into admin_user(ADMIN_USER_ID,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,WEIXIN_NUM,POSITION,CREATE_TIME)
+	    values(#{adminUserId},#{userName},#{password},#{realName},#{contact},#{locked},#{weixin_num},#{position},#{createTime})    
+	</insert>
+	
+	<!-- 修改用户信息-->
+	<update id="updateAdminsUser" parameterType="com.codyy.oc.admin.entity.AdminUser">
+	     update admin_user u
+		<set>
+			<if test="userName != null">
+				u.USERNAME = #{userName},
+			</if>
+			<if test="locked != null">
+				u.LOCKED = #{locked},
+			</if>
+			<if test="realName != null">
+				u.REALNAME = #{realName},
+			</if>
+			<if test="contact != null">
+				u.CONTACT = #{contact},
+			</if>
+			<if test="weixin_num != null">
+				u.WEIXIN_NUM = #{weixin_num},
+			</if>
+			<if test="position != null">
+				u.POSITION = #{position},
+			</if>
+			<if test="password != null and password !=''">
+				u.PASSWORD = #{password},
+			</if>
+			
+		</set>
+		<where>
+			<if test="adminUserId != null">
+            u.ADMIN_USER_ID = #{adminUserId}
+          </if>
+      </where> 
+	</update>
+	
+	<!-- 用户按照id进行查询-->
+	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminUser">
+		<id column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="userName" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realName" jdbcType="VARCHAR" />
+		<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+		<result column="LOCKED" property="locked" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="WEIXIN_NUM" property="weixin_num" jdbcType="VARCHAR" />
+		<result column="POSITION" property="position" jdbcType="VARCHAR" />
+		<collection property="adminUserPer" ofType="com.codyy.oc.admin.entity.AdminUserPermission" column="ADMIN_USER_ID" select="collectionMap"></collection>
+	</resultMap>
+	
+	<resultMap id="adminPersissionMap" type="com.codyy.oc.admin.entity.AdminUserPermission">
+	     <id column="ADMIN_PERMISSION_ID" property="adminPersId" jdbcType="VARCHAR"/>
+	     <result column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 将每次返回的对象放入集合中-->
+	<select id="collectionMap" resultMap="adminPersissionMap">
+	      select ADMIN_PERMISSION_ID,ADMIN_USER_ID from admin_user_r_permission where ADMIN_USER_ID=#{ADMIN_USER_ID}
+	</select>
+	
+	<!-- 根据用户的id来获取对应用户的所有信息-->
+	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select ADMIN_USER_ID ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
+	    from admin_user where ADMIN_USER_ID=#{adminUserId}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getAdminUser" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
+		select
+			au.admin_user_id    as adminUserId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.contact  			as contact,
+			au.locked   			as locked ,
+			au.remark   			as remark ,
+			au.create_user_id	  as createUserId,
+			au.create_time        as createTime,
+			au.delete_flag        as deleteFlag,
+			au.weixin_num           as weixin_num,
+			au.position             as position
+		from admin_user au 
+		where au.username = #{userName} 
+			and au.password = #{password}
+	</select>
+	
+	<!-- 新增用户维护关联 -->
+	<insert id="insertAdminUserRole" parameterType="list">
+		insert into admin_user_r_role(admin_user_id, admin_role_id)  
+		<foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select
+				#{items.adminUserId} ,
+				#{items.adminRoleId}
+			from dual
+		</foreach>
+	</insert>
+	
+	<!-- 更新用户 -->
+	<update id="updateAdminUser" parameterType="com.codyy.oc.admin.entity.AdminUser">
+		update admin_user u
+		<set>
+			<if test="realName != null">
+				u.realname = #{realName},
+			</if>
+			<if test="contact != null">
+				u.contact = #{contact},
+			</if>
+			<if test="remark != null">
+				u.remark = #{remark},
+			</if>
+			<if test="locked != null">
+				u.locked = #{locked},
+			</if>
+			<if test="userName != null">
+				u.username = #{userName},
+			</if>
+			<if test="password != null">
+				u.password = #{password},
+			</if>
+		</set>
+		<where>
+			<if test="adminUserId != null">
+            u.admin_user_id = #{adminUserId}
+          </if>
+      </where>
+	</update>
+	
+	<!-- 更新用户维护关联表 -->
+	<delete id="deleteAdminUserRole" parameterType="java.lang.String">
+		delete from admin_user_r_role ur where ur.admin_user_id = #{adminUserId}
+	</delete>
+	
+	<!-- 删除用户 -->
+	<delete id="deleteAdminUserById" parameterType="java.lang.String">
+		delete from admin_user u where u.admin_user_id = #{adminUserId}
+	</delete>
+	
+	<update id="updateAdminUserById" parameterType="java.lang.String">
+		update admin_user u set u.delete_flag = 'Y' where u.admin_user_id = #{adminUserId}
+	</update>
+	
+	<!-- 根据管理员id获取管理员信息 -->
+	<select id="findAdminUserById" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="java.lang.String">
+		select 
+			au.admin_user_id as adminUserId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.contact  			as contact,
+			au.locked   			as locked ,
+			au.remark   			as remark,
+			au.create_user_id	as createUserId
+		from admin_user au 
+		where au.admin_user_id = #{id}
+	</select>
+	
+	<!-- 根据用户ID查询其所属角色 -->
+	<select id="findAdminUserRoleById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminUserRole">
+		select 
+			au.admin_user_id	adminUserId ,
+			ar.admin_role_id 	adminRoleId , 
+			ar.role_name 		adminRoleName 
+		 from admin_user au, admin_user_r_role aur, admin_role ar
+ 		 where au.admin_user_id = aur.admin_user_id
+   		 		 and aur.admin_role_id = ar.admin_role_id
+		 		 and au.admin_user_id = #{adminUserId}
+	</select>
+	
+	<!-- 修改管理员密码 -->
+	<update id="modifyPassword" parameterType="map" >
+		update 
+			admin_user au 
+		set au.password = #{password} 
+		where au.admin_user_id = #{adminUserId}
+	</update>	
+	
+	<!-- 分页条件查询用户 -->
+	<select id="findPageList" resultType="com.codyy.oc.admin.view.AdminUserView" parameterType="com.codyy.commons.page.Page">
+		select 
+			u.admin_user_id adminUserId,
+       	u.username userName,
+       	wm_concat(NVL(r.role_name, '-')) roleName, 
+       	NVL(au.userName,'-') createAdminUser,
+       	NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') createTime
+  		from admin_user u
+	  		left join admin_user_r_role ur on u.admin_user_id = ur.admin_user_id
+	  		left join admin_role r on ur.admin_role_id = r.admin_role_id
+	    	left join admin_user au on u.create_user_id = au.admin_user_id
+	  		<where>
+	  			and u.delete_flag = 'N'
+	  			<if test="map.adminRoleId != ''">
+	  				and r.admin_role_id = #{map.adminRoleId}
+	  			</if>
+	  			<if test="map.userName != ''">
+	  				and u.username like '%'|| #{map.userName} || '%'
+	  			</if>
+	  		</where>
+  			group by u.admin_user_id ,u.username, au.userName, NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '')
+  			order by NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') desc
+	</select>
+	
+	<!-- 校验用户名是否存在 -->
+	<select id="checkUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(1) num from admin_user u where u.username = #{userName}
+	</select>
+	
+	<!-- 修改个人资料 -->
+	<update id="modifyMsg" parameterType="map">
+	     update 
+			admin_user au 
+		set au.realname = #{realName} , au.contact=#{contact}
+		where au.admin_user_id = #{adminUserId}
+	</update>
+	
+	<!-- 获取个人资料 -->
+	<select id="getAdmin" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="map">
+		select
+		    au.admin_user_id    as adminUserId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.contact  			as contact,
+			au.locked   			as locked ,
+			au.remark   			as remark ,
+			au.create_user_id	  as createUserId,
+			au.create_time        as createTime,
+			au.delete_flag        as deleteFlag,
+			au.weixin_num           as weixin_num,
+			au.position             as position
+		from admin_user au 
+		where au.username = #{userName} 
+			and au.admin_user_id = #{adminUserId}
+	</select>
+	
+	<!-- 获取用户列表  -->
+	<select id="getAdminUserPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
+		select
+			au.admin_user_id as adminUserId,
+			au.username as userName,
+			au.realname as realName,
+			NVL(au.contact,'-') as contact,
+			au.position as position,
+			au.locked   as locked
+		from admin_user au
+		where 1 = 1
+			<if test="map.userName!= null and  map.userName!=''">
+				and au.username like '%' || #{map.userName} || '%' ESCAPE '/'
+			</if>
+			<if test="map.realName != null and map.realName !=''">
+				and au.realname like '%' || #{map.realName} || '%' ESCAPE '/'
+			</if>
+			<if test="map.contact != null and map.contact!='' ">
+				and au.contact like '%' || #{map.contact} || '%' ESCAPE '/'
+			</if>
+			<if test="map.position != null and map.position!='' ">
+				and au.position like '%' || #{map.position} || '%' ESCAPE '/'
+			</if>
+			<if test="map.state != null and map.state !='' and map.state !='-1' ">
+				and au.locked=#{map.state}
+			</if>
+			 <if test="map.projectId != null and map.projectId!='' ">
+				and (au.admin_user_id in (
+				              select a.admin_user_id from admin_user a 
+                                       left join project_r_user pr
+                                            on pr.admin_user_id=a.admin_user_id
+                                            where pr.project_id=#{map.projectId}
+                                            and  a.locked='Y')
+                                       or admin_user_id in (select a.admin_user_id
+                                                  from project p
+                                   left join  admin_user a
+                                       on a.admin_user_id=p.manager_id
+                                       
+                                   where  p.project_id=#{map.projectId})  
+
+				     or au.locked='N')
+			</if>
+			order by au.create_time DESC
+		
+	</select>
+	<!-- 获取用户数量 -->
+	<select id="getAdminUserCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(1)
+		from admin_user au
+		where
+			1 = 1
+			<if test="userName!=null and userName!=''">
+				and au.username like '%' || #{userName} || '%' ESCAPE '/'
+			</if>
+			<if test="realName!= null and realName!=''">
+				and au.realname like '%' || #{realName} || '%' ESCAPE '/'
+			</if>
+			<if test="contact!= null and contact!='' ">
+				and au.contact like '%' || #{contact} || '%' ESCAPE '/'
+			</if>
+			<if test="position!= null and position!='' ">
+				and au.position like '%' || #{position} || '%' ESCAPE '/'
+			</if>
+			<if test="state != null and state!='' and state!='-1' ">
+				and au.locked=#{state}
+			</if>
+		    <if test="projectId != null and projectId!='' ">
+				and (au.admin_user_id in (
+				              select pr.admin_user_id from  project_r_user pr 
+                                       left join admin_user  a
+                                            on pr.admin_user_id=a.admin_user_id
+                                            where pr.project_id=#{projectId}
+                                            and  a.locked='Y') 
+                            or admin_user_id in (select a.admin_user_id
+                                                  from project p
+                                   left join  admin_user a
+                                       on a.admin_user_id=p.manager_id
+                                       
+                                   where  p.project_id=#{projectId}  
+                                      
+                                 ) 
+
+				     or au.locked='N')
+			</if>
+	</select>
+	<select id="checkUserState" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
+	    select 
+	        au.admin_user_id as adminUserId,
+			au.username as userName,
+			au.realname as realName,
+			au.locked   as locked
+	    from admin_user au
+	    where au.admin_user_id=#{userId}
+	</select>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminRoleMapper" >
+	<!-- 新增角色 -->
+	<insert id="insertAdminRole" parameterType="com.codyy.oc.admin.entity.AdminRole">
+		insert into admin_role (
+				admin_role_id, 
+				<if test="roleDesc != null">
+					role_desc ,
+				</if>
+				role_name, 
+				create_time
+			) values (
+				#{adminRoleId} ,
+				<if test="roleDesc != null">
+					#{roleDesc} ,
+				</if>
+				#{roleName},
+				#{createTime}
+			)
+	</insert>
+	
+	<!-- 维护角色权限表 -->
+	<insert id="insertAdminRolePermission" parameterType="list">
+		insert into 
+			admin_role_r_permission(admin_permission_id, admin_role_id) 
+		<foreach collection="list" item="items" open="(" close=")" separator="union all">
+			select 
+				#{items.adminPermissionId} ,
+				#{items.adminRoleId} 
+			from dual
+		</foreach>
+	</insert>
+	
+	<!-- 修改角色 -->
+	<update id="updateAdminRole" parameterType="com.codyy.oc.admin.entity.AdminRole">
+		update admin_role r
+		<set>
+			<if test="roleName != null">
+				r.role_name = #{roleName} ,
+			</if>
+			<if test="roleDesc != null">
+				r.role_desc = #{roleDesc} ,
+			</if>
+		</set>
+		<where>
+			<if test="adminRoleId != null">
+            r.admin_role_id = #{adminRoleId}
+          </if>
+		</where>
+	</update>
+	
+	<!-- 删除角色权限中间表 -->
+	<delete id="deleteAdminRolePermission" parameterType="java.lang.String">
+		delete from admin_role_r_permission rp where rp.admin_role_id = #{adminRoleId}
+	</delete>
+	
+	<!-- 根据ID删除角色 -->
+	<delete id="deleteAdminRoleById" parameterType="java.lang.String">
+		delete from admin_role r where r.admin_role_id = #{adminRoleId}
+	</delete>
+	
+	<!-- 根据ID查询角色 -->
+	<select id="findAdminRoleById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminRole">
+		select 
+			r.admin_role_id adminRoleId, 
+			r.role_name roleName, 
+			r.role_desc roleDesc ,
+			r.create_time createTime
+		from admin_role r
+		where r.admin_role_id = #{adminRoleId}
+	</select>
+	
+	<!-- 查询角色所属权限 -->
+	<select id="findAdminRolePermissionByRoldId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminRolePermission">
+		<!-- select 
+			r.admin_role_id adminRoleId, 
+			p.admin_permission_id adminPermissionId, 
+			p.permission_name adminPermissionName
+   		from admin_role r, admin_role_r_permission rp, admin_permission p
+  		where r.admin_role_id = rp.admin_role_id
+    			and rp.admin_permission_id = p.admin_permission_id
+    			and r.admin_role_id = #{adminRoleId} -->
+    	select 
+	      r.admin_role_id adminRoleId, 
+	      p.admin_permission_id adminPermissionId, 
+	      am.menu_name adminPermissionName
+       from admin_role r, admin_role_r_permission rp, admin_permission p,admin_menu am
+      where r.admin_role_id = rp.admin_role_id
+          and rp.admin_permission_id = p.admin_permission_id
+          and p.admin_menu_id = am.admin_menu_id
+    			and r.admin_role_id = #{adminRoleId}
+	</select>
+	
+	<!-- 多条件分页查询角色 -->
+	<select id="findPageList" resultType="com.codyy.oc.admin.view.AdminRoleView" parameterType="com.codyy.commons.page.Page">
+		select 
+			r.admin_role_id adminRoleId,
+       		r.role_name adminRoleName,
+       		wm_concat(NVL(u.username, '-')) adminUserName,
+       		NVL2(r.create_time, to_char(r.create_time, 'yyyy-MM-dd HH:mm:ss'),'') createTime,
+       		count(u.username) adminUserNum
+  		from admin_role r
+  		left join admin_user_r_role aur on r.admin_role_id = aur.admin_role_id
+  		left join admin_user u on aur.admin_user_id = u.admin_user_id
+ 		group by 
+			r.admin_role_id,
+          	r.role_name,
+          	NVL2(r.create_time, to_char(r.create_time, 'yyyy-MM-dd HH:mm:ss'), '')
+ 		order by NVL2(r.create_time, to_char(r.create_time, 'yyyy-MM-dd HH:mm:ss'), '') desc
+	</select>
+	
+	<!-- 查询后台所有角色 -->
+	<select id="findAllAdminRole" resultType="com.codyy.oc.admin.entity.AdminRole">
+		select 
+			r.admin_role_id adminRoleId, 
+			r.role_name roleName, 
+			r.role_desc roleDesc
+		from admin_role r
+	</select>
+	
+	<!-- 查询所有分组权限 -->
+	<select id="findAllGroupPermission" resultType="com.codyy.oc.admin.entity.AdminRolePermission">
+		<!-- select 
+			p.group_name      adminPermissionGroupName ,
+			p.admin_permission_id adminPermissionId,
+      	 	p.permission_name adminPermissionName
+  		from admin_permission p
+ 		group by 
+ 				p.group_name, 
+ 				p.admin_permission_id, 
+ 				p.permission_name -->
+ 		select 
+		  amm.menu_name      adminPermissionGroupName ,
+		  p.admin_permission_id adminPermissionId,
+		  am.menu_name adminPermissionName
+		from admin_permission p, admin_menu am, admin_menu amm
+		where p.admin_menu_id = am.admin_menu_id
+			and am.parent_id = amm.admin_menu_id
+	</select>
+	
+	<!-- 查询角色下是否挂载了用户 -->
+	<select id="findAdminUserExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(1) num from admin_user_r_role r where r.admin_role_id = #{adminRoleId}
+	</select>
+	
+	<!-- 角色名称唯一性校验 -->
+	<select id="checkAdminRoleName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(1) num from admin_role r where r.role_name = #{adminRoleName}
+	</select>
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.SupplierRProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.SupplierRProject" >
+    <id column="SUPPLIER_R_PROJECT_ID" property="supplierRProjectId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SUPPLIER_R_PROJECT_ID, PROJECT_ID, SUPPLIER_ID
+  </sql>
+  
+   <!-- 向集成商与项目的关系表中添加数据     sys_guid()是oracle自己产生uuid的函数  -->
+   	<insert id="insertSuppRProject" parameterType="com.codyy.oc.admin.entity.SupplierRProject">
+         insert into SUPPLIER_R_PROJECT(SUPPLIER_R_PROJECT_ID,PROJECT_ID,SUPPLIER_ID)
+         <foreach collection="projIdList" item="items" open="(" close=")" separator="union all">
+			select 
+			    sys_guid(),
+			    <if test="items==null">
+			     '-',
+			    </if>
+			    <if test="items!=null">
+			    #{items},
+			    </if>
+				#{supplierId}
+			from dual
+     </foreach>
+	</insert>
+	
+	<!-- 根据集成商的id来删除集成商项目表中本集成商对应的所有项目的信息-->
+	<delete id="delSupplRProjBySuId" parameterType="java.lang.String">
+	    delete from SUPPLIER_R_PROJECT where SUPPLIER_ID=#{supplierId}
+	</delete>
+  
+  <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SUPPLIER_R_PROJECT
+    where SUPPLIER_R_PROJECT_ID = #{supplierRProjectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SUPPLIER_R_PROJECT
+    where SUPPLIER_R_PROJECT_ID = #{supplierRProjectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.SupplierRProject" >
+    insert into SUPPLIER_R_PROJECT (SUPPLIER_R_PROJECT_ID, PROJECT_ID, SUPPLIER_ID
+      )
+    values (#{supplierRProjectId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{supplierId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.SupplierRProject" >
+    insert into SUPPLIER_R_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierRProjectId != null" >
+        SUPPLIER_R_PROJECT_ID,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierRProjectId != null" >
+        #{supplierRProjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.SupplierRProject" >
+    update SUPPLIER_R_PROJECT
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SUPPLIER_R_PROJECT_ID = #{supplierRProjectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.SupplierRProject" >
+    update SUPPLIER_R_PROJECT
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+    where SUPPLIER_R_PROJECT_ID = #{supplierRProjectId,jdbcType=VARCHAR}
+  </update> -->
+</mapper>

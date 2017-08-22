@@ -1,0 +1,125 @@
+<div class="menu">
+	<ul >
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">管理中心</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("default&type=welcome")'>欢迎页</a></li><li><a href='javascript:;' onclick='clickLeft("default&type=modifyinfo")'>修改密码</a></li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="hide">
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">评课管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>系统默认评估标准</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>评课活动回收站</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>评估标准回收站</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">资源管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>视频类资源</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>视频资源回收站</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>文档类资源</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>视频资源回收站</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">资源评论管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("usr&type=list")'>视频类评论</a></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<ul class="hide">
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">前台参数配置</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("area&type=list")'> 基本分类</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("area&type=list")'> 学科管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("area&type=list")'> 教材版本管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("area&type=list")'> 知识点管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("area&type=list")'> 资源分类</a></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<ul class="hide">
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">系统设置</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>行政区管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>服务器管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>角色管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>账号管理</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">学校管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>学校列表</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>教室列表</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">用户管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>机构用户管理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>教师管理</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">报修管理</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>报修处理</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>故障排查指南</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("school_group&type=list")'>报修信息跟踪</a></li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="hide">
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">授课统计</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>开课数统计</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>课堂资源统计</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>开课教师统计</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>教师授课统计</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>学科覆盖</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>学校列表</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>课堂列表</a></li>
+			</ul>
+		</li>
+		<li class="menulist">
+			<div class="menutree1">
+				<a hidefocus="true" href="javascript:;" class="mius">资源及活动统计</a>
+			</div>
+			<ul class='menusub'>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>资源统计</a></li>
+				<li><a href='javascript:;' onclick='clickLeft("teacher&type=list")'>活动统计</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>

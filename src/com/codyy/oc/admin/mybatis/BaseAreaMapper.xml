@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.BaseAreaMapper">
+	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.BaseArea">
+		<id column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR" />
+		<result column="BASE_FILE_SERVER_ID" property="baseFileServerId" jdbcType="VARCHAR" />
+		<result column="BASE_PMS_SERVER_ID" property="basePmsServerId" jdbcType="VARCHAR" />
+		<result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+		<result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+		<result column="SORT" property="sort" jdbcType="DECIMAL" />
+		<result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+		<result column="AREA_LEVEL" property="areaLevel" jdbcType="DECIMAL" />
+		<result column="AREA_PATH" property="areaPath" jdbcType="VARCHAR" />
+		<result column="AREA_ID_PATH" property="areaIdPath" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.codyy.oc.admin.entity.BaseArea" extends="BaseResultMap">
+		<result column="MAP_SOURCE" property="mapSource" jdbcType="CLOB" />
+		<result column="MAP_OUTPUT" property="mapOutput" jdbcType="CLOB" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		BASE_AREA_ID, BASE_FILE_SERVER_ID, BASE_PMS_SERVER_ID, AREA_NAME, AREA_CODE, SORT,
+		PARENT_ID, EDIT_SCHEDULE, SOFTWARE_UPGRADE, CREATE_SCHOOL, AREA_LEVEL, AREA_PATH,
+		AREA_ID_PATH
+	</sql>
+	<sql id="Blob_Column_List">
+		MAP_SOURCE, MAP_OUTPUT
+	</sql>
+	
+	<!-- 根据parent获取直属行政区  -->
+	<select id="getBaseAreaByParentId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.SelectModel">
+		select
+			ba.base_area_id as id,
+			ba.area_name as name
+		from base_area ba 
+		left join base_config_area_level  bcal
+		on  ba.area_level=bcal.area_level
+		where 1=1
+		<choose>
+			<when test="parentId == null or parentId == ''">
+				and ba.parent_id = '-1'
+			</when>
+			<when test="parentId == '-1'">
+				and ba.parent_id is null
+			</when>
+			<otherwise>
+				and ba.parent_id = #{parentId}
+			</otherwise>
+		</choose>
+		order by ba.sort
+	</select>
+	
+	
+	<select id="getBaseArea" parameterType="java.util.Map"  resultType="com.codyy.oc.admin.view.SelectModel">
+	    select 
+	         ba.base_area_id as id,
+	         ba.base_name    as  name
+	         from   base_area  ba
+	         where 
+	         <choose>
+			<when test="id == null or id == ''">
+				 ba.base_area_id is null
+			</when>
+			<otherwise>
+				 ba.base_area_id = #{id}
+			</otherwise>
+		</choose>
+		order by ba.sort
+	</select>
+	
+	
+	
+	
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from BASE_AREA
+		where BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from BASE_AREA
+		where BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.codyy.oc.admin.entity.BaseArea">
+		insert into BASE_AREA (BASE_AREA_ID, BASE_FILE_SERVER_ID, BASE_PMS_SERVER_ID,
+		AREA_NAME, AREA_CODE, SORT,
+		PARENT_ID, EDIT_SCHEDULE, SOFTWARE_UPGRADE,
+		CREATE_SCHOOL, AREA_LEVEL, AREA_PATH,
+		AREA_ID_PATH, MAP_SOURCE, MAP_OUTPUT
+		)
+		values (#{baseAreaId,jdbcType=VARCHAR}, #{baseFileServerId,jdbcType=VARCHAR}, #{basePmsServerId,jdbcType=VARCHAR},
+		#{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{sort,jdbcType=DECIMAL},
+		#{parentId,jdbcType=VARCHAR}, #{editSchedule,jdbcType=CHAR}, #{softwareUpgrade,jdbcType=CHAR},
+		#{createSchool,jdbcType=CHAR}, #{areaLevel,jdbcType=DECIMAL}, #{areaPath,jdbcType=VARCHAR},
+		#{areaIdPath,jdbcType=VARCHAR}, #{mapSource,jdbcType=CLOB}, #{mapOutput,jdbcType=CLOB}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.BaseArea">
+		insert into BASE_AREA
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="baseAreaId != null">
+				BASE_AREA_ID,
+			</if>
+			<if test="baseFileServerId != null">
+				BASE_FILE_SERVER_ID,
+			</if>
+			<if test="basePmsServerId != null">
+				BASE_PMS_SERVER_ID,
+			</if>
+			<if test="areaName != null">
+				AREA_NAME,
+			</if>
+			<if test="areaCode != null">
+				AREA_CODE,
+			</if>
+			<if test="sort != null">
+				SORT,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="editSchedule != null">
+				EDIT_SCHEDULE,
+			</if>
+			<if test="softwareUpgrade != null">
+				SOFTWARE_UPGRADE,
+			</if>
+			<if test="createSchool != null">
+				CREATE_SCHOOL,
+			</if>
+			<if test="areaLevel != null">
+				AREA_LEVEL,
+			</if>
+			<if test="areaPath != null">
+				AREA_PATH,
+			</if>
+			<if test="areaIdPath != null">
+				AREA_ID_PATH,
+			</if>
+			<if test="mapSource != null">
+				MAP_SOURCE,
+			</if>
+			<if test="mapOutput != null">
+				MAP_OUTPUT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="baseAreaId != null">
+				#{baseAreaId,jdbcType=VARCHAR},
+			</if>
+			<if test="baseFileServerId != null">
+				#{baseFileServerId,jdbcType=VARCHAR},
+			</if>
+			<if test="basePmsServerId != null">
+				#{basePmsServerId,jdbcType=VARCHAR},
+			</if>
+			<if test="areaName != null">
+				#{areaName,jdbcType=VARCHAR},
+			</if>
+			<if test="areaCode != null">
+				#{areaCode,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=DECIMAL},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="editSchedule != null">
+				#{editSchedule,jdbcType=CHAR},
+			</if>
+			<if test="softwareUpgrade != null">
+				#{softwareUpgrade,jdbcType=CHAR},
+			</if>
+			<if test="createSchool != null">
+				#{createSchool,jdbcType=CHAR},
+			</if>
+			<if test="areaLevel != null">
+				#{areaLevel,jdbcType=DECIMAL},
+			</if>
+			<if test="areaPath != null">
+				#{areaPath,jdbcType=VARCHAR},
+			</if>
+			<if test="areaIdPath != null">
+				#{areaIdPath,jdbcType=VARCHAR},
+			</if>
+			<if test="mapSource != null">
+				#{mapSource,jdbcType=CLOB},
+			</if>
+			<if test="mapOutput != null">
+				#{mapOutput,jdbcType=CLOB},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.BaseArea">
+		update BASE_AREA
+		<set>
+			<if test="baseFileServerId != null">
+				BASE_FILE_SERVER_ID = #{baseFileServerId,jdbcType=VARCHAR},
+			</if>
+			<if test="basePmsServerId != null">
+				BASE_PMS_SERVER_ID = #{basePmsServerId,jdbcType=VARCHAR},
+			</if>
+			<if test="areaName != null">
+				AREA_NAME = #{areaName,jdbcType=VARCHAR},
+			</if>
+			<if test="areaCode != null">
+				AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				SORT = #{sort,jdbcType=DECIMAL},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="editSchedule != null">
+				EDIT_SCHEDULE = #{editSchedule,jdbcType=CHAR},
+			</if>
+			<if test="softwareUpgrade != null">
+				SOFTWARE_UPGRADE = #{softwareUpgrade,jdbcType=CHAR},
+			</if>
+			<if test="createSchool != null">
+				CREATE_SCHOOL = #{createSchool,jdbcType=CHAR},
+			</if>
+			<if test="areaLevel != null">
+				AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL},
+			</if>
+			<if test="areaPath != null">
+				AREA_PATH = #{areaPath,jdbcType=VARCHAR},
+			</if>
+			<if test="areaIdPath != null">
+				AREA_ID_PATH = #{areaIdPath,jdbcType=VARCHAR},
+			</if>
+			<if test="mapSource != null">
+				MAP_SOURCE = #{mapSource,jdbcType=CLOB},
+			</if>
+			<if test="mapOutput != null">
+				MAP_OUTPUT = #{mapOutput,jdbcType=CLOB},
+			</if>
+		</set>
+		where BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.codyy.oc.admin.entity.BaseArea">
+		update BASE_AREA
+		set BASE_FILE_SERVER_ID = #{baseFileServerId,jdbcType=VARCHAR},
+		BASE_PMS_SERVER_ID = #{basePmsServerId,jdbcType=VARCHAR},
+		AREA_NAME = #{areaName,jdbcType=VARCHAR},
+		AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+		SORT = #{sort,jdbcType=DECIMAL},
+		PARENT_ID = #{parentId,jdbcType=VARCHAR},
+		EDIT_SCHEDULE = #{editSchedule,jdbcType=CHAR},
+		SOFTWARE_UPGRADE = #{softwareUpgrade,jdbcType=CHAR},
+		CREATE_SCHOOL = #{createSchool,jdbcType=CHAR},
+		AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL},
+		AREA_PATH = #{areaPath,jdbcType=VARCHAR},
+		AREA_ID_PATH = #{areaIdPath,jdbcType=VARCHAR},
+		MAP_SOURCE = #{mapSource,jdbcType=CLOB},
+		MAP_OUTPUT = #{mapOutput,jdbcType=CLOB}
+		where BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.BaseArea">
+		update BASE_AREA
+		set BASE_FILE_SERVER_ID = #{baseFileServerId,jdbcType=VARCHAR},
+		BASE_PMS_SERVER_ID = #{basePmsServerId,jdbcType=VARCHAR},
+		AREA_NAME = #{areaName,jdbcType=VARCHAR},
+		AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+		SORT = #{sort,jdbcType=DECIMAL},
+		PARENT_ID = #{parentId,jdbcType=VARCHAR},
+		EDIT_SCHEDULE = #{editSchedule,jdbcType=CHAR},
+		SOFTWARE_UPGRADE = #{softwareUpgrade,jdbcType=CHAR},
+		CREATE_SCHOOL = #{createSchool,jdbcType=CHAR},
+		AREA_LEVEL = #{areaLevel,jdbcType=DECIMAL},
+		AREA_PATH = #{areaPath,jdbcType=VARCHAR},
+		AREA_ID_PATH = #{areaIdPath,jdbcType=VARCHAR}
+		where BASE_AREA_ID = #{baseAreaId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 根据parent获取直属行政区 -->
+	<select id="getAreaByparentId" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+		select
+		ba.base_area_id as baseAreaId,
+		ba.area_name as areaName,
+		ba.area_level as areaLevel,
+		ba.area_code as areaCode
+		from base_area ba
+		where
+		<choose>
+			<when test="parentId == null or parentId == ''">
+				ba.parent_id is null
+			</when>
+			<otherwise>
+				ba.parent_id = #{parentId}
+			</otherwise>
+		</choose>
+		order by ba.sort
+	</select>
+
+	<!-- 根据名称或代码查询行政区 -->
+	<select id="getAreaByProperty" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+		select
+		ba.base_area_id as baseAreaId
+		from base_area ba
+		where
+		<choose>
+			<when test="type == 'name'">
+				ba.area_name = #{value}
+			</when>
+			<when test="type == 'code'">
+				ba.area_code = #{value}
+			</when>
+			<otherwise>
+				1 = 2
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 根据名称或代码查询行政区 -->
+	<select id="getMaxSortByParentId" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+		max(ba.sort)
+		from base_area ba
+		where
+		<choose>
+			<when test="parentId == null or parentId == ''">
+				ba.parent_id is null
+			</when>
+			<otherwise>
+				ba.parent_id = #{parentId}
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 根据服务器ID查询行政区 -->
+	<select id="getAreaByServerId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.entity.BaseArea">
+		select
+		ba.base_area_id as baseAreaId,
+		ba.base_file_server_id as baseFileServerId,
+		ba.base_pms_server_id as basePmsServerId,
+		ba.parent_id as parentId,
+		ba.area_level areaLevel
+		from base_area ba
+		where
+		<if test="type == 'http'">
+			ba.base_file_server_id = #{id}
+		</if>
+		<if test="type == 'pms'">
+			ba.base_pms_server_id = #{id}
+		</if>
+		order by ba.sort
+	</select>
+
+	<!-- 根据Id查询服务器配置不同的最近父级行政区 -->
+	<select id="getParentAreaByid" parameterType="java.util.Map" resultType="com.codyy.oc.admin.entity.BaseArea">
+		select * from(
+		select
+		rownum rn,
+		ba.base_area_id as baseAreaId,
+		ba.base_file_server_id as baseFileServerId,
+		ba.base_pms_server_id as basePmsServerId,
+		ba.parent_id as parentId,
+		ba.area_level areaLevel
+		from base_area ba
+		where
+		<if test="type == 'http'">
+			ba.base_file_server_id != #{serverId}
+		</if>
+		<if test="type == 'pms'">
+			ba.base_pms_server_id != #{serverId}
+		</if>
+		start with ba.base_area_id = #{baseAreaId}
+		connect by prior ba.parent_id = ba.base_area_id
+		order by ba.area_level desc)T
+		where T.rn = '1'
+	</select>
+
+	<!-- 根据Id更新行政区服务器信息 -->
+	<update id="updateAreaById" parameterType="java.util.Map">
+		update base_area set
+		<if test="type == 'http'">
+			base_file_server_id = #{serverId}
+		</if>
+		<if test="type == 'pms'">
+			base_pms_server_id = #{serverId}
+		</if>
+		where base_area_id = #{baseAreaId}
+	</update>
+
+	<!-- 根据区域ID查询其所有上级的区域 -->
+	<select id="getAreaByChildId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		arr.base_area_id,
+		arr.area_name
+		from base_area arr
+		start with arr.base_area_id = #{baseAreaId}
+		connect by prior arr.parent_id = arr.base_area_id
+		order by arr.area_level
+	</select>
+
+	<!-- 根据区域ID查询其所有下级的区域 -->
+	<select id="getChildrenAreaByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		arr.base_area_id,
+		arr.area_name,
+		arr.parent_id,
+		arr.area_code
+		from base_area arr
+		start with arr.base_area_id = #{baseAreaId}
+		connect by prior arr.base_area_id = arr.parent_id
+		order by arr.area_level
+	</select>
+
+	<update id="updateSortBatch">
+		begin
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			update base_area
+			<set>
+				sort=${item.sort}
+			</set>
+			where base_area_id = #{item.baseAreaId}
+		</foreach>
+		;end;
+	</update>
+
+	<!-- 根据区域ID查询其所有下级的区域 -->
+	<select id="getBaseAreaIdByAreaPath" parameterType="java.lang.String" resultType="java.lang.String">
+		select base_area_id from base_area where AREA_PATH = #{areaPath}
+	</select>
+	
+	<select id="getChildCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(0) from base_area where parent_id = #{id}
+	</select>
+</mapper>

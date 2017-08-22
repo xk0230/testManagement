@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.CommonsMapper" >
+
+	<!-- 根据parent获取直属行政区 yangyongwu -->
+	<select id="getAreaByparentId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.SelectModel">
+		select
+			ba.base_area_id as id,
+			ba.area_name as name
+		from base_area ba
+		where
+		<choose>
+			<when test="parentId == null or parentId == ''">
+				ba.parent_id is null
+			</when>
+			<otherwise>
+				ba.parent_id = #{parentId}
+			</otherwise>
+		</choose>
+		order by ba.sort
+	</select>
+	
+	<!-- 获取区域全名 yangyongwu -->
+	<select id="getFullAreaName" parameterType="java.lang.String" resultType="java.lang.String">
+		select ltrim(sys_connect_by_path(area_name,'--'),'--')
+		from base_area ba where ba.base_area_id = #{baseAreaId}
+		start with  ba.parent_id is null connect by (prior ba.base_area_id)=ba.parent_id
+	</select>
+
+	<select id="getSelectModelByAreaCode" resultType="com.codyy.oc.admin.view.SelectModel" parameterType="java.lang.String">
+		select
+			ba.base_area_id as id,
+			ba.area_name as name
+		from base_area ba where ba.area_code = #{areaCode} 
+	</select>
+	
+	<select id="getAreasAndLevelByParentId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.BaseAreaView">
+		select
+		ba.base_area_id baseAreaId,
+		ba.base_file_server_id baseFileServerId,
+		ba.base_pms_server_id basePmsServerId,
+		ba.area_name areaName,
+		ba.area_code areaCode,
+		ba.sort sort,
+		ba.parent_id parentId,
+		ba.edit_schedule editSchedule,
+		ba.software_upgrade softwareUpgrade,
+		ba.create_school createSchool,
+		ba.area_level areaLevel,
+		ba.area_path areaPath,
+		ba.area_id_path areaIdPath,
+		(select count(*) from base_area nba where nba.parent_id=ba.base_area_id) hasChilder,
+		(select bcal.level_title from base_config_area_level bcal where bcal.area_level=ba.area_level) levelName
+		from base_area ba
+		where 1 = 1 
+		<choose>
+			<when test="parentId == null or parentId ==''">
+				and ba.parent_id is null
+			</when>
+			<otherwise>
+				and ba.parent_id = #{parentId}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getAreaById" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.BaseAreaView">
+		select
+		ba.base_area_id baseAreaId,
+		ba.base_file_server_id baseFileServerId,
+		ba.base_pms_server_id basePmsServerId,
+		ba.area_name areaName,
+		ba.area_code areaCode,
+		ba.sort sort,
+		ba.parent_id parentId,
+		ba.edit_schedule editSchedule,
+		ba.software_upgrade softwareUpgrade,
+		ba.create_school createSchool,
+		ba.area_level areaLevel,
+		ba.area_path areaPath,
+		ba.area_id_path areaIdPath,
+		(select count(*) from base_area nba where nba.parent_id=ba.base_area_id) hasChilder,
+		(select bcal.level_title from base_config_area_level bcal where bcal.area_level=ba.area_level) levelName,
+		(select count(*) from cls_school ncs where ncs.base_area_id=ba.base_area_id) hasDirectlySchool
+		from base_area ba
+		where 1 = 1 and ba.base_area_id= #{id}
+	</select>
+	
+	<!-- 根据区域查询学校 -->
+	<select id="getSchoolByAreaId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.SelectModel">
+		select
+		cs.cls_school_id id,
+		cs.base_area_id parentId,
+		cs.school_name name
+		from cls_school cs
+		where 1=1 and cs.delete_flag != 'Y'
+		<choose>
+			<when test="areaId == null or areaId ==''">
+				and cs.base_area_id is null
+			</when>
+			<otherwise>
+				and cs.base_area_id = #{areaId}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getRootArea" resultType="com.codyy.oc.admin.entity.BaseArea">
+	    select
+		base_area_id baseAreaId,
+		base_file_server_id baseFileServerId,
+		base_pms_server_id basePmsServerId,
+		area_name areaName,area_code areaCode,
+		sort sort,
+		parent_id parentId,
+		edit_schedule editSchedule,
+		software_upgrade softwareUpgrade,
+		create_school createSchool,
+		area_level areaLevel,
+		map_source mapSource,
+		map_output mapOutput
+		from base_area
+		where parent_id is null
+	</select>
+	
+	<select id="getAllAreaLevelConfig" resultType="com.codyy.oc.admin.entity.BaseConfigAreaLevel">
+		select
+		bcal.base_config_area_level_id baseConfigAreaLevelId,
+		bcal.area_level areaLevel,
+		bcal.level_title levelTitle,
+		bcal.mobile_title mobileTitle
+		from base_config_area_level bcal
+	</select>
+	
+	<!-- 根据父级ID获取子区域内容 -->
+	<select id="getBaseAreaByParentId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.BaseArea">
+		select
+		base_area_id baseAreaId,
+		base_file_server_id baseFileServerId,
+		base_pms_server_id basePmsServerId,
+		area_name areaName,area_code areaCode,
+		sort sort,
+		parent_id parentId,
+		edit_schedule editSchedule,
+		software_upgrade softwareUpgrade,
+		create_school createSchool,
+		area_level areaLevel,
+		map_source mapSource,
+		map_output mapOutput
+		from base_area
+		where 1 = 1
+		<choose>
+			<when test='parentId == null or parentId =="" or parentId == "0"'>
+				and parent_id is null
+			</when>
+			<otherwise>
+				and parent_id = #{parentId}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 获取所有学科信息 -->
+	<select id="getAllSubjects" resultType="com.codyy.oc.admin.view.SelectModel">
+		select base_subject_id as id,subject_name as name from base_subject order by sort
+	</select>
+	
+	<select id="getBaseAreaById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.BaseArea">
+		select
+		base_area_id baseAreaId,
+		base_file_server_id baseFileServerId,
+		base_pms_server_id basePmsServerId,
+		area_name areaName,area_code areaCode,
+		sort sort,
+		parent_id parentId,
+		edit_schedule editSchedule,
+		software_upgrade softwareUpgrade,
+		create_school createSchool,
+		area_level areaLevel,
+		map_source mapSource,
+		map_output mapOutput
+		from base_area
+		where base_area_id = #{areaId}
+	</select>
+	
+	
+	<!-- 根据区域查询学校,及各子区域id号 -->
+	<select id="getSchoolsByAreaId" parameterType="java.util.Map" resultType="com.codyy.oc.admin.view.SelectModel">
+		select
+		cs.cls_school_id id,
+		cs.base_area_id parentid,
+		cs.school_name name
+		from cls_school cs
+		where 1=1 and cs.delete_flag ='N' and cs.base_area_id in (
+		select ba.base_area_id from base_area ba where ba.area_id_path like '%' || #{areaId} || '%' escape '/')
+	</select>
+	
+	<select id="getBaseAreaByMaxLevelAndId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.BaseArea">
+		select
+		base_area_id baseAreaId,
+		base_file_server_id baseFileServerId,
+		base_pms_server_id basePmsServerId,
+		area_name areaName,area_code areaCode,
+		sort sort,
+		parent_id parentId,
+		edit_schedule editSchedule,
+		software_upgrade softwareUpgrade,
+		create_school createSchool,
+		area_level areaLevel,
+		map_source mapSource,
+		map_output mapOutput
+		from base_area
+		where base_area_id = #{areaId} and area_level = (select max(area_level) from base_config_area_level)
+	</select>
+	
+	<select id="getFullPathByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+		select 
+		case bu.user_type
+		when 'AREA_USR' then area.area_path
+		when 'SCHOOL_USR' then area.area_path || ' ' || sch.school_name
+		when 'TEACHER' then area.area_path || ' ' || sch.school_name || ' ' || bu.realname
+		end
+		from base_user bu 
+		left join cls_school sch on sch.cls_school_id = bu.school_id
+		left join base_area area on area.base_area_id = bu.base_area_id
+		
+		where bu.base_user_id = #{baseUserId}
+	</select>
+	
+	<!-- 获取各统计总数 -->
+	<select id="getCount" resultType="java.lang.String">
+		select *
+  from (select count(1)
+          from sign s
+          left join admin_user a
+            on s.admin_user_id = a.admin_user_id
+         where a.locked != 'Y' --签到
+        union all
+        select count(1)
+          from project p
+         where p.delete_flag != 'Y' --项目
+        union all
+        select count(1)
+          from cls_school cs
+         where cs.delete_flag != 'Y' --学校
+        union all
+        select count(1)
+          from cls_classroom cc --教室
+        union all
+        select count(1)
+          from supplier s --供应商
+        union all
+        select count(1)
+          from regional_resource rr --区域资源
+        union all
+        select count(1)
+          from maintenance_order mo -- 工单
+        )
+	</select>
+	
+	
+	<!-- 获取上周新增各统计总数 -->
+	<select id="getZhouCount" resultType="java.lang.String">
+	select *
+  from (      
+        select count(1)
+          from sign s
+          left join admin_user a
+            on s.admin_user_id = a.admin_user_id
+         where a.locked != 'Y'
+           and s.sign_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --签到
+        union all
+        select count(1)
+          from project p
+         where p.delete_flag != 'Y'
+           and p.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --项目
+        union all
+        select count(1)
+          from cls_school cs
+         where cs.delete_flag != 'Y'
+           and cs.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --学校
+        union all
+        select count(1)
+          from cls_classroom cc
+         where cc.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --教室
+        union all
+        select count(1)
+          from supplier s
+         where s.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --供应商
+        union all
+        select count(1)
+          from regional_resource rr
+         where rr.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') --区域资源
+        union all
+        select count(1)
+          from maintenance_order mo
+         where mo.create_time between trunc(SYSDATE, 'd') - 6 and
+               trunc(SYSDATE, 'd') -- 工单
+        )
+	</select>
+</mapper>

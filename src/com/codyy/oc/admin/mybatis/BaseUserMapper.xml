@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.BaseUserMapper" >
+	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.BaseUser" >
+		<id column="BASE_USER_ID" property="baseUserId" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="userName" jdbcType="VARCHAR" />
+		<result column="SCHOOL_ID" property="schoolId" jdbcType="VARCHAR" />
+		<result column="BASE_AREA_ID" property="baseAreaId" jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realName" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="ADMIN_FLAG" property="adminFlag" jdbcType="VARCHAR" />
+		<result column="PERM_GRANT" property="permGrant" jdbcType="VARCHAR" />
+		<result column="LOCKED" property="locked" jdbcType="VARCHAR" />
+		<result column="HEAD_PIC" property="headPic" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+		<result column="CREATE_USER_TYPE" property="createUserType" jdbcType="VARCHAR" />
+		<result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+		<result column="POSITION" property="position" jdbcType="VARCHAR" />
+		<result column="CREATE_EVA_FLAG" property="createEvaFlag" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="pageTop">
+		select * from (select t.*,rownum as r from(
+	</sql>
+	<sql id="pageBottom">
+	<![CDATA[
+		) t) t1 where t1.r > #{start} and t1.r <= #{end}
+		]]>
+	</sql>
+	<insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.BaseUser">
+	insert into base_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				base_user_id,
+			<if test="baseAreaId != null">
+				base_area_id,
+			</if>
+			<if test="schoolId != null">
+				school_id,
+			</if>
+			<if test="userName != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="realName != null">
+				realname,
+			</if>
+			<if test="userType != null">
+				user_type,
+			</if>
+			<if test="adminFlag != null">
+				admin_flag,
+			</if>
+			<if test="permGrant != null">
+				perm_grant,
+			</if>
+			<if test="locked != null">
+				locked,
+			</if>
+			<if test="headPic != null">
+				head_pic,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="createUserId != null">
+				create_user_id,
+			</if>
+			<if test="createUserType != null">
+				create_user_type,
+			</if>
+			<if test="contactPhone != null">
+				contact_phone,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="position != null">
+				position,
+			</if>
+			<if test="createEvaFlag !=null">
+				create_eva_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="baseUserId != null">
+				#{baseUserId},
+			</if>
+			<if test="baseAreaId != null">
+				#{baseAreaId},
+			</if>
+			<if test="schoolId != null">
+				#{schoolId},
+			</if>
+			<if test="userName != null">
+				#{userName},
+			</if>
+			<if test="password != null">
+				#{password},
+			</if>
+			<if test="realName != null">
+				#{realName},
+			</if>
+			<if test="userType != null">
+				#{userType},
+			</if>
+			<if test="adminFlag != null">
+				#{adminFlag},
+			</if>
+			<if test="permGrant != null">
+				#{permGrant},
+			</if>
+			<if test="locked != null">
+				#{locked},
+			</if>
+			<if test="headPic != null">
+				#{headPic},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId},
+			</if>
+			<if test="createUserType != null">
+				#{createUserType},
+			</if>
+			<if test="contactPhone != null">
+				#{contactPhone},
+			</if>
+			<if test="remark != null">
+				#{remark},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag},
+			</if>
+			<if test="position != null">
+				#{position},
+			</if>
+			<if test="createEvaFlag !=null">
+				#{createEvaFlag},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 获取机构用户列表 yagnyongwu -->
+	<select id="getOrgUserList" parameterType="java.util.Map" resultType="com.codyy.oc.admin.entity.AdminUser">
+		<include refid="pageTop"/>
+		select
+			u.admin_user_id as adminUserId,
+			u.username as userName,
+			u.realname as realName,
+			u.contact as contact,
+			u.position as position
+			<!-- (case
+				when bu.create_user_type = '${adminUserType}' then (au.username)
+				when bu.create_user_type = '${baseUserType}' then (bu1.username)
+				else '无'
+			end) as createRealName -->
+		from admin_user u
+			<!-- left join areatab ba on bu.base_area_id = ba.base_area_id
+			left join admin_user au on au.admin_user_id = bu.create_user_id
+			left join base_user bu1 on bu1.base_user_id = bu.create_user_id -->
+		where 1 = 1
+			<!-- <choose>
+				<when test="containsFlag == 'YES' ">
+					<if test="baseAreaId != '-1' and baseAreaId != null">
+						and bu.base_area_id in(
+							select ba.base_area_id
+							from 
+								base_area ba start with ba.base_area_id = #{baseAreaId}
+							connect by prior ba.base_area_id = ba.parent_id
+						)
+					</if>
+				</when>
+				<otherwise>
+					<if test="baseAreaId != '-1' and baseAreaId != null">
+						and bu.base_area_id = #{baseAreaId}
+					</if>
+				</otherwise>
+			</choose> -->
+			<if test="userName != null and  userName !=''">
+				and u.username like '%' || #{userName} || '%' ESCAPE '/'
+			</if>
+			<if test="realName != null and realName !=''">
+				and u.realname like '%' || #{realName} || '%' ESCAPE '/'
+			</if>
+			<if test="contact != null and contact!='' ">
+				and u.contact=#{contact}
+			</if>
+			<if test="position != null and position!='' ">
+				and u.position=#{position}
+			</if>
+		<include refid="pageBottom"/>
+	</select>
+	<!-- 获取用户数量 -->
+	<select id="getOrgUserCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(1)
+		from admin_user u
+		where
+			1 = 1
+			<!-- <choose>
+				<when test="containsFlag == 'YES' ">
+					<if test="baseAreaId != '-1' and baseAreaId != null">
+						and bu.base_area_id in(
+							select base_area_id
+							from 
+								base_area ba start with ba.base_area_id = #{baseAreaId}
+							connect by prior ba.base_area_id = ba.parent_id
+						)
+					</if>
+				</when>
+				<otherwise>
+					<if test="baseAreaId != '-1' and baseAreaId != null">
+						and bu.base_area_id = #{baseAreaId}
+					</if>
+				</otherwise>
+			</choose> -->
+			<if test="userName != null and  userName !=''">
+				and u.username like '%' || #{userName} || '%' ESCAPE '/'
+			</if>
+			<if test="realName != null and realName !=''">
+				and u.realname like '%' || #{realName} || '%' ESCAPE '/'
+			</if>
+			<if test="contact != null and contact!='' ">
+				and u.contact=#{contact}
+			</if>
+			<if test="position != null and position!='' ">
+				and u.position=#{position}
+			</if>
+			<!-- and bu.user_type = #{userType}
+			and bu.delete_flag = 'N' -->
+	</select>
+	
+	<select id="getBaseUserCountByUserName" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count (1) from base_user bu where bu.username = #{userName}
+	</select>
+	
+	<select id="getBaseUserCountBySchoolId" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count (1) from base_user bu where bu.school_id = #{clsSchoolId} and bu.delete_flag = 'N' 
+	</select>
+	
+	<select id="getBaseUserById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+			BASE_USER_ID , SCHOOL_ID , USERNAME , BASE_AREA_ID , REALNAME , USER_TYPE , ADMIN_FLAG ,
+			PERM_GRANT , LOCKED , HEAD_PIC , CREATE_TIME , CREATE_USER_ID , CREATE_USER_TYPE ,
+			CONTACT_PHONE , REMARK , DELETE_FLAG, POSITION, CREATE_EVA_FLAG
+		from base_user
+		where BASE_USER_ID = #{baseUserId}
+	</select>
+	
+	<update id="deleteBaseUserById" parameterType="java.lang.String">
+		update base_user u set u.delete_flag = 'Y' where u.admin_flag != #{adminFlag} and u.base_user_id = #{baseUserId}
+	</update>
+	
+	<delete id="deleteBaseUserByAreaId" parameterType="java.lang.String">
+		delete from base_user 
+		where base_area_id = #{baseAreaId} 
+		and user_type = 'AREA_USR' and admin_flag='Y'
+	</delete>
+	
+	<delete id="deleteBaseUserBySchoolId" parameterType="java.lang.String">
+		delete from base_user 
+		where school_id = #{clsSchoolId} 
+	</delete>
+
+	
+	<!-- 更新机构用户信息(密码、备注、姓名、电话、状态、功能) yangyongwu -->
+	<update id="updateOrgUser" parameterType="com.codyy.oc.admin.entity.BaseUser">
+		update base_user bu
+		set
+		<if test="password != null and password != '' ">
+			bu.password = #{password},
+		</if>
+			bu.remark = #{remark},
+			bu.realname = #{realName},
+			bu.contact_phone = #{contactPhone}
+		<if test="locked != null and locked != '' ">
+			,bu.locked = #{locked}
+		</if>	
+		<if test="permGrant != null and permGrant != '' ">
+			,bu.perm_grant = #{permGrant}
+		</if>
+		<if test="position != null and position != '' ">
+			,bu.position = #{position}
+		</if>
+		<if test="createEvaFlag != null and  createEvaFlag != '' ">
+			,bu.create_eva_flag = #{createEvaFlag}
+		</if>
+		where bu.base_user_Id = #{baseUserId}
+	</update>
+	
+	<select id="getBaseUserByAreaId" resultType="com.codyy.oc.admin.entity.BaseUser" parameterType="java.lang.String">
+		select base_user_id baseUserId, base_area_id baseAreaId,username userName,
+		realname realName,contact_phone contactPhone,remark remark,position position
+		from base_user 
+		where base_area_id = #{baseAreaId} 
+		and user_type = 'AREA_USR' and admin_flag='Y'
+	</select>
+	
+	<!-- 查询学校所有的学段 -->
+	<select id="findSchoolBasemesters" parameterType="java.lang.String" resultType="java.lang.String">
+		select wm_concat(bs.semester_name) semesterName
+  		from cls_school cs, cls_school_r_semester ss, base_semester bs
+ 		where cs.cls_school_id = ss.cls_school_id
+   				and ss.base_semester_id = bs.base_semester_id 
+   				and cs.cls_school_id = #{schoolId}
+   				order by bs.sort
+	</select>
+	
+	
+	
+	<update id="updateSchoolAdminUserBySchoolId" parameterType="com.codyy.oc.admin.entity.BaseUser">
+		update base_user u set u.USERNAME = #{userName}, 
+		<if test="password != null and password != ''">
+		u.PASSWORD = #{password}, 
+		</if>
+		u.REMARK = #{remark}, u.POSITION = #{position}, u.CONTACT_PHONE = #{contactPhone}, u.REALNAME = #{realName}  
+		where u.admin_flag = 'Y' and u.SCHOOL_ID = #{schoolId} 
+	</update>
+</mapper>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.SignMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Sign" >
+    <id column="SIGN_ID" property="signId" jdbcType="VARCHAR" />
+    <result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+    <result column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="LATITUDE" property="latitude" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="VARCHAR" />
+    <result column="PRECISION" property="precision" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="SIGN_TIME" property="signTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SIGN_ID, PROJECT_ID, ADMIN_USER_ID, STATUS, REMARKS, LATITUDE, LONGITUDE, PRECISION, 
+    POSITION, SIGN_TIME
+  </sql>
+  
+  <resultMap id="signMap" type="com.codyy.oc.admin.view.ShowNewSignMessageView">
+    <id column="sign_id" property="sign_id" jdbcType="VARCHAR"/>
+    <result column="admin_user_id" property="admin_user_id" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="sign_time" property="sign_time" jdbcType="TIMESTAMP" />
+    <result column="project_name" property="project_name" jdbcType="VARCHAR" />
+    <result column="area_path" property="area_path" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="maintenance_order_id" property="maintenanceOrderId" jdbcType="VARCHAR"/>
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>  
+  </resultMap>
+  
+  <!-- 获得工程师的最早的签到信息-->
+  <select id="showNewSignPageList" parameterType="com.codyy.commons.page.Page" resultMap="signMap" >
+       <![CDATA[
+  select s.sign_id,s.admin_user_id,s.status,s.remarks,s.sign_time,p.project_name,s.position as area_path,u.realname username,u.position,tt.maxtime,r.order_num,s.maintenance_order_id from SIGN s 
+       left join PROJECT p on p.project_id=s.project_id
+       left join BASE_AREA b on p.base_area_id=b.base_area_id
+       left join ADMIN_USER u on u.admin_user_id=s.admin_user_id 
+       left join maintenance_order r on r.maintenance_order_id=s.maintenance_order_id
+       left join (select t.admin_user_id,max(t.sign_time) maxtime from (select * from sign  s where substr(s.sign_time,1,10) < sysdate ) t group by t.admin_user_id) tt on tt.admin_user_id = s.admin_user_id
+       where tt.maxtime = s.sign_time and u.locked='N'
+      ]]>  
+       <if test="map.projectArea!=null and map.projectArea!='' and map.projectArea!='-1'">
+        and  p.base_area_id in
+          (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{map.projectArea}
+        connect by prior b.base_area_id = b.parent_id)	
+       </if>
+       <if test="map.projectName!=null and map.projectName!=''">
+          and p.project_name like '%' || #{map.projectName} || '%' ESCAPE '/'
+       </if>
+       <if test="map.userName!=null and map.userName!=''">
+          and u.realName like '%' || #{map.userName} || '%' ESCAPE '/'
+       </if>
+       <if test="map.position!=null and map.position!=''">
+          and u.position like '%' || #{map.position} || '%' ESCAPE '/'
+       </if>
+       <if test="map.status!=null and map.status!=''">
+          and s.status=#{map.status}
+       </if>
+       <if test="map.sortDesc!=null and map.sortDesc!='' and map.sortDesc=='ASC'">
+          order by s.sign_time ASC
+       </if>
+       <if test="map.sortDesc!=null and map.sortDesc!='' and map.sortDesc=='DESC'">
+          order by s.sign_time DESC
+       </if>
+  </select>
+  
+  
+  <!-- 导出所有签到的工程师-->
+  <select id="exportAllSign" parameterType="map" resultMap="signMap">
+  
+    <![CDATA[
+      select s.sign_id,s.admin_user_id,s.status,s.remarks,s.sign_time,p.project_name,s.position as area_path,u.realname username,u.position,tt.maxtime,r.order_num from SIGN s 
+       left join PROJECT p on p.project_id=s.project_id
+       left join BASE_AREA b on p.base_area_id=b.base_area_id
+       left join ADMIN_USER u on u.admin_user_id=s.admin_user_id 
+       left join maintenance_order r on r.maintenance_order_id=s.maintenance_order_id
+       left join (select t.admin_user_id,max(t.sign_time) maxtime from (select * from sign  s where substr(s.sign_time,1,10) < sysdate ) t group by t.admin_user_id) tt on tt.admin_user_id = s.admin_user_id
+       where tt.maxtime = s.sign_time and u.locked='N'
+      ]]>  
+       <if test="projectArea!=null and projectArea!='' and projectArea!='-1'">
+        and  p.base_area_id in
+          (select b.base_area_id
+          from base_area b
+         start with b.base_area_id = #{projectArea}
+        connect by prior b.base_area_id = b.parent_id)	
+       </if>
+       <if test="projectName!=null and projectName!=''">
+          and p.project_name like '%' || #{projectName} || '%' ESCAPE '/'
+       </if>
+       <if test="userName!=null and userName!=''">
+          and u.realName like '%' || #{userName} || '%' ESCAPE '/'
+       </if>
+       <if test="position!=null and position!=''">
+          and u.position like '%' || #{position} || '%' ESCAPE '/'
+       </if>
+       <if test="status!=null and status!=''">
+          and s.status=#{status}
+       </if>
+       <if test="sortDesc!=null and sortDesc!='' and sortDesc=='ASC'">
+          order by s.sign_time ASC
+       </if>
+       <if test="sortDesc!=null and sortDesc!='' and  sortDesc=='DESC'">
+          order by s.sign_time DESC
+       </if>
+  </select>
+  
+  <!-- 工程师签到详情列表-->
+  <resultMap type="com.codyy.oc.admin.view.SignDetailView" id="signDetailMap">
+    <id column="admin_user_id" property="admin_user_id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="sign_time" property="sign_time" jdbcType="TIMESTAMP" />
+    <result column="project_name" property="project_name" jdbcType="VARCHAR" />
+    <result column="area_path" property="area_path" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum"  jdbcType="VARCHAR"/>
+    <result column="maintenance_order_id" property="maintenanceOrderId" jdbcType="VARCHAR"/>
+    <result column="realname" property="realName" jdbcType="VARCHAR"/>
+    <result column="sign_id" property="signId" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+ 
+  
+  <!-- 获取指定的用户所有的签到详情或者所有工单的签到详情-->
+  <select id="selcSignDetailPageList" resultMap="signDetailMap" parameterType="com.codyy.commons.page.Page">
+     select s.sign_id,u.realname,r.order_num,s.maintenance_order_id,s.admin_user_id,s.sign_time,s.status,s.remarks,p.project_name,s.position as area_path  from sign s 
+    left join PROJECT p on p.project_id=s.project_id
+    left join BASE_AREA b on  p.base_area_id=b.base_area_id
+    left join maintenance_order r on r.maintenance_order_id=s.maintenance_order_id
+    left join admin_user u on u.admin_user_id=s.admin_user_id
+     where 1=1 
+     <if test="map.userId!=null">
+     and s.admin_user_id=#{map.userId}
+     </if> 
+     <if test="map.maintenanceOrderId!=null">
+     and s.maintenance_order_id=#{map.maintenanceOrderId}
+     </if>
+      order by s.sign_time DESC
+  </select>
+  
+  <!--  导出指定用户的所有签到信息-->
+  
+  <select id="exportDetailSignById" resultMap="signDetailMap" parameterType="map">
+             select r.order_num,s.admin_user_id,s.sign_time,s.status,s.remarks,p.project_name,s.position as area_path,u.realName username from sign s 
+    left join PROJECT p on p.project_id=s.project_id
+    left join BASE_AREA b on  p.base_area_id=b.base_area_id
+    left join ADMIN_USER u on u.admin_user_id=s.admin_user_id
+    left join maintenance_order r on r.maintenance_order_id=s.maintenance_order_id
+     where s.admin_user_id=#{userId} order by s.sign_time DESC
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SIGN
+    where SIGN_ID = #{signId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SIGN
+    where SIGN_ID = #{signId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Sign" >
+    insert into SIGN (SIGN_ID, PROJECT_ID, ADMIN_USER_ID, 
+      STATUS, REMARKS, LATITUDE, 
+      LONGITUDE, PRECISION, POSITION, 
+      SIGN_TIME)
+    values (#{signId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{adminUserId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR}, #{precision,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{signTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Sign" >
+    insert into SIGN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="signId != null" >
+        SIGN_ID,
+      </if>
+      <if test="projectId != null" >
+        PROJECT_ID,
+      </if>
+      <if test="adminUserId != null" >
+        ADMIN_USER_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="precision != null" >
+        PRECISION,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="signTime != null" >
+        SIGN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="signId != null" >
+        #{signId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUserId != null" >
+        #{adminUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="precision != null" >
+        #{precision,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Sign" >
+    update SIGN
+    <set >
+      <if test="projectId != null" >
+        PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminUserId != null" >
+        ADMIN_USER_ID = #{adminUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="precision != null" >
+        PRECISION = #{precision,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        SIGN_TIME = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SIGN_ID = #{signId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Sign" >
+    update SIGN
+    set PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+      ADMIN_USER_ID = #{adminUserId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      PRECISION = #{precision,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      SIGN_TIME = #{signTime,jdbcType=TIMESTAMP}
+    where SIGN_ID = #{signId,jdbcType=VARCHAR}
+  </update>
+  
+   <!-- 获得签到上传的图片集合-->
+  <select id="getSignPic" resultType="com.codyy.oc.admin.entity.Attachment" parameterType="java.lang.String">
+       select t.attachment_id as attachmentId,t.name as name,
+       t.attachment_url as attachment_Url,t.remark as remark from attachment t where t.relationship_id=#{signId}
+  </select>
+  
+  <!-- 获取签到地图信息 -->
+  <select id="getSingMap" parameterType="String" resultType="com.codyy.oc.admin.view.MapView">
+	 select t.latitude x, t.longitude y, t.status name, at.attachment_url img
+	  from SIGN t
+	  left join attachment at
+	    on at.relationship_id = t.sign_id
+	 where t.maintenance_order_id = #{orderid,jdbcType=VARCHAR}
+	 order by t.sign_time
+  </select>
+</mapper>

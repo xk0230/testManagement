@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminPermissionMapper">
+	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminPermission">
+		<id column="ADMIN_PERMISSION_ID" property="adminPermissionId" jdbcType="VARCHAR" />
+		<result column="ADMIN_MENU_ID" property="adminMenuId" jdbcType="VARCHAR" />
+		<result column="MENU_NAME" property="permissionName" jdbcType="VARCHAR" />
+		<result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+		<result column="PERMISSION_DESC" property="permissionDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	  <select id="adminPermissionList" resultMap="BaseResultMap">
+	      select ADMIN_PERMISSION_ID,p.ADMIN_MENU_ID,m.MENU_NAME,GROUP_NAME,PERMISSION_DESC from admin_permission
+        p left join ADMIN_MENU m on m.ADMIN_MENU_ID=p.ADMIN_MENU_ID 
+	  </select>
+	 
+	
+	
+</mapper>

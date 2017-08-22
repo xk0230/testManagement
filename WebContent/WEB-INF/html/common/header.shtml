@@ -1,0 +1,19 @@
+<div id="header">
+	<div class="logo">
+		<h1>在线课堂管理中心</h1>
+	</div>
+	<div id="topDiv" class="headerNav">	
+		<div class="uinfo">
+			您好 , administrator <a class="quit" href="javascript:void(0)" >&nbsp;</a>
+		</div>
+		<div id="tmenu" class="nav">
+			<ul class="hmenu">
+				<li class='icon_0' class="navon"><a href='javascript:;' onclick='clickTop("0");'>管理中心</a></li>
+				<li class='icon_1' ><a href='javascript:;' onclick='clickTop("1");'>前台内容管理</a></li>
+				<li class='icon_2' ><a href='javascript:;' onclick='clickTop("2");'>前台参数配置</a></li>
+				<li class='icon_3' ><a href='javascript:;' onclick='clickTop("3");'>运营后台管理</a></li>
+				<li class='icon_4' ><a href='javascript:;' onclick='clickTop("4");'>统计管理</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

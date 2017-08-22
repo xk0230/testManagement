@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.ClassroomInspectDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.ClassroomInspectDetail" >
+    <id column="CLASSROOM_INSPECT_DETAIL_ID" property="classroomInspectDetailId" jdbcType="VARCHAR" />
+    <result column="CLASSROOM_INSPECT_ID" property="classroomInspectId" jdbcType="VARCHAR" />
+    <result column="CLS_CLASSROOM_ID" property="clsClassroomId" jdbcType="VARCHAR" />
+    <result column="RESULT" property="result" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    
+    <result column="type" property="classroomInspect.type" jdbcType="VARCHAR" />
+    <result column="sort" property="classroomInspect.sort" jdbcType="VARCHAR" />
+    <result column="name" property="classroomInspect.name" jdbcType="VARCHAR" />
+    <result column="type_name" property="classroomInspect.typeName" jdbcType="VARCHAR" />
+    <result column="istxt" property="classroomInspect.istxt" jdbcType="VARCHAR" />
+    <result column="options" property="classroomInspect.options" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CLASSROOM_INSPECT_DETAIL_ID, CLASSROOM_INSPECT_ID, CLS_CLASSROOM_ID, RESULT, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CLASSROOM_INSPECT_DETAIL
+    where CLASSROOM_INSPECT_DETAIL_ID = #{classroomInspectDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CLASSROOM_INSPECT_DETAIL
+    where CLASSROOM_INSPECT_DETAIL_ID = #{classroomInspectDetailId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.ClassroomInspectDetail" >
+    insert into CLASSROOM_INSPECT_DETAIL (CLASSROOM_INSPECT_DETAIL_ID, CLASSROOM_INSPECT_ID, 
+      CLS_CLASSROOM_ID, RESULT, UPDATE_TIME
+      )
+    values (#{classroomInspectDetailId,jdbcType=VARCHAR}, #{classroomInspectId,jdbcType=VARCHAR}, 
+      #{clsClassroomId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.ClassroomInspectDetail" >
+    insert into CLASSROOM_INSPECT_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classroomInspectDetailId != null" >
+        CLASSROOM_INSPECT_DETAIL_ID,
+      </if>
+      <if test="classroomInspectId != null" >
+        CLASSROOM_INSPECT_ID,
+      </if>
+      <if test="clsClassroomId != null" >
+        CLS_CLASSROOM_ID,
+      </if>
+      <if test="result != null" >
+        RESULT,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classroomInspectDetailId != null" >
+        #{classroomInspectDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="classroomInspectId != null" >
+        #{classroomInspectId,jdbcType=VARCHAR},
+      </if>
+      <if test="clsClassroomId != null" >
+        #{clsClassroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.ClassroomInspectDetail" >
+    update CLASSROOM_INSPECT_DETAIL
+    <set >
+      <if test="classroomInspectId != null" >
+        CLASSROOM_INSPECT_ID = #{classroomInspectId,jdbcType=VARCHAR},
+      </if>
+      <if test="clsClassroomId != null" >
+        CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        RESULT = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CLASSROOM_INSPECT_DETAIL_ID = #{classroomInspectDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.ClassroomInspectDetail" >
+    update CLASSROOM_INSPECT_DETAIL
+    set CLASSROOM_INSPECT_ID = #{classroomInspectId,jdbcType=VARCHAR},
+      CLS_CLASSROOM_ID = #{clsClassroomId,jdbcType=VARCHAR},
+      RESULT = #{result,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where CLASSROOM_INSPECT_DETAIL_ID = #{classroomInspectDetailId,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="insertByClassroomId" parameterType="java.lang.String">
+  	insert into CLASSROOM_INSPECT_DETAIL t
+  (t.classroom_inspect_detail_id,
+   t.classroom_inspect_id,
+   t.cls_classroom_id,
+   t.update_time)
+  (select sys_guid(), d.classroom_inspect_id, #{id,jdbcType=VARCHAR}, sysdate
+     from classroom_inspect d
+    where d.delete_flag = 'N')
+  </insert>
+  
+  <select id="getInspectListByClassroom" parameterType="java.lang.String"  resultMap="BaseResultMap">
+  	select cid.classroom_inspect_detail_id,
+       cid.result,
+       ci.type,
+       ci.sort,
+       ci.name,
+       MAX(cid.update_time) OVER(PARTITION BY ci.type) update_time,
+       ci.type_name,
+       ci.istxt,
+       ci.options
+  from classroom_inspect_detail cid
+  left join classroom_inspect ci
+    on ci.classroom_inspect_id = cid.classroom_inspect_id
+    where cid.cls_classroom_id = #{classroomId,jdbcType=VARCHAR}
+ order by ci.type, ci.sort
+  </select>
+
+	<update id="updateClassroomInspectDetailBatch">
+		<foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+			update CLASSROOM_INSPECT_DETAIL
+			set 
+				result=#{item.result},
+				<if test="item.result == null or item.result ==''">
+					update_time = (case when result is null then update_time else sysdate end)
+				</if>
+				<if test="item.result != null and item.result !=''">
+					update_time = (case when result = #{item.result} then update_time else sysdate end)
+				</if>
+			where classroom_inspect_detail_id = #{item.classroomInspectDetailId}
+		</foreach>
+	</update>
+	
+</mapper>

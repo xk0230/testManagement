@@ -1,0 +1,251 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view
+END
+AreaUnopenClsroomDetailExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaUnopenClsroomDetailExcel.java
+END
+SelectModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/Technology/!svn/ver/23196/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/SelectModel.java
+END
+ProjectView.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/Technology/!svn/ver/48913/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ProjectView.java
+END
+ActiveNumStatisticsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ActiveNumStatisticsView.java
+END
+ClsClassRoomEnvirView.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/Technology/!svn/ver/48699/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ClsClassRoomEnvirView.java
+END
+showOrderView.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/45426/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/showOrderView.java
+END
+WorkOrderView.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/43539/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/WorkOrderView.java
+END
+ShowNewSignMessageView.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/49341/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ShowNewSignMessageView.java
+END
+ProjectSearchModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/42095/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ProjectSearchModel.java
+END
+RepairView.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/Technology/!svn/ver/42074/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/RepairView.java
+END
+ClsSchoolSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/45426/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ClsSchoolSearch.java
+END
+AdminUserView.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AdminUserView.java
+END
+ClsClassRoomInspectView.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/Technology/!svn/ver/48913/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ClsClassRoomInspectView.java
+END
+ProblemRMainTenance.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/41930/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ProblemRMainTenance.java
+END
+SupplierSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/24259/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/SupplierSearch.java
+END
+OrderDetailView.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/42100/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/OrderDetailView.java
+END
+UserImportModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/UserImportModel.java
+END
+MgOrderView.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/Technology/!svn/ver/42791/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/MgOrderView.java
+END
+SignView.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/Technology/!svn/ver/25142/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/SignView.java
+END
+ProblemTypeView.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/41909/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ProblemTypeView.java
+END
+RegionalResourceSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/25507/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/RegionalResourceSearch.java
+END
+WorkOrderSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/25113/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/WorkOrderSearch.java
+END
+AdminRoleView.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AdminRoleView.java
+END
+AreaOpenProfileView.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaOpenProfileView.java
+END
+AreaUnrecClsroomDetailExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaUnrecClsroomDetailExcel.java
+END
+MapView.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/Technology/!svn/ver/50669/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/MapView.java
+END
+SignDetailView.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/45426/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/SignDetailView.java
+END
+AreaOpenProfileDetailExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaOpenProfileDetailExcel.java
+END
+AreaSubjectStaExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaSubjectStaExcel.java
+END
+StringExceptionHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/Technology/!svn/ver/45609/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/StringExceptionHandler.java
+END
+AttachmentView.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/Technology/!svn/ver/25354/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AttachmentView.java
+END
+SearchSchoolInfoView.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/43135/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/SearchSchoolInfoView.java
+END
+UserSearchModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/Technology/!svn/ver/28116/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/UserSearchModel.java
+END
+AreaOpenProfileDetailView.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaOpenProfileDetailView.java
+END
+AreaExcptClsroomDetailView.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaExcptClsroomDetailView.java
+END
+AreaUnsetClsroomDetailExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaUnsetClsroomDetailExcel.java
+END
+ClsClassroomSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/44929/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/ClsClassroomSearch.java
+END
+AreaSubjectStaView.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaSubjectStaView.java
+END
+AreaOpenProfileExcel.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/AreaOpenProfileExcel.java
+END
+BaseAreaView.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Technology/!svn/ver/22980/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/BaseAreaView.java
+END
+OrderReparingView.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Technology/!svn/ver/28692/ManagementPlatform/OperationManagement/trunk/OperationManagement/src/com/codyy/oc/admin/view/OrderReparingView.java
+END
