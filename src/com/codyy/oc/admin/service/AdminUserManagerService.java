@@ -246,7 +246,7 @@ public class AdminUserManagerService {
 		// ===  维护关联表  更新关联表执行先删除后插入操作
 		List<AdminUserRole> adminUserRoles = adminUser.getAdminUserRoles() ;
 		if(CollectionUtils.isNotEmpty(adminUserRoles)) {
-			adminUserMapper.deleteAdminUserRole(adminUser.getAdminUserId()) ;
+			adminUserMapper.deleteAdminUserRole(adminUser.getUserId()) ;
 			adminUserRoleNumI = adminUserMapper.insertAdminUserRole(adminUserRoles) ;
 			if(adminUserNum > 0 && adminUserRoleNumI > 0) {
 				return true ;

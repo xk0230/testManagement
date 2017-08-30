@@ -80,7 +80,7 @@ public class BaseUserService {
 		List<AdminUser> data = baseUserMapper.getOrgUserList(map);
 		System.out.println(data.size());
 		for(AdminUser user:data){
-			System.out.println(user.getAdminUserId());
+			System.out.println(user.getUserId());
 			System.out.println(user.getRealName());
 		}
 		page.setData(data);

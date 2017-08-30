@@ -34,7 +34,7 @@ public class LoginController {
 			if(CommonsConstant.FLAG_NO.equals(adminUser.getLocked())){
 				HttpSession session = request.getSession();
 				session.setAttribute(AdminUser.ADMIN_SESSION_USER, adminUser);
-				session.setAttribute("menu", adminUserManagerService.getUserAdminMenu(adminUser.getAdminUserId()));
+				session.setAttribute("menu", adminUserManagerService.getUserAdminMenu(adminUser.getUserId()));
 				return new ResultJson(true);
 			}else{
 				return new ResultJson(false,"账号号已被锁定，请联系管理员！");

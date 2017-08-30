@@ -50,15 +50,6 @@
 		<property name="url" value="${datasource.url}" />
 		<property name="username" value="${datasource.username}" />
 		<property name="password" value="${datasource.password}" />
-		<property name="initialSize" value="${datasource.initialSize}" />
-		<property name="maxActive" value="${datasource.maxActive}" />
-		<property name="minIdle" value="${datasource.minIdle}" />
-		<property name="maxWait" value="${datasource.maxWait}" />
-		<property name="validationQuery" value="${datasource.validationQuery}" />
-		<property name="testOnBorrow" value="${datasource.testOnBorrow}" />
-		<property name="testOnReturn" value="${datasource.testOnReturn}" />
-		<property name="testWhileIdle" value="${datasource.testWhileIdle}" />
-		<property name="timeBetweenEvictionRunsMillis"	value="${datasource.timeBetweenEvictionRunsMillis}" />
 	</bean>
 
 	<!-- mybatis文件 -->

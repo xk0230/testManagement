@@ -114,19 +114,34 @@
 	
 	<select id="getAdminUser" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
 		select
-			au.admin_user_id    as adminUserId,
+			au.user_id    as userId,
 			au.username 			as userName,
 			au.password 			as password,
 			au.realname 			as realName,
-			au.contact  			as contact,
-			au.locked   			as locked ,
-			au.remark   			as remark ,
-			au.create_user_id	  as createUserId,
 			au.create_time        as createTime,
 			au.delete_flag        as deleteFlag,
-			au.weixin_num           as weixin_num,
-			au.position             as position
-		from admin_user au 
+			au.position             as position,
+			au.dep_id              	as				  depId, 
+			au.is_dep_manager       as            isDepManager,
+			au.post_id              as            postId,
+			au.work_status          as            workStatus,
+			au.salary_scale         as            salaryScale,
+			au.entry_date           as            entryDate,
+			au.working_years        as            workingYears,
+			au.salary_begin_date    as            salaryBeginDate,
+			au.probation_period     as            probationPeriod,
+			au.expected_date        as            expectedDate,
+			au.fwq_agreement        as            fwqAgreement,
+			au.fwq_num              as            fwqNum,
+			au.labour_begin_time    as            labourBeginTime,
+			au.labour_begin_end     as            labourBeginEnd,
+			au.sign_time            as            signTime,
+			au.insurance_base       as            insuranceBase,
+			au.filing_date          as            filingDate,
+			au.leave_date           as            leaveDate,
+			au.retired_date         as            retiredDate
+			
+		from ADMIN_USER au 
 		where au.username = #{userName} 
 			and au.password = #{password}
 	</select>

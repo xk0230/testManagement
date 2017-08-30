@@ -33,7 +33,7 @@ public class BaseController {
 	 */
 	protected String getSessionUserId(HttpServletRequest request) {
 		Object adminUser = request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
-		return adminUser == null ? null : ((AdminUser) adminUser).getAdminUserId();
+		return adminUser == null ? null : ((AdminUser) adminUser).getUserId();
 	}
 
 }
