@@ -48,7 +48,7 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("insertadminuser")
 	public ResultJson  insertAdminUser(HttpServletRequest request, AdminUser adUser ){
-		
+		//测试私库
 		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
 			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
 		}
