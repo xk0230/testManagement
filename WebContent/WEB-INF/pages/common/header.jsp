@@ -164,7 +164,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.jpg" alt="SuggeElson">SuggeElson
+                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.jpg" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
                         </a>
                         <ul class="dropdown-menu right" role="menu">
                             <li><a href="profile.html"><i class="st-user"></i> Profile</a>
