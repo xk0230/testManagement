@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:\workspace\OperationManagement\WebContent\WEB-INF\lib\ojdbc14.jar" />
+	<context id="context1" defaultModelType="flat">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+
+			connectionURL="jdbc:oracle:thin:@10.1.50.10:1521:dev" userId="operationmanagement"
+			password="operationmanagement" />
+
+		<javaTypeResolver type="com.codyy.commons.utils.JavaTypeResolverDefaultImpl">
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.codyy.oc.admin.entity"	targetProject="OperationManagement" />
+		<sqlMapGenerator targetPackage="com.codyy.oc.admin.mybatis"	targetProject="OperationManagement" />
+		<javaClientGenerator targetPackage="com.codyy.oc.admin.dao"	targetProject="OperationManagement" type="XMLMAPPER" />
+		
+		<table schema="" tableName="environment_survey" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/Technology/!svn/ver/48729/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/pages/admin/administrator
+END
+addAdministrator.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/Technology/!svn/ver/48729/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/pages/admin/administrator/addAdministrator.jsp
+END
+showAdministratorList.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/svn/Technology/!svn/ver/35231/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/pages/admin/administrator/showAdministratorList.jsp
+END
+updateAdministrator.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/Technology/!svn/ver/48728/ManagementPlatform/OperationManagement/trunk/OperationManagement/WebContent/WEB-INF/pages/admin/administrator/updateAdministrator.jsp
+END

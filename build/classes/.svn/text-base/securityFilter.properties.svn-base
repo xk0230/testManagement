@@ -1,0 +1,6 @@
+admin/subject/sort=data
+admin/version/sort=data
+admin/knowledge/sort=data
+admin/malCenter/addMalGuide=description
+admin/malCenter/editMalGuide=description
+
