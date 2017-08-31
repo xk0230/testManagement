@@ -1,38 +1,245 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- Start #header -->
 <div id="header">
-	<div class="logo">
-		<h1>运营服务平台</h1>
-	</div>
-	<div id="topDiv" class="headerNav">	
-		<div class="uinfo">
-			您好 , ${sessionScope.adminUser.realName } <a class="quit" href="javascript:void(0)" >&nbsp;</a>
-		</div>
-		<div id="tmenu" class="nav">
-			<ul class="hmenu">
-				<li class='menu_main currMenu' data-menu="main"><a href='javascript:;' >管理中心</a></li>
-				<c:if test="${not empty sessionScope.menu.first['content'] }">
-					<li class='menu_content icon_1' data-menu="content" ><a href='javascript:;'>${sessionScope.menu.first['content'].menuName }</a></li>
-				</c:if>
-				<c:if test="${(not empty sessionScope.menu.first['para']) and (not empty sessionScope.menu.third['para.para.subject']) }">
-					<li class='menu_para icon_2' data-menu="para" ><a href='javascript:;' >${sessionScope.menu.first['para'].menuName }</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.menu.first['count'] }">
-					<li class='menu_count icon_4' data-menu="count" ><a href='javascript:;'>${sessionScope.menu.first['count'].menuName }</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.menu.first['maintain'] }">
-					<li class='menu_maintain icon_3' data-menu="maintain" ><a href='javascript:;'>${sessionScope.menu.first['maintain'].menuName }</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.menu.first['resource'] }">
-					<li class='menu_resource icon_3' data-menu="resource" ><a href='javascript:;'>${sessionScope.menu.first['resource'].menuName }</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.menu.first['admin'] }">
-					<li class='menu_admin icon_3' data-menu="admin" ><a href='javascript:;'>${sessionScope.menu.first['admin'].menuName }</a></li>
-				</c:if>
-				<c:if test="${not empty sessionScope.menu.first['app'] }">
-					<li class='menu_admin icon_3' data-menu="app" ><a href='javascript:;'>${sessionScope.menu.first['app'].menuName }</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
+    <div class="container-fluid">
+        <div class="navbar">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-logo">spr</span><span class="text-slogan">flat</span> 
+                </a>
+            </div>
+            <div>
+            <nav class="top-nav" role="navigation">
+                <ul class="nav navbar-nav pull-left">
+                    <li id="toggle-sidebar-li">
+                        <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
+                </a>
+                    </li>
+                    <li>
+                        <a href="#" class="full-screen"><i class ="fa-fullscreen"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown"><i class="ec-cog"></i><span class="notification">10</span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="en-database"></i> Database <span class="notification">3</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-cube"></i> Packages <span class="notification blue">17</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-health"></i> Disconnects <span class="notification yellow">1</span></a>
+                            </li>
+                            <li><a href="#"><i class="im-images"></i> Images <span class="notification teal">320</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-users"></i> Users <span class="notification orange">2k</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-meter"></i> Traffic <span class="notification magenta">2tb</span></a>
+                            </li>
+                            <li><a href="#"><i class="im-coin"></i> Finances <span class="notification pink">+3k</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-folder"></i> Directories <span class="notification green">17</span></a>
+                            </li>
+                            <li><a href="#"><i class="st-bag"></i> Orders <span class="notification purple">12</span></a>
+                            </li>
+                            <li><a href="#"><i class="ec-contract"></i> Contracts <span class="notification dark">7</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
+                        <ul class="dropdown-menu email" role="menu">
+                            <li class="mail-head">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        <a href="email-inbox.html"><i class="ec-archive"></i></a>
+                                    </div>
+                                    <span>Inbox</span> 
+                                    <div class="pull-right">
+                                        <a href="email-inbox.html"><i class="st-pencil"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="search-email">
+                                <form>
+                                    <input type="text" name="search" placeholder="Search for emails">
+                                    <button type="submit"><i class="ec-search"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="mail-list clearfix">
+                                <a href="#">
+                                    <img src="assets/img/avatars/128.jpg" class="mail-avatar pull-left" alt="avatar">
+                                    <p class="name">
+                                        <span class="status"><i class="en-dot"></i></span> Jason Rivera
+                                        <span class="notification">2</span>
+                                        <span class="time">12:30 am</span>
+                                    </p>
+                                    <p class="msg">
+                                        I contact you regarding my account please can you set up my pass ...
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="mail-list clearfix">
+                                <a href="#">
+                                    <img src="assets/img/avatars/129.jpg" class="mail-avatar pull-left" alt="avatar">
+                                    <p class="name">
+                                        <span class="status off"><i class="en-dot"></i></span> Steeve Mclark
+                                        <span class="notification">6</span>
+                                        <span class="time">10:26 am</span>
+                                    </p>
+                                    <p class="msg">
+                                        Good job dude awesome work here, please add theese features ...
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="mail-list clearfix">
+                                <a href="#">
+                                    <img src="assets/img/avatars/130.jpg" class="mail-avatar pull-left" alt="avatar">
+                                    <p class="name">
+                                        <span class="status off"><i class="en-dot"></i></span> Fellix Jones
+                                        <span class="notification">1</span>
+                                        <span class="time">7:15 am</span>
+                                    </p>
+                                    <p class="msg">
+                                        I have some issues when try to reach my product page can you ...
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="mail-list clearfix">
+                                <a href="#">
+                                    <img src="assets/img/avatars/131.jpg" class="mail-avatar pull-left" alt="avatar">
+                                    <p class="name">
+                                        <span class="status"><i class="en-dot"></i></span> Tina Dowsen
+                                        <span class="notification">5</span>
+                                        <span class="time">03:46 am</span>
+                                    </p>
+                                    <p class="msg">
+                                        Hello Sugge, i want to apply for your referal program , please ...
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="mail-more">
+                                <a href="email-inbox.html">View all <i class="en-arrow-right7"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li>
+                        <a href="#" id="toggle-header-area"><i class="ec-download"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown"><i class="br-alarm"></i> <span class="notification">5</span></a>
+                        <ul class="dropdown-menu notification-menu right" role="menu">
+                            <li class="clearfix">
+                                <i class="ec-chat"></i> 
+                                <a href="#" class="notification-user"> Ric Jones </a> 
+                                <span class="notification-action"> replied to your </span> 
+                                <a href="#" class="notification-link"> comment</a>
+                            </li>
+                            <li class="clearfix">
+                                <i class="st-pencil"></i> 
+                                <a href="#" class="notification-user"> SuggeElson </a> 
+                                <span class="notification-action"> just write a </span> 
+                                <a href="#" class="notification-link"> post</a>
+                            </li>
+                            <li class="clearfix">
+                                <i class="ec-trashcan"></i> 
+                                <a href="#" class="notification-user"> SuperAdmin </a> 
+                                <span class="notification-action"> just remove </span> 
+                                <a href="#" class="notification-link"> 12 files</a>
+                            </li>
+                            <li class="clearfix">
+                                <i class="st-paperclip"></i> 
+                                <a href="#" class="notification-user"> C. Wiilde </a> 
+                                <span class="notification-action"> attach </span> 
+                                <a href="#" class="notification-link"> 3 files</a>
+                            </li>
+                            <li class="clearfix">
+                                <i class="st-support"></i> 
+                                <a href="#" class="notification-user"> John Simpson </a> 
+                                <span class="notification-action"> add support </span> 
+                                <a href="#" class="notification-link"> ticket</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.jpg" alt="SuggeElson">SuggeElson
+                        </a>
+                        <ul class="dropdown-menu right" role="menu">
+                            <li><a href="profile.html"><i class="st-user"></i> Profile</a>
+                            </li>
+                            <li><a href="file.html"><i class="st-cloud"></i> Files</a>
+                            </li>
+                            <li><a href="#"><i class="st-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="login.html"><i class="im-exit"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
+                    </li>
+                </ul>
+            </nav>
+            </div>
+        </div>
+        <!-- Start #header-area -->
+        <div id="header-area" class="fadeInDown">
+            <div class="header-area-inner">
+                <ul class="list-unstyled list-inline">
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="im-pie"></i>
+                                <span>Earning Stats</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="ec-images color-dark"></i>
+                                <span>Gallery</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="en-light-bulb color-orange"></i>
+                                <span>Fresh ideas</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="ec-link color-blue"></i>
+                                <span>Links</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="ec-support color-red"></i>
+                                <span>Support</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="shortcut-button">
+                            <a href="#">
+                                <i class="st-lock color-teal"></i>
+                                <span>Lock area</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End #header-area -->
+    </div>
+    <!-- Start .header-inner -->
 </div>
+<!-- End #header -->
