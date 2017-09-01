@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.oc.admin.dto.JsonDto;
@@ -34,12 +36,16 @@ public class CostController {
 		return costService.getCostSubTypeList(castType);
 	}
 	
-	public JsonDto insertCost(CostEntityBean costEntityBean){
+	@ResponseBody
+	@RequestMapping(value = "/save",method = RequestMethod.POST)
+	public JsonDto insertCost(@RequestBody CostEntityBean costEntityBean){
 		
 		return costService.insertCostEntity(costEntityBean);
 	}
 	
-	public JsonDto updateCost(CostEntityBean costEntityBean){
+	@ResponseBody
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
+	public JsonDto updateCost(@RequestBody CostEntityBean costEntityBean){
 		
 		return costService.updateCostEntity(costEntityBean);
 	}
