@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.CostDaoMapper" >
+
+	<select id="getCostSubTypeList" parameterType="int" resultType="com.codyy.oc.admin.entity.CostSubTypeBean">
+		
+		SELECT cost_subtype_id AS costSubTypeId,cost_type AS castType,name as name
+		FROM COST_SUBTYPE
+		WHERE 1=1
+		<if test="castType ==0 OR castType ==1">
+			AND cost_type = #{castType}
+		</if>
+	
+	</select>
+	
+	<insert id="insertCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean" >
+		INSERT INTO COST_DETAIL(cost_id,
+								create_time,
+								cost_time,
+								create_user_id,
+								cost_type,
+								cost_subtype_id,
+								cost_num,
+								dep_id
+								)
+		VALUES(
+				#costId,
+				#createTime,
+				#costTime,
+				#createUserId,
+				#costType,
+				#costSubtypeId,
+				#costNum,
+				#depId
+			)
+	
+	</insert>
+	
+	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
+		UPDATE COST_DETAIL SET cost_time = #{costTime},
+							   create_user_id = #{createUserId},
+							   cost_type = #{costType},
+							   cost_subtype_id = #{costSubtypeId},
+							   cost_num = #{cost_num},
+							   dep_id = #{depId}
+		
+		WHERE cost_id = #{costId}
+	
+	</update>
+	
+	<delete id="delCostEntityById" parameterType="java.lang.String">
+	
+		DELETE FROM COST_DETAIL WHERE cost_id = #{costId}
+		
+	</delete>
+	
+</mapper>
