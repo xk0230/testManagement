@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
+<script src="${root}/WEB-INF/pages/js/administrator/script.js" type="text/javascript"></script>
 </head>
 <body ng-app = "myApp" >
 		<%@ include file="../../common/header.jsp"%>
@@ -48,10 +49,10 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<!-- col-lg-12 start here -->
-							<div class="panel panel-default plain toggle panelClose panelRefresh">
+							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
-								<div class="panel-heading white-bg">
-									<h4 class="panel-title">Data table</h4>
+								<div class="panel-heading">
+									<h4 class="panel-title">查询结果</h4>
 								</div>
 								<div class="panel-body">
 									<table class="table display" id="datatable">
@@ -59,7 +60,7 @@
 											<tr>
 												<th>工号</th>
 												<th>姓名</th>
-												<th>部门s)</th>
+												<th>部门</th>
 												<th>岗位</th>
 												<th>状态</th>
 												<th>入职日期</th>
@@ -68,8 +69,13 @@
 										</thead>
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
-
-												
+												<td><p ng-bind="item.userName"></p></td>
+												<td><p ng-bind="item.realName"></p></td>
+												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.workStatus"></p></td>
+												<td><p ng-bind="item.createTime"></p></td>
+												<td><p ng-bind="item.username"></p></td>
 											</tr>
 										</tbody>
 									</table>
@@ -83,61 +89,14 @@
 				</div>
 				<!-- End .outlet -->
 			</div>
+			
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
 		</div>
 		<!-- End #content -->
 	</div>
 		<script type="text/javascript">
-			var myAppModule = angular.module("myApp",[])
-			.controller('UserListController',
-				function UserListController($scope,$http){
-					var self = this;
-					
-					this.$onInit = function(){
-						self.getFinancingInfoList();
-					}
-					
-					// 默认分页参数对象
-					this.pages = {
-						totalCount : 0,
-						currentPage : 1,
-						recordNumber : 10
-					}
-					// 分页操作发生变化时
-					$scope.$on('currentPageChange',function(evt,page){
-						self.getFinancingInfoList();
-					});
-					
-					// 获取数据列表
-					this.getFinancingInfoList = function(){
-						alert($scope.userName + $scope.realName + $scope.contact +$scope.position +$scope.state)
-						$http({
-							method:'POST',
-							url:'${root}/admin/adminuser/getadminlist.do',
-							data:JSON.stringify({
-								'userName': $scope.userName,
-								'realName': $scope.realName,
-								'contact': $scope.contact,
-								'position': $scope.position,
-								'state': $scope.state
-							})
-						}).then(function(res){
-							if(res){
-								self.list = res.list || [];
-								self.pages.totalCount = res.totalCount || 0;
-							}else{
-								self.list = [];
-								self.pages.totalCount = 0;
-							}
-						})
-						.finally(function(){
-							layer.close(loading);
-						});
-					}
-					
-				}
-			)
+
 	</script>
 	
 	<script type="text/javascript">
@@ -148,49 +107,6 @@
 		var splitPage;
 		search();
 	});
-	
-	
-	function getOrgUserList(data,total){
-		if(total || total != 0){
-			if(data){
-				$("#totalNum").html(total);
-				var start = splitPage.req.start;
-				var html ='';
-				var baseUser;
-				for(var i = 0,j = data.length;i<j;i++){
-					baseUser = data[i];
-					start++;
-					html+='<tr>';
-					html+='<td>'+(start==null?'-':start)+'</td>';
-					html+='<td>'+(baseUser.userName==null?'-':baseUser.userName)+'</td>';
-					html+='<td>'+(baseUser.realName==null?'-':baseUser.realName)+'</td>';
-					html+='<td>'+(baseUser.contact==null?'-':baseUser.contact)+'</td>';
-					html+='<td>'+(baseUser.position==null?'-':baseUser.position)+'</td>';
-					html+='<td>'+(getState(baseUser.locked)==null?'-':getState(baseUser.locked))+'</td>';
-					html+='<td><a href="javascript:;" onclick="editOrgUser(\''+baseUser.adminUserId+'\');">编辑</a></td>';
-					html+='</tr>';
-					/* if('admin'==baseUser.adminUserId.trim()){
-						html+='</td>';
-					}else{
-						html+='<a href="javascript:;" class="delLink" onclick="deleteOrgUser(\''+baseUser.adminUserId+'\');" style="">删除</a></td>';	
-					} */
-				}
-				$("#pageBody").html(html);
-			}else{
-				$("#pageBody").html("<tr><td colspan='7'>抱歉，未查询到相关记录!</td></tr>");
-				$("#totalNum").html("0");
-			}
-		}else{
-			$("#pageBody").html("<tr><td colspan='7'>抱歉，未查询到相关记录!</td></tr>");
-			$("#totalNum").html("0");
-		}
-	}
-	function getCreateRealName(createRealName){
-		if(createRealName == null || createRealName == 'null' || createRealName == ''){
-			return '无';
-		}
-		return createRealName;
-	}
 	
 	function getUserType(adminFlag){
 		if('Y' == adminFlag){
@@ -226,56 +142,6 @@
 	
 	function editOrgUser(baseUserId){
 		Win.open({id:"addOrgUserWin",url:"${root}/admin/adminuser/getselbyid.do?userId="+baseUserId,title:"编辑账号",width:600,height:450,mask:true});
-	}
-	function search(){
-		var userName = $.trim($("#userName").val());
-		var realName = $.trim($("#realName").val());
-		var contact=$.trim($("#contact").val());
-		var position=$.trim($("#position").val());
-		var state=$("#state").val();
-		$("#pager").html("");
-		var config = {
-				node:$id("pager"),
-				url:"${root}/admin/adminuser/getadminlist.do",
-				count : 20,
-				type :"post",
-				callback:getOrgUserList,
-				data:{
-					userName:userName,
-					realName:realName,
-					contact:contact,
-					position:position,
-					state:state
-				}
-			};
-			splitPage = new SplitPage(config);
-	}
-	function exportOrgUserList(){
-		var adminFlag = $("#adminFlag").val();
-		var userName = $("#userName").val();
-		var locked = $("#locked").val();
-		var containFlag = "NO";
-		if($('#containFlag').is(':checked')){
-			containFlag = 'YES';
-		}else{
-			containFlag = 'NO';
-		}
-		var areas = $("#areaSelect select");
-		var areaLength = areas.length;
-		var baseAreaId = "";
-		var baseAreaId1 = "";
-		if(areaLength == 1){
-			baseAreaId = $(areas[0]).val();
-		}else{
-			baseAreaId = $(areas[areaLength-2]).val();
-			baseAreaId1 =$(areas[areaLength-1]).val();
-			if("-1" != baseAreaId1){
-				baseAreaId = baseAreaId1;
-			}
-		}
-		var url = "${root }/admin/orgUser/exportOrgUserList.do?adminFlag="+adminFlag
-				+"&userName="+encodeURIComponent(encodeURIComponent(userName))+"&locked="+locked+"&containFlag="+containFlag+"&baseAreaId="+baseAreaId;
-		window.location.href = url;
 	}
 	
 	function orgUserImport(){

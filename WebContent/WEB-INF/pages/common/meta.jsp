@@ -46,7 +46,8 @@
 <script src="${root}/public/js/bootstrap/js/bootstrap.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
-<script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>  
+<script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>
+
 <script src="${root}/public/js/extend.js" type="text/javascript"></script>
 <script src="${root}/public/js/litewin.js" type="text/javascript"></script>
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
