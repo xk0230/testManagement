@@ -3,54 +3,143 @@
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 </head>
-<body>
-	<h3 id="cataMenu">
-		<a href="javascript:;">用户管理</a> &gt; <a href="javascript:;">账号管理</a>
-	</h3>
-	<div id="control">
-		<div id="controlContent">
-			<ul class="searchWrap borderBox">
-				<li>
-					<label class="labelText">用户名：</label>
-					<input type="text" name="userName" id="userName" />
-					<label class="labelText">姓名：</label>
-					<input type="text" name="realName" id="realName" />
-					<label class="labelText">联系电话：</label>
-					<input type="text" name="contact" id="contact" />
-					<label class="labelText">职位：</label>
-					<input type="text" name="position" id="position" />
-					<label class="labelText">请选择：</label>
-					<select class="mr20" id="state">
-							<option value="-1">-- 请选择 --</option>
-							<option value="N">开启</option>
-							<option value="Y">关闭</option>
-						</select>
-					<input type="button" class="submit btn" name="query" onclick="search();" value="查询"  style="margin-left: 30px;"/>
-				</li>
-			</ul>
-			<div class="totalPageBox">
-				<div class="fr">
-					<a id="addOrgUser" class="btn btnGreen" href="javascript:;">新增</a>
+<body ng-app = "myApp" >
+		<%@ include file="../../common/header.jsp"%>
+		<%@ include file="../../common/side.jsp"%>
+		<!-- Start #content -->
+		<div id="content" ng-controller="UserListController as vm">
+			<!-- Start .content-wrapper -->
+			<div class="content-wrapper">
+				<div class="row">
+					<!-- Start .row -->
+					<!-- Start .page-header -->
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-table2"></i> 用户管理</h1>
+						<!-- Start .bredcrumb -->
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+						<ul class="searchWrap borderBox">
+							<li>
+								<label class="labelText">用户名：</label>
+								<input type="text" name="userName" ng-model="userName" id="userName" />
+								<label class="labelText">姓名：</label>
+								<input type="text" name="realName" ng-model="realName" id="realName" />
+								<label class="labelText">联系电话：</label>
+								<input type="text" name="contact"  ng-model="contact" id="contact" />
+								<label class="labelText">职位：</label>
+								<input type="text" name="position" ng-model="position" id="position" />
+								<label class="labelText">请选择：</label>
+								<select class="mr20" id="state" ng-model="state">
+										<option value="-1">-- 请选择 --</option>
+										<option value="N">开启</option>
+										<option value="Y">关闭</option>
+								</select>
+								<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
+							</li>
+						</ul>
+						<!-- End .breadcrumb -->
+					</div>
+					<!-- End .page	-header -->
 				</div>
-				<div>总共<span class="totalNum" id="totalNum">0</span> 条数据</div>
+				<!-- End .row -->
+				<div class="outlet">
+					<!-- Start .outlet -->
+					<!-- Page start here ( usual with .row ) -->
+					<div class="row">
+						<div class="col-lg-12">
+							<!-- col-lg-12 start here -->
+							<div class="panel panel-default plain toggle panelClose panelRefresh">
+								<!-- Start .panel -->
+								<div class="panel-heading white-bg">
+									<h4 class="panel-title">Data table</h4>
+								</div>
+								<div class="panel-body">
+									<table class="table display" id="datatable">
+										<thead>
+											<tr>
+												<th>工号</th>
+												<th>姓名</th>
+												<th>部门s)</th>
+												<th>岗位</th>
+												<th>状态</th>
+												<th>入职日期</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="odd gradeX" ng-repeat="item in vm.list">
+
+												
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- End .panel -->
+						</div>
+						<!-- col-lg-12 end here -->
+					</div>
+					<!-- Page End here -->
+				</div>
+				<!-- End .outlet -->
 			</div>
-		<table class="tableBox">
-			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">用户名</th>
-				<th width="15%">姓名</th>
-				<th width="15%">联系电话</th>
-				<th width="15%">职位</th>
-				<th width="15%">状态</th>
-				<th width="15%">操作</th>
-			</tr>
-			<tbody id="pageBody">
-			</tbody>
-		</table>
-		<div class="pageNavi" id="pager"></div>
-		
+			<!-- End .content-wrapper -->
+			<div class="clearfix"></div>
 		</div>
+		<!-- End #content -->
 	</div>
+		<script type="text/javascript">
+			var myAppModule = angular.module("myApp",[])
+			.controller('UserListController',
+				function UserListController($scope,$http){
+					var self = this;
+					
+					this.$onInit = function(){
+						self.getFinancingInfoList();
+					}
+					
+					// 默认分页参数对象
+					this.pages = {
+						totalCount : 0,
+						currentPage : 1,
+						recordNumber : 10
+					}
+					// 分页操作发生变化时
+					$scope.$on('currentPageChange',function(evt,page){
+						self.getFinancingInfoList();
+					});
+					
+					// 获取数据列表
+					this.getFinancingInfoList = function(){
+						alert($scope.userName + $scope.realName + $scope.contact +$scope.position +$scope.state)
+						$http({
+							method:'POST',
+							url:'${root}/admin/adminuser/getadminlist.do',
+							data:JSON.stringify({
+								'userName': $scope.userName,
+								'realName': $scope.realName,
+								'contact': $scope.contact,
+								'position': $scope.position,
+								'state': $scope.state
+							})
+						}).then(function(res){
+							if(res){
+								self.list = res.list || [];
+								self.pages.totalCount = res.totalCount || 0;
+							}else{
+								self.list = [];
+								self.pages.totalCount = 0;
+							}
+						})
+						.finally(function(){
+							layer.close(loading);
+						});
+					}
+					
+				}
+			)
+	</script>
+	
 	<script type="text/javascript">
 	 $(document).ready(function(){
 		$("#addOrgUser").click(function(){
@@ -78,9 +167,9 @@
 					html+='<td>'+(baseUser.contact==null?'-':baseUser.contact)+'</td>';
 					html+='<td>'+(baseUser.position==null?'-':baseUser.position)+'</td>';
 					html+='<td>'+(getState(baseUser.locked)==null?'-':getState(baseUser.locked))+'</td>';
-				    html+='<td><a href="javascript:;" onclick="editOrgUser(\''+baseUser.adminUserId+'\');">编辑</a></td>';
-				    html+='</tr>';
-				    /* if('admin'==baseUser.adminUserId.trim()){
+					html+='<td><a href="javascript:;" onclick="editOrgUser(\''+baseUser.adminUserId+'\');">编辑</a></td>';
+					html+='</tr>';
+					/* if('admin'==baseUser.adminUserId.trim()){
 						html+='</td>';
 					}else{
 						html+='<a href="javascript:;" class="delLink" onclick="deleteOrgUser(\''+baseUser.adminUserId+'\');" style="">删除</a></td>';	
