@@ -1,13 +1,17 @@
 package com.codyy.oc.admin.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.dao.CostDaoMapper;
 import com.codyy.oc.admin.dto.JsonDto;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
 
@@ -40,34 +44,37 @@ public class CostService {
 		
 		return jsonDto;
 	}
+	
+	public JsonDto insertOrUpdateCostEntity(AdminUser user,CostEntityBean costEntityBean){
+		
+		JsonDto jsonDto = new JsonDto();
+		
+		costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
+		costEntityBean.setCreateUserId(user.getUserId());
+		
+		if(StringUtils.isBlank(costEntityBean.getCostId())){
+			costEntityBean.setCostId(UUID.randomUUID().toString());
+			int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
+			if(insertCostEntityNum == 1){
+				jsonDto.setCode(0);
+				jsonDto.setMsg(INSERT_SUCCESS);
+			}else{
+				jsonDto.setMsg(INSERT_ERROR);
+			}
+			
+		}else{
+			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
+			if(updateCostEntityNum == 1){
+				jsonDto.setCode(0);
+				jsonDto.setMsg(UPDATE_SUCCESS);
+			}else{
+				jsonDto.setMsg(UPDATE_ERROR);
+			}
+		}
+		
+		return jsonDto;
+	}
 
-	public JsonDto insertCostEntity(CostEntityBean costEntityBean){
-		
-		JsonDto jsonDto = new JsonDto();
-		int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
-		if(insertCostEntityNum == 1){
-			jsonDto.setCode(0);
-			jsonDto.setMsg(INSERT_SUCCESS);
-		}else{
-			jsonDto.setMsg(INSERT_ERROR);
-		}
-		
-		return jsonDto;
-	}
-	
-	public JsonDto updateCostEntity(CostEntityBean costEntityBean){
-		
-		JsonDto jsonDto = new JsonDto();
-		int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
-		if(updateCostEntityNum == 1){
-			jsonDto.setCode(0);
-			jsonDto.setMsg(UPDATE_SUCCESS);
-		}else{
-			jsonDto.setMsg(UPDATE_ERROR);
-		}
-		return jsonDto;
-	}
-	
 	public JsonDto delCostEntityById(String costId){
 		
 		JsonDto jsonDto = new JsonDto();

@@ -1,6 +1,9 @@
 package com.codyy.oc.admin.controller;
 
+import java.util.UUID;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.CostService;
 
@@ -41,17 +45,10 @@ public class CostController extends BaseController{
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/save.do",method = RequestMethod.POST)
-	public JsonDto insertCost(@RequestBody CostEntityBean costEntityBean){
+	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
+	public JsonDto insertOrUpdateCost(HttpServletRequest request,@RequestBody CostEntityBean costEntityBean){
 		
-		return costService.insertCostEntity(costEntityBean);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/update.do",method = RequestMethod.POST)
-	public JsonDto updateCost(@RequestBody CostEntityBean costEntityBean){
-		
-		return costService.updateCostEntity(costEntityBean);
+		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
 	
 	@ResponseBody

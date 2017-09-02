@@ -1,5 +1,6 @@
 package com.codyy.commons.utils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -511,6 +512,16 @@ public class DateUtils {
 		calendar.set(Calendar.SECOND, 59);
 		return calendar.getTime();
 	}
+	
+	/**
+     * 获取当前Timestamp
+     * @return
+     */
+    public static Timestamp getCurrentTimestamp() {
+        
+        return new Timestamp(Calendar.getInstance().getTimeInMillis());
+        
+    }
 	
 
 }
