@@ -1,5 +1,6 @@
 package com.codyy.oc.admin.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codyy.commons.CommonsConstant;
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.OracleKeyWordUtils;
 import com.codyy.commons.utils.ResultJson;
@@ -27,7 +29,6 @@ import com.codyy.oc.admin.view.UserSearchModel;
  * ClassName:UserManagerService
  * Function: 用户管理业务控制
  *
- * @author   zhangtian
  * @Date	 2015	2015年3月23日		上午9:55:50
  *
  */
@@ -45,7 +46,6 @@ public class AdminUserManagerService {
 	
 	
 	/**
-	 * @author lichen
 	* @Title: getselcAdminUserById
 	* @Description: (通过id来对用户进行查询)
 	* @param @param userId
@@ -60,7 +60,6 @@ public class AdminUserManagerService {
 	
 	
 	/**
-	 * @author lichen
 	* @Title: insertAdminUsers
 	* @Description: (这里用一句话描述这个方法的作用)
 	* @param     设定文件
@@ -68,26 +67,40 @@ public class AdminUserManagerService {
 	* @throws
 	 */
 	public ResultJson insertAdminUsers(AdminUser adUser,AdminUserPermission adminUser){
-		
 		try{
-			
 			//如果用户名存在则直接返回并不执行下面的任何语句
 			if(null!=adminUserMapper.selUserName(adUser.getUserName()) && adminUserMapper.selUserName(adUser.getUserName()).size()>0){
 			       return new ResultJson(true, 1);
 			}
 			
+			//测试数据
+			adUser.setPosition(CommonsConstant.USER_TYPE_STAFF);
+			adUser.setDepId("1");
+			adUser.setPostId("2");
+			adUser.setWorkStatus("3");
+			adUser.setSalaryScale("4");
+			adUser.setEntryDate(new Date());
+			adUser.setWorkingYears("5");
+			adUser.setSalaryBeginDate(new Date());
+			adUser.setProbationPeriod("6");
+			adUser.setExpectedDate(new Date());
+			adUser.setFwqAgreement("7");
+			adUser.setFwqNum("8");
+			adUser.setLabourBeginTime(new Date());
+			adUser.setLabourEndTime(new Date());
+			adUser.setSignTime("9");
+			adUser.setInsuranceBase("10");
+			adUser.setFilingDate(new Date());
+			adUser.setLeaveDate(new Date());
+			
+			adUser.setRetiredDate(new Date());
+			
 			adminUserMapper.insertAdminUser(adUser);
-			
-			
 			if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
 				adminUserPermissionMapper.insertUserPernission(adminUser);
 			}
-			
 			return new ResultJson(true,2);//用户名不重名则直接添加
-			
-			
 		}catch(Exception e){
-			
 			e.printStackTrace();
 			return new ResultJson(false);
 		}
@@ -97,7 +110,6 @@ public class AdminUserManagerService {
 	
 	
 	/**
-	 * @author lichen
 	* @Title: deleteAdminUsersById
 	* @Description: (根据id来删除用户的所有信息)
 	* @param @param userId
@@ -112,7 +124,6 @@ public class AdminUserManagerService {
 	
 	
 	/**
-	 * @author lichen
 	* @Title: updateAdminsUser
 	* @Description: (修改用户信息)
 	* @param @param user
@@ -142,7 +153,6 @@ public class AdminUserManagerService {
 	
 	/**
 	 * 
-	 * @author yangyongwu
 	 * @param userName
 	 * @param password
 	 * @return
@@ -171,7 +181,6 @@ public class AdminUserManagerService {
 	 *
 	 * @param adminUserId
 	 * @return
-	 * @author zhangtian
 	 */
 	public AdminUser findAdminUserById(String adminUserId){
 		
@@ -190,7 +199,6 @@ public class AdminUserManagerService {
 	 *
 	 * @param page
 	 * @return
-	 * @author zhangtian
 	 */
 	public Page findPageList(Page page) {
 		
@@ -205,7 +213,6 @@ public class AdminUserManagerService {
 	 *
 	 * @param adminUser
 	 * @return  true  插入成功  false  插入失败
-	 * @author zhangtian
 	 */
 	public boolean insertAdminUser(AdminUser adminUser) {
 	
@@ -236,7 +243,6 @@ public class AdminUserManagerService {
 	 *
 	 * @param adminUser
 	 * @return  true  更新成功  false  更新失败
-	 * @author zhangtian
 	 */
 	public boolean updateAdminUser(AdminUser adminUser) {
 	
@@ -268,7 +274,6 @@ public class AdminUserManagerService {
 	 *
 	 * @param adminUser
 	 * @return  true  删除成功  false  删除失败
-	 * @author zhangshuangquan
 	 */
 	public ResultJson deleteAdminUserById(String adminUserId) {
 		// === 逻辑删除
@@ -288,7 +293,6 @@ public class AdminUserManagerService {
 	 * @param oldPassword
 	 * @param newPassword
 	 * @return
-	 * @author zhangtian
 	 */
  	public ResultJson modifyPassword(String adminUserId,String oldPassword,String newPassword){
 		if(StringUtils.isBlank(oldPassword)){
@@ -381,7 +385,6 @@ public class AdminUserManagerService {
 	
 	/**
 	 * 
-		* @author zhangshuangquan
 		* @Title: ModifyMsg
 		* @Description: (修改个人资料)
 		* @param:  adminUserId,realName,contact
@@ -416,7 +419,6 @@ public class AdminUserManagerService {
 
 	/**
 	 * 
-		* @author zhangshuangquan
 		* @Title: getAdmin
 		* @Description: (根据adminUserId和userName获取对象)
 		* @param: adminUserId,userName
@@ -443,7 +445,6 @@ public class AdminUserManagerService {
 	
 	/**
 	 * 
-		* @author zhangshuangquan
 		* @Title: getAdminList
 		* @Description: (获取用户列表)
 		* @param strStart,strEnd,userSearch
@@ -470,7 +471,6 @@ public class AdminUserManagerService {
 	}
 	
 	/**
-	 * @author lichen
 	* @Title: selUserName
 	* @Description: (这里用一句话描述这个方法的作用)
 	* @param @param userName

@@ -4,36 +4,24 @@ import org.apache.commons.lang.StringUtils;
 
 public class CommonsConstant {
 	public static final String FLAG_YES = "Y";
-	//DELETE_FLAG已删除
-	//LOCKED已经锁定无法再登录
-	//BASE_USER.ADMIN_FLAG区县管理员或学校管理员
-	//BASE_AREA.EDIT_SCHEDULE区域用户可以编辑课表
-	//BASE_AREA.SOFTWARE_UPGRADE区域教室自动更新软件
-	//BASE_AREA.CREATE_SCHOOL区域下可以挂学校
-	//CLS_CLASSROOM.WHITE_PAD_SWITCH, CLS_SCHEDULE_DETAIL.WHITE_PAD_SWITCH白板打开
-	//CLS_CLASSROOM.RECORD_SWITCH, CLS_SCHEDULE_DETAIL.RECORD_SWITCH录制打开
-	//CLS_CLASSROOM.REMOTE_SWITCH远程导播打开
-	//CLS_SCHEDUEL_DETAIL.SELF_DEFINE自主开课
-	//EVA_STANDARD.SYSTEM_PROVIDED系统默认评课标准
-	
 	public static final String FLAG_NO = "N";
-	//DELETE_FLAG未删除
-	//LOCKED未锁定可以登录
-	//BASE_USER.ADMIN_FLAG区县普通用户或学校普通用户
-	//BASE_AREA.EDIT_SCHEDULE区域用户不能编辑课表
-	//BASE_AREA.SOFTWARE_UPGRADE区域教室不更新软件
-	//BASE_AREA.CREATE_SCHOOL区域下不能挂学校
-	//CLS_CLASSROOM.WHITE_PAD_SWITCH, CLS_SCHEDULE_DETAIL.WHITE_PAD_SWITCH白板关闭
-	//CLS_CLASSROOM.RECORD_SWITCH, CLS_SCHEDULE_DETAIL.RECORD_SWITCH录制关闭
-	//CLS_CLASSROOM.REMOTE_SWITCH远程导播关闭
-	//CLS_SCHEDUEL_DETAIL.SELF_DEFINE课表开课
-	//EVA_STANDARD.SYSTEM_PROVIDED非系统默认评课标准
 	
 	
 	//BASE_USER的用户类型
-	public static final String USER_TYPE_AREA_USER = "AREA_USR";//行政机构用户
-	public static final String USER_TYPE_SCHOOL_USER = "SCHOOL_USR";//学校用户
-	public static final String USER_TYPE_TEACHER = "TEACHER";//教师
+	public static final String USER_TYPE_ADMIN = "ADMIN";//系统管理员
+	public static final String USER_TYPE_MANAGER = "MANAGER";//部门经理
+	public static final String USER_TYPE_STAFF = "STAFF";//普通员工
+	
+	
+	//员工状态
+	public static final String USER_STAFF_STATUS_ON_TRIAL  = "试用";//
+	public static final String USER_STAFF_STATUS_REGULAR  = "正式";//
+	public static final String USER_STAFF_STATUS_DEPARTING  = "离职";//
+
+	
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+	
+	
 	
 	//BASE_USER.CREATE_USER_TYPE用户的创建人类型
 	public static final String CREATE_USER_TYPE_BASE_ADMIN = "ADMIN_USER";//管理员用户创建

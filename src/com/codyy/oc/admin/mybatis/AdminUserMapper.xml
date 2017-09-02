@@ -30,8 +30,14 @@
 	
 	<!-- 添加用户AdminUser表-->
 	<insert id="insertAdminUser" parameterType="com.codyy.oc.admin.entity.AdminUser" >
-	    insert into ADMIN_USER(USER_ID,USERNAME,PASSWORD,REALNAME,CREATE_TIME)
-	    values(#{userId},#{userName},#{password},#{realName},#{createTime})    
+	insert into
+	ADMIN_USER(USER_ID,USERNAME,PASSWORD,REALNAME,CREATE_TIME,DEP_ID,POSITION,POST_ID,
+	WORK_STATUS,SALARY_SCALE,ENTRY_DATE,WORKING_YEARS,SALARY_BEGIN_DATE,PROBATION_PERIOD,EXPECTED_DATE,
+	FWQ_AGREEMENT,FWQ_NUM,LABOUR_BEGIN_TIME,LABOUR_END_TIME,SIGN_TIME,INSURANCE_BASE,FILING_DATE,LEAVE_DATE,RETIRED_DATE)
+	values(#{userId},#{userName},#{password},#{realName},#{createTime},#{depId},#{position},#{postId},
+	#{workStatus},#{salaryScale},#{entryDate},#{workingYears},#{salaryBeginDate},
+	#{probationPeriod},#{expectedDate},#{fwqAgreement},#{fwqNum},#{labourBeginTime},#{labourEndTime},#{signTime},
+	#{insuranceBase},#{filingDate},#{leaveDate},#{retiredDate})    
 	</insert>
 	
 	<!-- 修改用户信息-->
@@ -134,7 +140,7 @@
 			au.fwq_agreement        as            fwqAgreement,
 			au.fwq_num              as            fwqNum,
 			au.labour_begin_time    as            labourBeginTime,
-			au.labour_begin_end     as            labourBeginEnd,
+			au.labour_end_time     as            labourEndTime,
 			au.sign_time            as            signTime,
 			au.insurance_base       as            insuranceBase,
 			au.filing_date          as            filingDate,
