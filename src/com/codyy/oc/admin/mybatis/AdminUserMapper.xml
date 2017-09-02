@@ -13,7 +13,7 @@
 	
 	<!-- 根据传来的id来删除用户的所有信息-->
 	<delete id="deleteAdminUsersById" parameterType="java.lang.String">
-	     delete from ADMIN_USER where ADMIN_USER_ID=#{adminUserId}
+	     delete from ADMIN_USER where user_id=#{adminUserId}
 	</delete>
 	
 	
@@ -24,7 +24,7 @@
 	
 	<!--  修改操作中验证用户-->
 	<select id="checkSelUpteName" parameterType="com.codyy.oc.admin.entity.AdminUser" resultMap="BaseResultMap">
-	          select * from ADMIN_USER t where t.username=#{userName} and t.admin_user_id=#{adminUserId}
+	          select * from ADMIN_USER t where t.username=#{userName} and t.user_id=#{adminUserId}
 	</select>
 	
 	
@@ -69,14 +69,14 @@
 		</set>
 		<where>
 			<if test="adminUserId != null">
-            u.ADMIN_USER_ID = #{adminUserId}
+            u.user_id = #{adminUserId}
           </if>
       </where> 
 	</update>
 	
 	<!-- 用户按照id进行查询-->
 	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminUser">
-		<id column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR" />
+		<id column="user_id" property="adminUserId" jdbcType="VARCHAR" />
 		<result column="USERNAME" property="userName" jdbcType="VARCHAR" />
 		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
 		<result column="REALNAME" property="realName" jdbcType="VARCHAR" />
@@ -88,23 +88,23 @@
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="WEIXIN_NUM" property="weixin_num" jdbcType="VARCHAR" />
 		<result column="POSITION" property="position" jdbcType="VARCHAR" />
-		<collection property="adminUserPer" ofType="com.codyy.oc.admin.entity.AdminUserPermission" column="ADMIN_USER_ID" select="collectionMap"></collection>
+		<collection property="adminUserPer" ofType="com.codyy.oc.admin.entity.AdminUserPermission" column="user_id" select="collectionMap"></collection>
 	</resultMap>
 	
 	<resultMap id="adminPersissionMap" type="com.codyy.oc.admin.entity.AdminUserPermission">
 	     <id column="ADMIN_PERMISSION_ID" property="adminPersId" jdbcType="VARCHAR"/>
-	     <result column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR"/>
+	     <result column="user_id" property="adminUserId" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 将每次返回的对象放入集合中-->
 	<select id="collectionMap" resultMap="adminPersissionMap">
-	      select ADMIN_PERMISSION_ID,ADMIN_USER_ID from admin_user_r_permission where ADMIN_USER_ID=#{ADMIN_USER_ID}
+	      select ADMIN_PERMISSION_ID,user_id from admin_user_r_permission where user_id=#{user_id}
 	</select>
 	
 	<!-- 根据用户的id来获取对应用户的所有信息-->
 	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
-	    select ADMIN_USER_ID ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
-	    from ADMIN_USER where ADMIN_USER_ID=#{adminUserId}
+	    select user_id ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
+	    from ADMIN_USER where user_id=#{adminUserId}
 	</select>
 	
 	
@@ -154,7 +154,7 @@
 	
 	<!-- 新增用户维护关联 -->
 	<insert id="insertAdminUserRole" parameterType="list">
-		insert into admin_user_r_role(admin_user_id, admin_role_id)  
+		insert into admin_user_r_role(user_id, admin_role_id)  
 		<foreach collection="list" item="items" open="(" close=")" separator="union all">
 			select
 				#{items.adminUserId} ,
@@ -188,29 +188,29 @@
 		</set>
 		<where>
 			<if test="adminUserId != null">
-            u.admin_user_id = #{adminUserId}
+            u.user_id = #{adminUserId}
           </if>
       </where>
 	</update>
 	
 	<!-- 更新用户维护关联表 -->
 	<delete id="deleteAdminUserRole" parameterType="java.lang.String">
-		delete from admin_user_r_role ur where ur.admin_user_id = #{adminUserId}
+		delete from admin_user_r_role ur where ur.user_id = #{adminUserId}
 	</delete>
 	
 	<!-- 删除用户 -->
 	<delete id="deleteAdminUserById" parameterType="java.lang.String">
-		delete from ADMIN_USER u where u.admin_user_id = #{adminUserId}
+		delete from ADMIN_USER u where u.user_id = #{adminUserId}
 	</delete>
 	
 	<update id="updateAdminUserById" parameterType="java.lang.String">
-		update ADMIN_USER u set u.delete_flag = 'Y' where u.admin_user_id = #{adminUserId}
+		update ADMIN_USER u set u.delete_flag = 'Y' where u.user_id = #{adminUserId}
 	</update>
 	
 	<!-- 根据管理员id获取管理员信息 -->
 	<select id="findAdminUserById" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="java.lang.String">
 		select 
-			au.admin_user_id as adminUserId,
+			au.user_id as adminUserId,
 			au.username 			as userName,
 			au.password 			as password,
 			au.realname 			as realName,
@@ -219,19 +219,19 @@
 			au.remark   			as remark,
 			au.create_user_id	as createUserId
 		from ADMIN_USER au 
-		where au.admin_user_id = #{id}
+		where au.user_id = #{id}
 	</select>
 	
 	<!-- 根据用户ID查询其所属角色 -->
 	<select id="findAdminUserRoleById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminUserRole">
 		select 
-			au.admin_user_id	adminUserId ,
+			au.user_id	adminUserId ,
 			ar.admin_role_id 	adminRoleId , 
 			ar.role_name 		adminRoleName 
 		 from ADMIN_USER au, admin_user_r_role aur, admin_role ar
- 		 where au.admin_user_id = aur.admin_user_id
+ 		 where au.user_id = aur.user_id
    		 		 and aur.admin_role_id = ar.admin_role_id
-		 		 and au.admin_user_id = #{adminUserId}
+		 		 and au.user_id = #{adminUserId}
 	</select>
 	
 	<!-- 修改管理员密码 -->
@@ -239,21 +239,21 @@
 		update 
 			ADMIN_USER au 
 		set au.password = #{password} 
-		where au.admin_user_id = #{adminUserId}
+		where au.user_id = #{adminUserId}
 	</update>	
 	
 	<!-- 分页条件查询用户 -->
 	<select id="findPageList" resultType="com.codyy.oc.admin.view.AdminUserView" parameterType="com.codyy.commons.page.Page">
 		select 
-			u.admin_user_id adminUserId,
+			u.user_id adminUserId,
        	u.username userName,
        	wm_concat(NVL(r.role_name, '-')) roleName, 
        	NVL(au.userName,'-') createAdminUser,
        	NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') createTime
   		from ADMIN_USER u
-	  		left join admin_user_r_role ur on u.admin_user_id = ur.admin_user_id
+	  		left join admin_user_r_role ur on u.user_id = ur.user_id
 	  		left join admin_role r on ur.admin_role_id = r.admin_role_id
-	    	left join ADMIN_USER au on u.create_user_id = au.admin_user_id
+	    	left join ADMIN_USER au on u.create_user_id = au.user_id
 	  		<where>
 	  			and u.delete_flag = 'N'
 	  			<if test="map.adminRoleId != ''">
@@ -263,7 +263,7 @@
 	  				and u.username like '%'|| #{map.userName} || '%'
 	  			</if>
 	  		</where>
-  			group by u.admin_user_id ,u.username, au.userName, NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '')
+  			group by u.user_id ,u.username, au.userName, NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '')
   			order by NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') desc
 	</select>
 	
@@ -277,13 +277,13 @@
 	     update 
 			ADMIN_USER au 
 		set au.realname = #{realName} , au.contact=#{contact}
-		where au.admin_user_id = #{adminUserId}
+		where au.user_id = #{adminUserId}
 	</update>
 	
 	<!-- 获取个人资料 -->
 	<select id="getAdmin" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="map">
 		select
-		    au.admin_user_id    as adminUserId,
+		    au.user_id    as adminUserId,
 			au.username 			as userName,
 			au.password 			as password,
 			au.realname 			as realName,
@@ -297,13 +297,13 @@
 			au.position             as position
 		from ADMIN_USER au 
 		where au.username = #{userName} 
-			and au.admin_user_id = #{adminUserId}
+			and au.user_id = #{adminUserId}
 	</select>
 	
 	<!-- 获取用户列表  -->
 	<select id="getAdminUserPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
 		select
-			au.admin_user_id as adminUserId,
+			au.user_id as adminUserId,
 			au.username as userName,
 			au.realname as realName,
 			NVL(au.contact,'-') as contact,
@@ -327,16 +327,16 @@
 				and au.locked=#{map.state}
 			</if>
 			 <if test="map.projectId != null and map.projectId!='' ">
-				and (au.admin_user_id in (
-				              select a.admin_user_id from ADMIN_USER a 
+				and (au.user_id in (
+				              select a.user_id from ADMIN_USER a 
                                        left join project_r_user pr
-                                            on pr.admin_user_id=a.admin_user_id
+                                            on pr.user_id=a.user_id
                                             where pr.project_id=#{map.projectId}
                                             and  a.locked='Y')
-                                       or admin_user_id in (select a.admin_user_id
+                                       or user_id in (select a.user_id
                                                   from project p
                                    left join  ADMIN_USER a
-                                       on a.admin_user_id=p.manager_id
+                                       on a.user_id=p.manager_id
                                        
                                    where  p.project_id=#{map.projectId})  
 
@@ -368,16 +368,16 @@
 				and au.locked=#{state}
 			</if>
 		    <if test="projectId != null and projectId!='' ">
-				and (au.admin_user_id in (
-				              select pr.admin_user_id from  project_r_user pr 
+				and (au.user_id in (
+				              select pr.user_id from  project_r_user pr 
                                        left join ADMIN_USER  a
-                                            on pr.admin_user_id=a.admin_user_id
+                                            on pr.user_id=a.user_id
                                             where pr.project_id=#{projectId}
                                             and  a.locked='Y') 
-                            or admin_user_id in (select a.admin_user_id
+                            or user_id in (select a.user_id
                                                   from project p
                                    left join  ADMIN_USER a
-                                       on a.admin_user_id=p.manager_id
+                                       on a.user_id=p.manager_id
                                        
                                    where  p.project_id=#{projectId}  
                                       
@@ -388,11 +388,11 @@
 	</select>
 	<select id="checkUserState" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
 	    select 
-	        au.admin_user_id as adminUserId,
+	        au.user_id as adminUserId,
 			au.username as userName,
 			au.realname as realName,
 			au.locked   as locked
 	    from ADMIN_USER au
-	    where au.admin_user_id=#{userId}
+	    where au.user_id=#{userId}
 	</select>
 </mapper>
