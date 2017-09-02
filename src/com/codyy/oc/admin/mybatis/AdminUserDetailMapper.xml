@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.AdminUserDetailMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminUserDetail">
+    <id column="user_detail_id" jdbcType="VARCHAR" property="userDetailId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birthday_month" jdbcType="INTEGER" property="birthdayMonth" />
+    <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="domicile" jdbcType="VARCHAR" property="domicile" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="marriage" jdbcType="VARCHAR" property="marriage" />
+    <result column="political" jdbcType="VARCHAR" property="political" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="university" jdbcType="VARCHAR" property="university" />
+    <result column="phone1" jdbcType="VARCHAR" property="phone1" />
+    <result column="phone2" jdbcType="VARCHAR" property="phone2" />
+    <result column="citizen_card" jdbcType="VARCHAR" property="citizenCard" />
+    <result column="payroll_card" jdbcType="VARCHAR" property="payrollCard" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_detail_id, user_id, sex, birthday, age, birthday_month, id_number, origin, domicile, 
+    nation, marriage, political, education, major, university, phone1, phone2, citizen_card, 
+    payroll_card
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ADMIN_USER_DETAIL
+    where user_detail_id = #{userDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ADMIN_USER_DETAIL
+    where user_detail_id = #{userDetailId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
+    insert into ADMIN_USER_DETAIL (user_detail_id, user_id, sex, 
+      birthday, age, birthday_month, 
+      id_number, origin, domicile, 
+      nation, marriage, political, 
+      education, major, university, 
+      phone1, phone2, citizen_card, 
+      payroll_card)
+    values (#{userDetailId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, #{birthdayMonth,jdbcType=INTEGER}, 
+      #{idNumber,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{marriage,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
+      #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{citizenCard,jdbcType=VARCHAR}, 
+      #{payrollCard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
+    insert into ADMIN_USER_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userDetailId != null">
+        user_detail_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="birthdayMonth != null">
+        birthday_month,
+      </if>
+      <if test="idNumber != null">
+        id_number,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="domicile != null">
+        domicile,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="political != null">
+        political,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="university != null">
+        university,
+      </if>
+      <if test="phone1 != null">
+        phone1,
+      </if>
+      <if test="phone2 != null">
+        phone2,
+      </if>
+      <if test="citizenCard != null">
+        citizen_card,
+      </if>
+      <if test="payrollCard != null">
+        payroll_card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userDetailId != null">
+        #{userDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayMonth != null">
+        #{birthdayMonth,jdbcType=INTEGER},
+      </if>
+      <if test="idNumber != null">
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null">
+        #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null">
+        #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenCard != null">
+        #{citizenCard,jdbcType=VARCHAR},
+      </if>
+      <if test="payrollCard != null">
+        #{payrollCard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
+    update ADMIN_USER_DETAIL
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayMonth != null">
+        birthday_month = #{birthdayMonth,jdbcType=INTEGER},
+      </if>
+      <if test="idNumber != null">
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null">
+        domicile = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        political = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="university != null">
+        university = #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null">
+        phone1 = #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null">
+        phone2 = #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenCard != null">
+        citizen_card = #{citizenCard,jdbcType=VARCHAR},
+      </if>
+      <if test="payrollCard != null">
+        payroll_card = #{payrollCard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_detail_id = #{userDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
+    update ADMIN_USER_DETAIL
+    set user_id = #{userId,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      age = #{age,jdbcType=INTEGER},
+      birthday_month = #{birthdayMonth,jdbcType=INTEGER},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      domicile = #{domicile,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=VARCHAR},
+      political = #{political,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      university = #{university,jdbcType=VARCHAR},
+      phone1 = #{phone1,jdbcType=VARCHAR},
+      phone2 = #{phone2,jdbcType=VARCHAR},
+      citizen_card = #{citizenCard,jdbcType=VARCHAR},
+      payroll_card = #{payrollCard,jdbcType=VARCHAR}
+    where user_detail_id = #{userDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

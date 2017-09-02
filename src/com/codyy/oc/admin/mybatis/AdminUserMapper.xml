@@ -115,7 +115,15 @@
 	
 	
 	
-	
+  <sql id="UserDetail_Column_List">
+     ad.user_detail_id as 'adminUserDetail.userDetailId', ad.user_id as 'adminUserDetail.userId', ad.sex as 'adminUserDetail.sex',
+     ad.birthday as 'adminUserDetail.birthday', ad.age as 'adminUserDetail.age' , ad.birthday_month as 'adminUserDetail.birthdayMonth' , 
+     ad.id_number as 'adminUserDetail.idNumber', ad.origin as 'adminUserDetail.origin',
+     ad.domicile as 'adminUserDetail.domicile' , ad.nation as 'adminUserDetail.nation' , ad.marriage as 'adminUserDetail.marriage', 
+     ad.political as 'adminUserDetail.political', ad.education as 'adminUserDetail.education', ad.major as 'adminUserDetail.major', 
+     ad.university as 'adminUserDetail.university', ad.phone1 as 'adminUserDetail.phone1', ad.phone2 as 'adminUserDetail.phone2',
+     ad.citizen_card as 'adminUserDetail.citizenCard', ad.payroll_card as 'adminUserDetail.payrollCard'
+  </sql>
 	
 	
 	<select id="getAdminUser" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
@@ -144,9 +152,12 @@
 			au.insurance_base       as            insuranceBase,
 			au.filing_date          as            filingDate,
 			au.leave_date           as            leaveDate,
-			au.retired_date         as            retiredDate
+			au.retired_date         as            retiredDate,
 			
-		from ADMIN_USER au 
+			 <include refid="UserDetail_Column_List" />
+			
+		from ADMIN_USER au left join ADMIN_USER_DETAIL ad
+		 on au.user_id = ad.user_id
 		where au.username = #{userName} 
 			and au.password = #{password}
 	</select>
@@ -326,8 +337,11 @@
 			au.insurance_base       as            insuranceBase,
 			au.filing_date          as            filingDate,
 			au.leave_date           as            leaveDate,
-			au.retired_date         as            retiredDate
-		from ADMIN_USER au
+			au.retired_date         as            retiredDate,
+			 <include refid="UserDetail_Column_List" />
+		from ADMIN_USER au 
+		left join ADMIN_USER_DETAIL ad
+		 on au.user_id = ad.user_id
 		where 1 = 1
 			<if test="map.userName!= null and  map.userName!=''">
 				and au.username like '%' || #{map.userName} || '%' ESCAPE '/'
