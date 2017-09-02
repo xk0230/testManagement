@@ -7,8 +7,8 @@
 		SELECT cost_subtype_id AS costSubTypeId,cost_type AS castType,name as name
 		FROM COST_SUBTYPE
 		WHERE 1=1
-		<if test="castType ==0 OR castType ==1">
-			AND cost_type = #{castType}
+		<if test="_parameter == 0 || _parameter ==1">
+			AND cost_type = #{_parameter}
 		</if>
 	
 	</select>
@@ -50,7 +50,7 @@
 	
 	<delete id="delCostEntityById" parameterType="java.lang.String">
 	
-		DELETE FROM COST_DETAIL WHERE cost_id = #{costId}
+		DELETE FROM COST_DETAIL WHERE cost_id = #{_parameter}
 		
 	</delete>
 	

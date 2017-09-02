@@ -9,7 +9,7 @@ public class CostSubTypeBean {
 	
 	private int costSubTypeId;
 	
-	private int castType = -1;
+	private int costType = -1;
 	
 	private String name;
 
@@ -21,12 +21,12 @@ public class CostSubTypeBean {
 		this.costSubTypeId = costSubTypeId;
 	}
 
-	public int getCastType() {
-		return castType;
+	public int getCostType() {
+		return costType;
 	}
 
-	public void setCastType(int castType) {
-		this.castType = castType;
+	public void setCostType(int costType) {
+		this.costType = costType;
 	}
 
 	public String getName() {
