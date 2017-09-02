@@ -303,12 +303,32 @@
 	<!-- 获取用户列表  -->
 	<select id="getAdminUserPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
 		select
-			au.user_id as adminUserId,
-			au.username as userName,
-			au.realname as realName,
-			NVL(au.contact,'-') as contact,
-			au.position as position,
-			au.locked   as locked
+			au.user_id    as userId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.create_time        as createTime,
+			au.delete_flag        as deleteFlag,
+			au.position             as position,
+			au.dep_id              	as				  depId, 
+			au.is_dep_manager       as            isDepManager,
+			au.post_id              as            postId,
+			au.work_status          as            workStatus,
+			au.salary_scale         as            salaryScale,
+			au.entry_date           as            entryDate,
+			au.working_years        as            workingYears,
+			au.salary_begin_date    as            salaryBeginDate,
+			au.probation_period     as            probationPeriod,
+			au.expected_date        as            expectedDate,
+			au.fwq_agreement        as            fwqAgreement,
+			au.fwq_num              as            fwqNum,
+			au.labour_begin_time    as            labourBeginTime,
+			au.labour_end_time     as            labourEndTime,
+			au.sign_time            as            signTime,
+			au.insurance_base       as            insuranceBase,
+			au.filing_date          as            filingDate,
+			au.leave_date           as            leaveDate,
+			au.retired_date         as            retiredDate
 		from ADMIN_USER au
 		where 1 = 1
 			<if test="map.userName!= null and  map.userName!=''">
@@ -317,31 +337,10 @@
 			<if test="map.realName != null and map.realName !=''">
 				and au.realname like '%' || #{map.realName} || '%' ESCAPE '/'
 			</if>
-			<if test="map.contact != null and map.contact!='' ">
-				and au.contact like '%' || #{map.contact} || '%' ESCAPE '/'
+			<if test="map.depId != null and map.depId !=''">
+				and au.dep_id in (#{map.depId})
 			</if>
-			<if test="map.position != null and map.position!='' ">
-				and au.position like '%' || #{map.position} || '%' ESCAPE '/'
-			</if>
-			<if test="map.state != null and map.state !='' and map.state !='-1' ">
-				and au.locked=#{map.state}
-			</if>
-			 <if test="map.projectId != null and map.projectId!='' ">
-				and (au.user_id in (
-				              select a.user_id from ADMIN_USER a 
-                                       left join project_r_user pr
-                                            on pr.user_id=a.user_id
-                                            where pr.project_id=#{map.projectId}
-                                            and  a.locked='Y')
-                                       or user_id in (select a.user_id
-                                                  from project p
-                                   left join  ADMIN_USER a
-                                       on a.user_id=p.manager_id
-                                       
-                                   where  p.project_id=#{map.projectId})  
-
-				     or au.locked='N')
-			</if>
+			
 			order by au.create_time DESC
 		
 	</select>

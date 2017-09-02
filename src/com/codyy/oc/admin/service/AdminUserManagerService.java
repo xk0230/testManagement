@@ -74,26 +74,25 @@ public class AdminUserManagerService {
 			}
 			
 			//测试数据
-			adUser.setPosition(CommonsConstant.USER_TYPE_STAFF);
-			adUser.setDepId("1");
-			adUser.setPostId("2");
-			adUser.setWorkStatus("3");
-			adUser.setSalaryScale("4");
-			adUser.setEntryDate(new Date());
-			adUser.setWorkingYears("5");
-			adUser.setSalaryBeginDate(new Date());
-			adUser.setProbationPeriod("6");
-			adUser.setExpectedDate(new Date());
-			adUser.setFwqAgreement("7");
-			adUser.setFwqNum("8");
-			adUser.setLabourBeginTime(new Date());
-			adUser.setLabourEndTime(new Date());
-			adUser.setSignTime("9");
-			adUser.setInsuranceBase("10");
-			adUser.setFilingDate(new Date());
-			adUser.setLeaveDate(new Date());
-			
-			adUser.setRetiredDate(new Date());
+//			adUser.setPosition(CommonsConstant.USER_TYPE_STAFF);
+//			adUser.setDepId("1");
+//			adUser.setPostId("2");
+//			adUser.setWorkStatus("3");
+//			adUser.setSalaryScale("4");
+//			adUser.setEntryDate(new Date());
+//			adUser.setWorkingYears("5");
+//			adUser.setSalaryBeginDate(new Date());
+//			adUser.setProbationPeriod("6");
+//			adUser.setExpectedDate(new Date());
+//			adUser.setFwqAgreement("7");
+//			adUser.setFwqNum("8");
+//			adUser.setLabourBeginTime(new Date());
+//			adUser.setLabourEndTime(new Date());
+//			adUser.setSignTime("9");
+//			adUser.setInsuranceBase("10");
+//			adUser.setFilingDate(new Date());
+//			adUser.setLeaveDate(new Date());
+//			adUser.setRetiredDate(new Date());
 			
 			adminUserMapper.insertAdminUser(adUser);
 			if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
