@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
-<script src="${root}/WEB-INF/pages/js/administrator/script.js" type="text/javascript"></script>
+
 </head>
 <body ng-app = "myApp" >
 		<%@ include file="../../common/header.jsp"%>
@@ -19,29 +19,38 @@
 						<!-- Start .bredcrumb -->
 						<ul id="crumb" class="breadcrumb">
 						</ul>
-						<ul class="searchWrap borderBox">
-							<li>
-								<label class="labelText">用户名：</label>
-								<input type="text" name="userName" ng-model="userName" id="userName" />
-								<label class="labelText">姓名：</label>
-								<input type="text" name="realName" ng-model="realName" id="realName" />
-								<label class="labelText">联系电话：</label>
-								<input type="text" name="contact"  ng-model="contact" id="contact" />
-								<label class="labelText">职位：</label>
-								<input type="text" name="position" ng-model="position" id="position" />
-								<label class="labelText">请选择：</label>
-								<select class="mr20" id="state" ng-model="state">
-										<option value="-1">-- 请选择 --</option>
-										<option value="N">开启</option>
-										<option value="Y">关闭</option>
-								</select>
-								<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
-							</li>
-						</ul>
+
 						<!-- End .breadcrumb -->
 					</div>
 					<!-- End .page	-header -->
 				</div>
+				<div class="outlet">
+					<!-- Start .outlet -->
+					<!-- Page start here ( usual with .row ) -->
+					<div class="row">
+						<div class="col-lg-12">
+							<!-- col-lg-12 start here -->
+							<div class="panel panel-primary toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h4 class="panel-title">查询条件</h4>
+								</div>
+								<div class="panel-body">
+									<ul class="searchWrap borderBox">
+										<li>
+											<label class="labelText">用户名：</label>
+											<input type="text" name="userName" ng-model="userName" id="userName" />
+											<label class="labelText">姓名：</label>
+											<input type="text" name="realName" ng-model="realName" id="realName" />
+											<label class="labelText">部门：</label>
+											<input type="text" name="position" ng-model="position" id="position" />
+											<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
 				<!-- End .row -->
 				<div class="outlet">
 					<!-- Start .outlet -->
@@ -66,7 +75,7 @@
 												<th>入职日期</th>
 												<th>操作</th>
 											</tr>
-										</thead>
+										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td><p ng-bind="item.userName"></p></td>
@@ -79,9 +88,10 @@
 											</tr>
 										</tbody>
 									</table>
+									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+									<%@ include file="../../common/page.jsp"%>
 								</div>
-							</div>
-							<!-- End .panel -->
+
 						</div>
 						<!-- col-lg-12 end here -->
 					</div>
@@ -89,23 +99,19 @@
 				</div>
 				<!-- End .outlet -->
 			</div>
-			
+
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
 		</div>
 		<!-- End #content -->
 	</div>
-		<script type="text/javascript">
-
-	</script>
-	
+			
 	<script type="text/javascript">
 	 $(document).ready(function(){
 		$("#addOrgUser").click(function(){
 			Win.open({id:"addOrgUserWin",url:"${root}/admin/adminuser/toaddadminuser.html",title:"新增账号",width:600,height:450,mask:true});
 		});
 		var splitPage;
-		search();
 	});
 	
 	function getUserType(adminFlag){
@@ -148,5 +154,6 @@
 		Win.open({id:"uploadExcel",width:500,height:260,title:"批量导入机构用户",url:"${root}/admin/commons/importUserPage.do?userType=area",mask:true});
 	}
 	</script>
+	<script src="${root}/public/js/pages/administrator/script.js" type="text/javascript"></script>
 </body>
 </html>

@@ -37,17 +37,21 @@
 
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/icons.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/sprflat-theme/jquery.ui.all.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/bootstrap.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/css/bootstrap.css" media="screen">
+
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/plugins.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/main.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 
-<script src="${root}/public/js/jquery.js" type="text/javascript"></script> 
-<script src="${root}/public/js/bootstrap/js/bootstrap.js" type="text/javascript"></script> 
+<script src="${root}/public/js/jquery.js" type="text/javascript"></script>
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
+<script src="${root}/public/js/angular/angular-ui-router.js" type="text/javascript"></script> 
+<script src="${root}/public/js/angular/angular-animate.js" type="text/javascript"></script> 
+<script src="${root}/public/js/angular/angular-locale_zh-cn.js" type="text/javascript"></script> 
+<script src="${root}/public/js/bootstrap/js/bootstrap.js" type="text/javascript"></script> 
+<script src="${root}/public/js/bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script> 
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>
-
 <script src="${root}/public/js/extend.js" type="text/javascript"></script>
 <script src="${root}/public/js/litewin.js" type="text/javascript"></script>
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
@@ -55,6 +59,9 @@
 <script src="${root}/public/js/common.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
+
+<link type="text/css" rel="stylesheet" href="${root}/public/css/ui-bootstrap-tpls-2.5.0.min.css" media="screen">
+
 <script type="text/javascript">
     var ROOT =  '${root}';
     $(document).on('ajaxComplete', function (jqXHR, xhr) {<%-- 判断ajax请求连接是否登录 --%>

@@ -144,7 +144,8 @@ public class AdminUserManagerController extends BaseController {
 	 */
 	@RequestMapping("toadminlist")
 	public String toAdminList(){
-		return "admin/administrator/showAdministratorList";		
+		return "admin/administrator/showAdministratorList";	
+		//return "admin/test/testPation";	
 	}
 	
 	/**
