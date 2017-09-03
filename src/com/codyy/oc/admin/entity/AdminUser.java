@@ -48,6 +48,7 @@ public class AdminUser implements Serializable {
 
 	private  List<AdminUserPermission> adminUserPer= new ArrayList<AdminUserPermission>();
 	
+	private AdminUserDetail adminUserDetail;
 	
 	public List<AdminUserPermission> getAdminUserPer() {
 		return adminUserPer;
@@ -276,6 +277,14 @@ public class AdminUser implements Serializable {
 
 	public void setRetiredDate(Date retiredDate) {
 		this.retiredDate = retiredDate;
+	}
+
+	public AdminUserDetail getAdminUserDetail() {
+		return adminUserDetail;
+	}
+
+	public void setAdminUserDetail(AdminUserDetail adminUserDetail) {
+		this.adminUserDetail = adminUserDetail;
 	}
 
 
