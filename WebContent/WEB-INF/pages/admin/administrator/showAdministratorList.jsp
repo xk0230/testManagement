@@ -33,7 +33,7 @@
 							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-                                    <h4 class="panel-title"><i class="ec-search"></i> 查询条件</h4>
+                                    <h4 class="panel-title"><i class="ec-search"></i> 查询条件123</h4>
 								</div>
 								<div class="panel-body">
 								
