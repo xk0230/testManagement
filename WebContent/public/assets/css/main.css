@@ -1387,6 +1387,9 @@ body.full-screen #header {
 #content .content-wrapper .heading .option-buttons #lock-timer {
   vertical-align: text-bottom;
 }
+#content .content-wrapper .heading ul li i {
+  font-size:24px;
+}
 /* -----------------------------------------
    Template elements
 ----------------------------------------- */

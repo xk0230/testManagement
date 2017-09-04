@@ -8,21 +8,21 @@
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
+		
 		<div id="content" ng-controller="UserListController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
-					<!-- Start .row -->
-					<!-- Start .page-header -->
 					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-table2"></i> 用户管理</h1>
-						<!-- Start .bredcrumb -->
-						<ul id="crumb" class="breadcrumb">
-						</ul>
-
-						<!-- End .breadcrumb -->
+		                <ul class="nav navbar-nav pull-left">
+		                    <li id="toggle-sidebar-li">
+		                        <a href="#" id="toggle-sidebar"><i class="im-users"></i></a>
+		                    </li>
+		                    <li id="toggle-sidebar-li">
+		                        <h1 class="page-header">用户管理</h1>
+		                    </li>
+		                </ul>
 					</div>
-					<!-- End .page	-header -->
 				</div>
 				<div class="outlet">
 					<!-- Start .outlet -->
@@ -33,20 +33,20 @@
 							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title">查询条件</h4>
+                                    <h4 class="panel-title"><i class="ec-search"></i> 查询条件</h4>
 								</div>
 								<div class="panel-body">
-									<ul class="searchWrap borderBox">
-										<li>
-											<label class="labelText">用户名：</label>
-											<input type="text" name="userName" ng-model="userName" id="userName" />
-											<label class="labelText">姓名：</label>
-											<input type="text" name="realName" ng-model="realName" id="realName" />
-											<label class="labelText">部门：</label>
-											<input type="text" name="position" ng-model="position" id="position" />
-											<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
-										</li>
-									</ul>
+							<ul class="searchWrap borderBox">
+								<li>
+									<label class="labelText">用户名：</label>
+									<input type="text" name="userName" ng-model="userName" id="userName" />
+									<label class="labelText">姓名：</label>
+									<input type="text" name="realName" ng-model="realName" id="realName" />
+									<label class="labelText">部门：</label>
+									<input type="text" name="position" ng-model="position" id="position" />
+									<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
+								</li>
+							</ul>
 								</div>
 							</div>
 						</div>
@@ -61,7 +61,7 @@
 							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title">查询结果</h4>
+									<h4 class="panel-title"><i class="ec-list"></i>查询结果</h4>
 								</div>
 								<div class="panel-body">
 									<table class="table display" id="datatable">
