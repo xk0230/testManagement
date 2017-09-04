@@ -1,12 +1,9 @@
 package com.codyy.oc.admin.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.json.util.JSONStringer;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,6 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.OracleKeyWordUtils;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.SecurityUtil;
-import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.BaseUserMapper;
 import com.codyy.oc.admin.dao.CommonsMapper;
 import com.codyy.oc.admin.entity.AdminUser;
@@ -25,13 +21,11 @@ import com.codyy.oc.admin.entity.BaseUser;
 import com.codyy.oc.admin.view.UserImportModel;
 import com.codyy.oc.admin.view.UserSearchModel;
 
+import net.sf.json.util.JSONStringer;
+
 /** 
  * ClassName: BaseUserManagerService
- * date: 2015年3月24日 下午4:02:34
  * 
- * @author yangyognwu 
- * @version  
- * @since JDK 1.7
  */  
 @Service
 public class BaseUserService {
@@ -95,32 +89,32 @@ public class BaseUserService {
 	 * @param baseUser
 	 * @return
 	 */
-	public ResultJson addOrgBaseUser(BaseUser baseUser){
-		String userName = baseUser.getUserName();
-		if(StringUtils.isBlank(userName)){
-			return new ResultJson(false,"用户名不能为空！");
-		}
-		if(baseUserMapper.getBaseUserCountByUserName(userName)>0){
-			return new ResultJson(false, "很抱歉，账号名称已存在，请重新输入！");
-		}
-		baseUser.setBaseUserId(UUIDUtils.getUUID());
-		String password = baseUser.getPassword();
-		if(StringUtils.isNotBlank(password)){
-			baseUser.setPassword(SecurityUtil.MD5String(password));
-		}else{
-			return new ResultJson(false, "添加失败！");
-		}
-		baseUser.setHeadPic(CommonsConstant.HEAD_PIC_DEFAULT);
-		baseUser.setUserType(CommonsConstant.USER_TYPE_AREA_USER);
-		baseUser.setCreateTime(new Date());
-		baseUser.setDeleteFlag(CommonsConstant.FLAG_NO);
-		baseUser.setCreateUserType(CommonsConstant.CREATE_USER_TYPE_BASE_ADMIN);
-		if(baseUserMapper.insertSelective(baseUser)>0){
-			return new ResultJson(true);
-		}else{
-			return new ResultJson(false, "添加失败！");
-		}
-	}
+//	public ResultJson addOrgBaseUser(BaseUser baseUser){
+//		String userName = baseUser.getUserName();
+//		if(StringUtils.isBlank(userName)){
+//			return new ResultJson(false,"用户名不能为空！");
+//		}
+//		if(baseUserMapper.getBaseUserCountByUserName(userName)>0){
+//			return new ResultJson(false, "很抱歉，账号名称已存在，请重新输入！");
+//		}
+//		baseUser.setBaseUserId(UUIDUtils.getUUID());
+//		String password = baseUser.getPassword();
+//		if(StringUtils.isNotBlank(password)){
+//			baseUser.setPassword(SecurityUtil.MD5String(password));
+//		}else{
+//			return new ResultJson(false, "添加失败！");
+//		}
+//		baseUser.setHeadPic(CommonsConstant.HEAD_PIC_DEFAULT);
+//		baseUser.setUserType(CommonsConstant.USER_TYPE_AREA_USER);
+//		baseUser.setCreateTime(new Date());
+//		baseUser.setDeleteFlag(CommonsConstant.FLAG_NO);
+//		baseUser.setCreateUserType(CommonsConstant.CREATE_USER_TYPE_BASE_ADMIN);
+//		if(baseUserMapper.insertSelective(baseUser)>0){
+//			return new ResultJson(true);
+//		}else{
+//			return new ResultJson(false, "添加失败！");
+//		}
+//	}
 	
 	/**
 	 * 

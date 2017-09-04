@@ -13,7 +13,7 @@
 	
 	<!-- 根据传来的id来删除用户的所有信息-->
 	<delete id="deleteAdminUsersById" parameterType="java.lang.String">
-	     delete from ADMIN_USER where ADMIN_USER_ID=#{adminUserId}
+	     delete from ADMIN_USER where user_id=#{adminUserId}
 	</delete>
 	
 	
@@ -24,14 +24,20 @@
 	
 	<!--  修改操作中验证用户-->
 	<select id="checkSelUpteName" parameterType="com.codyy.oc.admin.entity.AdminUser" resultMap="BaseResultMap">
-	          select * from ADMIN_USER t where t.username=#{userName} and t.admin_user_id=#{adminUserId}
+	          select * from ADMIN_USER t where t.username=#{userName} and t.user_id=#{adminUserId}
 	</select>
 	
 	
 	<!-- 添加用户AdminUser表-->
 	<insert id="insertAdminUser" parameterType="com.codyy.oc.admin.entity.AdminUser" >
-	    insert into ADMIN_USER(USER_ID,USERNAME,PASSWORD,REALNAME,CREATE_TIME)
-	    values(#{userId},#{userName},#{password},#{realName},#{createTime})    
+	insert into
+	ADMIN_USER(USER_ID,USERNAME,PASSWORD,REALNAME,CREATE_TIME,DEP_ID,POSITION,POST_ID,
+	WORK_STATUS,SALARY_SCALE,ENTRY_DATE,WORKING_YEARS,SALARY_BEGIN_DATE,PROBATION_PERIOD,EXPECTED_DATE,
+	FWQ_AGREEMENT,FWQ_NUM,LABOUR_BEGIN_TIME,LABOUR_END_TIME,SIGN_TIME,INSURANCE_BASE,FILING_DATE,LEAVE_DATE,RETIRED_DATE)
+	values(#{userId},#{userName},#{password},#{realName},#{createTime},#{depId},#{position},#{postId},
+	#{workStatus},#{salaryScale},#{entryDate},#{workingYears},#{salaryBeginDate},
+	#{probationPeriod},#{expectedDate},#{fwqAgreement},#{fwqNum},#{labourBeginTime},#{labourEndTime},#{signTime},
+	#{insuranceBase},#{filingDate},#{leaveDate},#{retiredDate})    
 	</insert>
 	
 	<!-- 修改用户信息-->
@@ -41,17 +47,8 @@
 			<if test="userName != null">
 				u.USERNAME = #{userName},
 			</if>
-			<if test="locked != null">
-				u.LOCKED = #{locked},
-			</if>
 			<if test="realName != null">
 				u.REALNAME = #{realName},
-			</if>
-			<if test="contact != null">
-				u.CONTACT = #{contact},
-			</if>
-			<if test="weixin_num != null">
-				u.WEIXIN_NUM = #{weixin_num},
 			</if>
 			<if test="position != null">
 				u.POSITION = #{position},
@@ -63,42 +60,161 @@
 		</set>
 		<where>
 			<if test="adminUserId != null">
-            u.ADMIN_USER_ID = #{adminUserId}
+            u.user_id = #{adminUserId}
           </if>
       </where> 
 	</update>
 	
 	<!-- 用户按照id进行查询-->
 	<resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.AdminUser">
-		<id column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR" />
+		<id column="user_id" property="adminUserId" jdbcType="VARCHAR" />
 		<result column="USERNAME" property="userName" jdbcType="VARCHAR" />
 		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
 		<result column="REALNAME" property="realName" jdbcType="VARCHAR" />
-		<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
-		<result column="LOCKED" property="locked" jdbcType="VARCHAR" />
 		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
 		<result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
 		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="WEIXIN_NUM" property="weixin_num" jdbcType="VARCHAR" />
 		<result column="POSITION" property="position" jdbcType="VARCHAR" />
-		<collection property="adminUserPer" ofType="com.codyy.oc.admin.entity.AdminUserPermission" column="ADMIN_USER_ID" select="collectionMap"></collection>
+		<collection property="adminUserPer" ofType="com.codyy.oc.admin.entity.AdminUserPermission" column="user_id" select="collectionMap"></collection>
 	</resultMap>
+	
+	<resultMap id="UserResultMap" type="com.codyy.oc.admin.entity.AdminUser">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="delete_flag" jdbcType="CHAR" property="deleteFlag" />
+    <result column="dep_id" jdbcType="VARCHAR" property="depId" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="work_status" jdbcType="VARCHAR" property="workStatus" />
+    <result column="salary_scale" jdbcType="INTEGER" property="salaryScale" />
+    <result column="entry_date" jdbcType="TIMESTAMP" property="entryDate" />
+    <result column="working_years" jdbcType="DOUBLE" property="workingYears" />
+    <result column="salary_begin_date" jdbcType="TIMESTAMP" property="salaryBeginDate" />
+    <result column="probation_period" jdbcType="INTEGER" property="probationPeriod" />
+    <result column="expected_date" jdbcType="TIMESTAMP" property="expectedDate" />
+    <result column="fwq_agreement" jdbcType="VARCHAR" property="fwqAgreement" />
+    <result column="fwq_num" jdbcType="INTEGER" property="fwqNum" />
+    <result column="labour_begin_time" jdbcType="TIMESTAMP" property="labourBeginTime" />
+    <result column="labour_end_time" jdbcType="TIMESTAMP" property="labourEndTime" />
+    <result column="sign_time" jdbcType="INTEGER" property="signTime" />
+    <result column="insurance_base" jdbcType="INTEGER" property="insuranceBase" />
+    <result column="filing_date" jdbcType="TIMESTAMP" property="filingDate" />
+    <result column="leave_date" jdbcType="TIMESTAMP" property="leaveDate" />
+    <result column="retired_date" jdbcType="TIMESTAMP" property="retiredDate" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+  </resultMap>
+	
+	
+	  <update id="updateById" parameterType="map">
+    update ADMIN_USER
+    <set>
+      <if test="record.userName != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        realname = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null">
+        delete_flag = #{record.deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.depId != null">
+        dep_id = #{record.depId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workStatus != null">
+        work_status = #{record.workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salaryScale != null">
+        salary_scale = #{record.salaryScale,jdbcType=INTEGER},
+      </if>
+      <if test="record.entryDate != null">
+        entry_date = #{record.entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.workingYears != null">
+        working_years = #{record.workingYears,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salaryBeginDate != null">
+        salary_begin_date = #{record.salaryBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.probationPeriod != null">
+        probation_period = #{record.probationPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.expectedDate != null">
+        expected_date = #{record.expectedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fwqAgreement != null">
+        fwq_agreement = #{record.fwqAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fwqNum != null">
+        fwq_num = #{record.fwqNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.labourBeginTime != null">
+        labour_begin_time = #{record.labourBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.labourEndTime != null">
+        labour_end_time = #{record.labourEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.signTime != null">
+        sign_time = #{record.signTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.insuranceBase != null">
+        insurance_base = #{record.insuranceBase,jdbcType=INTEGER},
+      </if>
+      <if test="record.filingDate != null">
+        filing_date = #{record.filingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveDate != null">
+        leave_date = #{record.leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.retiredDate != null">
+        retired_date = #{record.retiredDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{record.userId,jdbcType=VARCHAR}
+  </update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<resultMap id="adminPersissionMap" type="com.codyy.oc.admin.entity.AdminUserPermission">
 	     <id column="ADMIN_PERMISSION_ID" property="adminPersId" jdbcType="VARCHAR"/>
-	     <result column="ADMIN_USER_ID" property="adminUserId" jdbcType="VARCHAR"/>
+	     <result column="user_id" property="adminUserId" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 将每次返回的对象放入集合中-->
 	<select id="collectionMap" resultMap="adminPersissionMap">
-	      select ADMIN_PERMISSION_ID,ADMIN_USER_ID from admin_user_r_permission where ADMIN_USER_ID=#{ADMIN_USER_ID}
+	      select ADMIN_PERMISSION_ID,user_id from admin_user_r_permission where user_id=#{user_id}
 	</select>
 	
 	<!-- 根据用户的id来获取对应用户的所有信息-->
 	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
-	    select ADMIN_USER_ID ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
-	    from ADMIN_USER where ADMIN_USER_ID=#{adminUserId}
+	    select user_id ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
+	    from ADMIN_USER where user_id=#{adminUserId}
 	</select>
 	
 	
@@ -109,7 +225,15 @@
 	
 	
 	
-	
+  <sql id="UserDetail_Column_List">
+     ad.user_detail_id as 'adminUserDetail.userDetailId', ad.user_id as 'adminUserDetail.userId', ad.sex as 'adminUserDetail.sex',
+     ad.birthday as 'adminUserDetail.birthday', ad.age as 'adminUserDetail.age' , ad.birthday_month as 'adminUserDetail.birthdayMonth' , 
+     ad.id_number as 'adminUserDetail.idNumber', ad.origin as 'adminUserDetail.origin',
+     ad.domicile as 'adminUserDetail.domicile' , ad.nation as 'adminUserDetail.nation' , ad.marriage as 'adminUserDetail.marriage', 
+     ad.political as 'adminUserDetail.political', ad.education as 'adminUserDetail.education', ad.major as 'adminUserDetail.major', 
+     ad.university as 'adminUserDetail.university', ad.phone1 as 'adminUserDetail.phone1', ad.phone2 as 'adminUserDetail.phone2',
+     ad.citizen_card as 'adminUserDetail.citizenCard', ad.payroll_card as 'adminUserDetail.payrollCard'
+  </sql>
 	
 	
 	<select id="getAdminUser" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
@@ -122,7 +246,6 @@
 			au.delete_flag        as deleteFlag,
 			au.position             as position,
 			au.dep_id              	as				  depId, 
-			au.is_dep_manager       as            isDepManager,
 			au.post_id              as            postId,
 			au.work_status          as            workStatus,
 			au.salary_scale         as            salaryScale,
@@ -134,21 +257,24 @@
 			au.fwq_agreement        as            fwqAgreement,
 			au.fwq_num              as            fwqNum,
 			au.labour_begin_time    as            labourBeginTime,
-			au.labour_begin_end     as            labourBeginEnd,
+			au.labour_end_time     as            labourEndTime,
 			au.sign_time            as            signTime,
 			au.insurance_base       as            insuranceBase,
 			au.filing_date          as            filingDate,
 			au.leave_date           as            leaveDate,
-			au.retired_date         as            retiredDate
+			au.retired_date         as            retiredDate,
 			
-		from ADMIN_USER au 
+			 <include refid="UserDetail_Column_List" />
+			
+		from ADMIN_USER au left join ADMIN_USER_DETAIL ad
+		 on au.user_id = ad.user_id
 		where au.username = #{userName} 
 			and au.password = #{password}
 	</select>
 	
 	<!-- 新增用户维护关联 -->
 	<insert id="insertAdminUserRole" parameterType="list">
-		insert into admin_user_r_role(admin_user_id, admin_role_id)  
+		insert into admin_user_r_role(user_id, admin_role_id)  
 		<foreach collection="list" item="items" open="(" close=")" separator="union all">
 			select
 				#{items.adminUserId} ,
@@ -182,29 +308,29 @@
 		</set>
 		<where>
 			<if test="adminUserId != null">
-            u.admin_user_id = #{adminUserId}
+            u.user_id = #{adminUserId}
           </if>
       </where>
 	</update>
 	
 	<!-- 更新用户维护关联表 -->
 	<delete id="deleteAdminUserRole" parameterType="java.lang.String">
-		delete from admin_user_r_role ur where ur.admin_user_id = #{adminUserId}
+		delete from admin_user_r_role ur where ur.user_id = #{adminUserId}
 	</delete>
 	
 	<!-- 删除用户 -->
 	<delete id="deleteAdminUserById" parameterType="java.lang.String">
-		delete from ADMIN_USER u where u.admin_user_id = #{adminUserId}
+		delete from ADMIN_USER u where u.user_id = #{adminUserId}
 	</delete>
 	
 	<update id="updateAdminUserById" parameterType="java.lang.String">
-		update ADMIN_USER u set u.delete_flag = 'Y' where u.admin_user_id = #{adminUserId}
+		update ADMIN_USER u set u.delete_flag = 'Y' where u.user_id = #{adminUserId}
 	</update>
 	
 	<!-- 根据管理员id获取管理员信息 -->
 	<select id="findAdminUserById" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="java.lang.String">
 		select 
-			au.admin_user_id as adminUserId,
+			au.user_id as adminUserId,
 			au.username 			as userName,
 			au.password 			as password,
 			au.realname 			as realName,
@@ -213,19 +339,19 @@
 			au.remark   			as remark,
 			au.create_user_id	as createUserId
 		from ADMIN_USER au 
-		where au.admin_user_id = #{id}
+		where au.user_id = #{id}
 	</select>
 	
 	<!-- 根据用户ID查询其所属角色 -->
 	<select id="findAdminUserRoleById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminUserRole">
 		select 
-			au.admin_user_id	adminUserId ,
+			au.user_id	adminUserId ,
 			ar.admin_role_id 	adminRoleId , 
 			ar.role_name 		adminRoleName 
 		 from ADMIN_USER au, admin_user_r_role aur, admin_role ar
- 		 where au.admin_user_id = aur.admin_user_id
+ 		 where au.user_id = aur.user_id
    		 		 and aur.admin_role_id = ar.admin_role_id
-		 		 and au.admin_user_id = #{adminUserId}
+		 		 and au.user_id = #{adminUserId}
 	</select>
 	
 	<!-- 修改管理员密码 -->
@@ -233,21 +359,21 @@
 		update 
 			ADMIN_USER au 
 		set au.password = #{password} 
-		where au.admin_user_id = #{adminUserId}
+		where au.user_id = #{adminUserId}
 	</update>	
 	
 	<!-- 分页条件查询用户 -->
 	<select id="findPageList" resultType="com.codyy.oc.admin.view.AdminUserView" parameterType="com.codyy.commons.page.Page">
 		select 
-			u.admin_user_id adminUserId,
+			u.user_id adminUserId,
        	u.username userName,
        	wm_concat(NVL(r.role_name, '-')) roleName, 
        	NVL(au.userName,'-') createAdminUser,
        	NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') createTime
   		from ADMIN_USER u
-	  		left join admin_user_r_role ur on u.admin_user_id = ur.admin_user_id
+	  		left join admin_user_r_role ur on u.user_id = ur.user_id
 	  		left join admin_role r on ur.admin_role_id = r.admin_role_id
-	    	left join ADMIN_USER au on u.create_user_id = au.admin_user_id
+	    	left join ADMIN_USER au on u.create_user_id = au.user_id
 	  		<where>
 	  			and u.delete_flag = 'N'
 	  			<if test="map.adminRoleId != ''">
@@ -257,7 +383,7 @@
 	  				and u.username like '%'|| #{map.userName} || '%'
 	  			</if>
 	  		</where>
-  			group by u.admin_user_id ,u.username, au.userName, NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '')
+  			group by u.user_id ,u.username, au.userName, NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '')
   			order by NVL2(u.create_time, to_char(u.create_time,'yyyy-MM-dd HH:mm:ss'), '') desc
 	</select>
 	
@@ -271,13 +397,13 @@
 	     update 
 			ADMIN_USER au 
 		set au.realname = #{realName} , au.contact=#{contact}
-		where au.admin_user_id = #{adminUserId}
+		where au.user_id = #{adminUserId}
 	</update>
 	
 	<!-- 获取个人资料 -->
 	<select id="getAdmin" resultType="com.codyy.oc.admin.entity.AdminUser" parameterType="map">
 		select
-		    au.admin_user_id    as adminUserId,
+		    au.user_id    as adminUserId,
 			au.username 			as userName,
 			au.password 			as password,
 			au.realname 			as realName,
@@ -291,19 +417,41 @@
 			au.position             as position
 		from ADMIN_USER au 
 		where au.username = #{userName} 
-			and au.admin_user_id = #{adminUserId}
+			and au.user_id = #{adminUserId}
 	</select>
 	
 	<!-- 获取用户列表  -->
 	<select id="getAdminUserPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
 		select
-			au.admin_user_id as adminUserId,
-			au.username as userName,
-			au.realname as realName,
-			NVL(au.contact,'-') as contact,
-			au.position as position,
-			au.locked   as locked
-		from ADMIN_USER au
+			au.user_id    as userId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.create_time        as createTime,
+			au.delete_flag        as deleteFlag,
+			au.position             as position,
+			au.dep_id              	as				  depId, 
+			au.post_id              as            postId,
+			au.work_status          as            workStatus,
+			au.salary_scale         as            salaryScale,
+			au.entry_date           as            entryDate,
+			au.working_years        as            workingYears,
+			au.salary_begin_date    as            salaryBeginDate,
+			au.probation_period     as            probationPeriod,
+			au.expected_date        as            expectedDate,
+			au.fwq_agreement        as            fwqAgreement,
+			au.fwq_num              as            fwqNum,
+			au.labour_begin_time    as            labourBeginTime,
+			au.labour_end_time     as            labourEndTime,
+			au.sign_time            as            signTime,
+			au.insurance_base       as            insuranceBase,
+			au.filing_date          as            filingDate,
+			au.leave_date           as            leaveDate,
+			au.retired_date         as            retiredDate,
+			 <include refid="UserDetail_Column_List" />
+		from ADMIN_USER au 
+		left join ADMIN_USER_DETAIL ad
+		 on au.user_id = ad.user_id
 		where 1 = 1
 			<if test="map.userName!= null and  map.userName!=''">
 				and au.username like '%' || #{map.userName} || '%' ESCAPE '/'
@@ -311,31 +459,10 @@
 			<if test="map.realName != null and map.realName !=''">
 				and au.realname like '%' || #{map.realName} || '%' ESCAPE '/'
 			</if>
-			<if test="map.contact != null and map.contact!='' ">
-				and au.contact like '%' || #{map.contact} || '%' ESCAPE '/'
+			<if test="map.depId != null and map.depId !=''">
+				and au.dep_id in (#{map.depId})
 			</if>
-			<if test="map.position != null and map.position!='' ">
-				and au.position like '%' || #{map.position} || '%' ESCAPE '/'
-			</if>
-			<if test="map.state != null and map.state !='' and map.state !='-1' ">
-				and au.locked=#{map.state}
-			</if>
-			 <if test="map.projectId != null and map.projectId!='' ">
-				and (au.admin_user_id in (
-				              select a.admin_user_id from ADMIN_USER a 
-                                       left join project_r_user pr
-                                            on pr.admin_user_id=a.admin_user_id
-                                            where pr.project_id=#{map.projectId}
-                                            and  a.locked='Y')
-                                       or admin_user_id in (select a.admin_user_id
-                                                  from project p
-                                   left join  ADMIN_USER a
-                                       on a.admin_user_id=p.manager_id
-                                       
-                                   where  p.project_id=#{map.projectId})  
-
-				     or au.locked='N')
-			</if>
+			
 			order by au.create_time DESC
 		
 	</select>
@@ -362,16 +489,16 @@
 				and au.locked=#{state}
 			</if>
 		    <if test="projectId != null and projectId!='' ">
-				and (au.admin_user_id in (
-				              select pr.admin_user_id from  project_r_user pr 
+				and (au.user_id in (
+				              select pr.user_id from  project_r_user pr 
                                        left join ADMIN_USER  a
-                                            on pr.admin_user_id=a.admin_user_id
+                                            on pr.user_id=a.user_id
                                             where pr.project_id=#{projectId}
                                             and  a.locked='Y') 
-                            or admin_user_id in (select a.admin_user_id
+                            or user_id in (select a.user_id
                                                   from project p
                                    left join  ADMIN_USER a
-                                       on a.admin_user_id=p.manager_id
+                                       on a.user_id=p.manager_id
                                        
                                    where  p.project_id=#{projectId}  
                                       
@@ -382,11 +509,15 @@
 	</select>
 	<select id="checkUserState" parameterType="String" resultType="com.codyy.oc.admin.entity.AdminUser">
 	    select 
-	        au.admin_user_id as adminUserId,
+	        au.user_id as adminUserId,
 			au.username as userName,
 			au.realname as realName,
 			au.locked   as locked
 	    from ADMIN_USER au
-	    where au.admin_user_id=#{userId}
+	    where au.user_id=#{userId}
 	</select>
+	
+	<update id="updatePaswd"  parameterType="com.codyy.oc.admin.entity.AdminUser" >
+		update ADMIN_USER au set au.password =  #{password} where au.user_id = #{userId}
+	</update>
 </mapper>

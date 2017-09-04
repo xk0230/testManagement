@@ -24,33 +24,31 @@ public class AdminUser implements Serializable {
 	private String userName ;												// === 用户名
 	private String password ;												// === 密码
 	private String realName ;												// === 真实姓名
-	private String locked = CommonsConstant.FLAG_NO ;				// === 帐号锁定状态
 	private String deleteFlag = CommonsConstant.FLAG_NO ;			// === 删除状态
 	private Date createTime ;												// === 创建时间
 	private String position;                                               //角色
 	private String depId; //部门id
-	private String isDepManager; //0:普通员工，1:部门经理
 	private String postId;//岗位ID
 	private String workStatus;//状态：试用等
 	private String salaryScale;//薪级
-	private String entryDate;//入职日期
+	private Date entryDate;//入职日期
 	private String workingYears;//工龄
-	private String salaryBeginDate;//起薪日
+	private Date salaryBeginDate;//起薪日
 	private String probationPeriod;//试用期限
-	private String expectedDate;//预计转正日
+	private Date expectedDate;//预计转正日
 	private String fwqAgreement;//服务期协议
 	private String fwqNum;//服务期金额
-	private String labourBeginTime;//合同开始时间
-	private String labourBeginEnd;//合同结束时间
+	private Date labourBeginTime;//合同开始时间
+	private Date labourEndTime;//合同结束时间
 	private String signTime;//签订次数
 	private String insuranceBase;//缴费基数
-	private String filingDate;//备案日期
-	private String leaveDate;//离职日期
-	private String retiredDate;//退工日期
-
+	private Date filingDate;//备案日期
+	private Date leaveDate;//离职日期
+	private Date retiredDate;//退工日期
 
 	private  List<AdminUserPermission> adminUserPer= new ArrayList<AdminUserPermission>();
 	
+	private AdminUserDetail adminUserDetail;
 	
 	public List<AdminUserPermission> getAdminUserPer() {
 		return adminUserPer;
@@ -95,15 +93,6 @@ public class AdminUser implements Serializable {
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-
-	public String getLocked() {
-		return locked;
-	}
-
-	public void setLocked(String locked) {
-		this.locked = locked;
-	}
-
 
 	public List<AdminUserRole> getAdminUserRoles() {
 		return adminUserRoles;
@@ -154,14 +143,6 @@ public class AdminUser implements Serializable {
 		this.depId = depId;
 	}
 
-	public String getIsDepManager() {
-		return isDepManager;
-	}
-
-	public void setIsDepManager(String isDepManager) {
-		this.isDepManager = isDepManager;
-	}
-
 	public String getPostId() {
 		return postId;
 	}
@@ -186,11 +167,11 @@ public class AdminUser implements Serializable {
 		this.salaryScale = salaryScale;
 	}
 
-	public String getEntryDate() {
+	public Date getEntryDate() {
 		return entryDate;
 	}
 
-	public void setEntryDate(String entryDate) {
+	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
 
@@ -202,11 +183,11 @@ public class AdminUser implements Serializable {
 		this.workingYears = workingYears;
 	}
 
-	public String getSalaryBeginDate() {
+	public Date getSalaryBeginDate() {
 		return salaryBeginDate;
 	}
 
-	public void setSalaryBeginDate(String salaryBeginDate) {
+	public void setSalaryBeginDate(Date salaryBeginDate) {
 		this.salaryBeginDate = salaryBeginDate;
 	}
 
@@ -218,11 +199,11 @@ public class AdminUser implements Serializable {
 		this.probationPeriod = probationPeriod;
 	}
 
-	public String getExpectedDate() {
+	public Date getExpectedDate() {
 		return expectedDate;
 	}
 
-	public void setExpectedDate(String expectedDate) {
+	public void setExpectedDate(Date expectedDate) {
 		this.expectedDate = expectedDate;
 	}
 
@@ -242,20 +223,20 @@ public class AdminUser implements Serializable {
 		this.fwqNum = fwqNum;
 	}
 
-	public String getLabourBeginTime() {
+	public Date getLabourBeginTime() {
 		return labourBeginTime;
 	}
 
-	public void setLabourBeginTime(String labourBeginTime) {
+	public void setLabourBeginTime(Date labourBeginTime) {
 		this.labourBeginTime = labourBeginTime;
 	}
 
-	public String getLabourBeginEnd() {
-		return labourBeginEnd;
+	public Date getLabourEndTime() {
+		return labourEndTime;
 	}
 
-	public void setLabourBeginEnd(String labourBeginEnd) {
-		this.labourBeginEnd = labourBeginEnd;
+	public void setLabourEndTime(Date labourEndTime) {
+		this.labourEndTime = labourEndTime;
 	}
 
 	public String getSignTime() {
@@ -274,29 +255,39 @@ public class AdminUser implements Serializable {
 		this.insuranceBase = insuranceBase;
 	}
 
-	public String getFilingDate() {
+	public Date getFilingDate() {
 		return filingDate;
 	}
 
-	public void setFilingDate(String filingDate) {
+	public void setFilingDate(Date filingDate) {
 		this.filingDate = filingDate;
 	}
 
-	public String getLeaveDate() {
+	public Date getLeaveDate() {
 		return leaveDate;
 	}
 
-	public void setLeaveDate(String leaveDate) {
+	public void setLeaveDate(Date leaveDate) {
 		this.leaveDate = leaveDate;
 	}
 
-	public String getRetiredDate() {
+	public Date getRetiredDate() {
 		return retiredDate;
 	}
 
-	public void setRetiredDate(String retiredDate) {
+	public void setRetiredDate(Date retiredDate) {
 		this.retiredDate = retiredDate;
 	}
 
+	public AdminUserDetail getAdminUserDetail() {
+		return adminUserDetail;
+	}
+
+	public void setAdminUserDetail(AdminUserDetail adminUserDetail) {
+		this.adminUserDetail = adminUserDetail;
+	}
+
+
+	
 	
 }

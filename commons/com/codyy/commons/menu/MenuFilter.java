@@ -84,12 +84,12 @@ public class MenuFilter implements Filter {
 			String subStr = map.get("menu." + m + ".submenus").toString();
 			String[] subs = StringUtils.split(subStr, ',');
 			for (String sub:subs){
-				if (user.getUserType().equals(CommonsConstant.USER_TYPE_AREA_USER)){
-					if (!user.getHasSubArea() && sub.equals("lowerUser"))
-						continue;
-					if (!user.getCreateSchool() && sub.equals("school"))
-						continue;
-				}
+//				if (user.getUserType().equals(CommonsConstant.USER_TYPE_AREA_USER)){
+//					if (!user.getHasSubArea() && sub.equals("lowerUser"))
+//						continue;
+//					if (!user.getCreateSchool() && sub.equals("school"))
+//						continue;
+//				}
 				String type = map.get("menu." + m + ".sub." + sub + ".type").toString();
 				if (type.equals("ALL") || StringUtils.contains(type, user.getUserType())){
 					SubMenuEntity subEntity = new SubMenuEntity();

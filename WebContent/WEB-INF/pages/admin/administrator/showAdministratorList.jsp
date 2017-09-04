@@ -2,55 +2,103 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
+<script src="${root}/WEB-INF/pages/js/administrator/script.js" type="text/javascript"></script>
 </head>
-<body>
-	<h3 id="cataMenu">
-		<a href="javascript:;">用户管理</a> &gt; <a href="javascript:;">账号管理</a>
-	</h3>
-	<div id="control">
-		<div id="controlContent">
-			<ul class="searchWrap borderBox">
-				<li>
-					<label class="labelText">用户名：</label>
-					<input type="text" name="userName" id="userName" />
-					<label class="labelText">姓名：</label>
-					<input type="text" name="realName" id="realName" />
-					<label class="labelText">联系电话：</label>
-					<input type="text" name="contact" id="contact" />
-					<label class="labelText">职位：</label>
-					<input type="text" name="position" id="position" />
-					<label class="labelText">请选择：</label>
-					<select class="mr20" id="state">
-							<option value="-1">-- 请选择 --</option>
-							<option value="N">开启</option>
-							<option value="Y">关闭</option>
-						</select>
-					<input type="button" class="submit btn" name="query" onclick="search();" value="查询"  style="margin-left: 30px;"/>
-				</li>
-			</ul>
-			<div class="totalPageBox">
-				<div class="fr">
-					<a id="addOrgUser" class="btn btnGreen" href="javascript:;">新增</a>
+<body ng-app = "myApp" >
+		<%@ include file="../../common/header.jsp"%>
+		<%@ include file="../../common/side.jsp"%>
+		<!-- Start #content -->
+		<div id="content" ng-controller="UserListController as vm">
+			<!-- Start .content-wrapper -->
+			<div class="content-wrapper">
+				<div class="row">
+					<!-- Start .row -->
+					<!-- Start .page-header -->
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-table2"></i> 用户管理</h1>
+						<!-- Start .bredcrumb -->
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+						<ul class="searchWrap borderBox">
+							<li>
+								<label class="labelText">用户名：</label>
+								<input type="text" name="userName" ng-model="userName" id="userName" />
+								<label class="labelText">姓名：</label>
+								<input type="text" name="realName" ng-model="realName" id="realName" />
+								<label class="labelText">联系电话：</label>
+								<input type="text" name="contact"  ng-model="contact" id="contact" />
+								<label class="labelText">职位：</label>
+								<input type="text" name="position" ng-model="position" id="position" />
+								<label class="labelText">请选择：</label>
+								<select class="mr20" id="state" ng-model="state">
+										<option value="-1">-- 请选择 --</option>
+										<option value="N">开启</option>
+										<option value="Y">关闭</option>
+								</select>
+								<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
+							</li>
+						</ul>
+						<!-- End .breadcrumb -->
+					</div>
+					<!-- End .page	-header -->
 				</div>
-				<div>总共<span class="totalNum" id="totalNum">0</span> 条数据</div>
+				<!-- End .row -->
+				<div class="outlet">
+					<!-- Start .outlet -->
+					<!-- Page start here ( usual with .row ) -->
+					<div class="row">
+						<div class="col-lg-12">
+							<!-- col-lg-12 start here -->
+							<div class="panel panel-primary toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h4 class="panel-title">查询结果</h4>
+								</div>
+								<div class="panel-body">
+									<table class="table display" id="datatable">
+										<thead>
+											<tr>
+												<th>工号</th>
+												<th>姓名</th>
+												<th>部门</th>
+												<th>岗位</th>
+												<th>状态</th>
+												<th>入职日期</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="odd gradeX" ng-repeat="item in vm.list">
+												<td><p ng-bind="item.userName"></p></td>
+												<td><p ng-bind="item.realName"></p></td>
+												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.workStatus"></p></td>
+												<td><p ng-bind="item.createTime"></p></td>
+												<td><p ng-bind="item.username"></p></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- End .panel -->
+						</div>
+						<!-- col-lg-12 end here -->
+					</div>
+					<!-- Page End here -->
+				</div>
+				<!-- End .outlet -->
 			</div>
-		<table class="tableBox">
-			<tr>
-				<th width="10%">序号</th>
-				<th width="15%">用户名</th>
-				<th width="15%">姓名</th>
-				<th width="15%">联系电话</th>
-				<th width="15%">职位</th>
-				<th width="15%">状态</th>
-				<th width="15%">操作</th>
-			</tr>
-			<tbody id="pageBody">
-			</tbody>
-		</table>
-		<div class="pageNavi" id="pager"></div>
-		
+			
+			<!-- End .content-wrapper -->
+			<div class="clearfix"></div>
 		</div>
+		<!-- End #content -->
 	</div>
+		<script type="text/javascript">
+
+	</script>
+	
 	<script type="text/javascript">
 	 $(document).ready(function(){
 		$("#addOrgUser").click(function(){
@@ -59,49 +107,6 @@
 		var splitPage;
 		search();
 	});
-	
-	
-	function getOrgUserList(data,total){
-		if(total || total != 0){
-			if(data){
-				$("#totalNum").html(total);
-				var start = splitPage.req.start;
-				var html ='';
-				var baseUser;
-				for(var i = 0,j = data.length;i<j;i++){
-					baseUser = data[i];
-					start++;
-					html+='<tr>';
-					html+='<td>'+(start==null?'-':start)+'</td>';
-					html+='<td>'+(baseUser.userName==null?'-':baseUser.userName)+'</td>';
-					html+='<td>'+(baseUser.realName==null?'-':baseUser.realName)+'</td>';
-					html+='<td>'+(baseUser.contact==null?'-':baseUser.contact)+'</td>';
-					html+='<td>'+(baseUser.position==null?'-':baseUser.position)+'</td>';
-					html+='<td>'+(getState(baseUser.locked)==null?'-':getState(baseUser.locked))+'</td>';
-				    html+='<td><a href="javascript:;" onclick="editOrgUser(\''+baseUser.adminUserId+'\');">编辑</a></td>';
-				    html+='</tr>';
-				    /* if('admin'==baseUser.adminUserId.trim()){
-						html+='</td>';
-					}else{
-						html+='<a href="javascript:;" class="delLink" onclick="deleteOrgUser(\''+baseUser.adminUserId+'\');" style="">删除</a></td>';	
-					} */
-				}
-				$("#pageBody").html(html);
-			}else{
-				$("#pageBody").html("<tr><td colspan='7'>抱歉，未查询到相关记录!</td></tr>");
-				$("#totalNum").html("0");
-			}
-		}else{
-			$("#pageBody").html("<tr><td colspan='7'>抱歉，未查询到相关记录!</td></tr>");
-			$("#totalNum").html("0");
-		}
-	}
-	function getCreateRealName(createRealName){
-		if(createRealName == null || createRealName == 'null' || createRealName == ''){
-			return '无';
-		}
-		return createRealName;
-	}
 	
 	function getUserType(adminFlag){
 		if('Y' == adminFlag){
@@ -137,56 +142,6 @@
 	
 	function editOrgUser(baseUserId){
 		Win.open({id:"addOrgUserWin",url:"${root}/admin/adminuser/getselbyid.do?userId="+baseUserId,title:"编辑账号",width:600,height:450,mask:true});
-	}
-	function search(){
-		var userName = $.trim($("#userName").val());
-		var realName = $.trim($("#realName").val());
-		var contact=$.trim($("#contact").val());
-		var position=$.trim($("#position").val());
-		var state=$("#state").val();
-		$("#pager").html("");
-		var config = {
-				node:$id("pager"),
-				url:"${root}/admin/adminuser/getadminlist.do",
-				count : 20,
-				type :"post",
-				callback:getOrgUserList,
-				data:{
-					userName:userName,
-					realName:realName,
-					contact:contact,
-					position:position,
-					state:state
-				}
-			};
-			splitPage = new SplitPage(config);
-	}
-	function exportOrgUserList(){
-		var adminFlag = $("#adminFlag").val();
-		var userName = $("#userName").val();
-		var locked = $("#locked").val();
-		var containFlag = "NO";
-		if($('#containFlag').is(':checked')){
-			containFlag = 'YES';
-		}else{
-			containFlag = 'NO';
-		}
-		var areas = $("#areaSelect select");
-		var areaLength = areas.length;
-		var baseAreaId = "";
-		var baseAreaId1 = "";
-		if(areaLength == 1){
-			baseAreaId = $(areas[0]).val();
-		}else{
-			baseAreaId = $(areas[areaLength-2]).val();
-			baseAreaId1 =$(areas[areaLength-1]).val();
-			if("-1" != baseAreaId1){
-				baseAreaId = baseAreaId1;
-			}
-		}
-		var url = "${root }/admin/orgUser/exportOrgUserList.do?adminFlag="+adminFlag
-				+"&userName="+encodeURIComponent(encodeURIComponent(userName))+"&locked="+locked+"&containFlag="+containFlag+"&baseAreaId="+baseAreaId;
-		window.location.href = url;
 	}
 	
 	function orgUserImport(){

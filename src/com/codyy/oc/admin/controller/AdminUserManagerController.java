@@ -48,7 +48,6 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("insertadminuser")
 	public ResultJson  insertAdminUser(HttpServletRequest request, AdminUser adUser ){
-		//测试私库
 		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
 			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
 		}
@@ -80,19 +79,19 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("updateuseradmin")
 	public ResultJson updateUserAdmin(HttpServletRequest request, AdminUser adUser){
-		
+		AdminUser sessionUser =  getSessionUser(request);
 		String userId=adUser.getUserId();
 		
 		adUser.setCreateTime(new Date());//记录当前时间
            //用户不输入密码即密码不进行修改
-		if("".equals(adUser.getPassword())){
-			
-			
-			
-		}else{
-			//用户修改密码
-			adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
-		}
+//		if("".equals(adUser.getPassword())){
+//			
+//			
+//			
+//		}else{
+//			//用户修改密码
+//			adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+//		}
 		
 		AdminUserPermission adminUser = new AdminUserPermission();
 		if(!"".equals(adUser.getFunctionList())){
@@ -102,8 +101,22 @@ public class AdminUserManagerController extends BaseController {
 		}
 		
 		adminUser.setAdminUserId(adUser.getUserId());
-		return adminUserManagerService.updateAdminsUser(userId,adUser,adminUser);//修改用户详情列表的信息
+		adUser.getAdminUserDetail().setUserId(adUser.getUserId());
+		return adminUserManagerService.updateAdminsUser(userId,adUser,adminUser,sessionUser);//修改用户详情列表的信息
 
+	}
+	
+	@ResponseBody
+	@RequestMapping("updatePasswd")
+	public ResultJson updatePasswd(HttpServletRequest request, AdminUser adUser){
+			if(StringUtils.isEmpty(adUser.getPassword())){
+				return new ResultJson(false,"密码不能为空");
+			}else{
+			//用户修改密码
+				adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+			}
+			adminUserManagerService.updatePasswd(adUser);
+			return new ResultJson(true);
 	}
 	
 	/**
