@@ -14,6 +14,7 @@ import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
+import com.codyy.oc.admin.vo.CostVO;
 
 /**
  * 成本控制server
@@ -87,6 +88,32 @@ public class CostService {
 		}
 		
 		return jsonDto;
+	}
+	
+	
+	public JsonDto getCostChartsData(AdminUser user){
+		
+		//判断当前角色，部门经理只能看到本部门成本数据，管理员汇总所有部门数据
+		
+		//1.按支出类型汇总
+		CostVO cost = new CostVO();
+		cost.setCostType(1);
+		cost.setStartTime(DateUtils.getCurrentTimestamp());
+		cost.setEndTime(DateUtils.getCurrentTimestamp());
+		
+		List<CostEntityBean> costDeatilList = costDaoMapper.getCostDeatilList(cost);
+		if(CollectionUtils.isNotEmpty(costDeatilList)){
+			
+			
+		}
+		
+		//2.按部门收入汇总
+		
+		
+		//3.按收入-结余汇总
+		
+		
+		return null;
 	}
 	
 }

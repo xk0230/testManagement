@@ -1,7 +1,5 @@
 package com.codyy.oc.admin.controller;
 
-import java.util.UUID;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
-import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.CostService;
 
@@ -25,7 +22,7 @@ import com.codyy.oc.admin.service.CostService;
  */
 
 @Controller
-@RequestMapping("/cost")
+@RequestMapping("/admin/cost")
 public class CostController extends BaseController{
 
 	@Resource
@@ -34,7 +31,7 @@ public class CostController extends BaseController{
 	@RequestMapping("/manager.do")
 	public String costManager(){
 		
-		return "cost/costManager";
+		return "admin/cost/costManager";
 	}
 	
 	@ResponseBody
