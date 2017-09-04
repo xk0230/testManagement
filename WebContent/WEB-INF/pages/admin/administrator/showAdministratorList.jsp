@@ -36,6 +36,13 @@
                                     <h4 class="panel-title"><i class="ec-search"></i> 查询条件</h4>
 								</div>
 								<div class="panel-body">
+								
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">Text field</label>
+                                    <div class="col-lg-3 col-md-6">
+                                        <input class="form-control" type="text" name="userName" ng-model="userName" id="userName" >
+                                    </div>
+                                </div>
 							<ul class="searchWrap borderBox">
 								<li>
 									<label class="labelText">用户名：</label>
