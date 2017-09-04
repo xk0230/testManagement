@@ -1,6 +1,5 @@
 package com.codyy.oc.admin.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +14,14 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.OracleKeyWordUtils;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.SecurityUtil;
+import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminMenuMapper;
+import com.codyy.oc.admin.dao.AdminUserDetailMapper;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.AdminUserPermissionMapper;
 import com.codyy.oc.admin.entity.AdminMenu;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
 import com.codyy.oc.admin.entity.AdminUserRole;
 import com.codyy.oc.admin.view.UserSearchModel;
@@ -40,10 +42,10 @@ public class AdminUserManagerService {
 	private AdminUserMapper adminUserMapper;
 	@Autowired
 	private AdminMenuMapper adminMenuMapper;
-	
 	@Autowired
 	private AdminUserPermissionMapper adminUserPermissionMapper;
-	
+	@Autowired
+	private AdminUserDetailMapper adminUserDetailMapper;
 	
 	/**
 	* @Title: getselcAdminUserById
@@ -98,6 +100,12 @@ public class AdminUserManagerService {
 			if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
 				adminUserPermissionMapper.insertUserPernission(adminUser);
 			}
+			
+			AdminUserDetail ad = adUser.getAdminUserDetail()==null?new AdminUserDetail():adUser.getAdminUserDetail();
+			ad.setUserDetailId(UUIDUtils.getUUID());
+			ad.setUserId(adUser.getUserId());
+//			ad.setAge(18);
+			adminUserDetailMapper.insert(ad);
 			return new ResultJson(true,2);//用户名不重名则直接添加
 		}catch(Exception e){
 			e.printStackTrace();
@@ -130,15 +138,22 @@ public class AdminUserManagerService {
 	* @return Integer    返回类型
 	* @throws
 	 */
-	public ResultJson updateAdminsUser(String userId, AdminUser user,AdminUserPermission adminUser){
+	public ResultJson updateAdminsUser(String userId, AdminUser user,AdminUserPermission adminUser,AdminUser sessionUser){
 		
 		try{
-			 adminUserPermissionMapper.deleteUserPermissionById(userId);//删除用户对应的权限表信息
-			 adminUserMapper.updateAdminsUser(user);//修改用户详情列表的信息
-			 if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
-				 
-				 adminUserPermissionMapper.insertUserPernission(adminUser); 
+//			 adminUserPermissionMapper.deleteUserPermissionById(userId);//删除用户对应的权限表信息
+			 
+			 if(sessionUser.getPosition().equals(CommonsConstant.USER_TYPE_ADMIN)) {
+				//只有管理员可以修改user信息
+				 adminUserMapper.updateById(user);//修改用户详情列表的信息
 			 }
+			 //非管理员用户可以修改自己的userdetail信息
+			 	adminUserDetailMapper.updateByPrimaryKeySelective(user.getAdminUserDetail());
+			 
+//			 if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
+//				 
+//				 adminUserPermissionMapper.insertUserPernission(adminUser); 
+//			 }
 			 
 			 return new ResultJson(true);
 			 
@@ -494,6 +509,11 @@ public class AdminUserManagerService {
 	public List<AdminUser> checkSelUpteName(AdminUser adminUser){
 		
 		return adminUserMapper.checkSelUpteName(adminUser);
+	}
+	
+	
+	public void updatePasswd(AdminUser user) {
+		adminUserMapper.updatePaswd(user);
 	}
 	
 }
