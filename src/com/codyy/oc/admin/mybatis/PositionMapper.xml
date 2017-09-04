@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.PositionMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Position">
+    <id column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dep_id" jdbcType="VARCHAR" property="depId" />
+    <result column="on_duty" jdbcType="VARCHAR" property="onDuty" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="vacancy" jdbcType="VARCHAR" property="vacancy" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    post_id, name, dep_id, on_duty, organization, vacancy, remark, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from POSITION
+    where post_id = #{postId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByDepId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from POSITION
+    where dep_id = #{depId,jdbcType=VARCHAR} and status='audited'
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from POSITION
+    where post_id = #{postId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Position">
+    insert into POSITION (post_id, name, dep_id, 
+      on_duty, organization, vacancy, 
+      remark, status)
+    values (#{postId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{depId,jdbcType=VARCHAR}, 
+      #{onDuty,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, #{vacancy,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Position">
+    insert into POSITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="depId != null">
+        dep_id,
+      </if>
+      <if test="onDuty != null">
+        on_duty,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="vacancy != null">
+        vacancy,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="onDuty != null">
+        #{onDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="vacancy != null">
+        #{vacancy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Position">
+    update POSITION
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        dep_id = #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="onDuty != null">
+        on_duty = #{onDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="vacancy != null">
+        vacancy = #{vacancy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where post_id = #{postId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Position">
+    update POSITION
+    set name = #{name,jdbcType=VARCHAR},
+      dep_id = #{depId,jdbcType=VARCHAR},
+      on_duty = #{onDuty,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      vacancy = #{vacancy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where post_id = #{postId,jdbcType=VARCHAR}
+  </update>
+</mapper>
