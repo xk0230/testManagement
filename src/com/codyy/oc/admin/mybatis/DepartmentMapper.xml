@@ -61,4 +61,8 @@
     <include refid="Base_Column_List" />
     from DEPARTMENT
   </select>
+  
+  <select id="hasManager" parameterType="java.lang.String"  resultType = "java.lang.Integer">
+  	select count(*) from ADMIN_USER where dep_id = #{depId} and position = 'MANAGER' and delete_flag = 'N'
+  </select>
 </mapper>

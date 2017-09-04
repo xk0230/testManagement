@@ -16,4 +16,8 @@ public class DepartmentService {
 	public List<Department> getAllDepartment(){
 		return mapper.getAllDep();
 	}
+	
+	public int hasManager(String depId) {
+		return mapper.hasManager(depId);
+	}
 }

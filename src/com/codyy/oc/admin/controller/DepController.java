@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.codyy.commons.utils.ResultJson;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.Department;
 import com.codyy.oc.admin.service.DepartmentService;
@@ -35,4 +38,14 @@ public class DepController extends BaseController {
 		return service.getAllDepartment();
 	}
 	
+	@RequestMapping("hasManager")
+	@ResponseBody
+	public ResultJson  hasManager(HttpServletRequest request,@RequestParam(required=true) String depId ){
+		int num = service.hasManager(depId);
+		if(num > 0) {
+			return new ResultJson(true,"Y");
+		}else {
+			return new ResultJson(true,"N");
+		}
+	}
 }

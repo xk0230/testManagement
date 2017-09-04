@@ -3,6 +3,8 @@ package com.codyy.oc.admin.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.AdminUserRole;
@@ -245,4 +247,17 @@ public interface AdminUserMapper {
 
 	public List<AdminUser> getAdminUserPageList(Page page);
 
+	/**
+	 * 修改密码
+	 * @param adminUser
+	 */
+	public void updatePaswd(AdminUser adminUser);
+	
+	
+	/**
+	 * 根据ID修改用户
+	 * @param record
+	 * @return
+	 */
+	 int updateById(@Param("record") AdminUser record);
 }
