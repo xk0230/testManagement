@@ -260,4 +260,11 @@ public interface AdminUserMapper {
 	 * @return
 	 */
 	 int updateById(@Param("record") AdminUser record);
+	 
+	 /**
+	  * 
+	  * 获取所有用户类型为admin的用户ID列表
+	  * @return
+	  */
+	 List<String> getAllAdminUserIDs();
 }

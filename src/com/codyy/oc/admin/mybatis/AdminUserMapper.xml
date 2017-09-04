@@ -520,4 +520,8 @@
 	<update id="updatePaswd"  parameterType="com.codyy.oc.admin.entity.AdminUser" >
 		update ADMIN_USER au set au.password =  #{password} where au.user_id = #{userId}
 	</update>
+	
+	<select id="getAllAdminUserIDs" resultType="java.lang.String">
+		select user_id from ADMIN_USER where position='ADMIN' and delete_flag='N'
+	</select>
 </mapper>
