@@ -4,7 +4,7 @@ myAppModule.controller('UserListController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 2;
 		
 		this.$onInit = function(){
 			self.getFinancingInfoList();

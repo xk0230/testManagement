@@ -44,7 +44,7 @@
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <!-- Plugin CSS -->
-<link href="${root}/public/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
 <script src="${root}/public/js/jquery.js" type="text/javascript"></script>
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-ui-router.js" type="text/javascript"></script> 
@@ -62,8 +62,6 @@
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
 
-<script src="${root}/public/js/datatables/jquery.dataTables.js"></script>
-<script src="${root}/public/js/datatables/dataTables.bootstrap4.js"></script>
 
 <script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
 
