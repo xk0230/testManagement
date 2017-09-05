@@ -25,11 +25,11 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<!-- col-lg-12 start here -->
-							<div class="panel panel-primary toggle">
+							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
-								<div class="panel-heading">
-									<h4 class="panel-title"><i class="ec-search"></i> 查询条件</h4>
-								</div>
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="ec-search"></i>查询条件</h3>
+                                </div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
 										<div class="form-group">
@@ -75,10 +75,10 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<!-- col-lg-12 start here -->
-							<div class="panel panel-primary toggle">
+							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title"><i class="ec-list"></i>查询结果</h4>
+									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
 								</div>
 								<div class="panel-body">
 									<table class="table display" id="datatable">

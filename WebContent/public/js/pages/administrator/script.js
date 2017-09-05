@@ -43,7 +43,8 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewUser = function(id){
-			Win.open({id:"addOrgUserWin",url:"toAddUser.do?userId="+id,title:"编辑账号",width:600,height:450,mask:true});
+			//Win.open({id:"addOrgUserWin",url:"toAddUser.do?userId="+id,title:"编辑账号",width:600,height:450,mask:true});
+			window.location.href="toAddUser.do?backurl="+window.location.href; 
 		};
 	}
 );

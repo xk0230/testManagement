@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8"/>
 <meta name="renderer" content="webkit">
-<title>运营服务平台abc</title>
+<title>长春一东信息管理系统</title>
 <%
     String contextPath = request.getContextPath();
     if (contextPath.equals("/"))
@@ -42,7 +42,9 @@
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/plugins.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/main.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
-
+<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
+<!-- Plugin CSS -->
+<link href="${root}/public/js/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 <script src="${root}/public/js/jquery.js" type="text/javascript"></script>
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-ui-router.js" type="text/javascript"></script> 
@@ -59,6 +61,9 @@
 <script src="${root}/public/js/common.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
+
+<script src="${root}/public/js/datatables/jquery.dataTables.js"></script>
+<script src="${root}/public/js/datatables/dataTables.bootstrap4.js"></script>
 
 <script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
 

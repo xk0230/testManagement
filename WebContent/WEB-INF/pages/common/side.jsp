@@ -3,8 +3,8 @@
 <div id="sidebar" ng-controller="SideListController as side">
 	<div class="sidebar-inner">
 		<ul id="sideNav" class="nav navbar-nav">
-			<li><a href="${root}/admin/adminuser/toadminlist.do">员工管理<i class="ec-users"></i></a>
-			</li>
+			<li><a href="${root}/admin/adminuser/toadminlist.do">员工管理<i class="ec-users"></i></a></li>
+			<li><a href="${root}/admin/adminuser/toAddUser.do">员工增加<i class="ec-users"></i></a></li>
 			<li><a href="#"> Tables <i class="im-table2"></i></a>
 				<ul class="nav sub">
 					<li><a href="tables.html"><i class="en-arrow-right7"></i> Static tables</a>
