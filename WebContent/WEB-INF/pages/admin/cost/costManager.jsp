@@ -40,10 +40,19 @@
 							<ul class="searchWrap borderBox">
 								<li>
 									<label class="labelText">所属部门：</label>
-									<input type="text" name="userName" ng-model="userName" id="userName" />
+									<select name="costType">
+										<option value="-1">--请选择--</option>
+										<option value="0">收入</option>
+										<option value="1">支出</option>
+									</select>
+									
 									&nbsp;&nbsp;&nbsp;
 									<label class="labelText">收支类型：</label>
-									<input type="text" name="userName" ng-model="userName" id="userName" />
+									<select name="costType">
+										<option value="-1">--请选择--</option>
+										<option value="0">收入</option>
+										<option value="1">支出</option>
+									</select>
 									
 									&nbsp;&nbsp;&nbsp;
 									<label class="labelText">分类名称：</label>
@@ -96,13 +105,16 @@
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
-												<td><p ng-bind="item.userName"></p></td>
-												<td><p ng-bind="item.realName"></p></td>
-												<td><p ng-bind="item.username"></p></td>
-												<td><p ng-bind="item.username"></p></td>
-												<td><p ng-bind="item.workStatus"></p></td>
-												<td><p ng-bind="item.createTime"></p></td>
-												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.depName"></p></td>
+												<td><p ng-bind="item.costTypeName"></p></td>
+												<td><p ng-bind="item.costSubName"></p></td>
+												<td><p ng-bind="item.costDate"></p></td>
+												<td><p ng-bind="item.costNum"></p></td>
+												<td><p ng-bind="item.createDate"></p></td>
+												<td>
+													<input type="button" class="submit btn" name="edit" ng-click="vm.editCost()" value="编辑"  />
+													<input type="button" class="submit btn" name="del" ng-click="vm.delCost(item.costId)" value="删除"  />
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -126,8 +138,9 @@
 			
 	<script type="text/javascript">
 	 $(document).ready(function(){
-		
-		 alert(123);
+		 //获取部门
+		 
+		 
 		 
 	 });
 	
@@ -153,9 +166,6 @@
 		Win.open({id:"addOrgUserWin",url:"${root}/admin/adminuser/getselbyid.do?userId="+baseUserId,title:"编辑账号",width:600,height:450,mask:true});
 	}
 	
-	function orgUserImport(){
-		Win.open({id:"uploadExcel",width:500,height:260,title:"批量导入机构用户",url:"${root}/admin/commons/importUserPage.do?userType=area",mask:true});
-	}
 	</script>
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
 </body>
