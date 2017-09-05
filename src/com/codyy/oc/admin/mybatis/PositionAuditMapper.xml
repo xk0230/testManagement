@@ -132,5 +132,8 @@
   	update POSITION set status = 'audited' where post_id = (select position_id from POSITION_AUDIT where position_audit_id = #{id})
   </update>
   
+     <select id="getUntreatedNum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+  	select count(*) from POSITION_AUDIT where audit_user_id=#{userId} and result is null
+  </select>
   
 </mapper>

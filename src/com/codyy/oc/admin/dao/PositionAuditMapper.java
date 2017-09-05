@@ -22,4 +22,6 @@ public interface PositionAuditMapper {
     int  getUnpassOrNullNum(String id);//根据id获取还未审批的和不通过的总数
     
     void passById(String id);//根据ID将岗位设为通过审批
+    
+    int getUntreatedNum(String userId);
 }

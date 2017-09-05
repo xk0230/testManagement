@@ -77,4 +77,12 @@ public class PositionService {
 		return new ResultJson(true);
 	}
 	
+	/**
+	 * 根据用户ID获取未审批的数量
+	 * @param userId
+	 * @return
+	 */
+	public Integer getUntreatedNum(String userId) {
+		return auditMapper.getUntreatedNum(userId);
+	} 
 }

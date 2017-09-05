@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.service.PositionService;
@@ -71,4 +72,12 @@ public class PositionController extends BaseController {
 	public ResultJson  auditPosition(HttpServletRequest request, PositionAudit audit){
 		return service.auditPosition(audit);
 	}
+	
+	@ResponseBody
+	@RequestMapping("getUntreatedNum")
+	public ResultJson  getUntreatedNum(HttpServletRequest request){
+		AdminUser su = getSessionUser(request);
+		return new ResultJson(true,service.getUntreatedNum(su.getUserId()));
+	}
+	
 }
