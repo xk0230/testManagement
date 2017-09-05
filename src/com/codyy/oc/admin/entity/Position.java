@@ -1,5 +1,9 @@
 package com.codyy.oc.admin.entity;
 
+import java.util.Date;
+
+import com.codyy.commons.CommonsConstant;
+
 public class Position {
     private String postId;
 
@@ -15,9 +19,30 @@ public class Position {
 
     private String remark;
 
-    private String status;
+    private String status = CommonsConstant.AUDIT_STATUS_AUDITING;//默认审核中
 
-    public String getPostId() {
+    private String createUser;
+    
+    private Date createTime;
+    
+    
+    public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getPostId() {
         return postId;
     }
 

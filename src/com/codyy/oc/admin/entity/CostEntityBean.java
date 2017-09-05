@@ -30,7 +30,7 @@ public class CostEntityBean {
 	private double costNum;
 	
 	//部门ID
-	private int depId;
+	private String depId;
 
 	public String getCostId() {
 		return costId;
@@ -88,11 +88,11 @@ public class CostEntityBean {
 		this.costNum = costNum;
 	}
 
-	public int getDepId() {
+	public String getDepId() {
 		return depId;
 	}
 
-	public void setDepId(int depId) {
+	public void setDepId(String depId) {
 		this.depId = depId;
 	}
 	

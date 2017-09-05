@@ -10,9 +10,11 @@
     <result column="vacancy" jdbcType="VARCHAR" property="vacancy" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    post_id, name, dep_id, on_duty, organization, vacancy, remark, status
+    post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -35,10 +37,11 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION (post_id, name, dep_id, 
       on_duty, organization, vacancy, 
-      remark, status)
+      remark, status,create_user,create_time)
     values (#{postId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{depId,jdbcType=VARCHAR}, 
       #{onDuty,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, #{vacancy,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION
@@ -67,6 +70,12 @@
       <if test="status != null">
         status,
       </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postId != null">
@@ -92,6 +101,12 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -119,6 +134,12 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
+       <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
@@ -131,6 +152,8 @@
       vacancy = #{vacancy,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR}
+      create_user = #{createUser,jdbcType=VARCHAR}
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
 </mapper>

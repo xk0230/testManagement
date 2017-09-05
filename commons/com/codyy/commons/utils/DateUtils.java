@@ -522,6 +522,15 @@ public class DateUtils {
         return new Timestamp(Calendar.getInstance().getTimeInMillis());
         
     }
-	
-
+    
+    public static int getCurrentYear(){
+    	Calendar cal = Calendar.getInstance();
+    	return cal.get(Calendar.YEAR);
+    }
+    
+    public static int getCurrentMonth(){
+    	Calendar cal = Calendar.getInstance();
+    	return cal.get(Calendar.MONTH)+1;
+    }
+    
 }
