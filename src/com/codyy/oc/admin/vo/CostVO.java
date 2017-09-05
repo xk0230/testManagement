@@ -10,6 +10,8 @@ public class CostVO extends CostEntityBean{
 	
 	private Timestamp endTime;
 	
+	//成本类型名称
+	private String name;
 
 	public Timestamp getStartTime() {
 		return startTime;
@@ -25,6 +27,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

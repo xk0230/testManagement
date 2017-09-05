@@ -21,6 +21,6 @@ public interface CostDaoMapper {
 	
 	int delCostEntityById(String costId);
 	
-	List<CostEntityBean> getCostDeatilList(CostVO cost);
+	List<CostVO> getCostDeatilList(CostVO cost);
 	
 }
