@@ -150,6 +150,19 @@ public class AdminUserManagerController extends BaseController {
 	}
 	
 	/**
+	* @Title: getselcAdminUserById
+	* @Description: (这里用一句话描述这个方法的作用)
+	* @param @param userId
+	* @param @return    设定文件
+	* @return AdminUser    返回类型
+	* @throws
+	 */
+	@RequestMapping("toAddUser")
+	public String showAddUser(){
+		return "admin/administrator/edit";
+	}
+	
+	/**
 	 * 
 		* @Title: toAdminList
 		* @Description: (跳转到orgUserList.jsp页面)
@@ -159,7 +172,6 @@ public class AdminUserManagerController extends BaseController {
 	@RequestMapping("toadminlist")
 	public String toAdminList(){
 		return "admin/administrator/showAdministratorList";	
-		//return "admin/test/testPation";	
 	}
 	
 	/**
