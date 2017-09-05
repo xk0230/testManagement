@@ -14,14 +14,10 @@
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
-		                <ul class="nav navbar-nav pull-left">
-		                    <li id="toggle-sidebar-li">
-		                        <a href="#" id="toggle-sidebar"><i class="im-users"></i></a>
-		                    </li>
-		                    <li id="toggle-sidebar-li">
-		                        <h1 class="page-header">用户管理</h1>
-		                    </li>
-		                </ul>
+                        <h1 class="page-header"><i class="im-users2"></i> 用户管理</h1>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        </ul>
 					</div>
 				</div>
 				<div class="outlet">
@@ -33,31 +29,46 @@
 							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-                                    <h4 class="panel-title"><i class="ec-search"></i> 查询条件123</h4>
+									<h4 class="panel-title"><i class="ec-search"></i> 查询条件</h4>
 								</div>
 								<div class="panel-body">
-								
-                                <div class="form-group">
-                                    <label class="col-lg-2 col-md-2 col-sm-12 control-label">Text field</label>
-                                    <div class="col-lg-3 col-md-6">
-                                        <input class="form-control" type="text" name="userName" ng-model="userName" id="userName" >
-                                    </div>
-                                </div>
-							<ul class="searchWrap borderBox">
-								<li>
-									<label class="labelText">用户名：</label>
-									<input type="text" name="userName" ng-model="userName" id="userName" />
-									<label class="labelText">姓名：</label>
-									<input type="text" name="realName" ng-model="realName" id="realName" />
-									<label class="labelText">部门：</label>
-									<input type="text" name="position" ng-model="position" id="position" />
-									<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
-								</li>
-							</ul>
+									<div class="form-horizontal group-border" role="form">
+										<div class="form-group">
+											<div class="col-lg-3">
+												<label class="col-lg-3 control-label" for="ds_host">用户名</label>
+												<div class="col-lg-9 ">
+													<input type="text" class="form-control" name="userName" ng-model="userName" id="userName" />
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-3 control-label" for="ds_name">姓名</label>
+												<div class="col-lg-9 ">
+													<input type="text" class="form-control" name="realName" ng-model="realName" id="realName" />
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-3 control-label" for="ds_name">部门</label>
+												<div class="col-lg-9">
+													<input type="text" class="form-control" name="position" ng-model="position" id="position" />
+												</div>
+											</div>
+											<div class="col-lg-3 pull-left">
+												<ul class="nav navbar-nav pull-left">
+													<li id="toggle-sidebar-li" class="ui-buttonset">
+														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
+													</li>
+													<li id="toggle-sidebar-li">
+														<input type="button"  class="btn btn-success" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
 				<!-- End .row -->
 				<div class="outlet">
 					<!-- Start .outlet -->
