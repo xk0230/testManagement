@@ -9,7 +9,7 @@
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
 		
-		<div id="content" ng-controller="UserListController as vm">
+		<div id="content" ng-controller="CostController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
@@ -127,7 +127,7 @@
 	<script type="text/javascript">
 	 $(document).ready(function(){
 		
-		 
+		 alert(123);
 		 
 	 });
 	

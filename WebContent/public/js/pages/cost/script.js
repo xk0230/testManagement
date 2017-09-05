@@ -1,5 +1,5 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
-.controller('UserListController',
+.controller('CostController',
 	function UserListController($scope,$http){
 		var self = this;
 		$scope.totalItems = 0;

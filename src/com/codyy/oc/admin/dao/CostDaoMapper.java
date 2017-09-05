@@ -2,8 +2,10 @@ package com.codyy.oc.admin.dao;
 
 import java.util.List;
 
+import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
+import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostVO;
 
 /**
@@ -21,6 +23,12 @@ public interface CostDaoMapper {
 	
 	int delCostEntityById(String costId);
 	
-	List<CostVO> getCostDeatilList(CostVO cost);
+	List<CostVO> getCostPageList(Page page);
+	
+	List<CostMonthInOut> getCostOutlayType(CostVO cost);
+	
+	List<CostMonthInOut> getCostDepartIncomeType(CostVO cost);
+	
+	CostMonthInOut getCostInOutType(CostVO cost);
 	
 }
