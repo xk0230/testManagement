@@ -87,6 +87,7 @@
 			});
 	
 		});
+	
 	</script>
 	
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
