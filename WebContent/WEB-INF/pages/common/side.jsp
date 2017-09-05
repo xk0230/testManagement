@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="sidebar" ng-controller="SideListController as side">
+<div id="sidebar" ng-app="sideApp" ng-controller="SideListControllera">
 	<div class="sidebar-inner">
 		<ul id="sideNav" class="nav navbar-nav">
 			<li><a href="${root}/admin/adminuser/toadminlist.do">员工信息<i class="ec-users"></i></a></li>
