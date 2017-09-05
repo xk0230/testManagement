@@ -4,12 +4,11 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body ng-app = "myApp" >
+<body  >
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
-		
-		<div id="content" ng-controller="UserListController as vm">
+		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">

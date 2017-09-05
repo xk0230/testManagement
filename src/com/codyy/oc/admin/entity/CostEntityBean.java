@@ -21,7 +21,7 @@ public class CostEntityBean {
 	private String createUserId;
 	
 	//成本类型,0:收入，1:支出
-	private int costType;
+	private int costType = -1;
 	
 	//成本子类型ID
 	private int costSubtypeId;
