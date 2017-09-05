@@ -1,19 +1,27 @@
 package com.codyy.oc.admin.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codyy.commons.CommonsConstant;
+import com.codyy.commons.page.Page;
+import com.codyy.commons.utils.OracleKeyWordUtils;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
+import com.codyy.oc.admin.view.PositionSearchView;
+import com.codyy.oc.admin.view.UserSearchModel;
 
 @Service
 public class PositionService {
@@ -85,4 +93,20 @@ public class PositionService {
 	public Integer getUntreatedNum(String userId) {
 		return auditMapper.getUntreatedNum(userId);
 	} 
+	
+	
+	public Page getPositionPageList(Page page,PositionSearchView search){
+		boolean flag=true;
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("name", OracleKeyWordUtils.oracleKeyWordReplace(search.getName()));
+		map.put("depId",search.getDepId());
+		map.put("status", search.getStatus());
+		map.put("createUser",search.getCreateUser());
+	    page.setMap(map);
+//		List<Position> data = mapper.getPositionPageList(page);
+//		page.setData(data);
+		return page;
+	}
+	
+	
 }
