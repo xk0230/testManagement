@@ -60,6 +60,8 @@
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
 
+<script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
+
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/icons.css" media="screen">
 <script type="text/javascript">
     var ROOT =  '${root}';
