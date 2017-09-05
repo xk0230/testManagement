@@ -1,7 +1,5 @@
 package com.codyy.oc.admin.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +16,6 @@ import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
-import com.codyy.oc.admin.vo.CostInOutlayType;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 
@@ -79,9 +76,9 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/outlay.do")
-    public List<CostInOutlayType> getChartDataByOutlayType(HttpServletRequest request){
+    public CostChartsData getChartDataByOutlayType(HttpServletRequest request){
 	    
-        return costService.getChartDataByOutlayType(this.getSessionUser(request));
+        return costService.getCostChartDataByDepIncome(this.getSessionUser(request),0);
         
     }
 	
@@ -89,7 +86,7 @@ public class CostController extends BaseController{
     @RequestMapping("/depIncome.do")
     public CostChartsData getChartDataByDepIncome(HttpServletRequest request){
         
-        return costService.getCostChartDataByDepIncome(this.getSessionUser(request));
+        return costService.getCostChartDataByDepIncome(this.getSessionUser(request),1);
         
     }
 	

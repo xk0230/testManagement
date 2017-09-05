@@ -523,6 +523,54 @@ public class DateUtils {
         
     }
     
+    /**
+     * 将字符串转化为timestamp
+     * 
+     * @param date
+     *            指定日期字符串
+     * @return
+     */
+    public static Timestamp stringToTimestamp(String date){
+        return stringToTimestamp(date,PATTERN_DATETIME);
+    }
+    
+    /**
+     * 将字符串转化为timestamp
+     * 
+     * @param date
+     *            指定日期字符串
+     * @param pattern
+     *            指定模板
+     * @return
+     */
+    public static Timestamp stringToTimestamp(String date,String pattern){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        try {
+            date = date.replace("/", "-");
+            cal.setTime(sdf.parse(date));
+            
+        } catch (ParseException ex) {
+            return null;
+        }
+        
+        return getTimestamp(cal);
+        
+    }
+    
+    
+    /**
+     * 获取指定日期Timestamp
+     * 
+     * @param cal
+     *            调用者指定日历类
+     * @return
+     */
+    public static Timestamp getTimestamp(Calendar cal) {
+        return new Timestamp(cal.getTimeInMillis());
+        
+    }
+    
     public static int getCurrentYear(){
     	Calendar cal = Calendar.getInstance();
     	return cal.get(Calendar.YEAR);

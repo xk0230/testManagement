@@ -1,7 +1,6 @@
 package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -123,73 +122,20 @@ public class CostService {
 	    return page;
 	}
 	
-	/**
-	 * 获取成本支出类型图表数据
-	 * @param user
-	 * @return
-	 */
-	public List<CostInOutlayType> getChartDataByOutlayType(AdminUser user){
-        
-	    CostVO cost = new CostVO();
-	    cost.setCostType(1);
-	    
-        boolean flag = false;
-        String position = user.getPosition();
-        if(CommonsConstant.USER_TYPE_STAFF.equalsIgnoreCase(position)){
-            cost.setDepId(user.getDepId());
-            flag = true;
-        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
-            flag = true;
-        }
-        
-        List<CostInOutlayType> outlayTypeList = new ArrayList<CostInOutlayType>();
-        if(flag){
-            String date = DateUtils.getCurrentYear()+"-01-01 00:00:00";
-            try {
-                cost.setStartTime(DateUtils.parseTimestampString(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            
-            cost.setEndTime(DateUtils.getCurrentTimestamp());
-            
-            List<CostMonthInOut> costList = costDaoMapper.getCostOutlayType(cost);
-            if(CollectionUtils.isNotEmpty(costList)){
-                Map<String,List<CostMonthInOut>> map = new HashMap<String,List<CostMonthInOut>>();
-                for(CostMonthInOut monthOutlay : costList){
-                    List<CostMonthInOut> list = map.get(monthOutlay.getName());
-                    if(list == null){
-                        list = new ArrayList<CostMonthInOut>();
-                    }
-                    list.add(monthOutlay);
-                    
-                    map.put(monthOutlay.getName(), list);
-                }
-                
-                if(map.size() > 0){
-                    for(String name : map.keySet()){
-                        CostInOutlayType costOutlayType = new CostInOutlayType();
-                        costOutlayType.setName(name);
-                        costOutlayType.setMonthInOut(map.get(name));
-                        
-                        outlayTypeList.add(costOutlayType);
-                    }
-                }
-            }
-        }
-	    
-	    return outlayTypeList;
-	}
-	
-
-	public CostChartsData getCostChartDataByDepIncome(AdminUser user){
+	public CostChartsData getCostChartDataByDepIncome(AdminUser user,int type){
 	    
 	    CostChartsData costChartsData = new CostChartsData();
 	    
 	    List<String> xcategories = new ArrayList<String>();
 	    List<CostChartsSeriesData> seriesDatas = new ArrayList<CostChartsSeriesData>();
 	    
-	    List<CostInOutlayType> departIncomeList = this.getChartDataByDepIncome(user);
+	    List<CostInOutlayType> departIncomeList = null;
+	    if(type == 1){
+	    	departIncomeList = this.getChartDataByDepIncome(user);
+	    }else{
+	    	departIncomeList = this.getChartDataByOutlayType(user);
+	    }
+	    
 	    if(CollectionUtils.isNotEmpty(departIncomeList)){
 	        Map<String,List<Double>> map = new HashMap<String,List<Double>>();
 	        for(CostInOutlayType costInOutlay : departIncomeList){
@@ -226,11 +172,64 @@ public class CostService {
 	}
 	
 	/**
+	 * 获取成本支出类型图表数据
+	 * @param user
+	 * @return
+	 */
+	private List<CostInOutlayType> getChartDataByOutlayType(AdminUser user){
+        
+	    CostVO cost = new CostVO();
+	    cost.setCostType(1);
+	    
+        boolean flag = false;
+        String position = user.getPosition();
+        if(CommonsConstant.USER_TYPE_STAFF.equalsIgnoreCase(position)){
+            cost.setDepId(user.getDepId());
+            flag = true;
+        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
+            flag = true;
+        }
+        
+        List<CostInOutlayType> outlayTypeList = new ArrayList<CostInOutlayType>();
+        if(flag){
+        	cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.getCurrentTimestamp());
+            
+            List<CostMonthInOut> costList = costDaoMapper.getCostOutlayType(cost);
+            if(CollectionUtils.isNotEmpty(costList)){
+                Map<String,List<CostMonthInOut>> map = new HashMap<String,List<CostMonthInOut>>();
+                for(CostMonthInOut monthOutlay : costList){
+                    List<CostMonthInOut> list = map.get(monthOutlay.getName());
+                    if(list == null){
+                        list = new ArrayList<CostMonthInOut>();
+                    }
+                    list.add(monthOutlay);
+                    
+                    map.put(monthOutlay.getName(), list);
+                }
+                
+                if(map.size() > 0){
+                    for(String name : map.keySet()){
+                        CostInOutlayType costOutlayType = new CostInOutlayType();
+                        costOutlayType.setName(name);
+                        costOutlayType.setMonthInOut(map.get(name));
+                        
+                        outlayTypeList.add(costOutlayType);
+                    }
+                }
+            }
+        }
+	    
+	    return outlayTypeList;
+	}
+	
+	
+	/**
      * 获取部门收入图表数据
      * @param user
      * @return
      */
-    public List<CostInOutlayType> getChartDataByDepIncome(AdminUser user){
+    private List<CostInOutlayType> getChartDataByDepIncome(AdminUser user){
         
         CostVO cost = new CostVO();
         cost.setCostType(0);
@@ -246,13 +245,7 @@ public class CostService {
         
         List<CostInOutlayType> departIncomeList = new ArrayList<CostInOutlayType>();
         if(flag){
-            String date = DateUtils.getCurrentYear()+"-01-01 00:00:00";
-            try {
-                cost.setStartTime(DateUtils.parseTimestampString(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            
+        	cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
             cost.setEndTime(DateUtils.getCurrentTimestamp());
             
             List<CostMonthInOut> costList = costDaoMapper.getCostDepartIncomeType(cost);
@@ -305,13 +298,7 @@ public class CostService {
         CostTotalInOut costTotalInOut = new CostTotalInOut();
         
         if(flag){
-            String date = DateUtils.getCurrentYear()+"-01-01 00:00:00";
-            try {
-                cost.setStartTime(DateUtils.parseTimestampString(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            
+            cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
             cost.setEndTime(DateUtils.getCurrentTimestamp());
             cost.setCostType(0);
             

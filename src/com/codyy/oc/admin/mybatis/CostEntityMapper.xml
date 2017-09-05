@@ -97,8 +97,8 @@
 			
 			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
 			
-			group by month,cost_subtype_id 
-			order by month,cost_subtype_id
+			group by month,costDetail.cost_subtype_id 
+			order by month,costDetail.cost_subtype_id
 	
 	</select>
 	
