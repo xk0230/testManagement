@@ -3524,3 +3524,10 @@ pre {
     display: none;
   }
 }
+
+.editRow label {
+	width:33.334%;
+}
+.editRow div {
+	width:66.666%;
+}
