@@ -84,6 +84,9 @@ public class PositionController extends BaseController {
 	@RequestMapping("getUntreatedNum")
 	public ResultJson  getUntreatedNum(HttpServletRequest request){
 		AdminUser su = getSessionUser(request);
+		if(su == null) {
+			return new ResultJson(false,"请登录");
+		}
 		return new ResultJson(true,service.getUntreatedNum(su.getUserId()));
 	}
 	

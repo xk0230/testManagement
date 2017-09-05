@@ -27,15 +27,16 @@
                                <div class="col-lg-12">
                                    <input type="password" name="password" class="form-control left-icon" placeholder="密码" needcheck nullmsg="账号或密码错误，请重新输入!">
                                    <i class="ec-locked s16 left-input-icon"></i>
-                                   <span class="help-block"><a href="#"><small>Forgout password ?</small></a></span> 
+                                   <!-- <span class="help-block"><a href="#"><small>Forgout password ?</small></a></span> --> 
                                </div>
                            </div>
                            <div class="form-group">
                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
                                    <!-- col-lg-12 start here -->
-                                   <label class="checkbox">
+                                   <!-- <label class="checkbox">
                                        <input type="checkbox" name="remember" id="remember" value="option">Remember me ?
-                                   </label>
+                                   </label> 
+                                   -->
                                </div>
                                <!-- col-lg-12 end here -->
                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4">

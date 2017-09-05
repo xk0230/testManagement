@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +114,17 @@ public class CostService {
 	    page.setEnd(cost.getEnd());
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
+	    
+	    
+	    map.put("depId", cost.getDepId());
+	    map.put("costType", cost.getCostType());
+	    map.put("costSubtypeId", cost.getCostSubtypeId());
+	    
+	    Timestamp costTime = cost.getCostTime();
+	    
+	    map.put("costTime", costTime);
+	    map.put("startTime", costTime);
+	    map.put("endTime", costTime);
 	    
 	    page.setMap(map);
 	    

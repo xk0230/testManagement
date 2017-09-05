@@ -9,7 +9,7 @@
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
 		
-		<div id="content" ng-controller="CostController as vm">
+		<div id="content">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 					

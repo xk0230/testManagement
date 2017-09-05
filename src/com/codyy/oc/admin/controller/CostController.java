@@ -68,7 +68,7 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(@RequestBody CostVO cost){
+    public Page getCostPageList(CostVO cost){
         
         return costService.getCostPageList(cost);
         

@@ -1,6 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Start #header -->
+<script type="text/javascript">
+function getNewsNum()
+{
+	$.ajax({
+	    url:'${root}/admin/position/getUntreatedNum.do',
+	    type:'POST', //GET
+	    async:true,    //或false,是否异步
+	    timeout:5000,    //超时时间
+	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+	    success:function(data,textStatus,jqXHR){
+	    	if(data.result == true){
+	    		$("#news").html(data.code);
+	    	}
+	    },
+	    error:function(xhr,textStatus){
+	        console.log('错误')
+	    }
+	})
+}
+
+function logout(){
+	$.ajax({
+	    url:'${root}/logOut.do',
+	    type:'POST', //GET
+	    async:true,    //或false,是否异步
+	    timeout:5000,    //超时时间
+	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+	    success:function(data,textStatus,jqXHR){
+	    	if(data.result == true){
+	    		window.location.href='${root}';
+	    	}
+	    },
+	    error:function(xhr,textStatus){
+	        console.log('错误')
+	    }
+	})
+}
+getNewsNum();
+setInterval("getNewsNum()","10000");
+</script>
 <div id="header">
     <div class="container-fluid">
         <div class="navbar">
@@ -11,7 +51,7 @@
             </div>
             <div>
             <nav class="top-nav" role="navigation">
-                <ul class="nav navbar-nav pull-left">
+                <!-- <ul class="nav navbar-nav pull-left">
                     <li id="toggle-sidebar-li">
                         <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
                 </a>
@@ -109,7 +149,7 @@
                                     <img src="assets/img/avatars/131.jpg" class="mail-avatar pull-left" alt="avatar">
                                     <p class="name">
                                         <span class="status"><i class="en-dot"></i></span> Tina Dowsen
-                                        <span class="notification">5</span>
+                                        <span class="notification">6</span>
                                         <span class="time">03:46 am</span>
                                     </p>
                                     <p class="msg">
@@ -122,14 +162,14 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
                 <ul class="nav navbar-nav pull-right">
-                    <li>
+                    <!-- <li>
                         <a href="#" id="toggle-header-area"><i class="ec-download"></i></a>
-                    </li>
+                    </li> -->
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="br-alarm"></i> <span class="notification">5</span></a>
-                        <ul class="dropdown-menu notification-menu right" role="menu">
+                        <a href="#" data-toggle="dropdown"><i class="br-alarm"></i> <span class="notification" id="news">0</span></a>
+                        <!-- <ul class="dropdown-menu notification-menu right" role="menu">
                             <li class="clearfix">
                                 <i class="ec-chat"></i> 
                                 <a href="#" class="notification-user"> Ric Jones </a> 
@@ -160,7 +200,7 @@
                                 <span class="notification-action"> add support </span> 
                                 <a href="#" class="notification-link"> ticket</a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -173,12 +213,12 @@
                             </li>
                             <li><a href="#"><i class="st-settings"></i> Settings</a>
                             </li>
-                            <li><a href="login.html"><i class="im-exit"></i> Logout</a>
+                            <li><a href="javascript:logout();"><i class="im-exit"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
-                    <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
-                    </li>
+                   <!--  <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
+                    </li> -->
                 </ul>
             </nav>
             </div>
