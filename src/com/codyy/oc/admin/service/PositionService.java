@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codyy.commons.CommonsConstant;
+import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
@@ -49,6 +51,30 @@ public class PositionService {
 	
 	public void updateById(Position position) {
 		mapper.updateByPrimaryKeySelective(position);
+	}
+	
+	public ResultJson auditPosition(PositionAudit audit) {
+		int num = auditMapper.selectUnauditByid(audit.getPositionAuditId());
+		if(num != 1) {
+			return new ResultJson(false,"该审批已完成，请勿重复审批");
+		}
+		else {
+			audit.setAuditTime(new Date());
+			auditMapper.updateByPrimaryKeySelective(audit);
+			//如果全部审批通过，则将该岗位状态修改为通过，如果有人不通过，则修改为不通过
+			if(audit.getResult() == CommonsConstant.AUDIT_UNPASS) {
+				//如果是不通过
+				auditMapper.setUnPassById(audit.getPositionAuditId());
+			}else {
+				//如果是通过
+				int unpassnum = auditMapper.getUnpassOrNullNum(audit.getPositionAuditId());
+				if(unpassnum == 0 ) {
+					//如果已经全部通过，则将该岗位修改为审批通过
+					auditMapper.passById(audit.getPositionAuditId());
+				}
+			}
+		}
+		return new ResultJson(true);
 	}
 	
 }

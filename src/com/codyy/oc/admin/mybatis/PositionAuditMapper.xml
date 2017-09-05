@@ -115,4 +115,22 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where position_audit_id = #{positionAuditId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectUnauditByid" parameterType="java.lang.String"  resultType="java.lang.Integer">
+  	select count(*) from POSITION_AUDIT where position_audit_id=#{id} and result is null
+  </select>
+  
+  <update id="setUnPassById" parameterType="java.lang.String">
+  	update POSITION set status = 'reject' where post_id = (select position_id from POSITION_AUDIT where position_audit_id = #{id})
+  </update>
+  
+   <select id="getUnpassOrNullNum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+  	select count(*) from POSITION_AUDIT where position_id=(select position_id from POSITION_AUDIT where position_audit_id=#{id}) and (result is null or result=-1)
+  </select>
+  
+  <update id="passById" parameterType="java.lang.String">
+  	update POSITION set status = 'audited' where post_id = (select position_id from POSITION_AUDIT where position_audit_id = #{id})
+  </update>
+  
+  
 </mapper>
