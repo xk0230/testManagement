@@ -26,6 +26,10 @@ public class CostVO extends CostEntityBean{
 	private String costDate = "";
 	
 	private String createDate = "";
+	
+	private String startDate;
+    
+    private String endDate;
 
 	public Timestamp getStartTime() {
 		return startTime;
@@ -96,7 +100,7 @@ public class CostVO extends CostEntityBean{
 
 	public String getCostDate() {
 		if(this.getCostTime() != null){
-			costDate = DateUtils.format(this.getCostTime(),"yyyy-MM");
+			costDate = DateUtils.format(this.getCostTime(),DateUtils.PATTERN_DATE);
 		}
 		return costDate;
 	}
@@ -107,5 +111,21 @@ public class CostVO extends CostEntityBean{
 		}
 		return createDate;
 	}
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
 }

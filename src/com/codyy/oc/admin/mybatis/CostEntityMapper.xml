@@ -4,7 +4,7 @@
 
 	<select id="getCostSubTypeList" parameterType="int" resultType="com.codyy.oc.admin.entity.CostSubTypeBean">
 		
-		SELECT cost_subtype_id AS costSubTypeId,cost_type AS castType,name as name
+		SELECT cost_subtype_id AS costSubTypeId,cost_type AS costType,name as name
 		FROM COST_SUBTYPE
 		WHERE 1=1
 		<if test="_parameter == 0 || _parameter ==1">
@@ -68,23 +68,26 @@
 			  AND costDetail.dep_id = dep.dep_id
 			  
 			<if test="map.depId != null and map.depId !=''">
-				AND dep_id = #{map.depId}
+				AND costDetail.dep_id = #{map.depId}
 			</if>
 			
 			<if test="map.costType != -1 ">
-				AND cost_type = #{map.costType}
+				AND costDetail.cost_type = #{map.costType}
 			</if>
 			
 			<if test="map.costSubtypeId != null and map.costSubtypeId !=''">
-				AND cost_subtype_id = #{map.costSubtypeId}
+				AND costDetail.cost_subtype_id = #{map.costSubtypeId}
 			</if>
 			
-			<if test="map.costTime != null">
-				AND cost_time <![CDATA[ >= ]]> #{map.startTime}
-				AND cost_time <![CDATA[ <= ]]> #{map.endTime}
+			<if test="map.startTime != null and map.startTime !=''">
+				AND costDetail.cost_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
 		
-		order by cost_id desc
+		ORDER BY costDetail.cost_id DESC
 	
 	</select>
 	

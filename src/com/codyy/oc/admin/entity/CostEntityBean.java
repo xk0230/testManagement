@@ -24,7 +24,7 @@ public class CostEntityBean {
 	private int costType = -1;
 	
 	//成本子类型ID
-	private int costSubtypeId;
+	private String costSubtypeId;
 	
 	//成本数目
 	private double costNum;
@@ -72,11 +72,11 @@ public class CostEntityBean {
 		this.costType = costType;
 	}
 
-	public int getCostSubtypeId() {
+	public String getCostSubtypeId() {
 		return costSubtypeId;
 	}
 
-	public void setCostSubtypeId(int costSubtypeId) {
+	public void setCostSubtypeId(String costSubtypeId) {
 		this.costSubtypeId = costSubtypeId;
 	}
 

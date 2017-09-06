@@ -4,12 +4,12 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body ng-app = "myApp" >
+<body>
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
 		
-		<div id="content" ng-controller="CostController as vm">
+		<div id="content" ng-app = "myApp"  ng-controller="CostController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
@@ -40,40 +40,34 @@
 							<ul class="searchWrap borderBox">
 								<li>
 									<label class="labelText">所属部门：</label>
-									<select name="costType">
-										<option value="-1">--请选择--</option>
-										<option value="0">收入</option>
-										<option value="1">支出</option>
+									<select id="depId" ng-model="dep" 
+											ng-options="dep.depId as dep.name group by dep.group for dep in depList">
+											<option value="">--请选择--</option>
 									</select>
 									
-									&nbsp;&nbsp;&nbsp;
 									<label class="labelText">收支类型：</label>
-									<select name="costType">
-										<option value="-1">--请选择--</option>
-										<option value="0">收入</option>
-										<option value="1">支出</option>
+									<select id="costType" ng-model="costType" 
+											ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
+											ng-change="costTypeChange()">
+										<option value="">--请选择--</option>
 									</select>
 									
-									&nbsp;&nbsp;&nbsp;
 									<label class="labelText">分类名称：</label>
-									<input type="text" name="position" ng-model="position" id="position" />
-									&nbsp;&nbsp;&nbsp;
-									<label class="labelText">归属日期：</label>
-									<input type="text" name="position" ng-model="position" id="position" />
+									<select id="costSubType" ng-model="costSubType" 
+											ng-options="costSubType.costSubTypeId as costSubType.name group by costSubType.group for costSubType in costSubTypeList">
+										<option value="">--请选择--</option>
+									</select>
 									
-									<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
+									<label class="labelText">开始日期：</label>
+									<input type="text" id="costStartTime" onClick="WdatePicker({readOnly:true})" />
+									
+									<label class="labelText">结束日期：</label>
+									<input type="text" id="costEndTime" onClick="WdatePicker({readOnly:true})" />
+									
+									<input type="button" class="submit btn" name="query" ng-click="vm.getCostList()" value="查询"  style="margin-left: 30px;"/>
 								</li>
 							</ul>
 								</div>
-							</div>
-						</div>
-						
-						<div class="col-lg-12">
-							<!-- col-lg-12 start here -->
-							<div class="panel panel-primary toggle">
-							
-									<input type="button" class="submit btn" name="query" ng-click="vm.getFinancingInfoList()" value="查询"  style="margin-left: 30px;"/>
-								
 							</div>
 						</div>
 						
@@ -135,38 +129,11 @@
 		</div>
 		<!-- End #content -->
 	</div>
-			
-	<script type="text/javascript">
-	 $(document).ready(function(){
-		 //获取部门
-		 
-		 
-		 
-	 });
 	
-	
-	function deleteOrgUser(id){
-		Win.confirm({'id':'deleteConfirm','html':'确认要删除吗?'},function(){
-			$.post("${root}/admin/adminuser/",{'adminUserId':id},function(data){
-				if(data){
-					if(data.result){
-						Win.alert('删除成功');
-						splitPage.reload();
-					}else{
-						Win.alert('删除失败！');
-					}
-				}else{
-					Win.alert('删除失败！');
-				}
-			});
-		},function(){});
-	}
-	
-	function editOrgUser(baseUserId){
-		Win.open({id:"addOrgUserWin",url:"${root}/admin/adminuser/getselbyid.do?userId="+baseUserId,title:"编辑账号",width:600,height:450,mask:true});
-	}
-	
-	</script>
+	<input type="hidden" id="rootUrl" value="${root}">
+		
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
+	<script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
+	
 </body>
 </html>

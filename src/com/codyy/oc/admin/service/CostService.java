@@ -115,16 +115,11 @@ public class CostService {
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
-	    
 	    map.put("depId", cost.getDepId());
 	    map.put("costType", cost.getCostType());
 	    map.put("costSubtypeId", cost.getCostSubtypeId());
-	    
-	    Timestamp costTime = cost.getCostTime();
-	    
-	    map.put("costTime", costTime);
-	    map.put("startTime", costTime);
-	    map.put("endTime", costTime);
+	    map.put("startTime", cost.getStartDate());
+	    map.put("endTime", cost.getEndDate());
 	    
 	    page.setMap(map);
 	    
