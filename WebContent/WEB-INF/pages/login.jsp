@@ -6,7 +6,6 @@
 <body class="login-page">
 
         <div id="login" class="animated bounceIn">
-            <img id="logo" src="assets/img/logo.png">
             <!-- Start .login-wrapper -->
             <div class="login-wrapper">
                 <ul id="myTab" class="nav nav-tabs nav-justified bn">
