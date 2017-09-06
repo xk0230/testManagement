@@ -57,7 +57,7 @@
 														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
 													</li>
 													<li id="toggle-sidebar-li">
-															<input type="button"  class="btn btn-success " name="query" ng-click="vm.addNewUser('')" value="新增用户" />
+														<input type="button"  class="btn btn-success " name="query" ng-click="vm.addNewUser('')" value="新增用户" />
 													</li>
 												</ul>
 											</div>
@@ -101,7 +101,10 @@
 												<td><p ng-bind="item.username"></p></td>
 												<td><p ng-bind="item.workStatus"></p></td>
 												<td><p ng-bind="item.createTime"></p></td>
-												<td><p ng-bind="item.username"></p></td>
+												<td>
+													<button type="button" class="btn btn-xs btn-success"><i class="ec-search"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userName)"><i class="br-pencil"></i></button>
+												</td>
 											</tr>
 										</tbody>
 									</table>

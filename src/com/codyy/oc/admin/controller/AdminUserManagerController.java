@@ -61,7 +61,7 @@ public class AdminUserManagerController extends BaseController {
 			}else{
 				adminUser.setFunctionList(null);
 			}
-			adminUser.setAdminUserId(adUser.getUserId());
+			//adminUser.setAdminUserId(adUser.getUserId());
 		return adminUserManagerService.insertAdminUsers(adUser,adminUser);
 	
 		

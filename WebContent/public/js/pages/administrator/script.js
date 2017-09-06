@@ -4,7 +4,7 @@ myAppModule.controller('UserListController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 2;
+		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
 			self.getFinancingInfoList();
@@ -43,8 +43,11 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewUser = function(id){
-			//Win.open({id:"addOrgUserWin",url:"toAddUser.do?userId="+id,title:"编辑账号",width:600,height:450,mask:true});
-			window.location.href="toAddUser.do?backurl="+window.location.href; 
+			window.location.href="toAddUser.do"; 
+		};
+		
+		this.edit = function(id){
+			window.location.href="toAddUser.do?id="+id; 
 		};
 	}
 );

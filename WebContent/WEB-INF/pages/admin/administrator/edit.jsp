@@ -22,7 +22,8 @@
 								<div class="col-lg-3">
 									<label class="col-lg-4 control-label" ></label>
 									<div class="col-lg-8">
-										<input type="button" class="btn btn-lg btn-success col-lg-12" ng-click="vm.addUser()" value="保存" />
+										<input type="button" class="btn btn-lg btn-success col-lg-12" ng-click="vm.addUser()" value="新增保存" />
+										<input type="button" class="btn btn-lg btn-success col-lg-12" ng-click="vm.updateUser()" value="修改保存" />
 									</div>
 								</div>
 							</div>
@@ -63,8 +64,8 @@
 												<label class="col-lg-4 control-label" >出生日期</label>
 												<div class="col-lg-8">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.birthday" is-open="popup.opened10" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.userDetail.birthday" is-open="popup.opened10" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空" ng-change="vm.birthDayChanged()"
 														ng-required="true"  />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(10)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -166,6 +167,7 @@
 						</div>
 					</div>
 				</div>
+
 				<!-- 银行信息 start here -->
 				<div class="outlet" ng-if="vm.edit == true">
 					<div class="row">
@@ -419,7 +421,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- 岗位信息 end here -->
+
 			</div>
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
