@@ -77,5 +77,43 @@
 			
 		};
 		
+		this.delCost = function(costId){
+			
+			 $("#dialog-confirm" ).dialog({
+			      resizable: false,
+			      height:170,
+			      modal: true,
+			      buttons: {
+			        "确定": function() {
+		        		$.post($("#rootUrl").val()+"/admin/cost/del/"+costId+".do",{},function(data){
+		        			if(data.code == 0){
+		        				self.getCostList();
+		        				jAlert("删除成功");
+		        			}
+		    			});
+		        		
+			        	$( this ).dialog( "close" );
+			        },
+			        "取消": function() {
+			        	$( this ).dialog( "close" );
+			        }
+			      }
+			 
+			  });
+		};
+		
+		this.editCost = function(costId){
+			
+			$("#dialog-save" ).dialog({
+			      resizable: false,
+			      height:300,
+			      width:350,
+			      modal: true
+			      
+			      
+			});
+			
+		};
+		
 	}
 );

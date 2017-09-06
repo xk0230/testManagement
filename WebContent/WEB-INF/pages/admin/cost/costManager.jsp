@@ -65,6 +65,10 @@
 									<input type="text" id="costEndTime" onClick="WdatePicker({readOnly:true})" />
 									
 									<input type="button" class="submit btn" name="query" ng-click="vm.getCostList()" value="查询"  style="margin-left: 30px;"/>
+									
+									<input type="button" class="submit btn" name="query" ng-click="vm.editCost(0)" value="添加"  style="margin-left: 30px;"/>
+								
+									
 								</li>
 							</ul>
 								</div>
@@ -106,7 +110,7 @@
 												<td><p ng-bind="item.costNum"></p></td>
 												<td><p ng-bind="item.createDate"></p></td>
 												<td>
-													<input type="button" class="submit btn" name="edit" ng-click="vm.editCost()" value="编辑"  />
+													<input type="button" class="submit btn" name="edit" ng-click="vm.editCost(item.costId)" value="编辑"  />
 													<input type="button" class="submit btn" name="del" ng-click="vm.delCost(item.costId)" value="删除"  />
 												</td>
 											</tr>
@@ -126,6 +130,48 @@
 
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
+			
+			<div id="dialog-save" title="成本记录" style="display:none">
+			  <form>
+				  <fieldset>
+				    <label for="depName">部门</label>
+				    <select id="depId" ng-model="dep" 
+							ng-options="dep.depId as dep.name group by dep.group for dep in depList">
+							<option value="">--请选择--</option>
+					</select>
+				    </br>
+				    <label for="costType">收支</label>
+				  	<select id="costType" ng-model="costType" 
+							ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
+							ng-change="costTypeChange()">
+						<option value="">--请选择--</option>
+					</select>
+					</br>
+				    <label for="costSubType">分类</label>
+				   	<select id="costSubType" ng-model="costSubType" 
+							ng-options="costSubType.costSubTypeId as costSubType.name group by costSubType.group for costSubType in costSubTypeList">
+						<option value="">--请选择--</option>
+					</select>
+				   	</br>
+				    <label for="costNum">金额</label>
+				    <input type="text" name="costNum" id="costNum" value="" class="text ui-widget-content ui-corner-all" />
+				    </br>
+				    
+				    <label for="costStartTime">日期</label>
+				    <input type="text" id="costStartTime" onClick="WdatePicker({readOnly:true})" />
+				     </br>
+				     
+				    <input type="button" class="submit btn" name="edit"  value="保存"  />
+					<input type="button" class="submit btn" name="del"  value="取消"  />
+				     
+				  </fieldset>
+			  </form>
+			</div>
+			
+			<div id="dialog-confirm" title="删除" style="display:none">
+			  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>删除后无法恢复,您确定吗？</p>
+			</div>
+			
 		</div>
 		<!-- End #content -->
 	</div>
@@ -134,6 +180,7 @@
 		
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
 	<script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	
 </body>
 </html>
