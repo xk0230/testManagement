@@ -45,9 +45,9 @@
 										<!-- 第1行 -->
 										<div class="form-group">
 											<div class="col-lg-3">
-												<label class="col-lg-4 control-label">姓名</label>
+												<label class="col-lg-4 control-label">姓名${user.realName}</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="vm.user.realname"/>
+													<input type="text" class="form-control" ng-model="vm.user.realname" id="realname" value="${user.realName}"/>
 												</div>
 											</div>
 											<div class="col-lg-3">

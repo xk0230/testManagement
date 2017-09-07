@@ -212,9 +212,9 @@
 	</select>
 	
 	<!-- 根据用户的id来获取对应用户的所有信息-->
-	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
-	    select user_id ,USERNAME,PASSWORD,REALNAME,CONTACT,LOCKED,REMARK,CREATE_USER_ID,CREATE_TIME,DELETE_FLAG,WEIXIN_NUM,POSITION
-	    from ADMIN_USER where user_id=#{adminUserId}
+	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="DefaultResultMap">
+	    select *
+	    from ADMIN_USER where user_id=#{userId}
 	</select>
 	
 	
@@ -527,9 +527,9 @@
 	
 	 <resultMap id="DefaultResultMap" type="com.codyy.oc.admin.entity.AdminUser">
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="username" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="realname" jdbcType="VARCHAR" property="realName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="delete_flag" jdbcType="CHAR" property="deleteFlag" />
     <result column="dep_id" jdbcType="VARCHAR" property="depId" />
