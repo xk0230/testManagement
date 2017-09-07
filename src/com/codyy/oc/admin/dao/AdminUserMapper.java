@@ -259,12 +259,14 @@ public interface AdminUserMapper {
 	 * @param record
 	 * @return
 	 */
-	 int updateById(@Param("record") AdminUser record);
+	 public int updateById(@Param("record") AdminUser record);
 	 
 	 /**
 	  * 
 	  * 获取所有用户类型为admin的用户ID列表
 	  * @return
 	  */
-	 List<String> getAllAdminUserIDs();
+	 public List<String> getAllAdminUserIDs();
+	 
+	 public int insertSelective(AdminUser record);
 }

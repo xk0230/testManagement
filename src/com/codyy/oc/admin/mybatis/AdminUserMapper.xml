@@ -113,7 +113,7 @@
     update ADMIN_USER
     <set>
       <if test="record.userName != null">
-        username = #{record.username,jdbcType=VARCHAR},
+        username = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.realName != null">
         realname = #{record.realName,jdbcType=VARCHAR},
@@ -524,4 +524,190 @@
 	<select id="getAllAdminUserIDs" resultType="java.lang.String">
 		select user_id from ADMIN_USER where position='ADMIN' and delete_flag='N'
 	</select>
+	
+	 <resultMap id="DefaultResultMap" type="com.codyy.oc.admin.entity.AdminUser">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="delete_flag" jdbcType="CHAR" property="deleteFlag" />
+    <result column="dep_id" jdbcType="VARCHAR" property="depId" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="work_status" jdbcType="VARCHAR" property="workStatus" />
+    <result column="salary_scale" jdbcType="INTEGER" property="salaryScale" />
+    <result column="entry_date" jdbcType="TIMESTAMP" property="entryDate" />
+    <result column="working_years" jdbcType="DOUBLE" property="workingYears" />
+    <result column="salary_begin_date" jdbcType="TIMESTAMP" property="salaryBeginDate" />
+    <result column="probation_period" jdbcType="INTEGER" property="probationPeriod" />
+    <result column="expected_date" jdbcType="TIMESTAMP" property="expectedDate" />
+    <result column="fwq_agreement" jdbcType="VARCHAR" property="fwqAgreement" />
+    <result column="fwq_num" jdbcType="INTEGER" property="fwqNum" />
+    <result column="labour_begin_time" jdbcType="TIMESTAMP" property="labourBeginTime" />
+    <result column="labour_end_time" jdbcType="TIMESTAMP" property="labourEndTime" />
+    <result column="sign_time" jdbcType="INTEGER" property="signTime" />
+    <result column="insurance_base" jdbcType="INTEGER" property="insuranceBase" />
+    <result column="filing_date" jdbcType="TIMESTAMP" property="filingDate" />
+    <result column="leave_date" jdbcType="TIMESTAMP" property="leaveDate" />
+    <result column="retired_date" jdbcType="TIMESTAMP" property="retiredDate" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+  </resultMap>
+  
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminUser">
+    insert into ADMIN_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null and userId !='' ">
+        user_id,
+      </if>
+      <if test="userName != null and userName !=''">
+        username,
+      </if>
+      <if test="password != null and password !=''">
+        password,
+      </if>
+      <if test="realName != null and realName !=''">
+        realname,
+      </if>
+      <if test="createTime != null and createTime !=''">
+        create_time,
+      </if>
+      <if test="deleteFlag != null and deleteFlag !=''">
+        delete_flag,
+      </if>
+      <if test="depId != null and depId !=''">
+        dep_id,
+      </if>
+      <if test="postId != null and postId !=''">
+        post_id,
+      </if>
+      <if test="workStatus != null and workStatus !=''">
+        work_status,
+      </if>
+      <if test="salaryScale != null and salaryScale !=''">
+        salary_scale,
+      </if>
+      <if test="entryDate != null and entryDate !=''">
+        entry_date,
+      </if>
+      <if test="workingYears != null and workingYears !=''">
+        working_years,
+      </if>
+      <if test="salaryBeginDate != null and salaryBeginDate !=''">
+        salary_begin_date,
+      </if>
+      <if test="probationPeriod != null and probationPeriod !=''">
+        probation_period,
+      </if>
+      <if test="expectedDate != null and expectedDate !=''">
+        expected_date,
+      </if>
+      <if test="fwqAgreement != null and fwqAgreement !=''">
+        fwq_agreement,
+      </if>
+      <if test="fwqNum != null and fwqNum !=''">
+        fwq_num,
+      </if>
+      <if test="labourBeginTime != null and labourBeginTime !=''">
+        labour_begin_time,
+      </if>
+      <if test="labourEndTime != null and labourEndTime !=''">
+        labour_end_time,
+      </if>
+      <if test="signTime != null and signTime !=''">
+        sign_time,
+      </if>
+      <if test="insuranceBase != null and insuranceBase !=''">
+        insurance_base,
+      </if>
+      <if test="filingDate != null and filingDate !=''">
+        filing_date,
+      </if>
+      <if test="leaveDate != null and leaveDate !=''">
+        leave_date,
+      </if>
+      <if test="retiredDate != null and retiredDate !=''">
+        retired_date,
+      </if>
+      <if test="position != null and position !=''">
+        position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null and userId !=''">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null and userName !=''">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password !=''">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null and realName !=''">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null and createTime !=''">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null and deleteFlag !=''">
+        #{deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="depId != null and depId !=''">
+        #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null and postId !=''">
+        #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null and workStatus !=''">
+        #{workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryScale != null and salaryScale !=''">
+        #{salaryScale,jdbcType=INTEGER},
+      </if>
+      <if test="entryDate != null and entryDate !=''">
+        #{entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workingYears != null and workingYears !=''">
+        #{workingYears,jdbcType=DOUBLE},
+      </if>
+      <if test="salaryBeginDate != null and salaryBeginDate !=''">
+        #{salaryBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="probationPeriod != null and probationPeriod !=''">
+        #{probationPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="expectedDate != null and expectedDate !=''">
+        #{expectedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fwqAgreement != null and fwqAgreement !=''">
+        #{fwqAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="fwqNum != null and fwqNum !=''">
+        #{fwqNum,jdbcType=INTEGER},
+      </if>
+      <if test="labourBeginTime != null and labourBeginTime !=''">
+        #{labourBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="labourEndTime != null and labourEndTime !=''">
+        #{labourEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null and signTime !=''">
+        #{signTime,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceBase != null and insuranceBase !=''">
+        #{insuranceBase,jdbcType=INTEGER},
+      </if>
+      <if test="filingDate != null and filingDate !=''">
+        #{filingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveDate != null and leaveDate !=''">
+        #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retiredDate != null and retiredDate !=''">
+        #{retiredDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null and position !=''">
+        #{position,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
 </mapper>

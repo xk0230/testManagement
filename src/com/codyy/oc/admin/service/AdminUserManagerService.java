@@ -96,7 +96,7 @@ public class AdminUserManagerService {
 //			adUser.setLeaveDate(new Date());
 //			adUser.setRetiredDate(new Date());
 			
-			adminUserMapper.insertAdminUser(adUser);
+			adminUserMapper.insertSelective(adUser);
 			if(null!=adminUser.getFunctionList() && adminUser.getFunctionList().size()>0){
 				adminUserPermissionMapper.insertUserPernission(adminUser);
 			}
@@ -105,7 +105,7 @@ public class AdminUserManagerService {
 			ad.setUserDetailId(UUIDUtils.getUUID());
 			ad.setUserId(adUser.getUserId());
 //			ad.setAge(18);
-			adminUserDetailMapper.insert(ad);
+			adminUserDetailMapper.insertSelective(ad);
 			return new ResultJson(true,2);//用户名不重名则直接添加
 		}catch(Exception e){
 			e.printStackTrace();

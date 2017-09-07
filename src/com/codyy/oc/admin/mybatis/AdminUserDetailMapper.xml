@@ -56,120 +56,120 @@
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
     insert into ADMIN_USER_DETAIL
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userDetailId != null">
+      <if test="userDetailId != null and userDetailId !=''">
         user_detail_id,
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId !=''">
         user_id,
       </if>
-      <if test="sex != null">
+      <if test="sex != null and sex !=''">
         sex,
       </if>
-      <if test="birthday != null">
+      <if test="birthday != null and birthday !=''">
         birthday,
       </if>
-      <if test="age != null">
+      <if test="age != null and age !=''">
         age,
       </if>
-      <if test="birthdayMonth != null">
+      <if test="birthdayMonth != null and birthdayMonth !=''">
         birthday_month,
       </if>
-      <if test="idNumber != null">
+      <if test="idNumber != null and idNumber !=''">
         id_number,
       </if>
-      <if test="origin != null">
+      <if test="origin != null and origin !=''">
         origin,
       </if>
-      <if test="domicile != null">
+      <if test="domicile != null and domicile !=''">
         domicile,
       </if>
-      <if test="nation != null">
+      <if test="nation != null and nation !=''">
         nation,
       </if>
-      <if test="marriage != null">
+      <if test="marriage != null and marriage !=''">
         marriage,
       </if>
-      <if test="political != null">
+      <if test="political != null and political !=''">
         political,
       </if>
-      <if test="education != null">
+      <if test="education != null and education !=''">
         education,
       </if>
-      <if test="major != null">
+      <if test="major != null and major !=''">
         major,
       </if>
-      <if test="university != null">
+      <if test="university != null and university !=''">
         university,
       </if>
-      <if test="phone1 != null">
+      <if test="phone1 != null and phone1 !=''">
         phone1,
       </if>
-      <if test="phone2 != null">
+      <if test="phone2 != null and phone2 !=''">
         phone2,
       </if>
-      <if test="citizenCard != null">
+      <if test="citizenCard != null and citizenCard !=''">
         citizen_card,
       </if>
-      <if test="payrollCard != null">
+      <if test="payrollCard != null and payrollCard !=''">
         payroll_card,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userDetailId != null">
+      <if test="userDetailId != null and userDetailId !=''">
         #{userDetailId,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId !=''">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
+      <if test="sex != null and sex !=''">
         #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="birthday != null">
+      <if test="birthday != null and birthday !=''">
         #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="age != null">
+      <if test="age != null and age !=''">
         #{age,jdbcType=INTEGER},
       </if>
-      <if test="birthdayMonth != null">
+      <if test="birthdayMonth != null and birthdayMonth !=''">
         #{birthdayMonth,jdbcType=INTEGER},
       </if>
-      <if test="idNumber != null">
+      <if test="idNumber != null and idNumber !=''">
         #{idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="origin != null">
+      <if test="origin != null and origin !=''">
         #{origin,jdbcType=VARCHAR},
       </if>
-      <if test="domicile != null">
+      <if test="domicile != null and domicile !=''">
         #{domicile,jdbcType=VARCHAR},
       </if>
-      <if test="nation != null">
+      <if test="nation != null and nation !=''">
         #{nation,jdbcType=VARCHAR},
       </if>
-      <if test="marriage != null">
+      <if test="marriage != null and marriage !=''">
         #{marriage,jdbcType=VARCHAR},
       </if>
-      <if test="political != null">
+      <if test="political != null and political !=''">
         #{political,jdbcType=VARCHAR},
       </if>
-      <if test="education != null">
+      <if test="education != null and education !=''">
         #{education,jdbcType=VARCHAR},
       </if>
-      <if test="major != null">
+      <if test="major != null and major !=''">
         #{major,jdbcType=VARCHAR},
       </if>
-      <if test="university != null">
+      <if test="university != null and university !=''">
         #{university,jdbcType=VARCHAR},
       </if>
-      <if test="phone1 != null">
+      <if test="phone1 != null and phone1 !=''">
         #{phone1,jdbcType=VARCHAR},
       </if>
-      <if test="phone2 != null">
+      <if test="phone2 != null and phone2 !=''">
         #{phone2,jdbcType=VARCHAR},
       </if>
-      <if test="citizenCard != null">
+      <if test="citizenCard != null and citizenCard !=''">
         #{citizenCard,jdbcType=VARCHAR},
       </if>
-      <if test="payrollCard != null">
+      <if test="payrollCard != null and payrollCard !=''">
         #{payrollCard,jdbcType=VARCHAR},
       </if>
     </trim>
