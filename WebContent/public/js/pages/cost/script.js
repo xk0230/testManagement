@@ -115,47 +115,15 @@
 		
 		this.editCost = function(costId){
 			
-			/*var modalInstance = $uibModal.open({
-	               templateUrl: 'myModalContent.html',
-	               controller: 'CostController',
-	               backdrop: "static",
-	               size: size
-	            });
-
-	           modalInstance.opened.then(function(){//模态窗口打开之后执行的函数   
-	        	   if(costId > 0){
-	        		   alert(costId);
-	        	   }
-	        	   
-		       });*/
+			alert("新增/修改");
 			
 		};
 	   
 		this.delCost = function (costId,size) {
-            var modalInstance = $uibModal.open({
-               templateUrl: 'myModalContent.html',
-               controller: 'CostController',
-               backdrop: "static",
-               size: size
-            });
 
+			alert("删除");
+			
         };
-   
-        $scope.delOk = function () {
-        	/*$.post($("#rootUrl").val()+"/admin/cost/del/"+costId+".do",{},function(data){
-    			if(data.code == 0){
-    				self.getCostList();
-    			}
-			});*/ 
-        	
-        	$uibModalInstance.close();
-        	
-         };
-        	 
-         $scope.delCancel = function () {
-      	   modalInstance.dismiss('cancel');
-         };
-		
 		
 	}
 );

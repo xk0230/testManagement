@@ -166,23 +166,6 @@
 				</div>
 				<!-- End .outlet -->
 			</div>
-
-			
-			 <div ng-controller="CostController">
-		         <script type="text/ng-template" id="myModalContent.html">
-             		<div class="modal-header">
-                 		<h3 class="modal-title">删除成本</h3>
-             		</div>
-             		<div class="modal-body">
-                 		删除后不可恢复，确认删除吗？
-             		</div>
-             		<div class="modal-footer">
-                 		<button class="btn btn-primary" type="button" ng-click="delOk()">确定</button>
-                 		<button class="btn btn-warning" type="button" ng-click="delCancel()">取消</button>
-            	 	</div>
-         		</script>
-		     </div>
-
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
 		</div>
