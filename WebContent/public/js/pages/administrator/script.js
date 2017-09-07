@@ -43,11 +43,11 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewUser = function(id){
-			window.location.href="toAddUser.do"; 
+			window.location.href="toAddOrEditUser.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="toAddUser.do?id="+id; 
+			window.location.href="toAddOrEditUser.do?id="+id; 
 		};
 	}
 );

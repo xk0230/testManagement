@@ -1,4 +1,5 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+realname_init = $('#realname').val();
 myAppModule.controller('UserListController',
 	function UserListController($scope,$http){
 		var self = this;
@@ -10,7 +11,7 @@ myAppModule.controller('UserListController',
 		self.user = {
 				userName :"",
 				password :"",
-				realname :"",
+				realname :realname_init,
 				create_time :"",
 				delete_flag :"",         //Y,N
 				depid :"",		 //部门id

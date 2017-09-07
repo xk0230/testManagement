@@ -103,7 +103,7 @@
 												<td><p ng-bind="item.createTime"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success"><i class="ec-search"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userName)"><i class="br-pencil"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userId)"><i class="br-pencil"></i></button>
 												</td>
 											</tr>
 										</tbody>

@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.poi.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -167,9 +166,18 @@ public class AdminUserManagerController extends BaseController {
 	* @return AdminUser    返回类型
 	* @throws
 	 */
-	@RequestMapping("toAddUser")
-	public String showAddUser(){
-		return "admin/administrator/edit";
+	@RequestMapping("toAddOrEditUser")
+	public ModelAndView showAddUser(String id,String isView){
+		ModelAndView model = new ModelAndView("admin/administrator/addOrEdit");
+		if(StringUtils.isNotBlank(id)) {
+			//如果有ID则是Edit
+			AdminUser adUser=adminUserManagerService.getselcAdminUserById(id);
+			model.addObject("user", adUser);
+		}else {
+			
+		}
+		
+		return model;
 	}
 	
 	/**
