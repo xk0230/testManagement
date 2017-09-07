@@ -30,7 +30,7 @@
 							<div class="panel panel-primary toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title">月度收入构成<i class="ec-list"></i></h4>
+									<h4 class="panel-title">月度收支构成<i class="ec-list"></i></h4>
 								</div>
 								<div class="panel-body">
 									<div id="container2"></div>
@@ -115,7 +115,7 @@
 		            enabled: false
 		       	},
 		        title: {
-		            text: '月度收入构成'
+		            text: '月度收支构成'
 		        },
 		        xAxis: {
 		            categories:xcategories,
