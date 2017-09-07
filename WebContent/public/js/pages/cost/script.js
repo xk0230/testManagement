@@ -1,6 +1,9 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
-.controller('CostController',
-	function costListController($scope,$http,$uibModal){
+
+
+
+myAppModule.controller('CostController',
+	function costListController($scope,$http,$uibModal,$document){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -112,13 +115,37 @@
 			opened3: false,
 			opened4: false
 		};
+		$scope.items = ['item1', 'item2', 'item3'];
 		
-		this.editCost = function(costId){
-			
-			alert("新增/修改");
-			
-		};
-	   
+		this.editCost = function (size, parentSelector) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    	    	  //好像必须得这么写
+		    	        items: function () {
+		    	          return ['item1', 'item2', 'item3'];
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result
+		    	    .then(function (selectedItem) {
+		    	    	//ok的回调函数
+		    	    	alert("回调函数"+selectedItem)
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	alert("dismised")
+		    	    });
+		    	  };
 		this.delCost = function (costId,size) {
 
 			alert("删除");
@@ -127,3 +154,20 @@
 		
 	}
 );
+
+//编辑页面的control
+angular.module('myApp').controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+	  var $ctrl = this;
+	  $ctrl.items = items;
+	  $ctrl.selected = {
+	    item: $ctrl.items[0]
+	  };
+
+	  $ctrl.ok = function () {
+	    $uibModalInstance.close("mmm");
+	  };
+
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+	});

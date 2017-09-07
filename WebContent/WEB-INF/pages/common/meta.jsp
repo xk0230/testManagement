@@ -37,9 +37,10 @@
 
 
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/sprflat-theme/jquery.ui.all.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/bootstrap.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/css/bootstrap.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/plugins.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/main.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <!-- Plugin CSS -->
 

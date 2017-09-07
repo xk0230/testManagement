@@ -70,7 +70,7 @@
 														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getCostList()" value="查询" />
 													</li>
 													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-success " name="query" ng-click="vm.editCost('')" value="新增成本" />
+														<input type="button"  class="btn btn-success " name="query" ng-click="vm.editCost('sm', '.outlet')" value="新增成本" />
 													</li>
 												</ul>
 											</div>
@@ -170,8 +170,46 @@
 			<div class="clearfix"></div>
 		</div>
 		<!-- End #content -->
+		
+		
+	<!-- 这里可以定义一个js文件放到public下面 -->
+    <script type="text/ng-template" id="myModalContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i> 用户新增</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>个人信息</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
 	</div>
-			
+
+	
+	
 	<input type="hidden" id="rootUrl" value="${root}">
 			
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
