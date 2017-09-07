@@ -16,12 +16,12 @@
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="im-table2"></i>
-              <span class="nav-link-text">员工信息</span>
+              <span class="nav-link-text">成本信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="collapseComponents">
-				<li><a href=""><i class="en-arrow-right7"></i>下拉1</a>
+				<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a>
 				</li>
-				<li><a href=""><i class="en-arrow-right7"></i> 下拉2</a>
+				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a>
 				</li>
             </ul>
           </li>

@@ -115,5 +115,60 @@
 			
 		};
 		
+		//日期模块加载
+		$scope.today = function() {
+			$scope.dt = new Date();
+		};
+		$scope.clear = function() {
+			$scope.dt = null;
+		};
+
+		$scope.dateOptions = {
+			dateDisabled: "",
+			formatYear: 'yyyy',
+			maxDate: new Date(9999, 12, 31),
+			minDate: new Date(1000, 1,1),
+			startingDay: 1,
+		};
+
+		
+		$scope.open = function(mode) {
+			if(mode == 1){
+				$scope.popup.opened1 = true;
+			}else if (mode == 2){
+				$scope.popup.opened2 = true;
+			}else if (mode == 3){
+				$scope.popup.opened3 = true;
+			}else if (mode == 4){
+				$scope.popup.opened4 = true;
+			}else if (mode == 5){
+				$scope.popup.opened5 = true;
+			}else if (mode == 6){
+				$scope.popup.opened6 = true;
+			}else if (mode == 7){
+				$scope.popup.opened7 = true;
+			}else if (mode == 8){
+				$scope.popup.opened8 = true;
+			}else if (mode == 9){
+				$scope.popup.opened9 = true;
+			}else if (mode == 10){
+				$scope.popup.opened10 = true;
+			}
+			
+		};
+	
+		$scope.popup = {
+			opened1: false,
+			opened2: false,
+			opened2: false,
+			opened4: false,
+			opened5: false,
+			opened6: false,
+			opened7: false,
+			opened8: false,
+			opened9: false,
+			opened10: false,
+		};
+		
 	}
 );
