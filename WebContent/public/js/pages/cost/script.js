@@ -1,6 +1,6 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
 .controller('CostController',
-	function costListController($scope,$http){
+	function costListController($scope,$http,$uibModal){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -77,44 +77,6 @@
 			
 		};
 		
-		this.delCost = function(costId){
-			
-			 $("#dialog-confirm" ).dialog({
-			      resizable: false,
-			      height:170,
-			      modal: true,
-			      buttons: {
-			        "确定": function() {
-		        		$.post($("#rootUrl").val()+"/admin/cost/del/"+costId+".do",{},function(data){
-		        			if(data.code == 0){
-		        				self.getCostList();
-		        				jAlert("删除成功");
-		        			}
-		    			});
-		        		
-			        	$( this ).dialog( "close" );
-			        },
-			        "取消": function() {
-			        	$( this ).dialog( "close" );
-			        }
-			      }
-			 
-			  });
-		};
-		
-		this.editCost = function(costId){
-			
-			$("#dialog-save" ).dialog({
-			      resizable: false,
-			      height:300,
-			      width:350,
-			      modal: true
-			      
-			      
-			});
-			
-		};
-		
 		//日期模块加载
 		$scope.today = function() {
 			$scope.dt = new Date();
@@ -131,7 +93,6 @@
 			startingDay: 1,
 		};
 
-		
 		$scope.open = function(mode) {
 			if(mode == 1){
 				$scope.popup.opened1 = true;
@@ -141,18 +102,6 @@
 				$scope.popup.opened3 = true;
 			}else if (mode == 4){
 				$scope.popup.opened4 = true;
-			}else if (mode == 5){
-				$scope.popup.opened5 = true;
-			}else if (mode == 6){
-				$scope.popup.opened6 = true;
-			}else if (mode == 7){
-				$scope.popup.opened7 = true;
-			}else if (mode == 8){
-				$scope.popup.opened8 = true;
-			}else if (mode == 9){
-				$scope.popup.opened9 = true;
-			}else if (mode == 10){
-				$scope.popup.opened10 = true;
 			}
 			
 		};
@@ -160,15 +109,53 @@
 		$scope.popup = {
 			opened1: false,
 			opened2: false,
-			opened2: false,
-			opened4: false,
-			opened5: false,
-			opened6: false,
-			opened7: false,
-			opened8: false,
-			opened9: false,
-			opened10: false,
+			opened3: false,
+			opened4: false
 		};
+		
+		this.editCost = function(costId){
+			
+			/*var modalInstance = $uibModal.open({
+	               templateUrl: 'myModalContent.html',
+	               controller: 'CostController',
+	               backdrop: "static",
+	               size: size
+	            });
+
+	           modalInstance.opened.then(function(){//模态窗口打开之后执行的函数   
+	        	   if(costId > 0){
+	        		   alert(costId);
+	        	   }
+	        	   
+		       });*/
+			
+		};
+	   
+		this.delCost = function (costId,size) {
+            var modalInstance = $uibModal.open({
+               templateUrl: 'myModalContent.html',
+               controller: 'CostController',
+               backdrop: "static",
+               size: size
+            });
+
+        };
+   
+        $scope.delOk = function () {
+        	/*$.post($("#rootUrl").val()+"/admin/cost/del/"+costId+".do",{},function(data){
+    			if(data.code == 0){
+    				self.getCostList();
+    			}
+			});*/ 
+        	
+        	$uibModalInstance.close();
+        	
+         };
+        	 
+         $scope.delCancel = function () {
+      	   modalInstance.dismiss('cancel');
+         };
+		
 		
 	}
 );
