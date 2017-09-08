@@ -49,6 +49,7 @@ setInterval("getNewsNum()","10000");
                     <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-logo">spr</span><span class="text-slogan">flat</span> 
                 </a>
             </div>
+            <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
             <div>
             <nav class="top-nav" role="navigation">
                 <!-- <ul class="nav navbar-nav pull-left">

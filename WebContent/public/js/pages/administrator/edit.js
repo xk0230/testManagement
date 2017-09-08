@@ -2,20 +2,18 @@
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]);  
-realname_init = $('#realname').val();
-
 myAppModule.controller('UserListController',
 	function UserListController($scope,$http,$location){
 		var self = this;
 		//模块显示
-		self.add = true;
-		self.edit = true;
-		self.mode;
-		//
+		self.readOnly = "";
+		self.admin;
+		self.mode = "";
 		self.user = {
+				userId:"",
 				userName :"",
 				password :"",
-				realname :realname_init,
+				realname :"",
 				create_time :"",
 				delete_flag :"",         //Y,N
 				depid :"",		 //部门id
@@ -36,27 +34,26 @@ myAppModule.controller('UserListController',
 				filing_date :"",	 //备案日期
 				leave_date :"",		 //离职日期
 				retired_date :"",	 //退工日期
-				position :""		 //角色'
-		}
-		
-		self.userDetail = {
-				sex:"",                     //性别
-				birthday:"",                //生日
-				age:"",                     //年龄
-				birthday_month:"",          //出生月份
-				id_number:"",               //身份证
-				origin:"",                  //籍贯
-				domicile:"",                //户籍
-				nation:"",                  //民族
-				marriage:"",                //婚姻
-				political:"",               //政治面貌
-				education:"",               //学历
-				major:"",                   //专业
-				university:"",              //毕业院校
-				phone1:"",                  //
-				phone2:"",                  //
-				citizen_card:"",            //市民卡
-				payroll_card:""             //工资卡
+				position :""	,	 //角色'
+				adminUserDetail : {
+						sex:"",                     //性别
+						birthday:"",                //生日
+						age:"",                     //年龄
+						birthday_month:"",          //出生月份
+						id_number:"",               //身份证
+						origin:"",                  //籍贯
+						domicile:"",                //户籍
+						nation:"",                  //民族
+						marriage:"",                //婚姻
+						political:"",               //政治面貌
+						education:"",               //学历
+						major:"",                   //专业
+						university:"",              //毕业院校
+						phone1:"",                  //
+						phone2:"",                  //
+						citizen_card:"",            //市民卡
+						payroll_card:""             //工资卡
+				}
 		}
 		
 		self.$onInit = function(){
@@ -67,9 +64,22 @@ myAppModule.controller('UserListController',
 			this.getDepList();
 			//获取用户ID
 			self.user.userName = $location.search().id;
-			//获取用户信息
-			this.getUser();
-			
+			//获取角色
+			self.admin =$("#sessionUserType").val();
+			//判定是否显示模块
+			if(typeof(self.user.userName)!="undefined"){
+				self.mode = "2";
+				//获取用户信息
+				this.getUser();
+				if(self.admin != "ADMIN"){
+					self.readOnly = true;
+				}else
+				{
+					self.readOnly = false;
+				}
+			}else{
+				self.mode = "1";
+			}
 		}
 		
 		//获取部门
@@ -88,17 +98,17 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
-		//获取用户
+		//获取
 		self.getUser = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getselcAdminUserById.do',
+				url:'/ccydManagement/admin/adminuser/getUserById.do',
 				params:{
-					userId: $scope.vm.user.depid
+					id: $scope.vm.user.userName
 				}
 			}).then(function(res){
 				if(res){
-					self.postlist = res.data || [];
+					self.user = res.data;
 				}else{
 					self.list = [];
 				}
@@ -111,7 +121,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/position/getPositionByDepId.do',
 				params:{
-					depId: $scope.user.userName
+					depId: $scope.vm.user.depId
 				}
 			}).then(function(res){
 				if(res){
@@ -122,8 +132,17 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
-		//新增用户
-		self.addUser = function(){
+		self.Save = function(){
+			if(self.mode == "1"){
+				this.getDepList2();
+			}else{
+				this.updateUser();
+			}
+			
+		}
+		
+		//获取部门
+		self.getDepList2 = function(){
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
@@ -150,7 +169,26 @@ myAppModule.controller('UserListController',
 					filingDate     : $scope.vm.user.filing_date                      , //备案日期
 					leaveDate      : $scope.vm.user.leave_date                       , //离职日期
 					retiredDate    : $scope.vm.user.retired_date                     , //退工日期
-					position       : $scope.vm.user.position                          //角色'
+					position       : $scope.vm.user.position                         ,//角色'
+					adminUserDetail:{
+						sex                 : $scope.vm.user.adminUserDetail.sex            , //性别
+						birthday            : $scope.vm.user.adminUserDetail.birthday       , //生日
+						age                 : $scope.vm.user.adminUserDetail.age            , //年龄
+						birthdayMonth       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
+						dNumber             : $scope.vm.user.adminUserDetail.id_number      , //身份证
+						rigin               : $scope.vm.user.adminUserDetail.origin         , //籍贯
+						omicile             : $scope.vm.user.adminUserDetail.domicile       , //户籍
+						ation               : $scope.vm.user.adminUserDetail.nation         , //民族
+						arriage             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
+						olitical            : $scope.vm.user.adminUserDetail.political      , //政治面貌
+						ducation            : $scope.vm.user.adminUserDetail.education      , //学历
+						ajor                : $scope.vm.user.adminUserDetail.major          , //专业
+						niversity           : $scope.vm.user.adminUserDetail.university     , //毕业院校
+						hone1               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
+						hone2               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
+						itizenCard          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
+						ayrollCard          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
+					}
 				}
 			}).then(function(res){
 				if(res){
@@ -159,6 +197,11 @@ myAppModule.controller('UserListController',
 					self.list = [];
 				}
 			})
+		}
+		
+		//新增用户
+		self.addUser = function(){
+
 		}
 		
 		//修改用户
@@ -191,24 +234,25 @@ myAppModule.controller('UserListController',
 					leaveDate      : $scope.vm.user.leave_date                       , //离职日期
 					retiredDate    : $scope.vm.user.retired_date                     , //退工日期
 					position       : $scope.vm.user.position                         ,//角色
-					
-					sex                 : $scope.vm.userDetail.sex            , //性别
-					birthday            : $scope.vm.userDetail.birthday       , //生日
-					age                 : $scope.vm.userDetail.age            , //年龄
-					birthdayMonth       : $scope.vm.userDetail.birthday_month , //出生月份
-					dNumber             : $scope.vm.userDetail.id_number      , //身份证
-					rigin               : $scope.vm.userDetail.origin         , //籍贯
-					omicile             : $scope.vm.userDetail.domicile       , //户籍
-					ation               : $scope.vm.userDetail.nation         , //民族
-					arriage             : $scope.vm.userDetail.marriage       , //婚姻
-					olitical            : $scope.vm.userDetail.political      , //政治面貌
-					ducation            : $scope.vm.userDetail.education      , //学历
-					ajor                : $scope.vm.userDetail.major          , //专业
-					niversity           : $scope.vm.userDetail.university     , //毕业院校
-					hone1               : $scope.vm.userDetail.phone1         , //电话号码
-					hone2               : $scope.vm.userDetail.phone2         , //电话号码
-					itizenCard          : $scope.vm.userDetail.citizen_card   , //市民卡
-					ayrollCard          : $scope.vm.userDetail.payroll_card    //工资卡
+					adminUserDetail:{
+						sex                 : $scope.vm.user.adminUserDetail.sex            , //性别
+						birthday            : $scope.vm.user.adminUserDetail.birthday       , //生日
+						age                 : $scope.vm.user.adminUserDetail.age            , //年龄
+						birthdayMonth       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
+						dNumber             : $scope.vm.user.adminUserDetail.id_number      , //身份证
+						rigin               : $scope.vm.user.adminUserDetail.origin         , //籍贯
+						omicile             : $scope.vm.user.adminUserDetail.domicile       , //户籍
+						ation               : $scope.vm.user.adminUserDetail.nation         , //民族
+						arriage             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
+						olitical            : $scope.vm.user.adminUserDetail.political      , //政治面貌
+						ducation            : $scope.vm.user.adminUserDetail.education      , //学历
+						ajor                : $scope.vm.user.adminUserDetail.major          , //专业
+						niversity           : $scope.vm.user.adminUserDetail.university     , //毕业院校
+						hone1               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
+						hone2               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
+						itizenCard          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
+						ayrollCard          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
+					}
 
 				}
 			}).then(function(res){
@@ -219,13 +263,13 @@ myAppModule.controller('UserListController',
 				}
 			})
 		}
-		
+
 		//获取岗位
 		self.birthDayChanged = function(){
 			var today = new Date();
-			var birthDay = $scope.vm.userDetail.birthday;
-			$scope.vm.userDetail.age = today.getYear() - birthDay.getYear();
-			$scope.vm.userDetail.birthday_month = birthDay.getMonth() + 1;
+			var birthDay = $scope.vm.user.adminUserDetail.birthday;
+			$scope.vm.user.adminUserDetail.age = today.getYear() - birthDay.getYear();
+			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
 		
 		
