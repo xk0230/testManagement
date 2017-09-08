@@ -207,13 +207,13 @@ setInterval("getNewsNum()","10000");
                             <img class="user-avatar" src="${root }/public/assets/img/avatars/48.jpg" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
                         </a>
                         <ul class="dropdown-menu right" role="menu">
-                            <li><a href="profile.html"><i class="st-user"></i> Profile</a>
+                            <li><a href="profile.html"><i class="st-user"></i>个人信息</a>
                             </li>
-                            <li><a href="file.html"><i class="st-cloud"></i> Files</a>
+<!--                             <li><a href="file.html"><i class="st-cloud"></i> Files</a>
                             </li>
-                            <li><a href="#"><i class="st-settings"></i> Settings</a>
+ -->                            <li><a href="#"><i class="st-settings"></i>修改密码</a>
                             </li>
-                            <li><a href="javascript:logout();"><i class="im-exit"></i> Logout</a>
+                            <li><a href="javascript:logout();"><i class="im-exit"></i> 退出</a>
                             </li>
                         </ul>
                     </li>

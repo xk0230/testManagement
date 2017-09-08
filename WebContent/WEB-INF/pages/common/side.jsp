@@ -3,16 +3,25 @@
 <div id="sidebar" ng-controller="SideListController as side">
 	<div class="sidebar-inner">
 		<ul id="sideNav" class="nav navbar-nav">
-			<li><a href="${root}/admin/adminuser/toadminlist.do">员工管理<i class="ec-users"></i></a></li>
+			<%-- <li><a href="${root}/admin/adminuser/toadminlist.do">员工管理<i class="ec-users"></i></a></li>
 			<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">员工增加<i class="ec-users"></i></a></li>
-			<li><a href="#"> Tables <i class="im-table2"></i></a>
-				<ul class="nav sub">
-					<li><a href="tables.html"><i class="en-arrow-right7"></i> Static tables</a>
-					</li>
-					<li><a href="data-tables.html"><i class="en-arrow-right7"></i> Data tables</a>
-					</li>
-				</ul>
-			</li>
+			 --%>
+		  
+		  
+		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
+              <i class="im-table2"></i>
+              <span class="nav-link-text">员工管理</span>
+            </a>
+            <ul class="sidenav-second-level collapse nav" id="userComponents">
+				<li><a href="${root}/admin/adminuser/toadminlist.do">员工列表<i class="en-arrow-right7"></i></a></li>
+				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">新增员工<i class="en-arrow-right7"></i></a></li>
+            </ul>
+          </li>
+          
+          
+          
+			
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="im-table2"></i>
@@ -22,6 +31,19 @@
 				<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a>
 				</li>
 				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a>
+				</li>
+            </ul>
+          </li>
+          
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postComponents" data-parent="#exampleAccordion">
+              <i class="im-table2"></i>
+              <span class="nav-link-text">岗位信息</span>
+            </a>
+            <ul class="sidenav-second-level collapse nav" id="postComponents">
+				<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>岗位管理</a>
+				</li>
+				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>岗位审批</a>
 				</li>
             </ul>
           </li>
