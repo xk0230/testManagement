@@ -466,7 +466,10 @@
 				and au.realname like concat('%',#{map.realName},'%')  
 			</if>
 			<if test="map.depId != null and map.depId !=''">
-				and au.dep_id in (#{map.depId})
+				and au.dep_id = #{map.depId}
+			</if>
+			<if test="map.postId != null and map.postId !=''">
+				and au.post_id = (#{map.postId})
 			</if>
 			
 			order by au.create_time DESC

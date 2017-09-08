@@ -69,6 +69,14 @@
     <filter-name>SecurityFilter</filter-name>
     <url-pattern>*.html</url-pattern>
   </filter-mapping>
+  <filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.codyy.oc.admin.filter.LoginFilter</filter-class>
+	</filter> 
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
   <servlet>
     <servlet-name>baseServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

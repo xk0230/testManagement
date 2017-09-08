@@ -474,11 +474,12 @@ public class AdminUserManagerService {
 		map.put("userName", userSearch.getUserName());
 		map.put("realName",userSearch.getRealName());
 		map.put("depId", userSearch.getDepId());
+		map.put("postId", userSearch.getPostId());
 //		map.put("contact", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getContact()));
 //		map.put("position",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getPosition()));
-		if(flag){
-			map.put("state",userSearch.getState());
-		}
+//		if(flag){
+//			map.put("state",userSearch.getState());
+//		}
 	    page.setMap(map);
 		List<AdminUser> data = adminUserMapper.getAdminUserPageList(page);
 		page.setData(data);

@@ -17,6 +17,14 @@ public class UserSearchModel {
 	private String state;
 	private String userId;
 	private String depId;
+	private String postId;
+	
+	public String getPostId() {
+		return postId;
+	}
+	public void setPostId(String postId) {
+		this.postId = postId;
+	}
 	public String getUserName() {
 		return userName;
 	}

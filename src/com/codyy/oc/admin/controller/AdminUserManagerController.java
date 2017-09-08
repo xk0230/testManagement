@@ -180,6 +180,13 @@ public class AdminUserManagerController extends BaseController {
 		return model;
 	}
 	
+	@ResponseBody
+	@RequestMapping("getUserById")
+	public AdminUser getUserById(@RequestParam(required=true) String id){
+		AdminUser adUser=adminUserManagerService.getselcAdminUserById(id);
+		return adUser;
+	}
+	
 	/**
 	 * 
 		* @Title: toAdminList

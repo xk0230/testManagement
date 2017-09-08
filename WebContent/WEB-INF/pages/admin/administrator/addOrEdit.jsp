@@ -222,7 +222,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >姓名</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="vm.user.realname"  />
+													<input type="text" class="form-control" ng-model="vm.user.realname"  value="66666666"/>
 												</div>
 											</div>
 											<div class="col-lg-3">
