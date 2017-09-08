@@ -8,6 +8,8 @@ myAppModule.controller('UserListController',
 		
 		this.$onInit = function(){
 			self.getFinancingInfoList();
+			//设置部门下拉框
+			this.getDepList();
 		}
 		
 		$scope.setPage = function (pageNo) {
@@ -22,11 +24,12 @@ myAppModule.controller('UserListController',
 		this.getFinancingInfoList = function(){
 			$http({
 				method:'POST',
-				url:'getadminlist.do',
+				url:'/ccydManagement/admin/adminuser/getadminlist.do',
 				params:{
 					userName: $scope.userName,
 					realName: $scope.realName,
-					position: $scope.position,
+					depId   : $scope.depId,
+					position: $scope.postId,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -41,13 +44,46 @@ myAppModule.controller('UserListController',
 			})
 		};
 		
+		//获取部门
+		self.getDepList = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/dep/getAlldep.do',
+				params:{
+				}
+			}).then(function(res){
+				if(res){
+					self.deplist = res.data || [];
+				}else{
+					self.list = [];
+				}
+			})
+		}
+		
+		//获取岗位
+		self.getPostionById = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/position/getPositionByDepId.do',
+				params:{
+					depId: $scope.depId
+				}
+			}).then(function(res){
+				if(res){
+					self.postlist = res.data || [];
+				}else{
+					self.list = [];
+				}
+			})
+		}
+		
 		// 添加新用户
 		this.addNewUser = function(id){
-			window.location.href="toAddOrEditUser.do"; 
+			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="toAddOrEditUser.do?id="+id; 
+			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+id; 
 		};
 	}
 );

@@ -1,7 +1,11 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]);  
 realname_init = $('#realname').val();
+
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http){
+	function UserListController($scope,$http,$location){
 		var self = this;
 		//模块显示
 		self.add = true;
@@ -61,13 +65,18 @@ myAppModule.controller('UserListController',
 			self.edit = true;
 			//设置部门下拉框
 			this.getDepList();
+			//获取用户ID
+			self.user.userName = $location.search().id;
+			//获取用户信息
+			this.getUser();
+			
 		}
 		
 		//获取部门
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'../dep/getAlldep.do',
+				url:'/ccydManagement/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -79,13 +88,30 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
+		//获取用户
+		self.getUser = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/adminuser/getselcAdminUserById.do',
+				params:{
+					userId: $scope.vm.user.depid
+				}
+			}).then(function(res){
+				if(res){
+					self.postlist = res.data || [];
+				}else{
+					self.list = [];
+				}
+			})
+		}
+		
 		//获取岗位
 		self.getPostionById = function(){
 			$http({
 				method:'POST',
-				url:'../position/getPositionByDepId.do',
+				url:'/ccydManagement/admin/position/getPositionByDepId.do',
 				params:{
-					depId: $scope.vm.user.depid
+					depId: $scope.user.userName
 				}
 			}).then(function(res){
 				if(res){
@@ -100,7 +126,7 @@ myAppModule.controller('UserListController',
 		self.addUser = function(){
 			$http({
 				method:'POST',
-				url:'insertadminuser.do',
+				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
 				params:{
 					userName       : $scope.vm.user.userName                         , //用户名
 					password       : $scope.vm.user.userName                         , //初始密码
@@ -139,7 +165,7 @@ myAppModule.controller('UserListController',
 		self.updateUser = function(){
 			$http({
 				method:'POST',
-				url:'updateuseradmin.do',
+				url:'/ccydManagement/admin/adminuser/updateuseradmin.do',
 				params:{
 					// ADMIN_USER
 					userName       : $scope.vm.user.userName                         , //用户名
