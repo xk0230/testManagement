@@ -147,6 +147,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
 				params:{
+					userId       : $scope.vm.user.userId                         , //用户名
 					userName       : $scope.vm.user.userName                         , //用户名
 					userName       : $scope.vm.user.userName                         , //用户名
 					password       : $scope.vm.user.userName                         , //初始密码
@@ -206,6 +207,7 @@ myAppModule.controller('UserListController',
 				url:'/ccydManagement/admin/adminuser/updateuseradmin.do',
 				params:{
 					// ADMIN_USER
+					userId       : $scope.vm.user.userId                         , //用户名
 					userName       : $scope.vm.user.userName                         , //用户名
 					password       : $scope.vm.user.userName                         , //初始密码
 					realName       : $scope.vm.user.realname                         , //姓名
