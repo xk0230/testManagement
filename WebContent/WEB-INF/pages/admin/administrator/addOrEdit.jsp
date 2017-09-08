@@ -45,7 +45,8 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" for="ds_host">用户名</label>
 												<div class="col-lg-8 ">
-													<input type="text" class="form-control"  ng-model="vm.user.userName" id="userName" ng-readonly="vm.readOnly" />
+													<input type="text" class="form-control"  ng-model="vm.user.userId" ng-show="false"/>
+													<input type="text" class="form-control"  ng-model="vm.user.userName"  ng-readonly="vm.readOnly" />
 												</div>
 											</div>
 											<div class="col-lg-3">
