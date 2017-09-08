@@ -213,15 +213,12 @@
 	
 	<!-- 根据用户的id来获取对应用户的所有信息-->
 	<select id="getselcAdminUserById" parameterType="java.lang.String" resultMap="DefaultResultMap">
-	    select *
-	    from ADMIN_USER where user_id=#{userId}
+	    select au.*,
+	    <include refid="UserDetail_Column_List" />
+	    from ADMIN_USER au left join ADMIN_USER_DETAIL ad
+	    on ad.user_id = au.user_id
+	      where au.user_id=#{userId}
 	</select>
-	
-	
-	
-	
-	
-	
 	
 	
 	
