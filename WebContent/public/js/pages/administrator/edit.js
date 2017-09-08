@@ -3,7 +3,7 @@ myAppModule.config(['$locationProvider', function($locationProvider) {
 	  $locationProvider.html5Mode(true);  
 	}]);  
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http,$location){
+	function UserListController($scope,$http,$location, $filter){
 		var self = this;
 		//模块显示
 		self.readOnly = "";
@@ -147,8 +147,8 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
 				params:{
+					// ADMIN_USER
 					userId       : $scope.vm.user.userId                         , //用户名
-					userName       : $scope.vm.user.userName                         , //用户名
 					userName       : $scope.vm.user.userName                         , //用户名
 					password       : $scope.vm.user.userName                         , //初始密码
 					realName       : $scope.vm.user.realname                         , //姓名
@@ -157,23 +157,23 @@ myAppModule.controller('UserListController',
 					postId         : $scope.vm.user.post_id                          , //岗位ID
 					workStatus     : $scope.vm.user.work_status                      , //状态：试用等
 					salaryScale    : $scope.vm.user.salary_scale                     , //薪级
-					entryDate      : $scope.vm.user.entry_date                       , //入职日期
+					entryDate      : $filter('date')($scope.vm.user.entry_date, "yyyy-MM-dd hh:mm:ss")                       , //入职日期
 					workingYears   : $scope.vm.user.working_years                    , //工龄
-					salaryBeginDate: $scope.vm.user.salary_begin_date                , //起薪日
-					probationPeriod: $scope.vm.user.probation_period                 , //试用期限
-					expectedDate   : $scope.vm.user.expected_date                    , //预计转正日
+					salaryBeginDate: $filter('date')($scope.vm.user.salary_begin_date, "yyyy-MM-dd")                , //起薪日
+					probationPeriod: $filter('date')($scope.vm.user.probation_period, "yyyy-MM-dd")                  , //试用期限
+					expectedDate   : $filter('date')($scope.vm.user.expected_date, "yyyy-MM-dd")                    , //预计转正日
 					fwqAgreement   : $scope.vm.user.fwq_agreement                    , //服务期协议
 					fwqNum         : $scope.vm.user.fwq_num                          , //服务期金额
-					labourBeginTime: $scope.vm.user.labour_begin_time                , //合同开始时间
-					labourEndTime  : $scope.vm.user.labour_end_time                  , //合同结束时间
+					labourBeginTime: $filter('date')($scope.vm.user.labour_begin_time, "yyyy-MM-dd")                , //合同开始时间
+					labourEndTime  : $filter('date')($scope.vm.user.labour_end_time, "yyyy-MM-dd")                  , //合同结束时间
 					signTime       : $scope.vm.user.sign_time                        , //签订次数
 					insuranceBase  : $scope.vm.user.insurance_base                   , //缴费基数
-					filingDate     : $scope.vm.user.filing_date                      , //备案日期
-					leaveDate      : $scope.vm.user.leave_date                       , //离职日期
-					retiredDate    : $scope.vm.user.retired_date                     , //退工日期
-					position       : $scope.vm.user.position                         ,//角色'
+					filingDate     : $filter('date')($scope.vm.user.filing_date, "yyyy-MM-dd")                      , //备案日期
+					leaveDate      : $filter('date')($scope.vm.user.leave_date, "yyyy-MM-dd")                       , //离职日期
+					retiredDate    : $filter('date')($scope.vm.user.retired_date, "yyyy-MM-dd")                     , //退工日期
+					position       : $scope.vm.user.position                         ,//角色
 					'adminUserDetail.sex'                 : $scope.vm.user.adminUserDetail.sex            , //性别
-					'adminUserDetail.birthday'            : $scope.vm.user.adminUserDetail.birthday       , //生日
+					'adminUserDetail.birthday'            : $filter('date')($scope.vm.user.adminUserDetail.birthday, "yyyy-MM-dd")       , //生日
 					'adminUserDetail.age'                 : $scope.vm.user.adminUserDetail.age            , //年龄
 					'adminUserDetail.birthdayMonth'       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
 					'adminUserDetail.idNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
@@ -216,23 +216,23 @@ myAppModule.controller('UserListController',
 					postId         : $scope.vm.user.post_id                          , //岗位ID
 					workStatus     : $scope.vm.user.work_status                      , //状态：试用等
 					salaryScale    : $scope.vm.user.salary_scale                     , //薪级
-					entryDate      : $scope.vm.user.entry_date                       , //入职日期
+					entryDate      : $filter('date')($scope.vm.user.entry_date, "yyyy-MM-dd hh:mm:ss")                       , //入职日期
 					workingYears   : $scope.vm.user.working_years                    , //工龄
-					salaryBeginDate: $scope.vm.user.salary_begin_date                , //起薪日
-					probationPeriod: $scope.vm.user.probation_period                 , //试用期限
-					expectedDate   : $scope.vm.user.expected_date                    , //预计转正日
+					salaryBeginDate: $filter('date')($scope.vm.user.salary_begin_date, "yyyy-MM-dd")                , //起薪日
+					probationPeriod: $filter('date')($scope.vm.user.probation_period, "yyyy-MM-dd")                  , //试用期限
+					expectedDate   : $filter('date')($scope.vm.user.expected_date, "yyyy-MM-dd")                    , //预计转正日
 					fwqAgreement   : $scope.vm.user.fwq_agreement                    , //服务期协议
 					fwqNum         : $scope.vm.user.fwq_num                          , //服务期金额
-					labourBeginTime: $scope.vm.user.labour_begin_time                , //合同开始时间
-					labourEndTime  : $scope.vm.user.labour_end_time                  , //合同结束时间
+					labourBeginTime: $filter('date')($scope.vm.user.labour_begin_time, "yyyy-MM-dd")                , //合同开始时间
+					labourEndTime  : $filter('date')($scope.vm.user.labour_end_time, "yyyy-MM-dd")                  , //合同结束时间
 					signTime       : $scope.vm.user.sign_time                        , //签订次数
 					insuranceBase  : $scope.vm.user.insurance_base                   , //缴费基数
-					filingDate     : $scope.vm.user.filing_date                      , //备案日期
-					leaveDate      : $scope.vm.user.leave_date                       , //离职日期
-					retiredDate    : $scope.vm.user.retired_date                     , //退工日期
+					filingDate     : $filter('date')($scope.vm.user.filing_date, "yyyy-MM-dd")                      , //备案日期
+					leaveDate      : $filter('date')($scope.vm.user.leave_date, "yyyy-MM-dd")                       , //离职日期
+					retiredDate    : $filter('date')($scope.vm.user.retired_date, "yyyy-MM-dd")                     , //退工日期
 					position       : $scope.vm.user.position                         ,//角色
 					'adminUserDetail.sex'                 : $scope.vm.user.adminUserDetail.sex            , //性别
-					'adminUserDetail.birthday'            : $scope.vm.user.adminUserDetail.birthday       , //生日
+					'adminUserDetail.birthday'            : $filter('date')($scope.vm.user.adminUserDetail.birthday, "yyyy-MM-dd")       , //生日
 					'adminUserDetail.age'                 : $scope.vm.user.adminUserDetail.age            , //年龄
 					'adminUserDetail.birthdayMonth'       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
 					'adminUserDetail.idNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
