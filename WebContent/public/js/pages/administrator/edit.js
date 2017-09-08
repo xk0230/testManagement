@@ -147,7 +147,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
 				params:{
-					userId       : $scope.vm.user.userId                         , //用户名
+					userName       : $scope.vm.user.userName                         , //用户名
 					userName       : $scope.vm.user.userName                         , //用户名
 					password       : $scope.vm.user.userName                         , //初始密码
 					realName       : $scope.vm.user.realname                         , //姓名
@@ -175,19 +175,19 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.birthday'            : $scope.vm.user.adminUserDetail.birthday       , //生日
 					'adminUserDetail.age'                 : $scope.vm.user.adminUserDetail.age            , //年龄
 					'adminUserDetail.birthdayMonth'       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
-					'adminUserDetail.dNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
-					'adminUserDetail.rigin'               : $scope.vm.user.adminUserDetail.origin         , //籍贯
-					'adminUserDetail.omicile'             : $scope.vm.user.adminUserDetail.domicile       , //户籍
-					'adminUserDetail.ation'               : $scope.vm.user.adminUserDetail.nation         , //民族
-					'adminUserDetail.arriage'             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
-					'adminUserDetail.olitical'            : $scope.vm.user.adminUserDetail.political      , //政治面貌
-					'adminUserDetail.ducation'            : $scope.vm.user.adminUserDetail.education      , //学历
-					'adminUserDetail.ajor'                : $scope.vm.user.adminUserDetail.major          , //专业
-					'adminUserDetail.niversity'           : $scope.vm.user.adminUserDetail.university     , //毕业院校
-					'adminUserDetail.hone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
-					'adminUserDetail.hone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
-					'adminUserDetail.itizenCard'          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
-					'adminUserDetail.ayrollCard'          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
+					'adminUserDetail.idNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
+					'adminUserDetail.origin'               : $scope.vm.user.adminUserDetail.origin         , //籍贯
+					'adminUserDetail.domicile'             : $scope.vm.user.adminUserDetail.domicile       , //户籍
+					'adminUserDetail.nation'               : $scope.vm.user.adminUserDetail.nation         , //民族
+					'adminUserDetail.marriage'             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
+					'adminUserDetail.political'            : $scope.vm.user.adminUserDetail.political      , //政治面貌
+					'adminUserDetail.education'            : $scope.vm.user.adminUserDetail.education      , //学历
+					'adminUserDetail.major'                : $scope.vm.user.adminUserDetail.major          , //专业
+					'adminUserDetail.university'           : $scope.vm.user.adminUserDetail.university     , //毕业院校
+					'adminUserDetail.phone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
+					'adminUserDetail.phone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
+					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
+					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
 				}
 			}).then(function(res){
 				if(res){
@@ -233,19 +233,19 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.birthday'            : $scope.vm.user.adminUserDetail.birthday       , //生日
 					'adminUserDetail.age'                 : $scope.vm.user.adminUserDetail.age            , //年龄
 					'adminUserDetail.birthdayMonth'       : $scope.vm.user.adminUserDetail.birthday_month , //出生月份
-					'adminUserDetail.dNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
-					'adminUserDetail.rigin'               : $scope.vm.user.adminUserDetail.origin         , //籍贯
-					'adminUserDetail.omicile'             : $scope.vm.user.adminUserDetail.domicile       , //户籍
-					'adminUserDetail.ation'               : $scope.vm.user.adminUserDetail.nation         , //民族
-					'adminUserDetail.arriage'             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
-					'adminUserDetail.olitical'            : $scope.vm.user.adminUserDetail.political      , //政治面貌
-					'adminUserDetail.ducation'            : $scope.vm.user.adminUserDetail.education      , //学历
-					'adminUserDetail.ajor'                : $scope.vm.user.adminUserDetail.major          , //专业
-					'adminUserDetail.niversity'           : $scope.vm.user.adminUserDetail.university     , //毕业院校
-					'adminUserDetail.hone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
-					'adminUserDetail.hone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
-					'adminUserDetail.itizenCard'          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
-					'adminUserDetail.ayrollCard'          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
+					'adminUserDetail.idNumber'             : $scope.vm.user.adminUserDetail.id_number      , //身份证
+					'adminUserDetail.origin'               : $scope.vm.user.adminUserDetail.origin         , //籍贯
+					'adminUserDetail.domicile'             : $scope.vm.user.adminUserDetail.domicile       , //户籍
+					'adminUserDetail.nation'               : $scope.vm.user.adminUserDetail.nation         , //民族
+					'adminUserDetail.marriage'             : $scope.vm.user.adminUserDetail.marriage       , //婚姻
+					'adminUserDetail.political'            : $scope.vm.user.adminUserDetail.political      , //政治面貌
+					'adminUserDetail.education'            : $scope.vm.user.adminUserDetail.education      , //学历
+					'adminUserDetail.major'                : $scope.vm.user.adminUserDetail.major          , //专业
+					'adminUserDetail.university'           : $scope.vm.user.adminUserDetail.university     , //毕业院校
+					'adminUserDetail.phone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
+					'adminUserDetail.phone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
+					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizen_card   , //市民卡
+					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payroll_card    //工资卡
 				}
 			}).then(function(res){
 				if(res){
