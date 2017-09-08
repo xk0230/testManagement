@@ -467,14 +467,15 @@ public class AdminUserManagerService {
 	public Page getAdminList(Page page,UserSearchModel userSearch){
 		boolean flag=true;
 		Map<String,Object> map = new HashMap<String, Object>();
-		if(StringUtils.isNotBlank(userSearch.getProjectId())){
-			map.put("projectId",userSearch.getProjectId());
-			flag=false;
-		}
-		map.put("userName", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getUserName()));
-		map.put("realName",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getRealName()));
-		map.put("contact", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getContact()));
-		map.put("position",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getPosition()));
+//		if(StringUtils.isNotBlank(userSearch.getProjectId())){
+//			map.put("projectId",userSearch.getProjectId());
+//			flag=false;
+//		}
+		map.put("userName", userSearch.getUserName());
+		map.put("realName",userSearch.getRealName());
+		map.put("depId", userSearch.getDepId());
+//		map.put("contact", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getContact()));
+//		map.put("position",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getPosition()));
 		if(flag){
 			map.put("state",userSearch.getState());
 		}

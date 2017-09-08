@@ -59,7 +59,7 @@ public class BaseUserService {
 		map.put("end", end);
 		map.put("userName", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getUserName()));
 		map.put("realName",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getUserName()));
-		map.put("contact", userSearch.getContact());
+//		map.put("contact", userSearch.getContact());
 		map.put("position",userSearch.getPosition());
 		/*map.put("adminUserType", CommonsConstant.CREATE_USER_TYPE_BASE_ADMIN);
 		map.put("baseUserType", CommonsConstant.CREATE_USER_TYPE_BASE_USER);

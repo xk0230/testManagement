@@ -13,12 +13,10 @@ public class UserSearchModel {
 
 	private String userName;
 	private String realName;
-	private String contact;
 	private String position;
 	private String state;
 	private String userId;
-	private String role;
-	private String projectId;
+	private String depId;
 	public String getUserName() {
 		return userName;
 	}
@@ -30,12 +28,6 @@ public class UserSearchModel {
 	}
 	public void setRealName(String realName) {
 		this.realName = realName;
-	}
-	public String getContact() {
-		return contact;
-	}
-	public void setContact(String contact) {
-		this.contact = contact;
 	}
 	public String getPosition() {
 		return position;
@@ -55,31 +47,11 @@ public class UserSearchModel {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getRole() {
-		return role;
+	public String getDepId() {
+		return depId;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setDepId(String depId) {
+		this.depId = depId;
 	}
-	public String getProjectId() {
-		return projectId;
-	}
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
