@@ -19,14 +19,34 @@ public class Position {
 
     private String remark;
 
-    private String status = CommonsConstant.AUDIT_STATUS_AUDITING;//默认审核中
+    private String status;
 
     private String createUser;
     
     private Date createTime;
     
+    private String depName;
     
-    public String getCreateUser() {
+    private String createUserName;
+
+    
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	public String getDepName() {
+		return depName;
+	}
+
+	public void setDepName(String depName) {
+		this.depName = depName;
+	}
+
+	public String getCreateUser() {
 		return createUser;
 	}
 

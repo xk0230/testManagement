@@ -465,7 +465,6 @@ public class AdminUserManagerService {
 		* @return Page    
 	 */
 	public Page getAdminList(Page page,UserSearchModel userSearch){
-		boolean flag=true;
 		Map<String,Object> map = new HashMap<String, Object>();
 //		if(StringUtils.isNotBlank(userSearch.getProjectId())){
 //			map.put("projectId",userSearch.getProjectId());

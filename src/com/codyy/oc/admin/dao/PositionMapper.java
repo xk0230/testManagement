@@ -2,6 +2,7 @@ package com.codyy.oc.admin.dao;
 
 import java.util.List;
 
+import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.Position;
 
 public interface PositionMapper {
@@ -18,4 +19,7 @@ public interface PositionMapper {
     int updateByPrimaryKeySelective(Position record);
 
     int updateByPrimaryKey(Position record);
+    
+    List<Position> getPositionPageList(Page page);
+    
 }

@@ -12,6 +12,8 @@
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="depname" jdbcType="VARCHAR" property="depName" />
+    <result column="createusername" jdbcType="VARCHAR" property="createUserName" />
   </resultMap>
   <sql id="Base_Column_List">
     post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time
@@ -156,4 +158,41 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getPositionPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+  	select 
+    p.post_id,
+    p.name, 
+    p.dep_id,
+    p.on_duty,
+    p.organization,
+    p.vacancy, 
+    p.remark,
+    p.status,
+    p.create_user,
+    p.create_time,
+    d.name as depname,
+    au.username as createusername
+    from POSITION p
+    left join DEPARTMENT d
+     on d.dep_id = p.dep_id
+    left join ADMIN_USER au
+    on au.user_id = p.create_user	
+    where 1=1
+    
+    <if test="map.createUser != null and map.createUser != ''">
+	    and p.create_user = #{map.createUser,jdbcType=VARCHAR}
+	</if>
+  	<if test="map.name != null and map.name != '' ">
+  		and p.name like   concat('%',#{map.name,jdbcType=VARCHAR},'%') 
+  	</if>
+    <if test="map.depId != null and map.depId != '' ">
+    	and p.dep_id = #{map.depId,jdbcType=VARCHAR}
+    </if>
+    <if test="map.status != null and map.status != '' ">
+    	and p.status = #{map.status,jdbcType=VARCHAR}
+    </if>
+    
+    order by create_time desc
+  </select>
 </mapper>

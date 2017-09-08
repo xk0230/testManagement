@@ -40,6 +40,7 @@ public class PositionService {
 	public void insert(Position position) {
 		position.setPostId(UUIDUtils.getUUID());
 		position.setCreateTime(new Date());
+		position.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 		mapper.insert(position);
 		
 		List<String> adminUserIds = adminUserMapper.getAllAdminUserIDs();
@@ -96,15 +97,14 @@ public class PositionService {
 	
 	
 	public Page getPositionPageList(Page page,PositionSearchView search){
-		boolean flag=true;
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("name", OracleKeyWordUtils.oracleKeyWordReplace(search.getName()));
 		map.put("depId",search.getDepId());
 		map.put("status", search.getStatus());
 		map.put("createUser",search.getCreateUser());
 	    page.setMap(map);
-//		List<Position> data = mapper.getPositionPageList(page);
-//		page.setData(data);
+		List<Position> data = mapper.getPositionPageList(page);
+		page.setData(data);
 		return page;
 	}
 	

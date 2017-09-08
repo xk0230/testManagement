@@ -1,11 +1,16 @@
 package com.codyy.oc.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +33,12 @@ public class PositionController extends BaseController {
 	@Autowired
 	private PositionService service;
 	
-	
+	@InitBinder  
+	 public void initBinder(WebDataBinder binder) {  
+	     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+	     dateFormat.setLenient(false);  
+	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
+	}
 	/**
 	 * 
 	 * 根据部门ID获取所有岗位
