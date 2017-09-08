@@ -195,6 +195,67 @@
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
 
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">所属部门</label>
+												<div class="col-lg-8">
+													<select id="depId" ng-model="dep"  class="form-control select2" 
+															ng-options="dep.depId as dep.name group by dep.group for dep in depList">
+															<option value="">--请选择--</option>
+													</select>
+												</div>
+											</div>
+											
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">收支类型</label>
+												<div class="col-lg-8">
+													<select id="costType" ng-model="costType"  class="form-control select2" 
+															ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
+															ng-change="costTypeChange()">
+														<option value="">--请选择--</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">分类名称</label>
+												<div class="col-lg-8">
+													<select id="costSubType" ng-model="costSubType" class="form-control select2"
+															ng-options="costSubType.costSubTypeId as costSubType.name group by costSubType.group for costSubType in costSubTypeList">
+														<option value="">--请选择--</option>
+													</select>
+												</div>
+											</div>
+											
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label" >成本产生时间</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="costStartDate" is-open="popup.opened1" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="true"  />
+														<span class="input-group-btn">
+														<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">金额</label>
+												<div class="col-lg-8">
+													<input type="text" class="form-control" ng-model="vm.user.realname" id="realname" value="${user.realName}"/>
+												</div>
+											</div>
+											
+											<div class="col-lg-6">
+
+			
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

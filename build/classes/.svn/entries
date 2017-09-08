@@ -2,13 +2,13 @@
 
 dir
 54780
-https://10.1.10.4:8443/svn/Technology/ManagementPlatform/OperationManagement/trunk/OperationManagement/test
+https://10.1.10.4:8443/svn/Technology/ManagementPlatform/OperationManagement/trunk/OperationManagement/src
 https://10.1.10.4:8443/svn/Technology
 
 
 
-2015-06-24T05:41:15.310348Z
-23060
+2016-01-27T01:32:17.958641Z
+50669
 xiaokan
 
 
@@ -25,4 +25,7 @@ xiaokan
 
 
 1073a941-e354-fa44-b718-fa81a013c4af
+
+com
+dir
 

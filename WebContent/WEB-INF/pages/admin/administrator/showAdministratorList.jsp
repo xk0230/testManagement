@@ -46,20 +46,37 @@
 												</div>
 											</div>
 											<div class="col-lg-3">
-												<label class="col-lg-3 control-label" for="ds_name">部门</label>
+												<label class="col-lg-3 control-label" >部门</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" name="position" ng-model="position" id="position" />
+													<select class="form-control select2" ng-model="depId"  ng-change="vm.getPostionById()" >
+														<option value="">请选择</option>
+														<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
+													</select>
 												</div>
 											</div>
-											<div class="col-lg-3 pull-left">
-												<ul class="nav navbar-nav pull-left">
-													<li id="toggle-sidebar-li" class="ui-buttonset">
-														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
-													</li>
-													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-success " name="query" ng-click="vm.addNewUser('')" value="新增用户" />
-													</li>
-												</ul>
+											<div class="col-lg-3">
+
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-3">
+												<label class="col-lg-3 control-label" >岗位</label>
+												<div class="col-lg-9">
+													<select class="form-control select2" ng-model="postId" >
+														<option value="">请选择</option>
+														<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-6">
+											</div>
+											<div class="col-lg-3">
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
+												</div>
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
+												</div>
 											</div>
 										</div>
 									</div>

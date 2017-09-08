@@ -159,6 +159,14 @@ myAppModule.controller('CostController',
 angular.module('myApp').controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
 	  var $ctrl = this;
 	  $ctrl.items = items;
+		this.$onInit = function(){
+			self.getCostList();
+			self.getDeparts();
+			$scope.costTypeList = [
+			                       {value : "0", name : "收入"},
+			                       {value : "1", name : "支出"}
+			                   ];
+		};
 	  $ctrl.selected = {
 	    item: $ctrl.items[0]
 	  };
