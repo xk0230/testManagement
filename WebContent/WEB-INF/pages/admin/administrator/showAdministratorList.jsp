@@ -97,10 +97,10 @@
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td><p ng-bind="item.userName"></p></td>
 												<td><p ng-bind="item.realName"></p></td>
-												<td><p ng-bind="item.username"></p></td>
-												<td><p ng-bind="item.username"></p></td>
+												<td><p ng-bind="item.depName"></p></td>
+												<td><p ng-bind="item.postName"></p></td>
 												<td><p ng-bind="item.workStatus"></p></td>
-												<td><p ng-bind="item.createTime"></p></td>
+												<td><p ng-bind="item.entryDate | date:'yyyy-MM-dd'"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success"><i class="ec-search"></i></button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userId)"><i class="br-pencil"></i></button>

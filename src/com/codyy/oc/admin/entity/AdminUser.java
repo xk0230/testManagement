@@ -50,6 +50,10 @@ public class AdminUser implements Serializable {
 	
 	private AdminUserDetail adminUserDetail;
 	
+	private String postName;//岗位name
+	
+	private String depName;//部门name
+	
 	public List<AdminUserPermission> getAdminUserPer() {
 		return adminUserPer;
 	}
@@ -57,6 +61,24 @@ public class AdminUser implements Serializable {
 	public void setAdminUserPer(List<AdminUserPermission> adminUserPer) {
 		this.adminUserPer = adminUserPer;
 	}
+
+	
+	public String getPostName() {
+		return postName;
+	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+	public String getDepName() {
+		return depName;
+	}
+
+	public void setDepName(String depName) {
+		this.depName = depName;
+	}
+
 
 	private List<AdminUserRole> adminUserRoles ;
 

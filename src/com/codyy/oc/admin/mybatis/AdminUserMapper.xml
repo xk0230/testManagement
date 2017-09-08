@@ -448,10 +448,16 @@
 			au.filing_date          as            filingDate,
 			au.leave_date           as            leaveDate,
 			au.retired_date         as            retiredDate,
+			dep.name as depName,
+			po.name as postName,
 			 <include refid="UserDetail_Column_List" />
 		from ADMIN_USER au 
 		left join ADMIN_USER_DETAIL ad
 		 on au.user_id = ad.user_id
+		left join DEPARTMENT dep 
+		 on dep.dep_id = au.dep_id 
+		left join POSITION po 
+		 on po.post_id = au.post_id 
 		where 1 = 1
 			<if test="map.userName!= null and  map.userName!=''">
 				and au.username like concat('%',#{map.userName},'%') 
