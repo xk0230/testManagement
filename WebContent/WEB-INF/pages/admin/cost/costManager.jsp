@@ -148,8 +148,8 @@
 												<td><p ng-bind="item.costNum"></p></td>
 												<td><p ng-bind="item.createDate"></p></td>
 												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delCost(item.costId,'.outlet')"><i class="ec-search"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId,'.outlet')"><i class="br-pencil"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId,'.outlet')"><i class="fa-edit"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delCost(item.costId,'.outlet')"><i class="ec-trashcan"></i></button>
 												</td>
 												
 											</tr>
