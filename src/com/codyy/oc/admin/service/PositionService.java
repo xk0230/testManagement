@@ -36,6 +36,10 @@ public class PositionService {
 		return mapper.selectByDepId(depId);
 	}
 	
+	public Position getPositionById(String depId){
+		return mapper.selectByPrimaryKey(depId);
+	}
+	
 	
 	public void insert(Position position) {
 		position.setPostId(UUIDUtils.getUUID());

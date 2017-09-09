@@ -72,7 +72,7 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.postlist = res.data || [];
 				}else{
-					self.list = [];
+					self.postlistpostlist = [];
 				}
 			})
 		}

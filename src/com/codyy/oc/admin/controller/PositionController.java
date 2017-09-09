@@ -19,7 +19,6 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
-import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
@@ -41,6 +40,19 @@ public class PositionController extends BaseController {
 	     dateFormat.setLenient(false);  
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
 	}
+	
+	/**
+	 * 
+		* @Title: toPostionList
+		* @Description: (岗位列表)
+		* @return String    返回类型
+		* @throws
+	 */
+	@RequestMapping("toPostionList")
+	public String toPostionList(){
+		return "admin/postion/postionManager";
+	}
+	
 	/**
 	 * 
 	 * 根据部门ID获取所有岗位
@@ -52,6 +64,12 @@ public class PositionController extends BaseController {
 	@ResponseBody
 	public List<Position>  testimg(HttpServletRequest request,@RequestParam(required=true) String depId ){
 		return service.getPositionByDepId(depId);
+	}
+	
+	@RequestMapping("getPositionById")
+	@ResponseBody
+	public Position  getPositionById(HttpServletRequest request,@RequestParam(required=true) String id ){
+		return service.getPositionById(id);
 	}
 	
 	/**
