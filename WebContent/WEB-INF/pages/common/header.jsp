@@ -2,6 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Start #header -->
 <script type="text/javascript">
+
+/* $(document).ready(function(){
+	  $(".table tr").mouseenter(function(){
+	    $("p").css("background-color","yellow");
+	  });
+	  $("p").mouseleave(function(){
+	    $("p").css("background-color","#E9E9E4");
+	  });
+	}); */
+	
+$(document).on("mouseenter", ".table tr.odd", function(){ 
+	//此处的$(this)指$( "#testDiv")，而非$(document) 
+	$(this).css("background-color","#E9E9E4");
+}); 
+$(document).on("mouseleave", ".table tr.odd", function(){ 
+	$(this).css("background-color","white");
+}); 
+	
 function getNewsNum()
 {
 	$.ajax({
