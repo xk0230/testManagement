@@ -5,6 +5,8 @@
  */
 package com.codyy.oc.admin.vo;
 
+import java.math.BigDecimal;
+
 
 /**
  * 成本月份收入支出
@@ -15,7 +17,7 @@ public class CostMonthInOut {
     
     private String month;
     
-    private double total;
+    private BigDecimal total;
     
     public String getName() {
         return name;
@@ -33,13 +35,13 @@ public class CostMonthInOut {
         this.month = month;
     }
 
-    public double getTotal() {
-        return total;
-    }
+	public BigDecimal getTotal() {
+		return total;
+	}
 
-    public void setTotal(double total) {
-        this.total = total;
-    }
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 
 }
 

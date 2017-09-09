@@ -1,7 +1,7 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
 
 myAppModule.controller('CostController',
-	function costListController($scope,$http,$uibModal,$document){
+	function costListController($scope,$http,$uibModal,$document,$filter){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -61,8 +61,8 @@ myAppModule.controller('CostController',
 					depId:$scope.dep,
 					costType:$scope.costType,
 					costSubtypeId:$scope.costSubType,
-					startDate:$scope.costStartDate,
-					endDate:$scope.costEndDate,
+					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -140,7 +140,7 @@ myAppModule.controller('CostController',
 		    	      animation: true,
 		    	      ariaLabelledBy: 'modal-title',
 		    	      ariaDescribedBy: 'modal-body',
-		    	      templateUrl: 'myModalContent.html',
+		    	      templateUrl: 'myModalEditContent.html',
 		    	      controller: 'ModalInstanceCtrl',
 		    	      controllerAs: '$ctrl',
 		    	      size: 'lg',
@@ -157,36 +157,54 @@ myAppModule.controller('CostController',
 		    	    modalInstance.result.then(function (selectedItem) {
 		    	    	
 		    	    	//ok的回调函数
-		    	    	 $http({
-		 					method:'POST',
-		 					url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
-		 					params:selectedItem
-		 				
-		 				}).then(function(res){
-		 					
-		 					if(res.data.code == 0){
-		 						self.getCostList();
-		 					}
-		 					
-		 				});
+		    	    	if(selectedItem == '0'){
+		    	    		self.getCostList();
+		    	    	}
 		    	    	
 		    	    }, function () {
 		    	    	//取消的回调函数
 		    	    	
 		    	    });
-		    	  };
+		   };
 		    	  
-		this.delCost = function (costId,size) {
+		   this.delCost = function (costId, parentSelector) {
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+			    	    var modalInstance = $uibModal.open({
+			    	      animation: true,
+			    	      ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'myModalDelContent.html',
+			    	      controller: 'ModalInstanceDel',
+			    	      controllerAs: '$ctrl',
+			    	      size: 'sm',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    	    	  //好像必须得这么写
+			    	        items: function () {
+			    	          return costId;
+			    	        }
+			    	      }
+			    	    });
 
-			alert("删除");
-			
-        };
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	//ok的回调函数
+			    	    	if(selectedItem == '0'){
+			    	    		self.getCostList();
+			    	    	}
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    });
+			   };
 		
 	}
 );
 
 //编辑页面的control
-angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
+angular.module('myApp').controller('ModalInstanceCtrl', 
+		function ($scope,$http,$uibModalInstance,$filter, items) {
 	  var $ctrl = this;
 	  $ctrl.items = items;
 	  $ctrl.costEntity = {
@@ -224,11 +242,8 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 							}
 							
 						});
-						
 					}
-					
 				});
-			  
 		  }
 		
 		  $ctrl.getDeparts();
@@ -246,11 +261,24 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				depId:$scope.costEntity.depId,
 				costType:$scope.costEntity.costType,
 				costSubtypeId:$scope.costEntity.costSubtypeId,
-				costTime:$scope.costEntity.costTime,
+				costTime:$filter('date')($scope.costEntity.costTime, "yyyy-MM-dd"),
 				costNum:$scope.costEntity.costNum
 			} 
+		 
+		 $http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+				params:params
+			
+			}).then(function(res){
+				
+				if(res.data.code == 0){
+					$uibModalInstance.close('0');
+				}
+				
+			});
 		  
-	    $uibModalInstance.close(params);
+	    
 	  };
 
 	  $ctrl.cancel = function () {
@@ -338,5 +366,38 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 			opened3: false,
 			opened4: false
 		};
+	  
+	});
+
+
+//删除页面的control
+angular.module('myApp').controller('ModalInstanceDel', 
+		function ($scope,$http,$uibModalInstance,items) {
+	  var $ctrl = this;
+	  $ctrl.items = items;
+	  
+	  $ctrl.selected = {
+	    item: $ctrl.items[0]
+	  };
+
+	  $ctrl.ok = function () {
+		  $http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/del/"+items+".do",
+				params:{}
+			
+			}).then(function(res){
+				
+				if(res.data.code == 0){
+					$uibModalInstance.close('0');
+				}
+				
+			});
+	    
+	  };
+
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
 	  
 	});
