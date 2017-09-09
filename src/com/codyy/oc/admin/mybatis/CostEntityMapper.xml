@@ -40,7 +40,7 @@
 							   create_user_id = #{createUserId},
 							   cost_type = #{costType},
 							   cost_subtype_id = #{costSubtypeId},
-							   cost_num = #{cost_num},
+							   cost_num = #{costNum},
 							   dep_id = #{depId}
 		
 		WHERE cost_id = #{costId}

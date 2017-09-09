@@ -1,7 +1,7 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
 
 myAppModule.controller('CostController',
-	function costListController($scope,$http,$uibModal,$document){
+	function costListController($scope,$http,$uibModal,$document,$filter){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -61,8 +61,8 @@ myAppModule.controller('CostController',
 					depId:$scope.dep,
 					costType:$scope.costType,
 					costSubtypeId:$scope.costSubType,
-					startDate:$scope.costStartDate,
-					endDate:$scope.costEndDate,
+					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -186,7 +186,8 @@ myAppModule.controller('CostController',
 );
 
 //编辑页面的control
-angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
+angular.module('myApp').controller('ModalInstanceCtrl', 
+		function ($scope,$http,$uibModalInstance,$filter, items) {
 	  var $ctrl = this;
 	  $ctrl.items = items;
 	  $ctrl.costEntity = {
@@ -246,7 +247,7 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				depId:$scope.costEntity.depId,
 				costType:$scope.costEntity.costType,
 				costSubtypeId:$scope.costEntity.costSubtypeId,
-				costTime:$scope.costEntity.costTime,
+				costTime:$filter('date')($scope.costEntity.costTime, "yyyy-MM-dd"),
 				costNum:$scope.costEntity.costNum
 			} 
 		  
