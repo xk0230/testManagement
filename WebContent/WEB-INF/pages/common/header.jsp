@@ -2,16 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Start #header -->
 <script type="text/javascript">
-
-/* $(document).ready(function(){
-	  $(".table tr").mouseenter(function(){
-	    $("p").css("background-color","yellow");
-	  });
-	  $("p").mouseleave(function(){
-	    $("p").css("background-color","#E9E9E4");
-	  });
-	}); */
-	
 $(document).on("mouseenter", ".table tr.odd", function(){ 
 	//此处的$(this)指$( "#testDiv")，而非$(document) 
 	$(this).css("background-color","#E9E9E4");
@@ -223,7 +213,7 @@ setInterval("getNewsNum()","10000");
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.jpg" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
+                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.png" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
                         </a>
                         <ul class="dropdown-menu right" role="menu">
                             <li><a href="profile.html"><i class="st-user"></i>个人信息</a>
