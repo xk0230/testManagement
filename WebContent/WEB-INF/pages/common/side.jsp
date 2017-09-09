@@ -10,7 +10,7 @@
 		  
 		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
-              <i class="im-table2"></i>
+              <i class="ec-users"></i>
               <span class="nav-link-text">员工管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="userComponents">
@@ -24,7 +24,7 @@
 			
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-              <i class="im-table2"></i>
+              <i class="st-chart"></i>
               <span class="nav-link-text">成本信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="collapseComponents">
@@ -37,7 +37,7 @@
           
            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="abbc">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postComponents" data-parent="#exampleAccordion">
-              <i class="im-table2"></i>
+              <i class="fa-th-list"></i>
               <span class="nav-link-text">岗位信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postComponents">
