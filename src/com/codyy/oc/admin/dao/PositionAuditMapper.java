@@ -1,5 +1,8 @@
 package com.codyy.oc.admin.dao;
 
+import java.util.List;
+
+import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.PositionAudit;
 
 public interface PositionAuditMapper {
@@ -24,4 +27,6 @@ public interface PositionAuditMapper {
     void passById(String id);//根据ID将岗位设为通过审批
     
     int getUntreatedNum(String userId);
+    
+    List<PositionAudit> getPositionAuditPageList(Page page);
 }
