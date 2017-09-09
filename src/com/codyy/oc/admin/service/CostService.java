@@ -161,15 +161,15 @@ public class CostService {
 	    }
 	    
 	    if(CollectionUtils.isNotEmpty(departIncomeList)){
-	        Map<String,List<Double>> map = new HashMap<String,List<Double>>();
+	        Map<String,List<BigDecimal>> map = new HashMap<String,List<BigDecimal>>();
 	        for(CostInOutlayType costInOutlay : departIncomeList){
 	            xcategories.add(costInOutlay.getName());
 	            
 	            List<CostMonthInOut> monthInOuts = costInOutlay.getMonthInOut();
 	            for(CostMonthInOut costMonthInOut : monthInOuts){
-	                List<Double> list = map.get(costMonthInOut.getMonth());
+	                List<BigDecimal> list = map.get(costMonthInOut.getMonth());
 	                if(list == null){
-	                    list = new ArrayList<Double>();
+	                    list = new ArrayList<BigDecimal>();
 	                }
 	                list.add(costMonthInOut.getTotal());
 	                map.put(costMonthInOut.getMonth(), list);
@@ -337,10 +337,7 @@ public class CostService {
                 costTotalInOut.setTotalOut(costMonthInOut.getTotal());
             }
             
-            BigDecimal totalIncome = new BigDecimal(costTotalInOut.getTotalIncome());
-            BigDecimal totalOut = new BigDecimal(costTotalInOut.getTotalOut());
-            
-            costTotalInOut.setBalance(totalIncome.subtract(totalOut).doubleValue());
+            costTotalInOut.setBalance(costTotalInOut.getTotalIncome().subtract(costTotalInOut.getTotalOut()));
             
         }
         

@@ -5,6 +5,7 @@
  */
 package com.codyy.oc.admin.vo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class CostChartsSeriesData {
     
     private String name;
     
-    private List<Double> data;
+    private List<BigDecimal> data;
 
     public String getName() {
         return name;
@@ -29,13 +30,13 @@ public class CostChartsSeriesData {
         this.name = name;
     }
 
-    public List<Double> getData() {
-        return data;
-    }
+	public List<BigDecimal> getData() {
+		return data;
+	}
 
-    public void setData(List<Double> data) {
-        this.data = data;
-    }
-    
+	public void setData(List<BigDecimal> data) {
+		this.data = data;
+	}
+
 }
 

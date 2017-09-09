@@ -5,7 +5,6 @@
  */
 package com.codyy.oc.admin.vo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

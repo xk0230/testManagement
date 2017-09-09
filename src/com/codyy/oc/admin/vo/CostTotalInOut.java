@@ -5,39 +5,41 @@
  */
 package com.codyy.oc.admin.vo;
 
+import java.math.BigDecimal;
+
 
 
 public class CostTotalInOut {
     
-    private double totalIncome = 0.00;
+    private BigDecimal totalIncome;
     
-    private double totalOut= 0.00;
+    private BigDecimal totalOut;
     
-    private double balance= 0.00;
+    private BigDecimal balance;
 
-    public double getTotalIncome() {
-        return totalIncome;
-    }
+	public BigDecimal getTotalIncome() {
+		return totalIncome;
+	}
 
-    public void setTotalIncome(double totalIncome) {
-        this.totalIncome = totalIncome;
-    }
+	public void setTotalIncome(BigDecimal totalIncome) {
+		this.totalIncome = totalIncome;
+	}
 
-    public double getTotalOut() {
-        return totalOut;
-    }
+	public BigDecimal getTotalOut() {
+		return totalOut;
+	}
 
-    public void setTotalOut(double totalOut) {
-        this.totalOut = totalOut;
-    }
+	public void setTotalOut(BigDecimal totalOut) {
+		this.totalOut = totalOut;
+	}
 
-    public double getBalance() {
-        return balance;
-    }
+	public BigDecimal getBalance() {
+		return balance;
+	}
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
 }
 
