@@ -19,6 +19,7 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
+import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
@@ -32,6 +33,7 @@ public class PositionController extends BaseController {
 	
 	@Autowired
 	private PositionService service;
+	
 	
 	@InitBinder  
 	 public void initBinder(WebDataBinder binder) {  
@@ -109,5 +111,15 @@ public class PositionController extends BaseController {
 	public Page getPositionPageList(Page page,PositionSearchView search){
 		return service.getPositionPageList(page, search);
 	}
+//	
+	
+	@ResponseBody
+	@RequestMapping("getPositionAuditPageList")
+	public Page getPositionAuditPageList(Page page,PositionSearchView search){
+		return service.getPositionAuditPageList(page, search);
+	}
+	
+	
+	
 	
 }

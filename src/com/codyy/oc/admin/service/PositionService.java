@@ -98,7 +98,7 @@ public class PositionService {
 	
 	public Page getPositionPageList(Page page,PositionSearchView search){
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("name", OracleKeyWordUtils.oracleKeyWordReplace(search.getName()));
+		map.put("name", search.getName());
 		map.put("depId",search.getDepId());
 		map.put("status", search.getStatus());
 		map.put("createUser",search.getCreateUser());
@@ -108,5 +108,17 @@ public class PositionService {
 		return page;
 	}
 	
+	public Page getPositionAuditPageList(Page page,PositionSearchView search){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("createUserId", search.getCreateUser());
+		if(search.getAudit()!=null) {
+			map.put("auditUserId",search.getAudit().getAuditUserId());
+			map.put("result", search.getAudit().getResult());
+		}
+	    page.setMap(map);
+		List<PositionAudit> data = auditMapper.getPositionAuditPageList(page);
+		page.setData(data);
+		return page;
+	}
 	
 }
