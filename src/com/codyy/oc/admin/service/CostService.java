@@ -1,7 +1,6 @@
 package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +41,7 @@ public class CostService {
 	private static final String UPDATE_ERROR = "修改失败";
 	private static final String DEL_SUCCESS = "删除成功";
 	private static final String DEL_ERROR = "删除失败";
+	private static final String NO_EXIT_DATA = "数据不存在";
 	
 
 	@Autowired
@@ -66,6 +66,8 @@ public class CostService {
 		costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
 		costEntityBean.setCreateUserId(user.getUserId());
 		
+		costEntityBean.setCostTime(DateUtils.stringToTimestamp((DateUtils.format(costEntityBean.getCostTime()))));
+		
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
 			costEntityBean.setCostId(UUID.randomUUID().toString());
 			int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
@@ -87,6 +89,21 @@ public class CostService {
 		}
 		
 		return jsonDto;
+	}
+	
+	public JsonDto getCostEntityById(String costId){
+		
+		JsonDto jsonDto = new JsonDto();
+		CostEntityBean cost = costDaoMapper.getCostEntityById(costId);
+		if(cost != null){
+			jsonDto.setCode(0);
+			jsonDto.setObjData(cost);
+		}else{
+			jsonDto.setMsg(NO_EXIT_DATA);
+		}
+		
+		return jsonDto;
+		
 	}
 
 	public JsonDto delCostEntityById(String costId){

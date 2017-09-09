@@ -70,7 +70,7 @@
 														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getCostList()" value="查询" />
 													</li>
 													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-success " name="query" ng-click="vm.editCost('sm', '.outlet')" value="新增成本" />
+														<input type="button"  class="btn btn-success " name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
 													</li>
 												</ul>
 											</div>
@@ -132,7 +132,7 @@
 												<th>所属部门</th>
 												<th>收支类型</th>
 												<th>分类名称</th>
-												<th>归属日期</th>
+												<th>成本产生时间</th>
 												<th>金额</th>
 												<th>更新时间</th>
 												<th>操作</th>
@@ -149,7 +149,7 @@
 												<td><p ng-bind="item.createDate"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delCost(item.costId,'sm')"><i class="ec-search"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId)"><i class="br-pencil"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId,'.outlet')"><i class="br-pencil"></i></button>
 												</td>
 												
 											</tr>
@@ -177,7 +177,7 @@
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 用户新增</h1>
+						<h1 class="page-header"><i class="im-users2"></i> 成本信息</h1>
 						<ul id="crumb" class="breadcrumb">
 						</ul>
 					</div>
@@ -190,7 +190,7 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>个人信息</h3>
+									<h3 class="panel-title"><i class="ec-pencil"></i>成本记录</h3>
 								</div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
@@ -209,7 +209,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">收支类型</label>
 												<div class="col-lg-8">
-													<select id="costType" ng-model="costType"  class="form-control select2" 
+													<select ng-model="costType"  class="form-control select2" 
 															ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
 															ng-change="costTypeChange()">
 														<option value="">--请选择--</option>
@@ -233,7 +233,7 @@
 												<label class="col-lg-4 control-label" >成本产生时间</label>
 												<div class="col-lg-8">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="costStartDate" is-open="popup.opened1" 
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="costDate" is-open="popup.opened1" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
 														ng-required="true"  />
 														<span class="input-group-btn">
@@ -247,7 +247,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">金额</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="vm.user.realname" id="realname" value="${user.realName}"/>
+													<input type="text" class="form-control" ng-model="costNum" id="costNum" value=""/>
 												</div>
 											</div>
 											
@@ -263,8 +263,8 @@
 					</div>
 				</div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         </div>
     </script>
 	</div>

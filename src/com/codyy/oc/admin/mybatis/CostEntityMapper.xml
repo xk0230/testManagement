@@ -14,17 +14,16 @@
 	</select>
 	
 	<insert id="insertCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean" >
-		INSERT INTO COST_DETAIL(cost_id,
-								create_time,
-								cost_time,
-								create_user_id,
-								cost_type,
-								cost_subtype_id,
-								cost_num,
-								dep_id
+		INSERT INTO COST_DETAIL( cost_id,
+								 create_time,
+								 cost_time,
+								 create_user_id,
+								 cost_type,
+								 cost_subtype_id,
+								 cost_num,
+								 dep_id
 								)
-		VALUES(
-				#costId,
+		VALUES( #costId,
 				#createTime,
 				#costTime,
 				#createUserId,
@@ -47,6 +46,20 @@
 		WHERE cost_id = #{costId}
 	
 	</update>
+	
+	<select id="getCostEntityById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostEntityBean">
+		SELECT cost_id AS costId,
+			 create_time AS createTime,
+			 cost_time AS costTime,
+			 create_user_id AS createUserId,
+			 cost_type AS costType, 
+			 cost_subtype_id AS costSubtypeId,
+			 cost_num AS costNum,
+			 dep_id AS depId
+			 
+		FROM COST_DETAIL
+	 	WHERE cost_id = #{_parameter}
+	</select>
 	
 	<delete id="delCostEntityById" parameterType="java.lang.String">
 	

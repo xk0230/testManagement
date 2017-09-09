@@ -23,6 +23,8 @@ public interface CostDaoMapper {
 	
 	int delCostEntityById(String costId);
 	
+	CostEntityBean getCostEntityById(String costId);
+	
 	List<CostVO> getCostPageList(Page page);
 	
 	List<CostMonthInOut> getCostOutlayType(CostVO cost);

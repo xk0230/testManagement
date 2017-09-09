@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +52,7 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
-	public JsonDto insertOrUpdateCost(HttpServletRequest request,@RequestBody CostEntityBean costEntityBean){
+	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
 		
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
@@ -63,6 +62,14 @@ public class CostController extends BaseController{
 	public JsonDto delCostById(@PathVariable String costId){
 		
 		return costService.delCostEntityById(costId);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/get/{costId}.do")
+	public JsonDto getCostEntityById(@PathVariable String costId){
+		
+		return costService.getCostEntityById(costId);
 		
 	}
 	

@@ -1,6 +1,6 @@
 package com.codyy.oc.admin.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 成本实体类
@@ -12,10 +12,10 @@ public class CostEntityBean {
 	private String costId;
 	
 	//成本记录创建时间
-	private Timestamp createTime;
+	private Date createTime;
 	
 	//成本记录实际时间
-	private Timestamp costTime;
+	private Date costTime;
 	
 	//创建人ID
 	private String createUserId;
@@ -27,7 +27,7 @@ public class CostEntityBean {
 	private String costSubtypeId;
 	
 	//成本数目
-	private double costNum;
+	private double costNum = 0.00;
 	
 	//部门ID
 	private String depId;
@@ -40,19 +40,19 @@ public class CostEntityBean {
 		this.costId = costId;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Timestamp getCostTime() {
+	public Date getCostTime() {
 		return costTime;
 	}
 
-	public void setCostTime(Timestamp costTime) {
+	public void setCostTime(Date costTime) {
 		this.costTime = costTime;
 	}
 
