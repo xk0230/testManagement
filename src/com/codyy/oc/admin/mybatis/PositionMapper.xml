@@ -48,66 +48,66 @@
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="postId != null">
+      <if test="postId != null and postId != ''">
         post_id,
       </if>
-      <if test="name != null">
+      <if test="name != null and name != ''" >
         name,
       </if>
-      <if test="depId != null">
+      <if test="depId != null and depId != ''">
         dep_id,
       </if>
-      <if test="onDuty != null">
+      <if test="onDuty != null and onDuty != ''">
         on_duty,
       </if>
-      <if test="organization != null">
+      <if test="organization != null and organization != ''">
         organization,
       </if>
-      <if test="vacancy != null">
+      <if test="vacancy != null and vacancy != ''">
         vacancy,
       </if>
-      <if test="remark != null">
+      <if test="remark != null and remark != ''">
         remark,
       </if>
-      <if test="status != null">
+      <if test="status != null and status != ''">
         status,
       </if>
-      <if test="createUser != null">
+      <if test="createUser != null and createUser != ''">
         create_user,
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null and createTime != ''">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="postId != null">
+      <if test="postId != null and postId != ''">
         #{postId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="name != null and name != ''">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="depId != null">
+      <if test="depId != null and depId != ''">
         #{depId,jdbcType=VARCHAR},
       </if>
-      <if test="onDuty != null">
+      <if test="onDuty != null and onDuty != ''">
         #{onDuty,jdbcType=VARCHAR},
       </if>
-      <if test="organization != null">
+      <if test="organization != null and organization != ''">
         #{organization,jdbcType=VARCHAR},
       </if>
-      <if test="vacancy != null">
+      <if test="vacancy != null and vacancy != ''">
         #{vacancy,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
+      <if test="remark != null and remark != ''">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null and status != ''">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="createUser != null">
+      <if test="createUser != null and createUser != ''">
         #{createUser,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null and createTime != ''">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
@@ -115,31 +115,31 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Position">
     update POSITION
     <set>
-      <if test="name != null">
+      <if test="name != null and name != ''">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="depId != null">
+      <if test="depId != null and depId != ''">
         dep_id = #{depId,jdbcType=VARCHAR},
       </if>
-      <if test="onDuty != null">
+      <if test="onDuty != null and onDuty != ''">
         on_duty = #{onDuty,jdbcType=VARCHAR},
       </if>
-      <if test="organization != null">
+      <if test="organization != null and organization != ''">
         organization = #{organization,jdbcType=VARCHAR},
       </if>
-      <if test="vacancy != null">
+      <if test="vacancy != null and vacancy != ''">
         vacancy = #{vacancy,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
+      <if test="remark != null and remark != ''">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null and status != ''">
         status = #{status,jdbcType=VARCHAR},
       </if>
-       <if test="createUser != null">
+       <if test="createUser != null and createUser != ''">
         create_user = #{createUser,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null and createTime != ''">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>

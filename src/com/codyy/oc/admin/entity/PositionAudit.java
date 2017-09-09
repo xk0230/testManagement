@@ -16,8 +16,59 @@ public class PositionAudit {
     private Date auditTime;
 
     private Date createTime;
+    
+    private String postName;
+    
+    private String createUserName;
+    
+    private String auditUserName;
+    
+    private String depName;
+    
+    private String postResult;//整个岗位的最终审批结果
+    
 
-    public String getPositionAuditId() {
+    public String getPostResult() {
+		return postResult;
+	}
+
+	public void setPostResult(String postResult) {
+		this.postResult = postResult;
+	}
+
+	public String getDepName() {
+		return depName;
+	}
+
+	public void setDepName(String depName) {
+		this.depName = depName;
+	}
+
+	public String getPostName() {
+		return postName;
+	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	public String getAuditUserName() {
+		return auditUserName;
+	}
+
+	public void setAuditUserName(String auditUserName) {
+		this.auditUserName = auditUserName;
+	}
+
+	public String getPositionAuditId() {
         return positionAuditId;
     }
 

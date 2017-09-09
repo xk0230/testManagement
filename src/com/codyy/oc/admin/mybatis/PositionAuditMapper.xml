@@ -9,6 +9,13 @@
     <result column="result" jdbcType="INTEGER" property="result" />
     <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    
+    <result column="postName" jdbcType="VARCHAR" property="postName" />
+    <result column="depName" jdbcType="VARCHAR" property="depName" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
+    <result column="postResult" jdbcType="VARCHAR" property="postResult" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     position_audit_id, position_id, audit_user_id, create_user_id, result, audit_time, 
@@ -136,4 +143,62 @@
   	select count(*) from POSITION_AUDIT where audit_user_id=#{userId} and result is null
   </select>
   
+  
+    <select id="getPositionAuditPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
+  	<!-- select 
+    p.post_id,
+    p.name, 
+    p.dep_id,
+    p.on_duty,
+    p.organization,
+    p.vacancy, 
+    p.remark,
+    p.status,
+    p.create_user,
+    p.create_time,
+    d.name as depname,
+    au.username as createusername
+    from POSITION p
+    left join DEPARTMENT d
+     on d.dep_id = p.dep_id
+    left join ADMIN_USER au
+    on au.user_id = p.create_user	
+    where 1=1
+    
+    <if test="map.createUser != null and map.createUser != ''">
+	    and p.create_user = #{map.createUser,jdbcType=VARCHAR}
+	</if>
+  	<if test="map.name != null and map.name != '' ">
+  		and p.name like   concat('%',#{map.name,jdbcType=VARCHAR},'%') 
+  	</if>
+    <if test="map.depId != null and map.depId != '' ">
+    	and p.dep_id = #{map.depId,jdbcType=VARCHAR}
+    </if>
+    <if test="map.status != null and map.status != '' ">
+    	and p.status = #{map.status,jdbcType=VARCHAR}
+    </if> -->
+    select pa.*,p.name as postName,dep.name as depName,cu.realname as createUserName
+    ,au.realname as auditUserName,p.status as postResult
+    
+    from POSITION_AUDIT pa 
+     left join POSITION p on p.post_id = pa.position_id
+     left join DEPARTMENT dep on dep.dep_id = p.dep_id
+     left join ADMIN_USER cu on pa.create_user_id = cu.user_id
+     left join ADMIN_USER au on pa.audit_user_id = au.user_id
+     
+     where 1=1
+     <if test="map.createUserId != null and map.createUserId != '' ">
+    	and pa.create_user_id = #{map.createUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="map.auditUserId != null and map.auditUserId != '' ">
+    	and pa.audit_user_id = #{map.auditUserId,jdbcType=VARCHAR}
+    </if>
+    <if test="map.result != null and map.result != '' and map.result != '0' and map.result != 0 ">
+    	and pa.result = #{map.result,jdbcType=VARCHAR}
+    </if>
+    <if test="map.result == 0 or map.result == '0' ">
+    	and pa.result is null
+    </if>
+    order by pa.create_time desc
+  </select>
 </mapper>
