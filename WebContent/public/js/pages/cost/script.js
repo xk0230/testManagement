@@ -157,18 +157,9 @@ myAppModule.controller('CostController',
 		    	    modalInstance.result.then(function (selectedItem) {
 		    	    	
 		    	    	//ok的回调函数
-		    	    	 $http({
-		 					method:'POST',
-		 					url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
-		 					params:selectedItem
-		 				
-		 				}).then(function(res){
-		 					
-		 					if(res.data.code == 0){
-		 						self.getCostList();
-		 					}
-		 					
-		 				});
+		    	    	if(selectedItem == '0'){
+		    	    		self.getCostList();
+		    	    	}
 		    	    	
 		    	    }, function () {
 		    	    	//取消的回调函数
@@ -199,22 +190,12 @@ myAppModule.controller('CostController',
 			    	    modalInstance.result.then(function (selectedItem) {
 			    	    	
 			    	    	//ok的回调函数
-			    	    	 $http({
-				 					method:'POST',
-				 					url:$("#rootUrl").val()+"/admin/cost/del/"+selectedItem+".do",
-				 					params:{}
-				 				
-				 				}).then(function(res){
-				 					
-				 					if(res.data.code == 0){
-				 						self.getCostList();
-				 					}
-				 					
-				 				});
+			    	    	if(selectedItem == '0'){
+			    	    		self.getCostList();
+			    	    	}
 			    	    	
 			    	    }, function () {
 			    	    	//取消的回调函数
-			    	    	
 			    	    });
 			   };
 		
@@ -283,8 +264,21 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 				costTime:$filter('date')($scope.costEntity.costTime, "yyyy-MM-dd"),
 				costNum:$scope.costEntity.costNum
 			} 
+		 
+		 $http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+				params:params
+			
+			}).then(function(res){
+				
+				if(res.data.code == 0){
+					$uibModalInstance.close('0');
+				}
+				
+			});
 		  
-	    $uibModalInstance.close(params);
+	    
 	  };
 
 	  $ctrl.cancel = function () {
@@ -387,7 +381,19 @@ angular.module('myApp').controller('ModalInstanceDel',
 	  };
 
 	  $ctrl.ok = function () {
-	    $uibModalInstance.close(items);
+		  $http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/del/"+items+".do",
+				params:{}
+			
+			}).then(function(res){
+				
+				if(res.data.code == 0){
+					$uibModalInstance.close('0');
+				}
+				
+			});
+	    
 	  };
 
 	  $ctrl.cancel = function () {
