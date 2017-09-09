@@ -11,8 +11,8 @@ myAppModule.controller('CostController',
 			self.getCostList();
 			self.getDeparts();
 			$scope.costTypeList = [
-			                       {value : "0", name : "收入"},
-			                       {value : "1", name : "支出"}
+			                       {costType : "0", name : "收入"},
+			                       {costType : "1", name : "支出"}
 			                   ];
 		};
 		
@@ -28,11 +28,21 @@ myAppModule.controller('CostController',
 			
 			var costTypeValue = $scope.costType;
 			if(costTypeValue == 0 || costTypeValue == 1){
-				$.post($("#rootUrl").val()+"/admin/cost/subType/"+costTypeValue+".do",{},function(data){
-					if(data.code == 0){
-						$scope.costSubTypeList = data.objData;
-						$scope.$apply();
+				
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/cost/subType/"+costTypeValue+".do",
+					params:{
 					}
+				
+				}).then(function(res){
+					
+					if(res.data.code == 0){
+						$scope.costSubTypeList = res.data.objData;
+					}else{
+						$scope.costSubTypeList = [];
+					}
+					
 				});
 				
 			}else{
@@ -70,11 +80,20 @@ myAppModule.controller('CostController',
 		
 		this.getDeparts = function(){
 			
-			$.post($("#rootUrl").val()+"/admin/dep/getAlldep.do",{},function(data){
-				
-				$scope.depList = data;
-				
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/dep/getAlldep.do',
+				params:{
+				}
+			
+			}).then(function(res){
+				if(res){
+					$scope.depList = res.data || [];
+				}else{
+					$scope.depList = [];
+				}
 			});
+			
 			
 		};
 		
@@ -136,14 +155,20 @@ myAppModule.controller('CostController',
 		    	    });
 
 		    	    modalInstance.result.then(function (selectedItem) {
-		    	    	//ok的回调函数
 		    	    	
-		    	    	$.post($("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",selectedItem,function(data){
-		    					if(data.code == 0){
-		    						self.getCostList();
-		    					}
-		    			});
-		    			
+		    	    	//ok的回调函数
+		    	    	 $http({
+		 					method:'POST',
+		 					url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+		 					params:selectedItem
+		 				
+		 				}).then(function(res){
+		 					
+		 					if(res.data.code == 0){
+		 						self.getCostList();
+		 					}
+		 					
+		 				});
 		    	    	
 		    	    }, function () {
 		    	    	//取消的回调函数
@@ -161,28 +186,34 @@ myAppModule.controller('CostController',
 );
 
 //编辑页面的control
-angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$uibModalInstance, items) {
+angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
 	  var $ctrl = this;
 	  $ctrl.items = items;
+	  $ctrl.costEntity = {
+				
+			};
 	  
 	  this.$onInit = function(){
 		  
-		  var costEntity;
 		  if(items != ''){
-			  $.post($("#rootUrl").val()+"/admin/cost/get/"+items+".do",{},function(data){
-					if(data.code == 0){
-						costEntity = data.objData;
-					}
-			  });
 			  
+			  $http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/cost/get/"+items+".do",
+					params:{
+					}
+				
+				}).then(function(res){
+					
+					if(res.data.code == 0){
+						$scope.costEntity = res.data.objData;
+						
+					}
+					
+				});
 		  }
 		
 		  $ctrl.getDeparts();
-		  
-		  $scope.costTypeList = [
-		                         {value : "0", name : "收入"},
-		                         {value : "1", name : "支出"}
-		                         ];
 		  
 	  };
 		
@@ -194,11 +225,11 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$uibMod
 		  
 		 var params = {
 				costId:'',
-				depId:$scope.dep,
-				costType:$scope.costType,
-				costSubtypeId:$scope.costSubType,
-				costTime:$scope.costDate,
-				costNum:$scope.costNum
+				depId:$scope.costEntity.dep,
+				costType:$scope.costEntity.costType,
+				costSubtypeId:$scope.costEntity.costSubType,
+				costTime:$scope.costEntity.costTime,
+				costNum:$scope.costEntity.costNum
 			} 
 		  
 	    $uibModalInstance.close(params);
@@ -209,20 +240,42 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$uibMod
 	  };
 	  
 	  this.getDeparts = function(){
-			$.post($("#rootUrl").val()+"/admin/dep/getAlldep.do",{},function(data){
-				 $scope.depList = data;
+			
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/dep/getAlldep.do',
+				params:{
+				}
+			
+			}).then(function(res){
+				if(res){
+					$scope.depList = res.data || [];
+				}else{
+					$scope.depList = [];
+				}
 			});
+			
 	  };
 	  
 	  $scope.costTypeChange = function() {
 			
 			var costTypeValue = $scope.costType;
 			if(costTypeValue == 0 || costTypeValue == 1){
-				$.post($("#rootUrl").val()+"/admin/cost/subType/"+costTypeValue+".do",{},function(data){
-					if(data.code == 0){
-						$scope.costSubTypeList = data.objData;
-						$scope.$apply();
+				
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/cost/subType/"+costTypeValue+".do",
+					params:{
 					}
+				
+				}).then(function(res){
+					
+					if(res.data.code == 0){
+						$scope.costSubTypeList = res.data.objData;
+					}else{
+						$scope.costSubTypeList = [];
+					}
+					
 				});
 				
 			}else{

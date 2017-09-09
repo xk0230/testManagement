@@ -47,7 +47,7 @@
 												<label class="col-lg-4 control-label">收支类型</label>
 												<div class="col-lg-8">
 													<select id="costType" ng-model="costType"  class="form-control select2" 
-															ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
+															ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
 															ng-change="costTypeChange()">
 														<option value="">--请选择--</option>
 													</select>
@@ -199,7 +199,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">所属部门</label>
 												<div class="col-lg-8">
-													<select id="depId" ng-model="dep"  class="form-control select2" 
+													<select ng-model="costEntity.depId"  class="form-control select2" 
 															ng-options="dep.depId as dep.name group by dep.group for dep in depList">
 															<option value="">--请选择--</option>
 													</select>
@@ -209,10 +209,12 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">收支类型</label>
 												<div class="col-lg-8">
-													<select ng-model="costType"  class="form-control select2" 
-															ng-options="costType.value as costType.name group by costType.group for costType in costTypeList"
+													<select ng-model="costEntity.costType"  class="form-control select2" 														
 															ng-change="costTypeChange()">
 														<option value="">--请选择--</option>
+														<option value="0" >收入</option>
+														<option value="1" >支出</option>
+
 													</select>
 												</div>
 											</div>
@@ -222,7 +224,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">分类名称</label>
 												<div class="col-lg-8">
-													<select id="costSubType" ng-model="costSubType" class="form-control select2"
+													<select id="costSubType" ng-model="costEntity.costSubType" class="form-control select2"
 															ng-options="costSubType.costSubTypeId as costSubType.name group by costSubType.group for costSubType in costSubTypeList">
 														<option value="">--请选择--</option>
 													</select>
@@ -233,7 +235,7 @@
 												<label class="col-lg-4 control-label" >成本产生时间</label>
 												<div class="col-lg-8">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="costDate" is-open="popup.opened1" 
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="costEntity.costTime" is-open="popup.opened1" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
 														ng-required="true"  />
 														<span class="input-group-btn">
@@ -247,14 +249,10 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">金额</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="costNum" id="costNum" value=""/>
+													<input type="text" class="form-control" ng-model="costEntity.costNum" />
 												</div>
 											</div>
 											
-											<div class="col-lg-6">
-
-			
-											</div>
 										</div>
 									</div>
 								</div>
