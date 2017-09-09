@@ -203,7 +203,7 @@ public class CostService {
 	private List<CostInOutlayType> getChartDataByOutlayType(AdminUser user){
         
 	    CostVO cost = new CostVO();
-	    cost.setCostType(1);
+	    cost.setCostType("1");
 	    
         boolean flag = false;
         String position = user.getPosition();
@@ -256,7 +256,7 @@ public class CostService {
     private List<CostInOutlayType> getChartDataByDepIncome(AdminUser user){
         
         CostVO cost = new CostVO();
-        cost.setCostType(0);
+        cost.setCostType("0");
         
         boolean flag = false;
         String position = user.getPosition();
@@ -324,14 +324,14 @@ public class CostService {
         if(flag){
             cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
             cost.setEndTime(DateUtils.getCurrentTimestamp());
-            cost.setCostType(0);
+            cost.setCostType("0");
             
             CostMonthInOut costMonthInOut = costDaoMapper.getCostInOutType(cost);
             if(null != costMonthInOut){
                 costTotalInOut.setTotalIncome(costMonthInOut.getTotal());
             }
             
-            cost.setCostType(1);
+            cost.setCostType("1");
             costMonthInOut = costDaoMapper.getCostInOutType(cost);
             if(null != costMonthInOut){
                 costTotalInOut.setTotalOut(costMonthInOut.getTotal());

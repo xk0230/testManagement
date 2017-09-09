@@ -84,7 +84,7 @@
 				AND costDetail.dep_id = #{map.depId}
 			</if>
 			
-			<if test="map.costType != -1 ">
+			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
 			

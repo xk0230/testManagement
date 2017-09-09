@@ -88,9 +88,9 @@ public class CostVO extends CostEntityBean{
 	}
 
 	public String getCostTypeName() {
-		if(this.getCostType() == 1){
+		if(this.getCostType().equals("1")){
 			costTypeName = "支出";
-		}else if(this.getCostType() == 0){
+		}else if(this.getCostType().equals("0")){
 			costTypeName = "收入";
 		}else{
 			costTypeName = "";

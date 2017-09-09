@@ -21,7 +21,7 @@ public class CostEntityBean {
 	private String createUserId;
 	
 	//成本类型,0:收入，1:支出
-	private int costType = -1;
+	private String costType ;
 	
 	//成本子类型ID
 	private String costSubtypeId;
@@ -64,11 +64,11 @@ public class CostEntityBean {
 		this.createUserId = createUserId;
 	}
 
-	public int getCostType() {
+	public String getCostType() {
 		return costType;
 	}
 
-	public void setCostType(int costType) {
+	public void setCostType(String costType) {
 		this.costType = costType;
 	}
 

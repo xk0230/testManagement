@@ -206,11 +206,29 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				}).then(function(res){
 					
 					if(res.data.code == 0){
+						
 						$scope.costEntity = res.data.objData;
+						
+						$http({
+							method:'POST',
+							url:$("#rootUrl").val()+"/admin/cost/subType/"+res.data.objData.costType+".do",
+							params:{
+							}
+						
+						}).then(function(res){
+							
+							if(res.data.code == 0){
+								$scope.costSubTypeList = res.data.objData;
+							}else{
+								$scope.costSubTypeList = [];
+							}
+							
+						});
 						
 					}
 					
 				});
+			  
 		  }
 		
 		  $ctrl.getDeparts();
@@ -224,10 +242,10 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 	  $ctrl.ok = function () {
 		  
 		 var params = {
-				costId:'',
-				depId:$scope.costEntity.dep,
+				costId:$scope.costEntity.costId,
+				depId:$scope.costEntity.depId,
 				costType:$scope.costEntity.costType,
-				costSubtypeId:$scope.costEntity.costSubType,
+				costSubtypeId:$scope.costEntity.costSubtypeId,
 				costTime:$scope.costEntity.costTime,
 				costNum:$scope.costEntity.costNum
 			} 
@@ -259,7 +277,7 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 	  
 	  $scope.costTypeChange = function() {
 			
-			var costTypeValue = $scope.costType;
+			var costTypeValue = $scope.costEntity.costType;
 			if(costTypeValue == 0 || costTypeValue == 1){
 				
 				$http({
@@ -272,6 +290,7 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 					
 					if(res.data.code == 0){
 						$scope.costSubTypeList = res.data.objData;
+						
 					}else{
 						$scope.costSubTypeList = [];
 					}

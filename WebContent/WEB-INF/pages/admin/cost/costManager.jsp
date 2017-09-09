@@ -194,7 +194,7 @@
 								</div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
-
+										<input type="hidden" ng-model="costEntity.costId">
 										<div class="form-group">
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">所属部门</label>
@@ -214,7 +214,6 @@
 														<option value="">--请选择--</option>
 														<option value="0" >收入</option>
 														<option value="1" >支出</option>
-
 													</select>
 												</div>
 											</div>
@@ -224,9 +223,9 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">分类名称</label>
 												<div class="col-lg-8">
-													<select id="costSubType" ng-model="costEntity.costSubType" class="form-control select2"
-															ng-options="costSubType.costSubTypeId as costSubType.name group by costSubType.group for costSubType in costSubTypeList">
+													<select id="costSubType" ng-model="costEntity.costSubtypeId" class="form-control select2">
 														<option value="">--请选择--</option>
+														<option value="{{costSubType.costSubTypeId}}" ng-repeat="costSubType in costSubTypeList">{{costSubType.name}}</option>
 													</select>
 												</div>
 											</div>
