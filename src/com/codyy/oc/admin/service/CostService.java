@@ -207,7 +207,7 @@ public class CostService {
 	    
         boolean flag = false;
         String position = user.getPosition();
-        if(CommonsConstant.USER_TYPE_STAFF.equalsIgnoreCase(position)){
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
             cost.setDepId(user.getDepId());
             flag = true;
         }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
@@ -260,7 +260,7 @@ public class CostService {
         
         boolean flag = false;
         String position = user.getPosition();
-        if(CommonsConstant.USER_TYPE_STAFF.equalsIgnoreCase(position)){
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
             cost.setDepId(user.getDepId());
             flag = true;
         }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
@@ -312,7 +312,7 @@ public class CostService {
         
         boolean flag = false;
         String position = user.getPosition();
-        if(CommonsConstant.USER_TYPE_STAFF.equalsIgnoreCase(position)){
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
             cost.setDepId(user.getDepId());
             flag = true;
         }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){

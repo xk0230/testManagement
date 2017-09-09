@@ -140,7 +140,7 @@ myAppModule.controller('CostController',
 		    	      animation: true,
 		    	      ariaLabelledBy: 'modal-title',
 		    	      ariaDescribedBy: 'modal-body',
-		    	      templateUrl: 'myModalContent.html',
+		    	      templateUrl: 'myModalEditContent.html',
 		    	      controller: 'ModalInstanceCtrl',
 		    	      controllerAs: '$ctrl',
 		    	      size: 'lg',
@@ -174,13 +174,49 @@ myAppModule.controller('CostController',
 		    	    	//取消的回调函数
 		    	    	
 		    	    });
-		    	  };
+		   };
 		    	  
-		this.delCost = function (costId,size) {
+		   this.delCost = function (costId, parentSelector) {
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+			    	    var modalInstance = $uibModal.open({
+			    	      animation: true,
+			    	      ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'myModalDelContent.html',
+			    	      controller: 'ModalInstanceDel',
+			    	      controllerAs: '$ctrl',
+			    	      size: 'sm',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    	    	  //好像必须得这么写
+			    	        items: function () {
+			    	          return costId;
+			    	        }
+			    	      }
+			    	    });
 
-			alert("删除");
-			
-        };
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	//ok的回调函数
+			    	    	 $http({
+				 					method:'POST',
+				 					url:$("#rootUrl").val()+"/admin/cost/del/"+selectedItem+".do",
+				 					params:{}
+				 				
+				 				}).then(function(res){
+				 					
+				 					if(res.data.code == 0){
+				 						self.getCostList();
+				 					}
+				 					
+				 				});
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    	
+			    	    });
+			   };
 		
 	}
 );
@@ -225,11 +261,8 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 							}
 							
 						});
-						
 					}
-					
 				});
-			  
 		  }
 		
 		  $ctrl.getDeparts();
@@ -339,5 +372,26 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			opened3: false,
 			opened4: false
 		};
+	  
+	});
+
+
+//删除页面的control
+angular.module('myApp').controller('ModalInstanceDel', 
+		function ($scope,$http,$uibModalInstance,items) {
+	  var $ctrl = this;
+	  $ctrl.items = items;
+	  
+	  $ctrl.selected = {
+	    item: $ctrl.items[0]
+	  };
+
+	  $ctrl.ok = function () {
+	    $uibModalInstance.close(items);
+	  };
+
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
 	  
 	});

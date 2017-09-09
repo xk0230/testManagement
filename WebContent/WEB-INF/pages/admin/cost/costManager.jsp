@@ -67,10 +67,10 @@
 											<div class="col-lg-3 pull-left">
 												<ul class="nav navbar-nav pull-left">
 													<li id="toggle-sidebar-li" class="ui-buttonset">
-														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getCostList()" value="查询" />
+														<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
 													</li>
 													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-success " name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
+														<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
 													</li>
 												</ul>
 											</div>
@@ -148,7 +148,7 @@
 												<td><p ng-bind="item.costNum"></p></td>
 												<td><p ng-bind="item.createDate"></p></td>
 												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delCost(item.costId,'sm')"><i class="ec-search"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delCost(item.costId,'.outlet')"><i class="ec-search"></i></button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId,'.outlet')"><i class="br-pencil"></i></button>
 												</td>
 												
@@ -173,7 +173,7 @@
 		
 		
 	<!-- 这里可以定义一个js文件放到public下面 -->
-    <script type="text/ng-template" id="myModalContent.html">
+    <script type="text/ng-template" id="myModalEditContent.html">
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
@@ -264,6 +264,24 @@
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         </div>
     </script>
+    
+    <script type="text/ng-template" id="myModalDelContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<ul id="crumb" class="breadcrumb">
+							确定删除成本记录吗？
+						</ul>
+					</div>
+				</div>
+			</div>
+				
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
+    
 	</div>
 
 	
