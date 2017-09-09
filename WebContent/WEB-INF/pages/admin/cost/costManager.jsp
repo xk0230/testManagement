@@ -214,6 +214,7 @@
 														<option value="">--请选择--</option>
 														<option value="0" >收入</option>
 														<option value="1" >支出</option>
+
 													</select>
 												</div>
 											</div>
