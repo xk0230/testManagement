@@ -23,14 +23,14 @@
 								 cost_num,
 								 dep_id
 								)
-		VALUES( #costId,
-				#createTime,
-				#costTime,
-				#createUserId,
-				#costType,
-				#costSubtypeId,
-				#costNum,
-				#depId
+		VALUES( #{costId},
+				#{createTime},
+				#{costTime},
+				#{createUserId},
+				#{costType},
+				#{costSubtypeId},
+				#{costNum},
+				#{depId}
 			)
 	
 	</insert>
@@ -100,7 +100,7 @@
 				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
 		
-		ORDER BY costDetail.cost_id DESC
+		ORDER BY costDetail.create_time DESC
 	
 	</select>
 	
