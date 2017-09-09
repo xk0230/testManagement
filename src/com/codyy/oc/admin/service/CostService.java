@@ -185,8 +185,6 @@ public class CostService {
 	                seriesDatas.add(seriesData);
 	            }
 	        }
-	        
-	        
 	    }
 	    
 	    costChartsData.setXcategories(xcategories);
