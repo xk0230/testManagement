@@ -87,3 +87,80 @@ myAppModule.controller('UserListController',
 		};
 	}
 );
+
+
+//Header
+myAppModule.controller('HeaderController',
+function HeaderController($scope,$http,$location,$uibModal,$document){
+		this.ChangePassWord = function (parentSelector) {
+			var userId = $("#sessionUserId").val();
+			var parentElem = parentSelector ? angular.element($document[0].querySelector( parentSelector)) : undefined;
+					var modalInstance = $uibModal.open({
+					  animation: true,
+					  ariaLabelledBy: 'modal-title',
+					  ariaDescribedBy: 'modal-body',
+					  templateUrl: 'ChangePassword.html',
+					  controller: 'ChangePasswordCtrl',
+					  controllerAs: '$ctrl',
+					  size: 'xs',
+					  appendTo: parentElem,
+					  //参数
+					  resolve: {
+		    	    	  //好像必须得这么写
+			    	        items: function () {
+			    	          return userId;
+			    	        }
+					  }
+					});
+
+					modalInstance.result.then(function (selectedItem) {
+						
+						
+					}, function () {
+						//取消的回调函数
+					});
+		   };
+		
+	}
+);
+
+//修改密码
+angular.module('myApp').controller('ChangePasswordCtrl', 
+	function ($scope,$http,$uibModalInstance,items) {
+		var $ctrl = this;
+		$ctrl.items = items;
+		$ctrl.ok = function () {
+			$http({
+					method:'POST',
+					url:"/ccydManagement/admin/adminuser/updatePasswd.do",
+					params:{
+						userId:items,
+						password:$scope.newPwd
+					}
+				}).then(function(res){
+					
+					if(res.data.result){
+						$ctrl.logOut();
+						//$uibModalInstance.close('0');
+					}else{
+						//提示失败
+					}
+					
+				});
+		};
+
+		$ctrl.logOut = function () {
+			$http({
+				method:'POST',
+				url:"/ccydManagement/logOut.do",
+				params:{
+				}
+			}).then(function(res){
+				
+			});
+		};
+		
+		$ctrl.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	});
