@@ -22,7 +22,11 @@ myAppModule.controller('PostionController',
 				{result: 1, resultName : "已通过"},
 				{result: -1, resultName : "已拒绝"}
 				];
-			self.getList();
+//			if($location.search().result == 0){
+//				$scope.result = "0";
+//				console.log("dddd");
+//			}
+				self.getList();
 		};
 		
 		//页数变化

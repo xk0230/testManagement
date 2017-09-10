@@ -177,7 +177,7 @@ setInterval("getNewsNum()","10000");
                         <a href="#" id="toggle-header-area"><i class="ec-download"></i></a>
                     </li> -->
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="br-alarm"></i> <span class="notification" id="news">0</span></a>
+                        <a href="${root}/admin/position/toPostionList.do?type=audit" ><i class="br-alarm"></i> <span class="notification" id="news">0</span></a>
                         <!-- <ul class="dropdown-menu notification-menu right" role="menu">
                             <li class="clearfix">
                                 <i class="ec-chat"></i> 
