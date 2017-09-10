@@ -124,9 +124,9 @@
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td class="col-lg-2"><p ng-bind="item.depName"></p></td>
 												<td class="col-lg-2"><p ng-bind="item.name"></p></td>
-												<td class="col-lg-1"><p ng-bind="item.organization"></p></td>
-												<td ng-if="${type=='list' or type=='mypost'} class="col-lg-1"><p ng-bind="item.onDuty"></p></td>
-												<td ng-if="${type=='list' or type=='mypost'} class="col-lg-1"><p ng-bind="item.vacancy"></p></td>
+												<td class="col-lg-1"><p ng-bind="item.organization">123</p></td>
+												<td ng-if="${type=='list' or type=='mypost'}" class="col-lg-1"><p ng-bind="item.onDuty"></p></td>
+												<td ng-if="${type=='list' or type=='mypost'}" class="col-lg-1"><p ng-bind="item.vacancy"></p></td>
 												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createUserName"></p></td>
 												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
 												<td ng-if="${type=='list'}">
