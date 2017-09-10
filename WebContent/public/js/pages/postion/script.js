@@ -137,11 +137,26 @@ myAppModule.controller('PostionController',
 		};
 		
 		this.audit = function (id,result, parentSelector) {
-			if(result == 'pass'){
-				alert("通过成功");
-			}else{
-				alert("驳回成功");
-			}
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/position/auditPosition.do',
+				params:{
+					positionAuditId:id,
+					result:result
+				}
+			}).then(function(res){
+				if(res.data.result == true){
+					if(result == 1){
+						alert("通过成功");
+					}else{
+						alert("驳回成功");
+					}
+					self.getList();
+					getNewsNum();
+				}else{
+					alert("操作失败 ");
+				}
+			})
 		};
 		
 	}

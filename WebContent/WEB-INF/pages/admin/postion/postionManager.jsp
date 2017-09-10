@@ -137,8 +137,8 @@
 												<td ng-if="${type=='mypost'}" class="col-lg-1"><p ng-bind="item.statusName"></p></td>
 												<td ng-if="${type=='audit'}" class="col-lg-1"><p ng-bind="item.resultName"></p></td>
 												<td ng-if="${type=='audit'}">
-													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,'pass','.outlet')">通过</i></button>
-													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,'unpass','.outlet')">驳回</button>
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,1,'.outlet')">通过</i></button>
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,-1,'.outlet')">驳回</button>
 												</td>
 											</tr>
 										</tbody>
