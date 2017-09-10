@@ -12,7 +12,14 @@
 		<div id="content">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
-					
+				<div class="row">
+					<div class="col-lg-12 heading">
+                        <h1 class="page-header"><i class="st-chart"></i> 成本图表</h1>
+                        <!-- Start .bredcrumb -->
+                        <ul id="crumb" class="breadcrumb">
+                        </ul>
+					</div>
+				</div>
 				<div class="outlet">
 					<div class="row">
 						<div class="col-lg-12">

@@ -13,7 +13,7 @@
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="im-users2"></i> 用户管理</h1>
+                        <h1 class="page-header"><i class="im-users2"></i> 员工列表</h1>
                         <!-- Start .bredcrumb -->
                         <ul id="crumb" class="breadcrumb">
                         </ul>

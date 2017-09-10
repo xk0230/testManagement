@@ -8,7 +8,7 @@
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 用户新增</h1>
+						<h1 class="page-header"><i class="im-users2"></i> 新增员工</h1>
 						<ul id="crumb" class="breadcrumb">
 						</ul>
 					</div>

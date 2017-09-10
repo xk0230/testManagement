@@ -14,7 +14,11 @@
 				<input id="type" value="${type}" type="hidden">
 				<div class="row">
 					<div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="im-users2"></i> 岗位管理</h1>
+                        
+                        <h1 ng-if="${type=='list'}" class="page-header"><i class="fa-th-list" > </i>岗位列表</h1>
+                        <h1 ng-if="${type=='mypost'}" class="page-header"><i class="fa-th-list" > </i>我的岗位管理</h1>
+                        <h1 ng-if="${type=='audit'}" class="page-header"><i class="fa-th-list" > </i>岗位审批</h1>
+                        
                         <!-- Start .bredcrumb -->
                         <ul id="crumb" class="breadcrumb">
                         </ul>
