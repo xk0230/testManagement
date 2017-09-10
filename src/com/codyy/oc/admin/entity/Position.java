@@ -29,7 +29,26 @@ public class Position {
     
     private String createUserName;
 
+    private String statusName;
     
+    
+	public String getStatusName() {
+		if(status == null) {
+			return null;
+		}else if (CommonsConstant.AUDIT_STATUS_AUDITED.equals(status)) {
+			return "审批通过";
+		}else if (CommonsConstant.AUDIT_STATUS_AUDITING.equals(status)) {
+			return "审批中";
+		}else if (CommonsConstant.AUDIT_STATUS_REJECT.equals(status)) {
+			return "审批拒绝";
+		}
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
 	public String getCreateUserName() {
 		return createUserName;
 	}

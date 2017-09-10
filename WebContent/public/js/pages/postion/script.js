@@ -1,19 +1,26 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
-
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]);  
 myAppModule.controller('PostionController',
-	function costListController($scope,$http,$uibModal,$document){
+	function costListController($scope,$http,$location,$uibModal,$document){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
-
+			$scope.type = $location.search().type;
 			self.getDeparts();
 			self.statusList = [
-				{statusId: "audited", statusName : "审批通过"},
-				{statusId : "auditing", statusName : "审批中"},
-				{statusId : "reject", statusName : "审批拒绝"}
+				{status: "audited", statusName : "审批通过"},
+				{status: "auditing", statusName : "审批中"},
+				{status: "reject", statusName : "审批拒绝"}
+				];
+			self.resultList = [
+				{result: 0, resultName : "未审批"},
+				{result: 1, resultName : "已通过"},
+				{result: -1, resultName : "已拒绝"}
 				];
 			self.getList();
 		};
@@ -30,26 +37,51 @@ myAppModule.controller('PostionController',
 		
 		// 获取数据列表
 		this.getList = function(){
-			$http({
-				method:'POST',
-				url:$("#rootUrl").val()+'/admin/position/getPositionPageList.do',
-				params:{
-					name:$scope.name,
-					depId:$scope.depId,
-					status:$scope.status,
-					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
-					end:$scope.currentPage * $scope.itemsPerPage -1
-				}
-			
-			}).then(function(res){
-				if(res){
-					self.list = res.data.data || [];
-					$scope.totalItems = res.data.total;
-				}else{
-					self.list = [];
-					$scope.totalItems = 0;
-				}
-			});
+//			var type = $("#type").val();
+			if($scope.type == "audit"){
+				//如果是审批
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+'/admin/position/getPositionAuditPageList.do',
+					params:{
+						'audit.postName':$scope.name,
+						depId:$scope.depId,
+						'audit.result':$("#result").val(),
+						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+						end:$scope.currentPage * $scope.itemsPerPage -1
+					}
+				
+				}).then(function(res){
+					if(res){
+						self.list = res.data.data || [];
+						$scope.totalItems = res.data.total;
+					}else{
+						self.list = [];
+						$scope.totalItems = 0;
+					}
+				});
+			}else{
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+'/admin/position/getPositionPageList.do',
+					params:{
+						name:$scope.name,
+						depId:$scope.depId,
+						status:$("#status").val(),
+						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+						end:$scope.currentPage * $scope.itemsPerPage -1
+					}
+				
+				}).then(function(res){
+					if(res){
+						self.list = res.data.data || [];
+						$scope.totalItems = res.data.total;
+					}else{
+						self.list = [];
+						$scope.totalItems = 0;
+					}
+				});
+			}
 		};
 		
 		//获取部门下拉框
@@ -86,6 +118,7 @@ myAppModule.controller('PostionController',
 						items: function () {
 							return id;
 						}
+					
 						}
 					});
 
@@ -99,8 +132,16 @@ myAppModule.controller('PostionController',
 					
 		this.delCost = function (costId,size) {
 
-			alert("删除");
 			
+			
+		};
+		
+		this.audit = function (id,result, parentSelector) {
+			if(result == 'pass'){
+				alert("通过成功");
+			}else{
+				alert("驳回成功");
+			}
 		};
 		
 	}
@@ -165,6 +206,8 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				postId:$scope.costEntity.postId,
 				name:$scope.costEntity.name,
 				depId:$scope.costEntity.depId,
+				result:$scope.costEntity.result,
+				status:$scope.costEntity.status,
 				onDuty:$scope.costEntity.onDuty,
 				organization:$scope.costEntity.organization,
 				vacancy:$scope.costEntity.vacancy

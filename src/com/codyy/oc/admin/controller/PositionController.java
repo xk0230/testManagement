@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -24,6 +25,7 @@ import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.service.PositionService;
 import com.codyy.oc.admin.view.PositionSearchView;
+import com.codyy.oc.commons.sso.SessionUser;
 
 @Controller
 @RequestMapping("/admin/position/")
@@ -49,7 +51,8 @@ public class PositionController extends BaseController {
 		* @throws
 	 */
 	@RequestMapping("toPostionList")
-	public String toPostionList(){
+	public String toPostionList(HttpServletRequest request,String type){
+		request.setAttribute("type", type);
 		return "admin/postion/postionManager";
 	}
 	
@@ -126,14 +129,24 @@ public class PositionController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("getPositionPageList")
-	public Page getPositionPageList(Page page,PositionSearchView search){
+	public Page getPositionPageList(HttpServletRequest request,Page page,PositionSearchView search,String type){
+		
 		return service.getPositionPageList(page, search);
 	}
 //	
 	
 	@ResponseBody
 	@RequestMapping("getPositionAuditPageList")
-	public Page getPositionAuditPageList(Page page,PositionSearchView search){
+	public Page getPositionAuditPageList(HttpServletRequest request,Page page,PositionSearchView search){
+		AdminUser su = getSessionUser(request);
+		//只查询分配给自己的审批
+		if(search.getAudit() == null) {
+			PositionAudit audit = new PositionAudit();
+			audit.setAuditUserId(su.getUserId());
+			search.setAudit(audit);
+		}else {
+			search.getAudit().setAuditUserId(su.getUserId());
+		}
 		return service.getPositionAuditPageList(page, search);
 	}
 	

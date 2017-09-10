@@ -118,6 +118,8 @@ public class PositionService {
 		if(search.getAudit()!=null) {
 			map.put("auditUserId",search.getAudit().getAuditUserId());
 			map.put("result", search.getAudit().getResult());
+			map.put("postName", search.getAudit().getPostName());
+			map.put("depId", search.getDepId());
 		}
 	    page.setMap(map);
 		List<PositionAudit> data = auditMapper.getPositionAuditPageList(page);

@@ -15,7 +15,7 @@
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
     <result column="postResult" jdbcType="VARCHAR" property="postResult" />
-    
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
   </resultMap>
   <sql id="Base_Column_List">
     position_audit_id, position_id, audit_user_id, create_user_id, result, audit_time, 
@@ -178,7 +178,7 @@
     	and p.status = #{map.status,jdbcType=VARCHAR}
     </if> -->
     select pa.*,p.name as postName,dep.name as depName,cu.realname as createUserName
-    ,au.realname as auditUserName,p.status as postResult
+    ,au.realname as auditUserName,p.status as postResult,p.organization as organization
     
     from POSITION_AUDIT pa 
      left join POSITION p on p.post_id = pa.position_id
@@ -198,6 +198,12 @@
     </if>
     <if test="map.result == 0 or map.result == '0' ">
     	and pa.result is null
+    </if>
+    <if test="map.name != null and map.name != '' ">
+    	and p.name = #{map.name,jdbcType=VARCHAR}
+    </if>
+    <if test="map.depId != null and map.depId != '' ">
+    	and p.dep_id = #{map.depId,jdbcType=VARCHAR}
     </if>
     order by pa.create_time desc
   </select>

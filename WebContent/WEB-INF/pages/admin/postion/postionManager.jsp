@@ -11,6 +11,7 @@
 		<div id="content" ng-app = "myApp" ng-controller="PostionController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
+				<input id="type" value="${type}" type="hidden">
 				<div class="row">
 					<div class="col-lg-12 heading">
                         <h1 class="page-header"><i class="im-users2"></i> 岗位管理</h1>
@@ -50,23 +51,32 @@
 												</div>
 											</div>
 											
-											<div class="col-lg-3">
+											<div class="col-lg-3" ng-if="${type=='mypost'}">
 												<label class="col-lg-4 control-label">岗位状态</label>
 												<div class="col-lg-8">
-													<select ng-model="status" class="form-control">
+													<select  id="status" ng-model="status" class="form-control">
 														<option value="">--请选择--</option>
-														<option value="{{status.statusId}}" ng-repeat="status in vm.statusList">{{status.statusName}}</option>
+														<option value="{{status.status}}" ng-repeat="status in vm.statusList">{{status.statusName}}</option>
 													</select>
 												</div>
 											</div>
-											
+											<div class="col-lg-3" ng-if="${type=='audit'}">
+												<label class="col-lg-4 control-label">审批状态</label>
+												<div class="col-lg-8">
+													<select id="result" ng-model="result" class="form-control">
+														<option value="">--请选择--</option>
+														<option value="{{result.result}}" ng-repeat="result in vm.resultList">{{result.resultName}}</option>
+													</select>
+												</div>
+											</div>
+											<br>
 											<div class="col-lg-3 pull-left">
 												<ul class="nav navbar-nav pull-left">
 													<li id="toggle-sidebar-li" class="ui-buttonset">
 														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getList()" value="查询" />
 													</li>
 													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-success " name="query" ng-click="vm.edit('', '.outlet')" value="新增岗位" />
+														<input ng-if="${type=='mypost'}" type="button"  class="btn btn-success " name="query" ng-click="vm.edit('', '.outlet')" value="新增岗位" />
 													</li>
 												</ul>
 											</div>
@@ -96,24 +106,36 @@
 												<th>所属部门</th>
 												<th>岗位名称</th>
 												<th>编制</th>
-												<th>在岗人数</th>
-												<th>空缺</th>
-												<th colspan="3">操作</th>
+												<th ng-if="${type=='list' or type=='mypost'}">在岗人数</th>
+												<th ng-if="${type=='list' or type=='mypost'}">空缺</th>
+												<th ng-if="${type=='audit'}">创建人</th>
+												<th ng-if="${type=='audit'}">创建时间</th>
+												<th colspan="3" ng-if="${type=='list'}">操作</th>
+												<th ng-if="${type=='mypost'}">岗位状态</th>
+												<th ng-if="${type=='audit'}">审批状态</th>
+												<th colspan="2" ng-if="${type=='audit'}">操作</th>
 											</tr>
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td class="col-lg-2"><p ng-bind="item.depName"></p></td>
-												<td class="col-lg-3"><p ng-bind="item.name"></p></td>
-												<td class="col-lg-1"><p ng-bind="item.onDuty"></p></td>
+												<td class="col-lg-2"><p ng-bind="item.name"></p></td>
 												<td class="col-lg-1"><p ng-bind="item.organization"></p></td>
-												<td class="col-lg-1"><p ng-bind="item.vacancy"></p></td>
-												<td>
+												<td ng-if="${type=='list' or type=='mypost'} class="col-lg-1"><p ng-bind="item.onDuty"></p></td>
+												<td ng-if="${type=='list' or type=='mypost'} class="col-lg-1"><p ng-bind="item.vacancy"></p></td>
+												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createUserName"></p></td>
+												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
+												<td ng-if="${type=='list'}">
 													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">查看岗位</i></button>
 													<button type="button" class="btn btn-sm btn-success" ng-click="">招聘进度</i></button>
 													<button type="button" class="btn btn-sm btn-success" ng-click="">查看员工</button>
 												</td>
-												
+												<td ng-if="${type=='mypost'}" class="col-lg-1"><p ng-bind="item.statusName"></p></td>
+												<td ng-if="${type=='audit'}" class="col-lg-1"><p ng-bind="item.resultName"></p></td>
+												<td ng-if="${type=='audit'}">
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,'pass','.outlet')">通过</i></button>
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,'unpass','.outlet')">驳回</button>
+												</td>
 											</tr>
 										</tbody>
 									</table>

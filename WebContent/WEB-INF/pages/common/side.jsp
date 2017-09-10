@@ -41,9 +41,11 @@
               <span class="nav-link-text">岗位信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postComponents">
-				<li><a href="${root}/admin/position/toPostionList.do"><i class="en-arrow-right7"></i>岗位管理</a>
+				<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>岗位列表</a>
 				</li>
-				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>岗位审批</a>
+				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>我的岗位管理</a>
+				</li>
+				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>岗位审批</a>
 				</li>
             </ul>
           </li>

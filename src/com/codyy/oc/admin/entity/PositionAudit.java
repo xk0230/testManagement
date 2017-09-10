@@ -27,8 +27,45 @@ public class PositionAudit {
     
     private String postResult;//整个岗位的最终审批结果
     
+    private String resultName;
+    
+    private String name;
+    
+    private Integer organization;
+    
 
-    public String getPostResult() {
+    public Integer getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Integer organization) {
+		this.organization = organization;
+	}
+
+	public String getName() {
+		return postName;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getResultName() {
+    	if (null==result||0==result) {
+			return "未审批";
+		}else if (1==result) {
+			return "已通过";
+		}else if (-1==result) {
+			return "已拒绝";
+		}
+		return resultName;
+	}
+
+	public void setResultName(String resultName) {
+		this.resultName = resultName;
+	}
+
+	public String getPostResult() {
 		return postResult;
 	}
 
