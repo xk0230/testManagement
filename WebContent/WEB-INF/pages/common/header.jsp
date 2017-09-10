@@ -216,7 +216,7 @@ setInterval("getNewsNum()","10000");
                             <img class="user-avatar" src="${root }/public/assets/img/avatars/48.png" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
                         </a>
                         <ul class="dropdown-menu right" role="menu">
-                            <li><a href="profile.html"><i class="st-user"></i>个人信息</a>
+                            <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="st-user"></i>个人信息</a>
                             </li>
 <!--                             <li><a href="file.html"><i class="st-cloud"></i> Files</a>
                             </li>
