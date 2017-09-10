@@ -20,7 +20,7 @@ public class LoginController {
 	
 	@RequestMapping("login")
 	public String toLogin(){
-		return "login";
+		return "loginNew";
 	}
 	
 	@RequestMapping("loginValidate")
