@@ -4,19 +4,19 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body  >
+<body ng-app = "myApp" >
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
-		<div id="content" ng-app = "myApp" ng-controller="CostController as vm">
+		<div id="content"  ng-controller="CostController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="st-chart"></i> 成本管理</h1>
-                        <!-- Start .bredcrumb -->
-                        <ul id="crumb" class="breadcrumb">
-                        </ul>
+						<h1 class="page-header"><i class="st-chart"></i> 成本管理</h1>
+						<!-- Start .bredcrumb -->
+						<ul id="crumb" class="breadcrumb">
+						</ul>
 					</div>
 				</div>
 				<div class="outlet">
@@ -27,9 +27,9 @@
 							<!-- col-lg-12 start here -->
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="ec-search"></i>查询条件</h3>
-                                </div>
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-search"></i>查询条件</h3>
+								</div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
 										<div class="form-group">
@@ -42,7 +42,6 @@
 													</select>
 												</div>
 											</div>
-											
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">收支类型</label>
 												<div class="col-lg-8">
@@ -53,7 +52,6 @@
 													</select>
 												</div>
 											</div>
-											
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">分类名称</label>
 												<div class="col-lg-8">
@@ -63,16 +61,7 @@
 													</select>
 												</div>
 											</div>
-											
-											<div class="col-lg-3 pull-left">
-												<ul class="nav navbar-nav pull-left">
-													<li id="toggle-sidebar-li" class="ui-buttonset">
-														<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
-													</li>
-													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
-													</li>
-												</ul>
+											<div class="col-lg-3">
 											</div>
 										</div>
 										
@@ -103,10 +92,17 @@
 													</p>
 												</div>
 											</div>
-											
+											<div class="col-lg-3">
+											</div>
+											<div class="col-lg-3">
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
+												</div>
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
+												</div>
+											</div>
 										</div>
-										
-										
 									</div>
 								</div>
 							</div>
@@ -158,7 +154,6 @@
 									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
 									<%@ include file="../../common/page.jsp"%>
 								</div>
-
 						</div>
 						<!-- col-lg-12 end here -->
 					</div>
@@ -173,7 +168,7 @@
 		
 		
 	<!-- 这里可以定义一个js文件放到public下面 -->
-    <script type="text/ng-template" id="myModalEditContent.html">
+	<script type="text/ng-template" id="myModalEditContent.html">
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
@@ -259,13 +254,13 @@
 						</div>
 					</div>
 				</div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
-        </div>
-    </script>
-    
-    <script type="text/ng-template" id="myModalDelContent.html">
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+			<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+		</div>
+	</script>
+	
+	<script type="text/ng-template" id="myModalDelContent.html">
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
@@ -276,18 +271,13 @@
 				</div>
 			</div>
 				
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
-        </div>
-    </script>
-    
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
+			<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+		</div>
+	</script>
 	</div>
-
-	
-	
 	<input type="hidden" id="rootUrl" value="${root}">
-			
 	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
 </body>
 </html>

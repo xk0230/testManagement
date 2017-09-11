@@ -4,11 +4,11 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body  >
+<body ng-app = "myApp">
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
-		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
+		<div id="content" ng-controller="UserListController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
@@ -191,6 +191,7 @@
 		Win.open({id:"uploadExcel",width:500,height:260,title:"批量导入机构用户",url:"${root}/admin/commons/importUserPage.do?userType=area",mask:true});
 	}
 	</script>
+
 	<script src="${root}/public/js/pages/administrator/script.js" type="text/javascript"></script>
 </body>
 </html>

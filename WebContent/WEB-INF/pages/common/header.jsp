@@ -49,185 +49,38 @@ function logout(){
 getNewsNum();
 setInterval("getNewsNum()","10000");
 </script>
-<div id="header">
+<div id="header" ng-controller="HeaderController as header" >
     <div class="container-fluid">
         <div class="navbar">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
-                    <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-logo">spr</span><span class="text-slogan">flat</span> 
+                <a class="navbar-brand" href="#">
+                    <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
                 </a>
             </div>
             <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
+            <input id="sessionUserId"  type="hidden" value="${sessionScope.adminUser.userId }" ng-model="sessionUserId" >
             <div>
             <nav class="top-nav" role="navigation">
-                <!-- <ul class="nav navbar-nav pull-left">
-                    <li id="toggle-sidebar-li">
-                        <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
-                </a>
-                    </li>
-                    <li>
-                        <a href="#" class="full-screen"><i class ="fa-fullscreen"></i></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="ec-cog"></i><span class="notification">10</span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="en-database"></i> Database <span class="notification">3</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-cube"></i> Packages <span class="notification blue">17</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-health"></i> Disconnects <span class="notification yellow">1</span></a>
-                            </li>
-                            <li><a href="#"><i class="im-images"></i> Images <span class="notification teal">320</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-users"></i> Users <span class="notification orange">2k</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-meter"></i> Traffic <span class="notification magenta">2tb</span></a>
-                            </li>
-                            <li><a href="#"><i class="im-coin"></i> Finances <span class="notification pink">+3k</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-folder"></i> Directories <span class="notification green">17</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-bag"></i> Orders <span class="notification purple">12</span></a>
-                            </li>
-                            <li><a href="#"><i class="ec-contract"></i> Contracts <span class="notification dark">7</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
-                        <ul class="dropdown-menu email" role="menu">
-                            <li class="mail-head">
-                                <div class="clearfix">
-                                    <div class="pull-left">
-                                        <a href="email-inbox.html"><i class="ec-archive"></i></a>
-                                    </div>
-                                    <span>Inbox</span> 
-                                    <div class="pull-right">
-                                        <a href="email-inbox.html"><i class="st-pencil"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="search-email">
-                                <form>
-                                    <input type="text" name="search" placeholder="Search for emails">
-                                    <button type="submit"><i class="ec-search"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/128.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status"><i class="en-dot"></i></span> Jason Rivera
-                                        <span class="notification">2</span>
-                                        <span class="time">12:30 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        I contact you regarding my account please can you set up my pass ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/129.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status off"><i class="en-dot"></i></span> Steeve Mclark
-                                        <span class="notification">6</span>
-                                        <span class="time">10:26 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        Good job dude awesome work here, please add theese features ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/130.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status off"><i class="en-dot"></i></span> Fellix Jones
-                                        <span class="notification">1</span>
-                                        <span class="time">7:15 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        I have some issues when try to reach my product page can you ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/131.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status"><i class="en-dot"></i></span> Tina Dowsen
-                                        <span class="notification">6</span>
-                                        <span class="time">03:46 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        Hello Sugge, i want to apply for your referal program , please ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-more">
-                                <a href="email-inbox.html">View all <i class="en-arrow-right7"></i></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul> -->
                 <ul class="nav navbar-nav pull-right">
-                    <!-- <li>
-                        <a href="#" id="toggle-header-area"><i class="ec-download"></i></a>
-                    </li> -->
                     <li class="dropdown">
                         <a href="${root}/admin/position/toPostionList.do?type=audit" ><i class="br-alarm"></i> <span class="notification" id="news">0</span></a>
-                        <!-- <ul class="dropdown-menu notification-menu right" role="menu">
-                            <li class="clearfix">
-                                <i class="ec-chat"></i> 
-                                <a href="#" class="notification-user"> Ric Jones </a> 
-                                <span class="notification-action"> replied to your </span> 
-                                <a href="#" class="notification-link"> comment</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-pencil"></i> 
-                                <a href="#" class="notification-user"> SuggeElson </a> 
-                                <span class="notification-action"> just write a </span> 
-                                <a href="#" class="notification-link"> post</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="ec-trashcan"></i> 
-                                <a href="#" class="notification-user"> SuperAdmin </a> 
-                                <span class="notification-action"> just remove </span> 
-                                <a href="#" class="notification-link"> 12 files</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-paperclip"></i> 
-                                <a href="#" class="notification-user"> C. Wiilde </a> 
-                                <span class="notification-action"> attach </span> 
-                                <a href="#" class="notification-link"> 3 files</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-support"></i> 
-                                <a href="#" class="notification-user"> John Simpson </a> 
-                                <span class="notification-action"> add support </span> 
-                                <a href="#" class="notification-link"> ticket</a>
-                            </li>
-                        </ul> -->
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img class="user-avatar" src="${root }/public/assets/img/avatars/48.png" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
                         </a>
                         <ul class="dropdown-menu right" role="menu">
-                            <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="st-user"></i>个人信息</a>
+                            <li>
+                            	<a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="st-user"></i>个人信息</a>
                             </li>
-<!--                             <li><a href="file.html"><i class="st-cloud"></i> Files</a>
+                            <li ng-click="header.ChangePassWord()">
+                            	<a href="javascript:void(0);" ng-click="header.ChangePassWord('.container-fluid')"><i class="st-settings"></i>修改密码</a>
                             </li>
- -->                            <li><a href="#"><i class="st-settings"></i>修改密码</a>
-                            </li>
-                            <li><a href="javascript:logout();"><i class="im-exit"></i> 退出</a>
+                            <li>
+                            	<a href="javascript:logout();"><i class="im-exit"></i> 退出</a>
                             </li>
                         </ul>
                     </li>
-                   <!--  <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
-                    </li> -->
                 </ul>
             </nav>
             </div>
@@ -287,8 +140,63 @@ setInterval("getNewsNum()","10000");
                 </ul>
             </div>
         </div>
-        <!-- End #header-area -->
     </div>
-    <!-- Start .header-inner -->
+    
+	<!-- 修改密码 -->
+	<script type="text/ng-template" id="ChangePassword.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i> 修改密码</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>修改密码</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<div class="form-group">
+											<div class="col-xs-12">
+												<label class="col-xs-2 control-label">旧密码</label>
+												<div class="col-xs-10">
+													<input type="password" class="form-control" ng-model="oldPwd" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<label class="col-xs-2 control-label">新密码</label>
+												<div class="col-xs-10">
+													<input type="password" class="form-control" ng-model="newPwd" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<label class="col-xs-2 control-label">新密码</label>
+												<div class="col-xs-10">
+													<input type="password" class="form-control" ng-model="newPwdRe" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+			<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+		</div>
+	</script>
 </div>
-<!-- End #header -->

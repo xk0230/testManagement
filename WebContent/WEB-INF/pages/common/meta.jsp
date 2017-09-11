@@ -43,7 +43,6 @@
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/main.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
-<!-- Plugin CSS -->
 
 <script src="${root}/public/js/jquery.js" type="text/javascript"></script>
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
@@ -61,9 +60,6 @@
 <script src="${root}/public/js/common.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
-
-
-<script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
 
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/icons.css" media="screen">
 <script type="text/javascript">

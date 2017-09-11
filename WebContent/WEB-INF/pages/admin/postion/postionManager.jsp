@@ -4,11 +4,11 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body  >
+<body  ng-app = "myApp" >
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
-		<div id="content" ng-app = "myApp" ng-controller="PostionController as vm">
+		<div id="content" ng-controller="PostionController as vm">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<input id="type" value="${type}" type="hidden">
@@ -54,7 +54,6 @@
 													</select>
 												</div>
 											</div>
-											
 											<div class="col-lg-3" ng-if="${type=='mypost'}">
 												<label class="col-lg-4 control-label">岗位状态</label>
 												<div class="col-lg-8">
@@ -73,16 +72,17 @@
 													</select>
 												</div>
 											</div>
-											<br>
-											<div class="col-lg-3 pull-left">
-												<ul class="nav navbar-nav pull-left">
-													<li id="toggle-sidebar-li" class="ui-buttonset">
-														<input type="button"  class="btn btn-primary" name="query" ng-click="vm.getList()" value="查询" />
-													</li>
-													<li id="toggle-sidebar-li">
-														<input ng-if="${type=='mypost'}" type="button"  class="btn btn-success " name="query" ng-click="vm.edit('', '.outlet')" value="新增岗位" />
-													</li>
-												</ul>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-9">
+											</div>
+											<div class="col-lg-3">
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-primary col-lg-12" ng-click="vm.getList()" value="查询" />
+												</div>
+												<div class="col-lg-6">
+													<input ng-if="${type=='mypost'}" type="button"  class="btn btn-lg btn-success col-lg-12" ng-click="vm.edit('', '.outlet')" value="新增岗位" />
+												</div>
 											</div>
 										</div>
 									</div>
