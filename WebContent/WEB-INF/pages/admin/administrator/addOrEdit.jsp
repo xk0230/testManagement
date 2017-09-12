@@ -137,7 +137,7 @@
 												</div>
 											</div>
 											<div class="col-lg-3">
-												<label class="col-lg-4 control-label" >预计转正日</label>
+												<label class="col-lg-4 control-label" >转正日</label>
 												<div class="col-lg-8">
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.expectedDate" is-open="popup.opened4" 
@@ -191,7 +191,7 @@
 												</div>
 											</div>
 											<div class="col-lg-3">
-												<label class="col-lg-4 control-label" >签订次数</label>
+												<label class="col-lg-4 control-label" >已签订次数</label>
 												<div class="col-lg-8">
 													<input type="text" class="form-control" ng-model="vm.user.signTime" id="position" ng-readonly="vm.readOnly" />
 												</div>

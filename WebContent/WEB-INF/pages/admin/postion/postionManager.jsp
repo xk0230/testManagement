@@ -113,7 +113,7 @@
 												<th ng-if="${type=='list' or type=='mypost'}">在岗人数</th>
 												<th ng-if="${type=='list' or type=='mypost'}">空缺</th>
 												<th ng-if="${type=='audit'}">创建人</th>
-												<th ng-if="${type=='audit'}">创建时间</th>
+												<th ng-if="${type=='audit' or type=='list'}">创建时间</th>
 												<th colspan="3" ng-if="${type=='list'}">操作</th>
 												<th ng-if="${type=='mypost'}">岗位状态</th>
 												<th ng-if="${type=='audit'}">审批状态</th>
@@ -128,7 +128,7 @@
 												<td ng-if="${type=='list' or type=='mypost'}" class="col-lg-1"><p ng-bind="item.onDuty"></p></td>
 												<td ng-if="${type=='list' or type=='mypost'}" class="col-lg-1"><p ng-bind="item.vacancy"></p></td>
 												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createUserName"></p></td>
-												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
+												<td ng-if="${type=='audit' or type=='list'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
 												<td ng-if="${type=='list'}">
 													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">查看岗位</i></button>
 													<button type="button" class="btn btn-sm btn-success" ng-click="">招聘进度</i></button>
