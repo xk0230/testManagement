@@ -193,6 +193,6 @@
     	and p.status = #{map.status,jdbcType=VARCHAR}
     </if>
     
-    order by create_time desc
+    order by d.name asc, create_time desc
   </select>
 </mapper>
