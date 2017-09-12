@@ -24,19 +24,6 @@
 			</form>
 			
 		</div>
-		
-		<ul class="bg-bubbles">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
 	</div>
 </div>
 
@@ -62,9 +49,5 @@
 		});
 	</script>
 	
-	<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';color:#000000">
-	<h1>长春一东管理系统</h1>
-	
-</div>
 </body>
 </html>
