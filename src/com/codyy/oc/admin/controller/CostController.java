@@ -98,7 +98,7 @@ public class CostController extends BaseController{
     @RequestMapping("/outlay.do")
     public CostChartsData getChartDataByOutlayType(HttpServletRequest request){
 	    
-        return costService.getCostChartDataByDepIncome(this.getSessionUser(request),0);
+        return costService.getCostChartData(this.getSessionUser(request),0);
         
     }
 	
@@ -106,7 +106,15 @@ public class CostController extends BaseController{
     @RequestMapping("/depIncome.do")
     public CostChartsData getChartDataByDepIncome(HttpServletRequest request){
         
-        return costService.getCostChartDataByDepIncome(this.getSessionUser(request),1);
+        return costService.getCostChartData(this.getSessionUser(request),1);
+        
+    }
+	
+	@ResponseBody
+    @RequestMapping("/depOutcome.do")
+    public CostChartsData getChartDataByDepOutcome(HttpServletRequest request){
+        
+        return costService.getCostChartData(this.getSessionUser(request),2);
         
     }
 	

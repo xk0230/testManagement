@@ -246,7 +246,7 @@
 										</div>
 										<div class="form-group">
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">金额（万元）</label>
+												<label class="col-lg-4 control-label">金额（元）</label>
 												<div class="col-lg-8">
 													<input type="text" class="form-control" ng-model="costEntity.costNum" />
 												</div>

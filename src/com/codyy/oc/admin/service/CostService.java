@@ -146,7 +146,7 @@ public class CostService {
 	    return page;
 	}
 	
-	public CostChartsData getCostChartDataByDepIncome(AdminUser user,int type){
+	public CostChartsData getCostChartData(AdminUser user,int type){
 	    
 	    CostChartsData costChartsData = new CostChartsData();
 	    
@@ -156,6 +156,8 @@ public class CostService {
 	    List<CostInOutlayType> departIncomeList = null;
 	    if(type == 1){
 	    	departIncomeList = this.getChartDataByDepIncome(user);
+	    }else if(type == 2){
+	        departIncomeList = this.getChartDataByDepOutcome(user);
 	    }else{
 	    	departIncomeList = this.getChartDataByOutlayType(user);
 	    }
@@ -298,6 +300,60 @@ public class CostService {
         
         return departIncomeList;
     }
+    
+    /**
+     * 获取部门支出图表数据
+     * @param user
+     * @return
+     */
+    private List<CostInOutlayType> getChartDataByDepOutcome(AdminUser user){
+        
+        CostVO cost = new CostVO();
+        cost.setCostType("1");
+        
+        boolean flag = false;
+        String position = user.getPosition();
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
+            cost.setDepId(user.getDepId());
+            flag = true;
+        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
+            flag = true;
+        }
+        
+        List<CostInOutlayType> departIncomeList = new ArrayList<CostInOutlayType>();
+        if(flag){
+            cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.getCurrentTimestamp());
+            
+            List<CostMonthInOut> costList = costDaoMapper.getCostDepartIncomeType(cost);
+            if(CollectionUtils.isNotEmpty(costList)){
+                Map<String,List<CostMonthInOut>> map = new HashMap<String,List<CostMonthInOut>>();
+                for(CostMonthInOut monthOutlay : costList){
+                    List<CostMonthInOut> list = map.get(monthOutlay.getName());
+                    if(list == null){
+                        list = new ArrayList<CostMonthInOut>();
+                    }
+                    list.add(monthOutlay);
+                    
+                    map.put(monthOutlay.getName(), list);
+                }
+                
+                if(map.size() > 0){
+                    for(String name : map.keySet()){
+                        CostInOutlayType costOutlayType = new CostInOutlayType();
+                        costOutlayType.setName(name);
+                        costOutlayType.setMonthInOut(map.get(name));
+                        
+                        departIncomeList.add(costOutlayType);
+                    }
+                }
+            }
+            
+        }
+        
+        return departIncomeList;
+    }
+    
 	
     /**
      * 获取成本收入支出
