@@ -70,9 +70,11 @@
     var ROOT =  '${root}';
     $(document).on('ajaxComplete', function (jqXHR, xhr) {<%-- 判断ajax请求连接是否登录 --%>
         var responseText = xhr.responseText;
-        var start = responseText.indexOf("<script>top.location='");
-        if(start>-1 && start < 10){
-            top.location="${root}/login.html";
-        }
+        if(typeof(responseText)!="undefined"){
+	        var start = responseText.indexOf("<script>top.location='");
+	        if(start>-1 && start < 10){
+	            top.location="${root}/login.html";
+	        }
+    	}
     });
 </script>

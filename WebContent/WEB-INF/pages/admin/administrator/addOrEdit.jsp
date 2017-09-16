@@ -57,10 +57,19 @@
 											</div>
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >部门</label>
-												<div class="col-lg-8">
+												<div class="col-lg-4">
 													<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-readonly="vm.readOnly">
 														<option value="">请选择</option>
 														<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
+													</select>
+												</div>
+												<div  class="col-lg-4">
+													<select class="form-control select2" ng-model="vm.user.position" ng-readonly="vm.readOnly">
+														<option value="">请选择</option>
+														<option value="ADMIN" >管理员</option>
+														<option value="MANAGER" ng-if="hasManager=='N'">部门经理</option>
+														<optgroup label="部门经理" ng-if="hasManager=='Y'"></optgroup>
+														<option value="STAFF" >员工</option>
 													</select>
 												</div>
 											</div>
@@ -85,7 +94,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >薪级</label>
 												<div class="col-lg-8 ">
-													<input type="text" class="form-control" ng-model="vm.user.salaryScale" ng-readonly="vm.readOnly" />
+													<input type="text" ng-if="${adminUser.position == 'ADMIN'}" class="form-control" ng-model="vm.user.salaryScale" ng-readonly="vm.readOnly" />
 												</div>
 											</div>
 											<div class="col-lg-3">

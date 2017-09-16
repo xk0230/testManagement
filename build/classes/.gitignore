@@ -1,5 +1,5 @@
-/.svn/
 /com/
+/.svn/
 /app.properties
 /applicationcontext-spring.xml
 /generatorConfig.xml

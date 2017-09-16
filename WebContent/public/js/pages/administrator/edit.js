@@ -77,6 +77,7 @@ myAppModule.controller('UserListController',
 				{
 					self.readOnly = false;
 				}
+				
 			}else{
 				self.mode = "1";
 			}
@@ -93,7 +94,7 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.deplist = res.data || [];
 				}else{
-					self.list = [];
+					self.deplist = [];
 				}
 			})
 		}
@@ -109,14 +110,16 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res){
 					self.user = res.data;
+					self.getHasManager($scope.vm.user.depId);
 				}else{
-					self.list = [];
+					self.user = "";
 				}
 			})
 		}
 		
 		//获取岗位
 		self.getPostionById = function(){
+			//获取部门岗位
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/position/getPositionByDepId.do',
@@ -127,9 +130,30 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.postlist = res.data || [];
 				}else{
-					self.list = [];
+					self.postlist = [];
 				}
 			})
+			
+			self.getHasManager($scope.vm.user.depId);
+		}
+		
+		//获取部门是否已有部长
+		self.getHasManager = function(depId){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/dep/hasManager.do',
+				params:{
+					depId: depId
+				}
+			}).then(function(res){
+				if(res){
+					$scope.hasManager = res.data.message;
+				}else{
+					return "Y";
+				}
+			})
+			
+			
 		}
 		
 		self.Save = function(){
@@ -138,7 +162,6 @@ myAppModule.controller('UserListController',
 			}else{
 				this.updateUser();
 			}
-			
 		}
 		
 		//获取部门
@@ -194,7 +217,7 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.postlist = res.data || [];
 				}else{
-					self.list = [];
+					self.postlist = [];
 				}
 			})
 		}
@@ -253,7 +276,7 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.postlist = res.data || [];
 				}else{
-					self.list = [];
+					self.postlist = [];
 				}
 			})
 		}
