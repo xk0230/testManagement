@@ -151,6 +151,26 @@ public class PositionController extends BaseController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("getPositionAuditDetailPageList")
+	public Page getPositionAuditDetailPageList(HttpServletRequest request,Page page,PositionSearchView search){
+		AdminUser su = getSessionUser(request);
+		//只查询分配给自己的审批
+		search.setCreateUser(su.getUserId());
+		if(search.getAudit() == null) {
+			PositionAudit audit = new PositionAudit();
+			audit.setCreateUserId(su.getUserId());
+//			audit.setAuditUserId(su.getUserId());
+			audit.setResult(-1);
+			search.setAudit(audit);
+		}else {
+			search.getAudit().setAuditUserId(su.getUserId());
+			search.getAudit().setResult(-1);
+		}
+		return service.getPositionAuditPageList(page, search);
+	}
+	
+	
 	
 	
 }

@@ -33,8 +33,17 @@ public class PositionAudit {
     
     private Integer organization;
     
+    private String remark;
 
-    public Integer getOrganization() {
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Integer getOrganization() {
 		return organization;
 	}
 

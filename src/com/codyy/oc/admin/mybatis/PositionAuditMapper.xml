@@ -16,6 +16,7 @@
     <result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
     <result column="postResult" jdbcType="VARCHAR" property="postResult" />
     <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
     position_audit_id, position_id, audit_user_id, create_user_id, result, audit_time, 
@@ -91,23 +92,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.PositionAudit">
     update POSITION_AUDIT
     <set>
-      <if test="positionId != null">
+      <if test="positionId != null and positionId != ''">
         position_id = #{positionId,jdbcType=VARCHAR},
       </if>
-      <if test="auditUserId != null">
+      <if test="auditUserId != null and auditUserId != ''">
         audit_user_id = #{auditUserId,jdbcType=VARCHAR},
       </if>
-      <if test="createUserId != null">
+      <if test="createUserId != null and createUserId != ''">
         create_user_id = #{createUserId,jdbcType=VARCHAR},
       </if>
-      <if test="result != null">
+      <if test="result != null and result != ''">
         result = #{result,jdbcType=INTEGER},
       </if>
-      <if test="auditTime != null">
+      <if test="auditTime != null and auditTime != ''">
         audit_time = #{auditTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+       <if test="remark!= null and remark != ''">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where position_audit_id = #{positionAuditId,jdbcType=VARCHAR}

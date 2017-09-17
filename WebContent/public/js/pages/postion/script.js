@@ -41,6 +41,7 @@ myAppModule.controller('PostionController',
 		
 		// 获取数据列表
 		this.getList = function(){
+			console.log("获取数据");
 //			var type = $("#type").val();
 			if($scope.type == "audit"){
 				//如果是审批
@@ -134,6 +135,71 @@ myAppModule.controller('PostionController',
 					});
 					};
 					
+					this.auditReg = function (id, parentSelector) {
+						var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+								var auditmodalInstance = $uibModal.open({
+									animation: true,
+									ariaLabelledBy: 'modal-title',
+									ariaDescribedBy: 'modal-body',
+									templateUrl: 'myAuditContent.html',
+									controller: 'AuditModalInstanceCtrl',
+									controllerAs: '$ctrl',
+									size: 'lg',
+									appendTo: parentElem,
+									//参数
+									resolve: {
+										//好像必须得这么写
+									items: function () {
+										return id;
+									}
+								
+									}
+								});
+
+								auditmodalInstance.result.then(function (selectedItem) {
+									console.log("刷新啦");
+									self.getList();
+								}, function () {
+									//取消的回调函数
+								});
+								};
+								
+		this.auditDetailReg = function (id, parentSelector) {
+			var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+					var auditmodalInstance = $uibModal.open({
+						animation: true,
+						ariaLabelledBy: 'modal-title',
+						ariaDescribedBy: 'modal-body',
+						templateUrl: 'myAuditDetailContent.html',
+						controller: 'AuditDetailModalInstanceCtrl',
+						controllerAs: '$ctrl',
+						size: 'lg',
+						appendTo: parentElem,
+						//参数
+						resolve: {
+							//好像必须得这么写
+						items: function () {
+							return id;
+						}
+					
+						}
+					});
+
+					auditmodalInstance.result.then(function (selectedItem) {
+					}, function () {
+						//取消的回调函数
+					});
+					};
+								
+								
+								
+								
+								
+								
+								
+								
+								
+					
 		this.delCost = function (costId,size) {
 
 			
@@ -162,6 +228,10 @@ myAppModule.controller('PostionController',
 				}
 			})
 		};
+		
+		
+		
+		
 		
 	}
 );
@@ -346,6 +416,105 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 			opened2: false,
 			opened3: false,
 			opened4: false
+		};
+		
+	});
+
+
+
+
+//驳回审批的control
+angular.module('myApp').controller('AuditModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
+		var $ctrl = this;
+		$ctrl.id = items;
+		$ctrl.auditEntity = {
+			};
+
+		$ctrl.okaudit = function () {
+				console.log($ctrl.id);
+				console.log($scope.auditEntity.remark);
+
+				$http({
+					method:'POST',
+					url:'/ccydManagement/admin/position/auditPosition.do',
+					params:{
+						positionAuditId:$ctrl.id,
+						result:'-1',
+						remark:$scope.auditEntity.remark
+					}
+				}).then(function(res){
+					if(res.data.result == true){
+						getNewsNum();
+					}else{
+						alert("操作失败 ");
+					}
+				})
+				 var params = {
+						id:$scope.auditEntity.id,
+						remark:$scope.auditEntity.remark
+					} 
+					
+				$uibModalInstance.close(params);
+		};
+		
+
+		$ctrl.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+		};
+		
+	});
+
+
+
+//驳回审批详情的control
+angular.module('myApp').controller('AuditDetailModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
+	var self = this;
+	$scope.totalItems = 0;
+	$scope.currentPage = 1;
+	$scope.itemsPerPage = 10;
+	this.$onInit = function(){
+			self.getAuditList();
+	};
+	
+	this.getAuditList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/position/getPositionAuditDetailPageList.do',
+				params:{
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					console.log(self.list);
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+	};	
+	
+	
+	var $ctrl = this;
+		$ctrl.id = items;
+		$ctrl.auditEntity = {
+			};
+		$ctrl.ok = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+		$ctrl.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+		
+		$scope.pageChanged = function() {
+			self.getAuditList();
+		};
+		
+		//页数变化
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
 		};
 		
 	});

@@ -134,11 +134,14 @@
 													<button type="button" class="btn btn-sm btn-success" ng-click="">招聘进度</i></button>
 													<button type="button" class="btn btn-sm btn-success" ng-click="">查看员工</button>
 												</td>
-												<td ng-if="${type=='mypost'}" class="col-lg-1"><p ng-bind="item.statusName"></p></td>
+												<td ng-if="${type=='mypost'}" class="col-lg-1">
+													<p ng-if="item.statusName != '审批拒绝'" ng-bind="item.statusName"></p>
+													<button  ng-if="item.statusName == '审批拒绝'" type="button" class="btn btn-sm btn-success" ng-click="vm.auditDetailReg(item.positionAuditId, '.outlet')">审批拒绝</button>
+												</td>
 												<td ng-if="${type=='audit'}" class="col-lg-1"><p ng-bind="item.resultName"></p></td>
 												<td ng-if="${type=='audit'}">
-													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,1,'.outlet')">通过</i></button>
-													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,-1,'.outlet')">驳回</button>
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.audit(item.positionAuditId,1,'','.outlet')">通过</i></button>
+													<button  ng-if="item.resultName == '未审批'" type="button" class="btn btn-sm btn-success" ng-click="vm.auditReg(item.positionAuditId, '.outlet')">驳回</button>
 												</td>
 											</tr>
 										</tbody>
@@ -231,6 +234,99 @@
 				</div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="myAuditContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i>审批信息</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>驳回</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label" >驳回理由</label>
+												<div class="col-lg-8">
+													<input type="text" class="form-control" ng-model="auditEntity.remark" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.okaudit(id)">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
+    
+    
+    
+        <script type="text/ng-template" id="myAuditDetailContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i>审批信息</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>驳回详情</h3>
+								</div>
+								<div class="panel-body">
+									<div class="panel-body">
+									<table class="table display" id="datatable">
+										<thead>
+											<tr>
+												<th>审批人</th>
+												<th>驳回理由</th>
+											</tr>
+										</thead>  
+										<tbody>
+											<tr class="odd gradeX" ng-repeat="item in self.list">
+												<td class="col-lg-2"><p ng-bind="item.auditUserName"></p></td>
+												<td class="col-lg-2"><p ng-bind="item.remark"></p></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+									 <%@ include file="../../common/page.jsp"%> 
+								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         </div>
     </script>
