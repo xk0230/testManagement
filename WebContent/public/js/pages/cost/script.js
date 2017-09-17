@@ -401,3 +401,5 @@ angular.module('myApp').controller('ModalInstanceDel',
 	  };
 	  
 	});
+
+angular.bootstrap(document.getElementById("content"), ['myApp']);

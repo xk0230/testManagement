@@ -517,3 +517,5 @@ angular.module('myApp').controller('AuditDetailModalInstanceCtrl', function ($sc
 		};
 		
 	});
+
+angular.bootstrap(document.getElementById("content"), ['myApp']);
