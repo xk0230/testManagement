@@ -486,11 +486,10 @@ angular.module('myApp').controller('AuditDetailModalInstanceCtrl', function ($sc
 				}
 			}).then(function(res){
 				if(res){
-					self.list = res.data.data || [];
-					console.log(self.list);
+					$scope.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
 				}else{
-					self.list = [];
+					$scope.list = [];
 					$scope.totalItems = 0;
 				}
 			});
