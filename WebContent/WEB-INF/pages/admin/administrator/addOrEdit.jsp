@@ -68,7 +68,7 @@
 														<option value="">请选择</option>
 														<option value="ADMIN" >管理员</option>
 														<option value="MANAGER" ng-if="hasManager=='N'">部门经理</option>
-														<optgroup label="部门经理" ng-if="hasManager=='Y'"></optgroup>
+														<optgroup label="部门经理" ng-if="hasManager=='Y'" style="color:#D0D0D0"></optgroup>
 														<option value="STAFF" >员工</option>
 													</select>
 												</div>

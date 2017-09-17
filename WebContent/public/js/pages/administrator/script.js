@@ -87,3 +87,5 @@ myAppModule.controller('UserListController',
 		};
 	}
 );
+
+angular.bootstrap(document.getElementById("content"), ['myApp']);
