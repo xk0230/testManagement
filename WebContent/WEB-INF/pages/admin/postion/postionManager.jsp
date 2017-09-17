@@ -310,7 +310,7 @@
 											</tr>
 										</thead>  
 										<tbody>
-											<tr class="odd gradeX" ng-repeat="item in self.list">
+											<tr class="odd gradeX" ng-repeat="item in list">
 												<td class="col-lg-2"><p ng-bind="item.auditUserName"></p></td>
 												<td class="col-lg-2"><p ng-bind="item.remark"></p></td>
 											</tr>
