@@ -157,7 +157,6 @@ myAppModule.controller('PostionController',
 								});
 
 								auditmodalInstance.result.then(function (selectedItem) {
-									console.log("刷新啦");
 									self.getList();
 								}, function () {
 									//取消的回调函数
@@ -473,7 +472,7 @@ angular.module('myApp').controller('AuditDetailModalInstanceCtrl', function ($sc
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 10;
 	this.$onInit = function(){
-			self.getAuditList();
+			self.getAuditList($ctrl.id);
 	};
 	
 	this.getAuditList = function(){
@@ -481,6 +480,7 @@ angular.module('myApp').controller('AuditDetailModalInstanceCtrl', function ($sc
 				method:'POST',
 				url:$("#rootUrl").val()+'/admin/position/getPositionAuditDetailPageList.do',
 				params:{
+					postId:$ctrl.id,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}

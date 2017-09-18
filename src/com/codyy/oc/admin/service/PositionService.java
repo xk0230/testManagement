@@ -115,6 +115,7 @@ public class PositionService {
 	public Page getPositionAuditPageList(Page page,PositionSearchView search){
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("createUserId", search.getCreateUser());
+		map.put("postId", search.getPostId());
 		if(search.getAudit()!=null) {
 			map.put("auditUserId",search.getAudit().getAuditUserId());
 			map.put("result", search.getAudit().getResult());
