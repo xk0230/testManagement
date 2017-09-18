@@ -206,6 +206,9 @@
     <if test="map.depId != null and map.depId != '' ">
     	and p.dep_id = #{map.depId,jdbcType=VARCHAR}
     </if>
+      <if test="map.postId != null and map.postId != '' ">
+    	and pa.position_id = #{map.postId,jdbcType=VARCHAR}
+    </if>
     order by pa.create_time desc
   </select>
 </mapper>

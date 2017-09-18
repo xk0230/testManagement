@@ -136,7 +136,7 @@
 												</td>
 												<td ng-if="${type=='mypost'}" class="col-lg-1">
 													<p ng-if="item.statusName != '审批拒绝'" ng-bind="item.statusName"></p>
-													<button  ng-if="item.statusName == '审批拒绝'" type="button" class="btn btn-sm btn-success" ng-click="vm.auditDetailReg(item.positionAuditId, '.outlet')">审批拒绝</button>
+													<button  ng-if="item.statusName == '审批拒绝'" type="button" class="btn btn-sm btn-success" ng-click="vm.auditDetailReg(item.postId, '.outlet')">审批拒绝</button>
 												</td>
 												<td ng-if="${type=='audit'}" class="col-lg-1"><p ng-bind="item.resultName"></p></td>
 												<td ng-if="${type=='audit'}">
