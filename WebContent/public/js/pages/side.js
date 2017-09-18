@@ -24,3 +24,4 @@ myAppModule1.controller('sideController',
 		}
 	}
 );
+angular.bootstrap(document.getElementById("sidebar"), ['sideApp']);

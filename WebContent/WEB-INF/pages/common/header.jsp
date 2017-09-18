@@ -49,7 +49,7 @@ function logout(){
 getNewsNum();
 setInterval("getNewsNum()","10000");
 </script>
-<div id="header">
+<div id="header" ng-app = "headerApp" ng-controller="HeaderController as header">
     <div class="container-fluid">
         <div class="navbar">
             <div class="navbar-header">
@@ -220,7 +220,7 @@ setInterval("getNewsNum()","10000");
                             </li>
 <!--                             <li><a href="file.html"><i class="st-cloud"></i> Files</a>
                             </li>
- -->                            <li><a href="#"><i class="st-settings"></i>修改密码</a>
+ -->                            <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.container-fluid')"><i class="st-settings"></i>修改密码</a>
                             </li>
                             <li><a href="javascript:logout();"><i class="im-exit"></i> 退出</a>
                             </li>
@@ -290,5 +290,54 @@ setInterval("getNewsNum()","10000");
         <!-- End #header-area -->
     </div>
     <!-- Start .header-inner -->
+        <script type="text/ng-template" id="myModalEditContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i> 修改密码</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>修改密码</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="旧密码" ng-model="oldPwd">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="新密码" ng-model="newPwd1">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="再次输入新密码" ng-model="newPwd2">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
+    
 </div>
+<script src="${root}/public/js/pages/header.js" type="text/javascript"></script>
 <!-- End #header -->
