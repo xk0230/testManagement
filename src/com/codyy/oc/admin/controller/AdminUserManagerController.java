@@ -117,12 +117,20 @@ public class AdminUserManagerController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping("updatePasswd")
-	public ResultJson updatePasswd(HttpServletRequest request, AdminUser adUser){
+	public ResultJson updatePasswd(HttpServletRequest request, AdminUser adUser,String oldpsd){
 			if(StringUtils.isEmpty(adUser.getPassword())){
 				return new ResultJson(false,"密码不能为空");
-			}else{
-			//用户修改密码
-				adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+			}else {
+				//校验旧密码正确性
+				AdminUser sessionUser =  getSessionUser(request);
+				System.out.println(sessionUser.getPassword());
+				
+				if(StringUtils.isNotBlank(oldpsd)&&sessionUser.getPassword().equals(SecurityUtil.MD5String(oldpsd))) {
+					//如果原密码正确则修改密码
+					adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+				}else {
+					return new ResultJson(false,"原密码不正确");
+				}
 			}
 			adminUserManagerService.updatePasswd(adUser);
 			return new ResultJson(true);

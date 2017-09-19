@@ -64,6 +64,11 @@ myAppModule2.controller('ModalInstanceCtrl',
 
 	  $ctrl.ok = function () {
 		
+		  if($scope.oldPwd == '' || $scope.oldPwd == null){
+			  alert("请输入原始密码！")
+				return;
+		  }
+		  
 		if($scope.newPwd1 != $scope.newPwd2){
 			alert("两次输入的密码不一致！")
 			return;
@@ -74,7 +79,8 @@ myAppModule2.controller('ModalInstanceCtrl',
 				url:"/ccydManagement/admin/adminuser/updatePasswd.do",
 				params:{
 					userId:$scope.userId,
-					password:$scope.newPwd1
+					password:$scope.newPwd1,
+					oldpsd:$scope.oldPwd
 				}
 			
 			}).then(function(res){
@@ -82,6 +88,8 @@ myAppModule2.controller('ModalInstanceCtrl',
 				if(res.data.result){
 					alert("密码修改成功！")
 					$uibModalInstance.close('0');
+				}else{
+					alert(res.data.message)
 				}
 				
 			});
