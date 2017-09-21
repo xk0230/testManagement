@@ -5,6 +5,7 @@
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
+			<form ng-submit="onSubmit()" novalidate="novalidate">
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
@@ -22,14 +23,14 @@
 								<div class="col-lg-3">
 									<label class="col-lg-4 control-label" ></label>
 									<div class="col-lg-8">
-										<input type="button" class="btn btn-lg btn-success col-lg-12" ng-click="vm.Save()" value="保存" />
+										<input type="submit" class="btn btn-lg btn-success col-lg-12" ladda = "submitting"  value="保存" />
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<input type="text" class="form-control"  ng-model="vm.user.userId" ng-show="false"  />
 				<!-- 岗位信息 start here -->
 				<div class="outlet" >
 					<div class="row">
@@ -45,25 +46,28 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" for="ds_host">用户名</label>
 												<div class="col-lg-8 ">
-													<input type="text" class="form-control"  ng-model="vm.user.userId" ng-show="false"/>
-													<input type="text" class="form-control"  ng-model="vm.user.userName"  ng-readonly="vm.readOnly" />
+													<input type="text" class="form-control"  ng-model="vm.user.userName"  ng-readonly="vm.readOnly" ng-required="true" />
 												</div>
 											</div>
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >姓名</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="vm.user.realName"  value="66666666" ng-readonly="vm.readOnly"/>
+													<input type="text" class="form-control" ng-model="vm.user.realName"  value="" ng-readonly="vm.readOnly" ng-required="true" />
 												</div>
 											</div>
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >部门</label>
-												<div class="col-lg-4">
-													<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-readonly="vm.readOnly">
+												<div class="col-lg-8">
+													<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-readonly="vm.readOnly" ng-required="true" >
 														<option value="">请选择</option>
 														<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
 													</select>
 												</div>
-												<div  class="col-lg-4">
+											</div>
+											
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >角色</label>
+												<div class="col-lg-8">
 													<select class="form-control select2" ng-model="vm.user.position" ng-readonly="vm.readOnly">
 														<option value="">请选择</option>
 														<option value="ADMIN" >管理员</option>
@@ -73,6 +77,9 @@
 													</select>
 												</div>
 											</div>
+										</div>
+										<!-- 第2行 -->
+										<div class="form-group">
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >岗位</label>
 												<div class="col-lg-8">
@@ -82,19 +89,11 @@
 													</select>
 												</div>
 											</div>
-										</div>
-										<!-- 第2行 -->
-										<div class="form-group">
+											
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" for="ds_host">状态</label>
 												<div class="col-lg-8 ">
 													<input type="text" class="form-control"  ng-model="vm.user.workStatus" id="userName" ng-readonly="vm.readOnly" />
-												</div>
-											</div>
-											<div class="col-lg-3">
-												<label class="col-lg-4 control-label" >薪级</label>
-												<div class="col-lg-8 ">
-													<input type="text" ng-if="${adminUser.position == 'ADMIN'}" class="form-control" ng-model="vm.user.salaryScale" ng-readonly="vm.readOnly" />
 												</div>
 											</div>
 											<div class="col-lg-3">
@@ -123,7 +122,7 @@
 												<label class="col-lg-4 control-label" for="ds_host">起薪日</label>
 												<div class="col-lg-8 ">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.salaryBeginDate" is-open="popup.opened2" 
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.salaryBeginDate" is-open="popup.opened2" name="salaryBeginDate"
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
 														ng-required="true"  ng-readonly="vm.readOnly" />
 														<span class="input-group-btn">
@@ -136,7 +135,7 @@
 												<label class="col-lg-4 control-label" >试用期限</label>
 												<div class="col-lg-8 ">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.probationPeriod" is-open="popup.opened3" 
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.probationPeriod" is-open="popup.opened3"  name = "probationPeriod"
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
 														ng-required="true" ng-readonly="vm.readOnly" />
 														<span class="input-group-btn">
@@ -251,6 +250,14 @@
 															<button type="button" class="btn btn-default" ng-click="open(9)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
 													</p>
+												</div>
+											</div>
+										</div>
+										<div class="form-group" ng-if="${adminUser.position == 'ADMIN'}" >
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >薪级</label>
+												<div class="col-lg-8 ">
+													<input type="text" class="form-control" ng-model="vm.user.salaryScale" ng-readonly="vm.readOnly" />
 												</div>
 											</div>
 										</div>
@@ -430,7 +437,7 @@
 						</div>
 					</div>
 				</div>
-
+			</form>
 			</div>
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
