@@ -63,16 +63,7 @@
 													</select>
 												</div>
 											</div>
-											
-											<div class="col-lg-3 pull-left">
-												<ul class="nav navbar-nav pull-left">
-													<li id="toggle-sidebar-li" class="ui-buttonset">
-														<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
-													</li>
-													<li id="toggle-sidebar-li">
-														<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
-													</li>
-												</ul>
+											<div class="col-lg-3">
 											</div>
 										</div>
 										
@@ -103,7 +94,16 @@
 													</p>
 												</div>
 											</div>
-											
+											<div class="col-lg-3">
+											</div>
+											<div class="col-lg-3">
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
+												</div>
+												<div class="col-lg-6">
+													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
+												</div>
+											</div>
 										</div>
 										
 										
