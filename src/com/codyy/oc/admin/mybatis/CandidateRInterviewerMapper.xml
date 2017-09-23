@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.CandidateRInterviewerMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="candidate_id" jdbcType="VARCHAR" property="candidateId" />
+    <result column="interviewer_id" jdbcType="VARCHAR" property="interviewerId" />
+    <result column="interview_time" jdbcType="TIMESTAMP" property="interviewTime" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="word_score" jdbcType="VARCHAR" property="wordScore" />
+    <result column="skill_score" jdbcType="VARCHAR" property="skillScore" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    <result column="interview_detail" jdbcType="LONGVARCHAR" property="interviewDetail" />
+    <result column="work_detail" jdbcType="LONGVARCHAR" property="workDetail" />
+    <result column="skill_detail" jdbcType="LONGVARCHAR" property="skillDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, candidate_id, interviewer_id, interview_time, place, word_score, skill_score
+  </sql>
+  <sql id="Blob_Column_List">
+    interview_detail, work_detail, skill_detail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CANDIDATE_R_INTERVIEWER
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CANDIDATE_R_INTERVIEWER
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    insert into CANDIDATE_R_INTERVIEWER (id, candidate_id, interviewer_id, 
+      interview_time, place, word_score, 
+      skill_score, interview_detail, work_detail, 
+      skill_detail)
+    values (#{id,jdbcType=VARCHAR}, #{candidateId,jdbcType=VARCHAR}, #{interviewerId,jdbcType=VARCHAR}, 
+      #{interviewTime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{wordScore,jdbcType=VARCHAR}, 
+      #{skillScore,jdbcType=VARCHAR}, #{interviewDetail,jdbcType=LONGVARCHAR}, #{workDetail,jdbcType=LONGVARCHAR}, 
+      #{skillDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    insert into CANDIDATE_R_INTERVIEWER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="candidateId != null">
+        candidate_id,
+      </if>
+      <if test="interviewerId != null">
+        interviewer_id,
+      </if>
+      <if test="interviewTime != null">
+        interview_time,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="wordScore != null">
+        word_score,
+      </if>
+      <if test="skillScore != null">
+        skill_score,
+      </if>
+      <if test="interviewDetail != null">
+        interview_detail,
+      </if>
+      <if test="workDetail != null">
+        work_detail,
+      </if>
+      <if test="skillDetail != null">
+        skill_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateId != null">
+        #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerId != null">
+        #{interviewerId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTime != null">
+        #{interviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="wordScore != null">
+        #{wordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="skillScore != null">
+        #{skillScore,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewDetail != null">
+        #{interviewDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workDetail != null">
+        #{workDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="skillDetail != null">
+        #{skillDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    update CANDIDATE_R_INTERVIEWER
+    <set>
+      <if test="candidateId != null">
+        candidate_id = #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerId != null">
+        interviewer_id = #{interviewerId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTime != null">
+        interview_time = #{interviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="wordScore != null">
+        word_score = #{wordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="skillScore != null">
+        skill_score = #{skillScore,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewDetail != null">
+        interview_detail = #{interviewDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workDetail != null">
+        work_detail = #{workDetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="skillDetail != null">
+        skill_detail = #{skillDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    update CANDIDATE_R_INTERVIEWER
+    set candidate_id = #{candidateId,jdbcType=VARCHAR},
+      interviewer_id = #{interviewerId,jdbcType=VARCHAR},
+      interview_time = #{interviewTime,jdbcType=TIMESTAMP},
+      place = #{place,jdbcType=VARCHAR},
+      word_score = #{wordScore,jdbcType=VARCHAR},
+      skill_score = #{skillScore,jdbcType=VARCHAR},
+      interview_detail = #{interviewDetail,jdbcType=LONGVARCHAR},
+      work_detail = #{workDetail,jdbcType=LONGVARCHAR},
+      skill_detail = #{skillDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
+    update CANDIDATE_R_INTERVIEWER
+    set candidate_id = #{candidateId,jdbcType=VARCHAR},
+      interviewer_id = #{interviewerId,jdbcType=VARCHAR},
+      interview_time = #{interviewTime,jdbcType=TIMESTAMP},
+      place = #{place,jdbcType=VARCHAR},
+      word_score = #{wordScore,jdbcType=VARCHAR},
+      skill_score = #{skillScore,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

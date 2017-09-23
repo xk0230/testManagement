@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.RecruitMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Recruit">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="postId" jdbcType="VARCHAR" property="postid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="audit_user" jdbcType="VARCHAR" property="auditUser" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.codyy.oc.admin.entity.Recruit">
+    <result column="recruit_a" jdbcType="LONGVARCHAR" property="recruitA" />
+    <result column="recruit_b" jdbcType="LONGVARCHAR" property="recruitB" />
+    <result column="recruit_c" jdbcType="LONGVARCHAR" property="recruitC" />
+    <result column="recruit_d" jdbcType="LONGVARCHAR" property="recruitD" />
+    <result column="recruit_e" jdbcType="LONGVARCHAR" property="recruitE" />
+    <result column="recruit_f" jdbcType="LONGVARCHAR" property="recruitF" />
+    <result column="education_remark" jdbcType="LONGVARCHAR" property="educationRemark" />
+    <result column="professiona" jdbcType="LONGVARCHAR" property="professiona" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, postId, create_time, education, create_user, status, audit_user
+  </sql>
+  <sql id="Blob_Column_List">
+    recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f, education_remark, 
+    professiona
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from RECRUIT
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RECRUIT
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Recruit">
+    insert into RECRUIT (id, postId, create_time, 
+      education, create_user, status, 
+      audit_user, recruit_a, recruit_b, 
+      recruit_c, recruit_d, recruit_e, 
+      recruit_f, education_remark, professiona
+      )
+    values (#{id,jdbcType=VARCHAR}, #{postid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{education,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{auditUser,jdbcType=VARCHAR}, #{recruitA,jdbcType=LONGVARCHAR}, #{recruitB,jdbcType=LONGVARCHAR}, 
+      #{recruitC,jdbcType=LONGVARCHAR}, #{recruitD,jdbcType=LONGVARCHAR}, #{recruitE,jdbcType=LONGVARCHAR}, 
+      #{recruitF,jdbcType=LONGVARCHAR}, #{educationRemark,jdbcType=LONGVARCHAR}, #{professiona,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Recruit">
+    insert into RECRUIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="postid != null">
+        postId,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+      <if test="recruitA != null">
+        recruit_a,
+      </if>
+      <if test="recruitB != null">
+        recruit_b,
+      </if>
+      <if test="recruitC != null">
+        recruit_c,
+      </if>
+      <if test="recruitD != null">
+        recruit_d,
+      </if>
+      <if test="recruitE != null">
+        recruit_e,
+      </if>
+      <if test="recruitF != null">
+        recruit_f,
+      </if>
+      <if test="educationRemark != null">
+        education_remark,
+      </if>
+      <if test="professiona != null">
+        professiona,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="postid != null">
+        #{postid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitA != null">
+        #{recruitA,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitB != null">
+        #{recruitB,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitC != null">
+        #{recruitC,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitD != null">
+        #{recruitD,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitE != null">
+        #{recruitE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitF != null">
+        #{recruitF,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="educationRemark != null">
+        #{educationRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="professiona != null">
+        #{professiona,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Recruit">
+    update RECRUIT
+    <set>
+      <if test="postid != null">
+        postId = #{postid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUser != null">
+        audit_user = #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitA != null">
+        recruit_a = #{recruitA,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitB != null">
+        recruit_b = #{recruitB,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitC != null">
+        recruit_c = #{recruitC,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitD != null">
+        recruit_d = #{recruitD,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitE != null">
+        recruit_e = #{recruitE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitF != null">
+        recruit_f = #{recruitF,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="educationRemark != null">
+        education_remark = #{educationRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="professiona != null">
+        professiona = #{professiona,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.codyy.oc.admin.entity.Recruit">
+    update RECRUIT
+    set postId = #{postid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      education = #{education,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      audit_user = #{auditUser,jdbcType=VARCHAR},
+      recruit_a = #{recruitA,jdbcType=LONGVARCHAR},
+      recruit_b = #{recruitB,jdbcType=LONGVARCHAR},
+      recruit_c = #{recruitC,jdbcType=LONGVARCHAR},
+      recruit_d = #{recruitD,jdbcType=LONGVARCHAR},
+      recruit_e = #{recruitE,jdbcType=LONGVARCHAR},
+      recruit_f = #{recruitF,jdbcType=LONGVARCHAR},
+      education_remark = #{educationRemark,jdbcType=LONGVARCHAR},
+      professiona = #{professiona,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Recruit">
+    update RECRUIT
+    set postId = #{postid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      education = #{education,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      audit_user = #{auditUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

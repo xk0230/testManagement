@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.CandidateMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Candidate">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="recruit_id" jdbcType="VARCHAR" property="recruitId" />
+    <result column="pdp_sj_a" jdbcType="VARCHAR" property="pdpSjA" />
+    <result column="pdp_sj_b" jdbcType="VARCHAR" property="pdpSjB" />
+    <result column="pdp_sj_c" jdbcType="VARCHAR" property="pdpSjC" />
+    <result column="pdp_sj_d" jdbcType="VARCHAR" property="pdpSjD" />
+    <result column="pdp_nj_a" jdbcType="VARCHAR" property="pdpNjA" />
+    <result column="pdp_nj_b" jdbcType="VARCHAR" property="pdpNjB" />
+    <result column="pdp_nj_c" jdbcType="VARCHAR" property="pdpNjC" />
+    <result column="pdp_nj_d" jdbcType="VARCHAR" property="pdpNjD" />
+    <result column="word_score" jdbcType="VARCHAR" property="wordScore" />
+    <result column="skill_score" jdbcType="VARCHAR" property="skillScore" />
+    <result column="edu" jdbcType="VARCHAR" property="edu" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="evaluating" jdbcType="VARCHAR" property="evaluating" />
+    <result column="sort" jdbcType="VARCHAR" property="sort" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.codyy.oc.admin.entity.Candidate">
+    <result column="pc" jdbcType="LONGVARCHAR" property="pc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, recruit_id, pdp_sj_a, pdp_sj_b, pdp_sj_c, pdp_sj_d, pdp_nj_a, pdp_nj_b, 
+    pdp_nj_c, pdp_nj_d, word_score, skill_score, edu, other, evaluating, sort, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    pc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CANDIDATE
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CANDIDATE
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Candidate">
+    insert into CANDIDATE (id, name, recruit_id, 
+      pdp_sj_a, pdp_sj_b, pdp_sj_c, 
+      pdp_sj_d, pdp_nj_a, pdp_nj_b, 
+      pdp_nj_c, pdp_nj_d, word_score, 
+      skill_score, edu, other, 
+      evaluating, sort, create_time, 
+      pc)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{recruitId,jdbcType=VARCHAR}, 
+      #{pdpSjA,jdbcType=VARCHAR}, #{pdpSjB,jdbcType=VARCHAR}, #{pdpSjC,jdbcType=VARCHAR}, 
+      #{pdpSjD,jdbcType=VARCHAR}, #{pdpNjA,jdbcType=VARCHAR}, #{pdpNjB,jdbcType=VARCHAR}, 
+      #{pdpNjC,jdbcType=VARCHAR}, #{pdpNjD,jdbcType=VARCHAR}, #{wordScore,jdbcType=VARCHAR}, 
+      #{skillScore,jdbcType=VARCHAR}, #{edu,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{evaluating,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Candidate">
+    insert into CANDIDATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="recruitId != null">
+        recruit_id,
+      </if>
+      <if test="pdpSjA != null">
+        pdp_sj_a,
+      </if>
+      <if test="pdpSjB != null">
+        pdp_sj_b,
+      </if>
+      <if test="pdpSjC != null">
+        pdp_sj_c,
+      </if>
+      <if test="pdpSjD != null">
+        pdp_sj_d,
+      </if>
+      <if test="pdpNjA != null">
+        pdp_nj_a,
+      </if>
+      <if test="pdpNjB != null">
+        pdp_nj_b,
+      </if>
+      <if test="pdpNjC != null">
+        pdp_nj_c,
+      </if>
+      <if test="pdpNjD != null">
+        pdp_nj_d,
+      </if>
+      <if test="wordScore != null">
+        word_score,
+      </if>
+      <if test="skillScore != null">
+        skill_score,
+      </if>
+      <if test="edu != null">
+        edu,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="evaluating != null">
+        evaluating,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="pc != null">
+        pc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitId != null">
+        #{recruitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjA != null">
+        #{pdpSjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjB != null">
+        #{pdpSjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjC != null">
+        #{pdpSjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjD != null">
+        #{pdpSjD,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjA != null">
+        #{pdpNjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjB != null">
+        #{pdpNjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjC != null">
+        #{pdpNjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjD != null">
+        #{pdpNjD,jdbcType=VARCHAR},
+      </if>
+      <if test="wordScore != null">
+        #{wordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="skillScore != null">
+        #{skillScore,jdbcType=VARCHAR},
+      </if>
+      <if test="edu != null">
+        #{edu,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluating != null">
+        #{evaluating,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pc != null">
+        #{pc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Candidate">
+    update CANDIDATE
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitId != null">
+        recruit_id = #{recruitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjA != null">
+        pdp_sj_a = #{pdpSjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjB != null">
+        pdp_sj_b = #{pdpSjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjC != null">
+        pdp_sj_c = #{pdpSjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjD != null">
+        pdp_sj_d = #{pdpSjD,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjA != null">
+        pdp_nj_a = #{pdpNjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjB != null">
+        pdp_nj_b = #{pdpNjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjC != null">
+        pdp_nj_c = #{pdpNjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjD != null">
+        pdp_nj_d = #{pdpNjD,jdbcType=VARCHAR},
+      </if>
+      <if test="wordScore != null">
+        word_score = #{wordScore,jdbcType=VARCHAR},
+      </if>
+      <if test="skillScore != null">
+        skill_score = #{skillScore,jdbcType=VARCHAR},
+      </if>
+      <if test="edu != null">
+        edu = #{edu,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluating != null">
+        evaluating = #{evaluating,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pc != null">
+        pc = #{pc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.codyy.oc.admin.entity.Candidate">
+    update CANDIDATE
+    set name = #{name,jdbcType=VARCHAR},
+      recruit_id = #{recruitId,jdbcType=VARCHAR},
+      pdp_sj_a = #{pdpSjA,jdbcType=VARCHAR},
+      pdp_sj_b = #{pdpSjB,jdbcType=VARCHAR},
+      pdp_sj_c = #{pdpSjC,jdbcType=VARCHAR},
+      pdp_sj_d = #{pdpSjD,jdbcType=VARCHAR},
+      pdp_nj_a = #{pdpNjA,jdbcType=VARCHAR},
+      pdp_nj_b = #{pdpNjB,jdbcType=VARCHAR},
+      pdp_nj_c = #{pdpNjC,jdbcType=VARCHAR},
+      pdp_nj_d = #{pdpNjD,jdbcType=VARCHAR},
+      word_score = #{wordScore,jdbcType=VARCHAR},
+      skill_score = #{skillScore,jdbcType=VARCHAR},
+      edu = #{edu,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      evaluating = #{evaluating,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pc = #{pc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Candidate">
+    update CANDIDATE
+    set name = #{name,jdbcType=VARCHAR},
+      recruit_id = #{recruitId,jdbcType=VARCHAR},
+      pdp_sj_a = #{pdpSjA,jdbcType=VARCHAR},
+      pdp_sj_b = #{pdpSjB,jdbcType=VARCHAR},
+      pdp_sj_c = #{pdpSjC,jdbcType=VARCHAR},
+      pdp_sj_d = #{pdpSjD,jdbcType=VARCHAR},
+      pdp_nj_a = #{pdpNjA,jdbcType=VARCHAR},
+      pdp_nj_b = #{pdpNjB,jdbcType=VARCHAR},
+      pdp_nj_c = #{pdpNjC,jdbcType=VARCHAR},
+      pdp_nj_d = #{pdpNjD,jdbcType=VARCHAR},
+      word_score = #{wordScore,jdbcType=VARCHAR},
+      skill_score = #{skillScore,jdbcType=VARCHAR},
+      edu = #{edu,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      evaluating = #{evaluating,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

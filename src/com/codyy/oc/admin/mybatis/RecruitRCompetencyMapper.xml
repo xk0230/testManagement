@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.RecruitRCompetencyMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.RecruitRCompetency">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="recruit_id" jdbcType="VARCHAR" property="recruitId" />
+    <result column="competency_id" jdbcType="VARCHAR" property="competencyId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, recruit_id, competency_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from RECRUIT_R_COMPETENCY
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from RECRUIT_R_COMPETENCY
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency">
+    insert into RECRUIT_R_COMPETENCY (id, recruit_id, competency_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{recruitId,jdbcType=VARCHAR}, #{competencyId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency">
+    insert into RECRUIT_R_COMPETENCY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recruitId != null">
+        recruit_id,
+      </if>
+      <if test="competencyId != null">
+        competency_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitId != null">
+        #{recruitId,jdbcType=VARCHAR},
+      </if>
+      <if test="competencyId != null">
+        #{competencyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency">
+    update RECRUIT_R_COMPETENCY
+    <set>
+      <if test="recruitId != null">
+        recruit_id = #{recruitId,jdbcType=VARCHAR},
+      </if>
+      <if test="competencyId != null">
+        competency_id = #{competencyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency">
+    update RECRUIT_R_COMPETENCY
+    set recruit_id = #{recruitId,jdbcType=VARCHAR},
+      competency_id = #{competencyId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
