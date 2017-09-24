@@ -13,7 +13,7 @@
 		<div class="container">
       
             
-			<div class="welcome"><h1>Welcome2 ${root}</h1>
+			<div class="welcome"><h1>Welcome</h1>
 			
 			<form id="loginForm" class="form">
 				<input type="text" name="userName" placeholder="请输入用户名">
