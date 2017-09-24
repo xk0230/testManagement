@@ -14,18 +14,16 @@
 			<div class="welcome">
 			<div style="width:580px;"><h1>Welcome</h1></div>
 			<form id="loginForm" class="form">
-				<div>
+				<div style="margin-top:100px">
 					<input type="text" name="userName" placeholder="请输入用户名">
 				</div>
 				<div>
 					<input type="password" name="password" placeholder="请输入密码">
 				</div>
 				<div>
-					<span style="float:left;margin-left:150px;">
-						<button type="submit" id="login-button">登录</button>
-					</span>
+					<button type="submit" id="login-button" style="float:left;margin-left:150px;">登录</button>
+					<span id="msg" style="color:red;float:left;margin-top:50px;margin-left:10px;"></span>
 				</div>
-                <span id="msg" style="color:red;"></span>
 			</form>
 			</div>
 		</div>
