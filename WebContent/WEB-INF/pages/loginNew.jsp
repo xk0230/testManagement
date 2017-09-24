@@ -11,17 +11,21 @@
 <body>
         <div class="ysec"><img src="${pageContext.request.contextPath}/public/img/login/logo.png" ></div>
 		<div class="container">
-      
-            
-			<div class="welcome"><h1>Welcome</h1>
-			
+			<div class="welcome">
+			<div style="width:580px;"><h1>Welcome</h1></div>
 			<form id="loginForm" class="form">
-				<input type="text" name="userName" placeholder="请输入用户名">
-				<input type="password" name="password" placeholder="请输入密码">
-				<button type="submit" id="login-button">登录</button>
+				<div>
+					<input type="text" name="userName" placeholder="请输入用户名">
+				</div>
+				<div>
+					<input type="password" name="password" placeholder="请输入密码">
+				</div>
+				<div>
+					<span style="float:left;margin-left:150px;">
+						<button type="submit" id="login-button">登录</button>
+					</span>
+				</div>
                 <span id="msg" style="color:red;"></span>
-                <br>
-                <br>
 			</form>
 			</div>
 		</div>
