@@ -17,11 +17,11 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.codyy.oc.admin.entity"	targetProject="Test" />
-		<sqlMapGenerator targetPackage="com.codyy.oc.admin.mybatis"	targetProject="Test" />
-		<javaClientGenerator targetPackage="com.codyy.oc.admin.dao"	targetProject="Test" type="XMLMAPPER" />
+		<javaModelGenerator targetPackage="com.codyy.oc.admin.entity"	targetProject="ccydManagement" />
+		<sqlMapGenerator targetPackage="com.codyy.oc.admin.mybatis"	targetProject="ccydManagement" />
+		<javaClientGenerator targetPackage="com.codyy.oc.admin.dao"	targetProject="ccydManagement" type="XMLMAPPER" />
 		
-		<table schema="" tableName="ADMIN_USER" enableCountByExample="false"
+		<table schema="" tableName="RECRUIT_R_COMPETENCY" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>

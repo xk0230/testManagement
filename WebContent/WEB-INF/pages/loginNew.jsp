@@ -9,23 +9,22 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/loginStyles.css">
 </head>
 <body>
-<div class="htmleaf-container">
-	<div class="wrapper">
-		<div class="container" style="margin-top: 150px;">
-			<h1>Welcome</h1>
+        <div class="ysec"><img src="${pageContext.request.contextPath}/public/img/login/logo.png" ></div>
+		<div class="container">
+      
+            
+			<div class="welcome"><h1>Welcome2 ${root}</h1>
 			
 			<form id="loginForm" class="form">
 				<input type="text" name="userName" placeholder="请输入用户名">
 				<input type="password" name="password" placeholder="请输入密码">
 				<button type="submit" id="login-button">登录</button>
-				</br>
-				</br>
-				<span id="msg" style="color:red;"></span>
+                <span id="msg" style="color:red;"></span>
+                <br>
+                <br>
 			</form>
-			
+			</div>
 		</div>
-	</div>
-</div>
 
 <script src="${pageContext.request.contextPath}/public/js/jquery-2.1.1.min.js" type="text/javascript"></script>
 	<script>
