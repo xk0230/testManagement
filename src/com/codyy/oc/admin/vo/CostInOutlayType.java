@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *成本支出类型
  */
-public class CostInOutlayType {
+public class CostInOutlayType implements Comparable<CostInOutlayType> {
     
     private String name;
     
@@ -28,5 +28,11 @@ public class CostInOutlayType {
         this.monthInOut = monthInOut;
     }
 
+	@Override
+	public int compareTo(CostInOutlayType m) {
+		return this.getName().compareTo(m.getName());
+	}
+
+  
 }
 

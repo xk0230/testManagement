@@ -255,7 +255,31 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 	  };
 
 	  $ctrl.ok = function () {
-		  
+		  //console.log($scope.costEntity.costType);
+		  if(!$scope.costEntity){
+			  alert("请填写完整信息");
+			  return ;
+		  }
+		  if(!$scope.costEntity.depId){
+			  alert("请填写所属部门");
+			  return ;
+		  }
+		  if(!$scope.costEntity.costType){
+			  alert("请填写收支类型");
+			  return ;
+		  }
+		  if(!$scope.costEntity.costSubtypeId){
+			  alert("请填写分类名称");
+			  return ;
+		  }
+		  if(!$scope.costEntity.costTime){
+			  alert("请填写成本产生时间");
+			  return ;
+		  }
+		  if(!$scope.costEntity.costNum){
+			  alert("请填写金额");
+			  return ;
+		  }
 		 var params = {
 				costId:$scope.costEntity.costId,
 				depId:$scope.costEntity.depId,

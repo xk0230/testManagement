@@ -2,6 +2,7 @@ package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -297,7 +298,7 @@ public class CostService {
             }
             
         }
-        
+        Collections.sort(departIncomeList);
         return departIncomeList;
     }
     
@@ -350,7 +351,7 @@ public class CostService {
             }
             
         }
-        
+        Collections.sort(departIncomeList);
         return departIncomeList;
     }
     

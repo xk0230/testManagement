@@ -141,7 +141,7 @@
 			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
 			
 			group by month,costDetail.dep_id 
-			order by month,costDetail.dep_id; 
+			order by depart.name; 
 	
 	</select>
 	

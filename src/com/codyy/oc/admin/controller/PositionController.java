@@ -121,6 +121,7 @@ public class PositionController extends BaseController {
 			return new ResultJson(false,"请登录");
 		}
 		return new ResultJson(true,service.getUntreatedNum(su.getUserId()));
+//		return new ResultJson(true,1);
 	}
 	
 	/**
