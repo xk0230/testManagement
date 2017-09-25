@@ -32,10 +32,14 @@ public class TestController extends BaseController {
 	* @throws
 	 */
 	//@RequestMapping("insertAdminUser")
-	@RequestMapping("testimg")
-	public String  testimg(HttpServletRequest request, AdminUser adUser ){
-		System.out.println("测试一下");
-		return "/admin/test/testimg";
+	@RequestMapping("Recruitment")
+	public String Recruitment(HttpServletRequest request){
+		return "/admin/Recruitment/RecruitmentList";
+	}
+	
+	@RequestMapping("AddRecruitment")
+	public String AddRecruitment(HttpServletRequest request){
+		return "/admin/Recruitment/EditRecruitment";
 	}
 	
 }
