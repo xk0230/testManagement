@@ -105,7 +105,7 @@ form input {
   width: 250px;
   border-radius: 3px;
   padding: 15px 15px;
-  margin: 50px auto 10px 150px;
+  margin: 20px auto 10px 150px;
   display: block;
   text-align: center;
   font-size: 18px;
@@ -123,6 +123,7 @@ form input:focus {
   color:black;
 }
 form button {
+	height: 53px;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -133,7 +134,7 @@ form button {
   color: black;
   border-radius: 3px;
   width: 250px;
-  margin: 35px auto 10px 0px;
+  margin: 10px auto 10px 0px;
   cursor: pointer;
   font-size: 18px;
   -webkit-transition-duration: 0.25s;

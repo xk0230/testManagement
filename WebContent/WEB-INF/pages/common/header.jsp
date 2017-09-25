@@ -54,7 +54,7 @@ setInterval("getNewsNum()","10000");
         <div class="navbar">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">
-                    <i class="im-windows8 text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
+                    <i class="text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
                 </a>
             </div>
             <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
