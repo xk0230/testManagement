@@ -47,13 +47,13 @@ function logout(){
 	})
 }
 getNewsNum();
-setInterval("getNewsNum()","10000");
+setInterval("getNewsNum()","60000");
 </script>
 <div id="header" ng-app = "headerApp" ng-controller="HeaderController as header">
     <div class="container-fluid">
         <div class="navbar">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="javascript:void(0);">
                     <i class="text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
                 </a>
             </div>

@@ -269,4 +269,11 @@ public interface AdminUserMapper {
 	 public List<String> getAllAdminUserIDs();
 	 
 	 public int insertSelective(AdminUser record);
+
+	 /**
+	  * 根据用户Id获取部门经理Id
+	  * @param id
+	  * @return
+	  */
+	 public String getManagerIdByUserId(String userId);
 }

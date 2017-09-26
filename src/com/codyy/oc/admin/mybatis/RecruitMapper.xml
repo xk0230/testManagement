@@ -18,14 +18,14 @@
     <result column="recruit_e" jdbcType="LONGVARCHAR" property="recruitE" />
     <result column="recruit_f" jdbcType="LONGVARCHAR" property="recruitF" />
     <result column="education_remark" jdbcType="LONGVARCHAR" property="educationRemark" />
-    <result column="professiona" jdbcType="LONGVARCHAR" property="professiona" />
+    <result column="professional" jdbcType="LONGVARCHAR" property="professional" />
   </resultMap>
   <sql id="Base_Column_List">
     id, postId, create_time, education, create_user, status, audit_user
   </sql>
   <sql id="Blob_Column_List">
     recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f, education_remark, 
-    professiona
+    professional
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
@@ -44,13 +44,13 @@
       education, create_user, status, 
       audit_user, recruit_a, recruit_b, 
       recruit_c, recruit_d, recruit_e, 
-      recruit_f, education_remark, professiona
+      recruit_f, education_remark, professional
       )
     values (#{id,jdbcType=VARCHAR}, #{postid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{education,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{auditUser,jdbcType=VARCHAR}, #{recruitA,jdbcType=LONGVARCHAR}, #{recruitB,jdbcType=LONGVARCHAR}, 
       #{recruitC,jdbcType=LONGVARCHAR}, #{recruitD,jdbcType=LONGVARCHAR}, #{recruitE,jdbcType=LONGVARCHAR}, 
-      #{recruitF,jdbcType=LONGVARCHAR}, #{educationRemark,jdbcType=LONGVARCHAR}, #{professiona,jdbcType=LONGVARCHAR}
+      #{recruitF,jdbcType=LONGVARCHAR}, #{educationRemark,jdbcType=LONGVARCHAR}, #{professional,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Recruit">
@@ -98,8 +98,8 @@
       <if test="educationRemark != null">
         education_remark,
       </if>
-      <if test="professiona != null">
-        professiona,
+      <if test="professional != null">
+        professional,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,8 +145,8 @@
       <if test="educationRemark != null">
         #{educationRemark,jdbcType=LONGVARCHAR},
       </if>
-      <if test="professiona != null">
-        #{professiona,jdbcType=LONGVARCHAR},
+      <if test="professional != null">
+        #{professional,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -192,8 +192,8 @@
       <if test="educationRemark != null">
         education_remark = #{educationRemark,jdbcType=LONGVARCHAR},
       </if>
-      <if test="professiona != null">
-        professiona = #{professiona,jdbcType=LONGVARCHAR},
+      <if test="professional != null">
+        professional = #{professional,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -213,7 +213,7 @@
       recruit_e = #{recruitE,jdbcType=LONGVARCHAR},
       recruit_f = #{recruitF,jdbcType=LONGVARCHAR},
       education_remark = #{educationRemark,jdbcType=LONGVARCHAR},
-      professiona = #{professiona,jdbcType=LONGVARCHAR}
+      professional = #{professional,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Recruit">

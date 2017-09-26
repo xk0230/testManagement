@@ -15,6 +15,10 @@ public class RecruitAudit {
 
     private Date auditTime;
 
+    private String remark;
+
+    private Date createTime;
+
     public String getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class RecruitAudit {
 
     public void setAuditTime(Date auditTime) {
         this.auditTime = auditTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

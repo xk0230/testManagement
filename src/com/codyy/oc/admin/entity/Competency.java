@@ -4,7 +4,7 @@ public class Competency {
     private String id;
 
     private String name;
-
+    
     public String getId() {
         return id;
     }

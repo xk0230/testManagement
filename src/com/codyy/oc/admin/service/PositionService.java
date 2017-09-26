@@ -5,23 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codyy.commons.CommonsConstant;
 import com.codyy.commons.page.Page;
-import com.codyy.commons.utils.OracleKeyWordUtils;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
-import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.view.PositionSearchView;
-import com.codyy.oc.admin.view.UserSearchModel;
 
 @Service
 public class PositionService {

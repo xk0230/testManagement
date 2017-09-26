@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Recruit {
     private String id;
@@ -31,9 +32,19 @@ public class Recruit {
 
     private String educationRemark;
 
-    private String professiona;
+    private String professional;
+    
+    private List<Competency> competencys;//胜任特征
+    
+    public List<Competency> getCompetencys() {
+		return competencys;
+	}
 
-    public String getId() {
+	public void setCompetencys(List<Competency> competencys) {
+		this.competencys = competencys;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -145,11 +156,11 @@ public class Recruit {
         this.educationRemark = educationRemark;
     }
 
-    public String getProfessiona() {
-        return professiona;
+    public String getProfessional() {
+        return professional;
     }
 
-    public void setProfessiona(String professiona) {
-        this.professiona = professiona;
+    public void setProfessional(String professional) {
+        this.professional = professional;
     }
 }

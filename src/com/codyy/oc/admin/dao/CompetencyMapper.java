@@ -1,5 +1,7 @@
 package com.codyy.oc.admin.dao;
 
+import java.util.List;
+
 import com.codyy.oc.admin.entity.Competency;
 
 public interface CompetencyMapper {
@@ -14,4 +16,6 @@ public interface CompetencyMapper {
     int updateByPrimaryKeySelective(Competency record);
 
     int updateByPrimaryKey(Competency record);
+    
+    List<Competency> getAll();
 }

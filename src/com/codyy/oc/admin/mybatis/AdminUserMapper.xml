@@ -716,4 +716,22 @@
       </if>
     </trim>
   </insert>
+  
+  
+  <!-- 根据用户的id来获取对应用户的所有信息-->
+	<select id="getManagerIdByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+	    SELECT
+	au.user_id
+FROM
+	ADMIN_USER au
+WHERE
+	au.position = 'MANAGER'
+AND au.dep_id = (
+	SELECT
+		a.dep_id
+	FROM
+		ADMIN_USER a
+	WHERE
+		a.user_id = #{userId})
+	</select>
 </mapper>

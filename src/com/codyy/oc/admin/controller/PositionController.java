@@ -85,9 +85,9 @@ public class PositionController extends BaseController {
 	@RequestMapping("saveOrUpdatePosition")
 	public ResultJson  saveOrUpdatePosition(HttpServletRequest request, Position position ){
 		String userId = getSessionUserId(request);
-		position.setCreateUser(userId);
 		if(StringUtils.isEmpty(position.getPostId())){
 			//如果没有ID则新增
+			position.setCreateUser(userId);
 			service.insert(position);
 		}else {
 			//如果有ID则是修改

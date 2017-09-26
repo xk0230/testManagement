@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="E:\Users\49662\git\ccydManagement\WebContent\WEB-INF\lib\mysql-connector-java-5.1.38.jar" />
+	<classPathEntry location="D:\Users\allen.xiao\eclipse-workspace\ccydManagement\WebContent\WEB-INF\lib\mysql-connector-java-5.1.38.jar" />
 	<context id="context1" defaultModelType="flat">
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
@@ -21,7 +21,7 @@
 		<sqlMapGenerator targetPackage="com.codyy.oc.admin.mybatis"	targetProject="ccydManagement" />
 		<javaClientGenerator targetPackage="com.codyy.oc.admin.dao"	targetProject="ccydManagement" type="XMLMAPPER" />
 		
-		<table schema="" tableName="RECRUIT_R_COMPETENCY" enableCountByExample="false"
+		<table schema="" tableName="RECRUIT_AUDIT" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>

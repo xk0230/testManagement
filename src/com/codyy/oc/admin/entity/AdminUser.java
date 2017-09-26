@@ -14,6 +14,8 @@ import com.codyy.commons.CommonsConstant;
  *
  */
 public class AdminUser implements Serializable {
+	
+	public static final String SUPER_ADMIN_ID = "admin";
 
 	private static final long serialVersionUID = 1L;
 	
