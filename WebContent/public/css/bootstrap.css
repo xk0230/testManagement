@@ -2977,7 +2977,6 @@ select[multiple].input-lg {
   min-height: 27px;
 }
 .form-horizontal .form-group {
-  margin-right: -15px;
   margin-left: -15px;
 }
 @media (min-width: 768px) {
