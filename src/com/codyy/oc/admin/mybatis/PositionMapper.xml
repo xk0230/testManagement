@@ -14,9 +14,16 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="depname" jdbcType="VARCHAR" property="depName" />
     <result column="createusername" jdbcType="VARCHAR" property="createUserName" />
+     <result column="recruit_a" jdbcType="LONGVARCHAR" property="recruitA" />
+    <result column="recruit_b" jdbcType="LONGVARCHAR" property="recruitB" />
+    <result column="recruit_c" jdbcType="LONGVARCHAR" property="recruitC" />
+    <result column="recruit_d" jdbcType="LONGVARCHAR" property="recruitD" />
+    <result column="recruit_e" jdbcType="LONGVARCHAR" property="recruitE" />
+    <result column="recruit_f" jdbcType="LONGVARCHAR" property="recruitF" />
+    <result column="salary_scale" jdbcType="VARCHAR" property="salaryScale" />
   </resultMap>
   <sql id="Base_Column_List">
-    post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time
+    post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -78,6 +85,27 @@
       <if test="createTime != null and createTime != ''">
         create_time,
       </if>
+      <if test="recruitA != null and recruitA!='' ">
+        recruit_a,
+      </if>
+      <if test="recruitB != null and recruitB!='' ">
+        recruit_b,
+      </if>
+      <if test="recruitC != null  and recruitC!='' ">
+        recruit_c,
+      </if>
+      <if test="recruitD != null and recruitD!='' ">
+        recruit_d,
+      </if>
+      <if test="recruitE != null and recruitE!='' ">
+        recruit_e,
+      </if>
+      <if test="recruitF != null and recruitF!='' ">
+        recruit_f,
+      </if>
+        <if test="salaryScale != null and salaryScale!='' ">
+        salary_scale,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postId != null and postId != ''">
@@ -110,6 +138,27 @@
       <if test="createTime != null and createTime != ''">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
+            <if test="recruitA != null and recruitA!='' ">
+        #{recruitA,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitB != null and recruitB!='' ">
+        #{recruitB,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitC != null and recruitC!='' ">
+        #{recruitC,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitD != null and recruitD!='' ">
+        #{recruitD,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitE != null and recruitE!='' ">
+        #{recruitE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitF != null and recruitF!='' ">
+        #{recruitF,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="salaryScale != null and salaryScale!='' ">
+        #{salary_scale,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Position">
@@ -141,6 +190,27 @@
       </if>
       <if test="createTime != null and createTime != ''">
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="recruitA != null and recruitA!='' ">
+        recruit_a = #{recruitA,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitB != null and recruitB!='' ">
+        recruit_b = #{recruitB,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitC != null  and recruitC!='' ">
+        recruit_c = #{recruitC,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitD != null and recruitD!='' ">
+        recruit_d = #{recruitD,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitE != null and recruitE!='' ">
+        recruit_e = #{recruitE,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="recruitF != null and recruitF!='' ">
+        recruit_f = #{recruitF,jdbcType=LONGVARCHAR},
+      </if>
+        <if test="salaryScale != null and salaryScale!='' ">
+        salary_scale = #{salaryScale,jdbcType=VARCHAR},
       </if>
     </set>
     where post_id = #{postId,jdbcType=VARCHAR}

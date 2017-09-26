@@ -31,7 +31,77 @@ public class Position {
 
     private String statusName;
     
+    private String recruitA;
+
+    private String recruitB;
+
+    private String recruitC;
+
+    private String recruitD;
+
+    private String recruitE;
+
+    private String recruitF;
     
+    private String salaryScale;
+    
+    
+	public String getSalaryScale() {
+		return salaryScale;
+	}
+
+	public void setSalaryScale(String salaryScale) {
+		this.salaryScale = salaryScale;
+	}
+
+	public String getRecruitA() {
+		return recruitA;
+	}
+
+	public void setRecruitA(String recruitA) {
+		this.recruitA = recruitA;
+	}
+
+	public String getRecruitB() {
+		return recruitB;
+	}
+
+	public void setRecruitB(String recruitB) {
+		this.recruitB = recruitB;
+	}
+
+	public String getRecruitC() {
+		return recruitC;
+	}
+
+	public void setRecruitC(String recruitC) {
+		this.recruitC = recruitC;
+	}
+
+	public String getRecruitD() {
+		return recruitD;
+	}
+
+	public void setRecruitD(String recruitD) {
+		this.recruitD = recruitD;
+	}
+
+	public String getRecruitE() {
+		return recruitE;
+	}
+
+	public void setRecruitE(String recruitE) {
+		this.recruitE = recruitE;
+	}
+
+	public String getRecruitF() {
+		return recruitF;
+	}
+
+	public void setRecruitF(String recruitF) {
+		this.recruitF = recruitF;
+	}
+
 	public String getStatusName() {
 		if(status == null) {
 			return null;
