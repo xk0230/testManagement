@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.DeptPostLevelMapper">
+  
+  <resultMap type="com.codyy.oc.admin.vo.DeptPostLevel" id="depPostLevel">
+  	
+  	<result property="depName" column="depName"/>
+  
+  	<collection property="postLevels" ofType="com.codyy.oc.admin.vo.PostLevel">
+  		<result column="postName" property="postName"/>
+  		<result column="salaryScale" property="salaryScale"/>
+  	</collection>
+  
+  </resultMap>
+  
+  <select id="getDeptPostLevel" resultMap="depPostLevel">
+  	
+  	SELECT dep.name AS depName,
+  		   post.name AS postName,
+  		   salary_scale AS salaryScale
+    
+    FROM POSITION post,DEPARTMENT dep 
+    
+    WHERE post.dep_id = dep.dep_id
+    
+    	  AND post.status = 'audited'
+    
+  </select>
+  
+</mapper>
