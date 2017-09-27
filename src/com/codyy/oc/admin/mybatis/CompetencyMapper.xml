@@ -59,6 +59,13 @@
     <select id="getAll" resultMap="BaseResultMap">
   	select 
     <include refid="Base_Column_List" />
-    from COMPETENCY
+    from COMPETENCY order by id
   </select>
+  
+  <select id="getByRecId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from COMPETENCY where id in (select competency_id from RECRUIT_R_COMPETENCY where recruit_id=#{id,jdbcType=VARCHAR} ) order by id
+  </select>
+  
 </mapper>

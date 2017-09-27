@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.codyy.commons.CommonsConstant;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
+import com.codyy.oc.admin.dao.CompetencyMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.RecruitAuditMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
@@ -29,13 +30,13 @@ public class RecruitService {
 	@Autowired
 	private  RecruitMapper mapper;
 	@Autowired
-	private PositionAuditMapper auditMapper;
-	@Autowired
 	private AdminUserMapper adminUserMapper;
 	@Autowired
 	private RecruitRCompetencyMapper recruitRCompetencyMapper;
 	@Autowired
 	private RecruitAuditMapper recruitAuditMapper;
+	@Autowired
+	private CompetencyMapper competencyMapper;
 	
 	
 	private void setAuditUser(Recruit recruit) {
@@ -53,6 +54,8 @@ public class RecruitService {
 				ra.setId(UUIDUtils.getUUID());
 				ra.setRecruitId(recruit.getId());
 				
+				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
+				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
 				recruitAuditMapper.insert(ra);
 				recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
 			}else {
@@ -63,6 +66,8 @@ public class RecruitService {
 				ra.setId(UUIDUtils.getUUID());
 				ra.setRecruitId(recruit.getId());
 				
+				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
+				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
 				recruitAuditMapper.insert(ra);
 				recruit.setAuditUser(managerId);
 			}
@@ -75,19 +80,9 @@ public class RecruitService {
 		recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 		
 		setAuditUser(recruit);
-		
 		mapper.insert(recruit);
-		
-		for (Competency c : recruit.getCompetencys()) {
-			if(c != null && StringUtils.isNotBlank(c.getId())) {
-				RecruitRCompetency rc = new RecruitRCompetency();
-				rc.setId(UUIDUtils.getUUID());
-				rc.setCompetencyId(c.getId());
-				rc.setRecruitId(recruit.getId());
-				recruitRCompetencyMapper.insert(rc);
-			}
-		}
-		
+		addCompetencys(recruit);
+
 //		List<String> adminUserIds = adminUserMapper.getAllAdminUserIDs();
 //		adminUserIds.remove(recruit.getCreateUser());
 //		
@@ -103,8 +98,35 @@ public class RecruitService {
 //		}
 	};
 	
+	
+	private void addCompetencys(Recruit recruit) {
+		String[] competencys = recruit.getCompetencysStr().split("@");
+		for (String c : competencys) {
+			if(c != null && StringUtils.isNotBlank(c)) {
+				RecruitRCompetency rc = new RecruitRCompetency();
+				rc.setId(UUIDUtils.getUUID());
+				rc.setCompetencyId(c);
+				rc.setRecruitId(recruit.getId());
+				recruitRCompetencyMapper.insert(rc);
+			}
+		}
+	}
+	
+	
 	public void updateById(Recruit recruit) {
+		//先删除原有的关系
+		recruitRCompetencyMapper.deleteByRecId(recruit.getId());
+		addCompetencys(recruit);
+		setAuditUser(recruit);
 		mapper.updateByPrimaryKeySelective(recruit);
 	}
 	
+	
+	public Recruit getByid(String id) {
+		
+		Recruit rec =  mapper.selectByPrimaryKey(id);
+		rec.setCompetencys(competencyMapper.getByRecId(rec.getId()));
+		
+		return rec;
+	}
 }

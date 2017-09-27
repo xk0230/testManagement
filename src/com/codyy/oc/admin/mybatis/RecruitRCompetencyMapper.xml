@@ -19,6 +19,11 @@
     delete from RECRUIT_R_COMPETENCY
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByRecId" parameterType="java.lang.String">
+    delete from RECRUIT_R_COMPETENCY
+    where recruit_id = #{recruitId,jdbcType=VARCHAR}
+  </delete>
+  
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency">
     insert into RECRUIT_R_COMPETENCY (id, recruit_id, competency_id
       )

@@ -36,7 +36,17 @@ public class Recruit {
     
     private List<Competency> competencys;//胜任特征
     
-    public List<Competency> getCompetencys() {
+    private String competencysStr;//胜任特征字符串，用于前台解析
+    
+    public String getCompetencysStr() {
+		return competencysStr;
+	}
+
+	public void setCompetencysStr(String competencysStr) {
+		this.competencysStr = competencysStr;
+	}
+
+	public List<Competency> getCompetencys() {
 		return competencys;
 	}
 

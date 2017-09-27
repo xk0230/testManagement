@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.commons.utils.ResultJson;
@@ -34,7 +35,7 @@ public class RecruitController  extends BaseController{
 	}
 	
 	/**
-	 * 添加/修改岗位
+	 * 添加/修改招聘需求
 	 * @param request
 	 * @param position
 	 * @return
@@ -54,4 +55,17 @@ public class RecruitController  extends BaseController{
 		}
 		return new ResultJson(true);
 	}
+	
+	/**
+	 * 根据ID获取招聘需求
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("getById")
+	@ResponseBody
+	public Recruit  getPositionById(HttpServletRequest request,@RequestParam(required=true) String id ){
+		return service.getByid(id);
+	}
+	
 }

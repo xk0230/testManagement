@@ -4,6 +4,8 @@ import com.codyy.oc.admin.entity.RecruitRCompetency;
 
 public interface RecruitRCompetencyMapper {
     int deleteByPrimaryKey(String id);
+    
+    int deleteByRecId(String recruitId);
 
     int insert(RecruitRCompetency record);
 
@@ -14,4 +16,5 @@ public interface RecruitRCompetencyMapper {
     int updateByPrimaryKeySelective(RecruitRCompetency record);
 
     int updateByPrimaryKey(RecruitRCompetency record);
+    
 }

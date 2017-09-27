@@ -18,4 +18,6 @@ public interface CompetencyMapper {
     int updateByPrimaryKey(Competency record);
     
     List<Competency> getAll();
+    
+    List<Competency> getByRecId(String id);
 }

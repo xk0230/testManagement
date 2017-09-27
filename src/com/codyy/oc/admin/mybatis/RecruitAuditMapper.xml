@@ -125,4 +125,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getMaxRecruitNumByRecId" parameterType="java.lang.String" resultType="java.lang.Integer">
+  		select max(recruit_num) from RECRUIT_AUDIT  where recruit_id = #{recId,jdbcType=VARCHAR}
+  </select>
 </mapper>
