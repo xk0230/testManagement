@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
@@ -18,6 +19,7 @@ import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.service.CompetencyService;
 import com.codyy.oc.admin.service.RecruitService;
+import com.codyy.oc.admin.view.PositionSearchView;
 
 @Controller
 @RequestMapping("/admin/recruit")
@@ -66,6 +68,16 @@ public class RecruitController  extends BaseController{
 	@ResponseBody
 	public Recruit  getPositionById(HttpServletRequest request,@RequestParam(required=true) String id ){
 		return service.getByid(id);
+	}
+	
+	/**
+	 * 根据查询条件分页获取招聘需求列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("getRecruitPageList")
+	public Page getPositionPageList(HttpServletRequest request,Page page,Recruit search,String type){
+		return service.getRecruitPageList(page, search);
 	}
 	
 }

@@ -38,7 +38,28 @@ public class Recruit {
     
     private String competencysStr;//胜任特征字符串，用于前台解析
     
-    public String getCompetencysStr() {
+    private String postName;//岗位名称
+    
+    private String createUserName;//创建人姓名
+    
+    
+    public String getPostName() {
+		return postName;
+	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	public String getCompetencysStr() {
 		return competencysStr;
 	}
 

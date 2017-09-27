@@ -1,12 +1,16 @@
 package com.codyy.oc.admin.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codyy.commons.CommonsConstant;
+import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CompetencyMapper;
@@ -16,9 +20,11 @@ import com.codyy.oc.admin.dao.RecruitMapper;
 import com.codyy.oc.admin.dao.RecruitRCompetencyMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Competency;
+import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.entity.RecruitAudit;
 import com.codyy.oc.admin.entity.RecruitRCompetency;
+import com.codyy.oc.admin.view.PositionSearchView;
 
 /**
  * 胜任特征server
@@ -123,10 +129,19 @@ public class RecruitService {
 	
 	
 	public Recruit getByid(String id) {
-		
 		Recruit rec =  mapper.selectByPrimaryKey(id);
 		rec.setCompetencys(competencyMapper.getByRecId(rec.getId()));
-		
 		return rec;
+	}
+	
+	public Page getRecruitPageList(Page page,Recruit search){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("postId",search.getPostid());
+		map.put("status", search.getStatus());
+		map.put("createUser",search.getCreateUser());
+	    page.setMap(map);
+		List<Recruit> data = mapper.getRecruitPageList(page);
+		page.setData(data);
+		return page;
 	}
 }
