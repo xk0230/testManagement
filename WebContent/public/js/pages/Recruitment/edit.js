@@ -102,37 +102,35 @@ myAppModule.controller('UserListController',
 		}
 		self.onSubmit = function(){
 			var push = Array.prototype.push;
-			var params = {
-				id               : $scope.vm.Recruitment.id             , 
-				postid           : $scope.vm.Recruitment.postid         , 
-				education        : $scope.vm.Recruitment.education      , 
-				createUser       : $scope.vm.Recruitment.createUser     , 
-				recruitA         : $scope.vm.Recruitment.recruitA       , 
-				recruitB         : $scope.vm.Recruitment.recruitB       , 
-				recruitC         : $scope.vm.Recruitment.recruitC       , 
-				recruitD         : $scope.vm.Recruitment.recruitD       , 
-				recruitE         : $scope.vm.Recruitment.recruitE       , 
-				recruitF         : $scope.vm.Recruitment.recruitF       , 
-				educationRemark  : $scope.vm.Recruitment.educationRemark, 
-				professional     : $scope.vm.Recruitment.professional   
-			}
-			alert(typeof(params));
+
 			var CompetencyList = $(".Competency");
-			var index = 0;
-			
+			var par = "";
 			$.each(CompetencyList,function(n,value) {  
 				if(value.checked){
-					push.call(params, "competencys["+index+"].id :" + value.value);
-					index = parseInt(index) + 1;
+					par = par + value.value + "@";
 				}
 		    });  
-			
+			if(par.length > 1){
+				par = par.substring(0,par.length -1)
+			}
 			
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/recruit/saveOrUpdateRecruit.do',
 				params:{
-					params
+					id               : $scope.vm.Recruitment.id             , 
+					postid           : $scope.vm.Recruitment.postid         , 
+					education        : $scope.vm.Recruitment.education      , 
+					createUser       : $scope.vm.Recruitment.createUser     , 
+					recruitA         : $scope.vm.Recruitment.recruitA       , 
+					recruitB         : $scope.vm.Recruitment.recruitB       , 
+					recruitC         : $scope.vm.Recruitment.recruitC       , 
+					recruitD         : $scope.vm.Recruitment.recruitD       , 
+					recruitE         : $scope.vm.Recruitment.recruitE       , 
+					recruitF         : $scope.vm.Recruitment.recruitF       , 
+					educationRemark  : $scope.vm.Recruitment.educationRemark, 
+					professional     : $scope.vm.Recruitment.professional   ,
+					competencysStr   : par
 				}
 			}).then(function(res){
 				if(res){
