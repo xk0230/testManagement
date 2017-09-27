@@ -19,7 +19,7 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-list"></i>部门岗位等级分布图</h3>
+									<h3 class="panel-title"><i class="ec-list"></i>标准岗位等级分布表</h3>
 								</div>
 								<div class="panel-body">
 									<table class="table display" id="datatable">

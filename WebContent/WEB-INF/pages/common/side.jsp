@@ -59,22 +59,15 @@
               <span class="nav-link-text">IPE管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postIPE">
-				<li><a href="#"><i class="en-arrow-right7"></i>IPE试算</a>
-				</li>
 				<li><a href="#"><i class="en-arrow-right7"></i>IPE</a>
 				</li>
-            </ul>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="postLevel">
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postLevel" data-parent="#exampleAccordion">
-              <i class="fa-th-list"></i>
-              <span class="nav-link-text">岗位等级分布</span>
-            </a>
-            <ul class="sidenav-second-level collapse nav" id="postLevel">
-				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>岗位等级分布表</a>
+				<li><a href="#"><i class="en-arrow-right7"></i>IPE试算</a>
+				</li>
+				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a>
 				</li>
             </ul>
           </li>
+         
 		</ul>
 	</div>
 </div>
