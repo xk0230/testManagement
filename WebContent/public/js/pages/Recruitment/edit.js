@@ -5,17 +5,8 @@ myAppModule.config(['$locationProvider', function($locationProvider) {
 myAppModule.controller('UserListController',
 	function UserListController($scope,$http,$location, $filter){
 		var self = this;
-
-		self.$onInit = function(){
-			//设置部门下拉框
-			this.getDepList();
-			//设置胜任特征
-			this.getAllCompetency();
-			//获取用户ID
-			//self.user.userId = $location.search().id;
-		}
-		
 		self.Recruitment = {
+				id:"",
 				postid:"",
 				recruitA:"",
 				recruitB :"",
@@ -25,7 +16,43 @@ myAppModule.controller('UserListController',
 				recruitF :"",
 				education :"",
 				educationRemark :"",
-				professional:""
+				professional:"",
+				
+		}
+		
+		
+		self.$onInit = function(){
+			//设置部门下拉框
+			this.getDepList();
+			//设置胜任特征
+			this.getAllCompetency();
+			//获取用户ID
+			self.Recruitment.id = $location.search().id;
+			if(self.Recruitment.id != ""){
+				this.getRecruitmentInfo()
+			}
+		}
+		
+		//获取招聘需求详情
+		self.getRecruitmentInfo = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/getById.do',
+				params:{
+					id : self.Recruitment.id
+				}
+			}).then(function(res){
+				if(res){
+					self.Recruitment = res.data || {};
+					var competencys = self.competencysStr.split('@');
+					$.each(competencys,function(n,value) {  
+						$("#competency" + value.value).checked = true;
+				    });
+					
+				}else{
+					self.Recruitment = {};
+				}
+			})
 		}
 		
 		//获取部门

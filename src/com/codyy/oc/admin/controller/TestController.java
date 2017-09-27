@@ -37,7 +37,7 @@ public class TestController extends BaseController {
 		return "/admin/Recruitment/RecruitmentList";
 	}
 	
-	@RequestMapping("AddRecruitment")
+	@RequestMapping("EditRecruitment")
 	public String AddRecruitment(HttpServletRequest request){
 		return "/admin/Recruitment/EditRecruitment";
 	}

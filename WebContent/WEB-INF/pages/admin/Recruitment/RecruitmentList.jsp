@@ -84,26 +84,18 @@
 									<table class="table display" id="datatable">
 										<thead>
 											<tr>
-												<th>工号</th>
-												<th>姓名</th>
-												<th>部门</th>
-												<th>岗位</th>
-												<th>状态</th>
-												<th>入职日期</th>
+												<th>岗位名称</th>
+												<th>招聘状态</th>
 												<th>操作</th>
 											</tr>
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
-												<td><p ng-bind="item.userName"></p></td>
-												<td><p ng-bind="item.realName"></p></td>
-												<td><p ng-bind="item.depName"></p></td>
 												<td><p ng-bind="item.postName"></p></td>
-												<td><p ng-bind="item.workStatus"></p></td>
-												<td><p ng-bind="item.entryDate | date:'yyyy-MM-dd'"></p></td>
+												<td><p ng-bind="item.status"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success"><i class="ec-search"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userId)"><i class="br-pencil"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i></button>
 												</td>
 											</tr>
 										</tbody>

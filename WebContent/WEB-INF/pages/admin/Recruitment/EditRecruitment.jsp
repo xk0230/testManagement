@@ -19,13 +19,13 @@
 						<div class="col-lg-12 ">
 							<div>
 								<div class="col-lg-3 form-group">
-									<select class="form-control select2" ng-model="depId" ng-change="vm.getPostionByDepId()" ng-required="true">
+									<select class="form-control select2" ng-model="vm.depId" ng-change="vm.getPostionByDepId()" ng-required="true">
 										<option value="">请选择部门</option>
 										<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
 									</select>
 								</div>
 								<div class="col-lg-3 form-group">
-									<select class="form-control select2" ng-model="postId" ng-change="vm.getPostionInfo()" ng-required="true">
+									<select class="form-control select2" ng-model="vm.Recruitment.postid" ng-change="vm.getPostionInfo()" ng-required="true">
 										<option value="">请选择岗位</option>
 										<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
 									</select>
@@ -157,7 +157,7 @@
 											<div class="col-lg-4 pull-left" ng-repeat="Competency in vm.AllCompetency">
 	                                            <div class="checkbox">
 	                                                <label>
-	                                                    <input type="checkbox" class="Competency" value="{{Competency.id}}">{{Competency.name}}
+	                                                    <input type="checkbox" class="Competency" id="competency{{Competency.id}}" value="{{Competency.id}}">{{Competency.name}}
 	                                                </label>
 	                                            </div>
                                             </div>

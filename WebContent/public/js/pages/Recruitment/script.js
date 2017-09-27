@@ -24,12 +24,11 @@ myAppModule.controller('UserListController',
 		this.getFinancingInfoList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getadminlist.do',
+				url:'/ccydManagement/admin/recruit/getRecruitPageList.do',
 				params:{
-					userName: $scope.userName,
-					realName: $scope.realName,
-					depId   : $scope.depId,
-					position: $scope.postId,
+					postid: $scope.postId,
+					createUser: "",
+					status   : "",
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -79,11 +78,11 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewRecruitment = function(){
-			window.location.href="/ccydManagement/admin/test/AddRecruitment.do"; 
+			window.location.href="/ccydManagement/admin/test/EditRecruitment.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+id; 
+			window.location.href="/ccydManagement/admin/test/EditRecruitment.do?id="+id; 
 		};
 	}
 );
