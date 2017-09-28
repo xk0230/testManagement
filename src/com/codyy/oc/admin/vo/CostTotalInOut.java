@@ -11,11 +11,11 @@ import java.math.BigDecimal;
 
 public class CostTotalInOut {
     
-    private BigDecimal totalIncome;
+    private BigDecimal totalIncome = new BigDecimal(0);
     
-    private BigDecimal totalOut;
+    private BigDecimal totalOut = new BigDecimal(0);
     
-    private BigDecimal balance;
+    private BigDecimal balance = new BigDecimal(0);
 
 	public BigDecimal getTotalIncome() {
 		return totalIncome;

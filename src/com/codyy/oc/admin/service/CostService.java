@@ -164,22 +164,57 @@ public class CostService {
 	    }
 	    
 	    if(CollectionUtils.isNotEmpty(departIncomeList)){
-	        Map<String,List<BigDecimal>> map = new HashMap<String,List<BigDecimal>>();
+	        
+	        Map<String,Integer> monthMap = new HashMap<String,Integer>();
 	        for(CostInOutlayType costInOutlay : departIncomeList){
+                
 	            xcategories.add(costInOutlay.getName());
 	            
 	            List<CostMonthInOut> monthInOuts = costInOutlay.getMonthInOut();
+                for(CostMonthInOut costMonthInOut : monthInOuts){
+                    monthMap.put(costMonthInOut.getMonth(), 1);
+                }
+            }
+	        
+	        Map<String,List<BigDecimal>> map = new HashMap<String,List<BigDecimal>>();
+	        for(CostInOutlayType costInOutlay : departIncomeList){
+	            Map<String,Integer> costInOutMap = new HashMap<String,Integer>();
+	            List<CostMonthInOut> monthInOuts = costInOutlay.getMonthInOut();
 	            for(CostMonthInOut costMonthInOut : monthInOuts){
 	                List<BigDecimal> list = map.get(costMonthInOut.getMonth());
-	                if(list == null){
-	                    list = new ArrayList<BigDecimal>();
-	                }
-	                list.add(costMonthInOut.getTotal());
-	                map.put(costMonthInOut.getMonth(), list);
+                    if(list == null){
+                        list = new ArrayList<BigDecimal>();
+                    }
+	                
+                    list.add(costMonthInOut.getTotal());
+                    map.put(costMonthInOut.getMonth(), list);
+                    costInOutMap.put(costMonthInOut.getMonth(), 1);	                
 	            }
+	            
+	            //补齐数据
+	            for(String month : monthMap.keySet()){
+	                boolean flag = true;
+	                for(String key : costInOutMap.keySet()){
+	                    if(month.equals(key)){
+	                        flag = false;
+	                        break;
+	                    }
+	                }
+	                
+	                if(flag){
+	                    List<BigDecimal> list = map.get(month);
+	                    if(list == null){
+	                        list = new ArrayList<BigDecimal>();
+	                    }
+	                    list.add(new BigDecimal(0));
+	                    map.put(month, list);
+	                }
+	            }
+	            
 	        }
 	        
 	        if(map.size() > 0){
+	            
 	            for(String key : map.keySet()){
 	                CostChartsSeriesData seriesData = new CostChartsSeriesData();
 	                seriesData.setName(key);

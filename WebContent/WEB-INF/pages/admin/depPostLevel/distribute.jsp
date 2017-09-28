@@ -37,7 +37,7 @@
 										</thead>  
 										<tbody>
 											
-											<c:forEach varStatus="pc" begin="1" end="100">
+											<c:forEach varStatus="pc" begin="40" end="84">
 											
 												<tr class="odd gradeX">
 												
