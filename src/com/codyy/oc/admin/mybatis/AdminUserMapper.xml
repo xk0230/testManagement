@@ -94,7 +94,7 @@
     <result column="entry_date" jdbcType="TIMESTAMP" property="entryDate" />
     <result column="working_years" jdbcType="DOUBLE" property="workingYears" />
     <result column="salary_begin_date" jdbcType="TIMESTAMP" property="salaryBeginDate" />
-    <result column="probation_period" jdbcType="INTEGER" property="probationPeriod" />
+    <result column="probation_period" jdbcType="TIMESTAMP" property="probationPeriod" />
     <result column="expected_date" jdbcType="TIMESTAMP" property="expectedDate" />
     <result column="fwq_agreement" jdbcType="VARCHAR" property="fwqAgreement" />
     <result column="fwq_num" jdbcType="INTEGER" property="fwqNum" />
@@ -146,7 +146,7 @@
         salary_begin_date = #{record.salaryBeginDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.probationPeriod != null">
-        probation_period = #{record.probationPeriod,jdbcType=INTEGER},
+        probation_period = #{record.probationPeriod,jdbcType=TIMESTAMP},
       </if>
       <if test="record.expectedDate != null">
         expected_date = #{record.expectedDate,jdbcType=TIMESTAMP},
@@ -545,7 +545,7 @@
     <result column="entry_date" jdbcType="TIMESTAMP" property="entryDate" />
     <result column="working_years" jdbcType="DOUBLE" property="workingYears" />
     <result column="salary_begin_date" jdbcType="TIMESTAMP" property="salaryBeginDate" />
-    <result column="probation_period" jdbcType="INTEGER" property="probationPeriod" />
+    <result column="probation_period" jdbcType="TIMESTAMP" property="probationPeriod" />
     <result column="expected_date" jdbcType="TIMESTAMP" property="expectedDate" />
     <result column="fwq_agreement" jdbcType="VARCHAR" property="fwqAgreement" />
     <result column="fwq_num" jdbcType="INTEGER" property="fwqNum" />
@@ -679,7 +679,7 @@
         #{salaryBeginDate,jdbcType=TIMESTAMP},
       </if>
       <if test="probationPeriod != null and probationPeriod !=''">
-        #{probationPeriod,jdbcType=INTEGER},
+        #{probationPeriod,jdbcType=TIMESTAMP},
       </if>
       <if test="expectedDate != null and expectedDate !=''">
         #{expectedDate,jdbcType=TIMESTAMP},

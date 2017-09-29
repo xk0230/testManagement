@@ -36,7 +36,7 @@ public class AdminUser implements Serializable {
 	private Date entryDate;//入职日期
 	private String workingYears;//工龄
 	private Date salaryBeginDate;//起薪日
-	private String probationPeriod;//试用期限
+	private Date probationPeriod;//试用期限
 	private Date expectedDate;//预计转正日
 	private String fwqAgreement;//服务期协议
 	private String fwqNum;//服务期金额
@@ -215,11 +215,11 @@ public class AdminUser implements Serializable {
 		this.salaryBeginDate = salaryBeginDate;
 	}
 
-	public String getProbationPeriod() {
+	public Date getProbationPeriod() {
 		return probationPeriod;
 	}
 
-	public void setProbationPeriod(String probationPeriod) {
+	public void setProbationPeriod(Date probationPeriod) {
 		this.probationPeriod = probationPeriod;
 	}
 
