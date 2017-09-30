@@ -23,6 +23,7 @@ import com.codyy.commons.utils.SecurityUtil;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
 import com.codyy.oc.admin.service.AdminUserManagerService;
 import com.codyy.oc.admin.service.AdminUserPermissionService;
@@ -111,7 +112,13 @@ public class AdminUserManagerController extends BaseController {
 		}
 		
 		adminUser.setAdminUserId(adUser.getUserId());
-		adUser.getAdminUserDetail().setUserId(adUser.getUserId());
+		if(adUser.getAdminUserDetail() == null) {
+			AdminUserDetail ad = new AdminUserDetail();
+			ad.setUserId(adUser.getUserId());
+			adUser.setAdminUserDetail(ad);
+		}else {
+			adUser.getAdminUserDetail().setUserId(adUser.getUserId());
+		}
 		return adminUserManagerService.updateAdminsUser(userId,adUser,adminUser,sessionUser);//修改用户详情列表的信息
 
 	}

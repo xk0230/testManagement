@@ -177,6 +177,7 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
     update ADMIN_USER_DETAIL
     <set>
+         user_id = #{userId,jdbcType=VARCHAR},
       <if test="sex != null">
         sex = #{sex,jdbcType=VARCHAR},
       </if>
