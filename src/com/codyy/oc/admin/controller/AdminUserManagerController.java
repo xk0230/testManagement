@@ -57,11 +57,12 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("insertadminuser")
 	public ResultJson  insertAdminUser(HttpServletRequest request, AdminUser adUser ){
-		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
-			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
-		}
 		adUser.setCreateTime(new Date());//记录当前时间
 		adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
+			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
+			adUser.setPassword(SecurityUtil.MD5String("888888"));
+		}
 	
 		//如果用户做修改操作的时候即用户名是存在的    即不用自动生成    若修改则不用创建id
 			AdminUserPermission adminUser = new AdminUserPermission();
