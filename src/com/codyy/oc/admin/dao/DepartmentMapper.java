@@ -22,4 +22,6 @@ public interface DepartmentMapper {
     int hasManager(String depId);
     
     String getDepManagerId(String depId);
+    
+    String getDepIdByPostId(String postId);
 }

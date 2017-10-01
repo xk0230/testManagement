@@ -70,4 +70,8 @@
   	select user_id from ADMIN_USER where position = 'MANAGER' and dep_id=#{depId} and delete_flag = 'N'
   </select>
   
+   <select id="getDepIdByPostId" parameterType="java.lang.String"  resultType = "java.lang.String">
+  	select dep_id from POSITION where post_id =#{postId} 
+  </select>
+  
 </mapper>

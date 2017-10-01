@@ -14,6 +14,7 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CompetencyMapper;
+import com.codyy.oc.admin.dao.DepartmentMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.RecruitAuditMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
@@ -43,7 +44,8 @@ public class RecruitService {
 	private RecruitAuditMapper recruitAuditMapper;
 	@Autowired
 	private CompetencyMapper competencyMapper;
-	
+	@Autowired
+	private DepartmentMapper departmentMapper;
 	
 	private void setAuditUser(Recruit recruit) {
 		//获取当前审批人，如果是普通员工提交的，则审批人为部门经理，如果部门没有经理，则给超级管理员；如果是部门经理提交的，则审批人为超级管理员
@@ -130,6 +132,7 @@ public class RecruitService {
 	
 	public Recruit getByid(String id) {
 		Recruit rec =  mapper.selectByPrimaryKey(id);
+		rec.setDepId(departmentMapper.getDepIdByPostId(rec.getPostid()));
 		rec.setCompetencys(competencyMapper.getByRecId(rec.getId()));
 		return rec;
 	}

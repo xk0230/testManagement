@@ -6,6 +6,8 @@ import java.util.List;
 public class Recruit {
     private String id;
 
+    private String depId;
+    
     private String postid;
 
     private Date createTime;
@@ -43,7 +45,15 @@ public class Recruit {
     private String createUserName;//创建人姓名
     
     
-    public String getPostName() {
+    public String getDepId() {
+		return depId;
+	}
+
+	public void setDepId(String depId) {
+		this.depId = depId;
+	}
+
+	public String getPostName() {
 		return postName;
 	}
 
