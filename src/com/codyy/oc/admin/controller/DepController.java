@@ -43,7 +43,8 @@ public class DepController extends BaseController {
 	public ResultJson  hasManager(HttpServletRequest request,@RequestParam(required=true) String depId ){
 		int num = service.hasManager(depId);
 		if(num > 0) {
-			return new ResultJson(true,"Y");
+			//获取部门经理Id
+			return new ResultJson(true,service.getDepManagerId(depId));
 		}else {
 			return new ResultJson(true,"N");
 		}

@@ -20,4 +20,9 @@ public class DepartmentService {
 	public int hasManager(String depId) {
 		return mapper.hasManager(depId);
 	}
+	
+	public String getDepManagerId(String depId) {
+		
+		return mapper.getDepManagerId(depId);
+	}
 }
