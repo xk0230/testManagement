@@ -1,11 +1,16 @@
 package com.codyy.oc.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +20,9 @@ import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.Competency;
+import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.entity.Recruit;
+import com.codyy.oc.admin.entity.RecruitAudit;
 import com.codyy.oc.admin.service.CompetencyService;
 import com.codyy.oc.admin.service.RecruitService;
 
@@ -27,6 +34,12 @@ public class RecruitController  extends BaseController{
 	@Autowired
 	private RecruitService service;
 	
+	@InitBinder  
+	 public void initBinder(WebDataBinder binder) {  
+	     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+	     dateFormat.setLenient(false);  
+	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
+	}
 	
 	@ResponseBody
 	@RequestMapping("getAllCompetency")
@@ -76,5 +89,15 @@ public class RecruitController  extends BaseController{
 	public Page getRecruitPageList(HttpServletRequest request,Page page,Recruit search,String type){
 		return service.getRecruitPageList(page, search);
 	}
+	
+	/**
+	 * 审核招聘需求
+	 * @return
+	 */
+//	@ResponseBody
+//	@RequestMapping("auditRec")
+//	public ResultJson  auditRec(HttpServletRequest request, RecruitAudit audit){
+//		return service.auditRec(audit);
+//	}
 	
 }

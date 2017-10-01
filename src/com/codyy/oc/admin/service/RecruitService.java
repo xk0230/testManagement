@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.codyy.commons.CommonsConstant;
 import com.codyy.commons.page.Page;
+import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CompetencyMapper;
@@ -22,6 +23,7 @@ import com.codyy.oc.admin.dao.RecruitRCompetencyMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Competency;
 import com.codyy.oc.admin.entity.Position;
+import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.entity.RecruitAudit;
 import com.codyy.oc.admin.entity.RecruitRCompetency;
@@ -46,13 +48,16 @@ public class RecruitService {
 	private CompetencyMapper competencyMapper;
 	@Autowired
 	private DepartmentMapper departmentMapper;
+	@Autowired
+	private RecruitAuditMapper auditMapper;
 	
 	
 	private void setAuditUser(Recruit recruit) {
+		recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
 		//获取当前审批人，如果是普通员工提交的，则审批人为部门经理，如果部门没有经理，则给超级管理员；如果是部门经理提交的，则审批人为超级管理员
 		if(AdminUser.SUPER_ADMIN_ID.equals(recruit.getCreateUser())) {
 			//如果是超级管理员创建
-			recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
+//			recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
 		}else {
 			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getCreateUser());
 			if(StringUtils.isEmpty(managerId)||managerId.equals(recruit.getCreateUser())) {
@@ -66,7 +71,7 @@ public class RecruitService {
 				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
 				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
 				recruitAuditMapper.insert(ra);
-				recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
+//				recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
 			}else {
 				//添加审批记录
 				RecruitAudit ra = new RecruitAudit();
@@ -78,7 +83,7 @@ public class RecruitService {
 				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
 				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
 				recruitAuditMapper.insert(ra);
-				recruit.setAuditUser(managerId);
+//				recruit.setAuditUser(managerId);
 			}
 		}
 	}
@@ -148,4 +153,28 @@ public class RecruitService {
 		page.setData(data);
 		return page;
 	}
+	
+//	public ResultJson auditRec(RecruitAudit audit) {
+//		int num = auditMapper.selectUnauditByid(audit.getPositionAuditId());
+//		if(num != 1) {
+//			return new ResultJson(false,"该审批已完成，请勿重复审批");
+//		}
+//		else {
+//			audit.setAuditTime(new Date());
+//			auditMapper.updateByPrimaryKeySelective(audit);
+//			//如果全部审批通过，则将该岗位状态修改为通过，如果有人不通过，则修改为不通过
+//			if(audit.getResult() == CommonsConstant.AUDIT_UNPASS) {
+//				//如果是不通过
+//				auditMapper.setUnPassById(audit.getPositionAuditId());
+//			}else {
+//				//如果是通过
+//				int unpassnum = auditMapper.getUnpassOrNullNum(audit.getPositionAuditId());
+//				if(unpassnum == 0 ) {
+//					//如果已经全部通过，则将该岗位修改为审批通过
+//					auditMapper.passById(audit.getPositionAuditId());
+//				}
+//			}
+//		}
+//		return new ResultJson(true);
+//	}
 }

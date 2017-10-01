@@ -22,8 +22,39 @@ public class CandidateRInterviewer {
     private String workDetail;
 
     private String skillDetail;
+    
+    private String interviewerName;
+    
+    private String interviewerPostId;
+    
+    private String interviewerDepId;
+    
+    
+    public String getInterviewerName() {
+		return interviewerName;
+	}
 
-    public String getId() {
+	public void setInterviewerName(String interviewerName) {
+		this.interviewerName = interviewerName;
+	}
+
+	public String getInterviewerPostId() {
+		return interviewerPostId;
+	}
+
+	public void setInterviewerPostId(String interviewerPostId) {
+		this.interviewerPostId = interviewerPostId;
+	}
+
+	public String getInterviewerDepId() {
+		return interviewerDepId;
+	}
+
+	public void setInterviewerDepId(String interviewerDepId) {
+		this.interviewerDepId = interviewerDepId;
+	}
+
+	public String getId() {
         return id;
     }
 

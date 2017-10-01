@@ -21,6 +21,7 @@ public class CommonsConstant {
 	public static final String AUDIT_STATUS_AUDITING = "auditing";//审核中
 	public static final String AUDIT_STATUS_AUDITED = "audited";//审核通过
 	public static final String AUDIT_STATUS_REJECT = "reject";//驳回
+	public static final String AUDIT_STATUS_UNAUDIT = "unaudit";//未提交审核
 	
 	
 	public static final int AUDIT_PASS= 1;//通过

@@ -16,4 +16,6 @@ public interface RecruitAuditMapper {
     int updateByPrimaryKey(RecruitAudit record);
     
     Integer getMaxRecruitNumByRecId(String recId);
+    
+    int selectUnauditByid(String id);
 }

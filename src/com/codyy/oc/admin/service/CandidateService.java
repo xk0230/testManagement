@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.UUIDUtils;
+import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CandidateMapper;
 import com.codyy.oc.admin.dao.CandidateRInterviewerMapper;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
 
@@ -24,8 +26,8 @@ import com.codyy.oc.admin.entity.CandidateRInterviewer;
 public class CandidateService {
 //	@Autowired
 //	private  RecruitMapper recruitMapper;
-//	@Autowired
-//	private AdminUserMapper adminUserMapper;
+	@Autowired
+	private AdminUserMapper adminUserMapper;
 //	@Autowired
 //	private RecruitRCompetencyMapper recruitRCompetencyMapper;
 	@Autowired
@@ -99,6 +101,12 @@ public class CandidateService {
 		map.put("candidateId",search.getCandidateId());//候选人ID
 	    page.setMap(map);
 		List<CandidateRInterviewer> data = candidateRInterviewerMapper.getCandidateRInterviewerPageList(page);
+		for (CandidateRInterviewer c : data) {
+			AdminUser in = adminUserMapper.getselcAdminUserById(c.getInterviewerId());
+			c.setInterviewerName(in.getRealName());
+			c.setInterviewerPostId(in.getPostId());
+			c.setInterviewerDepId(in.getDepId());
+		}
 		page.setData(data);
 		return page;
 	}
