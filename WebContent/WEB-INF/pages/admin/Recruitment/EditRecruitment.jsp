@@ -290,7 +290,7 @@
 					</div>
 
 					<!-- 面试官列表 -->
-					<div class="row">
+					<div class="row" ng-if="$ctrl.candidateId">
 						<div class="col-lg-12">
 							<!-- col-lg-12 start here -->
 							<div class="panel panel-info toggle">

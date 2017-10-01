@@ -228,7 +228,7 @@ myAppModule.controller('UserListController',
 		    	    	
 		    	    	//ok的回调函数
 		    	    	if(selectedItem == '0'){
-		    	    		self.getCostList();
+		    	    		self.getCandidatePageList();
 		    	    	}
 		    	    	
 		    	    }, function () {
@@ -410,7 +410,6 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 				params:params
 			
 			}).then(function(res){
-				
 				if(res.data.result){
 					$uibModalInstance.close('0');
 				}
