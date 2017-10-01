@@ -291,7 +291,7 @@
     ,
     <include refid="Blob_Column_List" />
     from CANDIDATE 
-    where recruit = #{map.recruitId,jdbcType=VARCHAR}
+    where recruit_id = #{map.recruitId,jdbcType=VARCHAR}
     order by create_time desc
   </select>
 </mapper>
