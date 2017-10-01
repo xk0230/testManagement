@@ -56,6 +56,27 @@ public class AdminUser implements Serializable {
 	
 	private String depName;//部门name
 	
+	private String positionStr;//角色中文显示  
+	
+	
+	public String getPositionStr() {
+		if(position == null) {
+			return null;
+		}else if(CommonsConstant.USER_TYPE_ADMIN.equals(position)){
+			return "管理员";
+		}else if(CommonsConstant.USER_TYPE_MANAGER.equals(position)){
+			return "部门经理";
+		}else if(CommonsConstant.USER_TYPE_STAFF.equals(position)){
+			return "普通员工";
+		}else {
+			return positionStr;
+		}
+	}
+
+	public void setPositionStr(String positionStr) {
+		this.positionStr = positionStr;
+	}
+
 	public List<AdminUserPermission> getAdminUserPer() {
 		return adminUserPer;
 	}
