@@ -359,7 +359,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 				userName: "",
 				realName: "",
 				depId   : $scope.Interview.interviewerDepId,
-				position: $scope.Interview.interviewerPostId,
+				postId  : $scope.Interview.interviewerPostId,
 				start:0,
 				end:1000
 			}
