@@ -3,7 +3,7 @@ myAppModule.config(['$locationProvider', function($locationProvider) {
 	  $locationProvider.html5Mode(true);  
 	}]);  
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http,$location, $filter){
+	function UserListController($scope,$http,$location,$document, $filter,$uibModal){
 		var self = this;
 		self.Recruitment = {
 				id:"",
@@ -16,10 +16,11 @@ myAppModule.controller('UserListController',
 				recruitF :"",
 				education :"",
 				educationRemark :"",
-				professional:"",
-				
+				professional:""
 		}
-		
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 10;
 		
 		self.$onInit = function(){
 			//设置部门下拉框
@@ -28,8 +29,12 @@ myAppModule.controller('UserListController',
 			this.getAllCompetency();
 			//获取用户ID
 			self.Recruitment.id = $location.search().id;
-			if(self.Recruitment.id != ""){
-				this.getRecruitmentInfo()
+			if(self.Recruitment.id != "" && typeof(self.Recruitment.id)!="undefined"){
+				//招聘需求详细信息
+				this.getRecruitmentInfo();
+				//招聘需求候选人
+				this.getCandidatePageList();
+				
 			}
 		}
 		
@@ -43,10 +48,17 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
+					//设置招聘需求
 					self.Recruitment = res.data || {};
-					var competencys = self.competencysStr.split('@');
-					$.each(competencys,function(n,value) {  
-						$("#competency" + value.value).checked = true;
+					if($scope.vm.Recruitment.depId != null){
+						//选择部门对应的岗位
+						self.getPostionByDepId();
+					}
+					$.each(self.Recruitment.competencys,function(n,value) {
+						var check = $("#competency" + value.id);
+						if(typeof(check)!="undefined"){
+							check[0].checked = true;
+						}
 				    });
 					
 				}else{
@@ -94,7 +106,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/position/getPositionByDepId.do',
 				params:{
-					depId: $scope.depId
+					depId: $scope.vm.Recruitment.depId
 				}
 			}).then(function(res){
 				if(res){
@@ -112,7 +124,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/position/getPositionById.do',
 				params:{
-					id: $scope.postId
+					id: $scope.vm.Recruitment.postId
 				}
 			}).then(function(res){
 				if(res){
@@ -127,6 +139,29 @@ myAppModule.controller('UserListController',
 				}
 			})
 		}
+		
+		//获取获选人列表
+		self.getCandidatePageList = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/candidate/getCandidatePageList.do',
+				params:{
+					recruitId : self.Recruitment.id,
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			})
+		}
+		
+		//保存
 		self.onSubmit = function(){
 			var push = Array.prototype.push;
 
@@ -168,7 +203,254 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
+		//候选人编辑
+		this.editCost = function (costId,name, parentSelector) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalEditContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    	    	  //好像必须得这么写
+		    	        items: function () {
+		    	          return [$scope.vm.Recruitment.id,costId,name];
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result.then(function (selectedItem) {
+		    	    	
+		    	    	//ok的回调函数
+		    	    	if(selectedItem == '0'){
+		    	    		self.getCostList();
+		    	    	}
+		    	    	
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	
+		    	    });
+		   };
 	}
 );
+
+
+//编辑页面的control
+angular.module('myApp').controller('ModalInstanceCtrl', 
+function ($scope,$http,$uibModalInstance,$filter, items) {
+	var $ctrl = this;
+	//获取页面参数
+	$ctrl.id = items[0];
+	$ctrl.candidateId = items[1];
+	$ctrl.candidateName = items[2];
+	//分页
+	$scope.totalItems = 0;
+	$scope.currentPage = 1;
+	$scope.itemsPerPage = 10;
+	//显示面试官编辑
+	$scope.showEdit = false;
+	
+	$scope.Interview = {
+			depId:"",
+			postId:"",
+			interviewerId:"",
+			place:"",
+			interviewTime:"",
+			interviewDetail:"",
+
+	}
+	
+	//页面初期化
+	this.$onInit = function(){
+		//候选人ID不为空(编辑)
+		if($ctrl.candidateId!=''){
+			$scope.candidateName = $ctrl.candidateName;
+			//获取面试官列表
+			$scope.getInterViewList();
+		}
+		
+		//获取部门List
+		$scope.getDepList();
+
+	  };
+	
+	//获取面试官列表
+	$scope.getInterViewList = function(){
+		$http({
+			method:'POST',
+			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerPageList.do",
+			params:{
+				candidateId:$ctrl.candidateId,
+				start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+				end:$scope.currentPage * $scope.itemsPerPage -1
+			}
+		}).then(function(res){
+			if(res){
+				$scope.InterviewList = res.data.data || [];
+			}else{
+				$scope.InterviewList = [];
+			}
+		});
+	}
+	  
+	//新增面试官
+	$scope.addInterview = function(){
+		$scope.showEdit = true;
+		$scope.Interview = {};
+	}
+	
+	//新增面试官
+	$scope.editInterview = function(Interview){
+		$scope.showEdit = true;
+		//设置面试官信息
+		$scope.Interview = Interview;
+		//获取岗位列表
+		$scope.getPostionById();
+		//获取面试官列表
+		$scope.getFinancingInfoList();
+	}
+	
+	//获取部门
+	$scope.getDepList = function(){
+		$http({
+			method:'POST',
+			url:'/ccydManagement/admin/dep/getAlldep.do',
+			params:{
+			}
+		}).then(function(res){
+			if(res){
+				$scope.deplist = res.data || [];
+			}else{
+				$scope.deplist = [];
+			}
+		})
+	}
+	
+	//获取岗位
+	$scope.getPostionById = function(){
+		$http({
+			method:'POST',
+			url:'/ccydManagement/admin/position/getPositionByDepId.do',
+			params:{
+				depId: $scope.Interview.interviewerDepId
+			}
+		}).then(function(res){
+			if(res){
+				$scope.postlist = res.data || [];
+			}else{
+				$scope.postlist = [];
+			}
+		})
+	}
+	
+	// 获取数据列表
+	$scope.getFinancingInfoList = function(){
+		$http({
+			method:'POST',
+			url:'/ccydManagement/admin/adminuser/getadminlist.do',
+			params:{
+				userName: "",
+				realName: "",
+				depId   : $scope.Interview.depId,
+				position: $scope.Interview.postId,
+				start:0,
+				end:1000
+			}
+		}).then(function(res){
+			if(res){
+				$scope.userList = res.data.data || [];
+			}else{
+				$scope.userList = [];
+			}
+		})
+	};
+	
+	//保存操作
+	$ctrl.ok = function () {
+		if($scope.showEdit){
+			var params = {
+					//id
+					id:$scope.Interview.id,
+					// 候选人ID
+					candidateId:$ctrl.candidateId,
+					interviewerId:$scope.Interview.interviewerId,
+					place:$scope.Interview.place,
+					interviewTime:$filter('date')($scope.Interview.interviewTime, "yyyy-MM-dd hh:mm:ss"),
+					interviewDetail:$scope.Interview.interviewDetail,
+				}
+				$http({
+					method:'POST',
+					url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
+					params:params
+				
+				}).then(function(res){
+					if(res.data.result){
+						//获取面试官列表
+						$scope.getInterViewList();
+						//隐藏编辑框
+						$scope.showEdit = false;
+					}else{
+						alert("保存失败！");
+					}
+			});
+
+		}else{
+			var params = {
+				recruitId:$ctrl.id,
+				name:$scope.candidateName
+			}
+			$http({
+				method:'POST',
+				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidate.do",
+				params:params
+			
+			}).then(function(res){
+				
+				if(res.data.result){
+					$uibModalInstance.close('0');
+				}
+			});
+		}
+		
+	};
+
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+
+		//日期模块加载
+		$scope.today = function() {
+			$scope.dt = new Date();
+		};
+		$scope.clear = function() {
+			$scope.dt = null;
+		};
+
+		$scope.dateOptions = {
+			dateDisabled: "",
+			formatYear: 'yyyy',
+			maxDate: new Date(9999, 12, 31),
+			minDate: new Date(1000, 1,1),
+			startingDay: 1,
+		};
+
+		
+		$scope.open = function(mode) {
+			if(mode == 1){
+				$scope.popup.opened1 = true;
+			}
+		};
+	
+		$scope.popup = {
+			opened1: false,
+		};
+	  
+	  
+	});
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);
