@@ -183,58 +183,59 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Candidate">
     update CANDIDATE
     <set>
-      <if test="name != null">
+    id = #{id,jdbcType=VARCHAR},
+      <if test="name != null and name != ''">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="recruitId != null">
+      <if test="recruitId != null  and recruitId != ''">
         recruit_id = #{recruitId,jdbcType=VARCHAR},
       </if>
-      <if test="pdpSjA != null">
+      <if test="pdpSjA != null and pdpSjA != ''">
         pdp_sj_a = #{pdpSjA,jdbcType=VARCHAR},
       </if>
-      <if test="pdpSjB != null">
+      <if test="pdpSjB != null and pdpSjB != ''">
         pdp_sj_b = #{pdpSjB,jdbcType=VARCHAR},
       </if>
-      <if test="pdpSjC != null">
+      <if test="pdpSjC != null and pdpSjC != ''">
         pdp_sj_c = #{pdpSjC,jdbcType=VARCHAR},
       </if>
-      <if test="pdpSjD != null">
+      <if test="pdpSjD != null and pdpSjD != ''">
         pdp_sj_d = #{pdpSjD,jdbcType=VARCHAR},
       </if>
-      <if test="pdpNjA != null">
+      <if test="pdpNjA != null and pdpNjA != ''">
         pdp_nj_a = #{pdpNjA,jdbcType=VARCHAR},
       </if>
-      <if test="pdpNjB != null">
+      <if test="pdpNjB != null and pdpNjB != ''">
         pdp_nj_b = #{pdpNjB,jdbcType=VARCHAR},
       </if>
-      <if test="pdpNjC != null">
+      <if test="pdpNjC != null and pdpNjC != ''">
         pdp_nj_c = #{pdpNjC,jdbcType=VARCHAR},
       </if>
-      <if test="pdpNjD != null">
+      <if test="pdpNjD != null and pdpNjD != ''">
         pdp_nj_d = #{pdpNjD,jdbcType=VARCHAR},
       </if>
-      <if test="wordScore != null">
+      <if test="wordScore != null and wordScore != ''">
         word_score = #{wordScore,jdbcType=VARCHAR},
       </if>
-      <if test="skillScore != null">
+      <if test="skillScore != null and skillScore != ''">
         skill_score = #{skillScore,jdbcType=VARCHAR},
       </if>
-      <if test="edu != null">
+      <if test="edu != null and edu != ''">
         edu = #{edu,jdbcType=VARCHAR},
       </if>
-      <if test="other != null">
+      <if test="other != null and other != ''">
         other = #{other,jdbcType=VARCHAR},
       </if>
-      <if test="evaluating != null">
+      <if test="evaluating != null and evaluating != ''">
         evaluating = #{evaluating,jdbcType=VARCHAR},
       </if>
-      <if test="sort != null">
+      <if test="sort != null and sort != ''">
         sort = #{sort,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null and createTime != ''">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="pc != null">
+      <if test="pc != null and pc != ''">
         pc = #{pc,jdbcType=LONGVARCHAR},
       </if>
     </set>
@@ -283,4 +284,14 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+     <select id="getCandidatePageList" parameterType="com.codyy.commons.page.Page" resultMap="ResultMapWithBLOBs">
+  	   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CANDIDATE 
+    where recruit = #{map.recruitId,jdbcType=VARCHAR}
+    order by create_time desc
+  </select>
 </mapper>

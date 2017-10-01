@@ -1,5 +1,9 @@
 package com.codyy.oc.admin.dao;
 
+import java.util.List;
+
+import com.codyy.commons.page.Page;
+import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
 
 public interface CandidateRInterviewerMapper {
@@ -16,4 +20,6 @@ public interface CandidateRInterviewerMapper {
     int updateByPrimaryKeyWithBLOBs(CandidateRInterviewer record);
 
     int updateByPrimaryKey(CandidateRInterviewer record);
+    
+    List<CandidateRInterviewer> getCandidateRInterviewerPageList(Page page);
 }

@@ -15,11 +15,9 @@ import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.Competency;
-import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.service.CompetencyService;
 import com.codyy.oc.admin.service.RecruitService;
-import com.codyy.oc.admin.view.PositionSearchView;
 
 @Controller
 @RequestMapping("/admin/recruit")
@@ -46,7 +44,6 @@ public class RecruitController  extends BaseController{
 	@RequestMapping("saveOrUpdateRecruit")
 	public ResultJson  saveOrUpdateRecruit(HttpServletRequest request, Recruit recruit ){
 		String userId = getSessionUserId(request);
-//		http://localhost:8080/ccydManagement/admin/recruit/saveOrUpdateRecruit.do?postid=1&competencys[0].name=n0&competencys[0].id=1&competencys[1].name=n1&competencys[0].id=2
 		if(StringUtils.isEmpty(recruit.getId())){
 			//如果没有ID则新增
 			recruit.setCreateUser(userId);

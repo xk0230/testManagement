@@ -113,31 +113,32 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.CandidateRInterviewer">
     update CANDIDATE_R_INTERVIEWER
     <set>
-      <if test="candidateId != null">
+        id = #{id,jdbcType=VARCHAR},
+      <if test="candidateId != null and candidateId != ''">
         candidate_id = #{candidateId,jdbcType=VARCHAR},
       </if>
-      <if test="interviewerId != null">
+      <if test="interviewerId != null and interviewerId != ''">
         interviewer_id = #{interviewerId,jdbcType=VARCHAR},
       </if>
-      <if test="interviewTime != null">
+      <if test="interviewTime != null and interviewTime != ''">
         interview_time = #{interviewTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="place != null">
+      <if test="place != null and place != ''">
         place = #{place,jdbcType=VARCHAR},
       </if>
-      <if test="wordScore != null">
+      <if test="wordScore != null and wordScore != ''">
         word_score = #{wordScore,jdbcType=VARCHAR},
       </if>
-      <if test="skillScore != null">
+      <if test="skillScore != null and skillScore != ''">
         skill_score = #{skillScore,jdbcType=VARCHAR},
       </if>
-      <if test="interviewDetail != null">
+      <if test="interviewDetail != null and interviewDetail != ''">
         interview_detail = #{interviewDetail,jdbcType=LONGVARCHAR},
       </if>
-      <if test="workDetail != null">
+      <if test="workDetail != null and workDetail != ''">
         work_detail = #{workDetail,jdbcType=LONGVARCHAR},
       </if>
-      <if test="skillDetail != null">
+      <if test="skillDetail != null and skillDetail != ''">
         skill_detail = #{skillDetail,jdbcType=LONGVARCHAR},
       </if>
     </set>
