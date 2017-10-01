@@ -167,4 +167,13 @@
       skill_score = #{skillScore,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getCandidateRInterviewerPageList" parameterType="com.codyy.commons.page.Page" resultMap="ResultMapWithBLOBs">
+      select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CANDIDATE_R_INTERVIEWER
+    where candidate_id = #{map.candidateId,jdbcType=VARCHAR}
+  </select>
 </mapper>

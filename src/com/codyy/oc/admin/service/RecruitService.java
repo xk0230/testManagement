@@ -91,7 +91,7 @@ public class RecruitService {
 	public void insert(Recruit recruit) {
 		recruit.setId(UUIDUtils.getUUID());
 		recruit.setCreateTime(new Date());
-		recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
+		recruit.setStatus(CommonsConstant.AUDIT_STATUS_UNAUDIT);//默认未提交审核
 		
 		setAuditUser(recruit);
 		mapper.insert(recruit);
