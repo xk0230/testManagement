@@ -204,7 +204,7 @@ myAppModule.controller('UserListController',
 		}
 		
 		//候选人编辑
-		this.editCost = function (costId,name, parentSelector) {
+		this.editCost = function (id,name, parentSelector) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
@@ -219,7 +219,7 @@ myAppModule.controller('UserListController',
 		    	      resolve: {
 		    	    	  //好像必须得这么写
 		    	        items: function () {
-		    	          return [$scope.vm.Recruitment.id,costId,name];
+		    	          return [$scope.vm.Recruitment.id,id,name];
 		    	        }
 		    	      }
 		    	    });
@@ -245,7 +245,9 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 function ($scope,$http,$uibModalInstance,$filter, items) {
 	var $ctrl = this;
 	//获取页面参数
+	//需求ID
 	$ctrl.id = items[0];
+	//候选人id
 	$ctrl.candidateId = items[1];
 	$ctrl.candidateName = items[2];
 	//分页
@@ -356,8 +358,8 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			params:{
 				userName: "",
 				realName: "",
-				depId   : $scope.Interview.depId,
-				position: $scope.Interview.postId,
+				depId   : $scope.Interview.interviewerDepId,
+				position: $scope.Interview.interviewerPostId,
 				start:0,
 				end:1000
 			}
@@ -401,6 +403,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 
 		}else{
 			var params = {
+				id:$ctrl.candidateId,
 				recruitId:$ctrl.id,
 				name:$scope.candidateName
 			}
