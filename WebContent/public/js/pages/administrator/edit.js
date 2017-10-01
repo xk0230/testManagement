@@ -277,9 +277,11 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					self.postlist = res.data || [];
+					alert("保存成功!");
+					//self.postlist = res.data || [];
 				}else{
-					self.postlist = [];
+					alert("保存失败!");
+					//self.postlist = [];
 				}
 			})
 		}

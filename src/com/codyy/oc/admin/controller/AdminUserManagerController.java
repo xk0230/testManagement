@@ -23,6 +23,7 @@ import com.codyy.commons.utils.SecurityUtil;
 import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
 import com.codyy.oc.admin.service.AdminUserManagerService;
 import com.codyy.oc.admin.service.AdminUserPermissionService;
@@ -57,11 +58,12 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("insertadminuser")
 	public ResultJson  insertAdminUser(HttpServletRequest request, AdminUser adUser ){
-		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
-			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
-		}
 		adUser.setCreateTime(new Date());//记录当前时间
 		adUser.setPassword(SecurityUtil.MD5String(adUser.getPassword()));//密码进行MD5加密
+		if(StringUtils.isEmpty(adUser.getUserId())){//添加用户操作自动生成id
+			adUser.setUserId(UUIDUtils.getUUID());//自动生成id
+			adUser.setPassword(SecurityUtil.MD5String("888888"));
+		}
 	
 		//如果用户做修改操作的时候即用户名是存在的    即不用自动生成    若修改则不用创建id
 			AdminUserPermission adminUser = new AdminUserPermission();
@@ -110,7 +112,13 @@ public class AdminUserManagerController extends BaseController {
 		}
 		
 		adminUser.setAdminUserId(adUser.getUserId());
-		adUser.getAdminUserDetail().setUserId(adUser.getUserId());
+		if(adUser.getAdminUserDetail() == null) {
+			AdminUserDetail ad = new AdminUserDetail();
+			ad.setUserId(adUser.getUserId());
+			adUser.setAdminUserDetail(ad);
+		}else {
+			adUser.getAdminUserDetail().setUserId(adUser.getUserId());
+		}
 		return adminUserManagerService.updateAdminsUser(userId,adUser,adminUser,sessionUser);//修改用户详情列表的信息
 
 	}

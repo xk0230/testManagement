@@ -20,4 +20,6 @@ public interface DepartmentMapper {
     List<Department> getAllDep();
     
     int hasManager(String depId);
+    
+    String getDepManagerId(String depId);
 }

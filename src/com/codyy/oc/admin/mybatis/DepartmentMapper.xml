@@ -65,4 +65,9 @@
   <select id="hasManager" parameterType="java.lang.String"  resultType = "java.lang.Integer">
   	select count(*) from ADMIN_USER where dep_id = #{depId} and position = 'MANAGER' and delete_flag = 'N'
   </select>
+  
+  <select id="getDepManagerId" parameterType="java.lang.String"  resultType = "java.lang.String">
+  	select user_id from ADMIN_USER where position = 'MANAGER' and dep_id=#{depId} and delete_flag = 'N'
+  </select>
+  
 </mapper>
