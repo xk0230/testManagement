@@ -58,6 +58,7 @@ setInterval("getNewsNum()","60000");
                 </a>
             </div>
             <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
+            <input id="sessionUserDepId"  type="hidden" value="${adminUser.depId}">
             <div>
             <nav class="top-nav" role="navigation">
                 <!-- <ul class="nav navbar-nav pull-left">
