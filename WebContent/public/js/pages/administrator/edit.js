@@ -135,6 +135,7 @@ myAppModule.controller('UserListController',
 			})
 			
 			self.getHasManager($scope.vm.user.depId);
+			
 		}
 		
 		//获取部门是否已有部长
@@ -147,6 +148,8 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
+					
+					$scope.vm.user.userId = "";
 					$scope.hasManager = res.data.message;
 				}else{
 					return "Y";

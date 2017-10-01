@@ -7,9 +7,21 @@ myAppModule.controller('UserListController',
 		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
-			self.getFinancingInfoList();
+
 			//设置部门下拉框
 			this.getDepList();
+			
+			//获取角色
+			self.admin =$("#sessionUserType").val();
+			if(self.admin=="MANAGER"){
+				$scope.depId =$("#sessionUserDepId").val();
+				$scope.depIdChangeAble = true;
+				self.getPostionById();
+			}else if(self.admin=="ADMIN"){
+				$scope.depIdChangeAble = false;
+			}
+			//查询
+			self.getFinancingInfoList();
 		}
 		
 		$scope.setPage = function (pageNo) {
