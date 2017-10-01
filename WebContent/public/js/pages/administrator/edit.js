@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','jcs-autoValidate']);
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]);  
@@ -111,6 +111,7 @@ myAppModule.controller('UserListController',
 				if(res){
 					self.user = res.data;
 					self.getHasManager($scope.vm.user.depId);
+					self.getPostionById();
 				}else{
 					self.user = "";
 				}
@@ -119,6 +120,7 @@ myAppModule.controller('UserListController',
 		
 		//获取岗位
 		self.getPostionById = function(){
+			$scope.vm.user.depId;
 			//获取部门岗位
 			$http({
 				method:'POST',
@@ -133,9 +135,8 @@ myAppModule.controller('UserListController',
 					self.postlist = [];
 				}
 			})
-			
+			// 判断当前是否部长
 			self.getHasManager($scope.vm.user.depId);
-			
 		}
 		
 		//获取部门是否已有部长
@@ -148,15 +149,15 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					
-					$scope.vm.user.userId = "";
-					$scope.hasManager = res.data.message;
+					if($scope.vm.user.userId == res.data.message || res.data.message=="N"){
+						$scope.hasManager = "N";
+					}else{
+						$scope.hasManager = "Y";
+					}
 				}else{
 					return "Y";
 				}
 			})
-			
-			
 		}
 		
 		self.Save = function(){

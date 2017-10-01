@@ -57,7 +57,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >部门</label>
 												<div class="col-lg-8">
-													<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-readonly="vm.readOnly" ng-required="false" >
+													<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-disabled="vm.readOnly" ng-required="false" >
 														<option value="">请选择</option>
 														<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
 													</select>
@@ -67,7 +67,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >角色</label>
 												<div class="col-lg-8">
-													<select class="form-control select2" ng-model="vm.user.position" ng-readonly="vm.readOnly">
+													<select class="form-control select2" ng-model="vm.user.position" ng-disabled="vm.readOnly">
 														<option value="">请选择</option>
 														<option value="ADMIN" >管理员</option>
 														<option value="MANAGER" ng-if="hasManager=='N'">部门经理</option>
@@ -82,7 +82,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >岗位</label>
 												<div class="col-lg-8">
-													<select class="form-control select2" ng-model="vm.user.postId" ng-readonly="vm.readOnly">
+													<select class="form-control select2" ng-model="vm.user.postId" ng-disabled="vm.readOnly">
 														<option value="">请选择</option>
 														<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
 													</select>
@@ -101,7 +101,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.entryDate" is-open="popup.opened1" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(1)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -123,7 +123,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.salaryBeginDate" is-open="popup.opened2" name="salaryBeginDate"
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false"  ng-readonly="vm.readOnly" />
+														ng-required="false"  ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(2)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -136,7 +136,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.probationPeriod" is-open="popup.opened3"  name = "probationPeriod"
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(3)"><i class="glyphicon glyphicon-calendar" ng-readonly="vm.readOnly"></i></button>
 														</span>
@@ -149,7 +149,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.expectedDate" is-open="popup.opened4" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(4)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -177,7 +177,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.labourBeginTime" is-open="popup.opened5" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(5)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -190,7 +190,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.labourEndTime" is-open="popup.opened6" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(6)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -218,7 +218,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.filingDate" is-open="popup.opened7" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(7)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -231,7 +231,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.leaveDate" is-open="popup.opened8" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(8)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -244,7 +244,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.retiredDate" is-open="popup.opened9" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-readonly="vm.readOnly" />
+														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="open(9)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>

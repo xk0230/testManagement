@@ -8,12 +8,21 @@ myAppModule.controller('CostController',
 		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
-			self.getCostList();
 			self.getDeparts();
 			$scope.costTypeList = [
-			                       {costType : "0", name : "收入"},
-			                       {costType : "1", name : "支出"}
-			                   ];
+				{costType : "0", name : "收入"},
+				{costType : "1", name : "支出"}
+			];
+			
+			//获取角色
+			self.admin =$("#sessionUserType").val();
+			if(self.admin=="MANAGER"){
+				$scope.dep =$("#sessionUserDepId").val();
+				$scope.depIdChangeAble = true;
+			}else if(self.admin=="ADMIN"){
+				$scope.depIdChangeAble = false;
+			}
+			self.getCostList();
 		};
 		
 		$scope.setPage = function (pageNo) {

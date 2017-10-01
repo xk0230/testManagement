@@ -59,7 +59,7 @@
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/js/splitpage.js" type="text/javascript"></script>
 <script src="${root}/public/js/common.js" type="text/javascript"></script>
-<%-- <script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script> --%>
+<script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
 

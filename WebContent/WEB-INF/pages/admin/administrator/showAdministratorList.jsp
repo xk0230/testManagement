@@ -75,7 +75,7 @@
 													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
 												</div>
 												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
+													<input type="button" ng-if="${adminUser.position == 'ADMIN'}"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
 												</div>
 											</div>
 										</div>
@@ -104,6 +104,7 @@
 												<th>工号</th>
 												<th>姓名</th>
 												<th>部门</th>
+												<th>角色</th>
 												<th>岗位</th>
 												<th>状态</th>
 												<th>入职日期</th>
@@ -115,6 +116,7 @@
 												<td><p ng-bind="item.userName"></p></td>
 												<td><p ng-bind="item.realName"></p></td>
 												<td><p ng-bind="item.depName"></p></td>
+												<td><p ng-bind="item.postionStr"></p></td>
 												<td><p ng-bind="item.postName"></p></td>
 												<td><p ng-bind="item.workStatus"></p></td>
 												<td><p ng-bind="item.entryDate | date:'yyyy-MM-dd'"></p></td>

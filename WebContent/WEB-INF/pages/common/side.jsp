@@ -9,11 +9,11 @@
               <span class="nav-link-text">员工管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="userComponents">
-				<li><a href="${root}/admin/adminuser/toadminlist.do" ng-click="getPostionById()">员工列表<i class="en-arrow-right7"></i></a></li>
-				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">新增员工<i class="en-arrow-right7"></i></a></li>
+				<li ng-if="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do" ng-click="getPostionById()">员工列表<i class="en-arrow-right7"></i></a></li>
+				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">员工信息<i class="en-arrow-right7"></i></a></li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="成本信息">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="成本信息"  ng-if="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="st-chart"></i>
               <span class="nav-link-text">成本信息</span>
@@ -25,7 +25,7 @@
 				</li>
             </ul>
           </li>
-           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="岗位信息">
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="岗位信息" ng-if="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postComponents" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
               <span class="nav-link-text">岗位信息</span>
@@ -53,7 +53,7 @@
 				</li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ipe">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ipe" ng-if="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postIPE" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
               <span class="nav-link-text">IPE管理</span>

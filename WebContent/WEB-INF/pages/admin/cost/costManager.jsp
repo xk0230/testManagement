@@ -36,7 +36,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">所属部门</label>
 												<div class="col-lg-8">
-													<select id="depId" ng-model="dep"  class="form-control select2" 
+													<select id="depId" ng-model="dep"  class="form-control select2" ng-disabled = "depIdChangeAble"
 															ng-options="dep.depId as dep.name group by dep.group for dep in depList">
 															<option value="">--请选择--</option>
 													</select>
@@ -101,7 +101,7 @@
 													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
 												</div>
 												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
+													<input type="button" ng-if="${adminUser.position == 'ADMIN'}" class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
 												</div>
 											</div>
 										</div>

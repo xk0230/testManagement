@@ -4,12 +4,12 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body ng-app = "myApp" >
+<body >
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
 		
-		<div id="content">
+		<div id="content"  ng-app = "myApp">
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
@@ -54,7 +54,7 @@
 								</div>
 							</div>
 							
-							<div class="panel panel-default toggle">
+							<div class="panel panel-default toggle" ng-show="${adminUser.position == 'ADMIN'}">
 								<!-- Start .panel -->
 								<div class="panel-heading">
 									<h4 class="panel-title">收入结余构成<i class="ec-list"></i></h4>
