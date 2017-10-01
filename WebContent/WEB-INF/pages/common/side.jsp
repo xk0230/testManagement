@@ -3,13 +3,13 @@
 <div id="sidebar" ng-app = "sideApp" ng-controller="sideController as vm">
 	<div class=" ">
 		<ul id="sideNav" class="nav navbar-nav">
-		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="员工信息">
+		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="员工信息" ng-if="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
               <i class="ec-users"></i>
               <span class="nav-link-text">员工管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="userComponents">
-				<li ng-if="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do" ng-click="getPostionById()">员工列表<i class="en-arrow-right7"></i></a></li>
+				<li><a href="${root}/admin/adminuser/toadminlist.do" ng-click="getPostionById()">员工列表<i class="en-arrow-right7"></i></a></li>
 				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">员工信息<i class="en-arrow-right7"></i></a></li>
             </ul>
           </li>

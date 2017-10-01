@@ -120,23 +120,25 @@ myAppModule.controller('UserListController',
 		
 		//获取岗位
 		self.getPostionById = function(){
-			$scope.vm.user.depId;
-			//获取部门岗位
-			$http({
-				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionByDepId.do',
-				params:{
-					depId: $scope.vm.user.depId
-				}
-			}).then(function(res){
-				if(res){
-					self.postlist = res.data || [];
-				}else{
-					self.postlist = [];
-				}
-			})
-			// 判断当前是否部长
-			self.getHasManager($scope.vm.user.depId);
+			if(typeof($scope.vm.user.depId)!="undefined"){
+				$scope.vm.user.depId;
+				//获取部门岗位
+				$http({
+					method:'POST',
+					url:'/ccydManagement/admin/position/getPositionByDepId.do',
+					params:{
+						depId: $scope.vm.user.depId
+					}
+				}).then(function(res){
+					if(res){
+						self.postlist = res.data || [];
+					}else{
+						self.postlist = [];
+					}
+				})
+				// 判断当前是否部长
+				self.getHasManager($scope.vm.user.depId);
+			}
 		}
 		
 		//获取部门是否已有部长
@@ -160,7 +162,7 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
-		self.Save = function(){
+		self.onSubmit = function(){
 			if(self.mode == "1"){
 				this.addUser();
 			}else{
