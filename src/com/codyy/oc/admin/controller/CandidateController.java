@@ -23,7 +23,7 @@ public class CandidateController  extends BaseController{
 	private CandidateService service;
 	
 /**
-	 * 添加/修改招聘需求
+	 * 添加/修改候选人
 	 * @param request
 	 * @param position
 	 * @return
@@ -41,6 +41,12 @@ public class CandidateController  extends BaseController{
 		return new ResultJson(true);
 	}
 	
+	/**
+	 * 新增修改面试记录
+	 * @param request
+	 * @param candidateRInterviewer
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("saveOrUpdateCandidateRInterviewer")
 	public ResultJson  saveOrUpdateCandidateRInterviewer(HttpServletRequest request, CandidateRInterviewer candidateRInterviewer ){
@@ -75,7 +81,7 @@ public class CandidateController  extends BaseController{
 	
 //	
 	/**
-	 * 根据查询条件分页获取招聘需求列表
+	 * 根据查询条件分页获取获选人列表
 	 * @return
 	 */
 	@ResponseBody

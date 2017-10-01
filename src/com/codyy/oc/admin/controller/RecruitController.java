@@ -73,7 +73,7 @@ public class RecruitController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("getRecruitPageList")
-	public Page getPositionPageList(HttpServletRequest request,Page page,Recruit search,String type){
+	public Page getRecruitPageList(HttpServletRequest request,Page page,Recruit search,String type){
 		return service.getRecruitPageList(page, search);
 	}
 	
