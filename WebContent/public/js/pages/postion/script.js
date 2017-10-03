@@ -66,13 +66,17 @@ myAppModule.controller('PostionController',
 					}
 				});
 			}else{
+				var statusVal = $("#status").val();
+				if($scope.type == "list"){
+					statusVal = 'audited'
+				}
 				$http({
 					method:'POST',
 					url:$("#rootUrl").val()+'/admin/position/getPositionPageList.do',
 					params:{
 						name:$scope.name,
 						depId:$scope.depId,
-						status:$("#status").val(),
+						status:statusVal,
 						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 						end:$scope.currentPage * $scope.itemsPerPage -1
 					}
@@ -280,7 +284,14 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				depId:$scope.costEntity.depId,
 				onDuty:$scope.costEntity.onDuty,
 				organization:$scope.costEntity.organization,
-				vacancy:$scope.costEntity.vacancy
+				vacancy:$scope.costEntity.vacancy,
+				salaryScale:$scope.costEntity.salaryScale,
+				recruitA:$scope.costEntity.recruitA,
+				recruitB:$scope.costEntity.recruitB,
+				recruitC:$scope.costEntity.recruitC,
+				recruitD:$scope.costEntity.recruitD,
+				recruitE:$scope.costEntity.recruitE,
+				recruitF:$scope.costEntity.recruitF
 			}
 		}).then(function(res){
 			if(res){

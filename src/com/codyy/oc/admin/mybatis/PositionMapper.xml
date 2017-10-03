@@ -46,11 +46,12 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION (post_id, name, dep_id, 
       on_duty, organization, vacancy, 
-      remark, status,create_user,create_time)
+      remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale)
     values (#{postId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{depId,jdbcType=VARCHAR}, 
       #{onDuty,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, #{vacancy,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR},
-      #{createTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP},#{recruitA,jdbcType=VARCHAR}, #{recruitB,jdbcType=VARCHAR}, #{recruitC,jdbcType=VARCHAR},
+       #{recruitD,jdbcType=VARCHAR}, #{recruitE,jdbcType=VARCHAR}, #{recruitF,jdbcType=VARCHAR},#{salaryScale,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION

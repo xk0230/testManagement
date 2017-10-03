@@ -225,7 +225,107 @@
 													<input type="text" class="form-control" ng-model="costEntity.vacancy" ng-readonly="true" />
 												</div>
 											</div>
+
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">薪级</label>
+												<div class="col-lg-8">
+													<input type="text" class="form-control" ng-model="costEntity.salaryScale" />
+												</div>
+											</div>
 										</div>
+							<div class="panel panel-info toggle">
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>相关经历/成就要求</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >过往职业：</label>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >工作经验：</label>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >关键成就：</label>
+												</div>
+											</div>
+										</div >
+										<div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<textarea class="form-control" ng-model="costEntity.recruitA" rows="3" Placeholder="点击输入过往职业"  ng-required="true"></textarea>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<textarea class="form-control" ng-model="costEntity.recruitB"  rows="3" Placeholder="点击输入工作经验" ng-required="true"></textarea>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<textarea class="form-control" ng-model="costEntity.recruitC"  rows="3" Placeholder="点击输入关键成就"  ng-required="true"></textarea>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+<div class="panel panel-info toggle">
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>技术/岗位要求</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >基本要求1：</label>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >基本要求2：</label>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<label class="control-label" >基本要求3：</label>
+												</div>
+											</div>
+										</div>
+										<div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<textarea class="form-control" ng-model="costEntity.recruitD"  rows="3" Placeholder="点击输入基本要求1"></textarea>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<textarea class="form-control" ng-model="costEntity.recruitE"  rows="3" Placeholder="点击输入基本要求2"></textarea>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+												<textarea class="form-control" ng-model="costEntity.recruitF"  rows="3" Placeholder="点击输入基本要求3"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+									</div>
+								</div>
 									</div>
 								</div>
 							</div>
