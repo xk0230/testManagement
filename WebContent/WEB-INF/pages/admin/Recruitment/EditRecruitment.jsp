@@ -32,7 +32,7 @@
 								</div>
 								<div class="col-lg-3">
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-3 form-group">
 									<label class="col-lg-4 control-label" ></label>
 									<div class="col-lg-8">
 										<input type="submit" class="btn btn-lg btn-success col-lg-12" ladda = "submitting"  value="保存" />
@@ -42,7 +42,6 @@
 						</div>
 					</div>
 				</div>
-				<input type="text" class="form-control"  ng-model="vm.user.userId" ng-show="false"  />
 				<!-- 岗位信息 start here -->
 				<div class="outlet" >
 					<div class="row">
@@ -210,6 +209,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 					<!-- 候选人列表 -->
 					<div class="row">
 						<div class="col-lg-12">
@@ -249,7 +249,7 @@
 					</div>
 				</div>
 			</div>
-			</form>
+
 			
 			
 	<!-- 候选人，面试官编辑 -->

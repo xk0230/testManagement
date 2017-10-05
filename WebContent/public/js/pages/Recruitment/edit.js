@@ -124,7 +124,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/position/getPositionById.do',
 				params:{
-					id: $scope.vm.Recruitment.postId
+					id: $scope.vm.Recruitment.postid
 				}
 			}).then(function(res){
 				if(res){
@@ -195,10 +195,10 @@ myAppModule.controller('UserListController',
 					competencysStr   : par
 				}
 			}).then(function(res){
-				if(res){
-					self.postlist = res.data || [];
+				if(res.data.result){
+					alert("保存成功！");
 				}else{
-					self.postlist = [];
+					alert("保存失败！");
 				}
 			})
 		}

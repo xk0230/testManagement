@@ -3,29 +3,28 @@
 <div id="sidebar" ng-app = "sideApp" ng-controller="sideController as vm">
 	<div class=" ">
 		<ul id="sideNav" class="nav navbar-nav">
-		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="员工信息" ng-if="${adminUser.position != 'STAFF'}">
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
-              <i class="ec-users"></i>
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="招聘" >
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#post1" data-parent="#exampleAccordion">
+              <i class="fa-th-list"></i>
               <span class="nav-link-text">员工管理</span>
             </a>
-            <ul class="sidenav-second-level collapse nav" id="userComponents">
-				<li><a href="${root}/admin/adminuser/toadminlist.do" ng-click="getPostionById()">员工列表<i class="en-arrow-right7"></i></a></li>
-				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do">员工信息<i class="en-arrow-right7"></i></a></li>
+            <ul class="sidenav-second-level collapse nav" id="post1">
+				<li><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
+				<li ng-show="${adminUser.position == 'ADMIN'}"><a href="${root}/admin/adminuser/toAddOrEditUser.do"><i class="en-arrow-right7"></i>员工信息</a></li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="成本信息"  ng-if="${adminUser.position != 'STAFF'}">
-            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-              <i class="st-chart"></i>
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="成本信息" ng-show="${adminUser.position != 'STAFF'}">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#post2" data-parent="#exampleAccordion">
+              <i class="fa-th-list"></i>
               <span class="nav-link-text">成本信息</span>
             </a>
-            <ul class="sidenav-second-level collapse nav" id="collapseComponents">
-				<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a>
-				</li>
-				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a>
-				</li>
+            <ul class="sidenav-second-level collapse nav" id="post2">
+				<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a></li>
+				<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
             </ul>
           </li>
-           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="岗位信息" ng-if="${adminUser.position != 'STAFF'}">
+          
+           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="岗位信息" ng-show="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postComponents" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
               <span class="nav-link-text">岗位信息</span>
@@ -39,6 +38,7 @@
 				</li>
             </ul>
           </li>
+          
            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="招聘">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postRecruitment" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
@@ -47,13 +47,10 @@
             <ul class="sidenav-second-level collapse nav" id="postRecruitment">
 				<li><a href="${root}/admin/test/Recruitment.do"><i class="en-arrow-right7"></i>招聘需求列表</a>
 				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>我的岗位管理</a>
-				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>岗位审批</a>
-				</li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ipe" ng-if="${adminUser.position != 'STAFF'}">
+          
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ipe" ng-show="${adminUser.position != 'STAFF'}">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#postIPE" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
               <span class="nav-link-text">IPE管理</span>
