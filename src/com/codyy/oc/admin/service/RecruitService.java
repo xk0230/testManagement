@@ -48,16 +48,25 @@ public class RecruitService {
 	private CompetencyMapper competencyMapper;
 	@Autowired
 	private DepartmentMapper departmentMapper;
-	@Autowired
-	private RecruitAuditMapper auditMapper;
 	
 	
-	private void setAuditUser(Recruit recruit) {
+	private void setAuditUser(Recruit recruit,String[] audits) {
 		recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
 		//获取当前审批人，如果是普通员工提交的，则审批人为部门经理，如果部门没有经理，则给超级管理员；如果是部门经理提交的，则审批人为超级管理员
 		if(AdminUser.SUPER_ADMIN_ID.equals(recruit.getCreateUser())) {
 			//如果是超级管理员创建
 //			recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
+			Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
+			maxnum= (maxnum==null?1:(maxnum+1));
+			for (String audit : audits) {
+				RecruitAudit ra = new RecruitAudit();
+				ra.setAuditUser(audit);
+				ra.setCreateTime(new Date());
+				ra.setId(UUIDUtils.getUUID());
+				ra.setRecruitId(recruit.getId());
+				ra.setRecruitNum(maxnum);
+				recruitAuditMapper.insert(ra);
+			}
 		}else {
 			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getCreateUser());
 			if(StringUtils.isEmpty(managerId)||managerId.equals(recruit.getCreateUser())) {
@@ -88,12 +97,15 @@ public class RecruitService {
 		}
 	}
 	
+	
 	public void insert(Recruit recruit) {
 		recruit.setId(UUIDUtils.getUUID());
 		recruit.setCreateTime(new Date());
 		recruit.setStatus(CommonsConstant.AUDIT_STATUS_UNAUDIT);//默认未提交审核
 		
-		setAuditUser(recruit);
+		//添加审核记录
+		//setAuditUser(recruit);
+		
 		mapper.insert(recruit);
 		addCompetencys(recruit);
 
@@ -131,7 +143,9 @@ public class RecruitService {
 		//先删除原有的关系
 		recruitRCompetencyMapper.deleteByRecId(recruit.getId());
 		addCompetencys(recruit);
-		setAuditUser(recruit);
+//		setAuditUser(recruit);
+		//修改后将审核状态修改为未提交审核
+		recruit.setStatus(CommonsConstant.AUDIT_STATUS_UNAUDIT);
 		mapper.updateByPrimaryKeySelective(recruit);
 	}
 	
@@ -152,6 +166,11 @@ public class RecruitService {
 		List<Recruit> data = mapper.getRecruitPageList(page);
 		page.setData(data);
 		return page;
+	}
+	
+	//提交审核
+	public void  putAuditRecruit(Recruit recruit,String[]  auditIds) {
+		setAuditUser(recruit,auditIds);
 	}
 	
 //	public ResultJson auditRec(RecruitAudit audit) {
@@ -177,4 +196,40 @@ public class RecruitService {
 //		}
 //		return new ResultJson(true);
 //	}
+	
+	public ResultJson auditRecruit(RecruitAudit audit) {
+		int num = recruitAuditMapper.selectUnauditByid(audit.getId());
+		if(num != 1) {
+			return new ResultJson(false,"该审批已完成，请勿重复审批");
+		}
+		else {
+			audit.setAuditTime(new Date());
+			recruitAuditMapper.updateByPrimaryKeySelective(audit);
+			//如果全部审批通过，则将该岗位状态修改为通过，如果有人不通过，则修改为不通过
+			if(audit.getResult() == CommonsConstant.AUDIT_UNPASS) {
+				//如果是不通过
+				recruitAuditMapper.setUnPassById(audit.getId());
+			}else {
+				if(CommonsConstant.USER_TYPE_MANAGER.equals(audit.getAuditUserPosition())) {
+					//如果审批人是部门经理，则提交超级管理员审批,审批状态依旧为审批中
+					Recruit recruit = mapper.selectByPrimaryKey(audit.getRecruitId());
+					recruit.setAuditUser(audit.getAuditUserId());//将提交审核的人设为AuditUser
+					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
+					mapper.updateByPrimaryKeySelective(recruit);
+				}else if(CommonsConstant.USER_TYPE_ADMIN.equals(audit.getAuditUserPosition())) {
+					
+				}
+				
+				//如果是通过
+				int unpassnum = recruitAuditMapper.getUnpassOrNullNum(audit.getId());
+				if(unpassnum == 0 ) {
+					//如果已经全部通过，则将该岗位修改为审批通过
+					recruitAuditMapper.passById(audit.getId());
+					
+					
+				}
+			}
+		}
+		return new ResultJson(true);
+	}
 }

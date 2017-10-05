@@ -13,9 +13,13 @@ import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CandidateMapper;
 import com.codyy.oc.admin.dao.CandidateRInterviewerMapper;
+import com.codyy.oc.admin.dao.PositionMapper;
+import com.codyy.oc.admin.dao.RecruitMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
+import com.codyy.oc.admin.entity.Position;
+import com.codyy.oc.admin.entity.Recruit;
 
 /**
  * 候选人server
@@ -24,8 +28,8 @@ import com.codyy.oc.admin.entity.CandidateRInterviewer;
  */
 @Service("candidateService")
 public class CandidateService {
-//	@Autowired
-//	private  RecruitMapper recruitMapper;
+	@Autowired
+	private  RecruitMapper recruitMapper;
 	@Autowired
 	private AdminUserMapper adminUserMapper;
 //	@Autowired
@@ -40,6 +44,8 @@ public class CandidateService {
 //	private DepartmentMapper departmentMapper;
 	@Autowired
 	private CandidateMapper mapper;
+	@Autowired
+	private PositionMapper positionMapper;
 	
 	
 	public String insert(Candidate candidate) {
@@ -109,6 +115,12 @@ public class CandidateService {
 			c.setInterviewerName(in.getRealName());
 			c.setInterviewerPostId(in.getPostId());
 			c.setInterviewerDepId(in.getDepId());
+			
+			Candidate ca =  mapper.selectByPrimaryKey(c.getCandidateId());
+			c.setCandidateName(ca.getName());
+			Recruit r = recruitMapper.selectByPrimaryKey(ca.getRecruitId());
+			Position p =  positionMapper.selectByPrimaryKey(r.getPostid());
+			c.setPositionName(p.getName());
 		}
 		page.setData(data);
 		return page;

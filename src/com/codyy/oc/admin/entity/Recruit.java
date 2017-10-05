@@ -44,8 +44,17 @@ public class Recruit {
     
     private String createUserName;//创建人姓名
     
+    private String editUserPosition;//提交审批角色
     
-    public String getDepId() {
+	public String getEditUserPosition() {
+		return editUserPosition;
+	}
+
+	public void setEditUserPosition(String editUserPosition) {
+		this.editUserPosition = editUserPosition;
+	}
+
+	public String getDepId() {
 		return depId;
 	}
 

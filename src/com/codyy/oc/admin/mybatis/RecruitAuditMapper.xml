@@ -129,4 +129,16 @@
   <select id="getMaxRecruitNumByRecId" parameterType="java.lang.String" resultType="java.lang.Integer">
   		select max(recruit_num) from RECRUIT_AUDIT  where recruit_id = #{recId,jdbcType=VARCHAR}
   </select>
+  
+    <select id="selectUnauditByid" parameterType="java.lang.String"  resultType="java.lang.Integer">
+  	select count(*) from RECRUIT_AUDIT where id=#{id} and result is null
+  </select>
+  
+     <select id="getUnpassOrNullNum" parameterType="java.lang.String"  resultType="java.lang.Integer">
+  	select count(*) from RECRUIT_AUDIT where recruit_id=(select recruit_id from RECRUIT_AUDIT where position_audit_id=#{id}) and (result is null or result=-1)
+  </select>
+  
+  <update id="passById" parameterType="java.lang.String">
+  	update RECRUIT r set r.status = 'audited' where r.id = (select  	ra.recruit_id  from RECRUIT_AUDIT ra where ra.id = #{id})
+  </update>
 </mapper>

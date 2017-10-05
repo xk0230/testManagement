@@ -19,7 +19,27 @@ public class RecruitAudit {
 
     private Date createTime;
 
-    public String getId() {
+    private String auditUserPosition;//审批人角色
+    
+    private String auditUserId;//审批人ID
+    
+    public String getAuditUserId() {
+		return auditUserId;
+	}
+
+	public void setAuditUserId(String auditUserId) {
+		this.auditUserId = auditUserId;
+	}
+
+	public String getAuditUserPosition() {
+		return auditUserPosition;
+	}
+
+	public void setAuditUserPosition(String auditUserPosition) {
+		this.auditUserPosition = auditUserPosition;
+	}
+
+	public String getId() {
         return id;
     }
 

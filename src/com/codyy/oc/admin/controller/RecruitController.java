@@ -19,8 +19,8 @@ import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
 import com.codyy.oc.admin.BaseController;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Competency;
-import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.entity.RecruitAudit;
 import com.codyy.oc.admin.service.CompetencyService;
@@ -57,15 +57,57 @@ public class RecruitController  extends BaseController{
 	@RequestMapping("saveOrUpdateRecruit")
 	public ResultJson  saveOrUpdateRecruit(HttpServletRequest request, Recruit recruit ){
 		String userId = getSessionUserId(request);
+		AdminUser sessionUser = getSessionUser(request);
 		if(StringUtils.isEmpty(recruit.getId())){
 			//如果没有ID则新增
 			recruit.setCreateUser(userId);
+			recruit.setEditUserPosition(sessionUser.getPosition());
 			service.insert(recruit);
 		}else {
 			//如果有ID则是修改
 			service.updateById(recruit);
 		}
 		return new ResultJson(true);
+	}
+	
+	/**
+	 * 提交审批
+	 * @param request
+	 * @param recruit
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("putAuditRecruit")
+	public ResultJson  putAuditRecruit(HttpServletRequest request, Recruit recruit,String auditIds ){
+		/*String userId = getSessionUserId(request);
+		AdminUser sessionUser = getSessionUser(request);
+		if(StringUtils.isEmpty(recruit.getId())){
+			//如果没有ID则新增
+			recruit.setCreateUser(userId);
+			recruit.setEditUserPosition(sessionUser.getPosition());
+			service.insert(recruit);
+		}else {
+			//如果有ID则是修改
+			service.updateById(recruit);
+		}*/
+		String[] ids = auditIds.split("@");
+		service.putAuditRecruit(recruit, ids);
+		return new ResultJson(true);
+	}
+	
+	/**
+	 * 审批招聘需求 -1:驳回，1通过
+	 * @param request
+	 * @param audit
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("auditRecruit")
+	public ResultJson  auditRecruit(HttpServletRequest request, RecruitAudit audit){
+		AdminUser sessionUser = getSessionUser(request);
+		audit.setAuditUserId(sessionUser.getUserId());
+		audit.setAuditUserPosition(sessionUser.getPosition());
+		return service.auditRecruit(audit);
 	}
 	
 	/**
@@ -89,6 +131,8 @@ public class RecruitController  extends BaseController{
 	public Page getRecruitPageList(HttpServletRequest request,Page page,Recruit search,String type){
 		return service.getRecruitPageList(page, search);
 	}
+	
+	
 	
 	/**
 	 * 审核招聘需求

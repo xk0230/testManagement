@@ -29,8 +29,28 @@ public class CandidateRInterviewer {
     
     private String interviewerDepId;
     
+    private String candidateName;//候选人名称
     
-    public String getInterviewerName() {
+    private String positionName;//岗位名称
+    
+    
+    public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getInterviewerName() {
 		return interviewerName;
 	}
 
