@@ -42,10 +42,12 @@ public class CandidateService {
 	private CandidateMapper mapper;
 	
 	
-	public void insert(Candidate candidate) {
-		candidate.setId(UUIDUtils.getUUID());
+	public String insert(Candidate candidate) {
+		String uuid = UUIDUtils.getUUID();
+		candidate.setId(uuid);
 		candidate.setCreateTime(new Date());
 		mapper.insert(candidate);
+		return uuid;
 	};
 	
 	public void insertRInterviewer(CandidateRInterviewer candidateRInterviewer) {
@@ -99,6 +101,7 @@ public class CandidateService {
 	public Page getCandidateRInterviewerPageList(Page page,CandidateRInterviewer search){
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("candidateId",search.getCandidateId());//候选人ID
+		map.put("interviewerId",search.getInterviewerId());//面试官ID
 	    page.setMap(map);
 		List<CandidateRInterviewer> data = candidateRInterviewerMapper.getCandidateRInterviewerPageList(page);
 		for (CandidateRInterviewer c : data) {
