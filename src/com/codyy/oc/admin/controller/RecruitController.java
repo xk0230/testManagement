@@ -79,18 +79,10 @@ public class RecruitController  extends BaseController{
 	@ResponseBody
 	@RequestMapping("putAuditRecruit")
 	public ResultJson  putAuditRecruit(HttpServletRequest request, Recruit recruit,String auditIds ){
-		/*String userId = getSessionUserId(request);
-		AdminUser sessionUser = getSessionUser(request);
-		if(StringUtils.isEmpty(recruit.getId())){
-			//如果没有ID则新增
-			recruit.setCreateUser(userId);
-			recruit.setEditUserPosition(sessionUser.getPosition());
-			service.insert(recruit);
-		}else {
-			//如果有ID则是修改
-			service.updateById(recruit);
-		}*/
-		String[] ids = auditIds.split("@");
+		String[] ids = null;
+		if(StringUtils.isNotEmpty(auditIds)) {
+			 ids = auditIds.split("@");
+		}
 		service.putAuditRecruit(recruit, ids);
 		return new ResultJson(true);
 	}
@@ -103,11 +95,15 @@ public class RecruitController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("auditRecruit")
-	public ResultJson  auditRecruit(HttpServletRequest request, RecruitAudit audit){
+	public ResultJson  auditRecruit(HttpServletRequest request, RecruitAudit audit,String auditIds){
 		AdminUser sessionUser = getSessionUser(request);
 		audit.setAuditUserId(sessionUser.getUserId());
 		audit.setAuditUserPosition(sessionUser.getPosition());
-		return service.auditRecruit(audit);
+		String[] ids = null;
+		if(StringUtils.isNotEmpty(auditIds)) {
+			 ids = auditIds.split("@");
+		}
+		return service.auditRecruit(audit,ids);
 	}
 	
 	/**

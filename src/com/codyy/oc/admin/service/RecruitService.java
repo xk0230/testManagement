@@ -51,10 +51,13 @@ public class RecruitService {
 	
 	
 	private void setAuditUser(Recruit recruit,String[] audits) {
-		recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
+		if(StringUtils.isEmpty(recruit.getId())) {
+			//如果是新增
+			recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
+		}
 		//获取当前审批人，如果是普通员工提交的，则审批人为部门经理，如果部门没有经理，则给超级管理员；如果是部门经理提交的，则审批人为超级管理员
-		if(AdminUser.SUPER_ADMIN_ID.equals(recruit.getCreateUser())) {
-			//如果是超级管理员创建
+		if(AdminUser.SUPER_ADMIN_ID.equals(recruit.getAuditUser())) {
+			//如果是超级管理员
 //			recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
 			Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
 			maxnum= (maxnum==null?1:(maxnum+1));
@@ -69,7 +72,7 @@ public class RecruitService {
 			}
 		}else {
 			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getCreateUser());
-			if(StringUtils.isEmpty(managerId)||managerId.equals(recruit.getCreateUser())) {
+			if(StringUtils.isEmpty(managerId)||managerId.equals(recruit.getAuditUser())) {
 				//如果没有部门经理或者本身就是部门经理
 				RecruitAudit ra = new RecruitAudit();
 				ra.setAuditUser(AdminUser.SUPER_ADMIN_ID);
@@ -197,7 +200,7 @@ public class RecruitService {
 //		return new ResultJson(true);
 //	}
 	
-	public ResultJson auditRecruit(RecruitAudit audit) {
+	public ResultJson auditRecruit(RecruitAudit audit,String[] auditIds) {
 		int num = recruitAuditMapper.selectUnauditByid(audit.getId());
 		if(num != 1) {
 			return new ResultJson(false,"该审批已完成，请勿重复审批");
@@ -216,8 +219,13 @@ public class RecruitService {
 					recruit.setAuditUser(audit.getAuditUserId());//将提交审核的人设为AuditUser
 					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 					mapper.updateByPrimaryKeySelective(recruit);
-				}else if(CommonsConstant.USER_TYPE_ADMIN.equals(audit.getAuditUserPosition())) {
-					
+					setAuditUser(recruit, null);
+				}else if(AdminUser.SUPER_ADMIN_ID.equals(audit.getAuditUserId())) {
+					Recruit recruit = mapper.selectByPrimaryKey(audit.getRecruitId());
+					recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);//将超级管理员设为AuditUser
+					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
+					mapper.updateByPrimaryKeySelective(recruit);
+					setAuditUser(recruit, auditIds);
 				}
 				
 				//如果是通过
