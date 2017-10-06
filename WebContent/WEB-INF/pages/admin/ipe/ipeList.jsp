@@ -64,26 +64,26 @@
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td><p ng-bind="item.depName"></td>
+												<td><p ng-bind="item.realname"></td>
+												<td><p ng-bind="item.workStatus"></td>
+												<td><p ng-bind="item.pc"></td>
+												<td><p ng-bind="item.adviseSalary"></td>
+												<td><p ng-bind="item.salary"></td>
+												<td><p ng-bind="item.org"></td>
+												<td><p ng-bind="item.yx"></td>
+												<td><p ng-bind="item.gt"></td>
+												<td><p ng-bind="item.gx"></td>
+												<td><p ng-bind="item.kj"></td>
+												<td><p ng-bind="item.cx"></td>
+												<td><p ng-bind="item.fzd"></td>
+												<td><p ng-bind="item.zs"></td>
+												<td><p ng-bind="item.td"></td>
+												<td><p ng-bind="item.kd"></td>
 												
 												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editIpe('')"><i class="fa-edit"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delIpe('')"><i class="ec-trashcan"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editIpe(item.id)"><i class="fa-edit"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delIpe(item.id)"><i class="ec-trashcan"></i></button>
 												</td>
 											</tr>
 										</tbody>
@@ -162,11 +162,11 @@
 												<div class="col-lg-8">
 													<select ng-model="ipe.gx"  class="form-control select2">
 														<option value="">--请选择--</option>
-														<option value="yx" >有限</option>
-														<option value="bf" >部分</option>
-														<option value="zj" >直接</option>
-														<option value="xz" >显著</option>
-														<option value="sy" >首要</option>
+														<option value="yx,有限" >有限</option>
+														<option value="bf,部分" >部分</option>
+														<option value="zj,直接" >直接</option>
+														<option value="xz,显著" >显著</option>
+														<option value="sy,首要" >首要</option>
 													</select>
 												</div>
 											</div>
@@ -196,10 +196,10 @@
 												<div class="col-lg-8">
 													<select ng-model="ipe.kj"  class="form-control select2" >
 														<option value="">--请选择--</option>
-														<option value="a" >内部共享</option>
-														<option value="b" >外部共享</option>
-														<option value="c" >内部分歧</option>
-														<option value="d" >外部分歧</option>
+														<option value="a,内部共享" >内部共享</option>
+														<option value="b,外部共享" >外部共享</option>
+														<option value="c,内部分歧" >内部分歧</option>
+														<option value="d,外部分歧" >外部分歧</option>
 													</select>
 												</div>
 											</div>
@@ -231,13 +231,13 @@
 												<div class="col-lg-8">
 													<select ng-model="ipe.fzd"  class="form-control select2" >
 														<option value="">--请选择--</option>
-														<option value="a" >明确的</option>
-														<option value="b" >明确-复杂</option>
-														<option value="c" >困难的</option>
-														<option value="d" >困难-符合</option>
-														<option value="e" >复合的</option>
-														<option value="f" >复合-多维</option>
-														<option value="g" >多维的</option>
+														<option value="a,明确的" >明确的</option>
+														<option value="b,明确-复杂" >明确-复杂</option>
+														<option value="c,困难的" >困难的</option>
+														<option value="d,困难-符合" >困难-符合</option>
+														<option value="e,复合的" >复合的</option>
+														<option value="f,复合-多维" >复合-多维</option>
+														<option value="g,多维的" >多维的</option>
 													</select>
 												</div>
 											</div>
@@ -269,25 +269,25 @@
 											</div>
 											
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">团队本土</label>
+												<label class="col-lg-4 control-label">团队宽度</label>
 												<div class="col-lg-8">
 													<select ng-model="ipe.td"  class="form-control select2" >
 														<option value="">--请选择--</option>
-														<option value="a" >团队成员-本土</option>
-														<option value="b" >团队成员-地区</option>
-														<option value="c" >团队成员-全球</option>													
-														<option value="d" >成员-领导-本土</option>
-														<option value="e" >成员-领导-地区</option>													
-														<option value="f" >成员-领导-全球</option>
-														<option value="g" >团队领导-本土</option>
-														<option value="h" >团队领导-地区</option>													
-														<option value="i" >团队领导-全球</option>
-														<option value="j" >领导-多团队-本土</option>
-														<option value="k" >领导-多团队-地区</option>
-														<option value="l" >领导-多团队-全球</option>
-														<option value="m" >多团队领导-本土</option>
-														<option value="n" >多团队领导-地区</option>
-														<option value="o" >多团队领导-全球</option>														
+														<option value="a,团队成员-本土" >团队成员-本土</option>
+														<option value="b,团队成员-地区" >团队成员-地区</option>
+														<option value="c,团队成员-全球" >团队成员-全球</option>													
+														<option value="d,成员-领导-本土" >成员-领导-本土</option>
+														<option value="e,成员-领导-地区" >成员-领导-地区</option>													
+														<option value="f,成员-领导-全球" >成员-领导-全球</option>
+														<option value="g,团队领导-本土" >团队领导-本土</option>
+														<option value="h,团队领导-地区" >团队领导-地区</option>													
+														<option value="i,团队领导-全球" >团队领导-全球</option>
+														<option value="j,领导-多团队-本土" >领导-多团队-本土</option>
+														<option value="k,领导-多团队-地区" >领导-多团队-地区</option>
+														<option value="l,领导-多团队-全球" >领导-多团队-全球</option>
+														<option value="m,多团队领导-本土" >多团队领导-本土</option>
+														<option value="n,多团队领导-地区" >多团队领导-地区</option>
+														<option value="o,多团队领导-全球" >多团队领导-全球</option>														
 													</select>
 												</div>
 											</div>

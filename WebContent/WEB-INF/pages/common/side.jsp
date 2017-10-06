@@ -56,7 +56,7 @@
               <span class="nav-link-text">IPE管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postIPE">
-				<li><a href="#"><i class="en-arrow-right7"></i>IPE</a>
+				<li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a>
 				</li>
 				<li><a href="#"><i class="en-arrow-right7"></i>IPE试算</a>
 				</li>

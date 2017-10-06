@@ -3,6 +3,45 @@
 myAppModule.controller('IpeController',
 	function ipeController($scope,$http,$uibModal,$document,$filter){
 		var self = this;
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 10;
+		
+		this.$onInit = function(){
+			
+			self.getIpeList();
+		};
+		
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+
+		$scope.pageChanged = function() {
+			self.getIpeList();
+		};
+		
+		// 获取数据列表
+		this.getIpeList = function(){
+			
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/ipe/page.do',
+				params:{
+					userId:$('#userId').val(),
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+		};
 		
 		
 		this.editIpe = function (id, parentSelector) {
@@ -29,7 +68,7 @@ myAppModule.controller('IpeController',
 		    	    	
 		    	    	//ok的回调函数
 		    	    	if(selectedItem == '0'){
-		    	    		//self.getCostList();
+		    	    		self.getIpeList();
 		    	    	}
 		    	    	
 		    	    }, function () {

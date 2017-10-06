@@ -1,17 +1,23 @@
 package com.codyy.oc.admin.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.dao.IpeDao;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.IpeBean;
+import com.codyy.oc.admin.vo.IpeVO;
 
 @Service("ipeServer")
 public class IpeService {
@@ -32,9 +38,9 @@ public class IpeService {
 		JsonDto jsonDto = new JsonDto();
 		
 		ipe.setCreateUser(user.getUserName());
-		
-		ipe.setTd(StringUtils.substringBeforeLast(ipe.getTd(), "-"));
-		ipe.setKd(StringUtils.substringAfterLast(ipe.getTd(), "-"));
+		String td = ipe.getTd();
+		ipe.setTd(StringUtils.substringBeforeLast(td, "-"));
+		ipe.setKd(StringUtils.substringAfterLast(td, "-"));
 		
 		if(StringUtils.isBlank(ipe.getId())){
 			ipe.setCreateTime(DateUtils.getCurrentTimestamp());
@@ -79,14 +85,60 @@ public class IpeService {
 		
 		if(null == ipe){
 			ipe = new IpeBean();
-			ipe.setOrg(ipeDao.getOrganizationalSize());
 		}
 		
 		if(null != ipe){
+			ipe.setOrg(ipeDao.getOrganizationalSize());
+			ipe.setTd(ipe.getTd()+"-"+ipe.getKd());
+			
 			jsonDto.setCode(0);
 			jsonDto.setObjData(ipe);
 		}
 		return jsonDto;
+	}
+
+	public Page getIpePageList(IpeVO ipe) {
+		
+		Page page = new Page();
+	    page.setStart(ipe.getStart());
+	    page.setEnd(ipe.getEnd());
+	    
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    
+	    map.put("userId", ipe.getUserId());
+	    
+	    page.setMap(map);
+	    
+	    List<IpeVO> ipePageList = ipeDao.getIpePageList(page);
+	    
+	    if(CollectionUtils.isNotEmpty(ipePageList)){
+	    	//组织规模
+	    	String organizationalSize = ipeDao.getOrganizationalSize();
+	    	for(IpeVO ipeVO : ipePageList){
+	    		ipeVO.setOrg(organizationalSize);
+	    		
+	    		String gx = ipeVO.getGx();
+	    		String kj = ipeVO.getKj();
+	    		String fzd = ipeVO.getFzd();
+	    		String td = ipeVO.getTd();
+	    		
+	    		ipeVO.setGx(StringUtils.substringAfterLast(gx, ","));
+	    		ipeVO.setKj(StringUtils.substringAfterLast(kj, ","));
+	    		ipeVO.setFzd(StringUtils.substringAfterLast(fzd, ","));
+	    		ipeVO.setTd(StringUtils.substringAfterLast(td, ","));
+	    		
+	    		
+	    		//计算ipe
+	    		
+	    	};
+	    	
+	    }
+	    
+	    
+	    page.setData(ipePageList);
+	    
+	    return page;
+		
 	}
 
 	

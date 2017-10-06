@@ -106,5 +106,21 @@
 	
 	</update>
 	
+	<select id="getIpePageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.IpeVO">
+		SELECT 	user.realname, dep.name AS depName,
+				ipe.id,ipe.work_status AS workStatus,ipe.salary,ipe.yx,
+				ipe.gx,ipe.gt,ipe.kj,ipe.cx,ipe.fzd,ipe.zs,ipe.td,ipe.kd
+				
+		FROM IPE ipe,ADMIN_USER user,DEPARTMENT dep
+		
+		WHERE ipe.user_id = user.user_id AND user.dep_id = dep.dep_id
+			  
+			<if test="map.userId != null and map.userId !=''">
+				AND ipe.user_id  = #{map.userId}
+			</if>
+			
+		ORDER BY ipe.create_time DESC
+	
+	</select>
 	
 </mapper>
