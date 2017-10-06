@@ -42,4 +42,9 @@ public class TestController extends BaseController {
 		return "/admin/Recruitment/EditRecruitment";
 	}
 	
+	@RequestMapping("MyInterview")
+	public String MyInterview(HttpServletRequest request){
+		return "/admin/Recruitment/MyInterview";
+	}
+	
 }
