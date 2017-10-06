@@ -334,7 +334,7 @@
 			
 			
 		</div>
-		<!-- End #content -->
+		
 	<input type="hidden" id="rootUrl" value="${root}">
 	<input type="hidden" id="userId" value="${userId}">
 	<script src="${root}/public/js/pages/ipe/edit.js" type="text/javascript"></script>
