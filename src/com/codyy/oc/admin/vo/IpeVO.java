@@ -12,6 +12,9 @@ public class IpeVO extends IpeBean{
 	
 	private String depName;
 	
+	private String fieldName;
+	private String valueName;
+	
 	public int getStart() {
 		return start;
 	}
@@ -43,6 +46,21 @@ public class IpeVO extends IpeBean{
 	public void setDepName(String depName) {
 		this.depName = depName;
 	}
-	
-	
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+
+	public String getValueName() {
+		return valueName;
+	}
+
+	public void setValueName(String valueName) {
+		this.valueName = valueName;
+	}
+
 }

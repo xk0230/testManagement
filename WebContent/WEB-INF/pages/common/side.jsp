@@ -58,7 +58,7 @@
             <ul class="sidenav-second-level collapse nav" id="postIPE">
 				<li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a>
 				</li>
-				<li><a href="#"><i class="en-arrow-right7"></i>IPE试算</a>
+				<li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a>
 				</li>
 				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a>
 				</li>

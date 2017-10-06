@@ -35,6 +35,12 @@ public class IpeController extends BaseController{
 		return "/admin/ipe/ipeManager";
 	}
 	
+	@RequestMapping("/trial.do")
+	public String toIpeTrial(){
+		
+		return "/admin/ipe/ipeTrial";
+	}
+	
 	@RequestMapping("/getIpe.do")
 	public String getIpe(Model model,String userId){
 		model.addAttribute("userId", userId);
@@ -75,5 +81,45 @@ public class IpeController extends BaseController{
 	public JsonDto delIpeById(@PathVariable String id){
 		
 		return ipeService.delIpeById(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/alYxAndOrg.do")
+	public String calYxAndOrgValue(IpeVO ipeVO){
+		ipeVO.setOrg("6");
+		ipeVO.setYx("操作");
+		ipeVO.setGx("bf,部分");
+		
+		return ipeService.calYxAndOrgValue(ipeVO);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/calGtAndKj.do")
+	public String calGtAndKjValue(IpeVO ipeVO){
+		
+		ipeVO.setGt("交互");
+		ipeVO.setKj("c,内部分歧");
+		
+		return ipeService.calGtAndKjValue(ipeVO);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/calCxAndFzd.do")
+	public String calCxAndFzdValue(IpeVO ipeVO){
+		
+		ipeVO.setCx("核查-改进");
+		ipeVO.setFzd("d,困难-符合");
+		
+		return ipeService.calCxAndFzdValue(ipeVO);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/calZsAndTd.do")
+	public String calZsAndTdValue(IpeVO ipeVO){
+		
+		ipeVO.setZs("基本-宽泛");
+		ipeVO.setTd("j,领导-多团队-本土");
+		
+		return ipeService.calZsAndTdValue(ipeVO);
 	}
 }
