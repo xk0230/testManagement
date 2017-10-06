@@ -1,6 +1,6 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http){
+	function UserListController($scope,$http,$document, $filter,$uibModal){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -40,10 +40,85 @@ myAppModule.controller('UserListController',
 			})
 		};
 		
-		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/test/EditRecruitment.do?id="+id; 
-		};
+		//候选人编辑
+		this.edit = function (item, parentSelector) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalEditContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    	    	  //好像必须得这么写
+		    	        items: function () {
+		    	          return item;
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result.then(function (selectedItem) {
+		    	    	
+		    	    	//ok的回调函数
+		    	    	if(selectedItem == '0'){
+		    	    		alert("保存成功！");
+		    	    		self.getFinancingInfoList();
+		    	    	}
+		    	    	
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	
+		    	    });
+		   };
+		
 	}
 );
+
+//编辑页面的control
+angular.module('myApp').controller('ModalInstanceCtrl', 
+function ($scope,$http,$uibModalInstance,$filter, items) {
+	var $ctrl = this;
+	//获取页面参数
+	$scope.items = items;
+	$scope.items.interviewTime = $filter('date')(items.interviewTime, 'yyyy-MM-dd hh:mm:ss');
+	//页面初期化
+	this.$onInit = function(){
+
+	};
+	
+	//保存操作
+	$scope.onSubmit = function () {
+		var params = {
+				//id
+				id:$scope.items.id,
+				workDetail:items.workDetail,
+				skillDetail:items.skillDetail,
+				wordScore:items.wordScore,
+				skillScore:items.skillScore
+			}
+			$http({
+				method:'POST',
+				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
+				params:params
+			
+			}).then(function(res){
+				if(res.data.result){
+					$uibModalInstance.close('0');
+				}else{
+					alert("保存失败！");
+				}
+		});
+	};
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+	  
+	});
+
+
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);
