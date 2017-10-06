@@ -384,7 +384,7 @@
 																<span class="input-group-addon"><span class="glyphicon glyphicon-remove" ng-disabled="vm.readOnly"></span></span>
 																<span class="input-group-addon"><span class="glyphicon glyphicon-th" ng-disabled="vm.readOnly"></span></span>
 															</div>
-															<input type="text" id="dtp_input1" value="" ng-change="changeTime()" ng-model="Interview.interviewTime" />
+															<input type="hidden" id="dtp_input1" value="" ng-change="changeTime()" ng-model="Interview.interviewTime" />
 													</p>
 												</div>
 												</div>
