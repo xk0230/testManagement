@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.CandidateRRecrcomMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.CandidateRRecrcom">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="candidate_id" jdbcType="VARCHAR" property="candidateId" />
+    <result column="rec_r_com_id" jdbcType="VARCHAR" property="recRComId" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, candidate_id, rec_r_com_id, value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CANDIDATE_R_RECRCOM
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CANDIDATE_R_RECRCOM
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
+    insert into CANDIDATE_R_RECRCOM (id, candidate_id, rec_r_com_id, 
+      value)
+    values (#{id,jdbcType=VARCHAR}, #{candidateId,jdbcType=VARCHAR}, #{recRComId,jdbcType=VARCHAR}, 
+      #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
+    insert into CANDIDATE_R_RECRCOM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="candidateId != null">
+        candidate_id,
+      </if>
+      <if test="recRComId != null">
+        rec_r_com_id,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="candidateId != null">
+        #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="recRComId != null">
+        #{recRComId,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
+    update CANDIDATE_R_RECRCOM
+    <set>
+      <if test="candidateId != null">
+        candidate_id = #{candidateId,jdbcType=VARCHAR},
+      </if>
+      <if test="recRComId != null">
+        rec_r_com_id = #{recRComId,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
+    update CANDIDATE_R_RECRCOM
+    set candidate_id = #{candidateId,jdbcType=VARCHAR},
+      rec_r_com_id = #{recRComId,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
