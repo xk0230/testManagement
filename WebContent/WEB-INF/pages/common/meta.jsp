@@ -62,7 +62,10 @@
 <script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
-
+<!-- 日期选择控件 -->
+<link href="${root}/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript"></script> 
+<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script> 
 
 <script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
 

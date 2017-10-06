@@ -57,6 +57,7 @@ setInterval("getNewsNum()","60000");
                     <i class="text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
                 </a>
             </div>
+            <input id="sessionUserId"  type="hidden" value="${adminUser.userId}">
             <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
             <input id="sessionUserDepId"  type="hidden" value="${adminUser.depId}">
             <div>

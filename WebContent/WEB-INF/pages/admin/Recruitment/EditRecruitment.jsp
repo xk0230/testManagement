@@ -329,7 +329,7 @@
 						</div>
 					</div>
 
-					<div class="row" ng-if="showEdit">
+					<div class="row" ng-show="showEdit">
 						<div class="col-lg-12">
 							<div class="panel panel-info toggle">
 								<!-- Start .panel -->
@@ -379,12 +379,12 @@
 												<div class="col-lg-8">
 												<div class="form-group">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="Interview.interviewTime" is-open="popup.opened1" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-													     ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-														<button type="button" class="btn btn-default" ng-click="open(1)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
+															<div class="input-group date form_datetime col-lg-12"  data-date="2017-10-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
+																<input class="form-control" size="16" type="text" value="" readonly  ng-model="Interview.interviewTime" >
+																<span class="input-group-addon"><span class="glyphicon glyphicon-remove" ng-disabled="vm.readOnly"></span></span>
+																<span class="input-group-addon"><span class="glyphicon glyphicon-th" ng-disabled="vm.readOnly"></span></span>
+															</div>
+															<input type="text" id="dtp_input1" value="" ng-change="changeTime()" ng-model="Interview.interviewTime" />
 													</p>
 												</div>
 												</div>

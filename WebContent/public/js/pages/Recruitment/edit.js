@@ -34,7 +34,6 @@ myAppModule.controller('UserListController',
 				this.getRecruitmentInfo();
 				//招聘需求候选人
 				this.getCandidatePageList();
-				
 			}
 		}
 		
@@ -276,9 +275,8 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			$scope.getInterViewList();
 		}
 		
-		//获取部门List
+		// 获取部门List
 		$scope.getDepList();
-
 	  };
 	
 	//获取面试官列表
@@ -304,17 +302,40 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.addInterview = function(){
 		$scope.showEdit = true;
 		$scope.Interview = {};
+		// 日期控件
+		$('.form_datetime').datetimepicker({
+		    //language:  'fr',
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			forceParse: 0,
+		    showMeridian: 1
+		});
 	}
 	
-	//新增面试官
+	//编辑面试官
 	$scope.editInterview = function(Interview){
 		$scope.showEdit = true;
 		//设置面试官信息
 		$scope.Interview = Interview;
+		$scope.Interview.interviewTime = $filter('date')($scope.Interview.interviewTime, 'yyyy-MM-dd hh:mm:ss');
 		//获取岗位列表
 		$scope.getPostionById();
 		//获取面试官列表
 		$scope.getFinancingInfoList();
+		// 日期控件
+		$('.form_datetime').datetimepicker({
+		    language:  'zh-CN',
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			forceParse: 0,
+		    showMeridian: 1
+		});
 	}
 	
 	//获取部门
@@ -435,7 +456,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 
 		$scope.dateOptions = {
 			dateDisabled: "",
-			formatYear: 'yyyy',
+			formatYear: 'medium',
 			maxDate: new Date(9999, 12, 31),
 			minDate: new Date(1000, 1,1),
 			startingDay: 1,
@@ -454,5 +475,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	  
 	  
 	});
+
+
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);
