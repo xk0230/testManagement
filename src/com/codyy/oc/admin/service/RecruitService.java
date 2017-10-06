@@ -221,20 +221,19 @@ public class RecruitService {
 					mapper.updateByPrimaryKeySelective(recruit);
 					setAuditUser(recruit, null);
 				}else if(AdminUser.SUPER_ADMIN_ID.equals(audit.getAuditUserId())) {
+					//如果是超级管理员审批部门经理或者普通员工的请求
 					Recruit recruit = mapper.selectByPrimaryKey(audit.getRecruitId());
 					recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);//将超级管理员设为AuditUser
 					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 					mapper.updateByPrimaryKeySelective(recruit);
 					setAuditUser(recruit, auditIds);
-				}
-				
-				//如果是通过
-				int unpassnum = recruitAuditMapper.getUnpassOrNullNum(audit.getId());
-				if(unpassnum == 0 ) {
-					//如果已经全部通过，则将该岗位修改为审批通过
-					recruitAuditMapper.passById(audit.getId());
-					
-					
+				}else if(CommonsConstant.USER_TYPE_ADMIN.equals(audit.getAuditUserPosition())){
+					//如果是admin审批超级管理员的请求则表示最终通过
+					int unpassnum = recruitAuditMapper.getUnpassOrNullNum(audit.getId());
+					if(unpassnum == 0 ) {
+						//如果已经全部通过，则将该岗位修改为审批通过
+						recruitAuditMapper.passById(audit.getId());
+					}
 				}
 			}
 		}
