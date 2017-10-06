@@ -468,6 +468,9 @@
 			<if test="map.postId != null and map.postId !=''">
 				and au.post_id = (#{map.postId})
 			</if>
+			<if test="map.position != null and map.position !=''">
+				and au.position = #{map.position}
+			</if>
 			
 			order by au.create_time DESC
 		
