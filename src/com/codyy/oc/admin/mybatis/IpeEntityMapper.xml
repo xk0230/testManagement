@@ -101,7 +101,7 @@
 							   zs = #{zs},
 							   td = #{td},
 							   kd = #{kd},
-							   createUser = #{createUser}
+							   create_user = #{createUser}
 		WHERE id = #{id}
 	
 	</update>
