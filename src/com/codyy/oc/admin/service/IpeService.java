@@ -141,6 +141,16 @@ public class IpeService {
 		
 	}
 
+	public JsonDto delIpeById(String id) {
+		JsonDto jsonDto = new JsonDto();
+		int delNum = ipeDao.delIpeById(id);
+		if(delNum == 1){
+			jsonDto.setCode(0);
+		}
+		
+		return jsonDto;
+	}
+
 	
 	
 }

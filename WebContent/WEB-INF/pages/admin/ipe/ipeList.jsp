@@ -332,6 +332,22 @@
         </div>
     </script>
 			
+	<script type="text/ng-template" id="myModalDelContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<ul id="crumb" class="breadcrumb">
+							确定删除IPE记录吗？
+						</ul>
+					</div>
+				</div>
+			</div>
+				
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
 			
 		</div>
 		

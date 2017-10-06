@@ -76,6 +76,38 @@ myAppModule.controller('IpeController',
 		    	    	
 		    	    });
 		   };
+		   
+		   this.delIpe = function (id, parentSelector) {
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+			    	    var modalInstance = $uibModal.open({
+			    	      animation: true,
+			    	      ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'myModalDelContent.html',
+			    	      controller: 'ModalInstanceDel',
+			    	      controllerAs: '$ctrl',
+			    	      size: 'sm',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    	    	  //好像必须得这么写
+			    	        items: function () {
+			    	          return id;
+			    	        }
+			    	      }
+			    	    });
+
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	//ok的回调函数
+			    	    	if(selectedItem == '0'){
+			    	    		self.getIpeList();
+			    	    	}
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    });
+			   };
 	}
 );
 
@@ -189,9 +221,38 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 	    $uibModalInstance.dismiss('cancel');
 	  };
 	  
-	  
-	  
 	});
 
+//删除页面的control
+angular.module('myApp').controller('ModalInstanceDel', 
+		function ($scope,$http,$uibModalInstance,items) {
+	  var $ctrl = this;
+	  $ctrl.items = items;
+	  
+	  $ctrl.selected = {
+	    item: $ctrl.items[0]
+	  };
+
+	  $ctrl.ok = function () {
+		  $http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/ipe/del/"+items+".do",
+				params:{}
+			
+			}).then(function(res){
+				
+				if(res.data.code == 0){
+					$uibModalInstance.close('0');
+				}
+				
+			});
+	    
+	  };
+
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+	  
+	});
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);

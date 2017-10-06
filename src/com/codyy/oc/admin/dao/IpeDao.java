@@ -19,5 +19,7 @@ public interface IpeDao {
 	List<IpeBean> getIpeByUserId(String id);
 
 	List<IpeVO> getIpePageList(Page page);
+
+	int delIpeById(String id);
 	
 }

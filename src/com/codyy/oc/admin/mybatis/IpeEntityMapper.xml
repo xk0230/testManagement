@@ -123,4 +123,10 @@
 	
 	</select>
 	
+	<delete id="delIpeById" parameterType="java.lang.String">
+	
+		DELETE FROM IPE WHERE id = #{_parameter}
+		
+	</delete>
+	
 </mapper>
