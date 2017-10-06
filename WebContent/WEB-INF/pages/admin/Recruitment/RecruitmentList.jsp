@@ -85,14 +85,14 @@
 										<thead>
 											<tr>
 												<th>岗位名称</th>
-												<th>招聘状态</th>
+												<th>状态</th>
 												<th>操作</th>
 											</tr>
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td><p ng-bind="item.postName"></p></td>
-												<td><p ng-bind="item.status"></p></td>
+												<td><p ng-bind="item.statusStr"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success"><i class="ec-search"></i></button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i></button>
