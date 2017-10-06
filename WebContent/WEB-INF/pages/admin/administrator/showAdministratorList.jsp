@@ -101,7 +101,7 @@
 									<table class="table display" id="datatable">
 										<thead>
 											<tr>
-												<th>工号</th>
+												<th>用户名</th>
 												<th>姓名</th>
 												<th>部门</th>
 												<th>角色</th>
