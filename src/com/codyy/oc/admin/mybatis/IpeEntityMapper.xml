@@ -129,4 +129,44 @@
 		
 	</delete>
 	
+	<select id="getYxAndGxValue" parameterType="com.codyy.oc.admin.vo.IpeVO" resultType="java.lang.String">
+		
+		SELECT ${gx}  FROM IPE_CONF_A   WHERE id = #{yx}
+		
+	</select>
+	
+	<select id="getYxAndOrgValue" parameterType="com.codyy.oc.admin.vo.IpeVO" resultType="java.lang.String">
+		
+		SELECT ${fieldName}  FROM IPE_CONF_B   WHERE id = #{valueName}
+		
+	</select>
+	
+	<select id="getGtAndKjValue" parameterType="com.codyy.oc.admin.vo.IpeVO" resultType="java.lang.String">
+		
+		SELECT ${kj}  FROM IPE_CONF_C   WHERE id = #{gt}
+		
+	</select>
+	
+	<select id="getCxAndFzdValue" parameterType="com.codyy.oc.admin.vo.IpeVO" resultType="java.lang.String">
+		
+		SELECT ${fzd}  FROM IPE_CONF_D   WHERE id = #{cx}
+		
+	</select>
+	
+	<select id="getZsAndTdValue" parameterType="com.codyy.oc.admin.vo.IpeVO" resultType="java.lang.String">
+		
+		SELECT ${td}  FROM IPE_CONF_E   WHERE id = #{zs}
+		
+	</select>
+	
+	<select id="getMaxScorePcSalaryVO" parameterType="double" resultType="com.codyy.oc.admin.vo.ScorePcSalaryVO">
+		
+		SELECT score,pc,salary
+
+		FROM PC_SALARY
+
+		WHERE score = (SELECT MAX(score) FROM PC_SALARY WHERE score <![CDATA[<= ]]> #{_parameter} )
+		
+	</select>
+	
 </mapper>
