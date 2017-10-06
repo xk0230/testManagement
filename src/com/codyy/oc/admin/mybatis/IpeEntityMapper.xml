@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.IpeDao" >
+
+	
+	<select id="getOrganizationalSize" resultType="java.lang.String">
+	
+		SELECT VALUE FROM CONFIG WHERE `KEY` = 'organizational_size' 
+		
+	</select>
+	
+	<select id="getIpeById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.IpeBean">
+		SELECT  				 id,
+								 user_id AS userId,
+								 work_status AS workStatus,
+								 salary,
+								 yx,
+								 gx,
+								 gt,
+								 kj,
+								 cx,
+								 fzd,
+								 zs,
+								 td,
+								 kd,
+								 create_time AS createTime,
+								 create_user AS createUser
+		FROM IPE
+		
+		WHERE id = #{id}
+	
+	</select>
+	
+	<select id="getIpeByUserId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.IpeBean">
+		SELECT  				 id,
+								 user_id AS userId,
+								 work_status AS workStatus,
+								 salary,
+								 yx,
+								 gx,
+								 gt,
+								 kj,
+								 cx,
+								 fzd,
+								 zs,
+								 td,
+								 kd,
+								 create_time AS createTime,
+								 create_user AS createUser
+		FROM IPE
+		
+		WHERE user_id = #{userId}
+	
+	</select>
+	
+	<insert id="insertIpe" parameterType="com.codyy.oc.admin.entity.IpeBean" >
+		INSERT INTO IPE( id,
+								 user_id,
+								 work_status,
+								 salary,
+								 yx,
+								 gx,
+								 gt,
+								 kj,
+								 cx,
+								 fzd,
+								 zs,
+								 td,
+								 kd,
+								 create_time,
+								 create_user
+								)
+		VALUES( #{id},
+				#{userId},
+				#{workStatus},
+				#{salary},
+				#{yx},
+				#{gx},
+				#{gt},
+				#{kj},
+				#{cx},
+				#{fzd},
+				#{zs},
+				#{td},
+				#{kd},
+				#{createTime},
+				#{createUser}
+			)
+	
+	</insert>
+	
+	<update id="updateIpe" parameterType="com.codyy.oc.admin.entity.IpeBean">
+		UPDATE IPE SET work_status = #{workStatus},
+							   salary = #{salary},
+							   yx = #{yx},
+							   gx = #{gx},
+							   gt = #{gt},
+							   kj = #{kj},
+							   cx = #{cx},
+							   fzd = #{fzd},
+							   zs = #{zs},
+							   td = #{td},
+							   kd = #{kd},
+							   create_user = #{createUser}
+		WHERE id = #{id}
+	
+	</update>
+	
+	<select id="getIpePageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.IpeVO">
+		SELECT 	user.realname, dep.name AS depName,
+				ipe.id,ipe.work_status AS workStatus,ipe.salary,ipe.yx,
+				ipe.gx,ipe.gt,ipe.kj,ipe.cx,ipe.fzd,ipe.zs,ipe.td,ipe.kd
+				
+		FROM IPE ipe,ADMIN_USER user,DEPARTMENT dep
+		
+		WHERE ipe.user_id = user.user_id AND user.dep_id = dep.dep_id
+			  
+			<if test="map.userId != null and map.userId !=''">
+				AND ipe.user_id  = #{map.userId}
+			</if>
+			
+		ORDER BY ipe.create_time DESC
+	
+	</select>
+	
+	<delete id="delIpeById" parameterType="java.lang.String">
+	
+		DELETE FROM IPE WHERE id = #{_parameter}
+		
+	</delete>
+	
+</mapper>

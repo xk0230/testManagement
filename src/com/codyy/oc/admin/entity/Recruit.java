@@ -3,6 +3,8 @@ package com.codyy.oc.admin.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.codyy.commons.CommonsConstant;
+
 public class Recruit {
     private String id;
 
@@ -46,6 +48,27 @@ public class Recruit {
     
     private String editUserPosition;//提交审批角色
     
+    private String statusStr;
+    
+	public String getStatusStr() {
+		if(status == null) {
+			return statusStr;
+		}else if(CommonsConstant.AUDIT_STATUS_UNAUDIT.equals(status)) {
+			return "未提交审核";
+		}else if(CommonsConstant.AUDIT_STATUS_AUDITING.equals(status)) {
+			return "审核中";
+		}else if(CommonsConstant.AUDIT_STATUS_REJECT.equals(status)) {
+			return "驳回";
+		}else if(CommonsConstant.AUDIT_STATUS_AUDITED.equals(status)) {
+			return "审核通过";
+		}
+		return statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+
 	public String getEditUserPosition() {
 		return editUserPosition;
 	}

@@ -474,6 +474,7 @@ public class AdminUserManagerService {
 		map.put("realName",userSearch.getRealName());
 		map.put("depId", userSearch.getDepId());
 		map.put("postId", userSearch.getPostId());
+		map.put("position", userSearch.getPosition());
 //		map.put("contact", OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getContact()));
 //		map.put("position",OracleKeyWordUtils.oracleKeyWordReplace(userSearch.getPosition()));
 //		if(flag){

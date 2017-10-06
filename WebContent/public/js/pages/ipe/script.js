@@ -41,7 +41,7 @@ myAppModule.controller('UserListController',
 					userName: $scope.userName,
 					realName: $scope.realName,
 					depId   : $scope.depId,
-					postId: $scope.postId,
+					position: $scope.postId,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -89,13 +89,8 @@ myAppModule.controller('UserListController',
 			})
 		}
 		
-		// 添加新用户
-		this.addNewUser = function(id){
-			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do"; 
-		};
-		
-		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+id; 
+		this.searchIpe = function(userId){
+			window.location.href="/ccydManagement/admin/ipe/getIpe.do?userId="+userId; 
 		};
 	}
 );
