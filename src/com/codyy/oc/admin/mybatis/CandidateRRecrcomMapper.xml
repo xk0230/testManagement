@@ -20,6 +20,11 @@
     delete from CANDIDATE_R_RECRCOM
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+    <delete id="deleteByCandidate" parameterType="java.lang.String">
+    delete from CANDIDATE_R_RECRCOM
+    where candidate_id = #{canId,jdbcType=VARCHAR}
+  </delete>
+  
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
     insert into CANDIDATE_R_RECRCOM (id, candidate_id, rec_r_com_id, 
       value)

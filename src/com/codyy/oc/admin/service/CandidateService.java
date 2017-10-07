@@ -13,11 +13,13 @@ import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CandidateMapper;
 import com.codyy.oc.admin.dao.CandidateRInterviewerMapper;
+import com.codyy.oc.admin.dao.CandidateRRecrcomMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
+import com.codyy.oc.admin.entity.CandidateRRecrcom;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.Recruit;
 
@@ -32,20 +34,14 @@ public class CandidateService {
 	private  RecruitMapper recruitMapper;
 	@Autowired
 	private AdminUserMapper adminUserMapper;
-//	@Autowired
-//	private RecruitRCompetencyMapper recruitRCompetencyMapper;
 	@Autowired
 	private CandidateRInterviewerMapper candidateRInterviewerMapper;
-//	@Autowired
-//	private RecruitAuditMapper recruitAuditMapper;
-//	@Autowired
-//	private CompetencyMapper competencyMapper;
-//	@Autowired
-//	private DepartmentMapper departmentMapper;
 	@Autowired
 	private CandidateMapper mapper;
 	@Autowired
 	private PositionMapper positionMapper;
+	@Autowired
+	private CandidateRRecrcomMapper candidateRRecrcomMapper;
 	
 	
 	public String insert(Candidate candidate) {
@@ -76,8 +72,15 @@ public class CandidateService {
 //	}
 	
 	
-	public void updateById(Candidate candidate) {
+	public void updateById(Candidate candidate,List<CandidateRRecrcom> crs) {
 		mapper.updateByPrimaryKeySelective(candidate);
+		//添加胜任特征总评
+		if(crs != null) {
+			candidateRRecrcomMapper.deleteByCandidate(candidate.getId());
+			for (CandidateRRecrcom candidateRRecrcom : crs) {
+				candidateRRecrcomMapper.insert(candidateRRecrcom);
+			}
+		}
 	}
 	
 	public void updateRInterviewerById(CandidateRInterviewer candidateRInterviewer) {

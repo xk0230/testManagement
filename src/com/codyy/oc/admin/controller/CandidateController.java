@@ -1,7 +1,9 @@
 package com.codyy.oc.admin.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.ResultJson;
 import com.codyy.commons.utils.StringUtils;
+import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
+import com.codyy.oc.admin.entity.CandidateRRecrcom;
 import com.codyy.oc.admin.service.CandidateService;
 
 @Controller
@@ -42,13 +46,26 @@ public class CandidateController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("saveOrUpdateCandidate")
-	public ResultJson  saveOrUpdateCandidate(HttpServletRequest request, Candidate candidate ){
+	public ResultJson  saveOrUpdateCandidate(HttpServletRequest request, Candidate candidate,String recRComIdsStr,String valuesStr ){
 		if(StringUtils.isEmpty(candidate.getId())){
 			//如果没有ID则新增
 			service.insert(candidate);
 		}else {
 			//如果有ID则是修改
-			service.updateById(candidate);
+			List<CandidateRRecrcom> crs = new ArrayList<CandidateRRecrcom>();
+			if(StringUtils.isNotBlank(recRComIdsStr)&&StringUtils.isNotBlank(valuesStr)) {
+				String[] recRComIds = recRComIdsStr.split("@");
+				String[] values = valuesStr.split("@@@");
+				for (int i = 0; i < values.length; i++) {
+					CandidateRRecrcom cr = new CandidateRRecrcom();
+					cr.setId(UUIDUtils.getUUID());
+					cr.setRecRComId(values[i]);
+					cr.setValue(recRComIds[i]);
+					cr.setCandidateId(candidate.getId());
+					crs.add(cr);
+				}
+			}
+			service.updateById(candidate,crs);
 		}
 		return new ResultJson(true);
 	}

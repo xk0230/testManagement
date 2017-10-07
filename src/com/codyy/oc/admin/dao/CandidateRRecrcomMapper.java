@@ -14,4 +14,6 @@ public interface CandidateRRecrcomMapper {
     int updateByPrimaryKeySelective(CandidateRRecrcom record);
 
     int updateByPrimaryKey(CandidateRRecrcom record);
+    
+    int deleteByCandidate(String canId);
 }
