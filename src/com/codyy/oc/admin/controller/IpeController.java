@@ -86,9 +86,6 @@ public class IpeController extends BaseController{
 	@ResponseBody
 	@RequestMapping("/alYxAndOrg.do")
 	public String calYxAndOrgValue(IpeVO ipeVO){
-		ipeVO.setOrg("6");
-		ipeVO.setYx("操作");
-		ipeVO.setGx("bf,部分");
 		
 		return ipeService.calYxAndOrgValue(ipeVO);
 	}
@@ -97,18 +94,12 @@ public class IpeController extends BaseController{
 	@RequestMapping("/calGtAndKj.do")
 	public String calGtAndKjValue(IpeVO ipeVO){
 		
-		ipeVO.setGt("交互");
-		ipeVO.setKj("c,内部分歧");
-		
 		return ipeService.calGtAndKjValue(ipeVO);
 	}
 	
 	@ResponseBody
 	@RequestMapping("/calCxAndFzd.do")
 	public String calCxAndFzdValue(IpeVO ipeVO){
-		
-		ipeVO.setCx("核查-改进");
-		ipeVO.setFzd("d,困难-符合");
 		
 		return ipeService.calCxAndFzdValue(ipeVO);
 	}
@@ -117,9 +108,13 @@ public class IpeController extends BaseController{
 	@RequestMapping("/calZsAndTd.do")
 	public String calZsAndTdValue(IpeVO ipeVO){
 		
-		ipeVO.setZs("基本-宽泛");
-		ipeVO.setTd("j,领导-多团队-本土");
-		
 		return ipeService.calZsAndTdValue(ipeVO);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/calIpe.do")
+	public IpeVO calIpeByTotalScore(IpeVO ipeVO){
+		
+		return ipeService.calIpeByTotalScore(ipeVO);
 	}
 }

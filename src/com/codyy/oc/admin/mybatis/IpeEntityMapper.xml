@@ -9,7 +9,7 @@
 		
 	</select>
 	
-	<select id="getIpeById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.IpeBean">
+	<select id="getIpeById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.IpeVO">
 		SELECT  				 id,
 								 user_id AS userId,
 								 work_status AS workStatus,

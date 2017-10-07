@@ -15,7 +15,7 @@ public interface IpeDao {
 
 	int updateIpe(IpeBean ipe);
 
-	IpeBean getIpeById(String id);
+	IpeVO getIpeById(String id);
 	
 	List<IpeBean> getIpeByUserId(String id);
 

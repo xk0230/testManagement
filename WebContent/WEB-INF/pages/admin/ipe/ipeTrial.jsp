@@ -42,7 +42,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">影响</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.yx"  class="form-control select2" >
+													<select ng-model="ipe.yx"  class="form-control select2" ng-change="yxAndGxChange()">
 															<option value="">--请选择--</option>
 															<option value="交付">交付</option>
 															<option value="操作">操作</option>
@@ -56,7 +56,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">贡献</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.gx"  class="form-control select2">
+													<select ng-model="ipe.gx"  class="form-control select2" ng-change="yxAndGxChange()">
 														<option value="">--请选择--</option>
 														<option value="yx,有限" >有限</option>
 														<option value="bf,部分" >部分</option>
@@ -70,7 +70,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">得分</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.score1" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -80,7 +80,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">沟通</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.gt"  class="form-control select2" >
+													<select ng-model="ipe.gt"  class="form-control select2" ng-change="gtAndKjChange()">
 															<option value="">--请选择--</option>
 															<option value="传达" >传达</option>
 															<option value="传达-交互" >传达-交互</option>
@@ -98,7 +98,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">框架</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.kj"  class="form-control select2" >
+													<select ng-model="ipe.kj"  class="form-control select2" ng-change="gtAndKjChange()">
 														<option value="">--请选择--</option>
 														<option value="a,内部共享" >内部共享</option>
 														<option value="b,外部共享" >外部共享</option>
@@ -111,7 +111,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">得分</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.score2" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -121,7 +121,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">创新</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.cx"  class="form-control select2" >
+													<select ng-model="ipe.cx"  class="form-control select2" ng-change="cxAndFzdChange()">
 															<option value="">--请选择--</option>
 															<option value="跟从">跟从</option>
 															<option value="跟从-核查">跟从-核查</option>
@@ -141,7 +141,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">复杂度</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.fzd"  class="form-control select2" >
+													<select ng-model="ipe.fzd"  class="form-control select2" ng-change="cxAndFzdChange()">
 														<option value="">--请选择--</option>
 														<option value="a,明确的" >明确的</option>
 														<option value="b,明确-复杂" >明确-复杂</option>
@@ -157,7 +157,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">得分</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.score3" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -167,7 +167,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">知识</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.zs"  class="form-control select2" >
+													<select ng-model="ipe.zs"  class="form-control select2" ng-change="zsAndTdChange()">
 															<option value="">--请选择--</option>
 															<option value="有限职位知识">有限职位知识</option>
 															<option value="有限-基本">有限-基本</option>
@@ -191,7 +191,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">团队宽度</label>
 												<div class="col-lg-9">
-													<select ng-model="ipe.td"  class="form-control select2" >
+													<select ng-model="ipe.td"  class="form-control select2" ng-change="zsAndTdChange()">
 														<option value="">--请选择--</option>
 														<option value="a,团队成员-本土" >团队成员-本土</option>
 														<option value="b,团队成员-地区" >团队成员-地区</option>
@@ -215,7 +215,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">得分</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.score4" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -225,21 +225,21 @@
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">总得分</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.totalScore" ng-readonly="true"/>
 												</div>
 											</div>
 											
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">PC等级</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.pc" />
+													<input type="text" class="form-control" ng-model="ipe.pc" ng-readonly="true"/>
 												</div>
 											</div>
 
 											<div class="col-lg-3">
 												<label class="col-lg-3 control-label">建议年薪</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" ng-model="ipe.adviseSalary" />
+													<input type="text" class="form-control" ng-model="ipe.adviseSalary" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -266,6 +266,6 @@
 		
 	<input type="hidden" id="rootUrl" value="${root}">
 	
-	<script src="${root}/public/js/pages/ipe/edit.js" type="text/javascript"></script>
+	<script src="${root}/public/js/pages/ipe/trail.js" type="text/javascript"></script>
 </body>
 </html>

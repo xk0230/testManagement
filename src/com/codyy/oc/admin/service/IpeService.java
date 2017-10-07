@@ -107,14 +107,14 @@ public class IpeService {
 
 	public JsonDto getIpeById(String id) {
 		JsonDto jsonDto = new JsonDto();
-		IpeBean ipe = null;
+		IpeVO ipe = null;
 		if(StringUtils.isNotBlank(id)){
 			ipe  = ipeDao.getIpeById(id);
 			ipe.setTd(ipe.getTd()+"-"+ipe.getKd());
 		}
 		
 		if(null == ipe){
-			ipe = new IpeBean();
+			ipe = new IpeVO();
 		}
 		
 		if(null != ipe){
@@ -270,6 +270,24 @@ public class IpeService {
 	 
 	public ScorePcSalaryVO getMaxScorePcSalaryVO(double score){
 		return ipeDao.getMaxScorePcSalaryVO(score);
+	}
+
+	public IpeVO calIpeByTotalScore(IpeVO ipeVO) {
+		
+		BigDecimal yxAndOrgVal = new BigDecimal(ipeVO.getScore1());
+		BigDecimal gtAndKjVal = new BigDecimal(ipeVO.getScore2());
+		BigDecimal cxAndFzdVal = new BigDecimal(ipeVO.getScore3());
+		BigDecimal zsAndTdVal = new BigDecimal(ipeVO.getScore4());
+		
+		BigDecimal totalVal = yxAndOrgVal.add(gtAndKjVal).add(cxAndFzdVal).add(zsAndTdVal);
+		ScorePcSalaryVO scorePcSalary = getMaxScorePcSalaryVO(totalVal.doubleValue());
+		if(null != scorePcSalary){
+			ipeVO.setPc(String.valueOf(scorePcSalary.getPc()));
+			ipeVO.setAdviseSalary(scorePcSalary.getSalary());
+			ipeVO.setTotalScore(String.valueOf(totalVal.doubleValue()));
+		}
+		
+		return ipeVO;
 	}
 	
 }
