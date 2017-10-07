@@ -47,4 +47,9 @@ public class TestController extends BaseController {
 		return "/admin/Recruitment/MyInterview";
 	}
 	
+	@RequestMapping("AdminEvaluation")
+	public String AdminEvaluation(HttpServletRequest request){
+		return "/admin/Recruitment/AdminEvaluation";
+	}
+	
 }

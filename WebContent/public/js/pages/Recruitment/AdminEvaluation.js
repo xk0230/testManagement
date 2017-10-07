@@ -1,0 +1,184 @@
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]); 
+myAppModule.controller('UserListController',
+	function UserListController($scope,$http,$location,$document, $filter,$uibModal){
+		var self = this;
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 10;
+		
+		self.Recruitment = {
+		}
+		
+		this.$onInit = function(){
+			//招聘需求Id
+			var xxx = $location.search();
+			self.Recruitment.id = $location.search().id;
+			if(self.Recruitment.id != "" && typeof(self.Recruitment.id)!="undefined"){
+				//招聘需求详情
+				self.getRecruitmentInfo();
+				//面试得分表
+				self.getCandidatePageList();
+			}
+		}
+		
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+
+		$scope.pageChanged = function() {
+			self.getFinancingInfoList();
+		};
+		
+		//获取招聘需求详情
+		self.getRecruitmentInfo = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/getById.do',
+				params:{
+					id : self.Recruitment.id
+				}
+			}).then(function(res){
+				if(res){
+					//设置招聘需求
+					self.Recruitment = res.data || {};
+
+					/*$.each(self.Recruitment.competencys,function(n,value) {
+						var check = $("#competency" + value.id);
+						if(typeof(check)!="undefined"){
+							check[0].checked = true;
+						}
+				    });*/
+					
+				}else{
+					self.Recruitment = {};
+				}
+			})
+		}
+		
+		//获取获选人列表
+		self.getCandidatePageList = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/candidate/getCandidatePageList.do',
+				params:{
+					recruitId : self.Recruitment.id,
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			})
+		}
+		
+		//获取获选人列表
+		self.save = function(item){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/candidate/saveOrUpdateCandidate.do',
+				params:{
+					item
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			})
+		}
+		
+
+		
+		//候选人编辑
+		this.edit = function (item, parentSelector) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalEditContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    	    	  //好像必须得这么写
+		    	        items: function () {
+		    	          return item;
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result.then(function (selectedItem) {
+		    	    	
+		    	    	//ok的回调函数
+		    	    	if(selectedItem == '0'){
+		    	    		alert("保存成功！");
+		    	    		self.getFinancingInfoList();
+		    	    	}
+		    	    	
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	
+		    	    });
+		   };
+		
+	}
+);
+
+//编辑页面的control
+angular.module('myApp').controller('ModalInstanceCtrl', 
+function ($scope,$http,$uibModalInstance,$filter, items) {
+	var $ctrl = this;
+	//获取页面参数
+	$scope.items = items;
+	$scope.items.interviewTime = $filter('date')(items.interviewTime, 'yyyy-MM-dd hh:mm:ss');
+	//页面初期化
+	this.$onInit = function(){
+
+	};
+	
+	//保存操作
+	$scope.onSubmit = function () {
+		var params = {
+				//id
+				id:$scope.items.id,
+				workDetail:items.workDetail,
+				skillDetail:items.skillDetail,
+				wordScore:items.wordScore,
+				skillScore:items.skillScore
+			}
+			$http({
+				method:'POST',
+				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
+				params:params
+			
+			}).then(function(res){
+				if(res.data.result){
+					$uibModalInstance.close('0');
+				}else{
+					alert("保存失败！");
+				}
+		});
+	};
+	  $ctrl.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+	  
+	});
+
+
+
+angular.bootstrap(document.getElementById("content"), ['myApp']);

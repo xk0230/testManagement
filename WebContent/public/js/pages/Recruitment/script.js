@@ -84,6 +84,9 @@ myAppModule.controller('UserListController',
 		this.edit = function(id){
 			window.location.href="/ccydManagement/admin/test/EditRecruitment.do?id="+id; 
 		};
+		this.evaluation = function(id){
+			window.location.href="/ccydManagement/admin/test/AdminEvaluation.do?id="+id; 
+		};
 	}
 );
 
