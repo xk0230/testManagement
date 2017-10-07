@@ -169,4 +169,35 @@
 		
 	</select>
 	
+	<select id="getMaxIpeCreateTimeByUserId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.IpeVO">
+		
+		SELECT  				 id,
+								 user_id AS userId,
+								 work_status AS workStatus,
+								 salary,
+								 yx,
+								 gx,
+								 gt,
+								 kj,
+								 cx,
+								 fzd,
+								 zs,
+								 td,
+								 kd,
+								 create_time AS createTime,
+								 create_user AS createUser
+		FROM IPE
+		
+		WHERE user_id = #{_parameter}
+		
+		ORDER BY create_time DESC
+		
+		LIMIT 0,1
+	
+	</select>
+	
+	<update id="updateUserPc" parameterType="com.codyy.oc.admin.entity.AdminUser">
+		UPDATE ADMIN_USER SET salary_scale = #{salaryScale} WHERE user_id = #{userId}
+	</update>
+	
 </mapper>

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codyy.commons.page.Page;
@@ -76,6 +77,7 @@ public class IpeService {
 			ipe.setId(UUID.randomUUID().toString());
 			int insertNum = ipeDao.insertIpe(ipe);
 			if(insertNum == 1){
+				updateUserPc(ipe.getUserId());
 				jsonDto.setCode(0);
 				jsonDto.setMsg(INSERT_SUCCESS);
 			}else{
@@ -85,6 +87,7 @@ public class IpeService {
 		}else{
 			int updateNum = ipeDao.updateIpe(ipe);
 			if(updateNum == 1){
+				updateUserPc(ipe.getUserId());
 				jsonDto.setCode(0);
 				jsonDto.setMsg(UPDATE_SUCCESS);
 			}else{
@@ -177,8 +180,10 @@ public class IpeService {
 
 	public JsonDto delIpeById(String id) {
 		JsonDto jsonDto = new JsonDto();
+		IpeVO ipeVO = ipeDao.getIpeById(id);
 		int delNum = ipeDao.delIpeById(id);
 		if(delNum == 1){
+			updateUserPc(ipeVO.getUserId());
 			jsonDto.setCode(0);
 		}
 		
@@ -290,4 +295,18 @@ public class IpeService {
 		return ipeVO;
 	}
 	
+	public void updateUserPc(String userId){
+		AdminUser user = new AdminUser();
+		user.setUserId(userId);
+		IpeVO ipe = ipeDao.getMaxIpeCreateTimeByUserId(userId);
+		if(null != ipe){
+			ipe.setOrg(ipeDao.getOrganizationalSize());
+			double totalScore = this.calculateTotalScore(ipe);
+			ScorePcSalaryVO scorePcSalaryVO = this.getMaxScorePcSalaryVO(totalScore);
+			if(null != scorePcSalaryVO){
+				user.setSalaryScale(String.valueOf(scorePcSalaryVO.getPc()));
+				ipeDao.updateUserPc(user);
+			}
+		}
+	}
 }

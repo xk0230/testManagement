@@ -3,6 +3,7 @@ package com.codyy.oc.admin.dao;
 import java.util.List;
 
 import com.codyy.commons.page.Page;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.IpeBean;
 import com.codyy.oc.admin.vo.IpeVO;
 import com.codyy.oc.admin.vo.ScorePcSalaryVO;
@@ -34,5 +35,9 @@ public interface IpeDao {
 	String getZsAndTdValue(IpeVO ipe);
 	
 	ScorePcSalaryVO getMaxScorePcSalaryVO(double score);
+
+	IpeVO getMaxIpeCreateTimeByUserId(String userId);
+
+	void updateUserPc(AdminUser user);
 	
 }

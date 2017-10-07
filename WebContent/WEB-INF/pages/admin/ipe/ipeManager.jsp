@@ -113,7 +113,7 @@
 												<td><p ng-bind="item.depName"></p></td>
 												<td><p ng-bind="item.postName"></p></td>
 												<td><p ng-bind="item.workStatus"></p></td>
-												<td>47</td>
+												<td><p ng-bind="item.salaryScale"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.searchIpe(item.userId)"><i class="br-pencil">评估</i></button>
 												</td>
