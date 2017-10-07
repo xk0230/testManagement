@@ -73,4 +73,11 @@
       competency_id = #{competencyId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+   <select id="selectByRecCom" parameterType="com.codyy.oc.admin.entity.RecruitRCompetency" resultType="java.lang.String">
+    select  id from  RECRUIT_R_COMPETENCY
+    where  recruit_id = #{recruitId,jdbcType=VARCHAR}
+      and competency_id = #{competencyId,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

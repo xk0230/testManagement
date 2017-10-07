@@ -17,4 +17,6 @@ public interface RecruitRCompetencyMapper {
 
     int updateByPrimaryKey(RecruitRCompetency record);
     
+    String selectByRecCom(RecruitRCompetency record);
+    
 }

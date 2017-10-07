@@ -11,7 +11,17 @@ public class CandidateRRecrcom {
     
     private String recruitId;
     
-    public String getCompetencyId() {
+    private String competencyName;
+    
+    public String getCompetencyName() {
+		return competencyName;
+	}
+
+	public void setCompetencyName(String competencyName) {
+		this.competencyName = competencyName;
+	}
+
+	public String getCompetencyId() {
 		return competencyId;
 	}
 

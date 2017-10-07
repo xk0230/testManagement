@@ -1,5 +1,6 @@
 package com.codyy.oc.admin.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +15,18 @@ import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CandidateMapper;
 import com.codyy.oc.admin.dao.CandidateRInterviewerMapper;
 import com.codyy.oc.admin.dao.CandidateRRecrcomMapper;
+import com.codyy.oc.admin.dao.CompetencyMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
+import com.codyy.oc.admin.dao.RecruitRCompetencyMapper;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Candidate;
 import com.codyy.oc.admin.entity.CandidateRInterviewer;
 import com.codyy.oc.admin.entity.CandidateRRecrcom;
+import com.codyy.oc.admin.entity.Competency;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.Recruit;
+import com.codyy.oc.admin.entity.RecruitRCompetency;
 
 /**
  * 候选人server
@@ -42,6 +47,10 @@ public class CandidateService {
 	private PositionMapper positionMapper;
 	@Autowired
 	private CandidateRRecrcomMapper candidateRRecrcomMapper;
+	@Autowired
+	private CompetencyMapper competencyMapper;
+	@Autowired
+	private RecruitRCompetencyMapper recruitRCompetencyMapper;
 	
 	
 	public String insert(Candidate candidate) {
@@ -87,10 +96,35 @@ public class CandidateService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("recruitId",search.getRecruitId());//招聘需求ID
 	    page.setMap(map);
+//	    Recruit rec =  recruitMapper.selectByPrimaryKey(search.getRecruitId());
+	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+	    for (Competency c : competencyMapper.getByRecId(search.getRecruitId())) {
+	    	CandidateRRecrcom cr = new CandidateRRecrcom();
+	    	cr.setCompetencyId(c.getId());
+	    	cr.setCompetencyName(c.getName());
+	    	RecruitRCompetency rrr = new RecruitRCompetency();
+	    	rrr.setRecruitId(search.getRecruitId());
+	    	rrr.setCompetencyId(c.getId());
+	    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
+	    	crrsModel.add(cr);
+		}
 		List<Candidate> data = mapper.getCandidatePageList(page);
 		for (Candidate c : data) {
+			List<CandidateRRecrcom> res = new ArrayList<CandidateRRecrcom>();
+			res.addAll(crrsModel);
 			List<CandidateRRecrcom> crrs = candidateRRecrcomMapper.getAllByCandidateId(c.getId());
-			c.setCrrs(crrs);
+			for (CandidateRRecrcom cr : crrs) {
+				for (CandidateRRecrcom cm : res) {
+					if(cm.getCompetencyId().equals(cr.getCompetencyId())){
+						//如果是对应上的则赋值
+						cm.setCandidateId(cr.getCandidateId());
+						cm.setId(cr.getId());
+						cm.setRecRComId(cr.getRecRComId());
+						cm.setValue(cr.getValue());
+					}
+				}
+			}
+			c.setCrrs(res);
 		}
 		page.setData(data);
 		return page;
