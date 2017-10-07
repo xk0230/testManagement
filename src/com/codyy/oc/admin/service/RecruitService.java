@@ -17,6 +17,7 @@ import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CompetencyMapper;
 import com.codyy.oc.admin.dao.DepartmentMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
+import com.codyy.oc.admin.dao.PositionMapper;
 import com.codyy.oc.admin.dao.RecruitAuditMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
 import com.codyy.oc.admin.dao.RecruitRCompetencyMapper;
@@ -48,7 +49,8 @@ public class RecruitService {
 	private CompetencyMapper competencyMapper;
 	@Autowired
 	private DepartmentMapper departmentMapper;
-	
+	@Autowired
+	private PositionMapper positionMapper;
 	
 	private void setAuditUser(Recruit recruit,String[] audits) {
 		if(StringUtils.isEmpty(recruit.getId())) {
@@ -157,6 +159,7 @@ public class RecruitService {
 		Recruit rec =  mapper.selectByPrimaryKey(id);
 		rec.setDepId(departmentMapper.getDepIdByPostId(rec.getPostid()));
 		rec.setCompetencys(competencyMapper.getByRecId(rec.getId()));
+		rec.setPostName(positionMapper.selectByPrimaryKey(rec.getPostid()).getName());
 		return rec;
 	}
 	
