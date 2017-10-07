@@ -1,5 +1,7 @@
 package com.codyy.oc.admin.dao;
 
+import java.util.List;
+
 import com.codyy.oc.admin.entity.CandidateRRecrcom;
 
 public interface CandidateRRecrcomMapper {
@@ -16,4 +18,6 @@ public interface CandidateRRecrcomMapper {
     int updateByPrimaryKey(CandidateRRecrcom record);
     
     int deleteByCandidate(String canId);
+    
+    List<CandidateRRecrcom> getAllByCandidateId(String canId);
 }

@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Candidate {
     private String id;
@@ -40,8 +41,18 @@ public class Candidate {
     private Date createTime;
 
     private String pc;
+    
+    private List<CandidateRRecrcom> crrs;//胜任特征总评
 
-    public String getId() {
+    public List<CandidateRRecrcom> getCrrs() {
+		return crrs;
+	}
+
+	public void setCrrs(List<CandidateRRecrcom> crrs) {
+		this.crrs = crrs;
+	}
+
+	public String getId() {
         return id;
     }
 

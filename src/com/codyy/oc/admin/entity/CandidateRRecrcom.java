@@ -7,7 +7,27 @@ public class CandidateRRecrcom {
 
     private String recRComId;
 
-    private String value;
+    private String competencyId;
+    
+    private String recruitId;
+    
+    public String getCompetencyId() {
+		return competencyId;
+	}
+
+	public void setCompetencyId(String competencyId) {
+		this.competencyId = competencyId;
+	}
+
+	public String getRecruitId() {
+		return recruitId;
+	}
+
+	public void setRecruitId(String recruitId) {
+		this.recruitId = recruitId;
+	}
+
+	private String value;
 
     public String getId() {
         return id;

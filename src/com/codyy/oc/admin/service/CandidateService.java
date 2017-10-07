@@ -57,21 +57,6 @@ public class CandidateService {
 		candidateRInterviewerMapper.insert(candidateRInterviewer);
 	};
 	
-	
-//	private void addCompetencys(Recruit recruit) {
-//		String[] competencys = recruit.getCompetencysStr().split("@");
-//		for (String c : competencys) {
-//			if(c != null && StringUtils.isNotBlank(c)) {
-//				RecruitRCompetency rc = new RecruitRCompetency();
-//				rc.setId(UUIDUtils.getUUID());
-//				rc.setCompetencyId(c);
-//				rc.setRecruitId(recruit.getId());
-//				recruitRCompetencyMapper.insert(rc);
-//			}
-//		}
-//	}
-	
-	
 	public void updateById(Candidate candidate,List<CandidateRRecrcom> crs) {
 		mapper.updateByPrimaryKeySelective(candidate);
 		//添加胜任特征总评
@@ -103,6 +88,10 @@ public class CandidateService {
 		map.put("recruitId",search.getRecruitId());//招聘需求ID
 	    page.setMap(map);
 		List<Candidate> data = mapper.getCandidatePageList(page);
+		for (Candidate c : data) {
+			List<CandidateRRecrcom> crrs = candidateRRecrcomMapper.getAllByCandidateId(c.getId());
+			c.setCrrs(crrs);
+		}
 		page.setData(data);
 		return page;
 	}

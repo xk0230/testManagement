@@ -6,6 +6,9 @@
     <result column="candidate_id" jdbcType="VARCHAR" property="candidateId" />
     <result column="rec_r_com_id" jdbcType="VARCHAR" property="recRComId" />
     <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="competency_id" jdbcType="VARCHAR" property="competencyId" />
+    <result column="recruit_id" jdbcType="VARCHAR" property="recruitId" />
+    
   </resultMap>
   <sql id="Base_Column_List">
     id, candidate_id, rec_r_com_id, value
@@ -84,4 +87,11 @@
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getAllByCandidateId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+     crr.id, crr.candidate_id, crr.rec_r_com_id, crr.value,cr.competency_id,cr.recruit_id
+    from CANDIDATE_R_RECRCOM crr left join RECRUIT_R_COMPETENCY cr on crr.rec_r_com_id = cr.id
+    where candidate_id = #{canId,jdbcType=VARCHAR}
+  </select>
 </mapper>
