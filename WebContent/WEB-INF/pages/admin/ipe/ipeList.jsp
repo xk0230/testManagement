@@ -51,8 +51,8 @@
 												<th>实际年薪</th>
 												<th>组织规模</th>
 												<th>影响</th>
-												<th>沟通</th>
 												<th>贡献</th>
+												<th>沟通</th>
 												<th>框架</th>
 												<th>创新</th>
 												<th>复杂度</th>
@@ -72,8 +72,8 @@
 												<td><p ng-bind="item.salary"></td>
 												<td><p ng-bind="item.org"></td>
 												<td><p ng-bind="item.yx"></td>
-												<td><p ng-bind="item.gt"></td>
 												<td><p ng-bind="item.gx"></td>
+												<td><p ng-bind="item.gt"></td>
 												<td><p ng-bind="item.kj"></td>
 												<td><p ng-bind="item.cx"></td>
 												<td><p ng-bind="item.fzd"></td>
@@ -137,7 +137,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">组织规模</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="ipe.org" />
+													<input type="text" class="form-control" ng-model="ipe.org" ng-readonly="true"/>
 												</div>
 											</div>
 											
@@ -292,23 +292,6 @@
 												</div>
 											</div>
 										</div>										
-
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">PC等级</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="ipe.pc" />
-												</div>
-											</div>
-
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">建议年薪</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="ipe.adviseSalary" />
-												</div>
-											</div>
-											
-										</div>
 										
 										<div class="form-group">
 											<div class="col-lg-6">
