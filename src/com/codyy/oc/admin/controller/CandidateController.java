@@ -119,6 +119,16 @@ public class CandidateController  extends BaseController{
 		return service.getCandidatePageList(page, search);
 	}
 	
+	
+	/**
+	 * 获取候选人和面试官关联关系，既面试记录列表
+	 * @param request
+	 * @param page
+	 * @param search
+	 * @param type
+	 * @return
+	 */
+	
 	@ResponseBody
 	@RequestMapping("getCandidateRInterviewerPageList")
 	public Page getCandidateRInterviewerPageList(HttpServletRequest request,Page page,CandidateRInterviewer search,String type){
