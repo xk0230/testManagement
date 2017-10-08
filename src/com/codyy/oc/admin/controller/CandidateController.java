@@ -59,8 +59,8 @@ public class CandidateController  extends BaseController{
 				for (int i = 0; i < values.length; i++) {
 					CandidateRRecrcom cr = new CandidateRRecrcom();
 					cr.setId(UUIDUtils.getUUID());
-					cr.setRecRComId(values[i]);
-					cr.setValue(recRComIds[i]);
+					cr.setRecRComId(recRComIds[i]);
+					cr.setValue("null".equals(values[i])?null:values[i]);
 					cr.setCandidateId(candidate.getId());
 					crs.add(cr);
 				}
