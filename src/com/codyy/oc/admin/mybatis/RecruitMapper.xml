@@ -260,7 +260,7 @@ LEFT JOIN POSITION p ON p.post_id = r.postId
 LEFT JOIN ADMIN_USER au ON au.user_id = r.create_user
     where 1=1
     <if test="map.createUser != null and map.createUser != ''">
-	    and  r.create_user in ( SELECT
+	    and  r.id in ( SELECT
 	ra.recruit_id	
 FROM
 	`RECRUIT_AUDIT` ra
