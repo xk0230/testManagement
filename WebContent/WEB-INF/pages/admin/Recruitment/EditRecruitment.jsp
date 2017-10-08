@@ -65,7 +65,9 @@
 								<h4>请选择审批管理员：</h4>
 							</div>
 							<div class="col-lg-2 form-group" ng-repeat="admin in vm.adminlist">
-								<input type="checkbox" class="adminList" id="{{admin.userId}}" value="{{admin.id}}" ng-disabled="admin.userId=='admin'">&nbsp;&nbsp;{{admin.realName}}
+								<p ng-show="admin.userId!='admin'">
+									<input type="checkbox" class="adminList" id="{{admin.userId}}" value="{{admin.id}}">&nbsp;&nbsp;{{admin.realName}}
+								</p>
 							</div>
 						</div>
 					</div>
