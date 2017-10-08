@@ -174,6 +174,19 @@ public class RecruitService {
 		return page;
 	}
 	
+	public Page getMyAuditRecruitPageList(Page page,Recruit search){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("postId",search.getPostid());
+		map.put("status", search.getStatus());
+		map.put("createUser",search.getCreateUser());
+	    page.setMap(map);
+		List<Recruit> data = mapper.getMyAuditRecruitPageList(page);
+		page.setData(data);
+		return page;
+	}
+	
+	
+	
 	//提交审核
 	public void  putAuditRecruit(Recruit recruit,String[]  auditIds) {
 		setAuditUser(recruit,auditIds);

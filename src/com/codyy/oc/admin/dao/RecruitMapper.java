@@ -21,4 +21,7 @@ public interface RecruitMapper {
     int updateByPrimaryKey(Recruit record);
     
     List<Recruit> getRecruitPageList(Page page);
+    
+    List<Recruit> getMyAuditRecruitPageList(Page page);
+    
 }

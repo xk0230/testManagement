@@ -128,6 +128,15 @@ public class RecruitController  extends BaseController{
 		return service.getRecruitPageList(page, search);
 	}
 	
+	@ResponseBody
+	@RequestMapping("getMyAuditRecruitPageList")
+	public Page getMyAuditRecruitPageList(HttpServletRequest request,Page page,Recruit search,String type){
+		if(search==null) {
+			search = new Recruit();
+		}
+		search.setCreateUser(getSessionUserId(request));
+		return service.getMyAuditRecruitPageList(page, search);
+	}
 	
 	
 	/**

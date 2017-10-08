@@ -238,7 +238,6 @@ FROM
 LEFT JOIN POSITION p ON p.post_id = r.postId
 LEFT JOIN ADMIN_USER au ON au.user_id = r.create_user
     where 1=1
-    
     <if test="map.createUser != null and map.createUser != ''">
 	    and ( r.create_user = #{map.createUser,jdbcType=VARCHAR} or r.audit_user = #{map.createUser,jdbcType=VARCHAR} )
 	</if>
@@ -248,7 +247,35 @@ LEFT JOIN ADMIN_USER au ON au.user_id = r.create_user
     <if test="map.status != null and map.status != '' ">
     	and r.status = #{map.status,jdbcType=VARCHAR}
     </if>
-    
     order by r.create_time desc
   </select>
+  
+     <select id="getMyAuditRecruitPageList" parameterType="com.codyy.commons.page.Page" resultMap="ResultMapWithBLOBs">
+  	SELECT
+	r.*, p.`name` as postName,
+	au.username as createUserName
+FROM
+	RECRUIT r
+LEFT JOIN POSITION p ON p.post_id = r.postId
+LEFT JOIN ADMIN_USER au ON au.user_id = r.create_user
+    where 1=1
+    <if test="map.createUser != null and map.createUser != ''">
+	    and  r.create_user in ( SELECT
+	ra.recruit_id	
+FROM
+	`RECRUIT_AUDIT` ra
+	RIGHT JOIN ( SELECT recruit_id, max( recruit_num ) AS maxnum FROM `RECRUIT_AUDIT` GROUP BY recruit_id ) r2 ON ra.recruit_id = r2.recruit_id 
+	AND ra.recruit_num = r2.maxnum 
+   	where ra.audit_user = #{map.createUser,jdbcType=VARCHAR})
+	</if>
+    <if test="map.postId != null and map.postId != '' ">
+    	and r.postId = #{map.postId,jdbcType=VARCHAR}
+    </if>
+    <if test="map.status != null and map.status != '' ">
+    	and r.status = #{map.status,jdbcType=VARCHAR}
+    </if>
+    order by r.create_time desc
+  </select>
+  
+  
 </mapper>
