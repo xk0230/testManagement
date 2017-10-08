@@ -1,15 +1,24 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]);  
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http){
+	function UserListController($scope,$http,$location){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 10;
 		
+		$scope.userId = "";
+		
 		this.$onInit = function(){
-			self.getFinancingInfoList();
+			$scope.type = $location.search().type;
+			//查询操作
+			self.search();
 			//设置部门下拉框
 			this.getDepList();
+			//当前用户ID
+			$scope.userId = $("#sessionUserId").val();
 		}
 		
 		$scope.setPage = function (pageNo) {
@@ -17,7 +26,15 @@ myAppModule.controller('UserListController',
 		};
 
 		$scope.pageChanged = function() {
-			self.getFinancingInfoList();
+			self.search();
+		};
+		
+		this.search = function() {
+			if($scope.type != "myApproval"){
+				self.getFinancingInfoList();
+			}else{
+				self.getMyApprovalList();
+			}
 		};
 		
 		// 获取数据列表
@@ -25,6 +42,29 @@ myAppModule.controller('UserListController',
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/recruit/getRecruitPageList.do',
+				params:{
+					postid: $scope.postId,
+					createUser: $("#sessionUserId").val(),
+					status   : "",
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total
+				}else{
+					self.list = [];
+					$scope.totalItems = 0
+				}
+			})
+		};
+		
+		// 获取待我审批的列表
+		this.getMyApprovalList = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/getMyAuditRecruitPageList.do',
 				params:{
 					postid: $scope.postId,
 					createUser: "",

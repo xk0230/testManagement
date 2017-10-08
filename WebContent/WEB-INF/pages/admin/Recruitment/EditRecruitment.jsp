@@ -31,11 +31,14 @@
 									</select>
 								</div>
 								<div class="col-lg-3">
+
 								</div>
 								<div class="col-lg-3 form-group">
-									<label class="col-lg-4 control-label" ></label>
-									<div class="col-lg-8">
-										<input type="submit" class="btn btn-lg btn-success col-lg-12" ladda = "submitting"  value="保存" />
+									<div class="col-lg-6">
+										<input type="submit" class="btn btn-lg btn-success col-lg-12" value="保存" ng-if="vm.Recruitment.status!= 'auditing' && vm.Recruitment.status!='audited'" />
+									</div>
+									<div class="col-lg-6">
+										<input type="button" class="btn btn-lg btn-warning col-lg-12" value="提交审批" ng-click="vm.putAuditRecruit()" ng-if="vm.Recruitment.status== 'unaudit'" />
 									</div>
 								</div>
 							</div>
@@ -211,7 +214,7 @@
 					</div>
 					</form>
 					<!-- 候选人列表 -->
-					<div class="row">
+					<div class="row" ng-if="${adminUser.position == 'ADMIN'}&&vm.Recruitment.status== 'audited'">
 						<div class="col-lg-12">
 							<!-- col-lg-12 start here -->
 							<div class="panel panel-info toggle">

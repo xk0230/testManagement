@@ -196,8 +196,28 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res.data.result){
 					alert("保存成功！");
+					self.$onInit();
 				}else{
 					alert("保存失败！");
+				}
+			})
+		}
+		
+		//提交审核
+		self.putAuditRecruit = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/putAuditRecruit.do',
+				params:{
+					id : self.Recruitment.id,
+					auditIds:""
+				}
+			}).then(function(res){
+				if(res){
+					alert("提交审批成功！")
+					self.$onInit();
+				}else{
+					alert("提交审批失败！")
 				}
 			})
 		}

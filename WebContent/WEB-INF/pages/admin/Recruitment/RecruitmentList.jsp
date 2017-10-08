@@ -55,10 +55,10 @@
 											</div>
 											<div class="col-lg-3">
 												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
+													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.search()" value="查询" />
 												</div>
 												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewRecruitment()" value="新增招聘需求" />
+													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewRecruitment()" value="新增招聘需求" ng-if="type!='myApproval'" />
 												</div>
 											</div>
 										</div>
@@ -95,7 +95,7 @@
 												<td><p ng-bind="item.statusStr"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i> 编辑</button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.evaluation(item.id)"><i class="fa-thumbs-up"></i> 管理员评估</button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.evaluation(item.id)" ng-if="${adminUser.position == 'ADMIN'}"><i class="fa-thumbs-up"></i> 管理员评估</button>
 												</td>
 											</tr>
 										</tbody>
