@@ -141,4 +141,8 @@
   <update id="passById" parameterType="java.lang.String">
   	update RECRUIT r set r.status = 'audited' where r.id = (select  	ra.recruit_id  from RECRUIT_AUDIT ra where ra.id = #{id})
   </update>
+  <update id="setUnPassById" parameterType="java.lang.String">
+  	update RECRUIT r set r.status = 'reject' where r.id = (select  	ra.recruit_id  from RECRUIT_AUDIT ra where ra.id = #{id})
+  </update>
+  
 </mapper>
