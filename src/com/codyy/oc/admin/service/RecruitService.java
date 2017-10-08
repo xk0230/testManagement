@@ -52,11 +52,13 @@ public class RecruitService {
 	@Autowired
 	private PositionMapper positionMapper;
 	
-	private void setAuditUser(Recruit recruit,String[] audits) {
-		if(StringUtils.isEmpty(recruit.getId())) {
-			//如果是新增
-			recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
-		}
+	private void putAuditUser(Recruit recruit,String[] audits) {
+//		if(StringUtils.isEmpty(recruit.getId())) {
+//			//如果是新增
+//			if(recruit.getAuditUser() == null) {
+//				recruit.setAuditUser(recruit.getCreateUser());//初始创建时Audituser为创建人
+//			}
+//		}
 		//获取当前审批人，如果是普通员工提交的，则审批人为部门经理，如果部门没有经理，则给超级管理员；如果是部门经理提交的，则审批人为超级管理员
 		if(AdminUser.SUPER_ADMIN_ID.equals(recruit.getAuditUser())) {
 			//如果是超级管理员
@@ -189,7 +191,7 @@ public class RecruitService {
 	
 	//提交审核
 	public void  putAuditRecruit(Recruit recruit,String[]  auditIds) {
-		setAuditUser(recruit,auditIds);
+		putAuditUser(recruit,auditIds);
 		recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 		mapper.updateByPrimaryKeySelective(recruit);
 	}
@@ -219,6 +221,10 @@ public class RecruitService {
 //	}
 	
 	public ResultJson auditRecruit(RecruitAudit audit,String[] auditIds) {
+		//根据RecruitId和当前审核人获取auditId
+		
+		
+		
 		int num = recruitAuditMapper.selectUnauditByid(audit.getId());
 		if(num != 1) {
 			return new ResultJson(false,"该审批已完成，请勿重复审批");
@@ -237,14 +243,14 @@ public class RecruitService {
 					recruit.setAuditUser(audit.getAuditUserId());//将提交审核的人设为AuditUser
 					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 					mapper.updateByPrimaryKeySelective(recruit);
-					setAuditUser(recruit, null);
+					putAuditUser(recruit, null);
 				}else if(AdminUser.SUPER_ADMIN_ID.equals(audit.getAuditUserId())) {
 					//如果是超级管理员审批部门经理或者普通员工的请求
 					Recruit recruit = mapper.selectByPrimaryKey(audit.getRecruitId());
 					recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);//将超级管理员设为AuditUser
 					recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
 					mapper.updateByPrimaryKeySelective(recruit);
-					setAuditUser(recruit, auditIds);
+					putAuditUser(recruit, auditIds);
 				}else if(CommonsConstant.USER_TYPE_ADMIN.equals(audit.getAuditUserPosition())){
 					//如果是admin审批超级管理员的请求则表示最终通过
 					int unpassnum = recruitAuditMapper.getUnpassOrNullNum(audit.getId());

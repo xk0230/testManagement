@@ -61,6 +61,7 @@ public class RecruitController  extends BaseController{
 		if(StringUtils.isEmpty(recruit.getId())){
 			//如果没有ID则新增
 			recruit.setCreateUser(userId);
+			recruit.setAuditUser(userId);
 			recruit.setEditUserPosition(sessionUser.getPosition());
 			service.insert(recruit);
 		}else {
@@ -83,6 +84,7 @@ public class RecruitController  extends BaseController{
 		if(StringUtils.isNotEmpty(auditIds)) {
 			 ids = auditIds.split("@");
 		}
+		recruit.setAuditUser(getSessionUserId(request));
 		service.putAuditRecruit(recruit, ids);
 		return new ResultJson(true);
 	}
