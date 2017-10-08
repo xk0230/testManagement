@@ -35,12 +35,12 @@
 								</div>
 								<div class="col-lg-3 form-group">
 									<div class="col-lg-6">
-										<input type="submit" class="btn btn-lg btn-success col-lg-12" value="保存" ng-if="vm.Recruitment.status!= 'auditing' && vm.Recruitment.status!='audited'" />
-										<input type="button" class="btn btn-lg btn-success col-lg-12" value="通过" ng-click="vm.accept()" ng-if="vm.Recruitment.status== 'auditing'&&${sessionScope.adminUser.userId != vm.Recruitment.auditUser}" />
+										<input type="submit" class="btn btn-lg btn-success col-lg-12" value="保存" ng-if="vm.Recruitment.status!= 'auditing' && vm.Recruitment.status!='audited' && !ButtonShow" />
+										<input type="button" class="btn btn-lg btn-success col-lg-12" value="通过" ng-click="vm.accept()" ng-if="vm.Recruitment.status== 'auditing'&&ButtonShow" />
 									</div>
 									<div class="col-lg-6">
 										<input type="button" class="btn btn-lg btn-warning col-lg-12" value="提交审批" ng-click="vm.putAuditRecruit()" ng-if="vm.Recruitment.status== 'unaudit'" />
-										<input type="button" class="btn btn-lg btn-danger col-lg-12" value="驳回" ng-click="vm.refuse()" ng-if="vm.Recruitment.status== 'auditing'&&${sessionScope.adminUser.userId != vm.Recruitment.auditUser}" />
+										<input type="button" class="btn btn-lg btn-danger col-lg-12" value="驳回" ng-click="vm.refuse()" ng-if="vm.Recruitment.status== 'auditing'&&ButtonShow" />
 									</div>
 								</div>
 							</div>
@@ -48,16 +48,24 @@
 					</div>
 					<div class="row" ng-show="RefuseFlag">
 						<div class="col-lg-12 ">
-							<div>
-								<div class="col-lg-3 form-group">
-									驳回理由：
-								</div>
-								<div class="col-lg-6 form-group">
-									<textarea class="form-control" ng-model="RefuseReason" rows="3" Placeholder="请输入驳回理由后再点击驳回按钮"></textarea>
-								</div>
-								<div class="col-lg-3 form-group">
-									
-								</div>
+							<div class="col-lg-3 form-group">
+								驳回理由：
+							</div>
+							<div class="col-lg-6 form-group">
+								<textarea class="form-control" ng-model="RefuseReason" rows="3" Placeholder="请输入驳回理由后再点击驳回按钮"></textarea>
+							</div>
+							<div class="col-lg-3 form-group">
+								
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-show="${adminUser.userId == 'admin'}&&AdminAcceptFlag">
+						<div class="col-lg-12 ">
+							<div class="col-lg-2 form-group" >
+								<h4>请选择审批管理员：</h4>
+							</div>
+							<div class="col-lg-2 form-group" ng-repeat="admin in vm.adminlist">
+								<input type="checkbox" class="adminList" id="{{admin.userId}}" value="{{admin.id}}" ng-disabled="admin.userId=='admin'">&nbsp;&nbsp;{{admin.realName}}
 							</div>
 						</div>
 					</div>

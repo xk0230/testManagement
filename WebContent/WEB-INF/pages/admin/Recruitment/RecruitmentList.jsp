@@ -86,6 +86,8 @@
 											<tr>
 												<th>岗位名称</th>
 												<th>状态</th>
+												<th>创建人</th>
+												<th>创建时间</th>
 												<th>操作</th>
 											</tr>
 										</thead>  
@@ -93,6 +95,8 @@
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td><p ng-bind="item.postName"></p></td>
 												<td><p ng-bind="item.statusStr"></p></td>
+												<td><p ng-bind="item.createUserName"></p></td>
+												<td><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm'"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i> 编辑</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.evaluation(item.id)" ng-if="${adminUser.position == 'ADMIN'}"><i class="fa-thumbs-up"></i> 管理员评估</button>

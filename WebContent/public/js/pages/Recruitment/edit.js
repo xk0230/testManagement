@@ -25,7 +25,10 @@ myAppModule.controller('UserListController',
 		$scope.RefuseFlag = false;
 		//拒绝理由
 		$scope.RefuseReason = "";
+		//按钮显示
+		$scope.ButtonShow = false;
 		
+		$scope.AdminAcceptFlag = false;
 		//初期化
 		self.$onInit = function(){
 			//设置部门下拉框
@@ -33,13 +36,14 @@ myAppModule.controller('UserListController',
 			//设置胜任特征
 			this.getAllCompetency();
 			//获取用户ID
-			self.Recruitment.id = $location.search().id;
-			if(self.Recruitment.id != "" && typeof(self.Recruitment.id)!="undefined"){
+			if(typeof($location.search().id)!="undefined"){
+				self.Recruitment.id = $location.search().id;
 				//招聘需求详细信息
 				this.getRecruitmentInfo();
 				//招聘需求候选人
 				this.getCandidatePageList();
 			}
+			this.getAdminList();
 		}
 		
 		//获取招聘需求详情
@@ -64,6 +68,9 @@ myAppModule.controller('UserListController',
 							check[0].checked = true;
 						}
 				    });
+					var localUser = $("#sessionUserId").val();
+					
+					$scope.ButtonShow = self.Recruitment.auditUser != localUser;
 					
 				}else{
 					self.Recruitment = {};
@@ -83,6 +90,25 @@ myAppModule.controller('UserListController',
 					self.deplist = res.data || [];
 				}else{
 					self.deplist = [];
+				}
+			})
+		}
+		
+		//获取管理员List
+		self.getAdminList = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/adminuser/getadminlist.do',
+				params:{
+					position: "ADMIN",
+					start:0,
+					end:100
+				}
+			}).then(function(res){
+				if(res){
+					self.adminlist = res.data.data || [];
+				}else{
+					self.adminlist = [];
 				}
 			})
 		}
@@ -178,6 +204,9 @@ myAppModule.controller('UserListController',
 		    });  
 			if(par.length > 1){
 				par = par.substring(0,par.length -1)
+			}else{
+				alert("必须选择至少一个胜任特质！");
+				return;
 			}
 			
 			$http({
@@ -201,6 +230,11 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res.data.result){
 					alert("保存成功！");
+					if(typeof($location.search().id)!="undefined"){
+						self.$onInit();
+					}else{
+						window.location.href="/ccydManagement/admin/test/Recruitment.do?type=''"; 
+					}
 				}else{
 					alert("保存失败！");
 				}
@@ -228,21 +262,62 @@ myAppModule.controller('UserListController',
 		
 		//审核通过
 		self.accept = function(){
-			$http({
-				method:'POST',
-				url:'/ccydManagement/admin/recruit/auditRecruit.do',
-				params:{
-					recruitId : self.Recruitment.id,
-					result:"1"
+			if($("#sessionUserId").val()!="admin"){
+				$http({
+					method:'POST',
+					url:'/ccydManagement/admin/recruit/auditRecruit.do',
+					params:{
+						recruitId : self.Recruitment.id,
+						result:"1"
+					}
+				}).then(function(res){
+					if(res.data.result){
+						alert("审核提交成功！")
+						self.$onInit();
+					}else{
+						alert(res.data.message)
+					}
+				})
+			}else{
+				if(!$scope.AdminAcceptFlag){
+					$scope.AdminAcceptFlag = true;
+					return;
 				}
-			}).then(function(res){
-				if(res){
-					alert("审核提交成功！")
-					self.$onInit();
-				}else{
-					alert("审核提交失败！")
+				//获取选中的管理员
+				var AdminList = $(".adminList");
+				var auditIds = "";
+				$.each(AdminList,function(n,value) {  
+					if(value.checked){
+						auditIds = auditIds + value.id + "@";
+					}
+			    });  
+				if(auditIds == ""){
+					alert("必须选中至少一个管理员！");
+					return;
 				}
-			})
+				if(auditIds.length > 0){
+					auditIds = auditIds.substring(0,auditIds.length - 1);
+					$http({
+						method:'POST',
+						url:'/ccydManagement/admin/recruit/auditRecruit.do',
+						params:{
+							recruitId : self.Recruitment.id,
+							result:"1",
+							auditIds:auditIds
+						}
+					}).then(function(res){
+						if(res.data.result){
+							alert("审核提交成功！")
+							self.$onInit();
+							$scope.AdminAcceptFlag = false;
+						}else{
+							alert(res.data.message)
+						}
+					})
+				}
+				
+				
+			}
 		}
 		
 		//审核拒绝
@@ -265,11 +340,11 @@ myAppModule.controller('UserListController',
 					remark:$scope.RefuseReason
 				}
 			}).then(function(res){
-				if(res){
-					alert("驳回提交成功！")
+				if(res.data.result){
+					alert("审核提交成功！")
 					self.$onInit();
 				}else{
-					alert("驳回提交失败！")
+					alert(res.data.message)
 				}
 			})
 		}
