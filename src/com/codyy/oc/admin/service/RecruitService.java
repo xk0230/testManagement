@@ -75,7 +75,7 @@ public class RecruitService {
 				recruitAuditMapper.insert(ra);
 			}
 		}else {
-			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getCreateUser());
+			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getAuditUser());
 			if(StringUtils.isEmpty(managerId)||managerId.equals(recruit.getAuditUser())) {
 				//如果没有部门经理或者本身就是部门经理
 				RecruitAudit ra = new RecruitAudit();
