@@ -136,7 +136,7 @@
   
      <select id="getUnpassOrNullNum" parameterType="java.lang.String"  resultType="java.lang.Integer">
   	SELECT
-	* 
+	count(*)
 FROM
 	RECRUIT_AUDIT 
 WHERE
