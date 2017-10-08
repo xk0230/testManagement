@@ -99,7 +99,7 @@ public class RecruitController  extends BaseController{
 	@RequestMapping("auditRecruit")
 	public ResultJson  auditRecruit(HttpServletRequest request, RecruitAudit audit,String auditIds){
 		AdminUser sessionUser = getSessionUser(request);
-		audit.setAuditUserId(sessionUser.getUserId());
+		audit.setAuditUser(sessionUser.getUserId());
 		audit.setAuditUserPosition(sessionUser.getPosition());
 		String[] ids = null;
 		if(StringUtils.isNotEmpty(auditIds)) {
