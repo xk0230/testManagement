@@ -6,11 +6,11 @@
            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="招聘" >
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#post1" data-parent="#exampleAccordion">
               <i class="fa-th-list"></i>
-              <span class="nav-link-text">员工管理</span>
+              <span class="nav-link-text">员工信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="post1">
-				<li><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
-				<li ng-show="${adminUser.position == 'ADMIN'}"><a href="${root}/admin/adminuser/toAddOrEditUser.do"><i class="en-arrow-right7"></i>员工信息</a></li>
+				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
+				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="en-arrow-right7"></i>个人信息</a></li>
             </ul>
           </li>
            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="成本信息" ng-show="${adminUser.position != 'STAFF'}">
@@ -46,7 +46,7 @@
             </a>
             <ul class="sidenav-second-level collapse nav" id="postRecruitment">
 				<li><a href="${root}/admin/test/Recruitment.do?type=''"><i class="en-arrow-right7"></i>招聘需求列表</a></li>
-				<li><a href="${root}/admin/test/Recruitment.do?type=myApproval"><i class="en-arrow-right7"></i>招聘需求审批列表</a></li>
+				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/test/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>招聘需求审批列表</a></li>
 				<li><a href="${root}/admin/test/MyInterview.do"><i class="en-arrow-right7"></i>我的面试</a></li>
             </ul>
           </li>

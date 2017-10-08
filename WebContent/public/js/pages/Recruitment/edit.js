@@ -21,7 +21,12 @@ myAppModule.controller('UserListController',
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 10;
+		//拒绝理由输入框显示Flag
+		$scope.RefuseFlag = false;
+		//拒绝理由
+		$scope.RefuseReason = "";
 		
+		//初期化
 		self.$onInit = function(){
 			//设置部门下拉框
 			this.getDepList();
@@ -196,7 +201,6 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res.data.result){
 					alert("保存成功！");
-					self.$onInit();
 				}else{
 					alert("保存失败！");
 				}
@@ -218,6 +222,54 @@ myAppModule.controller('UserListController',
 					self.$onInit();
 				}else{
 					alert("提交审批失败！")
+				}
+			})
+		}
+		
+		//审核通过
+		self.accept = function(){
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/auditRecruit.do',
+				params:{
+					recruitId : self.Recruitment.id,
+					result:"1"
+				}
+			}).then(function(res){
+				if(res){
+					alert("审核提交成功！")
+					self.$onInit();
+				}else{
+					alert("审核提交失败！")
+				}
+			})
+		}
+		
+		//审核拒绝
+		self.refuse = function(){
+			if(!$scope.RefuseFlag){
+				$scope.RefuseFlag = true;
+				return;
+			}
+			if($scope.RefuseReason ==""){
+				alert("驳回理由不能为空！");
+				return;
+			}
+			
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/recruit/auditRecruit.do',
+				params:{
+					recruitId : self.Recruitment.id,
+					result:"-1",
+					remark:$scope.RefuseReason
+				}
+			}).then(function(res){
+				if(res){
+					alert("驳回提交成功！")
+					self.$onInit();
+				}else{
+					alert("驳回提交失败！")
 				}
 			})
 		}

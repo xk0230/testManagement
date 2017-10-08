@@ -48,7 +48,7 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">所属部门</label>
 												<div class="col-lg-8">
-													<select id="depId" ng-model="depId"  class="form-control select2" 
+													<select id="depId" ng-model="depId"  class="form-control select2" ng-Disabled = "depIdChangeAble"
 															ng-options="dep.depId as dep.name group by dep.group for dep in depList">
 															<option value="">--请选择--</option>
 													</select>

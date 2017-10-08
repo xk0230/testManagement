@@ -22,11 +22,21 @@ myAppModule.controller('PostionController',
 				{result: 1, resultName : "已通过"},
 				{result: -1, resultName : "已拒绝"}
 				];
+			
+			//获取角色
+			self.admin =$("#sessionUserType").val();
+			if(self.admin=="MANAGER"){
+				$scope.depId =$("#sessionUserDepId").val();
+				$scope.depIdChangeAble = true;
+			}else if(self.admin=="ADMIN"){
+				$scope.depIdChangeAble = false;
+			}
+			
 //			if($location.search().result == 0){
 //				$scope.result = "0";
 //				console.log("dddd");
 //			}
-				self.getList();
+			self.getList();
 		};
 		
 		//页数变化
@@ -41,8 +51,6 @@ myAppModule.controller('PostionController',
 		
 		// 获取数据列表
 		this.getList = function(){
-			console.log("获取数据");
-//			var type = $("#type").val();
 			if($scope.type == "audit"){
 				//如果是审批
 				$http({
