@@ -126,9 +126,11 @@ myAppModule.controller('UserListController',
 					valuesStr     :valuesStr
 				}
 			}).then(function(res){
-				if(res){
+				if(res.data.result){
+					alert("保存成功！");
 					self.getCandidatePageList();
 				}else{
+					alert(res.data.message);
 				}
 			})
 		}
