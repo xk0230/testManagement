@@ -305,8 +305,13 @@ public class IpeService {
 			ScorePcSalaryVO scorePcSalaryVO = this.getMaxScorePcSalaryVO(totalScore);
 			if(null != scorePcSalaryVO){
 				user.setSalaryScale(String.valueOf(scorePcSalaryVO.getPc()));
-				ipeDao.updateUserPc(user);
+			}else{
+				user.setSalaryScale("");
 			}
+		}else{
+			user.setSalaryScale("");
 		}
+		
+		ipeDao.updateUserPc(user);
 	}
 }
