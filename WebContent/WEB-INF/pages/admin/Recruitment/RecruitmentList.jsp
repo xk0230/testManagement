@@ -98,7 +98,7 @@
 												<td><p ng-bind="item.createUserName"></p></td>
 												<td><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm'"></p></td>
 												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i> 编辑</button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.id)"><i class="br-pencil"></i>详细信息</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.evaluation(item.id)" ng-if="${adminUser.userId == 'admin'}&&item.status=='audited'"><i class="fa-thumbs-up"></i> 管理员评估</button>
 												</td>
 											</tr>
