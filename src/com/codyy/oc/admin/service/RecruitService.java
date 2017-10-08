@@ -222,8 +222,12 @@ public class RecruitService {
 	
 	public ResultJson auditRecruit(RecruitAudit audit,String[] auditIds) {
 		//根据RecruitId和当前审核人获取auditId
-		
-		
+		String auditid = mapper.selectAuditRecruitId(audit);
+		if(StringUtils.isEmpty(auditid)) {
+			return new ResultJson(false, "您无权审批");
+		}else {
+			audit.setId(auditid);
+		}
 		
 		int num = recruitAuditMapper.selectUnauditByid(audit.getId());
 		if(num != 1) {

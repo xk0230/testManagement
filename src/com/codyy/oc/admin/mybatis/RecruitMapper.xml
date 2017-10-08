@@ -277,11 +277,17 @@ FROM
     order by r.create_time desc
   </select>
   
-  <select id="selectAuditRecruit" parameterType="com.codyy.oc.admin.entity.RecruitAudit">
-  	SELECT recruit_id, max( recruit_num ) AS maxnum FROM `RECRUIT_AUDIT` GROUP BY recruit_id ) r2 ON ra.recruit_id = r2.recruit_id 
+  <select id="selectAuditRecruitId" parameterType="com.codyy.oc.admin.entity.RecruitAudit" resultType="java.lang.String">
+  SELECT
+	id 
+FROM
+	`RECRUIT_AUDIT` ra
+	RIGHT JOIN ( SELECT recruit_id, max( recruit_num ) AS maxnum FROM `RECRUIT_AUDIT` GROUP BY recruit_id ) r2 ON ra.recruit_id = r2.recruit_id 
 	AND ra.recruit_num = r2.maxnum 
-   	where ra.audit_user = #{auditUser,jdbcType=VARCHAR}
-     and ra.recruit_id =#{recruitId,jdbcType=VARCHAR}
+WHERE
+	ra.audit_user = #{auditUser,jdbcType=VARCHAR} 
+	AND ra.recruit_id = #{recruitId,jdbcType=VARCHAR}
+	
   </select>
   
   
