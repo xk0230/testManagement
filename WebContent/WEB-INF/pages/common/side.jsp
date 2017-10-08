@@ -64,6 +64,13 @@
 				</li>
             </ul>
           </li>
+          
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ipe">
+            <a class="nav-link nav-link-collapse collapsed" href="${root}/admin/test/UnderConstruction.do" >
+              <i class="fa-th-list"></i>
+              <span class="nav-link-text">绩效管理</span>
+            </a>
+          </li>
          
 		</ul>
 	</div>

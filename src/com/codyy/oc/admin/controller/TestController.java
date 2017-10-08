@@ -52,4 +52,9 @@ public class TestController extends BaseController {
 		return "/admin/Recruitment/AdminEvaluation";
 	}
 	
+	@RequestMapping("UnderConstruction")
+	public String UnderConstruction(HttpServletRequest request){
+		return "/admin/UnderConstruction/UnderConstruction";
+	}
+	
 }
