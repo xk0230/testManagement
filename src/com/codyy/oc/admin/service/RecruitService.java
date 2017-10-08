@@ -177,6 +177,8 @@ public class RecruitService {
 	//提交审核
 	public void  putAuditRecruit(Recruit recruit,String[]  auditIds) {
 		setAuditUser(recruit,auditIds);
+		recruit.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
+		mapper.updateByPrimaryKeySelective(recruit);
 	}
 	
 //	public ResultJson auditRec(RecruitAudit audit) {
