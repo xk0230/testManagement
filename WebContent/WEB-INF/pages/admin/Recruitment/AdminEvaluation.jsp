@@ -146,7 +146,7 @@
 													<table border="0" cellspacing="0" cellpadding="0">
 														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 0" >
 															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="$index" />
+																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
 																</td>
 															</tr>
 														</tbody>
@@ -156,7 +156,7 @@
 													<table border="0" cellspacing="0" cellpadding="0">
 														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 1" >
 															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="$index" />
+																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
 																</td>
 															</tr>
 														</tbody>
@@ -166,7 +166,7 @@
 													<table border="0" cellspacing="0" cellpadding="0">
 														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 2" >
 															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="$index" />
+																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
 																</td>
 															</tr>
 														</tbody>
@@ -176,7 +176,7 @@
 													<table border="0" cellspacing="0" cellpadding="0">
 														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 3" >
 															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="$index" />
+																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
 																</td>
 															</tr>
 														</tbody>

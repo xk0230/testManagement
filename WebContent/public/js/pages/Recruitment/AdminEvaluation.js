@@ -12,6 +12,10 @@ myAppModule.controller('UserListController',
 		self.Recruitment = {
 		}
 		
+		self.evaluation = {
+				
+		}
+		
 		this.$onInit = function(){
 			//招聘需求Id
 			var xxx = $location.search();
@@ -81,19 +85,50 @@ myAppModule.controller('UserListController',
 		
 		//获取获选人列表
 		self.save = function(item){
+			var recRComIdsStr = "";
+			var valuesStr = "";
+			
+			$.each(item.crrs,function(n,value) {
+				recRComIdsStr = recRComIdsStr + value.recRComId + "@";
+				valuesStr = valuesStr + value.value + "@@@"
+		    });
+			
+			if(recRComIdsStr.length>0){
+				recRComIdsStr = recRComIdsStr.substring(0,recRComIdsStr.length-1)
+			}
+			if(valuesStr.length>0){
+				valuesStr = valuesStr.substring(0,valuesStr.length-3)
+			}
+			
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/candidate/saveOrUpdateCandidate.do',
 				params:{
-					item
+					id            :item.id        ,
+					name          :item.name      ,
+					recruitId     :item.recruitId ,
+					pdpSjA        :item.pdpSjA    ,
+					pdpSjB        :item.pdpSjB    ,
+					pdpSjC        :item.pdpSjC    ,
+					pdpSjD        :item.pdpSjD    ,
+					pdpNjA        :item.pdpNjA    ,
+					pdpNjB        :item.pdpNjB    ,
+					pdpNjC        :item.pdpNjC    ,
+					pdpNjD        :item.pdpNjD    ,
+					wordScore     :item.wordScore ,
+					skillScore    :item.skillScore,
+					edu           :item.edu       ,
+					other         :item.other     ,
+					evaluating    :item.evaluating,
+					sort          :item.sort      ,
+					pc            :item.pc        ,
+					recRComIdsStr :recRComIdsStr,
+					valuesStr     :valuesStr
 				}
 			}).then(function(res){
 				if(res){
-					self.list = res.data.data || [];
-					$scope.totalItems = res.data.total;
+					self.getCandidatePageList();
 				}else{
-					self.list = [];
-					$scope.totalItems = 0;
 				}
 			})
 		}

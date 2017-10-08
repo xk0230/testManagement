@@ -386,7 +386,9 @@
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >籍贯</label>
 												<div class="col-lg-8">
+												<div class="form-group">
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.origin"  />
+												</div>
 												</div>
 											</div>
 											<div class="col-lg-3">
