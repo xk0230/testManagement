@@ -135,7 +135,14 @@
   </select>
   
      <select id="getUnpassOrNullNum" parameterType="java.lang.String"  resultType="java.lang.Integer">
-  	select count(*) from RECRUIT_AUDIT where recruit_id=(select recruit_id from RECRUIT_AUDIT where position_audit_id=#{id}) and (result is null or result=-1)
+  	SELECT
+	* 
+FROM
+	RECRUIT_AUDIT 
+WHERE
+	recruit_id = ( SELECT recruit_id FROM RECRUIT_AUDIT WHERE id = #{id} ) 
+	AND recruit_num = ( SELECT recruit_num FROM RECRUIT_AUDIT WHERE id = #{id} ) 
+	AND ( result IS NULL OR result =- 1 )
   </select>
   
   <update id="passById" parameterType="java.lang.String">
