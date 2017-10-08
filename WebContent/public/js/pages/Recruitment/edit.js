@@ -233,7 +233,7 @@ myAppModule.controller('UserListController',
 					if(typeof($location.search().id)!="undefined"){
 						self.$onInit();
 					}else{
-						window.location.href="/ccydManagement/admin/test/Recruitment.do?type=''"; 
+						window.location.href="/ccydManagement/admin/recruit/Recruitment.do?type=''"; 
 					}
 				}else{
 					alert("保存失败！");
@@ -342,6 +342,7 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res.data.result){
 					alert("审核提交成功！")
+					$scope.RefuseFlag = false;
 					self.$onInit();
 				}else{
 					alert(res.data.message)

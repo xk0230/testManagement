@@ -32,25 +32,6 @@ public class TestController extends BaseController {
 	* @throws
 	 */
 	//@RequestMapping("insertAdminUser")
-	@RequestMapping("Recruitment")
-	public String Recruitment(HttpServletRequest request){
-		return "/admin/Recruitment/RecruitmentList";
-	}
-	
-	@RequestMapping("EditRecruitment")
-	public String AddRecruitment(HttpServletRequest request){
-		return "/admin/Recruitment/EditRecruitment";
-	}
-	
-	@RequestMapping("MyInterview")
-	public String MyInterview(HttpServletRequest request){
-		return "/admin/Recruitment/MyInterview";
-	}
-	
-	@RequestMapping("AdminEvaluation")
-	public String AdminEvaluation(HttpServletRequest request){
-		return "/admin/Recruitment/AdminEvaluation";
-	}
 	
 	@RequestMapping("UnderConstruction")
 	public String UnderConstruction(HttpServletRequest request){

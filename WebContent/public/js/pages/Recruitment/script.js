@@ -118,14 +118,14 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewRecruitment = function(){
-			window.location.href="/ccydManagement/admin/test/EditRecruitment.do"; 
+			window.location.href="/ccydManagement/admin/recruit/EditRecruitment.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/test/EditRecruitment.do?id="+id; 
+			window.location.href="/ccydManagement/admin/recruit/EditRecruitment.do?id="+id; 
 		};
 		this.evaluation = function(id){
-			window.location.href="/ccydManagement/admin/test/AdminEvaluation.do?id="+id; 
+			window.location.href="/ccydManagement/admin/recruit/AdminEvaluation.do?id="+id; 
 		};
 	}
 );

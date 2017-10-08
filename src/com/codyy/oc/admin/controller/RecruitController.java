@@ -140,7 +140,25 @@ public class RecruitController  extends BaseController{
 		search.setCreateUser(getSessionUserId(request));
 		return service.getMyAuditRecruitPageList(page, search);
 	}
+	@RequestMapping("Recruitment")
+	public String Recruitment(HttpServletRequest request){
+		return "/admin/Recruitment/RecruitmentList";
+	}
 	
+	@RequestMapping("EditRecruitment")
+	public String AddRecruitment(HttpServletRequest request){
+		return "/admin/Recruitment/EditRecruitment";
+	}
+	
+	@RequestMapping("MyInterview")
+	public String MyInterview(HttpServletRequest request){
+		return "/admin/Recruitment/MyInterview";
+	}
+	
+	@RequestMapping("AdminEvaluation")
+	public String AdminEvaluation(HttpServletRequest request){
+		return "/admin/Recruitment/AdminEvaluation";
+	}
 	
 	/**
 	 * 审核招聘需求
