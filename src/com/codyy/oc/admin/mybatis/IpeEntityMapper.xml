@@ -197,7 +197,12 @@
 	</select>
 	
 	<update id="updateUserPc" parameterType="com.codyy.oc.admin.entity.AdminUser">
+	    <if test="salaryScale != null and salaryScale !=''">
 		UPDATE ADMIN_USER SET salary_scale = #{salaryScale} WHERE user_id = #{userId}
+		</if>
+		 <if test="salaryScale == null or salaryScale ==''">
+		UPDATE ADMIN_USER SET salary_scale = null WHERE user_id = #{userId}
+		</if>
 	</update>
 	
 </mapper>
