@@ -7,7 +7,7 @@ myAppModule.controller('UserListController',
 		var self = this;
 		//模块显示
 		self.readOnly = "";
-		self.admin;
+		self.sessionUserId;
 		self.mode = "";
 		self.user = {
 				userId:"",
@@ -65,13 +65,13 @@ myAppModule.controller('UserListController',
 			//获取用户ID
 			self.user.userId = $location.search().id;
 			//获取角色
-			self.admin =$("#sessionUserType").val();
+			self.sessionUserId =$("#sessionUserId").val();
 			//判定是否显示模块
 			if(typeof(self.user.userId)!="undefined"){
 				self.mode = "2";
 				//获取用户信息
 				this.getUser();
-				if(self.admin != "ADMIN"){
+				if(self.sessionUserId != "admin"){
 					self.readOnly = true;
 				}else
 				{

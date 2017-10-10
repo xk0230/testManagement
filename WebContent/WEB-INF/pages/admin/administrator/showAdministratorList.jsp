@@ -75,7 +75,7 @@
 													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getFinancingInfoList()" value="查询" />
 												</div>
 												<div class="col-lg-6">
-													<input type="button" ng-if="${adminUser.position == 'ADMIN'}"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
+													<input type="button" ng-if="${adminUser.userId == 'admin'}"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addNewUser('')" value="新增用户" />
 												</div>
 											</div>
 										</div>

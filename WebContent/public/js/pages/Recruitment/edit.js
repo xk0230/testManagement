@@ -31,6 +31,9 @@ myAppModule.controller('UserListController',
 		$scope.AdminAcceptFlag = false;
 		//初期化
 		self.$onInit = function(){
+			//拒绝理由输入框显示Flag
+			$scope.RefuseFlag = false;
+			$scope.AdminAcceptFlag = false;
 			//设置部门下拉框
 			this.getDepList();
 			//设置胜任特征
@@ -243,12 +246,32 @@ myAppModule.controller('UserListController',
 		
 		//提交审核
 		self.putAuditRecruit = function(){
+			var userId = $("#sessionUserId").val();
+			var auditIds = "";
+			if(userId=="admin"){
+				if(!$scope.AdminAcceptFlag){
+					$scope.AdminAcceptFlag = true;
+					return;
+				}
+				//获取选中的管理员
+				var AdminList = $(".adminList");
+				$.each(AdminList,function(n,value) {  
+					if(value.checked){
+						auditIds = auditIds + value.id + "@";
+					}
+			    });  
+				if(auditIds == ""){
+					alert("必须选中至少一个管理员！");
+					return;
+				}
+			}
+			
 			$http({
 				method:'POST',
 				url:'/ccydManagement/admin/recruit/putAuditRecruit.do',
 				params:{
 					id : self.Recruitment.id,
-					auditIds:""
+					auditIds:auditIds
 				}
 			}).then(function(res){
 				if(res){

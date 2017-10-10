@@ -61,13 +61,13 @@
 					</div>
 					<div class="row" ng-show="${adminUser.userId == 'admin'}&&AdminAcceptFlag">
 						<div class="col-lg-12 ">
-							<div class="col-lg-2 form-group" >
+							<div class="col-lg-2 form-group pull-left" >
 								<h4>请选择审批管理员：</h4>
 							</div>
-							<div class="col-lg-2 form-group" ng-repeat="admin in vm.adminlist">
-								<p ng-show="admin.userId!='admin'">
+							<div class="col-lg-10 form-group " >
+								<div ng-show="admin.userId!='admin'" ng-repeat="admin in vm.adminlist" class="col-lg-2 pull-left">
 									<input type="checkbox" class="adminList" id="{{admin.userId}}" value="{{admin.id}}">&nbsp;&nbsp;{{admin.realName}}
-								</p>
+								</div>
 							</div>
 						</div>
 					</div>
