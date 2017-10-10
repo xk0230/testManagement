@@ -36,19 +36,18 @@
 											</tr>
 										</thead>  
 										<tbody>
-											
-											<c:forEach varStatus="pc" begin="40" end="84">
-											
+											<c:set var="tmpIndex" value="84"></c:set>
+											<c:forEach varStatus="pc" begin="40" end="84" >
 												<tr class="odd gradeX">
 												
-													<td>${pc.index}</td>
+													<td>${tmpIndex }</td>
 												
 													<c:if test="${deptPostLevels != null }">
 														<c:forEach var="dep" items="${deptPostLevels }" >
 															<td> 
 																<c:forEach var="depPostLevel" items="${dep.postLevels }">
 																	
-																	<c:if test="${pc.index == depPostLevel.salaryScale }">
+																	<c:if test="${tmpIndex == depPostLevel.salaryScale }">
 																		${depPostLevel.postName } </br>
 																	</c:if>
 																	
@@ -58,7 +57,7 @@
 													</c:if>
 
 												</tr>
-												
+												<c:set var="tmpIndex" value="${tmpIndex-1 }"></c:set>
 											</c:forEach>
 											
 										</tbody>
