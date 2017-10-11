@@ -101,7 +101,7 @@
 													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getCostList()" value="查询" />
 												</div>
 												<div class="col-lg-6">
-													<input type="button" ng-if="${adminUser.position == 'ADMIN'}" class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.editCost('', '.outlet')" value="新增成本" />
+													<input type="button" ng-if="${adminUser.position == 'ADMIN'}" class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addCost('', '.outlet')" value="新增成本" />
 												</div>
 											</div>
 										</div>
@@ -170,7 +170,80 @@
 			<div class="clearfix"></div>
 		</div>
 		<!-- End #content -->
-		
+	<!-- 这里可以定义一个js文件放到public下面 -->
+    <script type="text/ng-template" id="myModalAddContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i> 成本信息</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>成本记录</h3>
+								</div>
+								<div class="panel-body">
+									<div id="addDepNum" class="form-horizontal group-border" role="form">
+										
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">收支类型</label>
+												<div class="col-lg-8">
+													<select ng-model="costEntity.costType"  class="form-control select2" 														
+															ng-change="costTypeChange()">
+														<option value="">--请选择--</option>
+														<option value="0" >收入</option>
+														<option value="1" >支出</option>
+													</select>
+												</div>
+											</div>
+											
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">分类名称</label>
+												<div class="col-lg-8">
+													<select id="costSubType" ng-model="costEntity.costSubtypeId" class="form-control select2">
+														<option value="">--请选择--</option>
+														<option value="{{costSubType.costSubTypeId}}" ng-repeat="costSubType in costSubTypeList">{{costSubType.name}}</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label" >成本产生时间</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="costEntity.costTime" is-open="popup.opened1" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="true"  />
+														<span class="input-group-btn">
+														<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>	
 		
 	<!-- 这里可以定义一个js文件放到public下面 -->
     <script type="text/ng-template" id="myModalEditContent.html">
@@ -251,7 +324,6 @@
 													<input type="text" class="form-control" ng-model="costEntity.costNum" />
 												</div>
 											</div>
-											
 										</div>
 									</div>
 								</div>

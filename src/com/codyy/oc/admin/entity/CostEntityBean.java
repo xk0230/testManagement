@@ -31,6 +31,8 @@ public class CostEntityBean {
 	
 	//部门ID
 	private String depId;
+	
+	private String depAmount;
 
 	public String getCostId() {
 		return costId;
@@ -95,5 +97,13 @@ public class CostEntityBean {
 	public void setDepId(String depId) {
 		this.depId = depId;
 	}
+
+    public String getDepAmount() {
+        return depAmount;
+    }
+
+    public void setDepAmount(String depAmount) {
+        this.depAmount = depAmount;
+    }
 	
 }

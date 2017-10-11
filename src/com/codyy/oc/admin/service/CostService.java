@@ -70,14 +70,31 @@ public class CostService {
 		costEntityBean.setCostTime(DateUtils.stringToTimestamp((DateUtils.format(costEntityBean.getCostTime()))));
 		
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
-			costEntityBean.setCostId(UUID.randomUUID().toString());
-			int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
-			if(insertCostEntityNum == 1){
-				jsonDto.setCode(0);
-				jsonDto.setMsg(INSERT_SUCCESS);
-			}else{
-				jsonDto.setMsg(INSERT_ERROR);
-			}
+		    
+		    String depId = costEntityBean.getDepId();
+		    String depAmount = costEntityBean.getDepAmount();
+		    if(StringUtils.isNotBlank(depId) && StringUtils.isNotBlank(depAmount)) {
+		        String[] depIds = depId.split(",");
+		        String[] amouts = depAmount.split(",");
+		        if(depIds.length == amouts.length){
+		            CostEntityBean cost = null;
+		            for(int i = 0;i<depIds.length;i++){
+		                cost = new CostEntityBean();
+		                cost.setCostId(UUID.randomUUID().toString());
+		                cost.setCostSubtypeId(costEntityBean.getCostSubtypeId());
+		                cost.setCostTime(costEntityBean.getCostTime());
+		                cost.setCostType(costEntityBean.getCostType());
+		                cost.setCreateTime(DateUtils.getCurrentTimestamp());
+		                cost.setCreateUserId(costEntityBean.getCreateUserId());
+		                cost.setDepId(depIds[i]);
+		                cost.setCostNum(Double.parseDouble(amouts[i]));
+		                
+		                costDaoMapper.insertCostEntity(cost);
+		            }
+		        }
+		    }
+		    
+		    jsonDto.setCode(0);
 			
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
