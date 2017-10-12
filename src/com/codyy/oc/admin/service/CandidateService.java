@@ -182,6 +182,20 @@ public class CandidateService {
 		map.put("candidateId",search.getCandidateId());//候选人ID
 		map.put("interviewerId",search.getInterviewerId());//面试官ID
 	    page.setMap(map);
+	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+	    Candidate can=  candidateMapper.selectByPrimaryKey(search.getCandidateId());
+	    for (Competency c : competencyMapper.getByRecId(can.getRecruitId())) {
+	    	CandidateRRecrcom cr = new CandidateRRecrcom();
+	    	cr.setCompetencyId(c.getId());
+	    	cr.setCompetencyName(c.getName());
+	    	RecruitRCompetency rrr = new RecruitRCompetency();
+	    	rrr.setRecruitId(can.getRecruitId());
+	    	rrr.setCompetencyId(c.getId());
+	    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
+	    	crrsModel.add(cr);
+		}
+	    
+	    
 		List<CandidateRInterviewer> data = candidateRInterviewerMapper.getCandidateRInterviewerPageList(page);
 		for (CandidateRInterviewer c : data) {
 			AdminUser in = adminUserMapper.getselcAdminUserById(c.getInterviewerId());
@@ -194,7 +208,31 @@ public class CandidateService {
 			Recruit r = recruitMapper.selectByPrimaryKey(ca.getRecruitId());
 			Position p =  positionMapper.selectByPrimaryKey(r.getPostid());
 			c.setPositionName(p.getName());
+			
+			
+			List<CandidateRRecrcom> res = new ArrayList<CandidateRRecrcom>();
+			res.addAll(crrsModel);
+			
+			CandidateRRecrcom crr = new CandidateRRecrcom();
+			crr.setCandidateId(c.getCandidateId());
+			crr.setIntervireId(c.getInterviewerId());
+			List<CandidateRRecrcom> crrs = candidateRRecrcomMapper.getAllByCandidateId(crr);
+			for (CandidateRRecrcom cr : crrs) {
+				for (CandidateRRecrcom cm : res) {
+					if(cm.getCompetencyId().equals(cr.getCompetencyId())){
+						//如果是对应上的则赋值
+						cm.setCandidateId(cr.getCandidateId());
+						cm.setId(cr.getId());
+						cm.setRecRComId(cr.getRecRComId());
+						cm.setValue(cr.getValue());
+					}
+				}
+			}
+		c.setCrrs(res);
 		}
+		
+		
+		
 		page.setData(data);
 		return page;
 	}
