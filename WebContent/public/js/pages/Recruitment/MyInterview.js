@@ -87,18 +87,48 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.items.interviewTime = $filter('date')(items.interviewTime, 'yyyy-MM-dd hh:mm:ss');
 	//页面初期化
 	this.$onInit = function(){
-
+		$http({
+			method:'POST',
+			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerById.do",
+			params:{
+				id:items.id
+			}
+		
+		}).then(function(res){
+			if(res.status == "200"){
+				$scope.items.crrs = res.data.crrs;
+			}else{
+				alert("获取信息失败！");
+			}
+		});
 	};
 	
 	//保存操作
-	$scope.onSubmit = function () {
+	$scope.save = function () {
+
+		var recRComIdsStr = "";
+		var valuesStr = "";
+		
+		$.each($scope.items.crrs,function(n,value) {
+			recRComIdsStr = recRComIdsStr + value.recRComId + "@";
+			valuesStr = valuesStr + value.value + "@@@"
+	    });
+		
+		if(recRComIdsStr.length>0){
+			recRComIdsStr = recRComIdsStr.substring(0,recRComIdsStr.length-1)
+		}
+		if(valuesStr.length>0){
+			valuesStr = valuesStr.substring(0,valuesStr.length-3)
+		}
 		var params = {
 				//id
 				id:$scope.items.id,
 				workDetail:items.workDetail,
 				skillDetail:items.skillDetail,
 				wordScore:items.wordScore,
-				skillScore:items.skillScore
+				skillScore:items.skillScore,
+				recRComIdsStr :recRComIdsStr,
+				valuesStr     :valuesStr
 			}
 			$http({
 				method:'POST',
@@ -111,7 +141,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 				}else{
 					alert("保存失败！");
 				}
-		});
+			});
 	};
 	  $ctrl.cancel = function () {
 	    $uibModalInstance.dismiss('cancel');

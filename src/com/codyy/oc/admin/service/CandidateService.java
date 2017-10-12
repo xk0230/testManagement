@@ -66,12 +66,12 @@ public class CandidateService {
 		candidateRInterviewer.setId(UUIDUtils.getUUID());
 		candidateRInterviewerMapper.insert(candidateRInterviewer);
 		
-		if(crs != null) {
-			candidateRRecrcomMapper.deleteByCandidate(crs.get(0));
+		/*if(crs != null) {
+			candidateRRecrcomMapper.deleteByCandidate(crs.get(1));
 			for (CandidateRRecrcom candidateRRecrcom : crs) {
 				candidateRRecrcomMapper.insert(candidateRRecrcom);
 			}
-		}
+		}*/
 	};
 	
 	public void updateById(Candidate candidate,List<CandidateRRecrcom> crs) {
@@ -86,10 +86,13 @@ public class CandidateService {
 	}
 	
 	public void updateRInterviewerById(CandidateRInterviewer candidateRInterviewer,List<CandidateRRecrcom> crs) {
+		CandidateRInterviewer cr = candidateRInterviewerMapper.selectByPrimaryKey(candidateRInterviewer.getId());
 		candidateRInterviewerMapper.updateByPrimaryKeySelective(candidateRInterviewer);
 		if(crs != null) {
+			crs.get(0).setCandidateId(cr.getCandidateId());
 			candidateRRecrcomMapper.deleteByCandidate(crs.get(0));
 			for (CandidateRRecrcom candidateRRecrcom : crs) {
+				candidateRRecrcom.setCandidateId(cr.getCandidateId());
 				candidateRRecrcomMapper.insert(candidateRRecrcom);
 			}
 		}

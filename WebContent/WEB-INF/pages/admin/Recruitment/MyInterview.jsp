@@ -75,7 +75,6 @@
 						</ul>
 					</div>
 				</div>
-				<form ng-submit="onSubmit()" novalidate="novalidate">
 				<!-- 个人信息 start here -->
 				<div class="outlet" >
 					<div class="row">
@@ -174,18 +173,25 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group">
+											<div class="col-lg-12">
+												<label class="col-lg-12 control-label text-left" style="margin-left:-15px" >胜任特质</label>
+												<div class="col-lg-12 media">
+													<span ng-repeat="competency in items.crrs track by $index" >{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" /></span>
+												</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
        			 <div class="modal-footer">
-					<input type="submit" class="btn btn-primary" ladda = "submitting"  value="保存" />
+					<input type="button" class="btn btn-primary" ng-click="save()"  value="保存" />
             		<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         		</div>
-			</form>
     </script>
 			
 			
