@@ -35,7 +35,7 @@
 									<table class="table display" id="datatable">
 										<thead>
 											<tr>
-												<th>面试人</th>
+												<th>候选人人</th>
 												<th>面试时间</th>
 												<th>面试地点</th>
 												<th>面试内容</th>
@@ -44,7 +44,7 @@
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
-												<td><p ng-bind="item.place"></p></td>
+												<td><p ng-bind="item.candidateName"></p></td>
 												<td><p ng-bind="item.interviewTime | date:'yyyy-MM-dd'"></p></td>
 												<td><p ng-bind="item.place"></p></td>
 												<td><p ng-bind="item.interviewDetail"></p></td>

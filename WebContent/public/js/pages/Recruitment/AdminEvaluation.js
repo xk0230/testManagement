@@ -200,7 +200,11 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			}
 		}).then(function(res){
 			if(res){
+				
 				$scope.InterviewList = res.data.data || [];
+				
+				
+				
 			}else{
 				$scope.InterviewList = [];
 			}

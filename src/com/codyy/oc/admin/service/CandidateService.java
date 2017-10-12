@@ -185,22 +185,36 @@ public class CandidateService {
 		map.put("candidateId",search.getCandidateId());//候选人ID
 		map.put("interviewerId",search.getInterviewerId());//面试官ID
 	    page.setMap(map);
-	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
-	    Candidate can=  candidateMapper.selectByPrimaryKey(search.getCandidateId());
-	    for (Competency c : competencyMapper.getByRecId(can.getRecruitId())) {
-	    	CandidateRRecrcom cr = new CandidateRRecrcom();
-	    	cr.setCompetencyId(c.getId());
-	    	cr.setCompetencyName(c.getName());
-	    	RecruitRCompetency rrr = new RecruitRCompetency();
-	    	rrr.setRecruitId(can.getRecruitId());
-	    	rrr.setCompetencyId(c.getId());
-	    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
-	    	crrsModel.add(cr);
-		}
+//	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+//	    Candidate can=  candidateMapper.selectByPrimaryKey(search.getCandidateId());
+//	    for (Competency c : competencyMapper.getByRecId(can.getRecruitId())) {
+//	    	CandidateRRecrcom cr = new CandidateRRecrcom();
+//	    	cr.setCompetencyId(c.getId());
+//	    	cr.setCompetencyName(c.getName());
+//	    	RecruitRCompetency rrr = new RecruitRCompetency();
+//	    	rrr.setRecruitId(can.getRecruitId());
+//	    	rrr.setCompetencyId(c.getId());
+//	    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
+//	    	crrsModel.add(cr);
+//		}
 	    
 	    
 		List<CandidateRInterviewer> data = candidateRInterviewerMapper.getCandidateRInterviewerPageList(page);
 		for (CandidateRInterviewer c : data) {
+			List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+		    Candidate can=  candidateMapper.selectByPrimaryKey(c.getCandidateId());
+		    for (Competency cc : competencyMapper.getByRecId(can.getRecruitId())) {
+		    	CandidateRRecrcom cr = new CandidateRRecrcom();
+		    	cr.setCompetencyId(cc.getId());
+		    	cr.setCompetencyName(cc.getName());
+		    	RecruitRCompetency rrr = new RecruitRCompetency();
+		    	rrr.setRecruitId(can.getRecruitId());
+		    	rrr.setCompetencyId(cc.getId());
+		    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
+		    	crrsModel.add(cr);
+			}
+			
+			
 			AdminUser in = adminUserMapper.getselcAdminUserById(c.getInterviewerId());
 			c.setInterviewerName(in.getRealName());
 			c.setInterviewerPostId(in.getPostId());

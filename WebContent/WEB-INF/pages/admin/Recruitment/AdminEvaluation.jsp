@@ -175,7 +175,7 @@
 									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
 								</div>
 								<div class="panel-body">
-									<table class="table display" id="datatable">
+									<table class="table display" >
 										<thead>
 											<tr>
 												<th>面试项目</th>
@@ -183,10 +183,10 @@
 											</tr>
 										</thead>  
 										<tr>
-											<td ng-repeat="Interview in InterviewList">
-												<table>
-													<tr>
-														<td>相关工作经历/成就</td>
+											<td style="min-width:100px;max-width:200px;">
+												<table class="table table-bordered">
+													<tr style="min-height:500px;max-height:200px;">
+														<td >相关工作经历/成就</td>
 													</tr>
 													<tr>
 														<td>技术技能/岗位技能</td>
@@ -197,30 +197,30 @@
 													<tr>
 														<td>技术技能/岗位技能评分</td>
 													</tr>
-													<tr ng-repeat="crr in InterviewList.crrs">
+													<tr ng-repeat="crr in InterviewList[0].crrs">
 														<td>
-															abc
+															{{crr.competencyName}}
 														</td>
 													</tr>
 												</table>
 											</td>
-											<td ng-repeat="Interview in InterviewList">
-												<table>
+											<td ng-repeat="Interview in InterviewList" style="min-width:100px;max-width:200px;">
+												<table class="table table-bordered">
 													<tr>
-														<td>{{Interview.workDetail}}</td>
+														<td>&nbsp;{{Interview.workDetail}}</td>
 													</tr>
 													<tr>
-														<td>{{Interview.skillDetail}}</td>
+														<td>&nbsp;{{Interview.skillDetail}}</td>
 													</tr>
 													<tr>
-														<td>{{Interview.wordScore}}</td>
+														<td>&nbsp;{{Interview.wordScore}}</td>
 													</tr>
 													<tr>
-														<td>{{Interview.skillScore}}</td>
+														<td>&nbsp;{{Interview.skillScore}}</td>
 													</tr>
-													<tr ng-repeat="crr in InterviewList.crrs">
+													<tr ng-repeat="crr in Interview.crrs">
 														<td>
-															abc
+															&nbsp;{{crr.value}}
 														</td>
 													</tr>
 												</table>
@@ -228,7 +228,6 @@
 										</tr>
 									</table>
 									<div class="g-no-content" ng-if="InterviewList && InterviewList.length === 0">没有相关数据</div>
-									<%@ include file="../../common/page.jsp"%>
 								</div>
 							</div>
 						</div>
@@ -237,7 +236,6 @@
 					<!-- Page End here -->
 				</div>
        			 <div class="modal-footer">
-					<input type="submit" class="btn btn-primary" ladda = "submitting"  value="保存" />
             		<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         		</div>
 			</form>
