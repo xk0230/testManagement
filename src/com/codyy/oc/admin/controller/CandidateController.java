@@ -78,13 +78,31 @@ public class CandidateController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("saveOrUpdateCandidateRInterviewer")
-	public ResultJson  saveOrUpdateCandidateRInterviewer(HttpServletRequest request, CandidateRInterviewer candidateRInterviewer ){
+	public ResultJson  saveOrUpdateCandidateRInterviewer(HttpServletRequest request, CandidateRInterviewer candidateRInterviewer ,String recRComIdsStr,String valuesStr ){
+		List<CandidateRRecrcom> crs = new ArrayList<CandidateRRecrcom>();
+		String userId = getSessionUserId(request);
+		if(StringUtils.isNotBlank(recRComIdsStr)&&StringUtils.isNotBlank(valuesStr)) {
+			String[] recRComIds = recRComIdsStr.split("@");
+			String[] values = valuesStr.split("@@@");
+			for (int i = 0; i < values.length; i++) {
+				CandidateRRecrcom cr = new CandidateRRecrcom();
+				cr.setId(UUIDUtils.getUUID());
+				cr.setRecRComId(recRComIds[i]);
+				cr.setValue("null".equals(values[i])?null:values[i]);
+				cr.setCandidateId(candidateRInterviewer.getCandidateId());
+				cr.setIntervireId(userId);
+				crs.add(cr);
+			}
+		}
+		
+		
 		if(StringUtils.isEmpty(candidateRInterviewer.getId())){
 			//如果没有ID则新增
-			service.insertRInterviewer(candidateRInterviewer);
+			service.insertRInterviewer(candidateRInterviewer,crs);
 		}else {
 			//如果有ID则是修改
-			service.updateRInterviewerById(candidateRInterviewer);
+		
+			service.updateRInterviewerById(candidateRInterviewer,crs);
 		}
 		return new ResultJson(true);
 	}

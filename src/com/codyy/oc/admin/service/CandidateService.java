@@ -51,7 +51,8 @@ public class CandidateService {
 	private CompetencyMapper competencyMapper;
 	@Autowired
 	private RecruitRCompetencyMapper recruitRCompetencyMapper;
-	
+	@Autowired
+	private CandidateMapper candidateMapper;
 	
 	public String insert(Candidate candidate) {
 		String uuid = UUIDUtils.getUUID();
@@ -61,24 +62,37 @@ public class CandidateService {
 		return uuid;
 	};
 	
-	public void insertRInterviewer(CandidateRInterviewer candidateRInterviewer) {
+	public void insertRInterviewer(CandidateRInterviewer candidateRInterviewer,List<CandidateRRecrcom> crs) {
 		candidateRInterviewer.setId(UUIDUtils.getUUID());
 		candidateRInterviewerMapper.insert(candidateRInterviewer);
+		
+		if(crs != null) {
+			candidateRRecrcomMapper.deleteByCandidate(crs.get(0));
+			for (CandidateRRecrcom candidateRRecrcom : crs) {
+				candidateRRecrcomMapper.insert(candidateRRecrcom);
+			}
+		}
 	};
 	
 	public void updateById(Candidate candidate,List<CandidateRRecrcom> crs) {
 		mapper.updateByPrimaryKeySelective(candidate);
 		//添加胜任特征总评
-		if(crs != null) {
+	/*	if(crs != null) {
 			candidateRRecrcomMapper.deleteByCandidate(candidate.getId());
 			for (CandidateRRecrcom candidateRRecrcom : crs) {
 				candidateRRecrcomMapper.insert(candidateRRecrcom);
 			}
-		}
+		}*/
 	}
 	
-	public void updateRInterviewerById(CandidateRInterviewer candidateRInterviewer) {
+	public void updateRInterviewerById(CandidateRInterviewer candidateRInterviewer,List<CandidateRRecrcom> crs) {
 		candidateRInterviewerMapper.updateByPrimaryKeySelective(candidateRInterviewer);
+		if(crs != null) {
+			candidateRRecrcomMapper.deleteByCandidate(crs.get(0));
+			for (CandidateRRecrcom candidateRRecrcom : crs) {
+				candidateRRecrcomMapper.insert(candidateRRecrcom);
+			}
+		}
 	}
 	
 	
@@ -89,6 +103,39 @@ public class CandidateService {
 	
 	public CandidateRInterviewer getRInterviewerByid(String id) {
 		CandidateRInterviewer candidateRInterviewer =  candidateRInterviewerMapper.selectByPrimaryKey(id);
+		Candidate can=  candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId());
+		 List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+		    for (Competency c : competencyMapper.getByRecId(can.getRecruitId())) {
+		    	CandidateRRecrcom cr = new CandidateRRecrcom();
+		    	cr.setCompetencyId(c.getId());
+		    	cr.setCompetencyName(c.getName());
+		    	RecruitRCompetency rrr = new RecruitRCompetency();
+		    	rrr.setRecruitId(can.getRecruitId());
+		    	rrr.setCompetencyId(c.getId());
+		    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
+		    	crrsModel.add(cr);
+			}
+		    
+				List<CandidateRRecrcom> res = new ArrayList<CandidateRRecrcom>();
+				res.addAll(crrsModel);
+				
+				CandidateRRecrcom crr = new CandidateRRecrcom();
+				crr.setCandidateId(candidateRInterviewer.getCandidateId());
+				crr.setIntervireId(candidateRInterviewer.getInterviewerId());
+				List<CandidateRRecrcom> crrs = candidateRRecrcomMapper.getAllByCandidateId(crr);
+				for (CandidateRRecrcom cr : crrs) {
+					for (CandidateRRecrcom cm : res) {
+						if(cm.getCompetencyId().equals(cr.getCompetencyId())){
+							//如果是对应上的则赋值
+							cm.setCandidateId(cr.getCandidateId());
+							cm.setId(cr.getId());
+							cm.setRecRComId(cr.getRecRComId());
+							cm.setValue(cr.getValue());
+						}
+					}
+				}
+			candidateRInterviewer.setCrrs(res);
+				
 		return candidateRInterviewer;
 	}
 	
@@ -97,7 +144,7 @@ public class CandidateService {
 		map.put("recruitId",search.getRecruitId());//招聘需求ID
 	    page.setMap(map);
 //	    Recruit rec =  recruitMapper.selectByPrimaryKey(search.getRecruitId());
-	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
+/*	    List<CandidateRRecrcom> crrsModel = new ArrayList<CandidateRRecrcom>();
 	    for (Competency c : competencyMapper.getByRecId(search.getRecruitId())) {
 	    	CandidateRRecrcom cr = new CandidateRRecrcom();
 	    	cr.setCompetencyId(c.getId());
@@ -107,9 +154,9 @@ public class CandidateService {
 	    	rrr.setCompetencyId(c.getId());
 	    	cr.setRecRComId(recruitRCompetencyMapper.selectByRecCom(rrr));
 	    	crrsModel.add(cr);
-		}
+		}*/
 		List<Candidate> data = mapper.getCandidatePageList(page);
-		for (Candidate c : data) {
+		/*for (Candidate c : data) {
 			List<CandidateRRecrcom> res = new ArrayList<CandidateRRecrcom>();
 			res.addAll(crrsModel);
 			List<CandidateRRecrcom> crrs = candidateRRecrcomMapper.getAllByCandidateId(c.getId());
@@ -125,7 +172,7 @@ public class CandidateService {
 				}
 			}
 			c.setCrrs(res);
-		}
+		}*/
 		page.setData(data);
 		return page;
 	}

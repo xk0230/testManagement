@@ -17,7 +17,7 @@ public interface CandidateRRecrcomMapper {
 
     int updateByPrimaryKey(CandidateRRecrcom record);
     
-    int deleteByCandidate(String canId);
+    int deleteByCandidate(CandidateRRecrcom crr);
     
-    List<CandidateRRecrcom> getAllByCandidateId(String canId);
+    List<CandidateRRecrcom> getAllByCandidateId(CandidateRRecrcom crr);
 }

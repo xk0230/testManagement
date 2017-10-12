@@ -13,7 +13,17 @@ public class CandidateRRecrcom {
     
     private String competencyName;
     
-    public String getCompetencyName() {
+    private  String intervireId;
+    
+    public String getIntervireId() {
+		return intervireId;
+	}
+
+	public void setIntervireId(String intervireId) {
+		this.intervireId = intervireId;
+	}
+
+	public String getCompetencyName() {
 		return competencyName;
 	}
 

@@ -23,16 +23,17 @@
     delete from CANDIDATE_R_RECRCOM
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <delete id="deleteByCandidate" parameterType="java.lang.String">
+    <delete id="deleteByCandidate" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
     delete from CANDIDATE_R_RECRCOM
-    where candidate_id = #{canId,jdbcType=VARCHAR}
+    where candidate_id = #{candidateId,jdbcType=VARCHAR}
+     and intervire_id = #{intervireId,jdbcType=VARCHAR}
   </delete>
   
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
     insert into CANDIDATE_R_RECRCOM (id, candidate_id, rec_r_com_id, 
-      value)
+      value,intervire_id)
     values (#{id,jdbcType=VARCHAR}, #{candidateId,jdbcType=VARCHAR}, #{recRComId,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR})
+      #{value,jdbcType=VARCHAR},#{intervireId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.CandidateRRecrcom">
     insert into CANDIDATE_R_RECRCOM
@@ -92,6 +93,7 @@
   	select 
      crr.id, crr.candidate_id, crr.rec_r_com_id, crr.value,cr.competency_id,cr.recruit_id
     from CANDIDATE_R_RECRCOM crr left join RECRUIT_R_COMPETENCY cr on crr.rec_r_com_id = cr.id
-    where candidate_id = #{canId,jdbcType=VARCHAR}
+    where candidate_id = #{candidateId,jdbcType=VARCHAR}
+     and intervire_id = #{intervireId,jdbcType=VARCHAR}
   </select>
 </mapper>

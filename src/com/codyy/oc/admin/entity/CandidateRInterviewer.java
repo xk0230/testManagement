@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class CandidateRInterviewer {
     private String id;
@@ -33,8 +34,17 @@ public class CandidateRInterviewer {
     
     private String positionName;//岗位名称
     
+    private List<CandidateRRecrcom> crrs;//胜任特征
     
-    public String getCandidateName() {
+    public List<CandidateRRecrcom> getCrrs() {
+		return crrs;
+	}
+
+	public void setCrrs(List<CandidateRRecrcom> crrs) {
+		this.crrs = crrs;
+	}
+
+	public String getCandidateName() {
 		return candidateName;
 	}
 
