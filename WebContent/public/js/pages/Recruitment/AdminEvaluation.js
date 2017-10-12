@@ -138,7 +138,7 @@ myAppModule.controller('UserListController',
 
 		
 		//候选人编辑
-		this.edit = function (item, parentSelector) {
+		this.show = function (item, parentSelector) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
@@ -182,34 +182,32 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	//获取页面参数
 	$scope.items = items;
 	$scope.items.interviewTime = $filter('date')(items.interviewTime, 'yyyy-MM-dd hh:mm:ss');
+
+	//分页
+	$scope.totalItems = 0;
+	$scope.currentPage = 1;
+	$scope.itemsPerPage = 10;
+	
 	//页面初期化
 	this.$onInit = function(){
-
-	};
-	
-	//保存操作
-	$scope.onSubmit = function () {
-		var params = {
-				//id
-				id:$scope.items.id,
-				workDetail:items.workDetail,
-				skillDetail:items.skillDetail,
-				wordScore:items.wordScore,
-				skillScore:items.skillScore
+		$http({
+			method:'POST',
+			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerPageList.do",
+			params:{
+				candidateId:items.id,
+				start:0,
+				end:1000
 			}
-			$http({
-				method:'POST',
-				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
-				params:params
-			
-			}).then(function(res){
-				if(res.data.result){
-					$uibModalInstance.close('0');
-				}else{
-					alert("保存失败！");
-				}
+		}).then(function(res){
+			if(res){
+				$scope.InterviewList = res.data.data || [];
+			}else{
+				$scope.InterviewList = [];
+			}
 		});
 	};
+	
+	
 	  $ctrl.cancel = function () {
 	    $uibModalInstance.dismiss('cancel');
 	  };

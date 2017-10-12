@@ -109,6 +109,7 @@
 												<td><input type="text" class="form-control" ng-model="item.sort" /></p></td>
 												<td rowspan="3">
 													<input type="button" class="btn btn-success col-lg-12" ng-click="vm.save(item)"  value="保存" />
+													<button type="button" class="btn btn-warning col-lg-12" ng-click="vm.show(item)" style="margin-top:5px">查看面试详情</button>
 												</td>
 											</tr>
 											<tr class="odd gradeX">
@@ -139,50 +140,6 @@
 													</table>
 												</td>
 											</tr>
-											<tr>
-												<td style="vertical-align:middle;"><h5>胜任特质:</h5></td>
-												<!-- 胜任特征 -->
-												<td colspan="1">
-													<table border="0" cellspacing="0" cellpadding="0">
-														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 0" >
-															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-												<td colspan="1">
-													<table border="0" cellspacing="0" cellpadding="0">
-														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 1" >
-															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-												<td colspan="1">
-													<table border="0" cellspacing="0" cellpadding="0">
-														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 2" >
-															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-												<td colspan="1">
-													<table border="0" cellspacing="0" cellpadding="0">
-														<tbody ng-repeat="competency in item.crrs track by $index" ng-if="$index%4 == 3" >
-															<tr>
-																<td>{{competency.competencyName}}<input type="text" class="form-control" ng-model="competency.value" />
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</td>
-											</tr>
 										</tbody>
 									</table>
 									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
@@ -201,116 +158,83 @@
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 候选人评估</h1>
+						<h1 class="page-header"><i class="im-users2"></i> 面试详情</h1>
 						<ul id="crumb" class="breadcrumb">
 						</ul>
 					</div>
 				</div>
-				<form ng-submit="onSubmit()" novalidate="novalidate">
-				<!-- 个人信息 start here -->
-				<div class="outlet" >
+				<div class="outlet">
+					<!-- Start .outlet -->
+					<!-- Page start here ( usual with .row ) -->
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-info toggle">
+							<!-- col-lg-12 start here -->
+							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>评估信息</h3>
+									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
 								</div>
 								<div class="panel-body">
-									<div class="form-horizontal group-border" role="form">
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">岗位名称</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="items.positionName"  value="" ng-disabled="true" />
-												</div>
-											</div>
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">候选人</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="items.candidateName"  value="" ng-disabled="true" />
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">评估人</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="items.interviewerName"  value="" ng-disabled="true" />
-												</div>
-											</div>
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">评估时间</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="items.interviewTime"  value="" ng-disabled="true" />
-												</div>
-											</div>
-										</div>
-									</div>
+									<table class="table display" id="datatable">
+										<thead>
+											<tr>
+												<th>面试项目</th>
+												<th ng-repeat="Interview in InterviewList">{{Interview.interviewerName}}</th>
+											</tr>
+										</thead>  
+										<tr>
+											<td ng-repeat="Interview in InterviewList">
+												<table>
+													<tr>
+														<td>相关工作经历/成就</td>
+													</tr>
+													<tr>
+														<td>技术技能/岗位技能</td>
+													</tr>
+													<tr>
+														<td>相关工作经历/成就评分</td>
+													</tr>
+													<tr>
+														<td>技术技能/岗位技能评分</td>
+													</tr>
+													<tr ng-repeat="crr in InterviewList.crrs">
+														<td>
+															abc
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td ng-repeat="Interview in InterviewList">
+												<table>
+													<tr>
+														<td>{{Interview.workDetail}}</td>
+													</tr>
+													<tr>
+														<td>{{Interview.skillDetail}}</td>
+													</tr>
+													<tr>
+														<td>{{Interview.wordScore}}</td>
+													</tr>
+													<tr>
+														<td>{{Interview.skillScore}}</td>
+													</tr>
+													<tr ng-repeat="crr in InterviewList.crrs">
+														<td>
+															abc
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+									<div class="g-no-content" ng-if="InterviewList && InterviewList.length === 0">没有相关数据</div>
+									<%@ include file="../../common/page.jsp"%>
 								</div>
 							</div>
 						</div>
+						<!-- col-lg-12 end here -->
 					</div>
-
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="panel panel-info toggle">
-								<!-- Start .panel -->
-								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>面试记录</h3>
-								</div>
-								<div class="panel-body">
-									<div class="form-horizontal group-border" role="form">
-										<div class="form-group">
-											<label class="col-lg-12 control-label text-left" >I.相关工作经历/成就：</label>
-											<div class="col-lg-12 media">
-												<textarea class="form-control" ng-model="items.workDetail" rows="5" Placeholder="点击输入相关工作经历/成就"  ng-required="true"></textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-lg-12 control-label text-left" >II.技术技能/岗位技能：</label>
-											<div class="col-lg-12 media">
-												<textarea class="form-control" ng-model="items.skillDetail" rows="5" Placeholder="点击输入技术技能/岗位技能"  ng-required="true"></textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-12 control-label text-left" style="margin-left:-15px" >相关工作经历/成就</label>
-												<div class="col-lg-12 media">
-												<div class="form-group">
-													<select class="form-control select2" ng-model="items.wordScore" ng-required="true">
-														<option value="">请选择工作经历/成就评价</option>
-														<option value="1" >各方面都较欠缺</option>
-														<option value="2" >低于平均水平</option>
-														<option value="3" >平均水平</option>
-														<option value="4" >高于平均水平</option>
-														<option value="5" >非常杰出</option>
-													</select>
-												</div>
-												</div>
-											</div>
-											<div class="col-lg-6">
-												<label class="col-lg-12 control-label text-left" style="margin-left:-15px" >技术技能/岗位技能</label>
-												<div class="col-lg-12 media">
-												<div class="form-group">
-													<select class="form-control select2" ng-model="items.skillScore" ng-required="true">
-														<option value="">请选择技术技能/岗位技能评价</option>
-														<option value="1" >各方面都较欠缺</option>
-														<option value="2" >低于平均水平</option>
-														<option value="3" >平均水平</option>
-														<option value="4" >高于平均水平</option>
-														<option value="5" >非常杰出</option>
-													</select>
-												</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
+					<!-- Page End here -->
 				</div>
        			 <div class="modal-footer">
 					<input type="submit" class="btn btn-primary" ladda = "submitting"  value="保存" />
