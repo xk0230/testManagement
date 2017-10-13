@@ -175,56 +175,33 @@
 									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
 								</div>
 								<div class="panel-body">
-									<table class="table display" >
+									<table class="table display" id="datatable" >
 										<thead>
 											<tr>
-												<th>面试项目</th>
-												<th ng-repeat="Interview in InterviewList">{{Interview.interviewerName}}</th>
+												<th width="200px;">面试项目</th>
+												<th width="200px;" ng-repeat="Interview in InterviewList">{{Interview.interviewerName}}</th>
 											</tr>
 										</thead>  
 										<tr>
-											<td style="min-width:100px;max-width:200px;">
-												<table class="table table-bordered">
-													<tr style="min-height:500px;max-height:200px;">
-														<td >相关工作经历/成就</td>
-													</tr>
-													<tr>
-														<td>技术技能/岗位技能</td>
-													</tr>
-													<tr>
-														<td>相关工作经历/成就评分</td>
-													</tr>
-													<tr>
-														<td>技术技能/岗位技能评分</td>
-													</tr>
-													<tr ng-repeat="crr in InterviewList[0].crrs">
-														<td>
-															{{crr.competencyName}}
-														</td>
-													</tr>
-												</table>
-											</td>
-											<td ng-repeat="Interview in InterviewList" style="min-width:100px;max-width:200px;">
-												<table class="table table-bordered">
-													<tr>
-														<td>&nbsp;{{Interview.workDetail}}</td>
-													</tr>
-													<tr>
-														<td>&nbsp;{{Interview.skillDetail}}</td>
-													</tr>
-													<tr>
-														<td>&nbsp;{{Interview.wordScore}}</td>
-													</tr>
-													<tr>
-														<td>&nbsp;{{Interview.skillScore}}</td>
-													</tr>
-													<tr ng-repeat="crr in Interview.crrs">
-														<td>
-															&nbsp;{{crr.value}}
-														</td>
-													</tr>
-												</table>
-											</td>
+											<td>相关工作经历/成就</td>
+											<td ng-repeat="Interview in InterviewList">{{Interview.workDetail}}</td>
+										</tr>
+										<tr>
+											<td>技术技能/岗位技能</td>
+											<td ng-repeat="Interview in InterviewList">{{Interview.skillDetail}}</td>
+										</tr>
+										<tr>
+											<td>相关工作经历/成就评分</td>
+											<td ng-repeat="Interview in InterviewList">{{Interview.wordScore}}</td>
+										</tr>
+										<tr>
+											<td>技术技能/岗位技能评分</td>
+											<td ng-repeat="Interview in InterviewList">{{Interview.skillScore}}</td>
+										</tr>
+										<tr ng-repeat="crr in InterviewList[0].crrs track by $index">
+											<td ng-bind="tableMark=$index" style="display:none"></td>
+											<td>{{crr.competencyName}}</td>
+											<td ng-repeat="Interview in InterviewList">{{Interview.crrs[tableMark].value}}</td>
 										</tr>
 									</table>
 									<div class="g-no-content" ng-if="InterviewList && InterviewList.length === 0">没有相关数据</div>

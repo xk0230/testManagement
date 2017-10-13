@@ -200,10 +200,11 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			}
 		}).then(function(res){
 			if(res){
-				
 				$scope.InterviewList = res.data.data || [];
-				
-				
+				$scope.InterviewList2= angular.copy($scope.InterviewList);
+				$.each($scope.InterviewList,function(n,value) {
+					
+				});
 				
 			}else{
 				$scope.InterviewList = [];
