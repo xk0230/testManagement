@@ -27,6 +27,7 @@ import com.codyy.oc.admin.vo.CostInOutlayType;
 import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
+import com.codyy.oc.admin.vo.CostYearVO;
 
 /**
  * 成本控制server
@@ -164,7 +165,7 @@ public class CostService {
 	    return page;
 	}
 	
-	public CostChartsData getCostChartData(AdminUser user,int type){
+	public CostChartsData getCostChartData(AdminUser user,int type,int curYear){
 	    
 	    CostChartsData costChartsData = new CostChartsData();
 	    
@@ -173,11 +174,11 @@ public class CostService {
 	    
 	    List<CostInOutlayType> departIncomeList = null;
 	    if(type == 1){
-	    	departIncomeList = this.getChartDataByDepIncome(user);
+	    	departIncomeList = this.getChartDataByDepIncome(user,curYear);
 	    }else if(type == 2){
-	        departIncomeList = this.getChartDataByDepOutcome(user);
+	        departIncomeList = this.getChartDataByDepOutcome(user,curYear);
 	    }else{
-	    	departIncomeList = this.getChartDataByOutlayType(user);
+	    	departIncomeList = this.getChartDataByOutlayType(user,curYear);
 	    }
 	    
 	    if(CollectionUtils.isNotEmpty(departIncomeList)){
@@ -253,7 +254,7 @@ public class CostService {
 	 * @param user
 	 * @return
 	 */
-	private List<CostInOutlayType> getChartDataByOutlayType(AdminUser user){
+	private List<CostInOutlayType> getChartDataByOutlayType(AdminUser user,int curYear){
         
 	    CostVO cost = new CostVO();
 	    cost.setCostType("1");
@@ -269,8 +270,8 @@ public class CostService {
         
         List<CostInOutlayType> outlayTypeList = new ArrayList<CostInOutlayType>();
         if(flag){
-        	cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
-            cost.setEndTime(DateUtils.getCurrentTimestamp());
+            cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
             
             List<CostMonthInOut> costList = costDaoMapper.getCostOutlayType(cost);
             if(CollectionUtils.isNotEmpty(costList)){
@@ -306,7 +307,7 @@ public class CostService {
      * @param user
      * @return
      */
-    private List<CostInOutlayType> getChartDataByDepIncome(AdminUser user){
+    private List<CostInOutlayType> getChartDataByDepIncome(AdminUser user,int curYear){
         
         CostVO cost = new CostVO();
         cost.setCostType("0");
@@ -322,8 +323,8 @@ public class CostService {
         
         List<CostInOutlayType> departIncomeList = new ArrayList<CostInOutlayType>();
         if(flag){
-        	cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
-            cost.setEndTime(DateUtils.getCurrentTimestamp());
+        	cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
             
             List<CostMonthInOut> costList = costDaoMapper.getCostDepartIncomeType(cost);
             if(CollectionUtils.isNotEmpty(costList)){
@@ -359,7 +360,7 @@ public class CostService {
      * @param user
      * @return
      */
-    private List<CostInOutlayType> getChartDataByDepOutcome(AdminUser user){
+    private List<CostInOutlayType> getChartDataByDepOutcome(AdminUser user,int curYear){
         
         CostVO cost = new CostVO();
         cost.setCostType("1");
@@ -375,8 +376,8 @@ public class CostService {
         
         List<CostInOutlayType> departIncomeList = new ArrayList<CostInOutlayType>();
         if(flag){
-            cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
-            cost.setEndTime(DateUtils.getCurrentTimestamp());
+            cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
             
             List<CostMonthInOut> costList = costDaoMapper.getCostDepartIncomeType(cost);
             if(CollectionUtils.isNotEmpty(costList)){
@@ -413,7 +414,7 @@ public class CostService {
      * @param user
      * @return
      */
-    public CostTotalInOut getCostTotalInOut(AdminUser user){
+    public CostTotalInOut getCostTotalInOut(AdminUser user,int curYear){
         
         CostVO cost = new CostVO();
         
@@ -429,8 +430,8 @@ public class CostService {
         CostTotalInOut costTotalInOut = new CostTotalInOut();
         
         if(flag){
-            cost.setStartTime(DateUtils.stringToTimestamp(DateUtils.getCurrentYear()+"-01-01 00:00:00"));
-            cost.setEndTime(DateUtils.getCurrentTimestamp());
+            cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
             cost.setCostType("0");
             
             CostMonthInOut costMonthInOut = costDaoMapper.getCostInOutType(cost);
@@ -451,4 +452,28 @@ public class CostService {
         return costTotalInOut;
     }
     
+    public CostYearVO getRecentYear(int recentYear){
+        if(recentYear < 0 || recentYear == 0){
+            recentYear = 5;
+        }
+        
+        CostYearVO costYear = new CostYearVO();
+        List<Integer> years = new ArrayList<Integer>();
+        int currentYear = DateUtils.getCurrentYear();
+        
+        for(int i= -recentYear;i<0;i++){
+            years.add(currentYear + i);
+        }
+        
+        for(int i= 0;i<recentYear;i++){
+            years.add(currentYear + i);
+        }
+        
+        costYear.setCurYear(currentYear);
+        costYear.setYears(years);
+        
+        return costYear;
+    }
+    
+   
 }

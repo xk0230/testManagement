@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
+import com.codyy.oc.admin.vo.CostYearVO;
 
 /**
  * 成本中心
@@ -52,8 +54,15 @@ public class CostController extends BaseController{
 	
 	@RequestMapping("/chart.do")
     public String costChar(){
-        
+	    
         return "admin/cost/costChart";
+    }
+	
+	@ResponseBody
+    @RequestMapping("/costYear.do")
+    public CostYearVO getRecentYear(int recentYear){
+        
+        return costService.getRecentYear(recentYear);
     }
 	
 	@ResponseBody
@@ -96,33 +105,33 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/outlay.do")
-    public CostChartsData getChartDataByOutlayType(HttpServletRequest request){
+    public CostChartsData getChartDataByOutlayType(HttpServletRequest request,int curYear){
 	    
-        return costService.getCostChartData(this.getSessionUser(request),0);
+        return costService.getCostChartData(this.getSessionUser(request),0,curYear);
         
     }
 	
 	@ResponseBody
     @RequestMapping("/depIncome.do")
-    public CostChartsData getChartDataByDepIncome(HttpServletRequest request){
+    public CostChartsData getChartDataByDepIncome(HttpServletRequest request,int curYear){
         
-        return costService.getCostChartData(this.getSessionUser(request),1);
+        return costService.getCostChartData(this.getSessionUser(request),1,curYear);
         
     }
 	
 	@ResponseBody
     @RequestMapping("/depOutcome.do")
-    public CostChartsData getChartDataByDepOutcome(HttpServletRequest request){
+    public CostChartsData getChartDataByDepOutcome(HttpServletRequest request,int curYear){
         
-        return costService.getCostChartData(this.getSessionUser(request),2);
+        return costService.getCostChartData(this.getSessionUser(request),2,curYear);
         
     }
 	
 	@ResponseBody
     @RequestMapping("/inbalance.do")
-    public CostTotalInOut getCostTotalInOut(HttpServletRequest request){
+    public CostTotalInOut getCostTotalInOut(HttpServletRequest request,int curYear){
         
-        return costService.getCostTotalInOut(this.getSessionUser(request));
+        return costService.getCostTotalInOut(this.getSessionUser(request),curYear);
         
     }
 	
