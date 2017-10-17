@@ -287,6 +287,13 @@ angular.module('myApp').controller('ModalAddInstanceCtrl',
 				
 				html += '</div>';
 				
+				html += '<div class="form-group">';
+				html += '<div class="col-lg-6">';
+				html += '<label class="col-lg-4 control-label">成本详情</label>';
+				html += '<div class="col-lg-8">';
+				html += '<textarea class="form-control" id="remark" rows="3" Placeholder="请输入成本详情"></textarea>';
+				html += '</div></div></div>';
+				
 				$('#addDepNum').append(html);
 			}
 		});
@@ -357,12 +364,14 @@ angular.module('myApp').controller('ModalAddInstanceCtrl',
 			  alert("至少填写一个部门金额");
 			  return ;
 		  }
+		  
 		 var params = {
 				depId:depId,
 				costType:$scope.costEntity.costType,
 				costSubtypeId:$scope.costEntity.costSubtypeId,
 				costTime:$filter('date')($scope.costEntity.costTime, "yyyy-MM-dd"),
-				depAmount:depAmount
+				depAmount:depAmount,
+				remark:$('#remark').val()
 			};
 		 
 		 $http({

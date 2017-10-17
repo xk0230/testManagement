@@ -89,6 +89,7 @@ public class CostService {
 		                cost.setCreateUserId(costEntityBean.getCreateUserId());
 		                cost.setDepId(depIds[i]);
 		                cost.setCostNum(Double.parseDouble(amouts[i]));
+		                cost.setRemark(costEntityBean.getRemark());
 		                
 		                costDaoMapper.insertCostEntity(cost);
 		            }
