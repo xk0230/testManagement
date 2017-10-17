@@ -242,7 +242,7 @@ myAppModule.controller('CostController',
 	}
 );
 
-//编辑页面的control
+//添加页面的control
 angular.module('myApp').controller('ModalAddInstanceCtrl', 
 		function ($scope,$http,$uibModalInstance,$filter, items) {
 	
@@ -474,7 +474,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 	  };
 
 	  $ctrl.ok = function () {
-		  //console.log($scope.costEntity.costType);
+		  
 		  if(!$scope.costEntity){
 			  alert("请填写完整信息");
 			  return ;
@@ -505,7 +505,8 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 				costType:$scope.costEntity.costType,
 				costSubtypeId:$scope.costEntity.costSubtypeId,
 				costTime:$filter('date')($scope.costEntity.costTime, "yyyy-MM-dd"),
-				costNum:$scope.costEntity.costNum
+				costNum:$scope.costEntity.costNum,
+				remark:$scope.costEntity.remark
 			}; 
 		 
 		 $http({

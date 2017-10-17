@@ -232,7 +232,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -325,6 +325,16 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">成本详情</label>
+												<div class="col-lg-8">
+													<textarea class="form-control" ng-model="costEntity.remark" rows="3" Placeholder=""></textarea>
+												</div>
+											</div>
+										</div>
+
 									</div>
 								</div>
 							</div>

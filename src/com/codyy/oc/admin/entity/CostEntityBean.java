@@ -29,6 +29,8 @@ public class CostEntityBean {
 	//成本数目
 	private double costNum = 0.00;
 	
+	private String remark;
+	
 	//部门ID
 	private String depId;
 	
@@ -105,5 +107,13 @@ public class CostEntityBean {
     public void setDepAmount(String depAmount) {
         this.depAmount = depAmount;
     }
-	
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+    
 }

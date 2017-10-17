@@ -21,7 +21,8 @@
 								 cost_type,
 								 cost_subtype_id,
 								 cost_num,
-								 dep_id
+								 dep_id,
+								 remark
 								)
 		VALUES( #{costId},
 				#{createTime},
@@ -30,7 +31,8 @@
 				#{costType},
 				#{costSubtypeId},
 				#{costNum},
-				#{depId}
+				#{depId},
+				#{remark}
 			)
 	
 	</insert>
@@ -41,7 +43,8 @@
 							   cost_type = #{costType},
 							   cost_subtype_id = #{costSubtypeId},
 							   cost_num = #{costNum},
-							   dep_id = #{depId}
+							   dep_id = #{depId},
+							   remark = #{remark}
 		
 		WHERE cost_id = #{costId}
 	
@@ -55,7 +58,8 @@
 			 cost_type AS costType, 
 			 cost_subtype_id AS costSubtypeId,
 			 cost_num AS costNum,
-			 dep_id AS depId
+			 dep_id AS depId,
+			 remark AS remark
 			 
 		FROM COST_DETAIL
 	 	WHERE cost_id = #{_parameter}
