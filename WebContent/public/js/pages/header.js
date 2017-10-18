@@ -4,6 +4,7 @@ myAppModule2.controller('HeaderController',
 		var self = this;
 		$scope.pageId = "";
 		self.$onInit = function(){
+			alert("abc");
 		}
 		
 		this.ChangePwd = function (costId,parentSelector) {

@@ -221,9 +221,9 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					alert("保存成功!");
+					swal("保存成功!","","sucess");
 				}else{
-					alert("保存失败!");
+					swal("保存失败!","","error");
 				}
 			})
 		}
@@ -280,10 +280,10 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					alert("保存成功!");
+					swal("保存成功!","","sucess");
 					//self.postlist = res.data || [];
 				}else{
-					alert("保存失败!");
+					swal("保存失败!","","error");
 					//self.postlist = [];
 				}
 			})

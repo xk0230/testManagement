@@ -9,7 +9,7 @@ $(document).on("mouseenter", ".table tr.odd", function(){
 $(document).on("mouseleave", ".table tr.odd", function(){ 
 	$(this).css("background-color","white");
 }); 
-	
+
 function getNewsNum()
 {
 	$.ajax({
