@@ -21,7 +21,7 @@ myAppModule.controller('ChartController',
 				
 				self.getOutlay();
 				self.getDepIncome();
-				self.getDepOutcome();
+//				self.getDepOutcome();
 				self.getInbalance();
 				
 			});
@@ -32,7 +32,7 @@ myAppModule.controller('ChartController',
 			
 			self.getOutlay();
 			self.getDepIncome();
-			self.getDepOutcome();
+			//self.getDepOutcome();
 			self.getInbalance();
 		};
 
@@ -114,7 +114,7 @@ myAppModule.controller('ChartController',
 						var length = xcategories.length;
 						var html = '';
 						for(var i = 0;i<length;i++){
-							html += '<div class="panel panel-default toggle"><div class="panel-heading">';
+							html += '<div class="panel panel-default toggle" id = "dep_'+xcategories[i]+'"><div class="panel-heading">';
 							html += '<h4 class="panel-title">';
 							html += xcategories[i]+'部门月度收入构成';
 							html += '<i class="ec-list"></i></h4></div>';
@@ -178,7 +178,7 @@ myAppModule.controller('ChartController',
 					}
 				}
 			});
-			
+			self.getDepOutcome();
 		};
 		
 		this.getDepOutcome = function(){
@@ -199,8 +199,8 @@ myAppModule.controller('ChartController',
 					
 					if(null != xcategories && xcategories.length > 0){
 						var length = xcategories.length;
-						var html = '';
 						for(var i = 0;i<length;i++){
+							var html = '';
 							html += '<div class="panel panel-default toggle"><div class="panel-heading">';
 							html += '<h4 class="panel-title">';
 							html += xcategories[i]+'部门月度支出构成';
@@ -209,9 +209,12 @@ myAppModule.controller('ChartController',
 							html += '<div id="container3';
 							html += i+'">';
 							html += '</div></div></div>';
+							
+							$('#dep_'+xcategories[i]).after(html);
 						}
 						
-						$('#depOutcome').append(html);
+						//$('#depOutcome').append(html);
+						
 						
 						for(var i = 0;i<length;i++){
 							var xx = new Array(1);
