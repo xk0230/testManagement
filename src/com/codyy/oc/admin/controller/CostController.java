@@ -2,6 +2,7 @@ package com.codyy.oc.admin.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -131,6 +132,14 @@ public class CostController extends BaseController{
     public CostTotalInOut getCostTotalInOut(HttpServletRequest request,int curYear){
         
         return costService.getCostTotalInOut(this.getSessionUser(request),curYear);
+        
+    }
+	
+	@ResponseBody
+    @RequestMapping("/depInOutcome.do")
+    public List<CostChartsData> getChartDataByDepInOutcome(HttpServletRequest request,int curYear){
+        
+        return costService.getDepCostChartData(this.getSessionUser(request),curYear);
         
     }
 	

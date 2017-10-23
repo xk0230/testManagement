@@ -1,8 +1,3 @@
-/**
- * Creation Date:2017年9月5日-上午11:33:18
- * 
- * Copyright 2008-2017 © 同程网 Inc. All Rights Reserved
- */
 package com.codyy.oc.admin.vo;
 
 import java.math.BigDecimal;
@@ -16,6 +11,8 @@ public class CostMonthInOut {
     private String name;
     
     private String month;
+    
+    private String type;
     
     private BigDecimal total;
     
@@ -41,6 +38,14 @@ public class CostMonthInOut {
 
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

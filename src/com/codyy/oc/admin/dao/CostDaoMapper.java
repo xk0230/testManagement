@@ -32,5 +32,7 @@ public interface CostDaoMapper {
 	List<CostMonthInOut> getCostDepartIncomeType(CostVO cost);
 	
 	CostMonthInOut getCostInOutType(CostVO cost);
+
+	List<CostMonthInOut> getCostDepartInOutcome(CostVO cost);
 	
 }

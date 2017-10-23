@@ -2,6 +2,7 @@ package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -475,6 +476,121 @@ public class CostService {
         
         return costYear;
     }
+
+    /**
+     * 获取部门月份收入支出图表数据
+     * @param sessionUser
+     * @param curYear
+     * @return
+     */
+	public List<CostChartsData> getDepCostChartData(AdminUser user, int curYear) {
+		
+		List<CostChartsData> datas = new ArrayList<CostChartsData>();
+		
+		CostVO cost = new CostVO();
+        boolean flag = false;
+        String position = user.getPosition();
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
+            cost.setDepId(user.getDepId());
+            flag = true;
+        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
+            flag = true;
+        }
+		
+        if(flag){
+        	cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
+             
+            List<CostMonthInOut> costList = costDaoMapper.getCostDepartInOutcome(cost);
+        	if(CollectionUtils.isNotEmpty(costList)){
+        		Map<String,BigDecimal> months = new HashMap<String,BigDecimal>();
+        		for(CostMonthInOut costInOut : costList){
+        			String name = costInOut.getName();
+        			String month = costInOut.getMonth();
+        			String type = costInOut.getType();
+        			if(null == months.get(name+"-"+month+"-"+type)){
+        				months.put(name+"-"+month+"-"+type, costInOut.getTotal());
+        			}
+        		}
+        		//每个月份对应收入和支出
+        		Map<String,BigDecimal> inOutmonths = new HashMap<String,BigDecimal>();
+        		for(String key : months.keySet()){
+        			String keyMonth = "";
+        			String[] splits = key.split("-");
+        			if("0".equals(splits[2])){
+        				keyMonth = splits[0]+"-"+splits[1]+"-1";
+        			}else{
+        				keyMonth = splits[0]+"-"+splits[1]+"-0";
+        			}
+        			BigDecimal bigDecimal = months.get(keyMonth);
+        			if(null == bigDecimal){
+        				//补月份缺失的收入或支出 默认0
+        				inOutmonths.put(keyMonth, new BigDecimal(0));
+        			}
+        			inOutmonths.put(key, months.get(key));
+        		}
+        		
+        		List<CostMonthInOut> costMonthInOutList = new ArrayList<CostMonthInOut>();
+        		String month = null;
+        		CostMonthInOut costMonthInOut = null;
+        		for(String key : inOutmonths.keySet()){
+        			String[] splits = key.split("-");
+        			if("0".equals(splits[2])){
+        				month = splits[1] + "-收入";
+        			}else{
+        				month = splits[1] + "-支出";
+        			}
+        			costMonthInOut = new CostMonthInOut();
+        			costMonthInOut.setName(splits[0]);
+        			costMonthInOut.setMonth(month);
+        			costMonthInOut.setTotal(inOutmonths.get(key));
+        			
+        			costMonthInOutList.add(costMonthInOut);
+        		}
+        		
+        		CostChartsData costChartsData = null;
+        	    List<String> xcategories = null;
+        	    List<CostChartsSeriesData> seriesDatas = null;
+        		
+        	    Map<String,Integer> depNameMap = new HashMap<String,Integer>();
+        	    int size = costMonthInOutList.size();
+        	    for(int i =0;i<size;i++){
+        	    	CostMonthInOut costInOut = costMonthInOutList.get(i);
+        	    	if(null == depNameMap.get(costInOut.getName())){
+        	    		if(CollectionUtils.isNotEmpty(seriesDatas)){
+        	    			costChartsData.setSeriesData(seriesDatas);
+        	    			datas.add(costChartsData);
+        	    		}
+        	    		
+        	    		depNameMap.put(costInOut.getName(), 1);
+        	    		
+        	    		xcategories = new ArrayList<String>();
+        	    		xcategories.add(costInOut.getName());
+        	    		seriesDatas = new ArrayList<CostChartsSeriesData>();
+        	    		
+        	    		costChartsData = new CostChartsData();
+        	    		costChartsData.setXcategories(xcategories);
+        	    	}
+        	    	
+    	    		CostChartsSeriesData costChartsSeriesData = new CostChartsSeriesData();
+    	    		List<BigDecimal> data = new ArrayList<BigDecimal>();
+    	    		data.add(costInOut.getTotal());
+    	    		
+    	    		costChartsSeriesData.setName(costInOut.getMonth());
+    	    		costChartsSeriesData.setData(data);
+        	    	
+    	    		seriesDatas.add(costChartsSeriesData);
+    	    		
+    	    		if( i == (size -1)){
+	    				costChartsData.setSeriesData(seriesDatas);
+	    				datas.add(costChartsData);
+    	    		}
+        		}
+        	}
+        }
+        
+		return datas;
+	}
     
    
 }
