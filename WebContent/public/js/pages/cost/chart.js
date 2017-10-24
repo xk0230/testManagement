@@ -20,8 +20,11 @@ myAppModule.controller('ChartController',
 				$scope.year = res.data.curYear;
 				
 				self.getOutlay();
-				self.getDepIncome();
+//				self.getDepIncome();
 //				self.getDepOutcome();
+				
+				self.getDepInOutcome();
+				
 				self.getInbalance();
 				
 			});
@@ -31,9 +34,91 @@ myAppModule.controller('ChartController',
 		$scope.costYearChange = function(){
 			
 			self.getOutlay();
-			self.getDepIncome();
+			//self.getDepIncome();
 			//self.getDepOutcome();
+			self.getDepInOutcome();
 			self.getInbalance();
+		};
+		
+		this.getDepInOutcome = function(){
+			
+			$('#depIncome').html('');
+			
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/depInOutcome.do',
+				params:{
+					curYear:$scope.year
+				}
+			
+			}).then(function(res){
+				
+				if(res){
+					var datas = res.data;
+					if(datas.length > 0){
+						for(var i =0;i<datas.length;i++){
+							var chartData = datas[i];
+							var xcategories = chartData.xcategories;
+							var seriesData = chartData.seriesData;
+							
+							if(null != xcategories && xcategories.length > 0){
+								var length = xcategories.length;
+								var html = '';
+								for(var j = 0;j<length;j++){
+									html += '<div class="panel panel-default toggle" id = "dep_'+xcategories[j]+'"><div class="panel-heading">';
+									html += '<h4 class="panel-title">';
+									html += xcategories[j]+'部门月度收支构成';
+									html += '<div class="panel-body">';
+									html += '<div id="container2';
+									html += i+'">';
+									html += '</div></div></div>';
+								}
+								
+								$('#depIncome').append(html);
+								
+								$('#container2'+i).highcharts({
+							        chart: {
+							            type: 'column'
+							        },
+							        credits: {
+							            enabled: false
+							       	},
+							        title: {
+							            text: ''
+							        },
+							        xAxis: {
+							            categories:xcategories,
+							            crosshair: true
+							        },
+							        yAxis: {
+							            min: 0,
+							            title: {
+							                text: ''
+							            }
+							        },
+							        tooltip: {
+							            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+							            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+							            			 '<td style="padding:0"><b>{point.y:.5f}</b></td></tr>',
+							            footerFormat: '</table>',
+							            shared: true,
+							            useHTML: true
+							        },
+							        plotOptions: {
+							            column: {
+							                pointPadding: 0.2,
+							                borderWidth: 0
+							            }
+							        },
+							        series: seriesData
+							    });
+							}
+						}
+					}
+						
+				}
+			});
+			
 		};
 
 		this.getOutlay = function(){

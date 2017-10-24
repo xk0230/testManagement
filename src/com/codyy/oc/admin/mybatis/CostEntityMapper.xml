@@ -175,7 +175,7 @@
 			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
 			
 			GROUP BY costDetail.cost_type,MONTH,costDetail.dep_id 
-			ORDER BY depart.name
+			ORDER BY depart.name,MONTH,costDetail.cost_type
 	
 	</select>
 	

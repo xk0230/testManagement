@@ -503,6 +503,7 @@ public class CostService {
              
             List<CostMonthInOut> costList = costDaoMapper.getCostDepartInOutcome(cost);
         	if(CollectionUtils.isNotEmpty(costList)){
+        		List<String> depMonths = new ArrayList<String>();
         		Map<String,BigDecimal> months = new HashMap<String,BigDecimal>();
         		for(CostMonthInOut costInOut : costList){
         			String name = costInOut.getName();
@@ -510,30 +511,41 @@ public class CostService {
         			String type = costInOut.getType();
         			if(null == months.get(name+"-"+month+"-"+type)){
         				months.put(name+"-"+month+"-"+type, costInOut.getTotal());
+        				depMonths.add(name+"-"+month+"-"+type);
         			}
         		}
         		//每个月份对应收入和支出
+        		List<String> depInOutMonths = new ArrayList<String>();
         		Map<String,BigDecimal> inOutmonths = new HashMap<String,BigDecimal>();
-        		for(String key : months.keySet()){
+        		for(String key : depMonths){
         			String keyMonth = "";
         			String[] splits = key.split("-");
+        			boolean tag = false;
         			if("0".equals(splits[2])){
         				keyMonth = splits[0]+"-"+splits[1]+"-1";
+        				depInOutMonths.add(key);
         			}else{
+        				tag = true;
         				keyMonth = splits[0]+"-"+splits[1]+"-0";
         			}
+        			
         			BigDecimal bigDecimal = months.get(keyMonth);
         			if(null == bigDecimal){
         				//补月份缺失的收入或支出 默认0
         				inOutmonths.put(keyMonth, new BigDecimal(0));
+        				depInOutMonths.add(keyMonth);
         			}
         			inOutmonths.put(key, months.get(key));
+        			if(tag){
+        				depInOutMonths.add(key);
+        			}
+        			
         		}
         		
         		List<CostMonthInOut> costMonthInOutList = new ArrayList<CostMonthInOut>();
         		String month = null;
         		CostMonthInOut costMonthInOut = null;
-        		for(String key : inOutmonths.keySet()){
+        		for(String key : depInOutMonths){
         			String[] splits = key.split("-");
         			if("0".equals(splits[2])){
         				month = splits[1] + "-收入";
