@@ -24,6 +24,7 @@ import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
 import com.codyy.oc.admin.entity.AdminUserRole;
+import com.codyy.oc.admin.entity.ChartPieData;
 import com.codyy.oc.admin.view.UserSearchModel;
 
 /**
@@ -518,4 +519,12 @@ public class AdminUserManagerService {
 		adminUserMapper.updatePaswd(user);
 	}
 	
+	/**
+	 * 获取charts统计数据
+	 * @return
+	 */
+	public List<ChartPieData> getchartsdata(){
+		return adminUserMapper.getchartsdata();
+		
+	}
 }

@@ -3,6 +3,7 @@ package com.codyy.oc.admin.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +26,7 @@ import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
+import com.codyy.oc.admin.entity.ChartPieData;
 import com.codyy.oc.admin.service.AdminUserManagerService;
 import com.codyy.oc.admin.service.AdminUserPermissionService;
 import com.codyy.oc.admin.view.UserSearchModel;
@@ -262,5 +264,15 @@ public class AdminUserManagerController extends BaseController {
 	public List<AdminUser> checkSelUpteName(AdminUser adminUser){
 		
 		return adminUserManagerService.checkSelUpteName(adminUser);
+	}
+	
+	/**
+	 * 获取统计数据
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("getchartsdata")
+	public List<ChartPieData> getchartsdata(){
+		return adminUserManagerService.getchartsdata();
 	}
 }
