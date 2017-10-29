@@ -144,7 +144,7 @@ myAppModule.controller('ChartController',
 				            enabled: false
 				       	},
 				        title: {
-				            text: '月度支出构成'
+				            text: ''
 				        },
 				        xAxis: {
 				            categories:xcategories,

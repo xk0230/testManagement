@@ -55,7 +55,7 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title">月度支出构成<i class="ec-list"></i></h4>
+									<h4 class="panel-title">月度支出构成</h4>
 								</div>
 								<div class="panel-body">
 									<div id="container1"></div>
@@ -68,7 +68,7 @@
 							<div class="panel panel-default toggle" ng-show="${adminUser.position == 'ADMIN'}">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h4 class="panel-title">收入结余构成<i class="ec-list"></i></h4>
+									<h4 class="panel-title">收入结余构成</h4>
 								</div>
 								<div class="panel-body">
 									<div id="container4"></div>
