@@ -19,6 +19,15 @@
                         </ul>
 					</div>
 				</div>
+				<table align="center">
+					<tr><td width="30%"><div id="c1" ></div></td><td width="30%"><div id="c2" ></div></td><td width="30%"><div id="c3" ></div></td></tr>
+					<tr><td><div id="c4" ></div></td><td><div id="c5" ></div></td></tr>
+				</table>
+				
+				<!-- <div id="c2"></div>
+				<div id="c3"></div>
+				<div id="c4"></div>
+				<div id="c5"></div> -->
 				<div class="outlet">
 					<!-- Start .outlet -->
 					<!-- Page start here ( usual with .row ) -->
@@ -193,5 +202,7 @@
 	}
 	</script>
 	<script src="${root}/public/js/pages/administrator/script.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${root}/public/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="${root}/public/highcharts/modules/exporting.js"></script>
 </body>
 </html>
