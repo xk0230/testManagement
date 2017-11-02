@@ -132,7 +132,7 @@
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userId)"><i class="br-pencil"></i></button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTrainList(item.userId)">培训</button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTrainList(item.userId)">调岗</button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTransferPositionList(item.userId)">调岗</button>
 												</td>
 											</tr>
 										</tbody>

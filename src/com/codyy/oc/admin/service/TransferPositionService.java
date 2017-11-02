@@ -44,6 +44,7 @@ public class TransferPositionService {
         page.setEnd(transferPosition.getEnd());
         
         Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", transferPosition.getUserId());
         map.put("startDate", transferPosition.getStartDate());
         map.put("endDate", transferPosition.getEndDate());
         

@@ -265,8 +265,12 @@ myAppModule.controller('UserListController',
 		};
 		
 		this.userTrainList = function(id){
-			window.location.href="/ccydManagement/admin/user/train/manager.do?id="+id; 
+			window.location.href="/ccydManagement/admin/user/train/manager.do?userId="+id; 
 		};
+		this.userTransferPositionList = function(id){
+			window.location.href="/ccydManagement/admin/transferPosition/manager.do?userId="+id; 
+		}
+		
 	}
 );
 

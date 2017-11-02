@@ -27,6 +27,7 @@ myAppModule.controller('TransferPositionController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/admin/transferPosition/page.do',
 				params:{
+					userId:$("#userId").val(),
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -220,7 +221,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 				salaryNew:$scope.transferPositionEntity.salaryNew,
 				transferTime:$filter('date')($scope.transferPositionEntity.transferTime, "yyyy-MM-dd"),
 				remark:$scope.transferPositionEntity.remark,
-				userId:$scope.transferPositionEntity.userId
+				userId:$('#userId').val()
 			}; 
 		 
 		 $http({

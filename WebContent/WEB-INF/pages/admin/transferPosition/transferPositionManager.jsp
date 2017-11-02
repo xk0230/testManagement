@@ -108,7 +108,7 @@
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												
 												<td><p ng-bind="item.order"></p></td>
-												<td><p ng-bind="item.transferTime"></p></td>
+												<td><p ng-bind="item.transferTime | date:'yyyy-MM-dd'"></p></td>
 												<td><p ng-bind="item.postOld"></p></td>
 												<td><p ng-bind="item.postNew"></p></td>
 												<td><p ng-bind="item.salaryOld"></p></td>
@@ -254,7 +254,7 @@
 	</div>
 
 	
-	
+	<input type="hidden" id="userId" value="${userId}">
 	<input type="hidden" id="rootUrl" value="${root}">
 			
 	<script src="${root}/public/js/pages/transferPosition/script.js" type="text/javascript"></script>

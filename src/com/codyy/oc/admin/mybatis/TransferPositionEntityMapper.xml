@@ -59,7 +59,7 @@
 			 
 		FROM TRANSFER_POSITION
 				
-		WHERE  1 = 1 
+		WHERE user_id = #{map.userId}
 			  
 			<if test="map.startDate != null and map.startDate !=''">
 				AND transfer_time <![CDATA[ >= ]]> #{map.startDate}

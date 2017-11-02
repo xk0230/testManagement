@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +39,9 @@ public class TransferPositionController extends BaseController{
     
    
     @RequestMapping("/manager.do")
-    public String transferPositionManager(){
+    public String transferPositionManager(Model model,String userId){
+    	
+    	model.addAttribute("userId", userId);
         
         return "admin/transferPosition/transferPositionManager";
     }
