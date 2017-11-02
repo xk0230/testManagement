@@ -97,6 +97,10 @@ myAppModule.controller('UserListController',
 		this.edit = function(id){
 			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+id; 
 		};
+		
+		this.userTrainList = function(id){
+			window.location.href="/ccydManagement/admin/user/train/manager.do?id="+id; 
+		};
 	}
 );
 

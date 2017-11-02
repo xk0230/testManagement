@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AdminUserTrainDaoMapper" >
+
+	<insert id="saveUserTrain" parameterType="com.codyy.oc.admin.entity.AdminUserTrain">
+	
+		INSERT INTO TRAIN(id,create_time,train_time,project,place,form,result,user_id)
+		VALUES(#{id},#{createTime},#{trainTime},#{project},#{place},#{form},#{result},#{userId})
+	
+	</insert>
+	
+	<update id="updateUserTrain" parameterType="com.codyy.oc.admin.entity.AdminUserTrain">
+		UPDATE TRAIN SET train_time = #{trainTime},
+				         project = #{project},
+				         place = #{place},
+				         form = #{form},
+						 result = #{result}
+						
+		WHERE id = #{id}
+	
+	</update>
+	
+	<delete id="deleteUserTrain" parameterType="java.lang.String">
+		DELETE FROM TRAIN WHERE id = #{id}
+	</delete>
+	
+	<select id="getAllAdminUserTrain" parameterType="com.codyy.oc.admin.entity.AdminUserTrain"
+									  resultType="com.codyy.oc.admin.entity.AdminUserTrain">
+		SELECT id,
+			   create_time AS createTime,
+			   train_time AS trainTime,
+			   project,
+			   place,
+			   form,
+			   result,
+			   user_id AS userId
+		
+		FROM TRAIN
+		
+		WHERE user_id = #{userId}
+		
+		ORDER BY create_time DESC
+	
+	</select>
+	
+	<select id="getAdminUserTrainPageList" parameterType="com.codyy.commons.page.Page"
+									  resultType="com.codyy.oc.admin.entity.AdminUserTrain">
+		SELECT id,
+			   create_time AS createTime,
+			   train_time AS trainTime,
+			   project,
+			   place,
+			   form,
+			   result,
+			   user_id AS userId
+		
+		FROM TRAIN
+		
+		WHERE user_id = #{userId}
+		
+		ORDER BY create_time DESC
+	
+	</select>
+	
+</mapper>
