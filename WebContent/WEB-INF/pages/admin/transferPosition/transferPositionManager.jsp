@@ -200,7 +200,7 @@
 										<div class="form-group">
 											
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label" >成本产生时间</label>
+												<label class="col-lg-4 control-label" >调整时间</label>
 												<div class="col-lg-8">
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="transferPositionEntity.transferTime" is-open="popup.opened1" 

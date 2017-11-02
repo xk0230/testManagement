@@ -9,9 +9,11 @@ public interface AdminUserTrainDaoMapper {
 
 	void saveUserTrain(AdminUserTrain userTrain);
 	
-	void updateUserTrain(AdminUserTrain userTrain);
+	int updateUserTrain(AdminUserTrain userTrain);
 	
-	void deleteUserTrain(String trainId);
+	void deleteUserTrain(String id);
+	
+	AdminUserTrain getAdminUserTrainById(String id);
 	
 	List<AdminUserTrain> getAdminUserTrainPageList(Page page);
 	

@@ -20,6 +20,22 @@
 	
 	</update>
 	
+	<select id="getAdminUserTrainById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AdminUserTrain">
+		SELECT id,
+			   create_time AS createTime,
+			   train_time AS trainTime,
+			   project,
+			   place,
+			   form,
+			   result,
+			   user_id AS userId
+		
+		FROM TRAIN
+		
+		WHERE id = #{_parameter}
+	
+	</select>
+	
 	<delete id="deleteUserTrain" parameterType="java.lang.String">
 		DELETE FROM TRAIN WHERE id = #{id}
 	</delete>
@@ -56,9 +72,17 @@
 		
 		FROM TRAIN
 		
-		WHERE user_id = #{userId}
+		WHERE user_id = #{map.userId}
 		
-		ORDER BY create_time DESC
+			<if test="map.startDate != null and map.startDate !=''">
+				AND train_time <![CDATA[ >= ]]> #{map.startDate}
+			</if>
+			
+			<if test="map.endDate != null and  map.endDate != ''">
+				AND train_time <![CDATA[ <= ]]> #{map.endDate}
+			</if>
+		
+		ORDER BY train_time DESC
 	
 	</select>
 	

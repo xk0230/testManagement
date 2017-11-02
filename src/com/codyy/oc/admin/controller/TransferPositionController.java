@@ -48,7 +48,7 @@ public class TransferPositionController extends BaseController{
     
     @ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(TransferPosition transferPosition){
+    public Page getTransferPositionPageList(TransferPosition transferPosition){
         
         return transferPositionService.getTransferPositionPageList(transferPosition);
         
@@ -56,7 +56,7 @@ public class TransferPositionController extends BaseController{
     
     @ResponseBody
     @RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
-    public JsonDto insertOrUpdateCost(HttpServletRequest request,TransferPosition transferPosition){
+    public JsonDto insertOrUpdateTransferPositionEntity(HttpServletRequest request,TransferPosition transferPosition){
         
         return transferPositionService.insertOrUpdateTransferPositionEntity(this.getSessionUser(request),transferPosition);
     }

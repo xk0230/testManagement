@@ -19,6 +19,17 @@ public class AdminUserTrain {
 	private String result;
 	
 	private String userId;
+	
+	//----页面查询-----//
+	private int order;
+	
+    private int start;
+    
+    private int end = 10;
+    
+    private String startDate;
+    
+    private String endDate;
 
 	public String getId() {
 		return id;
@@ -83,5 +94,45 @@ public class AdminUserTrain {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 }
