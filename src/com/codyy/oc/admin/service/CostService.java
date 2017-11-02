@@ -601,8 +601,66 @@ public class CostService {
         	}
         }
         
+        //计算部门总收入总支出
+        datas = getCostInOutTotal(datas);
+        
 		return datas;
 	}
     
-   
+	/**
+	 * 计算部门总收入总支出
+	 * @param datas
+	 * @return
+	 */
+	private List<CostChartsData> getCostInOutTotal(List<CostChartsData> datas){
+	    
+	    for(CostChartsData costData : datas){
+	        List<CostChartsSeriesData> seriesDatas = costData.getSeriesData();
+	        int size = seriesDatas.size();
+	        
+	        List<BigDecimal> dataIn = new ArrayList<>();
+	        List<BigDecimal> dataOut = new ArrayList<>();
+	        for(int i = 0; i< size;i++){
+	            CostChartsSeriesData costChartsSeriesData = seriesDatas.get(i);
+	            List<BigDecimal> data = costChartsSeriesData.getData();
+	            if(i % 2 == 0){
+	                dataIn.addAll(data);
+	            }else{
+	                dataOut.addAll(data);
+	            }
+	        }
+	        
+	        
+	        List<BigDecimal> dataInTotal = new ArrayList<>();
+            List<BigDecimal> dataOutTotal = new ArrayList<>();
+            BigDecimal intotal = new BigDecimal(0);
+            BigDecimal outTotal = new BigDecimal(0);
+            
+	        for(BigDecimal data : dataIn){
+	            intotal = intotal.add(data);
+	        }
+	        
+	        for(BigDecimal data : dataOut){
+	            outTotal = outTotal.add(data);
+            }
+	        
+	        dataInTotal.add(intotal);
+	        dataOutTotal.add(outTotal);
+	        
+	        CostChartsSeriesData costChartsSeriesDataIn = new CostChartsSeriesData();
+	        costChartsSeriesDataIn.setName("总收入");
+	        costChartsSeriesDataIn.setData(dataInTotal);
+	        
+	        CostChartsSeriesData costChartsSeriesDataOut = new CostChartsSeriesData();
+	        costChartsSeriesDataOut.setName("总支出");
+	        costChartsSeriesDataOut.setData(dataOutTotal);
+	        
+	        seriesDatas.add(costChartsSeriesDataIn);
+	        seriesDatas.add(costChartsSeriesDataOut);
+	        
+	    }
+	    
+	    return datas;
+	}
+	
 }
