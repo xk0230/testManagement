@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.TransferPositionDaoMapper" >
+
+	
+	<insert id="insertTransferPositionEntity" parameterType="com.codyy.oc.admin.entity.TransferPosition" >
+		INSERT INTO TRANSFER_POSITION( id,
+								 create_time,
+								 post_old,
+								 post_new,
+								 salary_old,
+								 salary_new,
+								 transfer_time,
+								 remark,
+								 user_Id
+								)
+		VALUES( #{id},
+				#{createTime},
+				#{postOld},
+				#{postNew},
+				#{salaryOld},
+				#{salaryNew},
+				#{transferTime},
+				#{remark},
+				#{userId}
+			)
+	
+	</insert>
+	
+	<update id="updateTransferPositionEntity" parameterType="com.codyy.oc.admin.entity.TransferPosition">
+		UPDATE TRANSFER_POSITION SET post_old = #{postOld},
+							   post_new = #{postNew},
+							   salary_old = #{salaryOld},
+							   salary_new = #{salaryNew},
+							   transfer_time = #{transferTime},
+							   remark = #{remark}
+		
+		WHERE id = #{id}
+	
+	</update>
+	
+	<select id="getTransferPositionEntityById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.TransferPosition">
+		SELECT id,post_old AS postOld,post_new AS postNew,salary_old AS salaryOld,salary_new AS salaryNew,
+			 transfer_time AS transferTime,remark AS remark,user_Id AS userId
+			 
+		FROM TRANSFER_POSITION
+	 	WHERE id = #{_parameter}
+	</select>
+	
+	<delete id="delTransferPositionEntityById" parameterType="java.lang.String">
+	
+		DELETE FROM TRANSFER_POSITION WHERE id = #{_parameter}
+		
+	</delete>
+	
+	<select id="getTransferPositionPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.TransferPosition">
+		SELECT id,post_old AS postOld,post_new AS postNew,salary_old AS salaryOld,salary_new AS salaryNew,
+			 transfer_time AS transferTime,remark AS remark,user_Id AS userId
+			 
+		FROM TRANSFER_POSITION
+				
+		WHERE  1 = 1 
+			  
+			<if test="map.startDate != null and map.startDate !=''">
+				AND transfer_time <![CDATA[ >= ]]> #{map.startDate}
+			</if>
+			
+			<if test="map.endDate != null and  map.endDate != ''">
+				AND transfer_time <![CDATA[ <= ]]> #{map.endDate}
+			</if>
+			
+		
+		ORDER BY transfer_time DESC
+	
+	</select>
+	
+</mapper>

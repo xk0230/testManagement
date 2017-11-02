@@ -447,6 +447,7 @@
 			au.retired_date         as            retiredDate,
 			dep.name as depName,
 			po.name as postName,
+			po.salary_scale as postPc,
 			 <include refid="UserDetail_Column_List" />
 		from ADMIN_USER au 
 		left join ADMIN_USER_DETAIL ad

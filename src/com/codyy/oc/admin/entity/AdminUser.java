@@ -58,7 +58,16 @@ public class AdminUser implements Serializable {
 	
 	private String positionStr;//角色中文显示  
 	
+	private String postPc;//岗位默认pc等级
 	
+	public String getPostPc() {
+		return postPc;
+	}
+
+	public void setPostPc(String postPc) {
+		this.postPc = postPc;
+	}
+
 	public String getPositionStr() {
 		if(position == null) {
 			return null;

@@ -97,12 +97,13 @@
 									<table class="table display" id="datatable">
 										<thead>
 											<tr>
-												<th>工号</th>
+												<th>用户名</th>
 												<th>姓名</th>
 												<th>部门</th>
 												<th>岗位</th>
 												<th>状态</th>
-												<th>pc等级</th>
+												<th>个人pc等级</th>
+												<th>岗位pc等级</th>
 												<th>操作</th>
 											</tr>
 										</thead>  
@@ -114,6 +115,7 @@
 												<td><p ng-bind="item.postName"></p></td>
 												<td><p ng-bind="item.workStatus"></p></td>
 												<td><p ng-bind="item.salaryScale"></p></td>
+												<td><p ng-bind="item.postPc"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.searchIpe(item.userId)"><i class="br-pencil">评估</i></button>
 												</td>
