@@ -245,6 +245,18 @@ public class CostService {
 	        }
 	    }
 	    
+	    CostChartsSeriesData cc = new CostChartsSeriesData();
+	    cc.setName("All");
+	    List<BigDecimal> alls = new ArrayList<BigDecimal>();
+	    for (int i = 0; i < seriesDatas.size(); i++) {
+	    	BigDecimal all = new BigDecimal(0);
+	    	for (CostChartsSeriesData c : seriesDatas) {
+				all  = all.add(c.getData().get(i));
+			}
+	    	alls.add(all);
+		}
+	    cc.setData(alls);
+	    seriesDatas.add(cc);
 	    costChartsData.setXcategories(xcategories);
 	    costChartsData.setSeriesData(seriesDatas);
 	    
