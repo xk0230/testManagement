@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codyy.oc.admin.dao.AttachmentDaoMapper" >
+
+	
+	<insert id="insertAttachmentEntity" parameterType="com.codyy.oc.admin.entity.AttachmentEntity" >
+		INSERT INTO ATTACHMENT( id,
+								 f_id,
+								 name,
+								 location,
+								 type,
+								 create_Time
+								)
+		VALUES( #{id},
+				#{fId},
+				#{name},
+				#{location},
+				#{type},
+				#{createTime}
+			)
+	
+	</insert>
+	
+	<update id="updateAttachmentEntity" parameterType="com.codyy.oc.admin.entity.AttachmentEntity">
+		UPDATE ATTACHMENT SET  name = #{name},
+							   location = #{location},
+							   type = #{type}
+		
+		WHERE id = #{id}
+	
+	</update>
+	
+	<select id="getAttachmentEntityById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AttachmentEntity">
+		SELECT id,f_id AS fId,name,location,type,create_Time AS createTime
+			 
+		FROM ATTACHMENT
+	 	WHERE id = #{_parameter}
+	</select>
+	
+	<delete id="delAttachmentEntityById" parameterType="java.lang.String">
+	
+		DELETE FROM ATTACHMENT WHERE id = #{_parameter}
+		
+	</delete>
+	
+	<select id="getAttachmentEntityPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AttachmentEntity">
+		SELECT id,f_id AS fId,name,location,type,create_Time AS createTime
+			 
+		FROM ATTACHMENT
+				
+		WHERE 1 = 1 
+		
+			<if test="map.fId != null and map.fId !=''">
+				AND f_id = #{map.fId}
+			</if>
+			
+			<if test="map.name != null and map.name !=''">
+				AND name = #{map.name}
+			</if>
+			
+			<if test="map.type != null and map.type !=''">
+				AND type = #{map.type}
+			</if>
+			  
+			<if test="map.startDate != null and map.startDate !=''">
+				AND create_Time <![CDATA[ >= ]]> #{map.startDate}
+			</if>
+			
+			<if test="map.endDate != null and  map.endDate != ''">
+				AND create_Time <![CDATA[ <= ]]> #{map.endDate}
+			</if>
+			
+		
+		ORDER BY create_Time DESC
+	
+	</select>
+	
+</mapper>
