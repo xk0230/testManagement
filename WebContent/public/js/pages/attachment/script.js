@@ -291,7 +291,6 @@ angular.module('myApp').controller('ModalInstanceDel',
 				}
 				
 			});
-	    
 	  };
 
 	  $ctrl.cancel = function () {
