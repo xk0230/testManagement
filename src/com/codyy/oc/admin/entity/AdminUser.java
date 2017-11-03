@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -230,9 +231,31 @@ public class AdminUser implements Serializable {
 	}
 
 	public String getWorkingYears() {
-		return workingYears;
+		if(entryDate != null){
+			long nowTime=new Date().getTime();
+			long eTime = entryDate.getTime();
+			System.out.println((nowTime-eTime));
+			double res = ((double)(nowTime-eTime)) /1000/60/60/24/365;
+			BigDecimal b = new BigDecimal(res);
+			double f1 = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+			return f1+"";
+		}else {
+			
+			return workingYears;
+		}
+//		return workingYears;
+//		ROUND(datediff(NOW(),entry_date)/365,1) as dayFactor1
 	}
 
+	public static void main(String[] args) {
+//		long nowTime=new Date().getTime();
+//		long eTime = (long) (nowTime-(1000*60*60*24*365*1.7123456));
+		double res = 2212047899.0 /1000/60/60/24/365;
+		System.out.println(res);
+		BigDecimal b = new BigDecimal(res);
+		double f1 = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+	
 	public void setWorkingYears(String workingYears) {
 		this.workingYears = workingYears;
 	}

@@ -247,7 +247,7 @@
 			au.work_status          as            workStatus,
 			au.salary_scale         as            salaryScale,
 			au.entry_date           as            entryDate,
-			au.working_years        as            workingYears,
+			ROUND(datediff(NOW(),entry_date)/365,1)        as            workingYears,
 			au.salary_begin_date    as            salaryBeginDate,
 			au.probation_period     as            probationPeriod,
 			au.expected_date        as            expectedDate,
@@ -432,7 +432,7 @@
 			au.work_status          as            workStatus,
 			au.salary_scale         as            salaryScale,
 			au.entry_date           as            entryDate,
-			au.working_years        as            workingYears,
+			ROUND(datediff(NOW(),entry_date)/365,1)        as            workingYears,
 			au.salary_begin_date    as            salaryBeginDate,
 			au.probation_period     as            probationPeriod,
 			au.expected_date        as            expectedDate,
@@ -764,15 +764,15 @@ select 'age_40' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_
 UNION ALL
 select 'age_40up' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.age > 40 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_1' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years <= 1 AND au.user_id != 'admin'
+select 'work_yesr_1' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ROUND(datediff(NOW(),entry_date)/365,1) <= 1 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_2' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 1 and au.working_years <= 2 AND au.user_id != 'admin'
+select 'work_yesr_2' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ROUND(datediff(NOW(),entry_date)/365,1) > 1 and ROUND(datediff(NOW(),entry_date)/365,1) <= 2 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_5' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 2 and au.working_years <= 5 AND au.user_id != 'admin'
+select 'work_yesr_5' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ROUND(datediff(NOW(),entry_date)/365,1) > 2 and ROUND(datediff(NOW(),entry_date)/365,1) <= 5 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_10' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 5 and au.working_years <= 10 AND au.user_id != 'admin'
+select 'work_yesr_10' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ROUND(datediff(NOW(),entry_date)/365,1) > 5 and ROUND(datediff(NOW(),entry_date)/365,1) <= 10 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_10up' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 10 AND au.user_id != 'admin'
+select 'work_yesr_10up' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ROUND(datediff(NOW(),entry_date)/365,1) > 10 AND au.user_id != 'admin'
 UNION ALL
 SELECT 'dep_ysec' as name ,count(*) FROM admin_user au where au.dep_id = '1' AND au.user_id != 'admin'
 UNION ALL

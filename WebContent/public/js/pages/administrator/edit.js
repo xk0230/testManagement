@@ -298,6 +298,14 @@ myAppModule.controller('UserListController',
 		}
 		
 		
+		self.rzDayChanged = function(){
+			var today = new Date();
+			var birthDay = $scope.vm.user.entryDate;
+			var days = today.getTime() - birthDay.getTime();
+			$scope.vm.user.workingYears =  (parseInt(days / (1000 * 60 * 60 * 24))/365).toFixed(1);
+		}
+		
+		
 		//日期模块加载
 		$scope.today = function() {
 			$scope.dt = new Date();
