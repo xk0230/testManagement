@@ -248,7 +248,7 @@ public class CostService {
 	    CostChartsSeriesData cc = new CostChartsSeriesData();
 	    cc.setName("All");
 	    List<BigDecimal> alls = new ArrayList<BigDecimal>();
-	    for (int i = 0; i < seriesDatas.size(); i++) {
+	    for (int i = 0; i < xcategories.size(); i++) {
 	    	BigDecimal all = new BigDecimal(0);
 	    	for (CostChartsSeriesData c : seriesDatas) {
 				all  = all.add(c.getData().get(i));
