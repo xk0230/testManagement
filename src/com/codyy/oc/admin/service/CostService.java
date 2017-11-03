@@ -2,7 +2,6 @@ package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -248,7 +247,7 @@ public class CostService {
 	    CostChartsSeriesData cc = new CostChartsSeriesData();
 	    cc.setName("All");
 	    List<BigDecimal> alls = new ArrayList<BigDecimal>();
-	    for (int i = 0; i < seriesDatas.size(); i++) {
+	    for (int i = 0; i < xcategories.size(); i++) {
 	    	BigDecimal all = new BigDecimal(0);
 	    	for (CostChartsSeriesData c : seriesDatas) {
 				all  = all.add(c.getData().get(i));
