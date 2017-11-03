@@ -269,8 +269,10 @@ myAppModule.controller('UserListController',
 		};
 		this.userTransferPositionList = function(id){
 			window.location.href="/ccydManagement/admin/transferPosition/manager.do?userId="+id; 
-		}
-		
+		};
+		this.userAttachmentList = function(id){
+			window.location.href="/ccydManagement/admin/attachment/manager.do?userId="+id; 
+		};
 	}
 );
 
