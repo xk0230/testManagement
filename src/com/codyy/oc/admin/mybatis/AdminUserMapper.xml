@@ -740,48 +740,48 @@ AND au.dep_id = (
 	</select>
 	
 	<select id="getchartsdata" resultType="com.codyy.oc.admin.entity.ChartPieData" >
-		<![CDATA[	select 'marrage_yh' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.marriage = '已婚' 
+		<![CDATA[	select 'marrage_yh' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.marriage = '已婚' 
 UNION ALL
-select 'marrage_wh' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.marriage = '未婚'
+select 'marrage_wh' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.marriage = '未婚'
 UNION ALL
-select 'education_bkyx' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.education = '本科以下'
+select 'education_bkyx' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.education = '本科以下'
 UNION ALL
-select 'education_bk' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.education = '本科'
+select 'education_bk' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.education = '本科'
 UNION ALL
-select 'education_ss' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.education = '硕士'
+select 'education_ss' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.education = '硕士'
 UNION ALL
-select 'education_bs' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.education = '博士' AND au.user_id != 'admin'
+select 'education_bs' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.education = '博士' AND au.user_id != 'admin'
 UNION ALL
-select 'work_status_zs' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.work_status = '正式' AND au.user_id != 'admin'
+select 'work_status_zs' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.work_status = '正式' AND au.user_id != 'admin'
 UNION ALL
-select 'work_status_sy' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.work_status = '试用' AND au.user_id != 'admin'
+select 'work_status_sy' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.work_status = '试用' AND au.user_id != 'admin'
 UNION ALL
-select 'age_30' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.age <= 30 AND au.user_id != 'admin'
+select 'age_30' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.age <= 30 AND au.user_id != 'admin'
 UNION ALL
-select 'age_35' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.age >30 and ad.age <=35 AND au.user_id != 'admin'
+select 'age_35' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.age >30 and ad.age <=35 AND au.user_id != 'admin'
 UNION ALL
-select 'age_40' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.age >35 and ad.age <=40 AND au.user_id != 'admin'
+select 'age_40' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.age >35 and ad.age <=40 AND au.user_id != 'admin'
 UNION ALL
-select 'age_40up' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where ad.age > 40 AND au.user_id != 'admin'
+select 'age_40up' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where ad.age > 40 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_1' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years <= 1 AND au.user_id != 'admin'
+select 'work_yesr_1' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.working_years <= 1 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_2' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 1 and au.working_years <= 2 AND au.user_id != 'admin'
+select 'work_yesr_2' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.working_years > 1 and au.working_years <= 2 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_5' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 2 and au.working_years <= 5 AND au.user_id != 'admin'
+select 'work_yesr_5' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.working_years > 2 and au.working_years <= 5 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_10' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 5 and au.working_years <= 10 AND au.user_id != 'admin'
+select 'work_yesr_10' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.working_years > 5 and au.working_years <= 10 AND au.user_id != 'admin'
 UNION ALL
-select 'work_yesr_10up' as name ,count(*) as 'value' from admin_user au LEFT JOIN admin_user_detail ad on au.user_id = ad.user_id where au.working_years > 10 AND au.user_id != 'admin'
+select 'work_yesr_10up' as name ,count(*) as 'value' from ADMIN_USER au LEFT JOIN ADMIN_USER_DETAIL ad on au.user_id = ad.user_id where au.working_years > 10 AND au.user_id != 'admin'
 UNION ALL
-SELECT 'dep_ysec' as name ,count(*) FROM admin_user au where au.dep_id = '1' AND au.user_id != 'admin'
+SELECT 'dep_ysec' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '1' AND au.user_id != 'admin'
 UNION ALL
-SELECT 'dep_gmo' as name ,count(*) FROM admin_user au where au.dep_id = '2' AND au.user_id != 'admin'
+SELECT 'dep_gmo' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '2' AND au.user_id != 'admin'
 UNION ALL
-SELECT 'dep_atd' as name ,count(*) FROM admin_user au where au.dep_id = '3' AND au.user_id != 'admin'
+SELECT 'dep_atd' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '3' AND au.user_id != 'admin'
 UNION ALL
-SELECT 'dep_ces' as name ,count(*) FROM admin_user au where au.dep_id = '4' AND au.user_id != 'admin'
+SELECT 'dep_ces' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '4' AND au.user_id != 'admin'
 UNION ALL
-SELECT 'dep_ssc' as name ,count(*) FROM admin_user au where au.dep_id = '5' AND au.user_id != 'admin']]>  
+SELECT 'dep_ssc' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '5' AND au.user_id != 'admin']]>  
 	</select>
 </mapper>

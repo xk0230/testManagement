@@ -255,7 +255,13 @@ public class CostService {
 	    	alls.add(all);
 		}
 	    cc.setData(alls);
-	    seriesDatas.add(cc);
+//	    seriesDatas.add(cc);
+//	    for (String s : xcategories) {
+//			s=s
+//		}
+	    for (int i = 0; i < xcategories.size(); i++) {
+	    	xcategories.set(i,  xcategories.get(i)+"(总共: "+alls.get(i)+")");
+		}
 	    costChartsData.setXcategories(xcategories);
 	    costChartsData.setSeriesData(seriesDatas);
 	    
@@ -666,9 +672,9 @@ public class CostService {
 	        costChartsSeriesDataOut.setName("总支出");
 	        costChartsSeriesDataOut.setData(dataOutTotal);
 	        
-	        seriesDatas.add(costChartsSeriesDataIn);
-	        seriesDatas.add(costChartsSeriesDataOut);
-	        
+//	        seriesDatas.add(costChartsSeriesDataIn);
+//	        seriesDatas.add(costChartsSeriesDataOut);
+	        costData.getXcategories().set(0, costData.getXcategories().get(0)+"  (总收入 : "+dataInTotal.get(0)+"   总支出 : "+dataOutTotal.get(0)+")");
 	    }
 	    
 	    return datas;
