@@ -3531,3 +3531,8 @@ pre {
 .editRow div {
 	width:66.666%;
 }
+
+.redNumber{
+	font-weight:bold;
+	color:red;
+}
