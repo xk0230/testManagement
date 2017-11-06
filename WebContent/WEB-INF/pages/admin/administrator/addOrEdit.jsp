@@ -513,6 +513,149 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<!-- 附件信息 start here -->
+				<div class="outlet">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>附件信息</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div class="col-lg-12">
+											<table class="table display" id="datatable">
+												<thead>
+													<tr>
+														<th>文件名称</th>
+														<th>类型</th>
+														<th>创建日期</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX" ng-repeat="item in vm.listAttachment">
+														<td><a href="/ccydManagement/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p></a></td>
+														<td><p ng-bind="item.type"></p></td>
+														<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
+														<td>
+															<a href="/ccydManagement/admin/attachment/download.do?id={{item.id}}">下载</a>
+														</td>
+														
+													</tr>
+												</tbody> 
+											</table>
+											<div class="g-no-content" ng-if="vm.listAttachment && vm.listAttachment.length === 0">没有相关数据</div>
+											<div class="page">
+												<ul style="float:right;" uib-pagination direction-links="false" boundary-links="true" total-items="attachmentTotalItems" ng-model="attachmentCurrentPage" first-text="第一页" last-text="最后一页" items-per-page="attachmentItemsPerPage" ng-change="attachmentPageChanged()"></ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<!-- 培训信息 start here -->
+				<div class="outlet">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>培训信息</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div class="col-lg-12">
+											<table class="table display" id="datatable">
+												<thead>
+													<tr>
+														<th>日期</th>
+														<th>培训项目</th>
+														<th>培训地点</th>
+														<th>培训形式</th>
+														<th>培训结果</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX" ng-repeat="item in vm.listTrain">
+												
+														<td><p ng-bind="item.trainTime | date:'yyyy-MM-dd'"></p></td>
+														<td><p ng-bind="item.project"></p></td>
+														<td><p ng-bind="item.place"></p></td>
+														<td><p ng-bind="item.form"></p></td>
+														<td><p ng-bind="item.result"></p></td>
+														
+													</tr>
+												</tbody> 
+											</table>
+											<div class="g-no-content" ng-if="vm.listTrain && vm.listTrain.length === 0">没有相关数据</div>
+											<div class="page">
+												<ul style="float:right;" uib-pagination direction-links="false" boundary-links="true" total-items="trainTotalItems" ng-model="trainCurrentPage" first-text="第一页" last-text="最后一页" items-per-page="trainItemsPerPage" ng-change="trainPageChanged()"></ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 调岗信息 start here -->
+				<div class="outlet">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>调岗信息</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div class="col-lg-12">
+											<table class="table display" id="datatable">
+												<thead>
+													<tr>
+														<th>日期</th>
+														<th>调整前岗位</th>
+														<th>调整后岗位</th>
+														<th>调整前薪酬</th>
+														<th>调整后薪酬</th>
+														<th>其他备注</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX" ng-repeat="item in vm.listTransferPosition">
+														<td><p ng-bind="item.transferTime | date:'yyyy-MM-dd'"></p></td>
+														<td><p ng-bind="item.postOld"></p></td>
+														<td><p ng-bind="item.postNew"></p></td>
+														<td><p ng-bind="item.salaryOld"></p></td>
+														<td><p ng-bind="item.salaryNew"></p></td>
+														<td><p ng-bind="item.remark"></p></td>
+													</tr>
+												</tbody> 
+											</table>
+											<div class="g-no-content" ng-if="vm.vm.listTransferPosition && vm.vm.listTransferPosition.length === 0">没有相关数据</div>
+											<div class="page">
+												<ul style="float:right;" uib-pagination direction-links="false" boundary-links="true" total-items="transferPositionTotalItems" ng-model="transferPositionCurrentPage" first-text="第一页" last-text="最后一页" items-per-page="transferPositionItemsPerPage" ng-change="transferPositionPageChanged()"></ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 			</form>
 			<!-- End .content-wrapper -->

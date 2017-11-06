@@ -5,6 +5,20 @@ myAppModule.config(['$locationProvider', function($locationProvider) {
 myAppModule.controller('UserListController',
 	function UserListController($scope,$http,$location, $filter){
 		var self = this;
+		
+		//附件分页参数
+		$scope.attachmentTotalItems = 0;
+		$scope.attachmentCurrentPage = 1;
+		$scope.attachmentItemsPerPage = 10;
+		//培训分页参数
+		$scope.trainTotalItems = 0;
+		$scope.trainCurrentPage = 1;
+		$scope.trainItemsPerPage = 10;
+		//调岗分页参数
+		$scope.transferPositionTotalItems = 0;
+		$scope.transferPositionCurrentPage = 1;
+		$scope.transferPositionItemsPerPage = 10;
+		
 		//模块显示
 		self.readOnly = "";
 		self.sessionUserId;
@@ -81,6 +95,11 @@ myAppModule.controller('UserListController',
 			}else{
 				self.mode = "1";
 			}
+			
+			self.getAttachmentEntityPageList();
+			self.getTrainList();
+			self.getTransferPositionList();
+			
 		}
 		
 		//获取部门
@@ -296,6 +315,96 @@ myAppModule.controller('UserListController',
 			$scope.vm.user.adminUserDetail.age = today.getYear() - birthDay.getYear();
 			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
+		
+		
+		$scope.setPage = function (pageNo) {
+			$scope.attachmentCurrentPage = pageNo;
+			$scope.trainCurrentPage = pageNo;
+			$scope.transferPositionCurrentPage = pageNo;
+		};
+
+		//设置附件分页参数
+		$scope.attachmentPageChanged = function() {
+			self.getAttachmentEntityPageList();
+		};
+		
+		$scope.trainPageChanged = function() {
+			self.getTrainList();
+		};
+		
+		$scope.transferPositionPageChanged = function() {
+			self.getTransferPositionList();
+		}
+		
+		// 获取数据列表
+		this.getTransferPositionList = function(){
+			
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/transferPosition/page.do',
+				params:{
+					userId:'admin',
+					start:(($scope.transferPositionCurrentPage - 1) * $scope.transferPositionItemsPerPage),
+					end:$scope.transferPositionCurrentPage * $scope.transferPositionItemsPerPage -1
+				}
+			
+			}).then(function(res){
+				if(res){
+					self.listTransferPosition = res.data.data || [];
+					$scope.transferPositionTotalItems = res.data.total;
+				}else{
+					self.listTransferPosition = [];
+					$scope.transferPositionTotalItems = 0;
+				}
+			});
+		};
+		
+		this.getTrainList = function(){
+			
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/train/page.do',
+				params:{
+					userId:'admin',
+					start:(($scope.trainCurrentPage - 1) * $scope.trainItemsPerPage),
+					end:$scope.trainCurrentPage * $scope.trainItemsPerPage -1
+				}
+			
+			}).then(function(res){
+				if(res){
+					self.listTrain = res.data.data || [];
+					$scope.trainTotalItems = res.data.total;
+				}else{
+					self.listTrain = [];
+					$scope.trainTotalItems = 0;
+				}
+			});
+		};
+		
+		// 获取数据列表
+		this.getAttachmentEntityPageList = function(){
+			
+			$http({
+				method:'POST',
+				url:'/ccydManagement/admin/attachment/page.do',
+				params:{
+					fId:'admin',
+					start:(($scope.attachmentCurrentPage - 1) * $scope.attachmentItemsPerPage),
+					end:$scope.attachmentCurrentPage * $scope.attachmentItemsPerPage -1
+				}
+			
+			}).then(function(res){
+				if(res){
+					self.listAttachment = res.data.data || [];
+					$scope.attachmentTotalItems = res.data.total;
+				}else{
+					self.listAttachment = [];
+					$scope.attachmentTotalItems = 0;
+				}
+			});
+		};
+		
+		//
 		
 		
 		//日期模块加载
