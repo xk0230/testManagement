@@ -11,6 +11,7 @@ myAppModule.controller('PostionController',
 		
 		this.$onInit = function(){
 			$scope.type = $location.search().type;
+			$scope.mode = $location.search().mode;
 			self.getDeparts();
 			self.statusList = [
 				{status: "audited", statusName : "审批通过"},
@@ -37,6 +38,9 @@ myAppModule.controller('PostionController',
 //				console.log("dddd");
 //			}
 			self.getList();
+			if($scope.mode == 'add'){
+				self.edit('', '.outlet');
+			}
 		};
 		
 		//页数变化
