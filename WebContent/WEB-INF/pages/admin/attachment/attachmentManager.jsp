@@ -158,8 +158,13 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">类型</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="attachmentEntity.type" />
+													<select ng-model="attachmentEntity.type"  class="form-control select2" >
+														<option value="">--请选择--</option>
+														<option value="0" >图片</option>
+														<option value="1" >PDF</option>
+													</select>
 												</div>
+												
 											</div>
 										</div>
 

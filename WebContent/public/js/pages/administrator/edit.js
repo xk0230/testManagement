@@ -406,7 +406,6 @@ myAppModule.controller('UserListController',
 		
 		//
 		
-		
 		//日期模块加载
 		$scope.today = function() {
 			$scope.dt = new Date();

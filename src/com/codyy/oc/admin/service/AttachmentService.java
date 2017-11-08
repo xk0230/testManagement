@@ -79,7 +79,16 @@ public class AttachmentService {
             String uuid = UUID.randomUUID().toString();
             try {
                 String originalFilename = uploadFile.getOriginalFilename();
-                String realPath = request.getSession().getServletContext().getRealPath("/");
+                String realPath = "";
+                if(StringUtils.isBlank(realPath)){
+                    realPath = "d:\\upload\\";
+                }
+                
+                File fileDire = new File(realPath);
+                if(!fileDire.exists()){
+                    fileDire.mkdirs();
+                }
+                
                 String fileName = uuid +"-"+originalFilename;
                 
                 attachmentEntity.setName(originalFilename);

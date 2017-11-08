@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 </head>
-<body	>
+<body>
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
@@ -539,11 +539,12 @@
 												</thead>
 												<tbody>
 													<tr class="odd gradeX" ng-repeat="item in vm.listAttachment">
-														<td><a href="/ccydManagement/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p></a></td>
+														<td><p ng-bind="item.name"></p></td>
 														<td><p ng-bind="item.type"></p></td>
 														<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
 														<td>
-															<a href="/ccydManagement/admin/attachment/download.do?id={{item.id}}">下载</a>
+															<a target="_black" href="/ccydManagement/admin/attachment/preview.do?id={{item.id}}" >预览</a>
+															<a target="_black" href="/ccydManagement/admin/attachment/download.do?id={{item.id}}" >下载</a>
 														</td>
 														
 													</tr>
@@ -663,6 +664,7 @@
 		</div>
 		<!-- End #content -->
 	</div>
+	
 
 	<script src="${root}/public/js/pages/administrator/edit.js" type="text/javascript"></script>
 </body>

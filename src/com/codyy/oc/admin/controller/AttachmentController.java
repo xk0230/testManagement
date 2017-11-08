@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -97,6 +98,32 @@ public class AttachmentController extends BaseController{
                HttpHeaders headers = new HttpHeaders();
                headers.setContentDispositionFormData("attachment", new String(attachmentEntity.getName().getBytes("UTF-8"),"iso-8859-1"));
                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+               ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+               return responseEntity ;
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       }
+       
+       return null;
+   }
+   
+   @RequestMapping("/preview.do")
+   public ResponseEntity<byte[]> preview(String id){
+       
+       JsonDto dto = attachmentService.getAttachmentEntityById(id);
+       if(dto.getCode() == 0){
+           AttachmentEntity attachmentEntity = (AttachmentEntity)dto.getObjData();
+           String location = attachmentEntity.getLocation();
+           File file = new File(location);
+           try {
+               HttpHeaders headers = new HttpHeaders();
+               if(attachmentEntity.getType().equals("1")){
+                   headers.setContentType(MediaType.parseMediaType("application/pdf"));
+               }else{
+                   String name = attachmentEntity.getName();
+                   headers.setContentType(MediaType.parseMediaType("image/"+StringUtils.substringAfterLast(name, ".")));
+               }
                ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
                return responseEntity ;
            } catch (IOException e) {
