@@ -104,7 +104,7 @@
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												
 												<td><a href="${root}/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p></a></td>
-												<td><p ng-bind="item.type"></p></td>
+												<td><p ng-bind="item.typeName"></p></td>
 												<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.addAttachment(item.id,'.outlet')"><i class="fa-edit"></i></button>

@@ -19,6 +19,7 @@ public class AttachmentEntity {
     private Date createTime;
     
     //----页面查询-----//
+    private String typeName;
     
     private int start;
     
@@ -106,6 +107,15 @@ public class AttachmentEntity {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getTypeName() {
+        if("1".equals(this.getType())){
+            typeName = "PDF";
+        }else if("0".equals(this.getType())){
+            typeName = "图片";
+        }
+        return typeName;
     }
     
 }

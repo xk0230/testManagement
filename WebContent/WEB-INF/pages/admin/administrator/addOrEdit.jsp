@@ -540,7 +540,7 @@
 												<tbody>
 													<tr class="odd gradeX" ng-repeat="item in vm.listAttachment">
 														<td><p ng-bind="item.name"></p></td>
-														<td><p ng-bind="item.type"></p></td>
+														<td><p ng-bind="item.typeName"></p></td>
 														<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
 														<td>
 															<a target="_black" href="/ccydManagement/admin/attachment/preview.do?id={{item.id}}" >预览</a>
