@@ -263,6 +263,9 @@
     <if test="map.status != null and map.status != '' ">
     	and p.status = #{map.status,jdbcType=VARCHAR}
     </if>
+    <if test="map.onlykq != null and map.onlykq != '' ">
+    	and p.vacancy > 0
+    </if>
     
     order by d.name asc, create_time desc
   </select>

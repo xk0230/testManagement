@@ -55,6 +55,13 @@
 												</div>
 											</div>
 											
+											<div class="col-lg-3" >
+												<label class="col-lg-4 control-label"></label> 
+												<div class="col-lg-8">
+													<input type="checkbox"   ng-model="onlykq"  value="true">只显示空缺岗位 
+												</div>
+											</div>
+											
 											<div class="col-lg-3" ng-if="${type=='mypost'}">
 												<label class="col-lg-4 control-label">岗位状态</label>
 												<div class="col-lg-8">

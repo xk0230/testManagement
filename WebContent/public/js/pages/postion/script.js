@@ -89,6 +89,7 @@ myAppModule.controller('PostionController',
 						name:$scope.name,
 						depId:$scope.depId,
 						status:statusVal,
+						onlykq:$scope.onlykq,
 						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 						end:$scope.currentPage * $scope.itemsPerPage -1
 					}
