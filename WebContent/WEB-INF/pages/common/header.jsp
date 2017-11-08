@@ -53,7 +53,7 @@ setInterval("getNewsNum()","60000");
     <div class="container-fluid">
         <div class="navbar">
             <div class="navbar-header">
-                <a class="navbar-brand" href="javascript:void(0);">
+                <a class="navbar-brand" href="javascript:void(0);" ng-click="header.goDefault()">
                     <i class="text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
                 </a>
             </div>

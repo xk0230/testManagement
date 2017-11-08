@@ -6,7 +6,10 @@ myAppModule2.controller('HeaderController',
 		self.$onInit = function(){
 
 		}
-		
+		this.goDefault =  function () {
+			window.location.href = "/ccydManagement/admin/index.html";
+		}
+
 		this.ChangePwd = function (costId,parentSelector) {
 			var parentElem = parentSelector ? angular.element($document[0].querySelector('#header ' + parentSelector)) : undefined;
 					var modalInstance = $uibModal.open({

@@ -82,6 +82,9 @@ myAppModule.controller('PostionController',
 				if($scope.type == "list"){
 					statusVal = 'audited'
 				}
+				if($scope.mode == 'empty'){
+					$scope.onlykq = true;
+				}
 				$http({
 					method:'POST',
 					url:$("#rootUrl").val()+'/admin/position/getPositionPageList.do',

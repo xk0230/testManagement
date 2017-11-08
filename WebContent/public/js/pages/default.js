@@ -11,6 +11,10 @@ myAppModule.controller('UserListController',
 		this.userInfo = function(id){
 			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+self.sessionUserId; 
 		};
+		// 空缺岗位
+		this.emptyPostion = function(id){
+			window.location.href="/ccydManagement/admin/position/toPostionList.do?type=list&mode=empty"; 
+		};
 		// 添加岗位
 		this.addPostion = function(id){
 			window.location.href="/ccydManagement/admin/position/toPostionList.do?type=mypost&mode=add"; 
