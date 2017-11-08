@@ -45,7 +45,16 @@ public class Position {
     
     private String salaryScale;
     
+    private String onlykq;
     
+	public String getOnlykq() {
+		return onlykq;
+	}
+
+	public void setOnlykq(String onlykq) {
+		this.onlykq = onlykq;
+	}
+
 	public String getSalaryScale() {
 		return salaryScale;
 	}

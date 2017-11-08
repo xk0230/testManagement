@@ -1,7 +1,9 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
-
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]); 
 myAppModule.controller('CostController',
-	function costListController($scope,$http,$uibModal,$document,$filter){
+	function costListController($scope,$http,$location,$uibModal,$document,$filter){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -9,6 +11,7 @@ myAppModule.controller('CostController',
 		
 		this.$onInit = function(){
 			self.getDeparts();
+			$scope.mode = $location.search().mode;
 			$scope.costTypeList = [
 				{costType : "0", name : "收入"},
 				{costType : "1", name : "支出"}
@@ -23,6 +26,9 @@ myAppModule.controller('CostController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getCostList();
+			if($scope.mode == 'add'){
+				self.addCost('', '.outlet');
+			}
 		};
 		
 		$scope.setPage = function (pageNo) {

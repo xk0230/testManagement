@@ -102,6 +102,9 @@ public class PositionService {
 		map.put("depId",search.getDepId());
 		map.put("status", search.getStatus());
 		map.put("createUser",search.getCreateUser());
+		if("true".equals(search.getOnlykq())){
+			map.put("onlykq", "true");
+		}
 	    page.setMap(map);
 		List<Position> data = mapper.getPositionPageList(page);
 		page.setData(data);

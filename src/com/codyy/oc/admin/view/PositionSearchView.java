@@ -6,7 +6,7 @@ import com.codyy.oc.admin.entity.PositionAudit;
 public class PositionSearchView extends Position{
 	
 	private PositionAudit audit;
-
+	
 	public PositionAudit getAudit() {
 		return audit;
 	}

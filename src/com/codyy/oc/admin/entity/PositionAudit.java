@@ -35,7 +35,7 @@ public class PositionAudit {
     
     private String remark;
 
-    public String getRemark() {
+	public String getRemark() {
 		return remark;
 	}
 
