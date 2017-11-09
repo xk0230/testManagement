@@ -78,7 +78,7 @@
 											<div class="col-lg-3" >
 												<label class="col-lg-4 control-label"></label> 
 												<div class="col-lg-8">
-													<input type="checkbox"   ng-model="onlykq"  value="true"><label class=" control-label">只显示空缺岗位 </label>
+													<input type="checkbox"   ng-model="onlykq"  value="true" ng-Disabled = "${adminUser.position == 'STAFF'}"><label class=" control-label">只显示空缺岗位 </label>
 												</div>
 											</div>
 											<div class="col-lg-6">
