@@ -73,6 +73,15 @@
             </a>
           </li>
          
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="图书管理" >
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#book" data-parent="#exampleAccordion">
+              <i class="fa-th-list"></i>
+              <span class="nav-link-text">图书管理</span>
+            </a>
+            <ul class="sidenav-second-level collapse nav" id="book">
+				<li><a href="${root}/admin/book/manager.do"><i class="en-arrow-right7"></i>图书管理</a></li>
+            </ul>
+          </li>
 		</ul>
 	</div>
 </div>
