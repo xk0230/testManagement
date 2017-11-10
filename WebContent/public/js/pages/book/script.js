@@ -177,7 +177,7 @@ myAppModule.controller('CostController',
 		};
 		
 		
-		this.editCost = function (costId, parentSelector) {
+		this.editBook = function (costId, parentSelector) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
@@ -417,7 +417,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			  
 			  $http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/admin/cost/get/"+items+".do",
+					url:$("#rootUrl").val()+"/admin/book/get/"+items+".do",
 					params:{
 					}
 				
@@ -427,7 +427,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 						
 						$scope.bookEntity = res.data.objData;
 						
-						$http({
+						/*$http({
 							method:'POST',
 							url:$("#rootUrl").val()+"/admin/cost/subType/"+res.data.objData.costType+".do",
 							params:{
@@ -441,12 +441,12 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 								$scope.costSubTypeList = [];
 							}
 							
-						});
+						});*/
 					}
 				});
 		  }
 		
-		  $ctrl.getDeparts();
+		  //$ctrl.getDeparts();
 		  
 	  };
 		
@@ -460,39 +460,18 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			  alert("请填写完整信息");
 			  return ;
 		  }
-		  if(!$scope.bookEntity.depId){
-			  alert("请填写所属部门");
-			  return ;
-		  }
-		  if(!$scope.bookEntity.costType){
-			  alert("请填写收支类型");
-			  return ;
-		  }
-		  if(!$scope.bookEntity.costSubtypeId){
-			  alert("请填写分类名称");
-			  return ;
-		  }
-		  if(!$scope.bookEntity.costTime){
-			  alert("请填写成本产生时间");
-			  return ;
-		  }
-		  if(!$scope.bookEntity.costNum){
-			  alert("请填写金额");
+		  if(!$scope.bookEntity.name){
+			  alert("请填写图书名称");
 			  return ;
 		  }
 		 var params = {
-				costId:$scope.bookEntity.costId,
-				depId:$scope.bookEntity.depId,
-				costType:$scope.bookEntity.costType,
-				costSubtypeId:$scope.bookEntity.costSubtypeId,
-				costTime:$filter('date')($scope.bookEntity.costTime, "yyyy-MM-dd"),
-				costNum:$scope.bookEntity.costNum,
-				remark:$scope.bookEntity.remark
+				name:$scope.bookEntity.name,
+				id:$scope.bookEntity.id
 			}; 
 		 
 		 $http({
 				method:'POST',
-				url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+				url:$("#rootUrl").val()+"/admin/book/saveOrUpdate.do",
 				params:params
 			
 			}).then(function(res){

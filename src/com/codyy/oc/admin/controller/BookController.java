@@ -100,9 +100,9 @@ public class BookController extends BaseController{
 	
 	@ResponseBody
 	@RequestMapping("/get/{costId}.do")
-	public JsonDto getCostEntityById(@PathVariable String costId){
+	public JsonDto getBookEntityById(@PathVariable String costId){
 		
-		return costService.getCostEntityById(costId);
+		return bookService.getBookEntityById(costId);
 		
 	}
 	

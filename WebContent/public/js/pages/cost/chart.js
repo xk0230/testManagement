@@ -67,7 +67,8 @@ myAppModule.controller('ChartController',
 								for(var j = 0;j<length;j++){
 									html += '<div class="panel panel-default toggle" id = "dep_'+xcategories[j]+'"><div class="panel-heading">';
 									html += '<h4 class="panel-title">';
-									html += xcategories[j]+'部门月度收支构成';
+									//html += xcategories[j]+'部门月度收支构成';
+									html += xcategories[j];
 									html += '<div class="panel-body">';
 									html += '<div id="container2';
 									html += i+'">';

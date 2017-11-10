@@ -665,16 +665,16 @@ public class CostService {
 	        dataOutTotal.add(outTotal);
 	        
 	        CostChartsSeriesData costChartsSeriesDataIn = new CostChartsSeriesData();
-	        costChartsSeriesDataIn.setName("总收入");
+	        costChartsSeriesDataIn.setName("收入");
 	        costChartsSeriesDataIn.setData(dataInTotal);
 	        
 	        CostChartsSeriesData costChartsSeriesDataOut = new CostChartsSeriesData();
-	        costChartsSeriesDataOut.setName("总支出");
+	        costChartsSeriesDataOut.setName("支出");
 	        costChartsSeriesDataOut.setData(dataOutTotal);
 	        
 //	        seriesDatas.add(costChartsSeriesDataIn);
 //	        seriesDatas.add(costChartsSeriesDataOut);
-	        costData.getXcategories().set(0, costData.getXcategories().get(0)+"  (总收入 : "+dataInTotal.get(0)+"   总支出 : "+dataOutTotal.get(0)+")");
+	        costData.getXcategories().set(0, costData.getXcategories().get(0)+"  (收入 : "+dataInTotal.get(0)+"   支出 : "+dataOutTotal.get(0)+")");
 	    }
 	    
 	    return datas;

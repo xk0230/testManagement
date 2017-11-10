@@ -88,7 +88,7 @@
 												<td><p ng-bind="item.name"></p></td>
 												<td><p ng-bind="item.userName"></p></td>
 												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editBook(item.id,'.outlet')"><i class="fa-edit"></i></button>
+													<button ng-show="${adminUser.position == 'ADMIN'}" type="button" class="btn btn-xs btn-success" ng-click="vm.editBook(item.id,'.outlet')"><i class="fa-edit"></i></button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.pullOrBackBook(item.id,'.outlet')"><i class="im-notebook"></i></button>
 												</td>
 												
@@ -172,74 +172,17 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>图书记录</h3>
+									<h3 class="panel-title"><i class="ec-pencil"></i>图书信息</h3>
 								</div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
-										<input type="hidden" ng-model="costEntity.costId">
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">所属部门</label>
-												<div class="col-lg-8">
-													<select ng-model="costEntity.depId"  class="form-control select2" 
-															ng-options="dep.depId as dep.name group by dep.group for dep in depList">
-															<option value="">--请选择--</option>
-													</select>
-												</div>
-											</div>
-											
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">收支类型</label>
-												<div class="col-lg-8">
-													<select ng-model="costEntity.costType"  class="form-control select2" 														
-															ng-change="costTypeChange()">
-														<option value="">--请选择--</option>
-														<option value="0" >收入</option>
-														<option value="1" >支出</option>
-													</select>
-												</div>
-											</div>
-										</div>
+										<input type="hidden" ng-model="bookEntity.id">
 
 										<div class="form-group">
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">分类名称</label>
+												<label class="col-lg-4 control-label">图书名称</label>
 												<div class="col-lg-8">
-													<select id="costSubType" ng-model="costEntity.costSubtypeId" class="form-control select2">
-														<option value="">--请选择--</option>
-														<option value="{{costSubType.costSubTypeId}}" ng-repeat="costSubType in costSubTypeList">{{costSubType.name}}</option>
-													</select>
-												</div>
-											</div>
-											
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label" >图书产生时间</label>
-												<div class="col-lg-8">
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="costEntity.costTime" is-open="popup.opened1" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="true"  />
-														<span class="input-group-btn">
-														<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">金额（元）</label>
-												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="costEntity.costNum" />
-												</div>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">图书详情</label>
-												<div class="col-lg-8">
-													<textarea class="form-control" ng-model="costEntity.remark" rows="3" Placeholder=""></textarea>
+													<input type="text" class="form-control" ng-model="bookEntity.name" />
 												</div>
 											</div>
 										</div>
