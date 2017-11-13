@@ -19,7 +19,7 @@
 				<div class="outlet" >
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-info toggle">
+							<div class="panel panel-success toggle">
 								<div class="panel-heading">
 									<h3 class="panel-title"><i class="ec-pencil"></i>岗位信息</h3>
 								</div>
@@ -299,7 +299,7 @@
 				<div class="outlet" ng-if="vm.edit == true">
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-info toggle">
+							<div class="panel panel-success toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
 									<h3 class="panel-title"><i class="ec-pencil"></i>个人信息</h3>
@@ -468,7 +468,7 @@
 				<div class="outlet" ng-if="vm.edit == true">
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-info toggle">
+							<div class="panel panel-success toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
 									<h3 class="panel-title"><i class="ec-pencil"></i>银行信息</h3>
@@ -509,7 +509,7 @@
 							<div class="col-lg-3">
 								<label class="col-lg-4 control-label" ></label>
 								<div class="col-lg-8">
-									<input type="submit" class="btn btn-lg btn-info col-lg-12" ladda = "submitting"  value="保存" />
+									<input type="submit" class="btn btn-lg btn-success col-lg-12" ladda = "submitting"  value="保存" />
 								</div>
 							</div>
 						</div>
