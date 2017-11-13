@@ -41,7 +41,99 @@ public class AdminUserDetail {
 
     private String payrollCard;
 
-    public String getUserDetailId() {
+    private String pdpSjB;
+
+    private String pdpSjC;
+
+    private String pdpSjD;
+
+    private String pdpNjA;
+
+    private String pdpNjB;
+
+    private String pdpNjC;
+
+    private String pdpNjD;
+    
+    private String gx;
+    
+    private String sj;
+    
+    
+
+    public String getPdpSjB() {
+		return pdpSjB;
+	}
+
+	public void setPdpSjB(String pdpSjB) {
+		this.pdpSjB = pdpSjB;
+	}
+
+	public String getPdpSjC() {
+		return pdpSjC;
+	}
+
+	public void setPdpSjC(String pdpSjC) {
+		this.pdpSjC = pdpSjC;
+	}
+
+	public String getPdpSjD() {
+		return pdpSjD;
+	}
+
+	public void setPdpSjD(String pdpSjD) {
+		this.pdpSjD = pdpSjD;
+	}
+
+	public String getPdpNjA() {
+		return pdpNjA;
+	}
+
+	public void setPdpNjA(String pdpNjA) {
+		this.pdpNjA = pdpNjA;
+	}
+
+	public String getPdpNjB() {
+		return pdpNjB;
+	}
+
+	public void setPdpNjB(String pdpNjB) {
+		this.pdpNjB = pdpNjB;
+	}
+
+	public String getPdpNjC() {
+		return pdpNjC;
+	}
+
+	public void setPdpNjC(String pdpNjC) {
+		this.pdpNjC = pdpNjC;
+	}
+
+	public String getPdpNjD() {
+		return pdpNjD;
+	}
+
+	public void setPdpNjD(String pdpNjD) {
+		this.pdpNjD = pdpNjD;
+	}
+
+	public String getGx() {
+		return gx;
+	}
+
+	public void setGx(String gx) {
+		this.gx = gx;
+	}
+
+	public String getSj() {
+		return sj;
+	}
+
+	public void setSj(String sj) {
+		this.sj = sj;
+	}
+
+	public String getUserDetailId() {
         return userDetailId;
     }
 

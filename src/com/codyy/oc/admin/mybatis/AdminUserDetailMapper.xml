@@ -21,11 +21,22 @@
     <result column="phone2" jdbcType="VARCHAR" property="phone2" />
     <result column="citizen_card" jdbcType="VARCHAR" property="citizenCard" />
     <result column="payroll_card" jdbcType="VARCHAR" property="payrollCard" />
+    <result column="pdp_sj_a" jdbcType="VARCHAR" property="pdpSjA" />
+    <result column="pdp_sj_b" jdbcType="VARCHAR" property="pdpSjB" />
+    <result column="pdp_sj_c" jdbcType="VARCHAR" property="pdpSjC" />
+    <result column="pdp_sj_d" jdbcType="VARCHAR" property="pdpSjD" />
+    <result column="pdp_nj_a" jdbcType="VARCHAR" property="pdpNjA" />
+    <result column="pdp_nj_b" jdbcType="VARCHAR" property="pdpNjB" />
+    <result column="pdp_nj_c" jdbcType="VARCHAR" property="pdpNjC" />
+    <result column="pdp_nj_d" jdbcType="VARCHAR" property="pdpNjD" />
+    <result column="gx" jdbcType="VARCHAR" property="gx" />
+    <result column="sj" jdbcType="VARCHAR" property="sj" />
   </resultMap>
   <sql id="Base_Column_List">
     user_detail_id, user_id, sex, birthday, age, birthday_month, id_number, origin, domicile, 
     nation, marriage, political, education, major, university, phone1, phone2, citizen_card, 
-    payroll_card
+    payroll_card,pdp_sj_a, pdp_sj_b, pdp_sj_c, pdp_sj_d, pdp_nj_a, pdp_nj_b, 
+    pdp_nj_c, pdp_nj_d,gx,sj
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -44,14 +55,17 @@
       nation, marriage, political, 
       education, major, university, 
       phone1, phone2, citizen_card, 
-      payroll_card)
+      payroll_card,pdp_sj_a, pdp_sj_b, pdp_sj_c, pdp_sj_d, pdp_nj_a, pdp_nj_b, 
+    pdp_nj_c, pdp_nj_d,gx,sj)
     values (#{userDetailId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, #{birthdayMonth,jdbcType=INTEGER}, 
       #{idNumber,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
       #{nation,jdbcType=VARCHAR}, #{marriage,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, 
       #{education,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{university,jdbcType=VARCHAR}, 
       #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{citizenCard,jdbcType=VARCHAR}, 
-      #{payrollCard,jdbcType=VARCHAR})
+      #{payrollCard,jdbcType=VARCHAR},#{pdpSjA,jdbcType=VARCHAR}, #{pdpSjB,jdbcType=VARCHAR}, #{pdpSjC,jdbcType=VARCHAR}, 
+      #{pdpSjD,jdbcType=VARCHAR}, #{pdpNjA,jdbcType=VARCHAR}, #{pdpNjB,jdbcType=VARCHAR}, 
+      #{pdpNjC,jdbcType=VARCHAR}, #{pdpNjD,jdbcType=VARCHAR},#{gx,jdbcType=VARCHAR},#{sj,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
     insert into ADMIN_USER_DETAIL
@@ -113,6 +127,36 @@
       <if test="payrollCard != null and payrollCard !=''">
         payroll_card,
       </if>
+      <if test="pdpSjA != null">
+        pdp_sj_a,
+      </if>
+      <if test="pdpSjB != null">
+        pdp_sj_b,
+      </if>
+      <if test="pdpSjC != null">
+        pdp_sj_c,
+      </if>
+      <if test="pdpSjD != null">
+        pdp_sj_d,
+      </if>
+      <if test="pdpNjA != null">
+        pdp_nj_a,
+      </if>
+      <if test="pdpNjB != null">
+        pdp_nj_b,
+      </if>
+      <if test="pdpNjC != null">
+        pdp_nj_c,
+      </if>
+      <if test="pdpNjD != null">
+        pdp_nj_d,
+      </if>
+      <if test="gx != null">
+        gx,
+      </if>
+      <if test="sj != null">
+        sj,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userDetailId != null and userDetailId !=''">
@@ -172,6 +216,36 @@
       <if test="payrollCard != null and payrollCard !=''">
         #{payrollCard,jdbcType=VARCHAR},
       </if>
+      <if test="pdpSjA != null">
+        #{pdpSjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjB != null">
+        #{pdpSjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjC != null">
+        #{pdpSjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjD != null">
+        #{pdpSjD,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjA != null">
+        #{pdpNjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjB != null">
+        #{pdpNjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjC != null">
+        #{pdpNjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjD != null">
+        #{pdpNjD,jdbcType=VARCHAR},
+      </if>
+      <if test="gx != null">
+        #{gx,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null">
+        #{sj,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
@@ -228,6 +302,39 @@
       </if>
       <if test="payrollCard != null">
         payroll_card = #{payrollCard,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitId != null  and recruitId != ''">
+        recruit_id = #{recruitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjA != null and pdpSjA != ''">
+        pdp_sj_a = #{pdpSjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjB != null and pdpSjB != ''">
+        pdp_sj_b = #{pdpSjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjC != null and pdpSjC != ''">
+        pdp_sj_c = #{pdpSjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpSjD != null and pdpSjD != ''">
+        pdp_sj_d = #{pdpSjD,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjA != null and pdpNjA != ''">
+        pdp_nj_a = #{pdpNjA,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjB != null and pdpNjB != ''">
+        pdp_nj_b = #{pdpNjB,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjC != null and pdpNjC != ''">
+        pdp_nj_c = #{pdpNjC,jdbcType=VARCHAR},
+      </if>
+      <if test="pdpNjD != null and pdpNjD != ''">
+        pdp_nj_d = #{pdpNjD,jdbcType=VARCHAR},
+      </if>
+       <if test="gx != null and gx != ''">
+        gx = #{gx,jdbcType=VARCHAR},
+      </if>
+       <if test="sj != null and sj != ''">
+        sj = #{sj,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
