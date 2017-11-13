@@ -19,10 +19,25 @@
                         </ul>
 					</div>
 				</div>
-				<table align="center">
-					<tr><td width="30%"><div id="c1" ></div></td><td width="30%"><div id="c2" ></div></td><td width="30%"><div id="c3" ></div></td></tr>
-					<tr><td><div id="c4" ></div></td><td><div id="c5" ></div></td></tr>
-				</table>
+				<div class="row">
+					<div class="col-lg-12 heading">
+						<div class="col-lg-4" style="padding:15px;">
+                        	<div id="c1" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+                        </div>
+                        <div class="col-lg-4" style="padding:15px;">
+                        	<div id="c2" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+                        </div>
+                        <div class="col-lg-4" style="padding:15px;">
+                        	<div id="c3" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+                        </div>
+                        <div class="col-lg-4" style="padding:15px;">
+                        	<div id="c4" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+                        </div>
+                        <div class="col-lg-4" style="padding:15px;">
+                        	<div id="c5" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+                        </div>
+					</div>
+				</div>
 				
 				<!-- <div id="c2"></div>
 				<div id="c3"></div>
