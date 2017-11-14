@@ -96,9 +96,11 @@ myAppModule.controller('UserListController',
 				self.mode = "1";
 			}
 			
-			self.getAttachmentEntityPageList();
-			self.getTrainList();
-			self.getTransferPositionList();
+			if($scope.vm.user.userId){
+				self.getAttachmentEntityPageList();
+				self.getTrainList();
+				self.getTransferPositionList();
+			}
 			
 		}
 		
