@@ -343,7 +343,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/transferPosition/page.do',
 				params:{
-					userId:'admin',
+					userId:$scope.vm.user.userId,
 					start:(($scope.transferPositionCurrentPage - 1) * $scope.transferPositionItemsPerPage),
 					end:$scope.transferPositionCurrentPage * $scope.transferPositionItemsPerPage -1
 				}
@@ -365,7 +365,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/train/page.do',
 				params:{
-					userId:'admin',
+					userId:$scope.vm.user.userId,
 					start:(($scope.trainCurrentPage - 1) * $scope.trainItemsPerPage),
 					end:$scope.trainCurrentPage * $scope.trainItemsPerPage -1
 				}
@@ -388,7 +388,7 @@ myAppModule.controller('UserListController',
 				method:'POST',
 				url:'/ccydManagement/admin/attachment/page.do',
 				params:{
-					fId:'admin',
+					fId:$scope.vm.user.userId,
 					start:(($scope.attachmentCurrentPage - 1) * $scope.attachmentItemsPerPage),
 					end:$scope.attachmentCurrentPage * $scope.attachmentItemsPerPage -1
 				}
