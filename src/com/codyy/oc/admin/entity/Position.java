@@ -47,6 +47,36 @@ public class Position {
     
     private String onlykq;
     
+    private String educationRemark;
+
+    private String professional;
+    
+    private String education;
+    
+	public String getEducationRemark() {
+		return educationRemark;
+	}
+
+	public void setEducationRemark(String educationRemark) {
+		this.educationRemark = educationRemark;
+	}
+
+	public String getProfessional() {
+		return professional;
+	}
+
+	public void setProfessional(String professional) {
+		this.professional = professional;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
 	public String getOnlykq() {
 		return onlykq;
 	}

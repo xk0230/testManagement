@@ -21,9 +21,13 @@
     <result column="recruit_e" jdbcType="LONGVARCHAR" property="recruitE" />
     <result column="recruit_f" jdbcType="LONGVARCHAR" property="recruitF" />
     <result column="salary_scale" jdbcType="VARCHAR" property="salaryScale" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="education_remark" jdbcType="LONGVARCHAR" property="educationRemark" />
+    <result column="professional" jdbcType="LONGVARCHAR" property="professional" />
   </resultMap>
   <sql id="Base_Column_List">
     post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale
+    ,education, education_remark, professional
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -46,12 +50,12 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION (post_id, name, dep_id, 
       on_duty, organization, vacancy, 
-      remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale)
+      remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale,education, education_remark, professional)
     values (#{postId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{depId,jdbcType=VARCHAR}, 
       #{onDuty,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, #{vacancy,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},#{createUser,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP},#{recruitA,jdbcType=VARCHAR}, #{recruitB,jdbcType=VARCHAR}, #{recruitC,jdbcType=VARCHAR},
-       #{recruitD,jdbcType=VARCHAR}, #{recruitE,jdbcType=VARCHAR}, #{recruitF,jdbcType=VARCHAR},#{salaryScale,jdbcType=VARCHAR})
+       #{recruitD,jdbcType=VARCHAR}, #{recruitE,jdbcType=VARCHAR}, #{recruitF,jdbcType=VARCHAR},#{salaryScale,jdbcType=VARCHAR},#{education,jdbcType=VARCHAR},#{educationRemark,jdbcType=LONGVARCHAR}, #{professional,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Position">
     insert into POSITION
@@ -212,6 +216,15 @@
       </if>
         <if test="salaryScale != null and salaryScale!='' ">
         salary_scale = #{salaryScale,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="educationRemark != null">
+        education_remark = #{educationRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where post_id = #{postId,jdbcType=VARCHAR}
