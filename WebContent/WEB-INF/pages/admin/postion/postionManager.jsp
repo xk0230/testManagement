@@ -215,13 +215,13 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label">编制人数</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="costEntity.onDuty" ng-blur="$ctrl.cau()" />
+													<input type="text" class="form-control" ng-model="costEntity.organization" ng-blur="$ctrl.cau()" />
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label" >在岗人数</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="costEntity.organization" ng-blur="$ctrl.cau()" />
+													<input type="text" class="form-control" ng-model="costEntity.onDuty" ng-blur="$ctrl.cau()" />
 												</div>
 											</div>
 										</div>
