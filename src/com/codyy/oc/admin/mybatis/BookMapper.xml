@@ -117,7 +117,7 @@
 	</select>
 	
 	<select id="getMaxBookNo"  resultType="java.lang.Integer" >
-		select max(book_no) from book
+		select max(book_no) from BOOK
 	</select>
 	
 </mapper>

@@ -119,7 +119,7 @@
 				AND ipe.user_id  = #{map.userId}
 			</if>
 			
-		ORDER BY ipe.create_time DESC
+		ORDER BY ipe.salary DESC
 	
 	</select>
 	

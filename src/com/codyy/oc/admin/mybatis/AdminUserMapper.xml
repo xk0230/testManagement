@@ -473,7 +473,7 @@
 				and au.position = #{map.position}
 			</if>
 			
-			order by au.create_time DESC
+			order by postPc,au.create_time DESC 
 		
 	</select>
 	<!-- 获取用户数量 -->
