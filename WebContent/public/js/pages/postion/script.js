@@ -340,10 +340,10 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 		
 	//计算空缺人数
 		$ctrl.cau = function () {
-		if(typeof($scope.costEntity.organization) == "undefined"){
+	/*	if(typeof($scope.costEntity.organization) == "undefined"){
 			$scope.costEntity.organization = 0;
 			}
-			$scope.costEntity.vacancy = $scope.costEntity.onDuty - $scope.costEntity.organization;
+			$scope.costEntity.vacancy = $scope.costEntity.onDuty - $scope.costEntity.organization;*/
 		};
 		
 		

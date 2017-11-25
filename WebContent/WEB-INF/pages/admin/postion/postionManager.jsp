@@ -186,7 +186,7 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>成本记录</h3>
+									<h3 class="panel-title"><i class="ec-pencil"></i>岗位信息</h3>
 								</div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
@@ -221,7 +221,7 @@
 											<div class="col-lg-6">
 												<label class="col-lg-4 control-label" >在岗人数</label>
 												<div class="col-lg-8">
-													<input type="text" class="form-control" ng-model="costEntity.onDuty" ng-blur="$ctrl.cau()" />
+													<input type="text" class="form-control" ng-model="costEntity.onDuty" ng-blur="$ctrl.cau()" ng-readonly="true" />
 												</div>
 											</div>
 										</div>
