@@ -26,13 +26,15 @@
     <result column="professional" jdbcType="LONGVARCHAR" property="professional" />
   </resultMap>
   <sql id="Base_Column_List">
-    post_id, name, dep_id, on_duty, organization, vacancy, remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale
+    post_id, name, dep_id, (SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = post_id ) AS on_duty, organization, (organization-(SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = post_id )) AS vacancy, remark, status,create_user,create_time,recruit_a, recruit_b, recruit_c, recruit_d, recruit_e, recruit_f,salary_scale
     ,education, education_remark, professional
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from POSITION
+    p.post_id, p.name, p.dep_id, (SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = p.post_id ) AS on_duty, p.organization, (p.organization-(SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = p.post_id )) AS vacancy, p.remark, p.status,p.create_user,p.create_time,p.recruit_a, recruit_b, 
+    p.recruit_c, p.recruit_d, p.recruit_e, p.recruit_f,salary_scale
+    ,p.education, p.education_remark, p.professional
+    from POSITION p
     where post_id = #{postId,jdbcType=VARCHAR}
   </select>
   
@@ -248,9 +250,9 @@
     p.post_id,
     p.name, 
     p.dep_id,
-    p.on_duty,
+    (SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = p.post_id ) AS on_duty,
     p.organization,
-    p.vacancy, 
+    (p.organization-(SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = p.post_id )) AS vacancy, 
     p.remark,
     p.status,
     p.create_user,
@@ -277,7 +279,7 @@
     	and p.status = #{map.status,jdbcType=VARCHAR}
     </if>
     <if test="map.onlykq != null and map.onlykq != '' ">
-    	and p.vacancy > 0
+    	and (p.organization-(SELECT count( * ) FROM ADMIN_USER au WHERE au.post_id = p.post_id )) > 0
     </if>
     
     order by d.name asc, create_time desc
