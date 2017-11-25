@@ -167,6 +167,10 @@ myAppModule.controller('UserListController',
 					self.Recruitment.recruitD = res.data.recruitD;
 					self.Recruitment.recruitE = res.data.recruitE;
 					self.Recruitment.recruitF = res.data.recruitF;
+					
+					self.Recruitment.education = res.data.education;
+					self.Recruitment.educationRemark = res.data.educationRemark;
+					self.Recruitment.professional = res.data.professional;
 				}else{
 					
 				}

@@ -328,6 +328,32 @@
 												</div>
 											</div>
 										</div>
+												<div class="form-group">
+													<div class="col-lg-6">
+														<div class="col-lg-3">
+															<label class="control-label" >学历：</label>
+														</div>
+														<div class="col-lg-9">
+												<select class="form-control select2" ng-model="costEntity.education" ng-change="" >
+													<option value="">请选择学历</option>
+													<option value="博士">博士</option>
+													<option value="硕士">硕士</option>
+													<option value="学士">学士</option>
+													<option value="专科">专科</option>
+												</select>
+														</div>
+													</div>
+													<div class="col-lg-6"></div>
+												</div>
+
+											<div>
+												<textarea class="form-control" ng-model="costEntity.educationRemark" rows="3" Placeholder="点击输入学历备注"></textarea>
+											</div>
+&nbsp;
+											<div>
+												<textarea class="form-control" ng-model="costEntity.professional" rows="3" Placeholder="点击输入专业资格备注备注"></textarea>
+											</div>
+
 									</div>
 								</div>
 							</div>

@@ -210,7 +210,7 @@
 											<div class="col-lg-3">
 												<select class="form-control select2" ng-model="vm.Recruitment.education" ng-change="" >
 													<option value="">请选择学历</option>
-													<option value="博士">学士</option>
+													<option value="博士">博士</option>
 													<option value="硕士">硕士</option>
 													<option value="学士">学士</option>
 													<option value="专科">专科</option>

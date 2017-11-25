@@ -307,7 +307,13 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 				recruitC:$scope.costEntity.recruitC,
 				recruitD:$scope.costEntity.recruitD,
 				recruitE:$scope.costEntity.recruitE,
-				recruitF:$scope.costEntity.recruitF
+				recruitF:$scope.costEntity.recruitF,
+				
+				education:$scope.costEntity.education,
+				educationRemark:$scope.costEntity.educationRemark,
+				professional:$scope.costEntity.professional
+				
+				
 			}
 		}).then(function(res){
 			if(res){
