@@ -30,11 +30,11 @@
               <span class="nav-link-text">岗位信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postComponents">
-				<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>岗位列表</a>
+				<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a>
 				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>我的岗位管理</a>
+				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a>
 				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>岗位审批</a>
+				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a>
 				</li>
             </ul>
           </li>
@@ -45,8 +45,8 @@
               <span class="nav-link-text">招聘管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postRecruitment">
-				<li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>招聘需求列表</a></li>
-				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/recruit/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>招聘需求审批列表</a></li>
+				<li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
+				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/recruit/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>待我审批</a></li>
 				<li><a href="${root}/admin/recruit/MyInterview.do"><i class="en-arrow-right7"></i>我的面试</a></li>
             </ul>
           </li>

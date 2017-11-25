@@ -78,7 +78,7 @@
 							<div class="panel panel-default toggle">
 								<!-- Start .panel -->
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
+									<h3 class="panel-title"><i class="ec-list"></i>申请记录</h3>
 								</div>
 								<div class="panel-body">
 									<table class="table display" id="datatable">

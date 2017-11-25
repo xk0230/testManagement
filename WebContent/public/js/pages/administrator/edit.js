@@ -242,9 +242,11 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					swal("保存成功!","","sucess");
+					//swal("保存成功!","","sucess");
+					alert("保存成功!");
 				}else{
-					swal("保存失败!","","error");
+					//swal("保存失败!","","error");
+					alert("保存失败!");
 				}
 			})
 		}
@@ -301,11 +303,13 @@ myAppModule.controller('UserListController',
 				}
 			}).then(function(res){
 				if(res){
-					swal("保存成功!","","sucess");
+					//swal("保存成功!","","sucess");
 					//self.postlist = res.data || [];
+					alert("保存成功!");
 				}else{
-					swal("保存失败!","","error");
+					//swal("保存失败!","","error");
 					//self.postlist = [];
+					alert("保存失败!");
 				}
 			})
 		}

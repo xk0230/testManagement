@@ -7,7 +7,7 @@
 <meta charset="utf-8"/>
 <meta name="renderer" content="webkit">
 <base href="/">
-<title>长春一东信息管理系统</title>
+<title>CCYDSZ-SSC</title>
 <%
     String contextPath = request.getContextPath();
     if (contextPath.equals("/"))

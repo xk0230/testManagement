@@ -89,8 +89,13 @@
 												<label class="col-lg-4 control-label" for="ds_host">状态</label>
 												<div class="col-lg-8 ">
 													<div class="form-group">
-													<input type="text" class="form-control"  ng-model="vm.user.workStatus" id="userName" ng-readonly="vm.readOnly" />
-												</div>
+														<select class="form-control select2" ng-model="vm.user.workStatus">
+															<option value="">请选择</option>
+															<option value="试用期" >试用期</option>
+															<option value="正式" >正式</option>
+															<option value="离职" >离职</option>
+														</select>
+													</div>
 												</div>
 											</div>
 											<div class="col-lg-3">
@@ -401,7 +406,11 @@
 												<label class="col-lg-4 control-label" >婚姻</label>
 												<div class="col-lg-8">
 												<div class="form-group">
-													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.marriage" />
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.marriage">
+														<option value="">请选择</option>
+														<option value="已婚" >已婚</option>
+														<option value="未婚" >未婚</option>
+													</select>
 												</div>
 												</div>
 											</div>
@@ -409,7 +418,12 @@
 												<label class="col-lg-4 control-label" >政治面貌</label>
 												<div class="col-lg-8">
 												<div class="form-group">
-													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.political" />
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.political">
+														<option value="">请选择</option>
+														<option value="群众" >群众</option>
+														<option value="团员" >团员</option>
+														<option value="党员" >党员</option>
+													</select>
 												</div>
 												</div>
 											</div>
@@ -417,7 +431,13 @@
 												<label class="col-lg-4 control-label" >学历</label>
 												<div class="col-lg-8">
 												<div class="form-group">
-													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.education" />
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.education">
+														<option value="">请选择</option>
+														<option value="本科以下" >本科以下</option>
+														<option value="本科" >本科</option>
+														<option value="硕士" >硕士</option>
+														<option value="博士" >博士</option>
+													</select>
 												</div>
 												</div>
 											</div>
