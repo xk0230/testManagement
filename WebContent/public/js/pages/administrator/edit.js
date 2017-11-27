@@ -108,7 +108,7 @@ myAppModule.controller('UserListController',
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/getAlldep.do',
+				url:'/ssc/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -124,7 +124,7 @@ myAppModule.controller('UserListController',
 		self.getUser = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getUserById.do',
+				url:'/ssc/admin/adminuser/getUserById.do',
 				params:{
 					id: $scope.vm.user.userId
 				}
@@ -146,7 +146,7 @@ myAppModule.controller('UserListController',
 				//获取部门岗位
 				$http({
 					method:'POST',
-					url:'/ccydManagement/admin/position/getPositionByDepId.do',
+					url:'/ssc/admin/position/getPositionByDepId.do',
 					params:{
 						depId: $scope.vm.user.depId
 					}
@@ -166,7 +166,7 @@ myAppModule.controller('UserListController',
 		self.getHasManager = function(depId){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/hasManager.do',
+				url:'/ssc/admin/dep/hasManager.do',
 				params:{
 					depId: depId
 				}
@@ -195,7 +195,7 @@ myAppModule.controller('UserListController',
 		self.addUser = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/insertadminuser.do',
+				url:'/ssc/admin/adminuser/insertadminuser.do',
 				params:{
 					// ADMIN_USER
 					userId       : $scope.vm.user.userId                         , //用户名
@@ -256,7 +256,7 @@ myAppModule.controller('UserListController',
 		self.updateUser = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/updateuseradmin.do',
+				url:'/ssc/admin/adminuser/updateuseradmin.do',
 				params:{
 					// ADMIN_USER
 					userId       : $scope.vm.user.userId                         , //用户名
@@ -347,7 +347,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/transferPosition/page.do',
+				url:'/ssc/admin/transferPosition/page.do',
 				params:{
 					userId:$scope.vm.user.userId,
 					start:(($scope.transferPositionCurrentPage - 1) * $scope.transferPositionItemsPerPage),
@@ -369,7 +369,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/train/page.do',
+				url:'/ssc/admin/train/page.do',
 				params:{
 					userId:$scope.vm.user.userId,
 					start:(($scope.trainCurrentPage - 1) * $scope.trainItemsPerPage),
@@ -392,7 +392,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/attachment/page.do',
+				url:'/ssc/admin/attachment/page.do',
 				params:{
 					fId:$scope.vm.user.userId,
 					start:(($scope.attachmentCurrentPage - 1) * $scope.attachmentItemsPerPage),

@@ -40,7 +40,7 @@ myAppModule.controller('UserListController',
 		self.getRecruitmentInfo = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/getById.do',
+				url:'/ssc/admin/recruit/getById.do',
 				params:{
 					id : self.Recruitment.id
 				}
@@ -66,7 +66,7 @@ myAppModule.controller('UserListController',
 		self.getCandidatePageList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/candidate/getCandidatePageList.do',
+				url:'/ssc/admin/candidate/getCandidatePageList.do',
 				params:{
 					recruitId : self.Recruitment.id,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -102,7 +102,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/candidate/saveOrUpdateCandidate.do',
+				url:'/ssc/admin/candidate/saveOrUpdateCandidate.do',
 				params:{
 					id            :item.id        ,
 					name          :item.name      ,
@@ -192,7 +192,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	this.$onInit = function(){
 		$http({
 			method:'POST',
-			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerPageList.do",
+			url:"/ssc/admin/candidate/getCandidateRInterviewerPageList.do",
 			params:{
 				candidateId:items.id,
 				start:0,

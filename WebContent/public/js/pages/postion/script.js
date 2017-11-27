@@ -228,7 +228,7 @@ myAppModule.controller('PostionController',
 		this.audit = function (id,result, parentSelector) {
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/auditPosition.do',
+				url:'/ssc/admin/position/auditPosition.do',
 				params:{
 					positionAuditId:id,
 					result:result
@@ -293,7 +293,7 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 
 		$http({
 			method:'POST',
-			url:'/ccydManagement/admin/position/saveOrUpdatePosition.do',
+			url:'/ssc/admin/position/saveOrUpdatePosition.do',
 			params:{
 				postId:$scope.costEntity.postId,
 				name:$scope.costEntity.name,
@@ -374,7 +374,7 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope,$http,$
 		$ctrl.getPostionById = function(){
 		$http({
 			method:'POST',
-			url:'/ccydManagement/admin/position/getPositionByDepId.do',
+			url:'/ssc/admin/position/getPositionByDepId.do',
 			params:{
 				depId: $scope.costEntity.depId
 			}
@@ -468,7 +468,7 @@ angular.module('myApp').controller('AuditModalInstanceCtrl', function ($scope,$h
 
 				$http({
 					method:'POST',
-					url:'/ccydManagement/admin/position/auditPosition.do',
+					url:'/ssc/admin/position/auditPosition.do',
 					params:{
 						positionAuditId:$ctrl.id,
 						result:'-1',

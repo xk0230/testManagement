@@ -7,7 +7,7 @@ myAppModule2.controller('HeaderController',
 
 		}
 		this.goDefault =  function () {
-			window.location.href = "/ccydManagement/admin/index.html";
+			window.location.href = "/ssc/admin/index.html";
 		}
 
 		this.ChangePwd = function (costId,parentSelector) {
@@ -36,7 +36,7 @@ myAppModule2.controller('HeaderController',
 							//登出
 							 $http({
 									method:'POST',
-									url:"/ccydManagement/logOut.do",
+									url:"/ssc/logOut.do",
 									params:{
 									}
 								
@@ -80,7 +80,7 @@ myAppModule2.controller('ModalInstanceCtrl',
 		
 		 $http({
 				method:'POST',
-				url:"/ccydManagement/admin/adminuser/updatePasswd.do",
+				url:"/ssc/admin/adminuser/updatePasswd.do",
 				params:{
 					userId:$scope.userId,
 					password:$scope.newPwd1,

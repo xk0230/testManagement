@@ -565,8 +565,8 @@
 															<td><p ng-bind="item.typeName"></p></td>
 															<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
 															<td>
-																<a target="_black" href="/ccydManagement/admin/attachment/preview.do?id={{item.id}}" >预览</a>
-																<a target="_black" href="/ccydManagement/admin/attachment/download.do?id={{item.id}}" >下载</a>
+																<a target="_black" href="/ssc/admin/attachment/preview.do?id={{item.id}}" >预览</a>
+																<a target="_black" href="/ssc/admin/attachment/download.do?id={{item.id}}" >下载</a>
 															</td>
 															
 														</tr>

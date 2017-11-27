@@ -36,7 +36,7 @@ myAppModule.controller('UserListController',
 		this.getFinancingInfoList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getadminlist.do',
+				url:'/ssc/admin/adminuser/getadminlist.do',
 				params:{
 					userName: $scope.userName,
 					realName: $scope.realName,
@@ -60,7 +60,7 @@ myAppModule.controller('UserListController',
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/getAlldep.do',
+				url:'/ssc/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -76,7 +76,7 @@ myAppModule.controller('UserListController',
 		self.getPostionById = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionByDepId.do',
+				url:'/ssc/admin/position/getPositionByDepId.do',
 				params:{
 					depId: $scope.depId
 				}
@@ -90,7 +90,7 @@ myAppModule.controller('UserListController',
 		}
 		
 		this.searchIpe = function(userId){
-			window.location.href="/ccydManagement/admin/ipe/getIpe.do?userId="+userId; 
+			window.location.href="/ssc/admin/ipe/getIpe.do?userId="+userId; 
 		};
 	}
 );

@@ -41,7 +41,7 @@ myAppModule.controller('UserListController',
 			console.log("获取图表");
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getchartsdata.do'
+				url:'/ssc/admin/adminuser/getchartsdata.do'
 			}).then(function(res){
 				if(res){
 					var ls = [];
@@ -202,7 +202,7 @@ myAppModule.controller('UserListController',
 		this.getFinancingInfoList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getadminlist.do',
+				url:'/ssc/admin/adminuser/getadminlist.do',
 				params:{
 					userName: $scope.userName,
 					realName: $scope.realName,
@@ -226,7 +226,7 @@ myAppModule.controller('UserListController',
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/getAlldep.do',
+				url:'/ssc/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -242,7 +242,7 @@ myAppModule.controller('UserListController',
 		self.getPostionById = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionByDepId.do',
+				url:'/ssc/admin/position/getPositionByDepId.do',
 				params:{
 					depId: $scope.depId
 				}
@@ -257,21 +257,21 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewUser = function(id){
-			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do"; 
+			window.location.href="/ssc/admin/adminuser/toAddOrEditUser.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/adminuser/toAddOrEditUser.do?id="+id; 
+			window.location.href="/ssc/admin/adminuser/toAddOrEditUser.do?id="+id; 
 		};
 		
 		this.userTrainList = function(id){
-			window.location.href="/ccydManagement/admin/train/manager.do?userId="+id; 
+			window.location.href="/ssc/admin/train/manager.do?userId="+id; 
 		};
 		this.userTransferPositionList = function(id){
-			window.location.href="/ccydManagement/admin/transferPosition/manager.do?userId="+id; 
+			window.location.href="/ssc/admin/transferPosition/manager.do?userId="+id; 
 		};
 		this.userAttachmentList = function(id){
-			window.location.href="/ccydManagement/admin/attachment/manager.do?userId="+id; 
+			window.location.href="/ssc/admin/attachment/manager.do?userId="+id; 
 		};
 	}
 );

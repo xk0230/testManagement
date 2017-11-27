@@ -23,7 +23,7 @@ myAppModule.controller('UserListController',
 			var userId = $("#sessionUserId").val();
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/candidate/getCandidateRInterviewerPageList.do',
+				url:'/ssc/admin/candidate/getCandidateRInterviewerPageList.do',
 				params:{
 					interviewerId: userId,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -89,7 +89,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	this.$onInit = function(){
 		$http({
 			method:'POST',
-			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerById.do",
+			url:"/ssc/admin/candidate/getCandidateRInterviewerById.do",
 			params:{
 				id:items.id
 			}
@@ -132,7 +132,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			}
 			$http({
 				method:'POST',
-				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
+				url:"/ssc/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
 				params:params
 			
 			}).then(function(res){

@@ -53,7 +53,7 @@ myAppModule.controller('UserListController',
 		self.getRecruitmentInfo = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/getById.do',
+				url:'/ssc/admin/recruit/getById.do',
 				params:{
 					id : self.Recruitment.id
 				}
@@ -85,7 +85,7 @@ myAppModule.controller('UserListController',
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/getAlldep.do',
+				url:'/ssc/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -101,7 +101,7 @@ myAppModule.controller('UserListController',
 		self.getAdminList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/adminuser/getadminlist.do',
+				url:'/ssc/admin/adminuser/getadminlist.do',
 				params:{
 					position: "ADMIN",
 					start:0,
@@ -120,7 +120,7 @@ myAppModule.controller('UserListController',
 		self.getAllCompetency = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/getAllCompetency.do',
+				url:'/ssc/admin/recruit/getAllCompetency.do',
 				params:{
 				}
 			}).then(function(res){
@@ -137,7 +137,7 @@ myAppModule.controller('UserListController',
 			//获取部门岗位
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionByDepId.do',
+				url:'/ssc/admin/position/getPositionByDepId.do',
 				params:{
 					depId: $scope.vm.Recruitment.depId
 				}
@@ -155,7 +155,7 @@ myAppModule.controller('UserListController',
 			//获取部门岗位
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionById.do',
+				url:'/ssc/admin/position/getPositionById.do',
 				params:{
 					id: $scope.vm.Recruitment.postid
 				}
@@ -181,7 +181,7 @@ myAppModule.controller('UserListController',
 		self.getCandidatePageList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/candidate/getCandidatePageList.do',
+				url:'/ssc/admin/candidate/getCandidatePageList.do',
 				params:{
 					recruitId : self.Recruitment.id,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -218,7 +218,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/saveOrUpdateRecruit.do',
+				url:'/ssc/admin/recruit/saveOrUpdateRecruit.do',
 				params:{
 					id               : $scope.vm.Recruitment.id             , 
 					postid           : $scope.vm.Recruitment.postid         , 
@@ -240,7 +240,7 @@ myAppModule.controller('UserListController',
 					if(typeof($location.search().id)!="undefined"){
 						self.$onInit();
 					}else{
-						window.location.href="/ccydManagement/admin/recruit/Recruitment.do?type=''"; 
+						window.location.href="/ssc/admin/recruit/Recruitment.do?type=''"; 
 					}
 				}else{
 					alert("保存失败！");
@@ -272,7 +272,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/putAuditRecruit.do',
+				url:'/ssc/admin/recruit/putAuditRecruit.do',
 				params:{
 					id : self.Recruitment.id,
 					auditIds:auditIds
@@ -292,7 +292,7 @@ myAppModule.controller('UserListController',
 			if($("#sessionUserId").val()!="admin"){
 				$http({
 					method:'POST',
-					url:'/ccydManagement/admin/recruit/auditRecruit.do',
+					url:'/ssc/admin/recruit/auditRecruit.do',
 					params:{
 						recruitId : self.Recruitment.id,
 						result:"1"
@@ -326,7 +326,7 @@ myAppModule.controller('UserListController',
 					auditIds = auditIds.substring(0,auditIds.length - 1);
 					$http({
 						method:'POST',
-						url:'/ccydManagement/admin/recruit/auditRecruit.do',
+						url:'/ssc/admin/recruit/auditRecruit.do',
 						params:{
 							recruitId : self.Recruitment.id,
 							result:"1",
@@ -360,7 +360,7 @@ myAppModule.controller('UserListController',
 			
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/auditRecruit.do',
+				url:'/ssc/admin/recruit/auditRecruit.do',
 				params:{
 					recruitId : self.Recruitment.id,
 					result:"-1",
@@ -458,7 +458,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.getInterViewList = function(){
 		$http({
 			method:'POST',
-			url:"/ccydManagement/admin/candidate/getCandidateRInterviewerPageList.do",
+			url:"/ssc/admin/candidate/getCandidateRInterviewerPageList.do",
 			params:{
 				candidateId:$ctrl.candidateId,
 				start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -517,7 +517,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.getDepList = function(){
 		$http({
 			method:'POST',
-			url:'/ccydManagement/admin/dep/getAlldep.do',
+			url:'/ssc/admin/dep/getAlldep.do',
 			params:{
 			}
 		}).then(function(res){
@@ -533,7 +533,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.getPostionById = function(){
 		$http({
 			method:'POST',
-			url:'/ccydManagement/admin/position/getPositionByDepId.do',
+			url:'/ssc/admin/position/getPositionByDepId.do',
 			params:{
 				depId: $scope.Interview.interviewerDepId
 			}
@@ -550,7 +550,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 	$scope.getFinancingInfoList = function(){
 		$http({
 			method:'POST',
-			url:'/ccydManagement/admin/adminuser/getadminlist.do',
+			url:'/ssc/admin/adminuser/getadminlist.do',
 			params:{
 				userName: "",
 				realName: "",
@@ -583,7 +583,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 				}
 				$http({
 					method:'POST',
-					url:"/ccydManagement/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
+					url:"/ssc/admin/candidate/saveOrUpdateCandidateRInterviewer.do",
 					params:params
 				
 				}).then(function(res){
@@ -605,7 +605,7 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 			}
 			$http({
 				method:'POST',
-				url:"/ccydManagement/admin/candidate/saveOrUpdateCandidate.do",
+				url:"/ssc/admin/candidate/saveOrUpdateCandidate.do",
 				params:params
 			
 			}).then(function(res){

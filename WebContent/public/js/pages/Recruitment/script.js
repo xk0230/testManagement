@@ -41,7 +41,7 @@ myAppModule.controller('UserListController',
 		this.getFinancingInfoList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/getRecruitPageList.do',
+				url:'/ssc/admin/recruit/getRecruitPageList.do',
 				params:{
 					postid: $scope.postId,
 					createUser: $("#sessionUserId").val(),
@@ -64,7 +64,7 @@ myAppModule.controller('UserListController',
 		this.getMyApprovalList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/recruit/getMyAuditRecruitPageList.do',
+				url:'/ssc/admin/recruit/getMyAuditRecruitPageList.do',
 				params:{
 					postid: $scope.postId,
 					createUser: "",
@@ -87,7 +87,7 @@ myAppModule.controller('UserListController',
 		self.getDepList = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/dep/getAlldep.do',
+				url:'/ssc/admin/dep/getAlldep.do',
 				params:{
 				}
 			}).then(function(res){
@@ -103,7 +103,7 @@ myAppModule.controller('UserListController',
 		self.getPostionById = function(){
 			$http({
 				method:'POST',
-				url:'/ccydManagement/admin/position/getPositionByDepId.do',
+				url:'/ssc/admin/position/getPositionByDepId.do',
 				params:{
 					depId: $scope.depId
 				}
@@ -118,14 +118,14 @@ myAppModule.controller('UserListController',
 		
 		// 添加新用户
 		this.addNewRecruitment = function(){
-			window.location.href="/ccydManagement/admin/recruit/EditRecruitment.do"; 
+			window.location.href="/ssc/admin/recruit/EditRecruitment.do"; 
 		};
 		
 		this.edit = function(id){
-			window.location.href="/ccydManagement/admin/recruit/EditRecruitment.do?id="+id; 
+			window.location.href="/ssc/admin/recruit/EditRecruitment.do?id="+id; 
 		};
 		this.evaluation = function(id){
-			window.location.href="/ccydManagement/admin/recruit/AdminEvaluation.do?id="+id; 
+			window.location.href="/ssc/admin/recruit/AdminEvaluation.do?id="+id; 
 		};
 	}
 );
