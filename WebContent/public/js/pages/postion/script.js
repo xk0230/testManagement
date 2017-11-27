@@ -7,7 +7,7 @@ myAppModule.controller('PostionController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 50;
 		
 		this.$onInit = function(){
 			$scope.type = $location.search().type;

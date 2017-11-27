@@ -303,7 +303,7 @@
       <if test="payrollCard != null">
         payroll_card = #{payrollCard,jdbcType=VARCHAR},
       </if>
-      <if test="recruitId != null  and recruitId != ''">
+  <!--     <if test="recruitId != null  and recruitId != ''">
         recruit_id = #{recruitId,jdbcType=VARCHAR},
       </if>
       <if test="pdpSjA != null and pdpSjA != ''">
@@ -336,6 +336,7 @@
        <if test="sj != null and sj != ''">
         sj = #{sj,jdbcType=VARCHAR},
       </if>
+       -->
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
