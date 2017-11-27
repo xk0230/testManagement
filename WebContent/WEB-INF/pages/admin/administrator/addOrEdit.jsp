@@ -509,7 +509,7 @@
 												<label class="col-lg-4 control-label">工资卡</label>
 												<div class="col-lg-8">
 												<div class="form-group">
-													<input type="text" class="form-control" ng-model="vm.adminUserDetail.payrollCard"  />
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.payrollCard"  />
 												</div>
 												</div>
 											</div>
