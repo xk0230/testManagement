@@ -1,6 +1,9 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+myAppModule.config(['$locationProvider', function($locationProvider) {  
+	  $locationProvider.html5Mode(true);  
+	}]);  
 myAppModule.controller('UserListController',
-	function UserListController($scope,$http){
+	function UserListController($scope,$http,$location,$uibModal,$document,$filter){
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
@@ -273,7 +276,98 @@ myAppModule.controller('UserListController',
 		this.userAttachmentList = function(id){
 			window.location.href="/ssc/admin/attachment/manager.do?userId="+id; 
 		};
+		
+		this.bookHis = function (id, parentSelector) {
+			var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+					var auditmodalInstance = $uibModal.open({
+						animation: true,
+						ariaLabelledBy: 'modal-title',
+						ariaDescribedBy: 'modal-body',
+						templateUrl: 'myAuditDetailContent.html',
+						controller: 'AuditModalInstanceCtrl',
+						controllerAs: '$ctrl',
+						size: 'lg',
+						appendTo: parentElem,
+						//参数
+						resolve: {
+							//好像必须得这么写
+						items: function () {
+							return id;
+						}
+					
+						}
+					});
+
+					auditmodalInstance.result.then(function (selectedItem) {
+					}, function () {
+				//取消的回调函数
+			});
+		};
+		
+		
+		
 	}
 );
+
+//驳回审批的control
+angular.module('myApp').controller('AuditModalInstanceCtrl', function ($scope,$http,$uibModalInstance, items) {
+	var self = this;
+	$scope.totalItems = 0;
+	$scope.currentPage = 1;
+	$scope.itemsPerPage = 10;
+	this.$onInit = function(){
+			self.getAuditList($ctrl.id);
+	};
+	
+	this.getAuditList = function(){
+			$http({
+				method:'POST',
+				url:'ssc/admin/book/gethistory.do',
+				params:{
+					userId:$ctrl.id,
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					$.each(res.data, function(index, value) {
+						if(value.type=='get'){
+							value.type = "借阅";
+						}else{
+							value.type = "归还";
+						}
+						});
+					$scope.list = res.data || [];
+					$scope.totalItems = res.data.length;
+				}else{
+					$scope.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+	};	
+	
+	
+	var $ctrl = this;
+		$ctrl.id = items;
+		$ctrl.auditEntity = {
+			};
+		$ctrl.ok = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+		$ctrl.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+		
+		$scope.pageChanged = function() {
+			self.getAuditList();
+		};
+		
+		//页数变化
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+		
+	});
+
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);

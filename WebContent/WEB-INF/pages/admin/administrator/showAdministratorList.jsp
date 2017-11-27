@@ -7,6 +7,7 @@
 <body  >
 		<%@ include file="../../common/header.jsp"%>
 		<%@ include file="../../common/side.jsp"%>
+
 		<!-- Start #content -->
 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
 			<!-- Start .content-wrapper -->
@@ -149,6 +150,7 @@
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTrainList(item.userId)">培训</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTransferPositionList(item.userId)">调岗</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userAttachmentList(item.userId)">附件</button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.bookHis(item.userName,'.outlet')">借书记录</button>
 												</td>
 											</tr>
 										</tbody>
@@ -168,9 +170,67 @@
 			<!-- End .content-wrapper -->
 			<div class="clearfix"></div>
 		</div>
+			<!-- 这里可以定义一个js文件放到public下面 -->
+		<script type="text/ng-template" id="myAuditDetailContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i>图书借阅记录</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>借阅详情</h3>
+								</div>
+								<div class="panel-body">
+									<div class="panel-body">
+									<table class="table display" id="datatable">
+										<thead>
+											<tr>
+												<th>图书名</th>
+												<th>借阅人</th>
+												<th>借/还</th>
+												<th>时间</th>
+											</tr>
+										</thead>  
+										<tbody>
+											<tr class="odd gradeX" ng-repeat="item in list">
+												<td class="col-lg-2"><p ng-bind="item.bookName"></p></td>
+												<td class="col-lg-2"><p ng-bind="item.userName"></p></td>
+												<td class="col-lg-2"><p ng-bind="item.type"></p></td>
+												<td class="col-lg-2"><p ng-bind="item.bookTime | date:'yyyy-MM-dd hh:mm'"></p></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+									 <%@ include file="../../common/page.jsp"%> 
+								</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>	
 		<!-- End #content -->
 	</div>
-			
+
+
+
+
+
 	<script type="text/javascript">
 	 $(document).ready(function(){
 		$("#addOrgUser").click(function(){
@@ -219,6 +279,9 @@
 		Win.open({id:"uploadExcel",width:500,height:260,title:"批量导入机构用户",url:"${root}/admin/commons/importUserPage.do?userType=area",mask:true});
 	}
 	</script>
+	
+
+	
 	<script src="${root}/public/js/pages/administrator/script.js" type="text/javascript"></script>
 	<script type="text/javascript" src="${root}/public/highcharts/highcharts.js"></script>
 	<script type="text/javascript" src="${root}/public/highcharts/modules/exporting.js"></script>
