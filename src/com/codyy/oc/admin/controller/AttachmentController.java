@@ -3,6 +3,7 @@ package com.codyy.oc.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -87,7 +88,7 @@ public class AttachmentController extends BaseController{
    }
    
    @RequestMapping("/download.do")
-   public ResponseEntity<byte[]> downLoad(String id){
+   public ResponseEntity<byte[]> downLoad(HttpServletRequest request,String id){
        
        JsonDto dto = attachmentService.getAttachmentEntityById(id);
        if(dto.getCode() == 0){
@@ -96,9 +97,10 @@ public class AttachmentController extends BaseController{
            File file = new File(location);
            try {
                HttpHeaders headers = new HttpHeaders();
-               headers.setContentDispositionFormData("attachment", new String(attachmentEntity.getName().getBytes("UTF-8"),"iso-8859-1"));
+               headers.add("Content-Disposition", "attachment;filename=" + encodeChineseDownloadFileName(request, attachmentEntity.getName()));
+               //headers.setContentDispositionFormData("attachment", new String(attachmentEntity.getName().getBytes("UTF-8"),"iso-8859-1"));
                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-               ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+               ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);
                return responseEntity ;
            } catch (IOException e) {
                e.printStackTrace();
@@ -124,7 +126,7 @@ public class AttachmentController extends BaseController{
                    String name = attachmentEntity.getName();
                    headers.setContentType(MediaType.parseMediaType("image/"+StringUtils.substringAfterLast(name, ".")));
                }
-               ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+               ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);
                return responseEntity ;
            } catch (IOException e) {
                e.printStackTrace();
@@ -134,5 +136,24 @@ public class AttachmentController extends BaseController{
        return null;
    }
    
+   private String encodeChineseDownloadFileName(  
+           HttpServletRequest request, String pFileName) throws UnsupportedEncodingException {  
+         
+        String filename = null;    
+        String agent = request.getHeader("USER-AGENT");    
+        if (null != agent){    
+           if (-1 != agent.indexOf("Firefox")) {//Firefox    
+               filename = "=?UTF-8?B?" + (new String(org.apache.commons.codec.binary.Base64.encodeBase64(pFileName.getBytes("UTF-8"))))+ "?=";    
+           }else if (-1 != agent.indexOf("Chrome")) {//Chrome    
+               filename = new String(pFileName.getBytes(), "ISO8859-1");    
+           } else {//IE7+    
+               filename = java.net.URLEncoder.encode(pFileName, "UTF-8");    
+               filename = StringUtils.replace(filename, "+", "%20");//替换空格    
+           }    
+       } else {    
+           filename = pFileName;    
+       }    
+       return filename;   
+   }
 }
 
