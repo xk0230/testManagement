@@ -179,4 +179,29 @@
 	
 	</select>
 	
+	<select id="getCostVOList" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.vo.CostVO">
+		SELECT dep.`name` AS depName,
+				costSub.`name` AS costSubName,
+				costDetail.cost_id AS costId,
+				costDetail.cost_num AS costNum,
+				costDetail.cost_time AS costTime,
+				costDetail.cost_type AS costType,
+				costDetail.create_time AS createTime
+				
+		FROM COST_DETAIL costDetail,COST_SUBTYPE costSub,DEPARTMENT dep
+		WHERE costDetail.cost_subtype_id = costSub.cost_subtype_id
+			  AND costDetail.dep_id = dep.dep_id
+			  
+			  <if test="depId !=null and depId!=''">
+				AND costDetail.dep_id = #{depId}
+			  </if>
+			  
+			AND costDetail.cost_type = #{costType}
+			
+			AND costDetail.cost_time <![CDATA[ >= ]]> #{startTime}
+			
+			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
+			  
+	</select>
+	
 </mapper>

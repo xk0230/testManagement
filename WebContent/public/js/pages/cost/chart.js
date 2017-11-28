@@ -20,6 +20,9 @@ myAppModule.controller('ChartController',
 				$scope.year = res.data.curYear;
 				
 				self.getOutlay();
+				
+				self.depMonthOut();
+				
 //				self.getDepIncome();
 //				self.getDepOutcome();
 				
@@ -34,10 +37,27 @@ myAppModule.controller('ChartController',
 		$scope.costYearChange = function(){
 			
 			self.getOutlay();
+			self.depMonthOut();
 			//self.getDepIncome();
 			//self.getDepOutcome();
 			self.getDepInOutcome();
 			self.getInbalance();
+		};
+		
+		this.depMonthOut = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/depMonthOut.do',
+				params:{
+					curYear:$scope.year
+				}
+			
+			}).then(function(res){
+				if(res){
+					self.list = res.data || [];
+				}
+			});
+			
 		};
 		
 		this.getDepInOutcome = function(){

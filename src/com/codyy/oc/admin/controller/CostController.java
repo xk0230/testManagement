@@ -25,6 +25,7 @@ import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.CostYearVO;
+import com.codyy.oc.admin.vo.DepMonthTotalVO;
 
 /**
  * 成本中心
@@ -140,6 +141,14 @@ public class CostController extends BaseController{
     public List<CostChartsData> getChartDataByDepInOutcome(HttpServletRequest request,int curYear){
         
         return costService.getDepCostChartData(this.getSessionUser(request),curYear);
+        
+    }
+	
+	@ResponseBody
+    @RequestMapping("/depMonthOut.do")
+    public List<DepMonthTotalVO> getDepMonthTotalOutcome(HttpServletRequest request,int curYear){
+        
+        return costService.getDepMonthTotalOutcome(this.getSessionUser(request),curYear);
         
     }
 	

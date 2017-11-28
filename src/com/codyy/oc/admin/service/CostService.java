@@ -3,6 +3,7 @@ package com.codyy.oc.admin.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,9 @@ import java.util.UUID;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +32,7 @@ import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.CostYearVO;
+import com.codyy.oc.admin.vo.DepMonthTotalVO;
 
 /**
  * 成本控制server
@@ -678,6 +683,163 @@ public class CostService {
 	    }
 	    
 	    return datas;
+	}
+
+	public List<DepMonthTotalVO> getDepMonthTotalOutcome(AdminUser user,int curYear) {
+		
+		List<DepMonthTotalVO> depMonthTotals = new ArrayList<>();
+		
+		CostVO cost = new CostVO();
+		boolean flag = false;
+        String position = user.getPosition();
+        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
+            cost.setDepId(user.getDepId());
+            flag = true;
+        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
+            flag = true;
+        }
+        
+        if(flag){
+        	cost.setCostType("1");
+        	cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
+            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
+        	
+            List<CostVO> costs = costDaoMapper.getCostVOList(cost);
+            if(CollectionUtils.isNotEmpty(costs)){
+            	DepMonthTotalVO depMonthTotal = null;
+            	Map<String,DepMonthTotalVO> deps = new HashMap<>();
+            	for(CostVO costVO : costs){
+            		depMonthTotal = deps.get(costVO.getDepName());
+            		if(null == depMonthTotal){
+            			depMonthTotal = new DepMonthTotalVO();
+            			depMonthTotal.setDepName(costVO.getDepName());
+            		}
+            		
+            		deps.put(costVO.getDepName(), calculateDepMonthTotal(depMonthTotal, costVO));
+            	}
+            	
+            	for(String key : deps.keySet()){
+            		depMonthTotals.add(deps.get(key));
+            	}
+            }
+        }
+		
+		return depMonthTotals;
+	}
+	
+	private DepMonthTotalVO calculateDepMonthTotal(DepMonthTotalVO depMonthTotal,CostVO costVO){
+		
+		Date costTime = costVO.getCostTime();
+		DateTimeFormatter formatter = DateTimeFormat.forPattern(DateUtils.PATTERN_DATETIME);
+		LocalDate localDate = formatter.parseLocalDate(DateUtils.format(costTime, DateUtils.PATTERN_DATETIME));
+		
+		int monthOfYear = localDate.getMonthOfYear();
+		if(monthOfYear == 1){
+			BigDecimal januaryTotal = depMonthTotal.getJanuaryTotal();
+			if(null == januaryTotal){
+				januaryTotal = new BigDecimal(0);
+			}
+			januaryTotal = januaryTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setJanuaryTotal(januaryTotal);
+			
+		}else if(monthOfYear == 2){
+			BigDecimal februaryTotal = depMonthTotal.getFebruaryTotal();
+			if(null == februaryTotal){
+				februaryTotal = new BigDecimal(0);
+			}
+			februaryTotal = februaryTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setFebruaryTotal(februaryTotal);
+			
+		}else if(monthOfYear == 3){
+			BigDecimal marchTotal = depMonthTotal.getMarchTotal();
+			if(null == marchTotal){
+				marchTotal = new BigDecimal(0);
+			}
+			marchTotal = marchTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setMarchTotal(marchTotal);
+			
+		}else if(monthOfYear == 4){
+			
+			BigDecimal aprilTotal = depMonthTotal.getAprilTotal();
+			if(null == aprilTotal){
+				aprilTotal = new BigDecimal(0);
+			}
+			aprilTotal = aprilTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setAprilTotal(aprilTotal);
+			
+		}else if(monthOfYear == 5){
+			
+			BigDecimal mayTotal = depMonthTotal.getMayTotal();
+			if(null == mayTotal){
+				mayTotal = new BigDecimal(0);
+			}
+			mayTotal = mayTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setMayTotal(mayTotal);
+			
+		}else if(monthOfYear == 6){
+			
+			BigDecimal juneTotal = depMonthTotal.getJuneTotal();
+			if(null == juneTotal){
+				juneTotal = new BigDecimal(0);
+			}
+			juneTotal = juneTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setJuneTotal(juneTotal);
+			
+		}else if(monthOfYear == 7){
+			
+			BigDecimal julyTotal = depMonthTotal.getJulyTotal();
+			if(null == julyTotal){
+				julyTotal = new BigDecimal(0);
+			}
+			julyTotal = julyTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setJulyTotal(julyTotal);
+			
+		}else if(monthOfYear == 8){
+			
+			BigDecimal augustTotal = depMonthTotal.getAugustTotal();
+			if(null == augustTotal){
+				augustTotal = new BigDecimal(0);
+			}
+			augustTotal = augustTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setAugustTotal(augustTotal);
+			
+		}else if(monthOfYear == 9){
+			
+			BigDecimal septemberTotal = depMonthTotal.getSeptemberTotal();
+			if(null == septemberTotal){
+				septemberTotal = new BigDecimal(0);
+			}
+			septemberTotal = septemberTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setSeptemberTotal(septemberTotal);
+			
+		}else if(monthOfYear == 10){
+			
+			BigDecimal octoberTotal = depMonthTotal.getOctoberTotal();
+			if(null == octoberTotal){
+				octoberTotal = new BigDecimal(0);
+			}
+			octoberTotal = octoberTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setOctoberTotal(octoberTotal);
+			
+		}else if(monthOfYear == 11){
+			
+			BigDecimal novemberTotal = depMonthTotal.getNovemberTotal();
+			if(null == novemberTotal){
+				novemberTotal = new BigDecimal(0);
+			}
+			novemberTotal = novemberTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setNovemberTotal(novemberTotal);
+			
+		}else if(monthOfYear == 12){
+			BigDecimal decemberTotal = depMonthTotal.getDecemberTotal();
+			if(null == decemberTotal){
+				decemberTotal = new BigDecimal(0);
+			}
+			decemberTotal = decemberTotal.add(new BigDecimal(costVO.getCostNum()));
+			depMonthTotal.setDecemberTotal(decemberTotal);
+		}
+		
+		return depMonthTotal;
 	}
 	
 }
