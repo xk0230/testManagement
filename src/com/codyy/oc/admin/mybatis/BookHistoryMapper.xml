@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.BookHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.BookHistory">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="book_time" jdbcType="TIMESTAMP" property="bookTime" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="bookName" jdbcType="VARCHAR" property="bookName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, book_id, type, user_id, book_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOOK_HISTORY
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectAll" parameterType="com.codyy.oc.admin.entity.BookHistory" resultMap="BaseResultMap">
+    select 
+  	bh.id, bh.book_id, bh.type, bh.user_id, bh.book_time,b.name as bookName,au.realname as userName
+    from BOOK_HISTORY bh left join BOOK b on bh.book_id = b.id left join ADMIN_USER au on au.user_id = bh.user_id
+    where 1=1
+     <if test="userId != null and userId != ''">
+        and bh.user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+       <if test="bookId != null and bookId != ''">
+        and bh.book_id = #{bookId,jdbcType=VARCHAR}
+      </if>
+      order by book_time desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BOOK_HISTORY
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.BookHistory">
+    insert into BOOK_HISTORY (id, book_id, type, 
+      user_id, book_time)
+    values (#{id,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{bookTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.BookHistory">
+    insert into BOOK_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="bookTime != null">
+        book_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookTime != null">
+        #{bookTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.BookHistory">
+    update BOOK_HISTORY
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookTime != null">
+        book_time = #{bookTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.BookHistory">
+    update BOOK_HISTORY
+    set book_id = #{bookId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      book_time = #{bookTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

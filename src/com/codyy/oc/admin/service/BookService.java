@@ -3,6 +3,7 @@ package com.codyy.oc.admin.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +17,13 @@ import com.codyy.commons.CommonsConstant;
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.DateUtils;
 import com.codyy.commons.utils.UUIDUtils;
+import com.codyy.oc.admin.dao.BookHistoryMapper;
 import com.codyy.oc.admin.dao.BookMapper;
 import com.codyy.oc.admin.dao.CostDaoMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Book;
-import com.codyy.oc.admin.entity.CostSubTypeBean;
+import com.codyy.oc.admin.entity.BookHistory;
 import com.codyy.oc.admin.vo.BookVO;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
@@ -42,7 +44,8 @@ public class BookService {
 	private static final String DEL_SUCCESS = "删除成功";
 	private static final String DEL_ERROR = "删除失败";
 	private static final String NO_EXIT_DATA = "数据不存在";
-	
+	private static final String BOOK_GET = "get";//借书
+	private static final String BOOK_BACK = "back";//还书
 
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
@@ -50,17 +53,8 @@ public class BookService {
 	@Autowired
 	private BookMapper bookDaoMapper; 
 	
-	public JsonDto getCostSubTypeList(int castType){
-		
-		JsonDto jsonDto = new JsonDto();
-		List<CostSubTypeBean> costSubTypeList = costDaoMapper.getCostSubTypeList(castType);
-		if(CollectionUtils.isNotEmpty(costSubTypeList)){
-			jsonDto.setCode(0);
-			jsonDto.setObjData(costSubTypeList);
-		}
-		
-		return jsonDto;
-	}
+	@Autowired
+	private BookHistoryMapper bookHistoryMapper;
 	
 	public JsonDto insertOrUpdateBookEntity(AdminUser user,Book b){
 		JsonDto jsonDto = new JsonDto();
@@ -110,6 +104,12 @@ public class BookService {
 	
 	public JsonDto putOrBack(String userId,String id){
 		JsonDto jsonDto = new JsonDto();
+		BookHistory bh = new BookHistory();
+		bh.setId(UUIDUtils.getUUID());
+		bh.setBookId(id);
+		bh.setUserId(userId);
+		bh.setBookTime(new Date());
+
 		Book b = bookDaoMapper.selectByPrimaryKey(id);
 		if(b == null) {
 			jsonDto.setMsg("查无此书");
@@ -120,8 +120,10 @@ public class BookService {
 				b.setUserId(null);
 				bookDaoMapper.updateByPrimaryKey(b);
 				jsonDto.setCode(0);
+				//添加还书记录
+				bh.setType(BOOK_BACK);
+				bookHistoryMapper.insert(bh);
 				jsonDto.setMsg("还书成功");
-				
 			}else {
 				jsonDto.setMsg("此书已被人借走，请稍后再试");
 			}
@@ -130,6 +132,9 @@ public class BookService {
 			b.setUpdateTime(DateUtils.getCurrentTimestamp());
 			b.setUserId(userId);
 			bookDaoMapper.updateByPrimaryKey(b);
+			//添加借书记录
+			bh.setType(BOOK_GET);
+			bookHistoryMapper.insert(bh);
 			jsonDto.setCode(0);
 			jsonDto.setMsg("借书成功");
 		}
@@ -673,4 +678,12 @@ public class BookService {
 	    return datas;
 	}
 	
+	/**
+	 * 获取借书历史记录
+	 * @param bh
+	 * @return
+	 */
+	public List<BookHistory> getHistory(BookHistory bh){
+		return bookHistoryMapper.selectAll(bh);
+	}
 }
