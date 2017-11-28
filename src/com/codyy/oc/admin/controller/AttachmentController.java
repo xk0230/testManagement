@@ -124,7 +124,11 @@ public class AttachmentController extends BaseController{
                    headers.setContentType(MediaType.parseMediaType("application/pdf"));
                }else{
                    String name = attachmentEntity.getName();
-                   headers.setContentType(MediaType.parseMediaType("image/"+StringUtils.substringAfterLast(name, ".")));
+                   String picType = StringUtils.substringAfterLast(name, ".");
+                   if("jpg".equals(picType)){
+                	   picType = "jpeg";
+                   }
+                   headers.setContentType(MediaType.parseMediaType("image/"+picType));
                }
                ResponseEntity<byte[]> responseEntity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);
                return responseEntity ;
