@@ -26,12 +26,14 @@ myAppModule.controller('PostionController',
 			
 			//获取角色
 			self.admin =$("#sessionUserType").val();
-			if(self.admin=="MANAGER"){
+			
+			if(self.admin=="MANAGER")
+			{
 				$scope.depId =$("#sessionUserDepId").val();
-				$scope.depIdChangeAble = true;
-			}else if(self.admin=="ADMIN"){
+				$scope.depIdChangeAble = $scope.mode =="empty"? false : true;
+			}else{
 				$scope.depIdChangeAble = false;
-			}
+			} 
 			
 //			if($location.search().result == 0){
 //				$scope.result = "0";

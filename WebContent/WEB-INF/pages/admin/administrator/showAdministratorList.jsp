@@ -80,11 +80,6 @@
 												</div>
 											</div>
 											<div class="col-lg-3">
-
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-lg-3">
 												<label class="col-lg-3 control-label" >岗位</label>
 												<div class="col-lg-9">
 													<select class="form-control select2" ng-model="postId" >
@@ -92,6 +87,11 @@
 														<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
 													</select>
 												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-lg-3">
+
 											</div>
 											<div class="col-lg-6">
 											</div>
