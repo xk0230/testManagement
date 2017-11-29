@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -257,7 +258,7 @@ public class CostService {
 	    	for (CostChartsSeriesData c : seriesDatas) {
 				all  = all.add(c.getData().get(i));
 			}
-	    	alls.add(all.setScale(1));
+	    	alls.add(all.setScale(1, RoundingMode.HALF_UP));
 		}
 	    cc.setData(alls);
 //	    seriesDatas.add(cc);
@@ -460,16 +461,16 @@ public class CostService {
             
             CostMonthInOut costMonthInOut = costDaoMapper.getCostInOutType(cost);
             if(null != costMonthInOut){
-                costTotalInOut.setTotalIncome(costMonthInOut.getTotal().setScale(1));
+                costTotalInOut.setTotalIncome(costMonthInOut.getTotal().setScale(1, RoundingMode.HALF_UP));
             }
             
             cost.setCostType("1");
             costMonthInOut = costDaoMapper.getCostInOutType(cost);
             if(null != costMonthInOut){
-                costTotalInOut.setTotalOut(costMonthInOut.getTotal().setScale(1));
+                costTotalInOut.setTotalOut(costMonthInOut.getTotal().setScale(1, RoundingMode.HALF_UP));
             }
             
-            costTotalInOut.setBalance(costTotalInOut.getTotalIncome().subtract(costTotalInOut.getTotalOut()).setScale(1));
+            costTotalInOut.setBalance(costTotalInOut.getTotalIncome().subtract(costTotalInOut.getTotalOut()).setScale(1, RoundingMode.HALF_UP));
             
         }
         
@@ -679,7 +680,7 @@ public class CostService {
 	        
 //	        seriesDatas.add(costChartsSeriesDataIn);
 //	        seriesDatas.add(costChartsSeriesDataOut);
-	        costData.getXcategories().set(0, costData.getXcategories().get(0)+"  (收入 : "+dataInTotal.get(0).setScale(1)+"   支出 : "+dataOutTotal.get(0).setScale(1)+")");
+	        costData.getXcategories().set(0, costData.getXcategories().get(0)+"  (收入 : "+dataInTotal.get(0).setScale(1, RoundingMode.HALF_UP)+"   支出 : "+dataOutTotal.get(0).setScale(1, RoundingMode.HALF_UP)+")");
 	    }
 	    
 	    return datas;
@@ -740,7 +741,7 @@ public class CostService {
 				januaryTotal = new BigDecimal(0);
 			}
 			januaryTotal = januaryTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJanuaryTotal(januaryTotal.setScale(1));
+			depMonthTotal.setJanuaryTotal(januaryTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 2){
 			BigDecimal februaryTotal = depMonthTotal.getFebruaryTotal();
@@ -748,7 +749,7 @@ public class CostService {
 				februaryTotal = new BigDecimal(0);
 			}
 			februaryTotal = februaryTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setFebruaryTotal(februaryTotal.setScale(1));
+			depMonthTotal.setFebruaryTotal(februaryTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 3){
 			BigDecimal marchTotal = depMonthTotal.getMarchTotal();
@@ -756,7 +757,7 @@ public class CostService {
 				marchTotal = new BigDecimal(0);
 			}
 			marchTotal = marchTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setMarchTotal(marchTotal.setScale(1));
+			depMonthTotal.setMarchTotal(marchTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 4){
 			
@@ -765,7 +766,7 @@ public class CostService {
 				aprilTotal = new BigDecimal(0);
 			}
 			aprilTotal = aprilTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setAprilTotal(aprilTotal.setScale(1));
+			depMonthTotal.setAprilTotal(aprilTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 5){
 			
@@ -774,7 +775,7 @@ public class CostService {
 				mayTotal = new BigDecimal(0);
 			}
 			mayTotal = mayTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setMayTotal(mayTotal.setScale(1));
+			depMonthTotal.setMayTotal(mayTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 6){
 			
@@ -783,7 +784,7 @@ public class CostService {
 				juneTotal = new BigDecimal(0);
 			}
 			juneTotal = juneTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJuneTotal(juneTotal.setScale(1));
+			depMonthTotal.setJuneTotal(juneTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 7){
 			
@@ -792,7 +793,7 @@ public class CostService {
 				julyTotal = new BigDecimal(0);
 			}
 			julyTotal = julyTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJulyTotal(julyTotal.setScale(1));
+			depMonthTotal.setJulyTotal(julyTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 8){
 			
@@ -801,7 +802,7 @@ public class CostService {
 				augustTotal = new BigDecimal(0);
 			}
 			augustTotal = augustTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setAugustTotal(augustTotal.setScale(1));
+			depMonthTotal.setAugustTotal(augustTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 9){
 			
@@ -810,7 +811,7 @@ public class CostService {
 				septemberTotal = new BigDecimal(0);
 			}
 			septemberTotal = septemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setSeptemberTotal(septemberTotal.setScale(1));
+			depMonthTotal.setSeptemberTotal(septemberTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 10){
 			
@@ -819,7 +820,7 @@ public class CostService {
 				octoberTotal = new BigDecimal(0);
 			}
 			octoberTotal = octoberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setOctoberTotal(octoberTotal.setScale(1));
+			depMonthTotal.setOctoberTotal(octoberTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 11){
 			
@@ -828,7 +829,7 @@ public class CostService {
 				novemberTotal = new BigDecimal(0);
 			}
 			novemberTotal = novemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setNovemberTotal(novemberTotal.setScale(1));
+			depMonthTotal.setNovemberTotal(novemberTotal.setScale(1, RoundingMode.HALF_UP));
 			
 		}else if(monthOfYear == 12){
 			BigDecimal decemberTotal = depMonthTotal.getDecemberTotal();
@@ -836,7 +837,7 @@ public class CostService {
 				decemberTotal = new BigDecimal(0);
 			}
 			decemberTotal = decemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setDecemberTotal(decemberTotal.setScale(1));
+			depMonthTotal.setDecemberTotal(decemberTotal.setScale(1, RoundingMode.HALF_UP));
 		}
 		
 		return depMonthTotal;
