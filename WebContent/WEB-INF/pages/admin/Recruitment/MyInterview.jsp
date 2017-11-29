@@ -35,7 +35,7 @@
 									<table class="table display" id="datatable">
 										<thead>
 											<tr>
-												<th>候选人人</th>
+												<th>候选人</th>
 												<th>面试时间</th>
 												<th>面试地点</th>
 												<th>面试内容</th>

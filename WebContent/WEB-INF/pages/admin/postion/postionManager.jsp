@@ -138,8 +138,7 @@
 												<td ng-if="${type=='audit' or type=='list'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
 												<td ng-if="${type=='list'}">
 													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">查看岗位</i></button>
-													<button type="button" class="btn btn-sm btn-success" ng-click="">招聘进度</i></button>
-													<button type="button" class="btn btn-sm btn-success" ng-click="">查看员工</button>
+													<button type="button" class="btn btn-sm btn-success" ng-click="vm.userList(item.postId)" ng-show = "${adminUser.position != 'STAFF'}">查看员工</button>
 												</td>
 												<td ng-if="${type=='mypost'}" class="col-lg-1">
 													<p ng-if="item.statusName != '审批拒绝'" ng-bind="item.statusName"></p>
@@ -233,7 +232,7 @@
 												</div>
 											</div>
 
-											<div class="col-lg-6">
+											<div class="col-lg-6" ng-show = "${adminUser.position != 'STAFF'}">
 												<label class="col-lg-4 control-label">薪级</label>
 												<div class="col-lg-8">
 													<input type="text" class="form-control" ng-model="costEntity.salaryScale" />
@@ -307,24 +306,24 @@
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<label class="control-label" >基本要求3：</label>
+												<label class="control-label" >IPE要求：</label>
 												</div>
 											</div>
 										</div>
 										<div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitD"  rows="3" Placeholder="点击输入基本要求1"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitD"  rows="6" Placeholder="点击输入基本要求1"></textarea>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitE"  rows="3" Placeholder="点击输入基本要求2"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitE"  rows="6" Placeholder="点击输入基本要求2"></textarea>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitF"  rows="3" Placeholder="点击输入基本要求3"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitF"  rows="6" Placeholder="点击输入基本要求3"></textarea>
 												</div>
 											</div>
 										</div>
@@ -351,7 +350,7 @@
 											</div>
 &nbsp;
 											<div>
-												<textarea class="form-control" ng-model="costEntity.professional" rows="3" Placeholder="点击输入专业资格备注备注"></textarea>
+												<textarea class="form-control" ng-model="costEntity.professional" rows="3" Placeholder="点击输入专业资格"></textarea>
 											</div>
 
 									</div>

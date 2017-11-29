@@ -225,6 +225,10 @@ myAppModule.controller('PostionController',
 			
 		};
 		
+		this.userList = function(id){
+			window.location.href="/ssc/admin/adminuser/toadminlist.do?postId="+id; 
+		};
+		
 		this.audit = function (id,result, parentSelector) {
 			$http({
 				method:'POST',

@@ -10,7 +10,7 @@ myAppModule.controller('UserListController',
 		$scope.itemsPerPage = 50;
 		
 		this.$onInit = function(){
-
+			$scope.postId = $location.search().postId;
 			//设置部门下拉框
 			this.getDepList();
 			
