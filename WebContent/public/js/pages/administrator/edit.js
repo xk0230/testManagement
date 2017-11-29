@@ -133,6 +133,7 @@ myAppModule.controller('UserListController',
 					self.user = res.data;
 					self.getHasManager($scope.vm.user.depId);
 					self.getPostionById();
+					self.rzDayChanged(res.data.entryDate);
 				}else{
 					self.user = "";
 				}
@@ -141,6 +142,7 @@ myAppModule.controller('UserListController',
 		
 		//获取岗位
 		self.getPostionById = function(){
+			
 			if(typeof($scope.vm.user.depId)!="undefined"){
 				$scope.vm.user.depId;
 				//获取部门岗位
@@ -322,6 +324,18 @@ myAppModule.controller('UserListController',
 			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
 		
+		self.rzDayChanged = function(t){
+			if (t != null){
+				time2 = new Date(t).valueOf()/1000
+			}else{
+				time2 = Date.parse($scope.vm.user.entryDate)/1000;
+			}
+		    time1 = Date.parse(new Date())/1000;
+		    console.log(time2);
+		    console.log(time1);
+		    var times = time1 - time2;
+		    $scope.vm.user.workingYears = (times/(3600*24*365)).toFixed(2);
+		}
 		
 		$scope.setPage = function (pageNo) {
 			$scope.attachmentCurrentPage = pageNo;
