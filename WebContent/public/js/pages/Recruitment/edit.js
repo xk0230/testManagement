@@ -513,6 +513,37 @@ function ($scope,$http,$uibModalInstance,$filter, items) {
 		});
 	}
 	
+	//删除面试官
+	$scope.delInterview = function(Interview){
+//		$scope.showEdit = true;
+		//设置面试官信息
+//		$scope.Interview = Interview;
+		//获取岗位列表
+//		$scope.getPostionById();
+		//获取面试官列表
+		$http({
+			method:'POST',
+			url:"/ssc/admin/candidate/delCandidateRInterviewer.do",
+			params:{
+				id:Interview.id
+			}
+		}).then(function(res){
+			$scope.getInterViewList();
+		});
+		
+		// 日期控件
+//		$('.form_datetime').datetimepicker({
+//		    language:  'zh-CN',
+//		    weekStart: 1,
+//		    todayBtn:  1,
+//			autoclose: 1,
+//			todayHighlight: 1,
+//			startView: 2,
+//			forceParse: 0,
+//		    showMeridian: 1
+//		});
+	}
+	
 	//获取部门
 	$scope.getDepList = function(){
 		$http({

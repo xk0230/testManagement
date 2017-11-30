@@ -104,6 +104,10 @@ public class CandidateService {
 		return candidate;
 	}
 	
+	public void delRInterviewerByid(String id) {
+		candidateRInterviewerMapper.deleteByPrimaryKey(id);
+	}
+	
 	public CandidateRInterviewer getRInterviewerByid(String id) {
 		CandidateRInterviewer candidateRInterviewer =  candidateRInterviewerMapper.selectByPrimaryKey(id);
 		Candidate can=  candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId());
