@@ -67,7 +67,7 @@
 												<th style="width:10%">PC</th>
 												<th style="width:10%">教育</th>
 												<th style="width:10%">其他资质</th>
-												<th style="width:10%">测评</th>
+												<!-- <th style="width:10%">测评</th> -->
 												<th style="width:10%">总排序</th>
 												<th style="width:10%">操作</th>
 											</tr>
@@ -104,7 +104,7 @@
 												<!-- 其他资质 -->
 												<td><input type="text" class="form-control" ng-model="item.other" /></p></td>
 												<!-- 测评 -->
-												<td><input type="text" class="form-control" ng-model="item.evaluating" /></td>
+												<!-- <td><input type="text" class="form-control" ng-model="item.evaluating" /></td> -->
 												<!-- 总排序 -->
 												<td><input type="text" class="form-control" ng-model="item.sort" /></p></td>
 												<td rowspan="3">

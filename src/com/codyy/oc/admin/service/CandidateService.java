@@ -88,7 +88,7 @@ public class CandidateService {
 	public void updateRInterviewerById(CandidateRInterviewer candidateRInterviewer,List<CandidateRRecrcom> crs) {
 		CandidateRInterviewer cr = candidateRInterviewerMapper.selectByPrimaryKey(candidateRInterviewer.getId());
 		candidateRInterviewerMapper.updateByPrimaryKeySelective(candidateRInterviewer);
-		if(crs != null) {
+		if(crs != null && crs.size() !=0) {
 			crs.get(0).setCandidateId(cr.getCandidateId());
 			candidateRRecrcomMapper.deleteByCandidate(crs.get(0));
 			for (CandidateRRecrcom candidateRRecrcom : crs) {
