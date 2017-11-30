@@ -146,7 +146,7 @@
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<label class="control-label" >基本要求3：</label>
+												<label class="control-label" >IPE要求：</label>
 												</div>
 											</div>
 										</div>
@@ -163,7 +163,7 @@
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="vm.Recruitment.recruitF"  rows="3" Placeholder="点击输入基本要求3"></textarea>
+												<textarea class="form-control" ng-model="vm.Recruitment.recruitF"  rows="3" Placeholder="点击输入IPE要求"></textarea>
 												</div>
 											</div>
 										</div>

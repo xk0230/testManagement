@@ -137,7 +137,7 @@
 												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createUserName"></p></td>
 												<td ng-if="${type=='audit' or type=='list'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
 												<td ng-if="${type=='list'}">
-													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">查看岗位</i></button>
+													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">标准JD</i></button>
 													<button type="button" class="btn btn-sm btn-success" ng-click="vm.userList(item.postId)" ng-show = "${adminUser.position != 'STAFF'}">查看员工</button>
 												</td>
 												<td ng-if="${type=='mypost'}" class="col-lg-1">
@@ -313,17 +313,17 @@
 										<div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitD"  rows="6" Placeholder="点击输入基本要求1"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitD"  rows="10" Placeholder="点击输入基本要求1"></textarea>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitE"  rows="6" Placeholder="点击输入基本要求2"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitE"  rows="10" Placeholder="点击输入基本要求2"></textarea>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group">
-												<textarea class="form-control" ng-model="costEntity.recruitF"  rows="6" Placeholder="点击输入基本要求3"></textarea>
+												<textarea class="form-control" ng-model="costEntity.recruitF"  rows="10" Placeholder="点击输入IPE要求"></textarea>
 												</div>
 											</div>
 										</div>
