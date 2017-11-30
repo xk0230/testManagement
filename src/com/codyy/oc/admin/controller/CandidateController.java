@@ -70,6 +70,13 @@ public class CandidateController  extends BaseController{
 		return new ResultJson(true);
 	}
 	
+	@ResponseBody
+	@RequestMapping("delCandidateRInterviewer")
+	public ResultJson  delCandidateRInterviewer(HttpServletRequest request, String id){
+		service.delRInterviewerByid(id);
+		return new ResultJson(true);
+	}
+	
 	/**
 	 * 新增修改面试记录
 	 * @param request

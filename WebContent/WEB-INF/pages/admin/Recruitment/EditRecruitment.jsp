@@ -348,6 +348,7 @@
 												<td><p ng-bind="item.place"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="editInterview(item)"><i class="br-pencil"></i></button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="delInterview(item)"><i class="ec-trashcan"></i></button>
 												</td>
 											</tr>
 										</tbody>
