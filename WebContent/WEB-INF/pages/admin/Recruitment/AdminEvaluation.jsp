@@ -115,22 +115,22 @@
 											<tr class="odd gradeX">
 												<td style="vertical-align:middle;"><h5>PDP:</h5></td>
 												<td colspan="5" style="padding-right:0px;">
-													<table class="col-lg-12" style="margin-left:8px;">
-														<tr>
+													<table class="col-lg-12 table display" style="margin-left:8px;">
+														<tr class="odd gradeX">
 															<th style="width:12%" >情景</th>
 															<th style="width:22%" class="container">谦和</th>
 															<th style="width:22%" class="container">韧性</th>
 															<th style="width:22%" class="container">理性</th>
 															<th style="width:22%" class="container">自信</th>
 														</tr>
-														<tr>
+														<tr class="odd gradeX">
 															<th>顺境</th>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjA" /></td>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjB" /></td>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjC" /></td>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjD" /></td>
 														</tr>
-														<tr>
+														<tr class="odd gradeX" >
 															<th>逆境</th>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjA" /></td>
 															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjB" /></td>
