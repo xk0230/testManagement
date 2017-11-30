@@ -98,15 +98,15 @@
 													</select>
 												</td>
 												<!-- PC -->
-												<td><input type="text" class="form-control" ng-model="item.pc" /></td>
+												<td class="container"><input type="text" class="form-control" ng-model="item.pc" /></td>
 												<!-- 教育 -->
-												<td><input type="text" class="form-control" ng-model="item.edu" /></td>
+												<td class="container"><input type="text" class="form-control" ng-model="item.edu" /></td>
 												<!-- 其他资质 -->
-												<td><input type="text" class="form-control" ng-model="item.other" /></p></td>
+												<td class="container"><input type="text" class="form-control" ng-model="item.other" /></p></td>
 												<!-- 测评 -->
 												<!-- <td><input type="text" class="form-control" ng-model="item.evaluating" /></td> -->
 												<!-- 总排序 -->
-												<td><input type="text" class="form-control" ng-model="item.sort" /></p></td>
+												<td class="container"><input type="text" class="form-control" ng-model="item.sort" /></p></td>
 												<td rowspan="3">
 													<input type="button" class="btn btn-success col-lg-12" ng-click="vm.save(item)"  value="保存" />
 													<button type="button" class="btn btn-warning col-lg-12" ng-click="vm.show(item)" style="margin-top:5px">查看面试详情</button>
@@ -114,8 +114,8 @@
 											</tr>
 											<tr class="odd gradeX">
 												<td style="vertical-align:middle;"><h5>PDP:</h5></td>
-												<td colspan="6">
-													<table class="col-lg-10">
+												<td colspan="5" style="padding-right:0px;">
+													<table class="col-lg-12" style="margin-left:8px;">
 														<tr>
 															<th style="width:12%" >情景</th>
 															<th style="width:22%" class="container">谦和</th>
