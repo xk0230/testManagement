@@ -229,7 +229,10 @@
      ad.domicile as 'adminUserDetail.domicile' , ad.nation as 'adminUserDetail.nation' , ad.marriage as 'adminUserDetail.marriage', 
      ad.political as 'adminUserDetail.political', ad.education as 'adminUserDetail.education', ad.major as 'adminUserDetail.major', 
      ad.university as 'adminUserDetail.university', ad.phone1 as 'adminUserDetail.phone1', ad.phone2 as 'adminUserDetail.phone2',
-     ad.citizen_card as 'adminUserDetail.citizenCard', ad.payroll_card as 'adminUserDetail.payrollCard'
+     ad.citizen_card as 'adminUserDetail.citizenCard', ad.payroll_card as 'adminUserDetail.payrollCard',
+     ad.pdp_sj_a as 'adminUserDetail.pdpSjA',ad.pdp_sj_b  as 'adminUserDetail.pdpSjB', ad.pdp_sj_c as 'adminUserDetail.pdpSjC', ad.pdp_sj_d as 'adminUserDetail.pdpSjD', 
+     ad.pdp_nj_a as 'adminUserDetail.pdpNjA', ad.pdp_nj_b as 'adminUserDetail.pdpNjB', ad.pdp_nj_c as 'adminUserDetail.pdpNjC', ad.pdp_nj_d as 'adminUserDetail.pdpNjD',
+     ad.gx as 'adminUserDetail.gx',ad.sj as 'adminUserDetail.sj'
   </sql>
 	
 	

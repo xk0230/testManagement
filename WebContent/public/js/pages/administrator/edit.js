@@ -1,4 +1,47 @@
 ﻿﻿var myAppModule = angular.module("myApp",['ui.bootstrap','jcs-autoValidate']);
+/*$('#containerpdp').highcharts({
+    chart: {
+        polar: true,
+        type: 'line'
+    },
+    title: {
+        text: '预算与支出',
+        x: -80
+    },
+    pane: {
+        size: '80%'
+    },
+    xAxis: {
+        categories: ['销售', '市场营销', '发展', '客户支持',
+                     '信息技术', '行政管理'],
+        tickmarkPlacement: 'on',
+        lineWidth: 0
+    },
+    yAxis: {
+        gridLineInterpolation: 'polygon',
+        lineWidth: 0,
+        min: 0
+    },
+    tooltip: {
+        shared: true,
+        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+    },
+    legend: {
+        align: 'right',
+        verticalAlign: 'top',
+        y: 70,
+        layout: 'vertical'
+    },
+    series: [{
+        name: '预算拨款',
+        data: [1, 2, 3, 4, 5, 6],
+        pointPlacement: 'on'
+    }, {
+        name: '实际支出',
+        data: [2, 3, 4, 1, 8, 5],
+        pointPlacement: 'on'
+    }]
+});*/
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]);  
@@ -134,6 +177,54 @@ myAppModule.controller('UserListController',
 					self.getHasManager($scope.vm.user.depId);
 					self.getPostionById();
 					self.rzDayChanged(res.data.entryDate);
+					
+					console.log(self.user.adminUserDetail.pdpSjA);
+					$('#containerpdp').highcharts({
+				        chart: {
+				            polar: true,
+				            type: 'line'
+				        },
+				        title: {
+				            text: '',
+				            x: -80
+				        },
+				        pane: {
+				            size: '80%'
+				        },
+				        xAxis: {
+				            categories: ['谦和', '韧性', '理性', '自信'],
+				            tickmarkPlacement: 'on',
+				            lineWidth: 0
+				        },
+				        yAxis: {
+				            gridLineInterpolation: 'polygon',
+				            lineWidth: 0,
+				            min: 0
+				        },
+				        tooltip: {
+				            shared: true,
+				            pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
+				        },
+				        legend: {
+				            align: 'right',
+				            verticalAlign: 'top',
+				            y: 70,
+				            layout: 'vertical'
+				        },
+				        series: [{
+				            name: '顺境',
+				            data: [Number(self.user.adminUserDetail.pdpSjA), Number(self.user.adminUserDetail.pdpSjB),
+				            	Number(self.user.adminUserDetail.pdpSjC), Number(self.user.adminUserDetail.pdpSjD)],
+//				            data: [11,22,33,44],
+				            pointPlacement: 'on'
+				        }, {
+				            name: '逆境',
+				            data: [Number(self.user.adminUserDetail.pdpNjA), Number(self.user.adminUserDetail.pdpNjB), 
+				            		Number(self.user.adminUserDetail.pdpNjC), Number(self.user.adminUserDetail.pdpNjD)],
+//				            data: [44,33,11,22],
+				            pointPlacement: 'on'
+				        }]
+				    });
 				}else{
 					self.user = "";
 				}
@@ -240,7 +331,17 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.phone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
 					'adminUserDetail.phone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
 					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizenCard   , //市民卡
-					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payrollCard    //工资卡
+					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payrollCard,    //工资卡
+					'adminUserDetail.pdpSjA'          : $scope.vm.user.adminUserDetail.pdpSjA,
+					'adminUserDetail.pdpSjB'          : $scope.vm.user.adminUserDetail.pdpSjB,
+					'adminUserDetail.pdpSjC'          : $scope.vm.user.adminUserDetail.pdpSjC,
+					'adminUserDetail.pdpSjD'          : $scope.vm.user.adminUserDetail.pdpSjD,
+					'adminUserDetail.pdpNjA'          : $scope.vm.user.adminUserDetail.pdpNjA,
+					'adminUserDetail.pdpNjB'          : $scope.vm.user.adminUserDetail.pdpNjB,
+					'adminUserDetail.pdpNjC'          : $scope.vm.user.adminUserDetail.pdpNjC,
+					'adminUserDetail.pdpNjD'          : $scope.vm.user.adminUserDetail.pdpNjD,
+					'adminUserDetail.gx'          : $scope.vm.user.adminUserDetail.gx,
+					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj
 				}
 			}).then(function(res){
 				if(res){
@@ -301,7 +402,17 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.phone1'               : $scope.vm.user.adminUserDetail.phone1         , //电话号码
 					'adminUserDetail.phone2'               : $scope.vm.user.adminUserDetail.phone2         , //电话号码
 					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizenCard   , //市民卡
-					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payrollCard    //工资卡
+					'adminUserDetail.payrollCard'          : $scope.vm.user.adminUserDetail.payrollCard ,   //工资卡
+					'adminUserDetail.pdpSjA'          : $scope.vm.user.adminUserDetail.pdpSjA,
+					'adminUserDetail.pdpSjB'          : $scope.vm.user.adminUserDetail.pdpSjB,
+					'adminUserDetail.pdpSjC'          : $scope.vm.user.adminUserDetail.pdpSjC,
+					'adminUserDetail.pdpSjD'          : $scope.vm.user.adminUserDetail.pdpSjD,
+					'adminUserDetail.pdpNjA'          : $scope.vm.user.adminUserDetail.pdpNjA,
+					'adminUserDetail.pdpNjB'          : $scope.vm.user.adminUserDetail.pdpNjB,
+					'adminUserDetail.pdpNjC'          : $scope.vm.user.adminUserDetail.pdpNjC,
+					'adminUserDetail.pdpNjD'          : $scope.vm.user.adminUserDetail.pdpNjD,
+					'adminUserDetail.gx'          : $scope.vm.user.adminUserDetail.gx,
+					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj
 				}
 			}).then(function(res){
 				if(res){

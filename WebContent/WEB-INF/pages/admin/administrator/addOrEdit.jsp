@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
+<script type="text/javascript" src="${root}/public/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="${root}/public/highcharts/highcharts-more.js"></script>
+<script type="text/javascript" src="${root}/public/highcharts/modules/exporting.js"></script>
 </head>
 <body>
 		<%@ include file="../../common/header.jsp"%>
@@ -521,6 +524,152 @@
 					</div>
 				</div>
 				
+				
+					<!-- PDP信息 start here -->
+				<div class="outlet" ng-if="vm.edit == true">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-success toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>PDP信息</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >顺境-谦和</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpSjA" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >顺境-韧性</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpSjB" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >顺境-理性</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpSjC" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >顺境-自信</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpSjD" />
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第2行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >逆境-谦和</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpNjA" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >逆境-韧性</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpNjB" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >逆境-理性</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpNjC" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >逆境-自信</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.pdpNjD" />
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第三行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-6">
+												<label class="col-lg-2 control-label">共享中心后续验证</label>
+												
+												<div class="col-lg-10">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.gx"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<label class="col-lg-2 control-label">直接上级后续验证</label>
+												<div class="col-lg-10">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.sj"  />
+												</div>
+												</div>
+											</div>
+										</div>
+										
+									<!-- 第四行 -->
+									<div class="col-lg-12">
+									
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+						<!-- 	<div class="outlet">
+												<td style="vertical-align:middle;"><h5>PDP:</h5></td>
+												<td colspan="5" style="padding-right:0px;">
+													<table class="col-lg-12 table display" >
+														<tr class="odd gradeX">
+															<th style="width:12%" >情景</th>
+															<th style="width:22%" class="container">谦和</th>
+															<th style="width:22%" class="container">韧性</th>
+															<th style="width:22%" class="container">理性</th>
+															<th style="width:22%" class="container">自信</th>
+														</tr>
+														<tr class="odd gradeX">
+															<th>顺境</th>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjA" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjB" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjC" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpSjD" /></td>
+														</tr>
+														<tr class="odd gradeX" >
+															<th>逆境</th>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjA" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjB" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjC" /></td>
+															<td class="container"><input type="text" class="form-control" ng-model="item.pdpNjD" /></td>
+														</tr>
+													</table>
+												</td>
+				</div> -->
+				<div id="containerpdp" >12</div> 
+				
+				
 				<div class="lead">
 					<div class="row">
 						<div class="col-lg-12 ">
@@ -536,6 +685,7 @@
 					</div>
 				</div>
 				
+	
 				<c:if test="${not empty user.userId }">
 					<!-- 附件信息 start here -->
 					<div class="outlet">
@@ -693,5 +843,7 @@
 	
 
 	<script src="${root}/public/js/pages/administrator/edit.js" type="text/javascript"></script>
+<%-- 	<script type="text/javascript" src="${root}/public/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="${root}/public/highcharts/modules/exporting.js"></script> --%>
 </body>
 </html>

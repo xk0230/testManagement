@@ -41,6 +41,8 @@ public class AdminUserDetail {
 
     private String payrollCard;
 
+    private String pdpSjA;
+    
     private String pdpSjB;
 
     private String pdpSjC;
@@ -59,9 +61,16 @@ public class AdminUserDetail {
     
     private String sj;
     
-    
 
-    public String getPdpSjB() {
+    public String getPdpSjA() {
+		return pdpSjA;
+	}
+
+	public void setPdpSjA(String pdpSjA) {
+		this.pdpSjA = pdpSjA;
+	}
+
+	public String getPdpSjB() {
 		return pdpSjB;
 	}
 
