@@ -7,7 +7,7 @@ myAppModule.controller('CostController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 20;
 		
 		this.$onInit = function(){
 			self.getDeparts();

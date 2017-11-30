@@ -40,6 +40,10 @@ myAppModule.controller('UserListController',
 		this.addCost = function(id){
 			window.location.href="/ssc/admin/cost/manager.do?mode=add"; 
 		};
+		// 我的面试
+		this.myinterview = function(id){
+			window.location.href="/ssc/admin/recruit/MyInterview.do"; 
+		};
 	}
 );
 

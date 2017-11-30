@@ -174,6 +174,23 @@
 	                                </div>
 	                            </div>
                         	</div>
+                        	 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
+	                            <div class="carousel-tile carousel vertical slide" ng-click="vm.myinterview()">
+	                                <div class="carousel-inner">
+	                                    <div class="item active">
+	                                        <div class="tile brown">
+	                                            <div class="tile-icon">
+	                                                <i class="im-user4 s64"></i>
+	                                            </div>
+	                                            <div class="tile-content">
+	                                                <div class="number">我的面试</div>
+	                                                <h3>点击查看详细信息</h3>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+                        	</div>
 						</div>
 					</div>
 				</div>
