@@ -106,8 +106,8 @@
 												<!-- 测评 -->
 												<!-- <td><input type="text" class="form-control" ng-model="item.evaluating" /></td> -->
 												<!-- 总排序 -->
-												<td class="container"><input type="text" class="form-control" ng-model="item.sort" /></p></td>
-												<td rowspan="3">
+												<td class="container" style="padding-right:8px;"><input type="text" class="form-control" ng-model="item.sort" /></p></td>
+												<td rowspan="2">
 													<input type="button" class="btn btn-success col-lg-12" ng-click="vm.save(item)"  value="保存" />
 													<button type="button" class="btn btn-warning col-lg-12" ng-click="vm.show(item)" style="margin-top:5px">查看面试详情</button>
 												</td>
@@ -115,7 +115,7 @@
 											<tr class="odd gradeX">
 												<td style="vertical-align:middle;"><h5>PDP:</h5></td>
 												<td colspan="5" style="padding-right:0px;">
-													<table class="col-lg-12 table display" style="margin-left:8px;">
+													<table class="col-lg-12 table display" >
 														<tr class="odd gradeX">
 															<th style="width:12%" >情景</th>
 															<th style="width:22%" class="container">谦和</th>
