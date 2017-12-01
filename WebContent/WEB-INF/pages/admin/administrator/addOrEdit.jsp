@@ -526,7 +526,7 @@
 				
 				
 					<!-- PDP信息 start here -->
-				<div class="outlet" ng-if="vm.edit == true">
+				<div class="outlet" ng-if="${adminUser.position != 'STAFF'}" >
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-success toggle">
@@ -607,7 +607,7 @@
 											</div>
 										</div>
 										<!-- 第三行 -->
-										<div class="col-lg-12">
+										<div class="col-lg-12" ng-show='false' >
 											<div class="col-lg-6">
 												<label class="col-lg-2 control-label">共享中心后续验证</label>
 												
@@ -667,7 +667,7 @@
 													</table>
 												</td>
 				</div> -->
-				<div id="containerpdp" >12</div> 
+				<div id="containerpdp"  ng-if="${adminUser.position != 'STAFF'}"></div> 
 				
 				
 				<div class="lead">
