@@ -36,8 +36,8 @@
 											</tr>
 										</thead>  
 										<tbody>
-											<c:set var="tmpIndex" value="80"></c:set>
-											<c:forEach varStatus="pc" begin="40" end="80" >
+											<c:set var="tmpIndex" value="70"></c:set>
+											<c:forEach varStatus="pc" begin="40" end="70" >
 												<tr class="odd gradeX">
 												
 													<td>${tmpIndex }</td>
