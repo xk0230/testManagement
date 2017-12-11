@@ -136,9 +136,9 @@
 												<td ng-if="${type=='list' or type=='mypost'}" class="col-lg-1"><p ng-bind="item.vacancy" ng-class="{true: 'redNumber', false: ''}[item.vacancy > 0]"></p></td>
 												<td ng-if="${type=='audit'}" class="col-lg-2"><p ng-bind="item.createUserName"></p></td>
 												<td ng-if="${type=='audit' or type=='list'}" class="col-lg-2"><p ng-bind="item.createTime | date:'yyyy-MM-dd hh:mm:ss'"></p></td>
-												<td ng-if="${type=='list'}">
-													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')">标准JD</i></button>
-													<button type="button" class="btn btn-sm btn-success" ng-click="vm.userList(item.postId)" ng-show = "${adminUser.position != 'STAFF'}">查看员工</button>
+												<td ng-if="${type=='list'}" ng-show ="item.depName != '合计'">
+													<button type="button" class="btn btn-sm btn-success" ng-click="vm.edit(item.postId,'.outlet')" >标准JD</button>
+													<button type="button" class="btn btn-sm btn-success" ng-click="vm.userList(item.postId)" ng-show = "${adminUser.position != 'STAFF'} ">查看员工</button>
 												</td>
 												<td ng-if="${type=='mypost'}" class="col-lg-1">
 													<p ng-if="item.statusName != '审批拒绝'" ng-bind="item.statusName"></p>

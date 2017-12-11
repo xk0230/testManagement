@@ -1,10 +1,12 @@
 package com.codyy.oc.admin.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,7 +109,28 @@ public class PositionService {
 		}
 	    page.setMap(map);
 		List<Position> data = mapper.getPositionPageList(page);
-		page.setData(data);
+		
+		int onDutys = 0;
+		int organizations = 0;
+		int vacancys = 0;
+		for (Position position : data) {
+			onDutys += NumberUtils.createInteger(position.getOnDuty());
+			organizations += NumberUtils.createInteger(position.getOrganization());
+			vacancys += NumberUtils.createInteger(position.getVacancy());
+		}
+		//添加总计
+		Position p = new Position();
+		p.setDepName("合计");
+		p.setName("--");
+		p.setOnDuty(onDutys+"");
+		p.setOrganization(organizations+"");
+		p.setVacancy(vacancys + "");
+		List<Position> datatotal = new ArrayList<Position>();
+		datatotal.add(p);
+		datatotal.addAll(data);
+		page.setData(datatotal);
+		
+		page.setTotal(page.getTotal()+1);
 		return page;
 	}
 	

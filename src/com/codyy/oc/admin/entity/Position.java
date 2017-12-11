@@ -11,11 +11,11 @@ public class Position {
 
     private String depId;
 
-    private String onDuty;
+    private String onDuty;//在岗
 
-    private String organization;
+    private String organization;//编制
 
-    private String vacancy;
+    private String vacancy;//空缺
 
     private String remark;
 
