@@ -39,9 +39,9 @@ public class AdminUserTrainService {
         
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userId", train.getUserId());
-        map.put("startDate", train.getStartDate());
-        map.put("endDate", train.getEndDate());
-        
+//        map.put("startDate", train.getStartDate());
+//        map.put("endDate", train.getEndDate());
+        map.put("project", train.getProject());
         page.setMap(map);
         
         List<AdminUserTrain> trainList = userTrainDaoMapper.getAdminUserTrainPageList(page);

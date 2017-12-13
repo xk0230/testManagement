@@ -32,8 +32,16 @@
                                 </div>
 								<div class="panel-body">
 									<div class="form-horizontal group-border" role="form">
-										
 										<div class="form-group">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >培训项目</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" name="realName" ng-model="project" id="project" />
+													</p>
+												</div>
+											</div>
+										<!-- <div class="form-group">
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label" >培训开始时间</label>
 												<div class="col-lg-8">
@@ -59,7 +67,7 @@
 														</span>
 													</p>
 												</div>
-											</div>
+											</div> -->
 											<div class="col-lg-3">
 											</div>
 											<div class="col-lg-3">
@@ -95,7 +103,8 @@
 										<thead>
 											<tr>
 												<th>序号</th>
-												<th>日期</th>
+												<th>开始时间</th>
+												<th>结束时间</th>
 												<th>培训项目</th>
 												<th>培训地点</th>
 												<th>培训形式</th>
@@ -108,6 +117,7 @@
 												
 												<td><p ng-bind="item.order"></p></td>
 												<td><p ng-bind="item.trainTime | date:'yyyy-MM-dd'"></p></td>
+												<td><p ng-bind="item.trainEndTime | date:'yyyy-MM-dd'"></p></td>
 												<td><p ng-bind="item.project"></p></td>
 												<td><p ng-bind="item.place"></p></td>
 												<td><p ng-bind="item.form"></p></td>
@@ -198,7 +208,7 @@
 										<div class="form-group">
 											
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label" >培训时间</label>
+												<label class="col-lg-4 control-label" >培训开始时间</label>
 												<div class="col-lg-8">
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="trainEntity.trainTime" is-open="popup.opened1" 
@@ -206,6 +216,19 @@
 														ng-required="true"  />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+										<div class="col-lg-6">
+											<label class="col-lg-4 control-label" >培训结束时间</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="trainEntity.trainEndTime" is-open="popup.opened2" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="true"  />
+														<span class="input-group-btn">
+														<button type="button" class="btn btn-default" ng-click="open(2)"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
 													</p>
 												</div>

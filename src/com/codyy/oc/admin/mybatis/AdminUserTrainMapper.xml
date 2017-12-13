@@ -4,8 +4,8 @@
 
 	<insert id="saveUserTrain" parameterType="com.codyy.oc.admin.entity.AdminUserTrain">
 	
-		INSERT INTO TRAIN(id,create_time,train_time,project,place,form,result,user_id)
-		VALUES(#{id},#{createTime},#{trainTime},#{project},#{place},#{form},#{result},#{userId})
+		INSERT INTO TRAIN(id,create_time,train_time,project,place,form,result,user_id,train_end_time)
+		VALUES(#{id},#{createTime},#{trainTime},#{project},#{place},#{form},#{result},#{userId},#{trainEndTime})
 	
 	</insert>
 	
@@ -14,7 +14,8 @@
 				         project = #{project},
 				         place = #{place},
 				         form = #{form},
-						 result = #{result}
+						 result = #{result},
+						 train_end_time = #{trainEndTime}
 						
 		WHERE id = #{id}
 	
@@ -28,7 +29,8 @@
 			   place,
 			   form,
 			   result,
-			   user_id AS userId
+			   user_id AS userId,
+			   train_end_time as trainEndTime
 		
 		FROM TRAIN
 		
@@ -49,7 +51,8 @@
 			   place,
 			   form,
 			   result,
-			   user_id AS userId
+			   user_id AS userId,
+			   train_end_time as trainEndTime
 		
 		FROM TRAIN
 		
@@ -68,7 +71,8 @@
 			   place,
 			   form,
 			   result,
-			   user_id AS userId
+			   user_id AS userId,
+			   train_end_time as trainEndTime
 		
 		FROM TRAIN
 		
@@ -80,6 +84,10 @@
 			
 			<if test="map.endDate != null and  map.endDate != ''">
 				AND train_time <![CDATA[ <= ]]> #{map.endDate}
+			</if>
+			
+			<if test="map.project != null and  map.project != ''">
+				AND project like concat('%',#{map.project,jdbcType=VARCHAR},'%') 
 			</if>
 		
 		ORDER BY train_time DESC

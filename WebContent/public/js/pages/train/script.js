@@ -28,8 +28,9 @@ myAppModule.controller('AdminUserTrianController',
 				url:$("#rootUrl").val()+'/admin/train/page.do',
 				params:{
 					userId:$("#userId").val(),
-					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
-					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),
+			/*		startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),*/
+					project:$("#project").val(),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -210,7 +211,10 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			  return ;
 		  }
 		  if(!$scope.trainEntity.trainTime){
-			  alert("请选择培训时间");
+			  alert("请选择培训开始时间");
+			  return ;
+		  }if(!$scope.trainEntity.trainEndTime){
+			  alert("请选择培训结束时间");
 			  return ;
 		  }
 		 var params = {
@@ -220,6 +224,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 				form:$scope.trainEntity.form,
 				result:$scope.trainEntity.result,
 				trainTime:$filter('date')($scope.trainEntity.trainTime, "yyyy-MM-dd"),
+				trainEndTime:$filter('date')($scope.trainEntity.trainEndTime, "yyyy-MM-dd"),
 				userId:$('#userId').val()
 			}; 
 		 

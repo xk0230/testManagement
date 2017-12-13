@@ -20,6 +20,8 @@ public class AdminUserTrain {
 	
 	private String userId;
 	
+	private Date trainEndTime;
+	
 	//----页面查询-----//
 	private int order;
 	
@@ -135,4 +137,13 @@ public class AdminUserTrain {
 		this.order = order;
 	}
 
+	public Date getTrainEndTime() {
+		return trainEndTime;
+	}
+
+	public void setTrainEndTime(Date trainEndTime) {
+		this.trainEndTime = trainEndTime;
+	}
+
+	
 }
