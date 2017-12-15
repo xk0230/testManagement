@@ -16,19 +16,14 @@ import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.CompetencyMapper;
 import com.codyy.oc.admin.dao.DepartmentMapper;
-import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
 import com.codyy.oc.admin.dao.RecruitAuditMapper;
 import com.codyy.oc.admin.dao.RecruitMapper;
 import com.codyy.oc.admin.dao.RecruitRCompetencyMapper;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.Competency;
-import com.codyy.oc.admin.entity.Position;
-import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.entity.Recruit;
 import com.codyy.oc.admin.entity.RecruitAudit;
 import com.codyy.oc.admin.entity.RecruitRCompetency;
-import com.codyy.oc.admin.view.PositionSearchView;
 
 /**
  * 胜任特征server
@@ -72,7 +67,7 @@ public class RecruitService {
 				ra.setId(UUIDUtils.getUUID());
 				ra.setRecruitId(recruit.getId());
 				ra.setRecruitNum(maxnum);
-				recruitAuditMapper.insert(ra);
+				addAudit(ra);
 			}
 		}else {
 			String managerId = adminUserMapper.getManagerIdByUserId(recruit.getAuditUser());
@@ -86,7 +81,7 @@ public class RecruitService {
 				
 				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
 				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
-				recruitAuditMapper.insert(ra);
+				addAudit(ra);
 //				recruit.setAuditUser(AdminUser.SUPER_ADMIN_ID);
 			}else {
 				//添加审批记录
@@ -98,7 +93,7 @@ public class RecruitService {
 				
 				Integer maxnum = recruitAuditMapper.getMaxRecruitNumByRecId(recruit.getId());
 				ra.setRecruitNum(maxnum==null?1:(maxnum+1));
-				recruitAuditMapper.insert(ra);
+				addAudit(ra);
 //				recruit.setAuditUser(managerId);
 			}
 		}
@@ -266,5 +261,19 @@ public class RecruitService {
 			}
 		}
 		return new ResultJson(true);
+	}
+	
+	private static String MAIL_TITLE="招聘请求审批提醒";
+	private static String MAIL_DETAIL="您的新的招聘请求（#）需要审批，请登录  http://www.ccydsz-ssc.com:8080/ssc/ 完成审批";		
+	private void addAudit(RecruitAudit raa) {
+		recruitAuditMapper.insert(raa);
+		AdminUser au = adminUserMapper.getselcAdminUserById(raa.getAuditUser());
+		try {
+//			System.out.println(au.getUserName());
+			MailUtil.send(au.getUserName(), MAIL_TITLE, MAIL_DETAIL.replace("#", positionMapper.selectByPrimaryKey(mapper.selectByPrimaryKey(raa.getRecruitId()).getPostid()).getName()));
+//			MailUtil.send("allen.xiao", MAIL_TITLE, MAIL_DETAIL.replace("#", positionMapper.selectByPrimaryKey(mapper.selectByPrimaryKey(raa.getRecruitId()).getPostid()).getName()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -18,9 +18,10 @@ import javax.mail.internet.MimeMultipart;
 //发送邮件
 public class MailUtil {
 
-	private  String host = "58.210.127.130"; // smtp服务器
-    private  String from = "ssc@ccydsz.com"; // 发件人地址
-    private  String pwd = "ccyd@2017"; // 密码
+//	private  static String host = "58.210.127.130"; // smtp服务器
+	private  static String host = "mail.ccydsz.com";
+    private  static String from = "ssc@ccydsz.com"; // 发件人地址
+    private  static String pwd = "ccyd@2017"; // 密码
 //    private  String from = "allen.xiao@ccydsz.com"; // 发件人地址
 //    private  String pwd = "ccyd@xk0230"; // 密码
 //    public void setAffix(String affix, String affixName) {
@@ -34,7 +35,7 @@ public class MailUtil {
 ////        message = new MimeMessage(session);
 //    }
 
-    public   void send(String to, String subject,String detail) throws AddressException, MessagingException {
+    public  static void send(String to, String subject,String detail) throws AddressException, MessagingException {
           MimeMessage message=null;
           Session session=null;
           Properties props = new Properties();
@@ -49,7 +50,7 @@ public class MailUtil {
             // 加载发件人地址
             message.setFrom(new InternetAddress(from));
             // 加载收件人地址
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to+"@ccydsz.com"));
             // 加载标题
             message.setSubject(subject);
 
@@ -78,6 +79,6 @@ public class MailUtil {
     public static void main(String[] args) throws AddressException, MessagingException {
 //    	cn.setAddress("test@ccydsz.com", "allen.xiao@ccydsz.com", "我是邮件的标题2");
 //    	new MailUtil().send("lilian.liu@ccydsz.com", "这是一封来自机器的审批提醒邮件", "你有一个岗位审核，快去处理哦");
-    	new MailUtil().send("allen.xiao@ccydsz.com", "这是一封来自机器的审批提醒邮件", "你有一个岗位审核，快去处理哦");
+    	send("allen.xiao", "222", "你有一个岗位审核，快去处理哦");
     }
 }

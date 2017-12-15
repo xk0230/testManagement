@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -80,10 +82,12 @@ public class PositionController extends BaseController {
 	 * @param request
 	 * @param position
 	 * @return
+	 * @throws MessagingException 
+	 * @throws AddressException 
 	 */
 	@ResponseBody
 	@RequestMapping("saveOrUpdatePosition")
-	public ResultJson  saveOrUpdatePosition(HttpServletRequest request, Position position ){
+	public ResultJson  saveOrUpdatePosition(HttpServletRequest request, Position position ) throws AddressException, MessagingException{
 		String userId = getSessionUserId(request);
 		if(StringUtils.isEmpty(position.getPostId())){
 			//如果没有ID则新增

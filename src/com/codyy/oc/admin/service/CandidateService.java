@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +57,11 @@ public class CandidateService {
 	@Autowired
 	private CandidateMapper candidateMapper;
 	
+	private static String MAIL_TITLE="面试提醒";
+	
+	private static String MAIL_DETAIL="请与（###）进行（$$$）的候选人（%%%）面试，地点：（^^^）";
+	
+	
 	public String insert(Candidate candidate) {
 		String uuid = UUIDUtils.getUUID();
 		candidate.setId(uuid);
@@ -65,7 +73,21 @@ public class CandidateService {
 	public void insertRInterviewer(CandidateRInterviewer candidateRInterviewer,List<CandidateRRecrcom> crs) {
 		candidateRInterviewer.setId(UUIDUtils.getUUID());
 		candidateRInterviewerMapper.insert(candidateRInterviewer);
+//		private static String MAIL_DETAIL="请与（###）进行（$$$）的候选人（%%%）面试，地点：（^^^）";
+		AdminUser au = adminUserMapper.getselcAdminUserById(candidateRInterviewer.getInterviewerId());
+		String postName = positionMapper.selectByPrimaryKey(recruitMapper.selectByPrimaryKey(candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId()).getRecruitId()).getPostid()).getName();
 		
+		
+		try {
+			MailUtil.send(au.getUserName(), MAIL_TITLE, 
+					MAIL_DETAIL.replace("###", candidateRInterviewer.getInterviewTime()+"")
+					.replace("$$$",postName)
+					.replace("%%%", candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId()).getName())
+					.replace("^^^", candidateRInterviewer.getPlace()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*if(crs != null) {
 			candidateRRecrcomMapper.deleteByCandidate(crs.get(1));
 			for (CandidateRRecrcom candidateRRecrcom : crs) {

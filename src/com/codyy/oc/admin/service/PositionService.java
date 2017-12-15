@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import com.codyy.commons.utils.UUIDUtils;
 import com.codyy.oc.admin.dao.AdminUserMapper;
 import com.codyy.oc.admin.dao.PositionAuditMapper;
 import com.codyy.oc.admin.dao.PositionMapper;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Position;
 import com.codyy.oc.admin.entity.PositionAudit;
 import com.codyy.oc.admin.view.PositionSearchView;
@@ -30,6 +34,10 @@ public class PositionService {
 	@Autowired
 	private AdminUserMapper adminUserMapper;
 	
+	private static String MAIL_TITLE="岗位审批提醒";
+	
+	private static String MAIL_DETAIL="您的新增岗位需求（#）需要审批，请登录  http://www.ccydsz-ssc.com:8080/ssc/ 完成审批";
+	
 	public List<Position> getPositionByDepId(String depId){
 		return mapper.selectByDepId(depId);
 	}
@@ -39,7 +47,7 @@ public class PositionService {
 	}
 	
 	
-	public void insert(Position position) {
+	public void insert(Position position) throws AddressException, MessagingException {
 		position.setPostId(UUIDUtils.getUUID());
 		position.setCreateTime(new Date());
 		position.setStatus(CommonsConstant.AUDIT_STATUS_AUDITING);
@@ -57,6 +65,10 @@ public class PositionService {
 			pa.setPositionAuditId(UUIDUtils.getUUID());
 			pa.setPositionId(position.getPostId());
 			auditMapper.insert(pa);
+			AdminUser au = adminUserMapper.getselcAdminUserById(id);
+			MailUtil.send(au.getUserName(), MAIL_TITLE, MAIL_DETAIL.replace("#", pa.getName()));
+//			MailUtil.send("allen.xiao", MAIL_TITLE, MAIL_DETAIL.replace("#", position.getName()));
+			
 		}
 	};
 	
