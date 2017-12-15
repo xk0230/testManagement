@@ -78,7 +78,8 @@
 				costDetail.cost_num AS costNum,
 				costDetail.cost_time AS costTime,
 				costDetail.cost_type AS costType,
-				costDetail.create_time AS createTime
+				costDetail.create_time AS createTime,
+				costDetail.remark as remark
 				
 		FROM COST_DETAIL costDetail,COST_SUBTYPE costSub,DEPARTMENT dep
 		WHERE costDetail.cost_subtype_id = costSub.cost_subtype_id

@@ -134,6 +134,7 @@
 												<th>分类名称</th>
 												<th>成本产生时间</th>
 												<th>金额</th>
+												<th>成本详情</th>
 												<th>更新时间</th>
 												<th>操作</th>
 											</tr>
@@ -146,6 +147,7 @@
 												<td><p ng-bind="item.costSubName"></p></td>
 												<td><p ng-bind="item.costDate"></p></td>
 												<td><p ng-bind="item.costNum"></p></td>
+												<td><p ng-bind="item.remark"></p></td>
 												<td><p ng-bind="item.createDate"></p></td>
 												<td>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.editCost(item.costId,'.outlet')"><i class="fa-edit"></i></button>
