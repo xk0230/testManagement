@@ -18,8 +18,8 @@ import javax.mail.internet.MimeMultipart;
 //发送邮件
 public class MailUtil {
 
-//	private  static String host = "58.210.127.130"; // smtp服务器
-	private  static String host = "mail.ccydsz.com";
+	private  static String host = "58.210.127.130"; // smtp服务器
+//	private  static String host = "mail.ccydsz.com";
     private  static String from = "ssc@ccydsz.com"; // 发件人地址
     private  static String pwd = "ccyd@2017"; // 密码
 //    private  String from = "allen.xiao@ccydsz.com"; // 发件人地址
@@ -39,7 +39,8 @@ public class MailUtil {
           MimeMessage message=null;
           Session session=null;
           Properties props = new Properties();
-          props.setProperty("mail.imap.auth.plain.disable", "true");
+          props.put("mail.smtp.auth", true);
+          props.put("mail.imap.auth.plain.disable", true);
           Authenticator authenticator = null;
     	authenticator = new Email_Authenticator(from, pwd);
         session  = Session.getDefaultInstance(props, authenticator);
@@ -79,6 +80,6 @@ public class MailUtil {
     public static void main(String[] args) throws AddressException, MessagingException {
 //    	cn.setAddress("test@ccydsz.com", "allen.xiao@ccydsz.com", "我是邮件的标题2");
 //    	new MailUtil().send("lilian.liu@ccydsz.com", "这是一封来自机器的审批提醒邮件", "你有一个岗位审核，快去处理哦");
-    	send("allen.xiao", "222", "你有一个岗位审核，快去处理哦");
+    	send("allen.xiao", "hahah", "你有一个岗位审核\n快去处理哦");
     }
 }

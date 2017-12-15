@@ -22,4 +22,6 @@ public interface CandidateRInterviewerMapper {
     int updateByPrimaryKey(CandidateRInterviewer record);
     
     List<CandidateRInterviewer> getCandidateRInterviewerPageList(Page page);
+    
+    List<CandidateRInterviewer> getYesterday();
 }

@@ -182,4 +182,21 @@
      	 and interviewer_id = #{map.interviewerId,jdbcType=VARCHAR}
      </if>
   </select>
+  
+  <select id="getYesterday" resultMap="ResultMapWithBLOBs">
+  	 select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CANDIDATE_R_INTERVIEWER
+   WHERE
+	interview_time <![CDATA[ >= ]]> date_sub(
+		CURRENT_DATE (),
+		INTERVAL 1 DAY
+	)
+AND interview_time <![CDATA[ < ]]> date_sub(
+	CURRENT_DATE (),
+	INTERVAL 0 DAY
+)
+  </select>
 </mapper>

@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,11 +54,13 @@ public class CandidateService {
 	@Autowired
 	private CandidateMapper candidateMapper;
 	
-	private static String MAIL_TITLE="面试提醒";
+	private static String MAIL_TITLE ="面试提醒";
 	
-	private static String MAIL_DETAIL="请与（###）进行（$$$）的候选人（%%%）面试，地点：（^^^）";
+//	private static String MAIL_DETAIL="请与（###）进行（$$$）的候选人（%%%）面试，地点：（^^^）";
+	private static String MAIL_DETAIL =" 面试岗位：$$$ \n 面试时间:### \n 候选人:%%% \n 面试地点:^^^";
 	
-	
+	private static String MAIL_TITLE2 ="面试评估提醒";
+	private static String MAIL_DETAIL2 = "我的评估：请及时完成（%%%）的面试评估，谢谢配合。";
 	public String insert(Candidate candidate) {
 		String uuid = UUIDUtils.getUUID();
 		candidate.setId(uuid);
@@ -278,5 +277,29 @@ public class CandidateService {
 		
 		page.setData(data);
 		return page;
+	}
+	
+	/**
+	 * 获取昨天的面试记录 并发送邮件
+	 * @return
+	 */
+	public List<CandidateRInterviewer> getYesterday(){
+		List<CandidateRInterviewer> ls = candidateRInterviewerMapper.getYesterday();
+		for (CandidateRInterviewer candidateRInterviewer : ls) {
+			AdminUser au = adminUserMapper.getselcAdminUserById(candidateRInterviewer.getInterviewerId());
+//			String postName = positionMapper.selectByPrimaryKey(recruitMapper.selectByPrimaryKey(candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId()).getRecruitId()).getPostid()).getName();
+			
+			
+			try {
+				MailUtil.send(au.getUserName(), MAIL_TITLE2, 
+						MAIL_DETAIL2
+						.replace("%%%", candidateMapper.selectByPrimaryKey(candidateRInterviewer.getCandidateId()).getName())
+						);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ls;
 	}
 }

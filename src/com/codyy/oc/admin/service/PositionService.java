@@ -38,6 +38,7 @@ public class PositionService {
 	
 	private static String MAIL_DETAIL="您的新增岗位需求（#）需要审批，请登录  http://www.ccydsz-ssc.com:8080/ssc/ 完成审批";
 	
+	
 	public List<Position> getPositionByDepId(String depId){
 		return mapper.selectByDepId(depId);
 	}
