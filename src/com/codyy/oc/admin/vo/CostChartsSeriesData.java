@@ -4,7 +4,7 @@ package com.codyy.oc.admin.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class CostChartsSeriesData {
+public class CostChartsSeriesData{
     
     private String name;
     
@@ -25,6 +25,8 @@ public class CostChartsSeriesData {
 	public void setData(List<BigDecimal> data) {
 		this.data = data;
 	}
+
+
 
 }
 

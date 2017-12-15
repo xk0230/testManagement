@@ -1,6 +1,8 @@
 package com.codyy.oc.admin.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
+import com.codyy.oc.admin.vo.CostChartsSeriesData;
+import com.codyy.oc.admin.vo.CostChartsSeriesDataComparator;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.CostYearVO;
@@ -107,8 +111,10 @@ public class CostController extends BaseController{
 	@ResponseBody
     @RequestMapping("/outlay.do")
     public CostChartsData getChartDataByOutlayType(HttpServletRequest request,int curYear){
-	    
-        return costService.getCostChartData(this.getSessionUser(request),0,curYear);
+		CostChartsData c= costService.getCostChartData(this.getSessionUser(request),0,curYear);
+		List<CostChartsSeriesData>  ls = c.getSeriesData();
+		Collections.sort(ls, new CostChartsSeriesDataComparator());
+        return c;
         
     }
 	
