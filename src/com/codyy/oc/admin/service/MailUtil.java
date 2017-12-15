@@ -18,11 +18,11 @@ import javax.mail.internet.MimeMultipart;
 //发送邮件
 public class MailUtil {
 
-	private  String host = "mail.ccydsz.com"; // smtp服务器
-//    private  String from = "test@ccydsz.com"; // 发件人地址
-//    private  String pwd = "ccyd@2017"; // 密码
-    private  String from = "allen.xiao@ccydsz.com"; // 发件人地址
-    private  String pwd = "ccyd@xk0230"; // 密码
+	private  String host = "58.210.127.130"; // smtp服务器
+    private  String from = "ssc@ccydsz.com"; // 发件人地址
+    private  String pwd = "ccyd@2017"; // 密码
+//    private  String from = "allen.xiao@ccydsz.com"; // 发件人地址
+//    private  String pwd = "ccyd@xk0230"; // 密码
 //    public void setAffix(String affix, String affixName) {
 //        this.affix = affix;
 //        this.affixName = affixName;
@@ -38,6 +38,7 @@ public class MailUtil {
           MimeMessage message=null;
           Session session=null;
           Properties props = new Properties();
+          props.setProperty("mail.imap.auth.plain.disable", "true");
           Authenticator authenticator = null;
     	authenticator = new Email_Authenticator(from, pwd);
         session  = Session.getDefaultInstance(props, authenticator);
@@ -76,6 +77,7 @@ public class MailUtil {
     
     public static void main(String[] args) throws AddressException, MessagingException {
 //    	cn.setAddress("test@ccydsz.com", "allen.xiao@ccydsz.com", "我是邮件的标题2");
-    	new MailUtil().send("allen.xiao@ccydsz.com", "有一个岗位审核333", "你有一个岗位审核，快去处理啦");
+//    	new MailUtil().send("lilian.liu@ccydsz.com", "这是一封来自机器的审批提醒邮件", "你有一个岗位审核，快去处理哦");
+    	new MailUtil().send("allen.xiao@ccydsz.com", "这是一封来自机器的审批提醒邮件", "你有一个岗位审核，快去处理哦");
     }
 }
