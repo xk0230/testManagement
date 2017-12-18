@@ -627,9 +627,27 @@ public class CostService {
         //计算部门总收入总支出
         datas = getCostInOutTotal(datas);
         
+        //部门排序
+        datas = sortByDepartment(datas);
+        
 		return datas;
 	}
     
+	private List<CostChartsData> sortByDepartment(List<CostChartsData> datas) {
+		String[] departments = new String[]{"GROUP","YSEC","GMO","FDD","CES","ATD","SSC"};
+		List<CostChartsData> datasList = new ArrayList<CostChartsData>();
+		for(String department : departments){
+			for(CostChartsData costData : datas){
+				List<String> xcategories = costData.getXcategories();
+				if(xcategories.get(0).startsWith(department)){
+					datasList.add(costData);
+				}
+			}
+		}
+		
+		return datasList;
+	}
+
 	/**
 	 * 计算部门总收入总支出
 	 * @param datas
