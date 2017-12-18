@@ -31,12 +31,73 @@
     <result column="pdp_nj_d" jdbcType="VARCHAR" property="pdpNjD" />
     <result column="gx" jdbcType="VARCHAR" property="gx" />
     <result column="sj" jdbcType="VARCHAR" property="sj" />
+        <result column="english" jdbcType="VARCHAR" property="english" />
+    <result column="other_language" jdbcType="VARCHAR" property="otherLanguage" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="first_work_time" jdbcType="TIMESTAMP" property="firstWorkTime" />
+    <result column="home_name" jdbcType="VARCHAR" property="homeName" />
+    <result column="home_xl" jdbcType="VARCHAR" property="homeXl" />
+    <result column="home_zy" jdbcType="VARCHAR" property="homeZy" />
+    <result column="home_birthday" jdbcType="TIMESTAMP" property="homeBirthday" />
+    <result column="home_work" jdbcType="VARCHAR" property="homeWork" />
+    <result column="home_zw" jdbcType="VARCHAR" property="homeZw" />
+    <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
+    <result column="home_idcard" jdbcType="VARCHAR" property="homeIdcard" />
+    <result column="child1_name" jdbcType="VARCHAR" property="child1Name" />
+    <result column="child1_birthday" jdbcType="TIMESTAMP" property="child1Birthday" />
+    <result column="child1_sex" jdbcType="VARCHAR" property="child1Sex" />
+    <result column="child1_work" jdbcType="VARCHAR" property="child1Work" />
+    <result column="child2_name" jdbcType="VARCHAR" property="child2Name" />
+    <result column="child2_birthday" jdbcType="TIMESTAMP" property="child2Birthday" />
+    <result column="child2_sex" jdbcType="VARCHAR" property="child2Sex" />
+    <result column="child2_work" jdbcType="VARCHAR" property="child2Work" />
+    <result column="child3_name" jdbcType="VARCHAR" property="child3Name" />
+    <result column="child3_birthday" jdbcType="TIMESTAMP" property="child3Birthday" />
+    <result column="child3_sex" jdbcType="VARCHAR" property="child3Sex" />
+    <result column="child3_work" jdbcType="VARCHAR" property="child3Work" />
+    <result column="work1_time" jdbcType="VARCHAR" property="work1Time" />
+    <result column="work1_place" jdbcType="VARCHAR" property="work1Place" />
+    <result column="work1_reason" jdbcType="VARCHAR" property="work1Reason" />
+    <result column="work1_job" jdbcType="VARCHAR" property="work1Job" />
+    <result column="work1_zyyj" jdbcType="VARCHAR" property="work1Zyyj" />
+    <result column="work2_time" jdbcType="VARCHAR" property="work2Time" />
+    <result column="work2_place" jdbcType="VARCHAR" property="work2Place" />
+    <result column="work2_reason" jdbcType="VARCHAR" property="work2Reason" />
+    <result column="work2_job" jdbcType="VARCHAR" property="work2Job" />
+    <result column="work2_zyyj" jdbcType="VARCHAR" property="work2Zyyj" />
+    <result column="work3_time" jdbcType="VARCHAR" property="work3Time" />
+    <result column="work3_place" jdbcType="VARCHAR" property="work3Place" />
+    <result column="work3_reason" jdbcType="VARCHAR" property="work3Reason" />
+    <result column="work3_job" jdbcType="VARCHAR" property="work3Job" />
+    <result column="work3_zyyj" jdbcType="VARCHAR" property="work3Zyyj" />
+    <result column="work4_time" jdbcType="VARCHAR" property="work4Time" />
+    <result column="work4_place" jdbcType="VARCHAR" property="work4Place" />
+    <result column="work4_reason" jdbcType="VARCHAR" property="work4Reason" />
+    <result column="work4_job" jdbcType="VARCHAR" property="work4Job" />
+    <result column="work4_zyyj" jdbcType="VARCHAR" property="work4Zyyj" />
+    <result column="work5_time" jdbcType="VARCHAR" property="work5Time" />
+    <result column="work5_place" jdbcType="VARCHAR" property="work5Place" />
+    <result column="work5_reason" jdbcType="VARCHAR" property="work5Reason" />
+    <result column="work5_job" jdbcType="VARCHAR" property="work5Job" />
+    <result column="work5_zyyj" jdbcType="VARCHAR" property="work5Zyyj" />
+    <result column="work6_time" jdbcType="VARCHAR" property="work6Time" />
+    <result column="work6_place" jdbcType="VARCHAR" property="work6Place" />
+    <result column="work6_reason" jdbcType="VARCHAR" property="work6Reason" />
+    <result column="work6_job" jdbcType="VARCHAR" property="work6Job" />
+    <result column="work6_zyyj" jdbcType="VARCHAR" property="work6Zyyj" />
   </resultMap>
   <sql id="Base_Column_List">
     user_detail_id, user_id, sex, birthday, age, birthday_month, id_number, origin, domicile, 
     nation, marriage, political, education, major, university, phone1, phone2, citizen_card, 
     payroll_card,pdp_sj_a, pdp_sj_b, pdp_sj_c, pdp_sj_d, pdp_nj_a, pdp_nj_b, 
-    pdp_nj_c, pdp_nj_d,gx,sj
+    pdp_nj_c, pdp_nj_d,gx,sj, english, other_language, address, first_work_time, home_name, home_xl, 
+    home_zy, home_birthday, home_work, home_zw, home_phone, home_idcard, child1_name, 
+    child1_birthday, child1_sex, child1_work, child2_name, child2_birthday, child2_sex, 
+    child2_work, child3_name, child3_birthday, child3_sex, child3_work, work1_time, work1_place, 
+    work1_reason, work1_job, work1_zyyj, work2_time, work2_place, work2_reason, work2_job, 
+    work2_zyyj, work3_time, work3_place, work3_reason, work3_job, work3_zyyj, work4_time, 
+    work4_place, work4_reason, work4_job, work4_zyyj, work5_time, work5_place, work5_reason, 
+    work5_job, work5_zyyj, work6_time, work6_place, work6_reason, work6_job, work6_zyyj
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -56,7 +117,25 @@
       education, major, university, 
       phone1, phone2, citizen_card, 
       payroll_card,pdp_sj_a, pdp_sj_b, pdp_sj_c, pdp_sj_d, pdp_nj_a, pdp_nj_b, 
-    pdp_nj_c, pdp_nj_d,gx,sj)
+    pdp_nj_c, pdp_nj_d,gx,sj, english, other_language, 
+      address, first_work_time, home_name, 
+      home_xl, home_zy, home_birthday, 
+      home_work, home_zw, home_phone, 
+      home_idcard, child1_name, child1_birthday, 
+      child1_sex, child1_work, child2_name, 
+      child2_birthday, child2_sex, child2_work, 
+      child3_name, child3_birthday, child3_sex, 
+      child3_work, work1_time, work1_place, 
+      work1_reason, work1_job, work1_zyyj, 
+      work2_time, work2_place, work2_reason, 
+      work2_job, work2_zyyj, work3_time, 
+      work3_place, work3_reason, work3_job, 
+      work3_zyyj, work4_time, work4_place, 
+      work4_reason, work4_job, work4_zyyj, 
+      work5_time, work5_place, work5_reason, 
+      work5_job, work5_zyyj, work6_time, 
+      work6_place, work6_reason, work6_job, 
+      work6_zyyj)
     values (#{userDetailId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, #{birthdayMonth,jdbcType=INTEGER}, 
       #{idNumber,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
@@ -65,7 +144,25 @@
       #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{citizenCard,jdbcType=VARCHAR}, 
       #{payrollCard,jdbcType=VARCHAR},#{pdpSjA,jdbcType=VARCHAR}, #{pdpSjB,jdbcType=VARCHAR}, #{pdpSjC,jdbcType=VARCHAR}, 
       #{pdpSjD,jdbcType=VARCHAR}, #{pdpNjA,jdbcType=VARCHAR}, #{pdpNjB,jdbcType=VARCHAR}, 
-      #{pdpNjC,jdbcType=VARCHAR}, #{pdpNjD,jdbcType=VARCHAR},#{gx,jdbcType=VARCHAR},#{sj,jdbcType=VARCHAR})
+      #{pdpNjC,jdbcType=VARCHAR}, #{pdpNjD,jdbcType=VARCHAR},#{gx,jdbcType=VARCHAR},#{sj,jdbcType=VARCHAR}, #{english,jdbcType=VARCHAR}, #{otherLanguage,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{firstWorkTime,jdbcType=TIMESTAMP}, #{homeName,jdbcType=VARCHAR}, 
+      #{homeXl,jdbcType=VARCHAR}, #{homeZy,jdbcType=VARCHAR}, #{homeBirthday,jdbcType=TIMESTAMP}, 
+      #{homeWork,jdbcType=VARCHAR}, #{homeZw,jdbcType=VARCHAR}, #{homePhone,jdbcType=VARCHAR}, 
+      #{homeIdcard,jdbcType=VARCHAR}, #{child1Name,jdbcType=VARCHAR}, #{child1Birthday,jdbcType=TIMESTAMP}, 
+      #{child1Sex,jdbcType=VARCHAR}, #{child1Work,jdbcType=VARCHAR}, #{child2Name,jdbcType=VARCHAR}, 
+      #{child2Birthday,jdbcType=TIMESTAMP}, #{child2Sex,jdbcType=VARCHAR}, #{child2Work,jdbcType=VARCHAR}, 
+      #{child3Name,jdbcType=VARCHAR}, #{child3Birthday,jdbcType=TIMESTAMP}, #{child3Sex,jdbcType=VARCHAR}, 
+      #{child3Work,jdbcType=VARCHAR}, #{work1Time,jdbcType=VARCHAR}, #{work1Place,jdbcType=VARCHAR}, 
+      #{work1Reason,jdbcType=VARCHAR}, #{work1Job,jdbcType=VARCHAR}, #{work1Zyyj,jdbcType=VARCHAR}, 
+      #{work2Time,jdbcType=VARCHAR}, #{work2Place,jdbcType=VARCHAR}, #{work2Reason,jdbcType=VARCHAR}, 
+      #{work2Job,jdbcType=VARCHAR}, #{work2Zyyj,jdbcType=VARCHAR}, #{work3Time,jdbcType=VARCHAR}, 
+      #{work3Place,jdbcType=VARCHAR}, #{work3Reason,jdbcType=VARCHAR}, #{work3Job,jdbcType=VARCHAR}, 
+      #{work3Zyyj,jdbcType=VARCHAR}, #{work4Time,jdbcType=VARCHAR}, #{work4Place,jdbcType=VARCHAR}, 
+      #{work4Reason,jdbcType=VARCHAR}, #{work4Job,jdbcType=VARCHAR}, #{work4Zyyj,jdbcType=VARCHAR}, 
+      #{work5Time,jdbcType=VARCHAR}, #{work5Place,jdbcType=VARCHAR}, #{work5Reason,jdbcType=VARCHAR}, 
+      #{work5Job,jdbcType=VARCHAR}, #{work5Zyyj,jdbcType=VARCHAR}, #{work6Time,jdbcType=VARCHAR}, 
+      #{work6Place,jdbcType=VARCHAR}, #{work6Reason,jdbcType=VARCHAR}, #{work6Job,jdbcType=VARCHAR}, 
+      #{work6Zyyj,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.AdminUserDetail">
     insert into ADMIN_USER_DETAIL
@@ -157,6 +254,168 @@
       <if test="sj != null">
         sj,
       </if>
+      <if test="english != null">
+        english,
+      </if>
+      <if test="otherLanguage != null">
+        other_language,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="firstWorkTime != null">
+        first_work_time,
+      </if>
+      <if test="homeName != null">
+        home_name,
+      </if>
+      <if test="homeXl != null">
+        home_xl,
+      </if>
+      <if test="homeZy != null">
+        home_zy,
+      </if>
+      <if test="homeBirthday != null">
+        home_birthday,
+      </if>
+      <if test="homeWork != null">
+        home_work,
+      </if>
+      <if test="homeZw != null">
+        home_zw,
+      </if>
+      <if test="homePhone != null">
+        home_phone,
+      </if>
+      <if test="homeIdcard != null">
+        home_idcard,
+      </if>
+      <if test="child1Name != null">
+        child1_name,
+      </if>
+      <if test="child1Birthday != null">
+        child1_birthday,
+      </if>
+      <if test="child1Sex != null">
+        child1_sex,
+      </if>
+      <if test="child1Work != null">
+        child1_work,
+      </if>
+      <if test="child2Name != null">
+        child2_name,
+      </if>
+      <if test="child2Birthday != null">
+        child2_birthday,
+      </if>
+      <if test="child2Sex != null">
+        child2_sex,
+      </if>
+      <if test="child2Work != null">
+        child2_work,
+      </if>
+      <if test="child3Name != null">
+        child3_name,
+      </if>
+      <if test="child3Birthday != null">
+        child3_birthday,
+      </if>
+      <if test="child3Sex != null">
+        child3_sex,
+      </if>
+      <if test="child3Work != null">
+        child3_work,
+      </if>
+      <if test="work1Time != null">
+        work1_time,
+      </if>
+      <if test="work1Place != null">
+        work1_place,
+      </if>
+      <if test="work1Reason != null">
+        work1_reason,
+      </if>
+      <if test="work1Job != null">
+        work1_job,
+      </if>
+      <if test="work1Zyyj != null">
+        work1_zyyj,
+      </if>
+      <if test="work2Time != null">
+        work2_time,
+      </if>
+      <if test="work2Place != null">
+        work2_place,
+      </if>
+      <if test="work2Reason != null">
+        work2_reason,
+      </if>
+      <if test="work2Job != null">
+        work2_job,
+      </if>
+      <if test="work2Zyyj != null">
+        work2_zyyj,
+      </if>
+      <if test="work3Time != null">
+        work3_time,
+      </if>
+      <if test="work3Place != null">
+        work3_place,
+      </if>
+      <if test="work3Reason != null">
+        work3_reason,
+      </if>
+      <if test="work3Job != null">
+        work3_job,
+      </if>
+      <if test="work3Zyyj != null">
+        work3_zyyj,
+      </if>
+      <if test="work4Time != null">
+        work4_time,
+      </if>
+      <if test="work4Place != null">
+        work4_place,
+      </if>
+      <if test="work4Reason != null">
+        work4_reason,
+      </if>
+      <if test="work4Job != null">
+        work4_job,
+      </if>
+      <if test="work4Zyyj != null">
+        work4_zyyj,
+      </if>
+      <if test="work5Time != null">
+        work5_time,
+      </if>
+      <if test="work5Place != null">
+        work5_place,
+      </if>
+      <if test="work5Reason != null">
+        work5_reason,
+      </if>
+      <if test="work5Job != null">
+        work5_job,
+      </if>
+      <if test="work5Zyyj != null">
+        work5_zyyj,
+      </if>
+      <if test="work6Time != null">
+        work6_time,
+      </if>
+      <if test="work6Place != null">
+        work6_place,
+      </if>
+      <if test="work6Reason != null">
+        work6_reason,
+      </if>
+      <if test="work6Job != null">
+        work6_job,
+      </if>
+      <if test="work6Zyyj != null">
+        work6_zyyj,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userDetailId != null and userDetailId !=''">
@@ -245,6 +504,168 @@
       </if>
       <if test="sj != null">
         #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="english != null">
+        #{english,jdbcType=VARCHAR},
+      </if>
+      <if test="otherLanguage != null">
+        #{otherLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="firstWorkTime != null">
+        #{firstWorkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeName != null">
+        #{homeName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeXl != null">
+        #{homeXl,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZy != null">
+        #{homeZy,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBirthday != null">
+        #{homeBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeWork != null">
+        #{homeWork,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZw != null">
+        #{homeZw,jdbcType=VARCHAR},
+      </if>
+      <if test="homePhone != null">
+        #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="homeIdcard != null">
+        #{homeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Name != null">
+        #{child1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Birthday != null">
+        #{child1Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child1Sex != null">
+        #{child1Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Work != null">
+        #{child1Work,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Name != null">
+        #{child2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Birthday != null">
+        #{child2Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child2Sex != null">
+        #{child2Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Work != null">
+        #{child2Work,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Name != null">
+        #{child3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Birthday != null">
+        #{child3Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child3Sex != null">
+        #{child3Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Work != null">
+        #{child3Work,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Time != null">
+        #{work1Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Place != null">
+        #{work1Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Reason != null">
+        #{work1Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Job != null">
+        #{work1Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Zyyj != null">
+        #{work1Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Time != null">
+        #{work2Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Place != null">
+        #{work2Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Reason != null">
+        #{work2Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Job != null">
+        #{work2Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Zyyj != null">
+        #{work2Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Time != null">
+        #{work3Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Place != null">
+        #{work3Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Reason != null">
+        #{work3Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Job != null">
+        #{work3Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Zyyj != null">
+        #{work3Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Time != null">
+        #{work4Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Place != null">
+        #{work4Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Reason != null">
+        #{work4Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Job != null">
+        #{work4Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Zyyj != null">
+        #{work4Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Time != null">
+        #{work5Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Place != null">
+        #{work5Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Reason != null">
+        #{work5Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Job != null">
+        #{work5Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Zyyj != null">
+        #{work5Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Time != null">
+        #{work6Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Place != null">
+        #{work6Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Reason != null">
+        #{work6Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Job != null">
+        #{work6Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Zyyj != null">
+        #{work6Zyyj,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -337,6 +758,168 @@
       </if>
        <if test="sj != null and sj != ''">
         sj = #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="english != null">
+        english = #{english,jdbcType=VARCHAR},
+      </if>
+      <if test="otherLanguage != null">
+        other_language = #{otherLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="firstWorkTime != null">
+        first_work_time = #{firstWorkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeName != null">
+        home_name = #{homeName,jdbcType=VARCHAR},
+      </if>
+      <if test="homeXl != null">
+        home_xl = #{homeXl,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZy != null">
+        home_zy = #{homeZy,jdbcType=VARCHAR},
+      </if>
+      <if test="homeBirthday != null">
+        home_birthday = #{homeBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeWork != null">
+        home_work = #{homeWork,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZw != null">
+        home_zw = #{homeZw,jdbcType=VARCHAR},
+      </if>
+      <if test="homePhone != null">
+        home_phone = #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="homeIdcard != null">
+        home_idcard = #{homeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Name != null">
+        child1_name = #{child1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Birthday != null">
+        child1_birthday = #{child1Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child1Sex != null">
+        child1_sex = #{child1Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child1Work != null">
+        child1_work = #{child1Work,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Name != null">
+        child2_name = #{child2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Birthday != null">
+        child2_birthday = #{child2Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child2Sex != null">
+        child2_sex = #{child2Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child2Work != null">
+        child2_work = #{child2Work,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Name != null">
+        child3_name = #{child3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Birthday != null">
+        child3_birthday = #{child3Birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="child3Sex != null">
+        child3_sex = #{child3Sex,jdbcType=VARCHAR},
+      </if>
+      <if test="child3Work != null">
+        child3_work = #{child3Work,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Time != null">
+        work1_time = #{work1Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Place != null">
+        work1_place = #{work1Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Reason != null">
+        work1_reason = #{work1Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Job != null">
+        work1_job = #{work1Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work1Zyyj != null">
+        work1_zyyj = #{work1Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Time != null">
+        work2_time = #{work2Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Place != null">
+        work2_place = #{work2Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Reason != null">
+        work2_reason = #{work2Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Job != null">
+        work2_job = #{work2Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work2Zyyj != null">
+        work2_zyyj = #{work2Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Time != null">
+        work3_time = #{work3Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Place != null">
+        work3_place = #{work3Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Reason != null">
+        work3_reason = #{work3Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Job != null">
+        work3_job = #{work3Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work3Zyyj != null">
+        work3_zyyj = #{work3Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Time != null">
+        work4_time = #{work4Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Place != null">
+        work4_place = #{work4Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Reason != null">
+        work4_reason = #{work4Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Job != null">
+        work4_job = #{work4Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work4Zyyj != null">
+        work4_zyyj = #{work4Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Time != null">
+        work5_time = #{work5Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Place != null">
+        work5_place = #{work5Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Reason != null">
+        work5_reason = #{work5Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Job != null">
+        work5_job = #{work5Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work5Zyyj != null">
+        work5_zyyj = #{work5Zyyj,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Time != null">
+        work6_time = #{work6Time,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Place != null">
+        work6_place = #{work6Place,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Reason != null">
+        work6_reason = #{work6Reason,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Job != null">
+        work6_job = #{work6Job,jdbcType=VARCHAR},
+      </if>
+      <if test="work6Zyyj != null">
+        work6_zyyj = #{work6Zyyj,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
