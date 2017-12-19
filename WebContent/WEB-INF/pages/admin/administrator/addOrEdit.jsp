@@ -108,7 +108,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.entryDate" is-open="popup.opened1" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-													     ng-disabled="vm.readOnly"  ng-change="vm.rzDayChanged()"/>
+													     ng-disabled="vm.readOnly"  ng-change="vm.rzDayChanged()" ng-required="true"/>
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(1)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
@@ -503,11 +503,11 @@
 												<div class="col-lg-8">
 												<div class="form-group">
 													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.firstWorkTime" is-open="popup.opened11" 
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.firstWorkTime" is-open="popup.opened22" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
 														ng-required="false" ng-disabled="vm.readOnly" />
 														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(11)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+															<button type="button" class="btn btn-default" ng-click="open(22)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
 													</p>
 												</div>
@@ -822,14 +822,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work1Time" is-open="popup.opened16" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(16)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Place"  />
@@ -846,14 +839,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work2Time" is-open="popup.opened17" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(17)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Place"  />
@@ -870,14 +856,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work3Time" is-open="popup.opened18" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(18)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Place"  />
@@ -894,14 +873,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work4Time" is-open="popup.opened19" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(19)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Place"  />
@@ -918,14 +890,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work5Time" is-open="popup.opened20" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(20)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Place"  />
@@ -942,14 +907,7 @@
 											</tr>
 											<tr>
 												<td>
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work6Time" is-open="popup.opened21" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="false" ng-disabled="vm.readOnly" />
-														<span class="input-group-btn">
-															<button type="button" class="btn btn-default" ng-click="open(21)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Time"  />
 												</td>
 												<td>
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Place"  />
