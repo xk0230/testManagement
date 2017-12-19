@@ -108,7 +108,7 @@
 													<p class="input-group">
 														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.entryDate" is-open="popup.opened1" 
 														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-													     ng-disabled="vm.readOnly"  ng-change="vm.rzDayChanged()" ng-required="true"/>
+													     ng-disabled="vm.readOnly"  ng-change="vm.rzDayChanged()" />
 														<span class="input-group-btn">
 														<button type="button" class="btn btn-default" ng-click="open(1)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
 														</span>
