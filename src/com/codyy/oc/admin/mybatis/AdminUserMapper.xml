@@ -232,7 +232,29 @@
      ad.citizen_card as 'adminUserDetail.citizenCard', ad.payroll_card as 'adminUserDetail.payrollCard',
      ad.pdp_sj_a as 'adminUserDetail.pdpSjA',ad.pdp_sj_b  as 'adminUserDetail.pdpSjB', ad.pdp_sj_c as 'adminUserDetail.pdpSjC', ad.pdp_sj_d as 'adminUserDetail.pdpSjD', 
      ad.pdp_nj_a as 'adminUserDetail.pdpNjA', ad.pdp_nj_b as 'adminUserDetail.pdpNjB', ad.pdp_nj_c as 'adminUserDetail.pdpNjC', ad.pdp_nj_d as 'adminUserDetail.pdpNjD',
-     ad.gx as 'adminUserDetail.gx',ad.sj as 'adminUserDetail.sj'
+     ad.gx as 'adminUserDetail.gx',ad.sj as 'adminUserDetail.sj',
+     ad.english as 'adminUserDetail.english', ad.other_language as 'adminUserDetail.otherLanguage', ad.address as 'adminUserDetail.address', 
+     ad.first_work_time as 'adminUserDetail.firstWorTime', ad.home_name as 'adminUserDetail.homeName', ad.home_xl as 'adminUserDetail.homeXl', 
+    ad.home_zy as 'adminUserDetail.homeZy', ad.home_birthday as 'adminUserDetail.homeBirthday', ad.home_work as 'adminUserDetail.homeWork',
+     ad.home_zw as 'adminUserDetail.homeZw', ad.home_phone as 'adminUserDetail.homePhone', ad.home_idcard as 'adminUserDetail.homeIdcard', ad.child1_name as 'adminUserDetail.child1Name', 
+    ad.child1_birthday as 'adminUserDetail.child1Birthday', ad.child1_sex as 'adminUserDetail.child1Sex', ad.child1_work as 'adminUserDetail.child1Work', ad.child2_name as 'adminUserDetail.child2Name', 
+    ad.child2_birthday as 'adminUserDetail.child2Birthday', ad.child2_sex as 'adminUserDetail.child2Sex', 
+    ad.child2_work as 'adminUserDetail.child2Work', ad.child3_name as 'adminUserDetail.child3Name', ad.child3_birthday as 'adminUserDetail.child3Birthday',
+     ad.child3_sex as 'adminUserDetail.child3Sex', ad.child3_work as 'adminUserDetail.child3Work',
+      ad.work1_time as 'adminUserDetail.work1Time', ad.work1_place as 'adminUserDetail.work1Place', 
+    ad.work1_reason as 'adminUserDetail.work1Reason', ad.work1_job as 'adminUserDetail.work1Job', 
+    ad.work1_zyyj as 'adminUserDetail.work1Zyyj', ad.work2_time as 'adminUserDetail.work2Time', ad.work2_place as 'adminUserDetail.work2Place', 
+    ad.work2_reason as 'adminUserDetail.work2Reason', ad.work2_job as 'adminUserDetail.work2Job', 
+    ad.work2_zyyj as 'adminUserDetail.work2Zyyj', ad.work3_time as 'adminUserDetail.work3Time', 
+    ad.work3_place as 'adminUserDetail.work3Place', ad.work3_reason as 'adminUserDetail.work3Reason', ad.work3_job as 'adminUserDetail.work3Job', 
+    ad.work3_zyyj as 'adminUserDetail.work3Zyyj', ad.work4_time as 'adminUserDetail.work4Time', 
+    ad.work4_place as 'adminUserDetail.work4Place', ad.work4_reason as 'adminUserDetail.work4Reason', 
+    ad.work4_job as 'adminUserDetail.work4Job', ad.work4_zyyj as 'adminUserDetail.work4Zyyj', 
+    ad.work5_time as 'adminUserDetail.work5Time', ad.work5_place as 'adminUserDetail.work5Place', ad.work5_reason as 'adminUserDetail.work5Reason', 
+    ad.work5_job as 'adminUserDetail.work5Job', ad.work5_zyyj as 'adminUserDetail.work5Zyyj', 
+    ad.work6_time as 'adminUserDetail.work6Time', ad.work6_place as 'adminUserDetail.work6Place', 
+    ad.work6_reason as 'adminUserDetail.work6Reason', ad.work6_job as 'adminUserDetail.work6Job', 
+    ad.work6_zyyj as 'adminUserDetail.work6Zyyj'
   </sql>
 	
 	

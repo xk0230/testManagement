@@ -31,7 +31,7 @@
     <result column="pdp_nj_d" jdbcType="VARCHAR" property="pdpNjD" />
     <result column="gx" jdbcType="VARCHAR" property="gx" />
     <result column="sj" jdbcType="VARCHAR" property="sj" />
-        <result column="english" jdbcType="VARCHAR" property="english" />
+    <result column="english" jdbcType="VARCHAR" property="english" />
     <result column="other_language" jdbcType="VARCHAR" property="otherLanguage" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="first_work_time" jdbcType="TIMESTAMP" property="firstWorkTime" />
