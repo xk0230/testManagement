@@ -480,6 +480,48 @@
 												</div>
 											</div>
 										</div>
+										<!-- 第5行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >英语水平</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.english" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >其他语言水平</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.otherLanguage" />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">参加工作日期</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.firstWorkTime" is-open="popup.opened11" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(11)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >家庭住址</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.address" />
+												</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -524,6 +566,411 @@
 					</div>
 				</div>
 				
+				<!-- 家庭情况 start here -->
+				<div class="outlet" ng-if="vm.edit == true">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-success toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>家庭情况</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">配偶姓名</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeName"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">学历</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeXl"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">专业</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeZy"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">出生日期</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.homeBirthday" is-open="popup.opened11" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(11)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第2行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-2">
+												<label class="col-lg-12 control-label pull-left">工作单位及地址</label>
+											</div>
+											<div class="col-lg-10">
+												<div class="col-lg-12">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeWork"  />
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第3行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">职务</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeZw"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">联系电话</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homePhone"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">身份证号</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeIdcard"  />
+												</div>
+												</div>
+											</div>
+										</div>
+										
+										<!-- 第3行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">子女姓名</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child1Name"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">出生日期</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.child1Birthday" is-open="popup.opened13" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(13)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">性别</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.child1Sex">
+														<option value="">请选择</option>
+														<option value="0" >男</option>
+														<option value="1" >女</option>
+													</select>
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">学习/工作单位</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child1Work"  />
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第4行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">子女姓名</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child2Name"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">出生日期</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.child2Birthday" is-open="popup.opened14" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(14)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">性别</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.child2Sex">
+														<option value="">请选择</option>
+														<option value="0" >男</option>
+														<option value="1" >女</option>
+													</select>
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">学习/工作单位</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child2Work"  />
+												</div>
+												</div>
+											</div>
+										</div>
+										<!-- 第5行 -->
+										<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">子女姓名</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child3Name"  />
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">出生日期</label>
+												<div class="col-lg-8">
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.child3Birthday" is-open="popup.opened15" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(15)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">性别</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<select class="form-control select2" ng-model="vm.user.adminUserDetail.child3Sex">
+														<option value="">请选择</option>
+														<option value="0" >男</option>
+														<option value="1" >女</option>
+													</select>
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label">学习/工作单位</label>
+												<div class="col-lg-8">
+												<div class="form-group">
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child3Work"  />
+												</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 工作经历 start here -->
+				<div class="outlet" ng-if="vm.edit == true">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-success toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>工作经历</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<!-- 第1行 -->
+										<table class="col-lg-12 table">
+											<tr>
+												<th width="10%" rowspan="7"  style="vertical-align:middle">工作简历</th>
+												<th width="18%">时间</th>
+												<th width="18%">就职单位</th>
+												<th width="18%">离职原因</th>
+												<th width="18%">职务</th>
+												<th width="18%">重要业绩</th>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work1Time" is-open="popup.opened16" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(16)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work1Zyyj"  />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work2Time" is-open="popup.opened17" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(17)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work2Zyyj"  />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work3Time" is-open="popup.opened18" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(18)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work3Zyyj"  />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work4Time" is-open="popup.opened19" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(19)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work4Zyyj"  />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work5Time" is-open="popup.opened20" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(20)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work5Zyyj"  />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p class="input-group">
+														<input type="text" class="form-control" uib-datepicker-popup ng-model="vm.user.adminUserDetail.work6Time" is-open="popup.opened21" 
+														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
+														ng-required="false" ng-disabled="vm.readOnly" />
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="open(21)" ng-readonly="vm.readOnly"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</p>
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Place"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Reason"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Job"  />
+												</td>
+												<td>
+													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.work6Zyyj"  />
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				
 					<!-- PDP信息 start here -->
 				<div class="outlet" ng-if="${adminUser.position != 'STAFF'}" >

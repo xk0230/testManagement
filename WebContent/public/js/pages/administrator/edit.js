@@ -341,7 +341,62 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.pdpNjC'          : $scope.vm.user.adminUserDetail.pdpNjC,
 					'adminUserDetail.pdpNjD'          : $scope.vm.user.adminUserDetail.pdpNjD,
 					'adminUserDetail.gx'          : $scope.vm.user.adminUserDetail.gx,
-					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj
+					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj,
+					'adminUserDetail.english'          : $scope.vm.user.adminUserDetail.english,
+					'adminUserDetail.otherLanguage'          : $scope.vm.user.adminUserDetail.otherLanguage,
+					'adminUserDetail.homeIdcard'          : $scope.vm.user.adminUserDetail.homeIdcard,
+					'adminUserDetail.homeName'          : $scope.vm.user.adminUserDetail.homeName  ,
+					'adminUserDetail.homePhone'          : $scope.vm.user.adminUserDetail.homePhone ,
+					'adminUserDetail.homeWork'          : $scope.vm.user.adminUserDetail.homeWork  ,
+					'adminUserDetail.homeXl'          : $scope.vm.user.adminUserDetail.homeXl    ,
+					'adminUserDetail.homeZw'          : $scope.vm.user.adminUserDetail.homeZw    ,
+					'adminUserDetail.homeZy'          : $scope.vm.user.adminUserDetail.homeZy    ,
+					'adminUserDetail.homeBirthday'        : $filter('date')($scope.vm.user.adminUserDetail.homeBirthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child1Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child1Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child1Name'          : $scope.vm.user.adminUserDetail.child1Name    ,
+					'adminUserDetail.child1Sex'          : $scope.vm.user.adminUserDetail.child1Sex     ,
+					'adminUserDetail.child1Work'          : $scope.vm.user.adminUserDetail.child1Work    ,
+					'adminUserDetail.child2Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child2Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child2Name'          : $scope.vm.user.adminUserDetail.child2Name    ,
+					'adminUserDetail.child2Sex'          : $scope.vm.user.adminUserDetail.child2Sex     ,
+					'adminUserDetail.child2Work'          : $scope.vm.user.adminUserDetail.child2Work    ,
+					'adminUserDetail.child3Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child3Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child3Name'          : $scope.vm.user.adminUserDetail.child3Name    ,
+					'adminUserDetail.child3Sex'          : $scope.vm.user.adminUserDetail.child3Sex     ,
+					'adminUserDetail.child3Work'          : $scope.vm.user.adminUserDetail.child3Work    ,
+					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizenCard   ,
+					'adminUserDetail.work1Job'          : $scope.vm.user.adminUserDetail.work1Job   ,
+					'adminUserDetail.work1Place'          : $scope.vm.user.adminUserDetail.work1Place ,
+					'adminUserDetail.work1Reason'          : $scope.vm.user.adminUserDetail.work1Reason,
+					'adminUserDetail.work1Time'          : $filter('date')($scope.vm.user.adminUserDetail.work1Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work1Zyyj'          : $scope.vm.user.adminUserDetail.work1Zyyj  ,
+					'adminUserDetail.work2Job'          : $scope.vm.user.adminUserDetail.work2Job   ,
+					'adminUserDetail.work2Place'          : $scope.vm.user.adminUserDetail.work2Place ,
+					'adminUserDetail.work2Reason'          : $scope.vm.user.adminUserDetail.work2Reason,
+					'adminUserDetail.work2Time'          : $filter('date')($scope.vm.user.adminUserDetail.work2Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work2Zyyj'          : $scope.vm.user.adminUserDetail.work2Zyyj  ,
+					'adminUserDetail.work3Job'          : $scope.vm.user.adminUserDetail.work3Job   ,
+					'adminUserDetail.work3Place'          : $scope.vm.user.adminUserDetail.work3Place ,
+					'adminUserDetail.work3Reason'          : $scope.vm.user.adminUserDetail.work3Reason,
+					'adminUserDetail.work3Time'          : $filter('date')($scope.vm.user.adminUserDetail.work3Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work3Zyyj'          : $scope.vm.user.adminUserDetail.work3Zyyj  ,
+					'adminUserDetail.work4Job'          : $scope.vm.user.adminUserDetail.work4Job   ,
+					'adminUserDetail.work4Place'          : $scope.vm.user.adminUserDetail.work4Place ,
+					'adminUserDetail.work4Reason'          : $scope.vm.user.adminUserDetail.work4Reason,
+					'adminUserDetail.work4Time'          : $filter('date')($scope.vm.user.adminUserDetail.work4Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work4Zyyj'          : $scope.vm.user.adminUserDetail.work4Zyyj  ,
+					'adminUserDetail.work5Job'          : $scope.vm.user.adminUserDetail.work5Job   ,
+					'adminUserDetail.work5Place'          : $scope.vm.user.adminUserDetail.work5Place ,
+					'adminUserDetail.work5Reason'          : $scope.vm.user.adminUserDetail.work5Reason,
+					'adminUserDetail.work5Time'          : $filter('date')($scope.vm.user.adminUserDetail.work5Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work5Zyyj'          : $scope.vm.user.adminUserDetail.work5Zyyj  ,
+					'adminUserDetail.work6Job'          : $scope.vm.user.adminUserDetail.work6Job   ,
+					'adminUserDetail.work6Place'          : $scope.vm.user.adminUserDetail.work6Place ,
+					'adminUserDetail.work6Reason'          : $scope.vm.user.adminUserDetail.work6Reason,
+					'adminUserDetail.work6Time'          : $filter('date')($scope.vm.user.adminUserDetail.work6Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work6Zyyj'          : $scope.vm.user.adminUserDetail.work6Zyyj  ,
+					'adminUserDetail.firstWorkTime'          : $filter('date')($scope.vm.user.adminUserDetail.firstWorkTime, "yyyy-MM-dd")  ,
+					'adminUserDetail.address'          : $scope.vm.user.adminUserDetail.address
 				}
 			}).then(function(res){
 				if(res){
@@ -412,7 +467,62 @@ myAppModule.controller('UserListController',
 					'adminUserDetail.pdpNjC'          : $scope.vm.user.adminUserDetail.pdpNjC,
 					'adminUserDetail.pdpNjD'          : $scope.vm.user.adminUserDetail.pdpNjD,
 					'adminUserDetail.gx'          : $scope.vm.user.adminUserDetail.gx,
-					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj
+					'adminUserDetail.sj'          : $scope.vm.user.adminUserDetail.sj,
+					'adminUserDetail.english'          : $scope.vm.user.adminUserDetail.english,
+					'adminUserDetail.otherLanguage'          : $scope.vm.user.adminUserDetail.otherLanguage,
+					'adminUserDetail.homeIdcard'          : $scope.vm.user.adminUserDetail.homeIdcard,
+					'adminUserDetail.homeName'          : $scope.vm.user.adminUserDetail.homeName  ,
+					'adminUserDetail.homePhone'          : $scope.vm.user.adminUserDetail.homePhone ,
+					'adminUserDetail.homeWork'          : $scope.vm.user.adminUserDetail.homeWork  ,
+					'adminUserDetail.homeXl'          : $scope.vm.user.adminUserDetail.homeXl    ,
+					'adminUserDetail.homeZw'          : $scope.vm.user.adminUserDetail.homeZw    ,
+					'adminUserDetail.homeZy'          : $scope.vm.user.adminUserDetail.homeZy    ,
+					'adminUserDetail.homeBirthday'        : $filter('date')($scope.vm.user.adminUserDetail.homeBirthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child1Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child1Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child1Name'          : $scope.vm.user.adminUserDetail.child1Name    ,
+					'adminUserDetail.child1Sex'          : $scope.vm.user.adminUserDetail.child1Sex     ,
+					'adminUserDetail.child1Work'          : $scope.vm.user.adminUserDetail.child1Work    ,
+					'adminUserDetail.child2Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child2Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child2Name'          : $scope.vm.user.adminUserDetail.child2Name    ,
+					'adminUserDetail.child2Sex'          : $scope.vm.user.adminUserDetail.child2Sex     ,
+					'adminUserDetail.child2Work'          : $scope.vm.user.adminUserDetail.child2Work    ,
+					'adminUserDetail.child3Birthday'          : $filter('date')($scope.vm.user.adminUserDetail.child3Birthday, "yyyy-MM-dd")  ,
+					'adminUserDetail.child3Name'          : $scope.vm.user.adminUserDetail.child3Name    ,
+					'adminUserDetail.child3Sex'          : $scope.vm.user.adminUserDetail.child3Sex     ,
+					'adminUserDetail.child3Work'          : $scope.vm.user.adminUserDetail.child3Work    ,
+					'adminUserDetail.citizenCard'          : $scope.vm.user.adminUserDetail.citizenCard   ,
+					'adminUserDetail.work1Job'          : $scope.vm.user.adminUserDetail.work1Job   ,
+					'adminUserDetail.work1Place'          : $scope.vm.user.adminUserDetail.work1Place ,
+					'adminUserDetail.work1Reason'          : $scope.vm.user.adminUserDetail.work1Reason,
+					'adminUserDetail.work1Time'          : $filter('date')($scope.vm.user.adminUserDetail.work1Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work1Zyyj'          : $scope.vm.user.adminUserDetail.work1Zyyj  ,
+					'adminUserDetail.work2Job'          : $scope.vm.user.adminUserDetail.work2Job   ,
+					'adminUserDetail.work2Place'          : $scope.vm.user.adminUserDetail.work2Place ,
+					'adminUserDetail.work2Reason'          : $scope.vm.user.adminUserDetail.work2Reason,
+					'adminUserDetail.work2Time'          : $filter('date')($scope.vm.user.adminUserDetail.work2Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work2Zyyj'          : $scope.vm.user.adminUserDetail.work2Zyyj  ,
+					'adminUserDetail.work3Job'          : $scope.vm.user.adminUserDetail.work3Job   ,
+					'adminUserDetail.work3Place'          : $scope.vm.user.adminUserDetail.work3Place ,
+					'adminUserDetail.work3Reason'          : $scope.vm.user.adminUserDetail.work3Reason,
+					'adminUserDetail.work3Time'          : $filter('date')($scope.vm.user.adminUserDetail.work3Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work3Zyyj'          : $scope.vm.user.adminUserDetail.work3Zyyj  ,
+					'adminUserDetail.work4Job'          : $scope.vm.user.adminUserDetail.work4Job   ,
+					'adminUserDetail.work4Place'          : $scope.vm.user.adminUserDetail.work4Place ,
+					'adminUserDetail.work4Reason'          : $scope.vm.user.adminUserDetail.work4Reason,
+					'adminUserDetail.work4Time'          : $filter('date')($scope.vm.user.adminUserDetail.work4Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work4Zyyj'          : $scope.vm.user.adminUserDetail.work4Zyyj  ,
+					'adminUserDetail.work5Job'          : $scope.vm.user.adminUserDetail.work5Job   ,
+					'adminUserDetail.work5Place'          : $scope.vm.user.adminUserDetail.work5Place ,
+					'adminUserDetail.work5Reason'          : $scope.vm.user.adminUserDetail.work5Reason,
+					'adminUserDetail.work5Time'          : $filter('date')($scope.vm.user.adminUserDetail.work5Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work5Zyyj'          : $scope.vm.user.adminUserDetail.work5Zyyj  ,
+					'adminUserDetail.work6Job'          : $scope.vm.user.adminUserDetail.work6Job   ,
+					'adminUserDetail.work6Place'          : $scope.vm.user.adminUserDetail.work6Place ,
+					'adminUserDetail.work6Reason'          : $scope.vm.user.adminUserDetail.work6Reason,
+					'adminUserDetail.work6Time'          : $filter('date')($scope.vm.user.adminUserDetail.work6Time, "yyyy-MM-dd")  ,
+					'adminUserDetail.work6Zyyj'          : $scope.vm.user.adminUserDetail.work6Zyyj  ,
+					'adminUserDetail.firstWorkTime'          : $filter('date')($scope.vm.user.adminUserDetail.firstWorkTime, "yyyy-MM-dd")  ,
+					'adminUserDetail.address'          : $scope.vm.user.adminUserDetail.address
 				}
 			}).then(function(res){
 				if(res){
@@ -576,6 +686,42 @@ myAppModule.controller('UserListController',
 			}else if (mode == 10){
 				$scope.popup.opened10 = true;
 			}
+			else if (mode == 11){
+				$scope.popup.opened11 = true;
+			}
+			else if (mode == 12){
+				$scope.popup.opened12 = true;
+			}
+			else if (mode == 13){
+				$scope.popup.opened13 = true;
+			}
+			else if (mode == 14){
+				$scope.popup.opened14 = true;
+			}
+			else if (mode == 15){
+				$scope.popup.opened15 = true;
+			}
+			else if (mode == 16){
+				$scope.popup.opened16 = true;
+			}
+			else if (mode == 17){
+				$scope.popup.opened17 = true;
+			}
+			else if (mode == 18){
+				$scope.popup.opened18 = true;
+			}
+			else if (mode == 19){
+				$scope.popup.opened19 = true;
+			}
+			else if (mode == 20){
+				$scope.popup.opened20 = true;
+			}
+			else if (mode == 21){
+				$scope.popup.opened21 = true;
+			}
+			else if (mode == 22){
+				$scope.popup.opened22 = true;
+			}
 			
 		};
 	
@@ -590,6 +736,18 @@ myAppModule.controller('UserListController',
 			opened8: false,
 			opened9: false,
 			opened10: false,
+			opened11: false,
+			opened12: false,
+			opened13: false,
+			opened14: false,
+			opened15: false,
+			opened16: false,
+			opened17: false,
+			opened18: false,
+			opened19: false,
+			opened20: false,
+			opened21: false,
+			opened22: false
 		};
 	}
 );
