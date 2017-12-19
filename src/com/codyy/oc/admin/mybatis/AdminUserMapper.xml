@@ -234,7 +234,7 @@
      ad.pdp_nj_a as 'adminUserDetail.pdpNjA', ad.pdp_nj_b as 'adminUserDetail.pdpNjB', ad.pdp_nj_c as 'adminUserDetail.pdpNjC', ad.pdp_nj_d as 'adminUserDetail.pdpNjD',
      ad.gx as 'adminUserDetail.gx',ad.sj as 'adminUserDetail.sj',
      ad.english as 'adminUserDetail.english', ad.other_language as 'adminUserDetail.otherLanguage', ad.address as 'adminUserDetail.address', 
-     ad.first_work_time as 'adminUserDetail.firstWorTime', ad.home_name as 'adminUserDetail.homeName', ad.home_xl as 'adminUserDetail.homeXl', 
+     ad.first_work_time as 'adminUserDetail.firstWorkTime', ad.home_name as 'adminUserDetail.homeName', ad.home_xl as 'adminUserDetail.homeXl', 
     ad.home_zy as 'adminUserDetail.homeZy', ad.home_birthday as 'adminUserDetail.homeBirthday', ad.home_work as 'adminUserDetail.homeWork',
      ad.home_zw as 'adminUserDetail.homeZw', ad.home_phone as 'adminUserDetail.homePhone', ad.home_idcard as 'adminUserDetail.homeIdcard', ad.child1_name as 'adminUserDetail.child1Name', 
     ad.child1_birthday as 'adminUserDetail.child1Birthday', ad.child1_sex as 'adminUserDetail.child1Sex', ad.child1_work as 'adminUserDetail.child1Work', ad.child2_name as 'adminUserDetail.child2Name', 
