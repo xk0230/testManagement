@@ -13,7 +13,7 @@
 			<div class="content-wrapper">
 				<div class="row">
 					<div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="st-chart"></i> 调岗信息</h1>
+                        <h1 class="page-header"><i class="st-chart"></i> 调岗/调薪信息</h1>
                         <!-- Start .bredcrumb -->
                         <ul id="crumb" class="breadcrumb">
                         </ul>
@@ -143,7 +143,7 @@
 			<div class="modal-header">
 				<div class="row ">
 					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 调岗信息</h1>
+						<h1 class="page-header"><i class="im-users2"></i> 调岗/调薪信息</h1>
 						<ul id="crumb" class="breadcrumb">
 						</ul>
 					</div>

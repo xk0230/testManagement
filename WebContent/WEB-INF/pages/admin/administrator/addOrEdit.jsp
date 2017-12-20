@@ -1187,14 +1187,14 @@
 						</div>
 					</div>
 					
-					<!-- 调岗信息 start here -->
+					<!-- 调岗/调薪信息 start here -->
 					<div class="outlet">
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-default toggle">
 									<!-- Start .panel -->
 									<div class="panel-heading">
-										<h3 class="panel-title"><i class="ec-pencil"></i>调岗信息</h3>
+										<h3 class="panel-title"><i class="ec-pencil"></i>调岗/调薪信息</h3>
 									</div>
 									<div class="panel-body">
 										<div class="form-horizontal group-border" role="form">
