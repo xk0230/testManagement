@@ -621,19 +621,19 @@
 										</div>
 										<!-- 第2行 -->
 										<div class="col-lg-12">
-											<div class="col-lg-2">
-												<label class="col-lg-12 control-label pull-left">工作单位及地址</label>
-											</div>
-											<div class="col-lg-10">
-												<div class="col-lg-12">
+											<div class="col-lg-3">
+												<label class="col-lg-4 control-label" >工作单位</label>
+											<!-- </div>
+											<div class="col-lg-3"> -->
+												<div class="col-lg-8">
 												<div class="form-group">
 													<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeWork"  />
 												</div>
 												</div>
 											</div>
-										</div>
-										<!-- 第3行 -->
-										<div class="col-lg-12">
+								<!-- 		</div>
+										第3行
+										<div class="col-lg-12"> -->
 											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">职务</label>
 												<div class="col-lg-8">
@@ -650,7 +650,7 @@
 												</div>
 												</div>
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-3">
 												<label class="col-lg-4 control-label">身份证号</label>
 												<div class="col-lg-8">
 												<div class="form-group">
