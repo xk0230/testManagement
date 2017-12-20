@@ -67,7 +67,7 @@ public class PositionService {
 			pa.setPositionId(position.getPostId());
 			auditMapper.insert(pa);
 			AdminUser au = adminUserMapper.getselcAdminUserById(id);
-			MailUtil.send(au.getUserName(), MAIL_TITLE, MAIL_DETAIL.replace("#", pa.getName()));
+			MailUtil.send(au.getUserName(), MAIL_TITLE, MAIL_DETAIL.replace("#", position.getName()));
 //			MailUtil.send("allen.xiao", MAIL_TITLE, MAIL_DETAIL.replace("#", position.getName()));
 			
 		}
