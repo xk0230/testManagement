@@ -150,7 +150,7 @@
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTrainList(item.userId)">培训</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTransferPositionList(item.userId)">调岗/调薪</button>
 													<button type="button" class="btn btn-xs btn-success" ng-click="vm.userAttachmentList(item.userId)">附件</button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.bookHis(item.userName,'.outlet')">借书记录</button>
+													<button type="button" class="btn btn-xs btn-success" ng-click="vm.bookHis(item.userId,'.outlet')">借书记录</button>
 												</td>
 											</tr>
 										</tbody>
