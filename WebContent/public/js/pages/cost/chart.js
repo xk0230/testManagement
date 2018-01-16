@@ -31,9 +31,11 @@ myAppModule.controller('ChartController',
 				self.getInbalance();
 				
 			});
-			
+			console.log( $(".a1"));
 		};
-		
+		$scope.$on('$viewContentLoaded', function(){
+			console.log( $(".a1"));
+		});
 		$scope.costYearChange = function(){
 			
 			self.getOutlay();
@@ -195,7 +197,6 @@ myAppModule.controller('ChartController',
 				    });
 				}
 			});
-			
 		};
 		
 		

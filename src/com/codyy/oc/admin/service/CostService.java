@@ -743,6 +743,59 @@ public class CostService {
             }
         }
 		
+        
+//		for (CostChartsSeriesData cc : ls) {
+//		List<BigDecimal> Datas = cc.getData();
+//		BigDecimal all = new BigDecimal(0.0);
+//		for (BigDecimal d : Datas) {
+//			all = all.add(d);
+//		}
+//		Datas.add(all);
+//	}
+//	c.getXcategories().add("总计");
+        DepMonthTotalVO all = new DepMonthTotalVO();
+        		all.setAprilTotal(new BigDecimal(0.0));
+        		all.setAugustTotal(new BigDecimal(0.0));
+        		all.setDecemberTotal(new BigDecimal(0.0));
+        		all.setFebruaryTotal(new BigDecimal(0.0));
+        		all.setJanuaryTotal(new BigDecimal(0.0));
+        		all.setJulyTotal(new BigDecimal(0.0));
+        		all.setJuneTotal(new BigDecimal(0.0));
+        		all.setMarchTotal(new BigDecimal(0.0));
+        		all.setMayTotal(new BigDecimal(0.0));
+        		all.setNovemberTotal(new BigDecimal(0.0));
+        		all.setOctoberTotal(new BigDecimal(0.0));
+        		all.setSeptemberTotal(new BigDecimal(0.0));
+        for (DepMonthTotalVO d : depMonthTotals) {
+        	all.setAprilTotal(all.getAprilTotal().add(d.getAprilTotal()==null?new BigDecimal(0.0):d.getAprilTotal()));
+        	all.setAugustTotal(all.getAugustTotal().add(d.getAugustTotal()==null?new BigDecimal(0.0):d.getAugustTotal()));
+        	all.setDecemberTotal(all.getDecemberTotal().add(d.getDecemberTotal()==null?new BigDecimal(0.0):d.getDecemberTotal()));
+        	all.setFebruaryTotal(all.getFebruaryTotal().add(d.getFebruaryTotal()==null?new BigDecimal(0.0):d.getFebruaryTotal()));
+        	all.setJanuaryTotal(all.getJanuaryTotal().add(d.getJanuaryTotal()==null?new BigDecimal(0.0):d.getJanuaryTotal()));
+        	all.setJulyTotal(all.getJulyTotal().add(d.getJulyTotal()==null?new BigDecimal(0.0):d.getJulyTotal()));
+        	all.setJuneTotal(all.getJuneTotal().add(d.getJuneTotal()==null?new BigDecimal(0.0):d.getJuneTotal()));
+        	all.setMarchTotal(all.getMarchTotal().add(d.getMarchTotal()==null?new BigDecimal(0.0):d.getMarchTotal()));
+        	all.setMayTotal(all.getMayTotal().add(d.getMayTotal()==null?new BigDecimal(0.0):d.getMayTotal()));
+        	all.setNovemberTotal(all.getNovemberTotal().add(d.getNovemberTotal()==null?new BigDecimal(0.0):d.getNovemberTotal()));
+        	all.setOctoberTotal(all.getOctoberTotal().add(d.getOctoberTotal()==null?new BigDecimal(0.0):d.getOctoberTotal()));
+        	all.setSeptemberTotal(all.getSeptemberTotal().add(d.getSeptemberTotal()==null?new BigDecimal(0.0):d.getSeptemberTotal()));
+		}
+        
+        all.setAprilTotal(all.getAprilTotal().intValue()==0?null:all.getAprilTotal());
+		all.setAugustTotal(all.getAugustTotal().intValue()==0?null:all.getAugustTotal());
+		all.setDecemberTotal(all.getDecemberTotal().intValue()==0?null:all.getDecemberTotal());
+		all.setFebruaryTotal(all.getFebruaryTotal().intValue()==0?null:all.getFebruaryTotal());
+		all.setJanuaryTotal(all.getJanuaryTotal().intValue()==0?null:all.getJanuaryTotal());
+		all.setJulyTotal(all.getJulyTotal().intValue()==0?null:all.getJulyTotal());
+		all.setJuneTotal(all.getJuneTotal().intValue()==0?null:all.getJuneTotal());
+		all.setMarchTotal(all.getMarchTotal().intValue()==0?null:all.getMarchTotal());
+		all.setMayTotal(all.getMayTotal().intValue()==0?null:all.getMayTotal());
+		all.setNovemberTotal(all.getNovemberTotal().intValue()==0?null:all.getNovemberTotal());
+		all.setOctoberTotal(all.getOctoberTotal().intValue()==0?null:all.getOctoberTotal());
+		all.setSeptemberTotal(all.getSeptemberTotal().intValue()==0?null:all.getSeptemberTotal());
+        
+        all.setDepName("总计");
+        depMonthTotals.add(all);
 		return depMonthTotals;
 	}
 	

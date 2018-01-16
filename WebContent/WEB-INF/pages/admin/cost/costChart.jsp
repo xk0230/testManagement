@@ -76,24 +76,42 @@
 												<th>十月</th>
 												<th>十一月</th>
 												<th>十二月</th>
+												<th>总计</th>
 											</tr>
 										</thead>  
 										<tbody>
 											<tr class="odd gradeX" ng-repeat="item in vm.list">
 												<td><p ng-bind="item.depName"></p></td>
-												<td><p ng-bind="item.januaryTotal"></p></td>
-												<td><p ng-bind="item.februaryTotal"></p></td>
-												<td><p ng-bind="item.marchTotal"></p></td>
-												<td><p ng-bind="item.aprilTotal"></p></td>
-												<td><p ng-bind="item.mayTotal"></p></td>
-												<td><p ng-bind="item.juneTotal"></p></td>
-												<td><p ng-bind="item.julyTotal"></p></td>
-												<td><p ng-bind="item.augustTotal"></p></td>
-												<td><p ng-bind="item.septemberTotal"></p></td>
-												<td><p ng-bind="item.octoberTotal"></p></td>
-												<td><p ng-bind="item.novemberTotal"></p></td>
-												<td><p ng-bind="item.decemberTotal"></p></td>
+												<td><p class ="a1" ng-bind="item.januaryTotal"></p></td>
+												<td><p class ="a2" ng-bind="item.februaryTotal"></p></td>
+												<td><p class ="a3" ng-bind="item.marchTotal"></p></td>
+												<td><p class ="a4" ng-bind="item.aprilTotal"></p></td>
+												<td><p class ="a5" ng-bind="item.mayTotal"></p></td>
+												<td><p class ="a6" ng-bind="item.juneTotal"></p></td>
+												<td><p class ="a7" ng-bind="item.julyTotal"></p></td>
+												<td><p class ="a8" ng-bind="item.augustTotal"></p></td>
+												<td><p class ="a9" ng-bind="item.septemberTotal"></p></td>
+												<td><p class ="a10" ng-bind="item.octoberTotal"></p></td>
+												<td><p class ="a11" ng-bind="item.novemberTotal"></p></td>
+												<td><p class ="a12" ng-bind="item.decemberTotal"></p></td>
+												<td><p class ="a13" ng-bind="item.decemberTotal+item.februaryTotal+item.marchTotal+item.aprilTotal+item.mayTotal+item.juneTotal+item.augustTotal+tem.septemberTotal+item.octoberTotal+item.novemberTotal+item.januaryTotal|number:1"></p></td>
 											</tr>
+									<!-- 		<tr>
+												<td><p >总计</p></td>
+												<td><p id="a1"></p></td>
+												<td><p id="a2"></p></td>
+												<td><p id="a3"></p></td>
+												<td><p id="a4"></p></td>
+												<td><p id="a5"></p></td>
+												<td><p id="a6"></p></td>
+												<td><p id="a7"></p></td>
+												<td><p id="a8"></p></td>
+												<td><p id="a9"></p></td>
+												<td><p id="a10"></p></td>
+												<td><p id="a11"></p></td>
+												<td><p id="a12"></p></td>
+												<td><p id="a13"></p></td>
+											</tr> -->
 										</tbody>
 									</table>
 									
