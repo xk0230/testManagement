@@ -157,7 +157,13 @@ public interface AdminUserMapper {
 	 * @author yangyongwu
 	 */
 	public AdminUser getAdminUser(Map<String,String> map);
-	
+	/**
+	 * 根据username和password获取adminUser
+	 * @param map(userName,password)
+	 * @return
+	 * @author yangyongwu
+	 */
+	public AdminUser getAdminUser2(Map<String,String> map);
 	/**
 	 * 
 	 * modifyPassword:(修改密码)

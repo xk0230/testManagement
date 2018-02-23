@@ -38,10 +38,14 @@
 
 
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/sprflat-theme/jquery.ui.all.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/css/bootstrap.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/plugins.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/main.css" media="screen">
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
+
+<link type="text/css" rel="stylesheet" href="${root}/public/newCss/bootstrap.min.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/newCss/style.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/newCss/bootstrap-responsive.min.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/newCss/pages/dashboard.css" media="screen">
+<link type="text/css" rel="stylesheet" href="${root}/public/newCss/font-awesome.css" media="screen">
+
+
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
 <!-- Plugin CSS -->
 
@@ -69,7 +73,7 @@
 
 <script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
 
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/icons.css" media="screen">
+
 
 <script src="${root}/public/js/sweetAlert/sweet-alert.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/css/sweetAlert/sweet-alert.css" media="screen">
