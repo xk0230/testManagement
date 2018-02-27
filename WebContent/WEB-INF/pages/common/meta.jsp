@@ -35,27 +35,32 @@
         request.setAttribute("phoneType", "all");
     }
 %>
-
-
+<!-- Jquery -->
+<script src="${root}/public/js/jquery.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/assets/css/sprflat-theme/jquery.ui.all.css" media="screen">
 
+<!-- 新模板部分 -->
 <link type="text/css" rel="stylesheet" href="${root}/public/newCss/bootstrap.min.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/newCss/style.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/newCss/bootstrap-responsive.min.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/newCss/pages/dashboard.css" media="screen">
 <link type="text/css" rel="stylesheet" href="${root}/public/newCss/font-awesome.css" media="screen">
+<script src="${root}/public/newCss/base.js" type="text/javascript"></script>
 
-
-<link type="text/css" rel="stylesheet" href="${root}/public/assets/css/custom.css" media="screen">
-<!-- Plugin CSS -->
-
-<script src="${root}/public/js/jquery.js" type="text/javascript"></script>
+<!-- Angular部分 -->
 <script src="${root}/public/js/angular/angular.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-ui-router.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-animate.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-locale_zh-cn.js" type="text/javascript"></script> 
+<script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script>
+<!-- bootstrap部分 -->
 <script src="${root}/public/js/bootstrap/js/bootstrap.js" type="text/javascript"></script> 
 <script src="${root}/public/js/bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script> 
+<!-- 日期选择控件 -->
+<link href="${root}/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript"></script> 
+<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script> 
+
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>
 <script src="${root}/public/js/extend.js" type="text/javascript"></script>
@@ -63,19 +68,12 @@
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/js/splitpage.js" type="text/javascript"></script>
 <script src="${root}/public/js/common.js" type="text/javascript"></script>
-<script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script>
+
 <link type="text/css" rel="stylesheet" href="${root}/public/calendar/skin/WdatePicker.css" media="screen">
 <script src="${root}/public/calendar/WdatePicker.js" type="text/javascript"></script>
-<!-- 日期选择控件 -->
-<link href="${root}/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript"></script> 
-<script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script> 
 
-<script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
-
-
-
-<script src="${root}/public/js/sweetAlert/sweet-alert.js" type="text/javascript"></script>
+<!-- 弹出框 -->
+<script src="${root}/public/js/sweetAlert/sweet-alert.min.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="${root}/public/css/sweetAlert/sweet-alert.css" media="screen">
 
 <script type="text/javascript">

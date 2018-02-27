@@ -49,57 +49,91 @@ function logout(){
 getNewsNum();
 setInterval("getNewsNum()","60000");
 </script>
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-    	<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">YSEC-SSC</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li class="dropdown">
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">修改密码</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i>&nbsp;&nbsp;&nbsp;超级管理员<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
-      </div>
-      <!--/.nav-collapse --> 
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /navbar-inner --> 
+<div ng-app = "headerApp" ng-controller="HeaderController as header">
+	<div class="navbar navbar-fixed-top" >
+	  <div class="navbar-inner">
+	    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	    	<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">YSEC-SSC</a>
+	      <div class="nav-collapse">
+	        <ul class="nav pull-right">
+	          <li class="dropdown">
+	            <ul class="dropdown-menu">
+	              <li><a href="javascript:;">修改密码</a></li>
+	            </ul>
+	          </li>
+	          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+	                            class="icon-user"></i>&nbsp;&nbsp;&nbsp;超级管理员<b class="caret"></b></a>
+	            <ul class="dropdown-menu">
+	              <li><a href="javascript:;">Profile</a></li>
+	              <li><a href="javascript:;">Logout</a></li>
+	            </ul>
+	          </li>
+	        </ul>
+	        <form class="navbar-search pull-right">
+	          <input type="text" class="search-query" placeholder="Search">
+	        </form>
+	      </div>
+	      <!--/.nav-collapse --> 
+	    </div>
+	    <!-- /container --> 
+	  </div>
+	  <!-- /navbar-inner --> 
+	</div>
+	<!-- /网页头 -->
+	
+	<div class="subnavbar">
+	  <div class="subnavbar-inner">
+	    <div class="container">
+	      <ul class="mainnav">
+	        <li class="dropdown mainLi"><a href="${root}/admin/index.do"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
+			<!-- 员工信息 -->
+	        <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>员工信息</span> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
+				<li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="en-arrow-right7"></i>个人信息</a></li>
+	          </ul>
+	        </li>
+			<!-- 成本信息 -->
+	        <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+					<li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a></li>
+					<li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
+	          </ul>
+	        </li>
+			<!-- 岗位信息 -->
+	        <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位信息</span> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+					<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a></li>
+					<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
+					<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
+	          </ul>
+	        </li>
+			<!-- 招聘管理 -->
+	        <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+				<li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
+				<li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/recruit/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>待我审批</a></li>
+				<li><a href="${root}/admin/recruit/MyInterview.do"><i class="en-arrow-right7"></i>我的面试</a></li>
+	          </ul>
+	        </li>
+	        <!-- IPE管理 -->
+	        <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE管理</span> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+				<li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a></li>
+				<li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a></li>
+				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a></li>
+	          </ul>
+	        </li>
+			<!-- 绩效管理 -->
+	        <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效管理</span> </a> </li>
+			<!-- 图书管理 -->
+	        <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书管理</span> </a> </li>
+	      </ul>
+	    </div>
+	    <!-- /container --> 
+	  </div>
+	  <!-- /subnavbar-inner --> 
+	</div>
+	<!-- /导航栏 -->
 </div>
-<!-- /navbar -->
-
-<div class="subnavbar">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li ><a href="index.html"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
-        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="active"><a href="costdetail.html"><i class="icon-money"></i><span>成本中心</span> </a> </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-
-
-
-
 <script src="${root}/public/js/pages/header.js" type="text/javascript"></script>
-<!-- End #header -->

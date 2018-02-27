@@ -30,12 +30,9 @@
               <span class="nav-link-text">岗位信息</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postComponents">
-				<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a>
-				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a>
-				</li>
-				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a>
-				</li>
+				<li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a></li>
+				<li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
+				<li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
             </ul>
           </li>
           
@@ -57,12 +54,9 @@
               <span class="nav-link-text">IPE管理</span>
             </a>
             <ul class="sidenav-second-level collapse nav" id="postIPE">
-				<li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a>
-				</li>
-				<li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a>
-				</li>
-				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a>
-				</li>
+				<li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a></li>
+				<li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a></li>
+				<li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a></li>
             </ul>
           </li>
           
@@ -85,4 +79,4 @@
 		</ul>
 	</div>
 </div>
-<script src="${root}/public/js/pages/side.js" type="text/javascript"></script>
+
