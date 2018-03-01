@@ -587,6 +587,11 @@ ul.messages_layout li a.avatar img {
 	-moz-border-radius: 5px;
 	border-radius: 5px
 }
+.AvatarImg{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px
+}
 ul.messages_layout li .message_wrap {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
