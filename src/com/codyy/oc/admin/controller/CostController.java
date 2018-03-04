@@ -52,15 +52,13 @@ public class CostController extends BaseController{
 	     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
 	}
 	
-	@RequestMapping("/manager.do")
+	@RequestMapping("/costApply.do")
 	public String costManager(){
-		
-		return "admin/cost/costManager";
+		return "admin/cost/costApply";
 	}
 	
 	@RequestMapping("/chart.do")
     public String costChar(){
-	    
         return "admin/cost/costChart";
     }
 	
@@ -81,6 +79,8 @@ public class CostController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
 	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
+		
+		
 		
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
@@ -103,8 +103,9 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(CostVO cost){
-        
+    public Page getCostPageList(HttpServletRequest request,CostVO cost){
+		String userId = getSessionUserId(request);
+		cost.setUserId(userId);
         return costService.getCostPageList(cost);
         
     }

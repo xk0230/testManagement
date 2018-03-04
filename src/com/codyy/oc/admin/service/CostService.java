@@ -158,11 +158,11 @@ public class CostService {
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
-	    map.put("depId", cost.getDepId());
 	    map.put("costType", cost.getCostType());
-	    map.put("costSubtypeId", cost.getCostSubtypeId());
+	    map.put("userId", cost.getUserId());
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
+	    
 	    
 	    page.setMap(map);
 	    

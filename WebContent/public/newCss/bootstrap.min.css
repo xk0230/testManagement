@@ -537,7 +537,6 @@ input, button, select, textarea {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 label {
-	display: block;
 	margin-bottom: 5px;
 	color: #333333;
 }
@@ -2815,7 +2814,6 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endCo
 }
 .pagination {
 	height: 36px;
-	margin: 18px 0;
 }
 .pagination ul {
 	display: inline-block;
@@ -3644,4 +3642,17 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbb450', endCo
 }
 .invisible {
 	visibility: hidden;
+}
+.searchSpan{
+	display:inline-block;
+	vertical-align:middle;
+	width:100px;
+	height:37px;
+}
+.searchSpanMid{
+	display:inline-block;
+	vertical-align:middle;
+	text-align: center;
+	width:20px;
+	height:37px;
 }

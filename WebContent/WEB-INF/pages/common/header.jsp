@@ -98,7 +98,7 @@ setInterval("getNewsNum()","60000");
             <!-- 成本信息 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                    <li><a href="${root}/admin/cost/manager.do"><i class="en-arrow-right7"></i>成本管理</a></li>
+                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>成本管理</a></li>
                     <li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
             </li>

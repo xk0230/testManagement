@@ -72,29 +72,27 @@
 	</delete>
 	
 	<select id="getCostPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
-		SELECT dep.`name` AS depName,
+		SELECT  dep.`name` AS depName,
 				costSub.`name` AS costSubName,
 				costDetail.cost_id AS costId,
 				costDetail.cost_num AS costNum,
 				costDetail.cost_time AS costTime,
 				costDetail.cost_type AS costType,
 				costDetail.create_time AS createTime,
-				costDetail.remark as remark
-			FROM	
+				costDetail.remark as remark,
+				'view' as editMode
+			FROM
 		COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
 		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
 			  where 1=1 
-			<if test="map.depId != null and map.depId !=''">
-				AND costDetail.dep_id = #{map.depId}
-			</if>
 			
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
 			
-			<if test="map.costSubtypeId != null and map.costSubtypeId !=''">
-				AND costDetail.cost_subtype_id = #{map.costSubtypeId}
+			<if test="map.userId != null and  map.userId != ''">
+				AND costDetail.create_user_id = #{map.userId}
 			</if>
 			
 			<if test="map.startTime != null and map.startTime !=''">
