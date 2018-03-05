@@ -43,8 +43,8 @@ import com.codyy.oc.admin.vo.DepMonthTotalVO;
 @Service("costServer")
 public class CostService {
 	
-	private static final String INSERT_SUCCESS = "保存成功";
-	private static final String INSERT_ERROR = "保存失败";
+	private static final String INSERT_SUCCESS = "新增成功";
+	private static final String INSERT_ERROR = "新增失败";
 	private static final String UPDATE_SUCCESS = "修改成功";
 	private static final String UPDATE_ERROR = "修改失败";
 	private static final String DEL_SUCCESS = "删除成功";
@@ -67,43 +67,35 @@ public class CostService {
 		return jsonDto;
 	}
 	
+	/**
+	 * 插入，更新成本数据
+	 * @param user
+	 * @param costEntityBean
+	 * @return
+	 */
 	public JsonDto insertOrUpdateCostEntity(AdminUser user,CostEntityBean costEntityBean){
 		
 		JsonDto jsonDto = new JsonDto();
-		
-		costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
-		costEntityBean.setCreateUserId(user.getUserId());
-		
+		//成本产生时间
 		costEntityBean.setCostTime(DateUtils.stringToTimestamp((DateUtils.format(costEntityBean.getCostTime()))));
-		
+		//CostID为空时执行插入
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
-		    
-		    String depId = costEntityBean.getDepId();
-		    String depAmount = costEntityBean.getDepAmount();
-		    if(StringUtils.isNotBlank(depId) && StringUtils.isNotBlank(depAmount)) {
-		        String[] depIds = depId.split(",");
-		        String[] amouts = depAmount.split(",");
-		        if(depIds.length == amouts.length){
-		            CostEntityBean cost = null;
-		            for(int i = 0;i<depIds.length;i++){
-		                cost = new CostEntityBean();
-		                cost.setCostId(UUID.randomUUID().toString());
-		                cost.setCostSubtypeId(costEntityBean.getCostSubtypeId());
-		                cost.setCostTime(costEntityBean.getCostTime());
-		                cost.setCostType(costEntityBean.getCostType());
-		                cost.setCreateTime(DateUtils.getCurrentTimestamp());
-		                cost.setCreateUserId(costEntityBean.getCreateUserId());
-		                cost.setDepId(depIds[i]);
-		                cost.setCostNum(Double.parseDouble(amouts[i]));
-		                cost.setRemark(costEntityBean.getRemark());
-		                
-		                costDaoMapper.insertCostEntity(cost);
-		            }
-		        }
+			//部门ID=当前用户的部门
+		    String depId = user.getDepId();
+			//创建时间和创建者
+			costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
+			costEntityBean.setCreateUserId(user.getUserId());
+		    if(StringUtils.isNotBlank(depId)) {
+		    	costEntityBean.setCostId(UUID.randomUUID().toString());
+		    	
+		    	int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
+		    	if(insertCostEntityNum == 1) {
+					jsonDto.setCode(0);
+					jsonDto.setMsg(INSERT_SUCCESS);
+		    	}else {
+					jsonDto.setMsg(INSERT_ERROR);
+		    	}
 		    }
-		    
-		    jsonDto.setCode(0);
-			
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
 			if(updateCostEntityNum == 1){
@@ -113,7 +105,6 @@ public class CostService {
 				jsonDto.setMsg(UPDATE_ERROR);
 			}
 		}
-		
 		return jsonDto;
 	}
 	

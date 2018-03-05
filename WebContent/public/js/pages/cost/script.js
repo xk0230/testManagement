@@ -95,6 +95,7 @@ myAppModule.controller('CostController',
 					costId:costItem.costId,
 					costType:costItem.costType,
 					costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
+					createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
 					costNum:costItem.costNum,
 					remark:costItem.remark
 				}; 
@@ -106,9 +107,12 @@ myAppModule.controller('CostController',
 				
 				}).then(function(res){
 					if(res.data.code == 0){
-						
+						swal(res.data.msg);
+						self.getCostList();
+						//costItem.editMode="view";
+					}else{
+						swal(res.data.msg);
 					}
-					
 				});
 		};
 

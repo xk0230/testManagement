@@ -39,13 +39,12 @@
 	
 	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
 		UPDATE COST_DETAIL SET cost_time = #{costTime},
-							   create_user_id = #{createUserId},
 							   cost_type = #{costType},
 							   cost_subtype_id = #{costSubtypeId},
 							   cost_num = #{costNum},
 							   dep_id = #{depId},
-							   remark = #{remark}
-		
+							   remark = #{remark},
+							   create_time = #{createTime}
 		WHERE cost_id = #{costId}
 	
 	</update>

@@ -186,7 +186,7 @@ public class AdminUserManagerService {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("userName", userName);
 		map.put("password", SecurityUtil.MD5String(password));
-		return adminUserMapper.getAdminUser2(map);
+		return adminUserMapper.getAdminUser(map);
 	}
 
 	

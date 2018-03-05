@@ -79,9 +79,7 @@ public class CostController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
 	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
-		
-		
-		
+
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
 	
@@ -93,13 +91,13 @@ public class CostController extends BaseController{
 		
 	}
 	
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping("/get/{costId}.do")
 	public JsonDto getCostEntityById(@PathVariable String costId){
 		
 		return costService.getCostEntityById(costId);
 		
-	}
+	}*/
 	
 	@ResponseBody
     @RequestMapping("/page.do")
