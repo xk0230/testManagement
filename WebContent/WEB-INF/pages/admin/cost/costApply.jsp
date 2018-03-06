@@ -4,9 +4,8 @@
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
 
 </head>
-<body  >
+<body>
 		<%@ include file="../../common/header.jsp"%>
-
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
@@ -40,28 +39,32 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<table class="table table-condensed table-bordered table-striped" style="width:97%" >
+										<div style="width:1134px;">
+											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i> 新增</button>
+										</div>
+										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
 													<th width="120px">收支类型</th>
 													<th width="170px">成本产生时间</th>
 													<th width="120px">金额</th>
 													<th width="300px">成本详情</th>
-													<th width="230px">更新时间</th>
+													<th width="100px">状态</th>
 													<th>操作</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode">
+												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.createDate"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)">编辑</a>
-														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.delCost(item.costId,'.outlet')">报废</a>
+														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="item.status=='00'">编辑</a>
+														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.submitCost(item)" ng-if="item.status=='00'">提交</a>
+														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">报废</a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit">
@@ -90,7 +93,6 @@
 										</table>
 										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
 										<div style="width:1134px;">
-											<input type="button" class="btn btn-info" ng-click="vm.addCost()" value="新增" />
 											<%@ include file="../../common/page.jsp"%>
 										</div>
 									</div>

@@ -14,17 +14,23 @@
 	</select>
 	
 	<insert id="insertCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean" >
-		INSERT INTO COST_DETAIL( cost_id,
-								 create_time,
-								 cost_time,
-								 create_user_id,
-								 cost_type,
-								 cost_subtype_id,
-								 cost_num,
-								 dep_id,
-								 remark
-								)
-		VALUES( #{costId},
+		INSERT INTO COST_DETAIL
+			(
+				cost_id,
+				create_time,
+				cost_time,
+				create_user_id,
+				cost_type,
+				cost_subtype_id,
+				cost_num,
+				dep_id,
+				remark,
+				status,
+				cost_no
+			)
+		VALUES
+			(
+				#{costId},
 				#{createTime},
 				#{costTime},
 				#{createUserId},
@@ -32,34 +38,76 @@
 				#{costSubtypeId},
 				#{costNum},
 				#{depId},
-				#{remark}
+				#{remark},
+				'00',
+				#{costNo}
 			)
-	
 	</insert>
 	
+	<!-- 更新成本表 -->
 	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
-		UPDATE COST_DETAIL SET cost_time = #{costTime},
-							   cost_type = #{costType},
-							   cost_subtype_id = #{costSubtypeId},
-							   cost_num = #{costNum},
-							   dep_id = #{depId},
-							   remark = #{remark},
-							   create_time = #{createTime}
+		UPDATE COST_DETAIL
+		SET
+			cost_time = #{costTime},
+			cost_type = #{costType},
+			cost_subtype_id = #{costSubtypeId},
+			cost_num = #{costNum},
+			dep_id = #{depId},
+			remark = #{remark}
 		WHERE cost_id = #{costId}
 	
 	</update>
 	
+	<!-- 更新成本状态 -->
+	<update id="updateCostStatus" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
+		UPDATE COST_DETAIL SET status = #{status}
+		WHERE cost_id = #{costId}
+	</update>
+	
+	<!-- 取番 -->
+	<select id="getCostNoSeq" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostSeqBean" >
+		SELECT
+			type,date,seq
+		FROM COST_SEQ
+	 	WHERE Type = #{_parameter}
+	</select>
+
+	<update id="updateCostNoSeq" parameterType="com.codyy.oc.admin.entity.CostSeqBean">
+		UPDATE
+			COST_SEQ
+		SET 
+			date = #{date},
+			seq = #{seq}
+		WHERE type = #{type}
+	</update>
+	
+	<update id="insertCostNoSeq" parameterType="com.codyy.oc.admin.entity.CostSeqBean">
+		INSERT INTO COST_SEQ
+			(
+				type,
+				date,
+				seq
+			)
+		VALUES
+			(
+				#{type},
+				#{date},
+				#{seq}
+			)
+	</update>
+	
+	
 	<select id="getCostEntityById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostEntityBean">
-		SELECT cost_id AS costId,
-			 create_time AS createTime,
-			 cost_time AS costTime,
-			 create_user_id AS createUserId,
-			 cost_type AS costType, 
-			 cost_subtype_id AS costSubtypeId,
-			 cost_num AS costNum,
-			 dep_id AS depId,
-			 remark AS remark
-			 
+		SELECT
+			cost_id AS costId,
+			create_time AS createTime,
+			cost_time AS costTime,
+			create_user_id AS createUserId,
+			cost_type AS costType, 
+			cost_subtype_id AS costSubtypeId,
+			cost_num AS costNum,
+			dep_id AS depId,
+			remark AS remark
 		FROM COST_DETAIL
 	 	WHERE cost_id = #{_parameter}
 	</select>
@@ -71,20 +119,25 @@
 	</delete>
 	
 	<select id="getCostPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
-		SELECT  dep.`name` AS depName,
-				costSub.`name` AS costSubName,
-				costDetail.cost_id AS costId,
-				costDetail.cost_num AS costNum,
-				costDetail.cost_time AS costTime,
-				costDetail.cost_type AS costType,
-				costDetail.create_time AS createTime,
-				costDetail.remark as remark,
-				'view' as editMode
-			FROM
-		COST_DETAIL costDetail
+		SELECT
+			dep.`name` AS depName,
+			costSub.`name` AS costSubName,
+			costDetail.cost_id AS costId,
+			costDetail.cost_num AS costNum,
+			costDetail.cost_time AS costTime,
+			costDetail.cost_type AS costType,
+			costDetail.create_time AS createTime,
+			costDetail.remark as remark,
+			costDetail.cost_no as costNo,
+			costDetail.status,
+			code.content as statusName,
+			'view' as editMode
+		FROM
+			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
 		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
-			  where 1=1 
+		LEFT JOIN CODE_CONTENT code on costDetail.status = code.id and codeName = 'CodeStatus'
+		where 1=1 
 			
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}

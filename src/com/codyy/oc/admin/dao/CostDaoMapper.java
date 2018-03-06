@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.CostEntityBean;
+import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
 import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostVO;
@@ -21,6 +22,8 @@ public interface CostDaoMapper {
 	
 	int updateCostEntity(CostEntityBean costEntityBean);
 	
+	int updateCostStatus(CostEntityBean costEntityBean);
+	
 	int delCostEntityById(String costId);
 	
 	CostEntityBean getCostEntityById(String costId);
@@ -37,4 +40,9 @@ public interface CostDaoMapper {
 
 	List<CostVO> getCostVOList(CostVO cost);
 	
+	CostSeqBean getCostNoSeq(String costType);
+	
+	int updateCostNoSeq(CostSeqBean costSeqBean);
+	
+	int insertCostNoSeq(CostSeqBean costSeqBean);
 }

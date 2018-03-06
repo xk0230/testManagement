@@ -62,13 +62,20 @@ myAppModule.controller('CostController',
 		//添加新申请
 		this.addCost = function(){
 			var newItem = {
-				costDate:""
+				costDate:new Date()
 				,costNum:0
 				,costType:""
 				,remark:""
 				,editMode:"edit"
 			};
-			self.list.push(newItem);
+			var myArray=new Array()
+			myArray.push(newItem);
+			
+			$.each(self.list, function(index, value) {
+				myArray.push(value);
+			}
+			);
+			self.list = myArray;
 		};
 		
 		//点击编辑
@@ -91,20 +98,51 @@ myAppModule.controller('CostController',
 				alert("请填写金额");
 				return ;
 			}
-			 var params = {
-					costId:costItem.costId,
-					costType:costItem.costType,
-					costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
-					createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
-					costNum:costItem.costNum,
-					remark:costItem.remark
-				}; 
-			 
-			 $http({
-					method:'POST',
-					url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
-					params:params
+			var params = {
+				costId:costItem.costId,
+				costType:costItem.costType,
+				costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
+				createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
+				costNum:costItem.costNum,
+				remark:costItem.remark
+			};
+			
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+				params:params
 				
+			}).then(function(res){
+				if(res.data.code == 0){
+					swal(res.data.msg);
+					self.getCostList();
+					//costItem.editMode="view";
+				}else{
+					swal(res.data.msg);
+				}
+			});
+		};
+		
+		//报废
+		this.scrap = function (costItem) {
+			swal({ 
+					title: "确定报废吗？", 
+					text: "你将无法恢复该成本信息！", 
+					type: "warning", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"99"
+					};
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/cost/updateCostStatus.do",
+					params:params
+					
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal(res.data.msg);
@@ -113,73 +151,44 @@ myAppModule.controller('CostController',
 					}else{
 						swal(res.data.msg);
 					}
-				});
+				})
+			});
 		};
-
-		//报废
-		this.delCost = function (costId, parentSelector) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
-		    	    var modalInstance = $uibModal.open({
-		    	      animation: true,
-		    	      ariaLabelledBy: 'modal-title',
-		    	      ariaDescribedBy: 'modal-body',
-		    	      templateUrl: 'myModalDelContent.html',
-		    	      controller: 'ModalInstanceDel',
-		    	      controllerAs: '$ctrl',
-		    	      size: 'sm',
-		    	      appendTo: parentElem,
-		    	      //参数
-		    	      resolve: {
-		    	    	  //好像必须得这么写
-		    	        items: function () {
-		    	          return costId;
-		    	        }
-		    	      }
-		    	    });
-		    	    modalInstance.result.then(function (selectedItem) {
-		    	    	//ok的回调函数
-		    	    	if(selectedItem == '0'){
-		    	    		self.getCostList();
-		    	    	}
-		    	    	
-		    	    }, function () {
-		    	    	//取消的回调函数
-		    	    });
-		   };
-	
+		
+		//提交
+		this.submitCost = function (costItem) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将提交给您的部门领导审核！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"01"
+					};
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/cost/updateCostStatus.do",
+					params:params
+					
+				}).then(function(res){
+					if(res.data.code == 0){
+						swal("提交成功！");
+						self.getCostList();
+						//costItem.editMode="view";
+					}else{
+						swal("提交失败！");
+					}
+				})
+			});
+		};
+		
 	}
 );
 
-//删除页面的control
-angular.module('myApp').controller('ModalInstanceDel', 
-		function ($scope,$http,$uibModalInstance,items) {
-	  var $ctrl = this;
-	  $ctrl.items = items;
-	  
-	  $ctrl.selected = {
-	    item: $ctrl.items[0]
-	  };
-
-	  $ctrl.ok = function () {
-		  $http({
-				method:'POST',
-				url:$("#rootUrl").val()+"/admin/cost/del/"+items+".do",
-				params:{}
-			
-			}).then(function(res){
-				
-				if(res.data.code == 0){
-					$uibModalInstance.close('0');
-				}
-				
-			});
-	    
-	  };
-
-	  $ctrl.cancel = function () {
-	    $uibModalInstance.dismiss('cancel');
-	  };
-	  
-	});
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);

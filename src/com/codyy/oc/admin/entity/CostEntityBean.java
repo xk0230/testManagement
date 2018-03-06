@@ -35,6 +35,13 @@ public class CostEntityBean {
 	private String depId;
 	
 	private String depAmount;
+	
+	//成本状态
+	private String status;
+	
+	//成本单号
+	private String costNo;
+	
 
 	public String getCostId() {
 		return costId;
@@ -115,5 +122,21 @@ public class CostEntityBean {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCostNo() {
+		return costNo;
+	}
+
+	public void setCostNo(String costNo) {
+		this.costNo = costNo;
+	}
     
 }
