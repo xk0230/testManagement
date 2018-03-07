@@ -1,2 +1,13 @@
 #由于涉及到数据库变更的问题，如果新增表，或者修改原有表结构，请将对应的sql语句写到本文件中。
 #这样,部署的时候只要执行该sql即可
+
+#创建图书评论表
+
+CREATE TABLE `BOOK_COMMENT` (
+  `id` varchar(32) NOT NULL,
+  `book_id` varchar(32) DEFAULT NULL,
+  `comment` varchar(2000) DEFAULT NULL,
+  `user_id` varchar(32) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
