@@ -26,16 +26,29 @@ xiaokan
 
 1073a941-e354-fa44-b718-fa81a013c4af
 
-pages
+WEB-INF.iml
+file
+0
+
+
+add
+
+classes
+dir
+
+document
 dir
 
 html
 dir
 
-temp
+lib
 dir
 
-lib
+pages
+dir
+
+temp
 dir
 
 template
@@ -74,10 +87,4 @@ xiaokan
 
 
 6129
-
-classes
-dir
-
-document
-dir
 

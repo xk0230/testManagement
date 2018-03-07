@@ -3,7 +3,7 @@ package com.codyy.oc.admin.entity;
 import java.util.Date;
 
 public class RecruitAudit {
-    private String id;
+	private String id;
 
     private String recruitId;
 

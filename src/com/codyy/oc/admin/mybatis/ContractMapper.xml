@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Contract">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="contract_id" jdbcType="VARCHAR" property="contractId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="dept" jdbcType="VARCHAR" property="dept" />
+    <result column="cost" jdbcType="INTEGER" property="cost" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="serialid" jdbcType="VARCHAR" property="serialid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, contract_id, type, content, dept, cost, company, url, serialid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONTRACT
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByContractId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONTRACT
+    where contract_id = #{contract_id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CONTRACT
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Contract">
+    insert into CONTRACT (id, contract_id, type, 
+      content, dept, cost, 
+      company, url, serialid
+      )
+    values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=INTEGER}, 
+      #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Contract">
+    insert into CONTRACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contractId != null">
+        contract_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="dept != null">
+        dept,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="serialid != null">
+        serialid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null">
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="serialid != null">
+        #{serialid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Contract">
+    update CONTRACT
+    <set>
+      <if test="contractId != null">
+        contract_id = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="serialid != null">
+        serialid = #{serialid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Contract">
+    update CONTRACT
+    set contract_id = #{contractId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      dept = #{dept,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      serialid = #{serialid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update> 
+  <select id="getAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CONTRACT
+  </select>
+  
+</mapper>
