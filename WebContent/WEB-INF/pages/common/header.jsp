@@ -98,8 +98,9 @@ setInterval("getNewsNum()","60000");
             <!-- 成本信息 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>成本管理</a></li>
-                    <li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
+                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>成本申请</a></li>
+                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审核</a></li>
+                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
             </li>
             <!-- 岗位信息 -->

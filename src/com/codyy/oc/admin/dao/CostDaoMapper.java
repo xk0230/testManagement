@@ -30,6 +30,8 @@ public interface CostDaoMapper {
 	
 	List<CostVO> getCostPageList(Page page);
 	
+	List<CostVO> getCostAuditPageList(Page page);
+	
 	List<CostMonthInOut> getCostOutlayType(CostVO cost);
 	
 	List<CostMonthInOut> getCostDepartIncomeType(CostVO cost);

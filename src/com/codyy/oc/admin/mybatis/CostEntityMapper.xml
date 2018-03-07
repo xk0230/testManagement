@@ -50,12 +50,10 @@
 		SET
 			cost_time = #{costTime},
 			cost_type = #{costType},
-			cost_subtype_id = #{costSubtypeId},
 			cost_num = #{costNum},
-			dep_id = #{depId},
-			remark = #{remark}
+			remark = #{remark},
+			status = #{status}
 		WHERE cost_id = #{costId}
-	
 	</update>
 	
 	<!-- 更新成本状态 -->
@@ -118,6 +116,7 @@
 		
 	</delete>
 	
+	<!-- 申请列表 -->
 	<select id="getCostPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
 		SELECT
 			dep.`name` AS depName,
@@ -158,6 +157,55 @@
 		ORDER BY costDetail.create_time DESC
 	
 	</select>
+	
+	<!-- 审批列表 -->
+	<select id="getCostAuditPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
+		SELECT
+			dep.`name` AS depName,
+			costSub.`name` AS costSubName,
+			costDetail.cost_id AS costId,
+			costDetail.cost_num AS costNum,
+			costDetail.cost_time AS costTime,
+			costDetail.cost_type AS costType,
+			costDetail.create_time AS createTime,
+			costDetail.remark as remark,
+			costDetail.cost_no as costNo,
+			costDetail.status,
+			code.content as statusName,
+			'view' as editMode
+		FROM
+			COST_DETAIL costDetail
+		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
+		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
+		LEFT JOIN CODE_CONTENT code on costDetail.status = code.id and codeName = 'CodeStatus'
+		where 1=1 
+			
+			<if test="map.costType != null and  map.costType != ''">
+				AND costDetail.cost_type = #{map.costType}
+			</if>
+			
+			<!-- 管理员时 条件设定为部门领导审核通过的 -->
+			<if test="map.userId == 'admin'">
+				AND (costDetail.status = '03' or costDetail.status = '05')
+			</if>
+			
+			<if test="map.userId != 'admin'">
+				AND costDetail.dep_id = #{map.depId}
+				AND (costDetail.status = '01' or costDetail.status = '04')
+			</if>
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				AND costDetail.cost_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+		
+		ORDER BY costDetail.create_time DESC
+	
+	</select>
+	
 	
 	<select id="getCostOutlayType" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.vo.CostMonthInOut">
 		SELECT costSubtype.name,DATE_FORMAT(costDetail.cost_time,'%m') month,sum(costDetail.cost_num) AS total

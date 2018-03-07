@@ -15,7 +15,7 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>我的成本申请</h3>
+								<h3>我的成本审批</h3>
 							</div>
 							
 							<div class="widget-content">
@@ -39,9 +39,6 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<div style="width:1134px;">
-											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i> 新增</button>
-										</div>
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
@@ -62,9 +59,13 @@
 													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'">编辑</a>
-														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'">提交</a>
-														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">报废</a>
+														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">经理提交</a>
+														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">经理驳回</a>
+														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">管理员提交</a>
+														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">管理员驳回</a>
+														
+														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">编辑</a>
+														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">报废</a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit">
@@ -103,9 +104,25 @@
 				</div>
 			</div>
 		</div>
+	<!-- 弹框-删除 -->
+    <script type="text/ng-template" id="myModalDelContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<ul id="crumb" class="breadcrumb">
+							确定删除成本记录吗？
+						</ul>
+					</div>
+				</div>
+			</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 
-	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
+	<script src="${root}/public/js/pages/cost/costAudit.js" type="text/javascript"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@ myAppModule.controller('CostController',
 			}else if(self.admin=="ADMIN"){
 				$scope.depIdChangeAble = false;
 			}
-			self.getCostList();
+			self.getCostAuditList();
 
 		};
 		
@@ -37,10 +37,10 @@ myAppModule.controller('CostController',
 		};
 		
 		// 获取数据列表
-		this.getCostList = function(){
+		this.getCostAuditList = function(){
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+'/admin/cost/page.do',
+				url:$("#rootUrl").val()+'/admin/cost/auditPage.do',
 				params:{
 					costType:$scope.costType,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
@@ -57,25 +57,6 @@ myAppModule.controller('CostController',
 					$scope.totalItems = 0;
 				}
 			});
-		};
-		
-		//添加新申请
-		this.addCost = function(){
-			var newItem = {
-				costDate:new Date()
-				,costNum:0
-				,costType:""
-				,remark:""
-				,editMode:"edit"
-			};
-			var myArray=new Array()
-			myArray.push(newItem);
-			
-			$.each(self.list, function(index, value) {
-				myArray.push(value);
-			}
-			);
-			self.list = myArray;
 		};
 		
 		//点击编辑
@@ -116,12 +97,105 @@ myAppModule.controller('CostController',
 			}).then(function(res){
 				if(res.data.code == 0){
 					swal(res.data.msg);
-					self.getCostList();
-					//costItem.editMode="view";
+					self.getCostAuditList();
 				}else{
 					swal(res.data.msg);
 				}
 			});
+		};
+		
+		//经理审核提交
+		this.managerSubCost = function (costItem) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将提交给管理员审核！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"03"
+					};
+				self.updateStatus(params);
+			});
+		};
+
+		//经理驳回
+		this.managerRejCost = function (costItem) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回给申请者修改！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"02"
+					};
+				self.updateStatus(params);
+			});
+		};
+		
+		//管理员审核提交
+		this.adminSubCost = function (costItem) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将通过审核并计入成本！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"05"
+					};
+				self.updateStatus(params);
+			});
+		};
+
+		//管理员驳回
+		this.adminRejCost = function (costItem) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回至部门经理！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"04"
+					};
+				self.updateStatus(params);
+			});
+		};
+		
+		//更新状态
+		this.updateStatus = function (params) {
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/updateCostStatus.do",
+				params:params
+				
+			}).then(function(res){
+				if(res.data.code == 0){
+					swal(res.data.msg);
+					//重新加载列表
+					self.getCostAuditList();
+				}else{
+					swal(res.data.msg);
+				}
+			})
 		};
 		
 		//报废
@@ -147,7 +221,7 @@ myAppModule.controller('CostController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal(res.data.msg);
-						self.getCostList();
+						self.getCostAuditList();
 					}else{
 						swal(res.data.msg);
 					}
@@ -155,36 +229,12 @@ myAppModule.controller('CostController',
 			});
 		};
 		
-		//提交
-		this.submitCost = function (costItem) {
-			swal({ 
-					title: "确定提交吗？", 
-					text: "将提交给您的部门领导审核！", 
-					type: "info", 
-					showCancelButton: true, 
-					closeOnConfirm: false, 
-					showLoaderOnConfirm: true, 
-			},
-			function(){ 
-				var params = {
-						costId:costItem.costId,
-						status:"01"
-					};
-				$http({
-					method:'POST',
-					url:$("#rootUrl").val()+"/admin/cost/updateCostStatus.do",
-					params:params
-					
-				}).then(function(res){
-					if(res.data.code == 0){
-						swal("提交成功！");
-						self.getCostList();
-					}else{
-						swal("提交失败！");
-					}
-				})
-			});
-		};
+		
+		
+		
+		
+		
+		
 		
 	}
 );

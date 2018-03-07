@@ -41,6 +41,8 @@ public class CostVO extends CostEntityBean{
 	
 	private String statusName;
 	
+	private String depId;
+	
     public String getCostNo() {
 		return costNo;
 	}
@@ -177,5 +179,13 @@ public class CostVO extends CostEntityBean{
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+	public String getDepId() {
+		return depId;
+	}
+
+	public void setDepId(String depId) {
+		this.depId = depId;
+	}
 
 }
