@@ -4,7 +4,13 @@ myAppModule2.controller('HeaderController',
 		var self = this;
 		$scope.pageId = "";
 		self.$onInit = function(){
-
+		    var url = window.location.href;
+		    
+		    var lis = $('.mainnav li');
+		    
+		    var element = lis.find("a").filter(function() {
+		        return this.href == url;
+		    }).parents(".mainLi").addClass('active');
 		}
 		this.goDefault =  function () {
 			window.location.href = "/ssc/admin/index.html";

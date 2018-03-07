@@ -3,343 +3,139 @@
 <!-- Start #header -->
 <script type="text/javascript">
 $(document).on("mouseenter", ".table tr.odd", function(){ 
-	//此处的$(this)指$( "#testDiv")，而非$(document) 
-	$(this).css("background-color","#E9E9E4");
+    //此处的$(this)指$( "#testDiv")，而非$(document) 
+    $(this).css("background-color","#E9E9E4");
 }); 
 $(document).on("mouseleave", ".table tr.odd", function(){ 
-	$(this).css("background-color","white");
+    $(this).css("background-color","white");
 }); 
 
 function getNewsNum()
 {
-	$.ajax({
-	    url:'${root}/admin/position/getUntreatedNum.do',
-	    type:'POST', //GET
-	    async:true,    //或false,是否异步
-	    timeout:5000,    //超时时间
-	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-	    success:function(data,textStatus,jqXHR){
-	    	if(data.result == true){
-	    		$("#news").html(data.code);
-	    	}
-	    },
-	    error:function(xhr,textStatus){
-	        console.log('错误')
-	    }
-	})
+    $.ajax({
+        url:'${root}/admin/position/getUntreatedNum.do',
+        type:'POST', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+            if(data.result == true){
+                $("#news").html(data.code);
+            }
+        },
+        error:function(xhr,textStatus){
+            console.log('错误')
+        }
+    })
 }
 
 function logout(){
-	$.ajax({
-	    url:'${root}/logOut.do',
-	    type:'POST', //GET
-	    async:true,    //或false,是否异步
-	    timeout:5000,    //超时时间
-	    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-	    success:function(data,textStatus,jqXHR){
-	    	if(data.result == true){
-	    		window.location.href='${root}';
-	    	}
-	    },
-	    error:function(xhr,textStatus){
-	        console.log('错误')
-	    }
-	})
+    $.ajax({
+        url:'${root}/logOut.do',
+        type:'POST', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+            if(data.result == true){
+                window.location.href='${root}';
+            }
+        },
+        error:function(xhr,textStatus){
+            console.log('错误')
+        }
+    })
 }
 getNewsNum();
 setInterval("getNewsNum()","60000");
 </script>
-<div id="header" ng-app = "headerApp" ng-controller="HeaderController as header">
-    <div class="container-fluid">
-        <div class="navbar">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="javascript:void(0);" ng-click="header.goDefault()">
-                    <i class="text-logo-element animated bounceIn"></i><span class="text-slogan">YSEC</span> 
-                </a>
-            </div>
-            <input id="sessionUserId"  type="hidden" value="${adminUser.userId}">
-            <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
-            <input id="sessionUserDepId"  type="hidden" value="${adminUser.depId}">
-            <div>
-            <nav class="top-nav" role="navigation">
-                <!-- <ul class="nav navbar-nav pull-left">
-                    <li id="toggle-sidebar-li">
-                        <a href="#" id="toggle-sidebar"><i class="en-arrow-left2"></i>
-                </a>
-                    </li>
-                    <li>
-                        <a href="#" class="full-screen"><i class ="fa-fullscreen"></i></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="ec-cog"></i><span class="notification">10</span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="en-database"></i> Database <span class="notification">3</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-cube"></i> Packages <span class="notification blue">17</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-health"></i> Disconnects <span class="notification yellow">1</span></a>
-                            </li>
-                            <li><a href="#"><i class="im-images"></i> Images <span class="notification teal">320</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-users"></i> Users <span class="notification orange">2k</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-meter"></i> Traffic <span class="notification magenta">2tb</span></a>
-                            </li>
-                            <li><a href="#"><i class="im-coin"></i> Finances <span class="notification pink">+3k</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-folder"></i> Directories <span class="notification green">17</span></a>
-                            </li>
-                            <li><a href="#"><i class="st-bag"></i> Orders <span class="notification purple">12</span></a>
-                            </li>
-                            <li><a href="#"><i class="ec-contract"></i> Contracts <span class="notification dark">7</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"><i class="ec-mail"></i><span class="notification">4</span></a>
-                        <ul class="dropdown-menu email" role="menu">
-                            <li class="mail-head">
-                                <div class="clearfix">
-                                    <div class="pull-left">
-                                        <a href="email-inbox.html"><i class="ec-archive"></i></a>
-                                    </div>
-                                    <span>Inbox</span> 
-                                    <div class="pull-right">
-                                        <a href="email-inbox.html"><i class="st-pencil"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="search-email">
-                                <form>
-                                    <input type="text" name="search" placeholder="Search for emails">
-                                    <button type="submit"><i class="ec-search"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/128.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status"><i class="en-dot"></i></span> Jason Rivera
-                                        <span class="notification">2</span>
-                                        <span class="time">12:30 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        I contact you regarding my account please can you set up my pass ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/129.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status off"><i class="en-dot"></i></span> Steeve Mclark
-                                        <span class="notification">6</span>
-                                        <span class="time">10:26 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        Good job dude awesome work here, please add theese features ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/130.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status off"><i class="en-dot"></i></span> Fellix Jones
-                                        <span class="notification">1</span>
-                                        <span class="time">7:15 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        I have some issues when try to reach my product page can you ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-list clearfix">
-                                <a href="#">
-                                    <img src="assets/img/avatars/131.jpg" class="mail-avatar pull-left" alt="avatar">
-                                    <p class="name">
-                                        <span class="status"><i class="en-dot"></i></span> Tina Dowsen
-                                        <span class="notification">6</span>
-                                        <span class="time">03:46 am</span>
-                                    </p>
-                                    <p class="msg">
-                                        Hello Sugge, i want to apply for your referal program , please ...
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="mail-more">
-                                <a href="email-inbox.html">View all <i class="en-arrow-right7"></i></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul> -->
-                <ul class="nav navbar-nav pull-right">
-                    <!-- <li>
-                        <a href="#" id="toggle-header-area"><i class="ec-download"></i></a>
-                    </li> -->
-                    <li class="dropdown">
-                        <a href="${root}/admin/position/toPostionList.do?type=audit" ><i class="br-alarm"></i> <span class="notification" id="news">0</span></a>
-                        <!-- <ul class="dropdown-menu notification-menu right" role="menu">
-                            <li class="clearfix">
-                                <i class="ec-chat"></i> 
-                                <a href="#" class="notification-user"> Ric Jones </a> 
-                                <span class="notification-action"> replied to your </span> 
-                                <a href="#" class="notification-link"> comment</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-pencil"></i> 
-                                <a href="#" class="notification-user"> SuggeElson </a> 
-                                <span class="notification-action"> just write a </span> 
-                                <a href="#" class="notification-link"> post</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="ec-trashcan"></i> 
-                                <a href="#" class="notification-user"> SuperAdmin </a> 
-                                <span class="notification-action"> just remove </span> 
-                                <a href="#" class="notification-link"> 12 files</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-paperclip"></i> 
-                                <a href="#" class="notification-user"> C. Wiilde </a> 
-                                <span class="notification-action"> attach </span> 
-                                <a href="#" class="notification-link"> 3 files</a>
-                            </li>
-                            <li class="clearfix">
-                                <i class="st-support"></i> 
-                                <a href="#" class="notification-user"> John Simpson </a> 
-                                <span class="notification-action"> add support </span> 
-                                <a href="#" class="notification-link"> ticket</a>
-                            </li>
-                        </ul> -->
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="user-avatar" src="${root }/public/assets/img/avatars/48.png" alt=${sessionScope.adminUser.realName }>${sessionScope.adminUser.realName }
-                        </a>
-                        <ul class="dropdown-menu right" role="menu">
-                            <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="st-user"></i>个人信息</a>
-                            </li>
-<!--                             <li><a href="file.html"><i class="st-cloud"></i> Files</a>
-                            </li>
- -->                            <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.container-fluid')"><i class="st-settings"></i>修改密码</a>
-                            </li>
-                            <li><a href="javascript:logout();"><i class="im-exit"></i> 退出</a>
-                            </li>
-                        </ul>
-                    </li>
-                   <!--  <li id="toggle-right-sidebar-li"><a href="#" id="toggle-right-sidebar"><i class="ec-users"></i> <span class="notification">3</span></a>
-                    </li> -->
-                </ul>
-            </nav>
-            </div>
-        </div>
-        <!-- Start #header-area -->
-        <div id="header-area" class="fadeInDown">
-            <div class="header-area-inner">
-                <ul class="list-unstyled list-inline">
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="im-pie"></i>
-                                <span>Earning Stats</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="ec-images color-dark"></i>
-                                <span>Gallery</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="en-light-bulb color-orange"></i>
-                                <span>Fresh ideas</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="ec-link color-blue"></i>
-                                <span>Links</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="ec-support color-red"></i>
-                                <span>Support</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="shortcut-button">
-                            <a href="#">
-                                <i class="st-lock color-teal"></i>
-                                <span>Lock area</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- End #header-area -->
-    </div>
-    <!-- Start .header-inner -->
-        <script type="text/ng-template" id="myModalEditContent.html">
-			<div class="modal-header">
-				<div class="row ">
-					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 修改密码</h1>
-						<ul id="crumb" class="breadcrumb">
-						</ul>
-					</div>
-				</div>
+<div ng-app = "headerApp" ng-controller="HeaderController as header">
+    <div class="navbar navbar-fixed-top" >
+      <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index.html">YSEC-SSC</a>
+          <div class="nav-collapse pull-right">
+            <img class="AvatarImg" src="${root}/public/img/message_avatar2.png"/>
+          </div>
+          <div class="nav-collapse" >
+	          <ul class="nav pull-right">
+	            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 22px;">
+	            <i class="icon-user"></i>
+	            &nbsp;&nbsp;&nbsp;超级管理员<b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="javascript:;">Profile</a></li>
+	                <li><a href="javascript:;">Logout</a></li>
+	              </ul>
+	            </li>
+	           </ul>
+          </div>
 
-				<!-- 个人信息 start here -->
-				<div class="outlet" >
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="panel panel-default toggle">
-								<!-- Start .panel -->
-								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>修改密码</h3>
-								</div>
-								<div class="panel-body">
-									<div class="form-horizontal group-border" role="form">
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="旧密码" ng-model="oldPwd">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="新密码" ng-model="newPwd1">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="再次输入新密码" ng-model="newPwd2">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+          <!--/.nav-collapse --> 
         </div>
-    </script>
+        <!-- /container --> 
+      </div>
+      <!-- /navbar-inner --> 
+    </div>
+    <!-- /网页头 -->
     
+    <div class="subnavbar">
+      <div class="subnavbar-inner">
+        <div class="container">
+          <ul class="mainnav">
+            <li class="dropdown mainLi"><a href="${root}/admin/index.do"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
+            <!-- 员工信息 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>员工信息</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
+                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="en-arrow-right7"></i>个人信息</a></li>
+              </ul>
+            </li>
+            <!-- 成本信息 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>成本管理</a></li>
+                    <li><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
+              </ul>
+            </li>
+            <!-- 岗位信息 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位信息</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                    <li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a></li>
+                    <li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
+                    <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
+              </ul>
+            </li>
+            <!-- 招聘管理 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
+                <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/recruit/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>待我审批</a></li>
+                <li><a href="${root}/admin/recruit/MyInterview.do"><i class="en-arrow-right7"></i>我的面试</a></li>
+              </ul>
+            </li>
+            <!-- IPE管理 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE管理</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a></li>
+                <li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a></li>
+                <li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a></li>
+              </ul>
+            </li>
+            <!-- 绩效管理 -->
+            <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效管理</span> </a> </li>
+            <!-- 图书管理 -->
+            <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书管理</span> </a> </li>
+          </ul>
+        </div>
+        <!-- /container --> 
+      </div>
+      <!-- /subnavbar-inner --> 
+    </div>
+    <!-- /导航栏 -->
 </div>
 <script src="${root}/public/js/pages/header.js" type="text/javascript"></script>
-<!-- End #header -->

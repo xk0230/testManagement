@@ -35,5 +35,18 @@ public class BaseController {
 		Object adminUser = request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
 		return adminUser == null ? null : ((AdminUser) adminUser).getUserId();
 	}
+	
+	
+	/**
+	 * 获取session用户ID
+	 * 
+	 * @author Gwang
+	 * @param request
+	 * @return
+	 */
+	protected String getSessionDepId(HttpServletRequest request) {
+		Object adminUser = request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		return adminUser == null ? null : ((AdminUser) adminUser).getUserId();
+	}
 
 }

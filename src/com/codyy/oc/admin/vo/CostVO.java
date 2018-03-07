@@ -30,6 +30,56 @@ public class CostVO extends CostEntityBean{
 	private String startDate;
     
     private String endDate;
+    
+    private String UserId;
+    
+    private String editMode;
+    
+    private String costNo;
+    
+	private String status;
+	
+	private String statusName;
+	
+    public String getCostNo() {
+		return costNo;
+	}
+
+	public void setCostNo(String costNo) {
+		this.costNo = costNo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public String getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(String editMode) {
+		this.editMode = editMode;
+	}
+
+	public String getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(String userId) {
+		UserId = userId;
+	}
 
 	public Timestamp getStartTime() {
 		return startTime;

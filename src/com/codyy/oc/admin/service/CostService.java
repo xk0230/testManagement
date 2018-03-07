@@ -2,6 +2,7 @@ package com.codyy.oc.admin.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -25,6 +26,7 @@ import com.codyy.oc.admin.dao.CostDaoMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
+import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
@@ -43,14 +45,15 @@ import com.codyy.oc.admin.vo.DepMonthTotalVO;
 @Service("costServer")
 public class CostService {
 	
-	private static final String INSERT_SUCCESS = "保存成功";
-	private static final String INSERT_ERROR = "保存失败";
+	private static final String INSERT_SUCCESS = "新增成功";
+	private static final String INSERT_ERROR = "新增失败";
 	private static final String UPDATE_SUCCESS = "修改成功";
 	private static final String UPDATE_ERROR = "修改失败";
 	private static final String DEL_SUCCESS = "删除成功";
 	private static final String DEL_ERROR = "删除失败";
 	private static final String NO_EXIT_DATA = "数据不存在";
-	
+	private static final String SCRAP_SUCCESS = "报废成功";
+	private static final String SCRAP_ERROR = "报废失败";
 
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
@@ -67,43 +70,40 @@ public class CostService {
 		return jsonDto;
 	}
 	
+	/**
+	 * 插入，更新成本数据
+	 * @param user
+	 * @param costEntityBean
+	 * @return
+	 */
 	public JsonDto insertOrUpdateCostEntity(AdminUser user,CostEntityBean costEntityBean){
 		
 		JsonDto jsonDto = new JsonDto();
-		
-		costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
-		costEntityBean.setCreateUserId(user.getUserId());
-		
+		//成本产生时间
 		costEntityBean.setCostTime(DateUtils.stringToTimestamp((DateUtils.format(costEntityBean.getCostTime()))));
-		
+		//CostID为空时执行插入
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
-		    
-		    String depId = costEntityBean.getDepId();
-		    String depAmount = costEntityBean.getDepAmount();
-		    if(StringUtils.isNotBlank(depId) && StringUtils.isNotBlank(depAmount)) {
-		        String[] depIds = depId.split(",");
-		        String[] amouts = depAmount.split(",");
-		        if(depIds.length == amouts.length){
-		            CostEntityBean cost = null;
-		            for(int i = 0;i<depIds.length;i++){
-		                cost = new CostEntityBean();
-		                cost.setCostId(UUID.randomUUID().toString());
-		                cost.setCostSubtypeId(costEntityBean.getCostSubtypeId());
-		                cost.setCostTime(costEntityBean.getCostTime());
-		                cost.setCostType(costEntityBean.getCostType());
-		                cost.setCreateTime(DateUtils.getCurrentTimestamp());
-		                cost.setCreateUserId(costEntityBean.getCreateUserId());
-		                cost.setDepId(depIds[i]);
-		                cost.setCostNum(Double.parseDouble(amouts[i]));
-		                cost.setRemark(costEntityBean.getRemark());
-		                
-		                costDaoMapper.insertCostEntity(cost);
-		            }
-		        }
+			//部门ID=当前用户的部门
+		    String depId = user.getDepId();
+			//创建时间和创建者
+			costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
+			costEntityBean.setCreateUserId(user.getUserId());
+		    if(StringUtils.isNotBlank(depId)) {
+		    	//对CostID设定UUID
+		    	costEntityBean.setCostId(UUID.randomUUID().toString());
+		    	//生成新的costNo
+		    	costEntityBean.setCostNo(CreateCostNo(costEntityBean));
+		    	//设置部门
+		    	costEntityBean.setDepId(depId);
+		    	//执行插入
+		    	int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
+		    	if(insertCostEntityNum == 1) {
+					jsonDto.setCode(0);
+					jsonDto.setMsg(INSERT_SUCCESS);
+		    	}else {
+					jsonDto.setMsg(INSERT_ERROR);
+		    	}
 		    }
-		    
-		    jsonDto.setCode(0);
-			
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
 			if(updateCostEntityNum == 1){
@@ -113,9 +113,61 @@ public class CostService {
 				jsonDto.setMsg(UPDATE_ERROR);
 			}
 		}
-		
 		return jsonDto;
 	}
+	
+	/**
+	 * 生成成本单号
+	 * @param costEntityBean
+	 * @return
+	 */
+	private String CreateCostNo(CostEntityBean costEntityBean) {
+		//当前日期
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
+		String today = dateFormat.format(new Date());
+
+		//取番
+		CostSeqBean costSeqBean = costDaoMapper.getCostNoSeq(costEntityBean.getCostType());
+		
+		if(costSeqBean != null) {
+			if(costSeqBean.getDate() == today) {
+				costSeqBean.setSeq(costSeqBean.getSeq() + 1);
+				costDaoMapper.updateCostNoSeq(costSeqBean);
+			}else {
+				costSeqBean.setDate(today);
+				costSeqBean.setSeq(1);
+				costDaoMapper.updateCostNoSeq(costSeqBean);
+			}
+		}else {
+			costSeqBean = new CostSeqBean();
+			costSeqBean.setType(costEntityBean.getCostType());
+			costSeqBean.setDate(today);
+			costSeqBean.setSeq(1);
+			costDaoMapper.insertCostNoSeq(costSeqBean);
+		}
+		return costEntityBean.getCostType() + today + "_" + String.format("%04d", costSeqBean.getSeq());
+	}
+
+	/**
+	 * 更新成本状态
+	 * @param user
+	 * @param costEntityBean
+	 * @return
+	 */
+	public JsonDto updateCostStatus(AdminUser user,CostEntityBean costEntityBean){
+		
+		JsonDto jsonDto = new JsonDto();
+		
+		int updateCostEntityNum = costDaoMapper.updateCostStatus(costEntityBean);
+		if(updateCostEntityNum == 1){
+			jsonDto.setCode(0);
+			jsonDto.setMsg(SCRAP_SUCCESS);
+		}else{
+			jsonDto.setMsg(SCRAP_ERROR);
+		}
+		return jsonDto;
+	}
+	
 	
 	public JsonDto getCostEntityById(String costId){
 		
@@ -158,11 +210,11 @@ public class CostService {
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
-	    map.put("depId", cost.getDepId());
 	    map.put("costType", cost.getCostType());
-	    map.put("costSubtypeId", cost.getCostSubtypeId());
+	    map.put("userId", cost.getUserId());
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
+	    
 	    
 	    page.setMap(map);
 	    

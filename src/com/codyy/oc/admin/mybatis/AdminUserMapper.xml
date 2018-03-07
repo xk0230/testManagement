@@ -294,6 +294,20 @@
 			and au.password = #{password}
 	</select>
 	
+		<select id="getAdminUser2" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
+		select
+			au.user_id    as userId,
+			au.username 			as userName,
+			au.password 			as password,
+			au.realname 			as realName,
+			au.create_time        as createTime
+
+		from ADMIN_USER au left join ADMIN_USER_DETAIL ad
+		 on au.user_id = ad.user_id
+		where au.username = #{userName} 
+			and au.password = #{password}
+	</select>
+	
 	<!-- 新增用户维护关联 -->
 	<insert id="insertAdminUserRole" parameterType="list">
 		insert into admin_user_r_role(user_id, admin_role_id)  

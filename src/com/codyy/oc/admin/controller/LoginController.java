@@ -46,7 +46,7 @@ public class LoginController {
 	
 	@RequestMapping("admin/index")
 	public String index(){
-		return "defaultNew";
+		return "defaultNewMode";
 	}
 	
 }
