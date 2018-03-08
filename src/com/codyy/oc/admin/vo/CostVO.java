@@ -43,6 +43,14 @@ public class CostVO extends CostEntityBean{
 	
 	private String depId;
 	
+	private String auditUser;
+	
+	private String auditUserName;
+	
+	private String subUser;
+	
+	private String subUserName;
+	
     public String getCostNo() {
 		return costNo;
 	}
@@ -186,6 +194,38 @@ public class CostVO extends CostEntityBean{
 
 	public void setDepId(String depId) {
 		this.depId = depId;
+	}
+
+	public String getAuditUser() {
+		return auditUser;
+	}
+
+	public void setAuditUser(String auditUser) {
+		this.auditUser = auditUser;
+	}
+
+	public String getAuditUserName() {
+		return auditUserName;
+	}
+
+	public void setAuditUserName(String auditUserName) {
+		this.auditUserName = auditUserName;
+	}
+
+	public String getSubUser() {
+		return subUser;
+	}
+
+	public void setSubUser(String subUser) {
+		this.subUser = subUser;
+	}
+
+	public String getSubUserName() {
+		return subUserName;
+	}
+
+	public void setSubUserName(String subUserName) {
+		this.subUserName = subUserName;
 	}
 
 }

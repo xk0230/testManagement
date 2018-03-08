@@ -42,7 +42,9 @@ public class CostEntityBean {
 	//成本单号
 	private String costNo;
 	
-
+	//审核通过人
+	private String auditUser;
+	
 	public String getCostId() {
 		return costId;
 	}
@@ -138,5 +140,13 @@ public class CostEntityBean {
 	public void setCostNo(String costNo) {
 		this.costNo = costNo;
 	}
-    
+
+	public String getAuditUser() {
+		return auditUser;
+	}
+
+	public void setAuditUser(String auditUser) {
+		this.auditUser = auditUser;
+	}
+
 }

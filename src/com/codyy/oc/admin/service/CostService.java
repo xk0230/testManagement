@@ -91,7 +91,13 @@ public class CostService {
 			//创建时间和创建者
 			costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
 			costEntityBean.setCreateUserId(user.getUserId());
-			
+			if(user.getPosition() == "MANAGER") {
+				costEntityBean.setStatus("03");
+			}else if(user.getUserId() == "admin") {
+				costEntityBean.setStatus("05");
+			}else {
+				costEntityBean.setStatus("00");
+			}
 		    if(StringUtils.isNotBlank(depId)) {
 		    	//对CostID设定UUID
 		    	costEntityBean.setCostId(UUID.randomUUID().toString());
@@ -134,7 +140,7 @@ public class CostService {
 		CostSeqBean costSeqBean = costDaoMapper.getCostNoSeq(costEntityBean.getCostType());
 		
 		if(costSeqBean != null) {
-			if(costSeqBean.getDate() == today) {
+			if(costSeqBean.getDate().equals(today)) {
 				costSeqBean.setSeq(costSeqBean.getSeq() + 1);
 				costDaoMapper.updateCostNoSeq(costSeqBean);
 			}else {
@@ -165,16 +171,22 @@ public class CostService {
 		String sucessResult = "";
 		String errResult = "";
 		
-		if(costEntityBean.getStatus() == "99") {
+		if(costEntityBean.getStatus().equals("99")) {
 			sucessResult = SCRAP_SUCCESS;
 			errResult = SCRAP_ERROR;
-		}else if(costEntityBean.getStatus() == "03" || costEntityBean.getStatus() == "05") {
+		}else if(costEntityBean.getStatus().equals("03") || costEntityBean.getStatus().equals("05")) {
 			sucessResult = SUB_SUCCESS;
 			errResult = SUB_ERROR;
-		}else if(costEntityBean.getStatus() == "02"|| costEntityBean.getStatus() == "04") {
+			
+		}else if(costEntityBean.getStatus().equals("02")|| costEntityBean.getStatus().equals("04")) {
 			sucessResult = REJ_SUCCESS;
 			errResult = REJ_ERROR;
 		}
+		if(user.getPosition().equals("MANAGER") && (costEntityBean.getStatus().equals("03") || costEntityBean.getStatus().equals("02"))) {
+			costEntityBean.setAuditUser(user.getUserId());
+		}
+		
+		
 		
 		int updateCostEntityNum = costDaoMapper.updateCostStatus(costEntityBean);
 		if(updateCostEntityNum == 1){

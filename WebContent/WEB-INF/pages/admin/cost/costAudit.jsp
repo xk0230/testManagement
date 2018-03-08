@@ -42,10 +42,12 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="120px">收支类型</th>
-													<th width="170px">成本产生时间</th>
+													<th width="80px">收支类型</th>
+													<th width="120px">成本产生时间</th>
 													<th width="120px">金额</th>
 													<th width="300px">成本详情</th>
+													<th width="50px">提交人</th>
+													<th width="50px">审核人</th>
 													<th width="100px">状态</th>
 													<th>操作</th>
 												</tr>
@@ -57,13 +59,14 @@
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
 														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">经理提交</a>
 														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">经理驳回</a>
 														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">管理员提交</a>
 														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">管理员驳回</a>
-														
 														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">编辑</a>
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">报废</a>
 													</td>
