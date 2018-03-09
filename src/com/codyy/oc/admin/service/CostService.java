@@ -210,7 +210,7 @@ public class CostService {
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
-	    map.put("costType", cost.getCostType());
+	    map.put("type", cost.getCostType());
 	    map.put("userId", cost.getUserId());
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
