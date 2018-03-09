@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
@@ -47,9 +48,22 @@ public class CostController extends BaseController{
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
 	}
 	
+	/**
+	 * 成本申请
+	 * @return
+	 */
 	@RequestMapping("/costApply.do")
-	public String costManager(){
+	public String costApply(){
 		return "admin/cost/costApply";
+	}
+	
+	/**
+	 * 成本审核
+	 * @return
+	 */
+	@RequestMapping("/costAudit.do")
+	public String costcostAudit(){
+		return "admin/cost/costAudit";
 	}
 	
 	@RequestMapping("/chart.do")
@@ -60,7 +74,6 @@ public class CostController extends BaseController{
 	@ResponseBody
     @RequestMapping("/costYear.do")
     public CostYearVO getRecentYear(int recentYear){
-        
         return costService.getRecentYear(recentYear);
     }
 	
@@ -104,7 +117,17 @@ public class CostController extends BaseController{
 		String userId = getSessionUserId(request);
 		cost.setUserId(userId);
         return costService.getCostPageList(cost);
-        
+    }
+	
+	@ResponseBody
+    @RequestMapping("/auditPage.do")
+    public Page getAuditList(HttpServletRequest request,CostVO cost){
+		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		
+		cost.setDepId(adminUser.getDepId());
+		cost.setUserId(adminUser.getUserId());
+		
+        return costService.getCostAuditList(cost);
     }
 	
 	@ResponseBody
