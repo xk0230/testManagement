@@ -54,7 +54,10 @@ public class CostService {
 	private static final String NO_EXIT_DATA = "数据不存在";
 	private static final String SCRAP_SUCCESS = "报废成功";
 	private static final String SCRAP_ERROR = "报废失败";
-
+	private static final String SUB_SUCCESS = "提交成功";
+	private static final String SUB_ERROR = "提交失败";
+	private static final String REJ_SUCCESS = "提交成功";
+	private static final String REJ_ERROR = "提交失败";
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
 	
@@ -88,6 +91,7 @@ public class CostService {
 			//创建时间和创建者
 			costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
 			costEntityBean.setCreateUserId(user.getUserId());
+			
 		    if(StringUtils.isNotBlank(depId)) {
 		    	//对CostID设定UUID
 		    	costEntityBean.setCostId(UUID.randomUUID().toString());
@@ -158,12 +162,26 @@ public class CostService {
 		
 		JsonDto jsonDto = new JsonDto();
 		
+		String sucessResult = "";
+		String errResult = "";
+		
+		if(costEntityBean.getStatus() == "99") {
+			sucessResult = SCRAP_SUCCESS;
+			errResult = SCRAP_ERROR;
+		}else if(costEntityBean.getStatus() == "03" || costEntityBean.getStatus() == "05") {
+			sucessResult = SUB_SUCCESS;
+			errResult = SUB_ERROR;
+		}else if(costEntityBean.getStatus() == "02"|| costEntityBean.getStatus() == "04") {
+			sucessResult = REJ_SUCCESS;
+			errResult = REJ_ERROR;
+		}
+		
 		int updateCostEntityNum = costDaoMapper.updateCostStatus(costEntityBean);
 		if(updateCostEntityNum == 1){
 			jsonDto.setCode(0);
-			jsonDto.setMsg(SCRAP_SUCCESS);
+			jsonDto.setMsg(sucessResult);
 		}else{
-			jsonDto.setMsg(SCRAP_ERROR);
+			jsonDto.setMsg(errResult);
 		}
 		return jsonDto;
 	}
@@ -219,6 +237,33 @@ public class CostService {
 	    page.setMap(map);
 	    
 	    List<CostVO> costPageList = costDaoMapper.getCostPageList(page);
+	    page.setData(costPageList);
+	    
+	    return page;
+	}
+	
+	/**
+	 * 成本审核查询
+	 * @param cost
+	 * @return
+	 */
+	public Page getCostAuditList(CostVO cost){
+	    Page page = new Page();
+	    page.setStart(cost.getStart());
+	    page.setEnd(cost.getEnd());
+	    
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    
+	    map.put("costType", cost.getCostType());
+	    map.put("depId", cost.getDepId());
+	    map.put("status", cost.getStatus());
+	    map.put("startTime", cost.getStartDate());
+	    map.put("endTime", cost.getEndDate());
+	    map.put("userId", cost.getUserId());
+	    
+	    page.setMap(map);
+	    
+	    List<CostVO> costPageList = costDaoMapper.getCostAuditPageList(page);
 	    page.setData(costPageList);
 	    
 	    return page;
