@@ -35,6 +35,16 @@ public class ContractController extends BaseController {
 		
 	}
 	
+	/**
+	 * 合同申请
+	 * @return
+	 */
+	@RequestMapping("/contractApply.do")
+	public String contractApply(){
+		return "admin/contract/contractApply";
+	}
+	
+	
 	@ResponseBody
     @RequestMapping("/page.do")
     public Page getCostPageList(HttpServletRequest request,ContractVO cost){
