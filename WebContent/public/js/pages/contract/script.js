@@ -63,7 +63,8 @@ myAppModule.controller('ContractController',
 		this.addContract = function(){
 			var newItem = {
 				costDate:new Date()
-				,contractId:0
+				,createDate:new Date()
+				,contractId:""
 				,type:""
 				,content:""
 				,dept:""
@@ -131,14 +132,14 @@ myAppModule.controller('ContractController',
 				dept:contractItem.dept,
 				company:contractItem.company,
 				url:contractItem.url,
-				serialid:contractItem.serialid,
-				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd"),
-				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss"),
+				serialid:contractItem.serialid
+//				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd")
+//				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss")
 			};
 			
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+"/contract/save.do",
+				url:$("#rootUrl").val()+"/contract/saveOrUpdate.do",
 				params:params
 				
 			}).then(function(res){

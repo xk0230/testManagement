@@ -125,7 +125,7 @@
 				<div class="row ">
 					<div class="col-lg-12 heading">
 						<ul id="crumb" class="breadcrumb">
-							确定删除成本记录吗？
+							确定删除合同记录吗？
 						</ul>
 					</div>
 				</div>

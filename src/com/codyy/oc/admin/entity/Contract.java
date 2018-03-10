@@ -31,8 +31,24 @@ public class Contract {
 	
 	//合同记录实际时间
 	private Date costTime;
+	
+	private String createUserId;
 
     /**
+	 * @return the createUserId
+	 */
+	public String getCreateUserId() {
+		return createUserId;
+	}
+
+	/**
+	 * @param createUserId the createUserId to set
+	 */
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	/**
 	 * @return the createTime
 	 */
 	public Date getCreateTime() {
