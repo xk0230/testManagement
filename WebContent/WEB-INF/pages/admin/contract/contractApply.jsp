@@ -45,21 +45,19 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="100px">合同订单号</th>
 													<th width="100px">合同类型</th>
-													<th width="100px">合同内容</th>
+													<th width="200px">合同内容</th>
 													<th width="100px">所属部门</th>
 													<th width="100px">花费金额</th>
-													<th width="100px">对方公司</th>
-													<th width="100px">链接</th>
-													<th width="100px">外部订单</th>
+													<th width="130px">对方公司</th>
+													<th width="140px">链接</th>
+													<th width="140px">外部订单</th>
 													<th>操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.type"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
@@ -74,31 +72,31 @@
 													<!-- edit -->
 													
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.contractId" style="width:90px;" >
-													</td>
-													<td ng-switch-when="edit">
 				                                        <select id="type" style="width:90px;" ng-model="item.type"  class="form-control select2" 
 				                                            ng-options="cType.type as cType.name group by cType.group for cType in contractTypeList">
 				                                            <option value="">--收支类型--</option>
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.content" style="width:90px;" >
+														<input type="text" ng-model="item.content" style="width:190px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.dept"  style="width:90px;" />
+														<select id="dept" ng-model="item.dept"  style="width:90px;" class="form-control select2" 
+														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
+														<option value="">--所属部门--</option>
+														</select>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.cost" min=0 style="width:90px;">
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.company"  style="width:90px;" />
+														<input type="text" ng-model="item.company"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.url"  style="width:90px;" />
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.serialid"  style="width:90px;" />
+														<input type="text" ng-model="item.serialid"  style="width:130px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)">保存</a>
