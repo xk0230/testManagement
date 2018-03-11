@@ -51,10 +51,10 @@ public class ContractController extends BaseController {
 	
 	@ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(HttpServletRequest request,ContractVO cost){
+    public Page getCostPageList(HttpServletRequest request,ContractVO contract){
 		String userId = getSessionUserId(request);
-		cost.setUserId(userId);
-        return contractManageService.getContractPageList(cost);
+		contract.setUserId(userId);
+        return contractManageService.getContractPageList(contract);
     }
 
 }

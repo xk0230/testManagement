@@ -79,6 +79,9 @@ public class ContractManageService {
 		    	}
 		    }
 		}else{
+		    contract.setCreateTime(DateUtils.getCurrentTimestamp());
+		    contract.setCreateUserId(user.getUserId());
+		    
 			int updateCostEntityNum = contractMapper.updateByPrimaryKey(contract);
 			if(updateCostEntityNum == 1){
 				jsonDto.setCode(0);

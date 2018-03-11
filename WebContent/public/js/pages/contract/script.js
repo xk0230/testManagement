@@ -64,6 +64,7 @@ myAppModule.controller('ContractController',
 			var newItem = {
 				costDate:new Date()
 				,createDate:new Date()
+				,id:""
 				,contractId:""
 				,type:""
 				,content:""
@@ -125,6 +126,7 @@ myAppModule.controller('ContractController',
 				return ;
 			}
 			var params = {
+				id:contractItem.id,
 				contractId:contractItem.contractId,
 				type:contractItem.type,
 				content:contractItem.content,
@@ -132,6 +134,7 @@ myAppModule.controller('ContractController',
 				dept:contractItem.dept,
 				company:contractItem.company,
 				url:contractItem.url,
+				status:contractItem.status,
 				serialid:contractItem.serialid
 //				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd")
 //				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss")
