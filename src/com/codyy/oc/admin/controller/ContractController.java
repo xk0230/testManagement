@@ -48,7 +48,7 @@ public class ContractController extends BaseController {
 		return "admin/contract/contractApply";
 	}
 	
-	
+
 	@ResponseBody
     @RequestMapping("/page.do")
     public Page getCostPageList(HttpServletRequest request,ContractVO contract){
@@ -56,5 +56,13 @@ public class ContractController extends BaseController {
 		contract.setUserId(userId);
         return contractManageService.getContractPageList(contract);
     }
+
+	@ResponseBody
+    @RequestMapping("/deleteContract.do")
+    public int deleteContract(HttpServletRequest request,ContractVO contract){
+		return contractManageService.deleteContract(contract);
+    }
+	
+	
 
 }

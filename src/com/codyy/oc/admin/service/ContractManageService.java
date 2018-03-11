@@ -118,4 +118,8 @@ public class ContractManageService {
 	    
 	    return page;
 	}
+	
+	public int deleteContract(ContractVO contract){
+		return contractMapper.deleteByPrimaryKey(contract.getId());
+	}
 }

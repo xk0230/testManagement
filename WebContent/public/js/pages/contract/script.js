@@ -160,24 +160,23 @@ myAppModule.controller('ContractController',
 		this.scrap = function (ContractItem) {
 			swal({ 
 					title: "确定报废吗？", 
-					text: "你将无法恢复该成本信息！", 
+					text: "你将无法恢复该合同信息！", 
 					type: "warning", 
 					showCancelButton: true, 
-					closeOnConfirm: false, 
+					closeOnConfirm: true, 
 					showLoaderOnConfirm: true, 
 			},
 			function(){ 
 				var params = {
-						ContractId:ContractItem.ContractId,
-						status:"99"
+						id:ContractItem.id
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/contract/updateCostStatus.do",
+					url:$("#rootUrl").val()+"/contract/deleteContract.do",
 					params:params
 					
 				}).then(function(res){
-					if(res.data.code == 0){
+					if(res.data.code == 1){
 						swal(res.data.msg);
 						self.getContractList();
 						//costItem.editMode="view";
@@ -200,12 +199,12 @@ myAppModule.controller('ContractController',
 			},
 			function(){ 
 				var params = {
-						contractId:contractItem.contractId,
+						id:contractItem.id,
 						status:"01"
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/contract/updateCostStatus.do",
+					url:$("#rootUrl").val()+"/contract/deleteContract.do",
 					params:params
 					
 				}).then(function(res){
