@@ -11,9 +11,13 @@
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="serialid" jdbcType="VARCHAR" property="serialid" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="cost_time" jdbcType="TIMESTAMP" property="costTime" />
+  	<result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, contract_id, type, content, dept, cost, company, url, serialid
+    id, contract_id, type, content, dept, cost, company, url, serialid, status, create_time, cost_time, create_user_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -35,11 +39,12 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Contract">
     insert into CONTRACT (id, contract_id, type, 
       content, dept, cost, 
-      company, url, serialid
+      company, url, serialid, create_time, cost_time, create_user_id, status
       )
     values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=INTEGER}, 
-      #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}
+      #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{costTime,jdbcType=TIMESTAMP}
+      , #{createUserId,jdbcType=VARCHAR}, '00'
       )
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Contract">
@@ -72,6 +77,18 @@
       <if test="serialid != null">
         serialid,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="costTime != null">
+        cost_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +117,18 @@
       </if>
       <if test="serialid != null">
         #{serialid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costTime != null">
+        #{cost_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{create_user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -130,6 +159,18 @@
       <if test="serialid != null">
         serialid = #{serialid,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costTime != null">
+        cost_time = #{costTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -142,7 +183,11 @@
       cost = #{cost,jdbcType=INTEGER},
       company = #{company,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      serialid = #{serialid,jdbcType=VARCHAR}
+      serialid = #{serialid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      cost_time = #{costTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update> 
   <select id="getAll" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -150,5 +195,44 @@
     <include refid="Base_Column_List" />
     from CONTRACT
   </select>
+  
+  <select id="getContractPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.ContractVO">
+		SELECT
+			contract.id as id,
+			contract.contract_id AS contractId,
+			contract.type AS type,
+			contract.content AS content,
+			contract.dept AS dept,
+			contract.cost AS cost,
+			contract.company as company,
+			contract.url as url,
+			contract.serialid as serialid,
+			contract.status as status,
+			'view' as editMode
+		FROM
+			CONTRACT contract
+		where 1=1 
+			
+			<if test="map.type != null and  map.type != ''">
+				AND contract.type = #{map.type}
+			</if>
+			
+			<if test="map.userId != null and  map.userId != ''">
+				AND contract.create_user_id = #{map.userId}
+			</if>
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				AND contract.create_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND contract.create_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+		
+		ORDER BY contract.create_time DESC
+	
+	</select>
+  
+  
   
 </mapper>
