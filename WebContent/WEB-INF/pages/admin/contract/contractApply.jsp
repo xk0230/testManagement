@@ -89,7 +89,7 @@
 														</select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.cost" min="0" style="width:90px;">
+														<input type="number" ng-model="item.cost" min="-1" style="width:90px;">
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.company"  style="width:120px;" />

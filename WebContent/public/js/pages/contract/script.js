@@ -118,7 +118,7 @@ myAppModule.controller('ContractController',
 				alert("请填写对方部门");
 				return ;
 			}
-			if(!contractItem.cost){
+			if(contractItem.cost<0){
 				alert("请填写金额");
 				return ;
 			}
