@@ -23,6 +23,8 @@ public interface CostDaoMapper {
 	
 	int insertCostDepEntity(CostDepEntityBean costDepEntityBean);
 	
+	int updateCostDepEntity(CostDepEntityBean costDepEntityBean);
+	
 	int updateCostEntity(CostEntityBean costEntityBean);
 	
 	int updateCostStatus(CostEntityBean costEntityBean);

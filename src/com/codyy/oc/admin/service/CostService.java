@@ -95,7 +95,14 @@ public class CostService {
 		List<Department> depList = depService.getAllDepartment();
 		//成本部门明细类
 		CostDepEntityBean costDep = new CostDepEntityBean();
-		
+	    costDep.setCostId(costEntityBean.getCostId());
+	    Calendar calendar = Calendar.getInstance(); 
+	    calendar.setTime(costEntityBean.getCostTime());
+	    costDep.setCostYear(String.valueOf(calendar.get(Calendar.YEAR)));
+	    costDep.setCostMonth(String.valueOf(calendar.get(Calendar.MONTH) + 1));
+	    SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+	    costDep.setCostDate(format.format(calendar.getTime()));
+	    
 		//CostID为空时执行插入
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
 			//部门ID=当前用户的部门
@@ -127,13 +134,7 @@ public class CostService {
 					jsonDto.setMsg(INSERT_ERROR);
 				}
 			}
-		    costDep.setCostId(costEntityBean.getCostId());
-		    Calendar calendar = Calendar.getInstance(); 
-		    calendar.setTime(costEntityBean.getCostTime());
-		    costDep.setCostYear(String.valueOf(calendar.get(Calendar.YEAR)));
-		    costDep.setCostMonth(String.valueOf(calendar.get(Calendar.MONTH) + 1));
-		    SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-		    costDep.setCostDate(format.format(calendar.getTime()));
+
 		    
 		    for(Department dep : depList) {
 		    	costDep.setCostDep(dep.getDepId());
@@ -142,6 +143,9 @@ public class CostService {
 		    }
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
+			costDep.setCostDep(costEntityBean.getDepId());
+			costDep.setCostNum(costEntityBean.getCostNum());
+			costDaoMapper.updateCostDepEntity(costDep);
 			if(updateCostEntityNum == 1){
 				jsonDto.setCode(0);
 				jsonDto.setMsg(UPDATE_SUCCESS);

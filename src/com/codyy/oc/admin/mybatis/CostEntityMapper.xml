@@ -67,15 +67,15 @@
 	
 	
 	<!-- 更新成本表 -->
-	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
+	<update id="updateCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
 		UPDATE COST_DETAIL
 		SET
-			cost_time = #{costTime},
-			cost_type = #{costType},
-			cost_num = #{costNum},
-			remark = #{remark},
-			status = #{status}
+			cost_year = #{costYear},
+			cost_month = #{costMonth},
+			cost_date = #{costDate},
+			cost_num = #{costNum}
 		WHERE cost_id = #{costId}
+		AND cost_dep = #{costDep},
 	</update>
 	
 	<!-- 更新成本状态 -->
