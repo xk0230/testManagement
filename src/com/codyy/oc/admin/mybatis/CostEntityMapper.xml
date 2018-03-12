@@ -44,6 +44,28 @@
 			)
 	</insert>
 	
+	<insert id="insertCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostDepEntityBean" >
+		INSERT INTO COST_DEP_DETAIL
+			(
+				cost_id,
+				cost_dep,
+				cost_year,
+				cost_month,
+				cost_date,
+				cost_num
+			)
+		VALUES
+			(
+				#{costId},
+				#{costDep},
+				#{costYear},
+				#{costMonth},
+				#{costDate},
+				#{costNum}
+			)
+	</insert>
+	
+	
 	<!-- 更新成本表 -->
 	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
 		UPDATE COST_DETAIL
@@ -110,6 +132,21 @@
 			dep_id AS depId,
 			remark AS remark
 		FROM COST_DETAIL
+	 	WHERE cost_id = #{_parameter}
+	</select>
+	
+	<!-- 根据costID取成本部门划分信息 -->
+	<select id="getCostDepList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostDepEntityBean">
+		SELECT
+			a.cost_id AS costId,
+			a.cost_dep AS costDep,
+			b.name AS costDepName,
+			a.cost_year AS costYear,
+			a.cost_month AS costMonth,
+			a.cost_date AS costDate, 
+			a.cost_num AS costNum
+		FROM COST_DEP_DETAIL a
+		LEFT JOIN DEPARTMENT b on a.cost_dep = b.dep_id
 	 	WHERE cost_id = #{_parameter}
 	</select>
 	
@@ -195,12 +232,12 @@
 			
 			<!-- 管理员时 条件设定为部门领导审核通过的 -->
 			<if test="map.userId == 'admin'">
-				AND (costDetail.status = '03' or costDetail.status = '05')
+				AND (costDetail.status in ('03','04','05'))
 			</if>
 			
 			<if test="map.userId != 'admin'">
 				AND costDetail.dep_id = #{map.depId}
-				AND (costDetail.status = '01' or costDetail.status = '04')
+				AND (costDetail.status != '00' AND (costDetail.status != '99' )
 			</if>
 			
 			<if test="map.startTime != null and map.startTime !=''">

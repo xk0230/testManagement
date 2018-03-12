@@ -1,8 +1,10 @@
 package com.codyy.oc.admin.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.codyy.commons.utils.DateUtils;
+import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 
 public class CostVO extends CostEntityBean{
@@ -50,6 +52,8 @@ public class CostVO extends CostEntityBean{
 	private String subUser;
 	
 	private String subUserName;
+	
+	private List<CostDepEntityBean> costDepList;
 	
     public String getCostNo() {
 		return costNo;
@@ -226,6 +230,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setSubUserName(String subUserName) {
 		this.subUserName = subUserName;
+	}
+
+	public List<CostDepEntityBean> getCostDepList() {
+		return costDepList;
+	}
+
+	public void setCostDepList(List<CostDepEntityBean> costDepList) {
+		this.costDepList = costDepList;
 	}
 
 }

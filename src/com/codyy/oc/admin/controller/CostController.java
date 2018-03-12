@@ -19,6 +19,7 @@ import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.CostEntityBean;
+import com.codyy.oc.admin.entity.Department;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
@@ -83,12 +84,24 @@ public class CostController extends BaseController{
 		return costService.getCostSubTypeList(castType);
 	}
 	
+	/**
+	 * 成本的新增和修改
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
 	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
 	
+	/**
+	 * 更新成本表的状态，用于审核
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateCostStatus.do",method = RequestMethod.POST)
 	public JsonDto UpdateStatus(HttpServletRequest request,CostEntityBean costEntityBean){
@@ -111,6 +124,12 @@ public class CostController extends BaseController{
 		
 	}*/
 	
+	/**
+	 * 申请列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
 	@ResponseBody
     @RequestMapping("/page.do")
     public Page getCostPageList(HttpServletRequest request,CostVO cost){
@@ -119,11 +138,16 @@ public class CostController extends BaseController{
         return costService.getCostPageList(cost);
     }
 	
+	/**
+	 * 审批列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
 	@ResponseBody
     @RequestMapping("/auditPage.do")
     public Page getAuditList(HttpServletRequest request,CostVO cost){
 		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
-		
 		cost.setDepId(adminUser.getDepId());
 		cost.setUserId(adminUser.getUserId());
 		

@@ -359,7 +359,7 @@ ul ul, ul ol, ol ol, ol ul {
 	margin-bottom: 0;
 }
 ul {
-	list-style: disc;
+	list-style: none;
 }
 ol {
 	list-style: decimal;

@@ -45,6 +45,7 @@
 													<th width="80px">收支类型</th>
 													<th width="120px">成本产生时间</th>
 													<th width="120px">金额</th>
+													<th width="120px">各部门金额</th>
 													<th width="300px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
@@ -58,6 +59,13 @@
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
+													
+													<td ng-switch-when="view">
+														<ul class="costnav" ng-repeat="depCost in item.costDepList">
+															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+														</ul>
+													</td>
+													
 													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>

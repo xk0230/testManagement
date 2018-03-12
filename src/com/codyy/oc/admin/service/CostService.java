@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,9 +26,11 @@ import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.dao.CostDaoMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
+import com.codyy.oc.admin.entity.Department;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
 import com.codyy.oc.admin.vo.CostInOutlayType;
@@ -42,6 +45,7 @@ import com.codyy.oc.admin.vo.DepMonthTotalVO;
  * @author Administrator
  *
  */
+
 @Service("costServer")
 public class CostService {
 	
@@ -60,6 +64,9 @@ public class CostService {
 	private static final String REJ_ERROR = "提交失败";
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
+	
+	@Autowired
+	private DepartmentService depService;
 	
 	public JsonDto getCostSubTypeList(int castType){
 		
@@ -84,6 +91,11 @@ public class CostService {
 		JsonDto jsonDto = new JsonDto();
 		//成本产生时间
 		costEntityBean.setCostTime(DateUtils.stringToTimestamp((DateUtils.format(costEntityBean.getCostTime()))));
+		//所有部门列表
+		List<Department> depList = depService.getAllDepartment();
+		//成本部门明细类
+		CostDepEntityBean costDep = new CostDepEntityBean();
+		
 		//CostID为空时执行插入
 		if(StringUtils.isBlank(costEntityBean.getCostId())){
 			//部门ID=当前用户的部门
@@ -91,9 +103,9 @@ public class CostService {
 			//创建时间和创建者
 			costEntityBean.setCreateTime(DateUtils.getCurrentTimestamp());
 			costEntityBean.setCreateUserId(user.getUserId());
-			if(user.getPosition() == "MANAGER") {
+			if(user.getPosition().equals("MANAGER")) {
 				costEntityBean.setStatus("03");
-			}else if(user.getUserId() == "admin") {
+			}else if(user.getUserId().equals("admin")) {
 				costEntityBean.setStatus("05");
 			}else {
 				costEntityBean.setStatus("00");
@@ -107,12 +119,26 @@ public class CostService {
 		    	costEntityBean.setDepId(depId);
 		    	//执行插入
 		    	int insertCostEntityNum = costDaoMapper.insertCostEntity(costEntityBean);
+		    	
 		    	if(insertCostEntityNum == 1) {
 					jsonDto.setCode(0);
 					jsonDto.setMsg(INSERT_SUCCESS);
 		    	}else {
 					jsonDto.setMsg(INSERT_ERROR);
-		    	}
+				}
+			}
+		    costDep.setCostId(costEntityBean.getCostId());
+		    Calendar calendar = Calendar.getInstance(); 
+		    calendar.setTime(costEntityBean.getCostTime());
+		    costDep.setCostYear(String.valueOf(calendar.get(Calendar.YEAR)));
+		    costDep.setCostMonth(String.valueOf(calendar.get(Calendar.MONTH) + 1));
+		    SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+		    costDep.setCostDate(format.format(calendar.getTime()));
+		    
+		    for(Department dep : depList) {
+		    	costDep.setCostDep(dep.getDepId());
+		    	costDep.setCostNum(dep.getDepId().equals(costEntityBean.getDepId())?costEntityBean.getCostNum():0);
+		    	costDaoMapper.insertCostDepEntity(costDep);
 		    }
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
@@ -185,8 +211,6 @@ public class CostService {
 		if(user.getPosition().equals("MANAGER") && (costEntityBean.getStatus().equals("03") || costEntityBean.getStatus().equals("02"))) {
 			costEntityBean.setAuditUser(user.getUserId());
 		}
-		
-		
 		
 		int updateCostEntityNum = costDaoMapper.updateCostStatus(costEntityBean);
 		if(updateCostEntityNum == 1){
@@ -276,8 +300,11 @@ public class CostService {
 	    page.setMap(map);
 	    
 	    List<CostVO> costPageList = costDaoMapper.getCostAuditPageList(page);
-	    page.setData(costPageList);
 	    
+	    for(CostVO costVO : costPageList) {
+	    	costVO.setCostDepList(costDaoMapper.getCostDepList(costVO.getCostId()));
+	    }
+	    page.setData(costPageList);
 	    return page;
 	}
 	

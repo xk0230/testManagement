@@ -23,6 +23,10 @@ select,
 textarea {
   font-family: 'Open Sans';
 }
+ul{
+	padding: 0;
+	margin: 0;
+}
 
 .dropdown .dropdown-menu {
 	-webkit-border-radius: 6px;
@@ -1256,8 +1260,32 @@ color: #333;
 	.ScrapBackground{
 		background: #686868;
 	}
+	
+	.costnav{
+		display: inline-block;
+		height: 80px;
+		padding: 0px;
+		margin: 0px;
+		display: inline-block;
+	}
+	
+	.costnav > li{
+		float: left;
+		min-width: 90px;
+		height: 60px;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		list-style: none;
+		border-left: 1px solid #d9d9d9;
+	}
+	
+	.costnav > li > span{
+		display: inline-block;
+		vertical-align: top;
+	}
 }
-    
+
 
 
 

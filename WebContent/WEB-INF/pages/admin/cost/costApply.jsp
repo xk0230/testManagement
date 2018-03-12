@@ -106,6 +106,6 @@
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 
-	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
+	<script src="${root}/public/js/pages/cost/cost.js" type="text/javascript"></script>
 </body>
 </html>

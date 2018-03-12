@@ -3,6 +3,7 @@ package com.codyy.oc.admin.dao;
 import java.util.List;
 
 import com.codyy.commons.page.Page;
+import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
@@ -19,6 +20,8 @@ public interface CostDaoMapper {
 	List<CostSubTypeBean> getCostSubTypeList(int castType);
 
 	int insertCostEntity(CostEntityBean costEntityBean);
+	
+	int insertCostDepEntity(CostDepEntityBean costDepEntityBean);
 	
 	int updateCostEntity(CostEntityBean costEntityBean);
 	
@@ -47,4 +50,11 @@ public interface CostDaoMapper {
 	int updateCostNoSeq(CostSeqBean costSeqBean);
 	
 	int insertCostNoSeq(CostSeqBean costSeqBean);
+
+	/**
+	 * 根据成本ID取成本部门划分信息
+	 * @param costId
+	 * @return
+	 */
+	List<CostDepEntityBean> getCostDepList(String costId);
 }
