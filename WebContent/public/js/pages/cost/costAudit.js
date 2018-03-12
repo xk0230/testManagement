@@ -86,12 +86,13 @@ myAppModule.controller('CostController',
 				createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
 				costNum:costItem.costNum,
 				remark:costItem.remark,
-				status:costItem.status
+				status:costItem.status,
+				conditions:JSON.stringify(self.list)
 			};
 			
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+"/admin/cost/saveOrUpdate.do",
+				url:$("#rootUrl").val()+"/admin/cost/adminUpdate.do",
 				params:params
 				
 			}).then(function(res){

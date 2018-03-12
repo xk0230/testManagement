@@ -95,7 +95,6 @@ public class CostService {
 		List<Department> depList = depService.getAllDepartment();
 		//成本部门明细类
 		CostDepEntityBean costDep = new CostDepEntityBean();
-	    costDep.setCostId(costEntityBean.getCostId());
 	    Calendar calendar = Calendar.getInstance(); 
 	    calendar.setTime(costEntityBean.getCostTime());
 	    costDep.setCostYear(String.valueOf(calendar.get(Calendar.YEAR)));
@@ -134,7 +133,8 @@ public class CostService {
 					jsonDto.setMsg(INSERT_ERROR);
 				}
 			}
-
+		    //设置costID
+		    costDep.setCostId(costEntityBean.getCostId());
 		    
 		    for(Department dep : depList) {
 		    	costDep.setCostDep(dep.getDepId());
@@ -143,9 +143,17 @@ public class CostService {
 		    }
 		}else{
 			int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
-			costDep.setCostDep(costEntityBean.getDepId());
-			costDep.setCostNum(costEntityBean.getCostNum());
-			costDaoMapper.updateCostDepEntity(costDep);
+			costDep.setCostId(costEntityBean.getCostId());
+			costDep.setCostDep(user.getDepId());
+		    for(Department dep : depList) {
+		    	if(dep.getDepId().equals(user.getDepId())) {
+		    		costDep.setCostNum(costEntityBean.getCostNum());
+		    	}else {
+		    		costDep.setCostNum(0);
+		    	}
+		    	costDep.setCostDep(dep.getDepId());
+		    	costDaoMapper.updateCostDepEntity(costDep);
+		    }
 			if(updateCostEntityNum == 1){
 				jsonDto.setCode(0);
 				jsonDto.setMsg(UPDATE_SUCCESS);

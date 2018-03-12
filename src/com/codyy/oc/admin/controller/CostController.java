@@ -18,6 +18,7 @@ import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Department;
 import com.codyy.oc.admin.service.CostService;
@@ -93,6 +94,18 @@ public class CostController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
 	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
+		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
+	}
+	
+	/**
+	 * 成本的新增和修改
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/adminUpdate.do",method = RequestMethod.POST)
+	public JsonDto adminUpdate(HttpServletRequest request,CostEntityBean costEntityBean,List<CostDepEntityBean> costDeps){
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
 	

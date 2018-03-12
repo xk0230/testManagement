@@ -117,7 +117,6 @@ myAppModule.controller('CostController',
 				if(res.data.code == 0){
 					swal(res.data.msg);
 					self.getCostList();
-					//costItem.editMode="view";
 				}else{
 					swal(res.data.msg);
 				}

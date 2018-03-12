@@ -67,15 +67,27 @@
 	
 	
 	<!-- 更新成本表 -->
-	<update id="updateCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
-		UPDATE COST_DETAIL
+	<update id="updateCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostDepEntityBean">
+		UPDATE COST_DEP_DETAIL
 		SET
 			cost_year = #{costYear},
 			cost_month = #{costMonth},
 			cost_date = #{costDate},
 			cost_num = #{costNum}
 		WHERE cost_id = #{costId}
-		AND cost_dep = #{costDep},
+		AND cost_dep = #{costDep}
+	</update>
+	
+		<!-- 更新成本表 -->
+	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
+		UPDATE COST_DETAIL
+		SET
+			cost_time = #{costTime},
+			cost_type = #{costType},
+			cost_num = #{costNum},
+			remark = #{remark},
+			status = #{status}
+		WHERE cost_id = #{costId}
 	</update>
 	
 	<!-- 更新成本状态 -->
@@ -237,7 +249,7 @@
 			
 			<if test="map.userId != 'admin'">
 				AND costDetail.dep_id = #{map.depId}
-				AND (costDetail.status != '00' AND (costDetail.status != '99' )
+				AND (costDetail.status in ('01','02','03','04','05'))
 			</if>
 			
 			<if test="map.startTime != null and map.startTime !=''">
