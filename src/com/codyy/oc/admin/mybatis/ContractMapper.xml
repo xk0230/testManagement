@@ -15,9 +15,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="cost_time" jdbcType="TIMESTAMP" property="costTime" />
   	<result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+	<result column="remakes" jdbcType="VARCHAR" property="remakes" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, contract_id, type, content, dept, cost, company, url, serialid, status, create_time, cost_time, create_user_id
+    id, contract_id, type, content, dept, cost, company, url, serialid, status, create_time, cost_time, create_user_id, remakes
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -39,12 +40,12 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Contract">
     insert into CONTRACT (id, contract_id, type, 
       content, dept, cost, 
-      company, url, serialid, create_time, cost_time, create_user_id, status
+      company, url, serialid, create_time, cost_time, create_user_id, status, remakes
       )
     values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=INTEGER}, 
       #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{costTime,jdbcType=TIMESTAMP}
-      , #{createUserId,jdbcType=VARCHAR}, '00'
+      , #{createUserId,jdbcType=VARCHAR}, '00', #{remakes,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Contract">
@@ -89,6 +90,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="remakes != null">
+        remakes,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -129,6 +133,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=CHAR},
+      </if>
+      <if test="remakes != null">
+        #{remakes,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -171,6 +178,9 @@
       <if test="status != null">
         status = #{status,jdbcType=CHAR},
       </if>
+      <if test="remakes != null">
+        status = #{remakes,jdbcType=CHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -187,7 +197,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       cost_time = #{costTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=CHAR},
-      create_user_id = #{createUserId,jdbcType=VARCHAR}
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      remakes = #{remakes,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update> 
   <select id="getAll" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -208,6 +219,7 @@
 			contract.url as url,
 			contract.serialid as serialid,
 			contract.status as status,
+			contract.remakes as remakes,
 			'view' as editMode
 		FROM
 			CONTRACT contract

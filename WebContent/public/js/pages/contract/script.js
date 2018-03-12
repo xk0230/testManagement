@@ -12,8 +12,8 @@ myAppModule.controller('ContractController',
 		this.$onInit = function(){
 
 			$scope.contractTypeList = [
-				{type : "0", name : "收入"},
-				{type : "1", name : "支出"}
+				{type : "收入", name : "收入"},
+				{type : "支出", name : "支出"}
 			];
 			
 			$scope.deptList = [
@@ -81,6 +81,7 @@ myAppModule.controller('ContractController',
 				,company:""
 				,url:""
 				,serialid:""	
+				,remakes:""	
 				,editMode:"edit"
 			};
 			var myArray=new Array()
@@ -133,6 +134,10 @@ myAppModule.controller('ContractController',
 				alert("请填写外部订单号");
 				return ;
 			}
+			if(!contractItem.remakes){
+				alert("请填写备注");
+				return ;
+			}
 			var params = {
 				id:contractItem.id,
 				contractId:contractItem.contractId,
@@ -143,7 +148,8 @@ myAppModule.controller('ContractController',
 				company:contractItem.company,
 				url:contractItem.url,
 				status:contractItem.status,
-				serialid:contractItem.serialid
+				serialid:contractItem.serialid,
+				remakes:contractItem.remakes
 //				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd")
 //				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss")
 			};

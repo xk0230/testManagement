@@ -36,6 +36,22 @@ public class Contract {
 	
 	private String status;
 	
+	private String remakes;
+	
+	/**
+	 * @return the remakes
+	 */
+	public String getRemakes() {
+		return remakes;
+	}
+
+	/**
+	 * @param remakes the remakes to set
+	 */
+	public void setRemakes(String remakes) {
+		this.remakes = remakes;
+	}
+
 	public String getStatus() {
 		return status;
 	}
