@@ -105,9 +105,10 @@ public class CostController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/adminUpdate.do",method = RequestMethod.POST)
-	public JsonDto adminUpdate(HttpServletRequest request,CostEntityBean costEntityBean,List<CostDepEntityBean> costDeps){
-		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
+	public JsonDto adminUpdate(HttpServletRequest request,CostEntityBean costEntityBean){
+		return costService.adminUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
+	
 	
 	/**
 	 * 更新成本表的状态，用于审核

@@ -165,6 +165,43 @@ public class CostService {
 	}
 	
 	/**
+	 * 插入，更新成本数据
+	 * @param user
+	 * @param costEntityBean
+	 * @return
+	 */
+	public JsonDto adminUpdateCostEntity(AdminUser user,CostEntityBean costEntityBean){
+		
+		JsonDto jsonDto = new JsonDto();
+		int updateCostEntityNum = costDaoMapper.updateCostEntity(costEntityBean);
+
+		//成本部门明细类
+	    Calendar calendar = Calendar.getInstance(); 
+	    calendar.setTime(costEntityBean.getCostTime());
+	    
+	    String year = String.valueOf(calendar.get(Calendar.YEAR));
+	    String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
+	    SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+	    String date = format.format(calendar.getTime());
+
+	    for(CostDepEntityBean costDep : costEntityBean.getCosDepList()) {
+	    	costDep.setCostYear(year);
+	    	costDep.setCostMonth(month);
+	    	costDep.setCostDate(date);
+	    	costDaoMapper.updateCostDepEntity(costDep);
+	    }
+		if(updateCostEntityNum == 1){
+			jsonDto.setCode(0);
+			jsonDto.setMsg(UPDATE_SUCCESS);
+		}else{
+			jsonDto.setMsg(UPDATE_ERROR);
+		}
+		return jsonDto;
+	}
+	
+	
+
+	/**
 	 * 生成成本单号
 	 * @param costEntityBean
 	 * @return
@@ -212,7 +249,7 @@ public class CostService {
 		if(costEntityBean.getStatus().equals("99")) {
 			sucessResult = SCRAP_SUCCESS;
 			errResult = SCRAP_ERROR;
-		}else if(costEntityBean.getStatus().equals("03") || costEntityBean.getStatus().equals("05")) {
+		}else if(costEntityBean.getStatus().equals("03") || costEntityBean.getStatus().equals("05")|| costEntityBean.getStatus().equals("01")) {
 			sucessResult = SUB_SUCCESS;
 			errResult = SUB_ERROR;
 			

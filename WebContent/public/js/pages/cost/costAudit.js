@@ -79,6 +79,7 @@ myAppModule.controller('CostController',
 				alert("请填写金额");
 				return ;
 			}
+			
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
@@ -87,7 +88,7 @@ myAppModule.controller('CostController',
 				costNum:costItem.costNum,
 				remark:costItem.remark,
 				status:costItem.status,
-				conditions:JSON.stringify(self.list)
+				cosDepList:JSON.stringify(self.list[0].costDepList),
 			};
 			
 			$http({
