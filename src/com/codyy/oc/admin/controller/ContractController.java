@@ -59,7 +59,7 @@ public class ContractController extends BaseController {
 
 	@ResponseBody
     @RequestMapping("/deleteContract.do")
-    public int deleteContract(HttpServletRequest request,ContractVO contract){
+    public JsonDto deleteContract(HttpServletRequest request,ContractVO contract){
 		return contractManageService.deleteContract(contract);
     }
 	

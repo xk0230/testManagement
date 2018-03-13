@@ -2,7 +2,6 @@
 /com/
 /app.properties
 /applicationcontext-spring.xml
-/com/
 /generatorConfig.xml
 /jdbc.properties
 /log4j.properties

@@ -30,11 +30,13 @@ import com.codyy.oc.admin.vo.CostVO;
 
 @Component("ContractManageService")
 public class ContractManageService {
-	
+
 	private static final String INSERT_SUCCESS = "新增成功";
 	private static final String INSERT_ERROR = "新增失败";
 	private static final String UPDATE_SUCCESS = "修改成功";
 	private static final String UPDATE_ERROR = "修改失败";
+	private static final String DELETE_SUCCESS = "删除成功";
+	private static final String DELETE_ERROR = "删除失败";
 	
 	@Autowired
 	private ContractMapper contractMapper;
@@ -67,8 +69,6 @@ public class ContractManageService {
 		    if(StringUtils.isNotBlank(depId)) {
 		    	contract.setId(UUID.randomUUID().toString());
 		    	
-		    	//设置部门
-		    	contract.setDept(depId);
 		    	//执行插入
 		    	int insertCostEntityNum = contractMapper.insert(contract);
 		    	if(insertCostEntityNum == 1) {
@@ -119,7 +119,15 @@ public class ContractManageService {
 	    return page;
 	}
 	
-	public int deleteContract(ContractVO contract){
-		return contractMapper.deleteByPrimaryKey(contract.getId());
+	public JsonDto deleteContract(ContractVO contract){
+		JsonDto jsonDto = new JsonDto();
+		int code = contractMapper.deleteByPrimaryKey(contract.getId());
+		if(code == 1) {
+			jsonDto.setCode(0);
+			jsonDto.setMsg(DELETE_SUCCESS);
+    	}else {
+			jsonDto.setMsg(DELETE_ERROR);
+    	}
+		return jsonDto;
 	}
 }

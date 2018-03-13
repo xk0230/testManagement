@@ -12,8 +12,16 @@ myAppModule.controller('ContractController',
 		this.$onInit = function(){
 
 			$scope.contractTypeList = [
-				{type : "0", name : "收入"},
-				{type : "1", name : "支出"}
+				{type : "收入", name : "收入"},
+				{type : "支出", name : "支出"}
+			];
+			
+			$scope.deptList = [
+			   	{type : "YSEC", name : "YSEC"},
+				{type : "GMO", name : "GMO"},
+				{type : "ATD", name : "ATD"},
+				{type : "CES", name : "CES"},
+			    {type : "SSC", name : "SSC"}
 			];
 			
 			//获取角色
@@ -65,7 +73,7 @@ myAppModule.controller('ContractController',
 				costDate:new Date()
 				,createDate:new Date()
 				,id:""
-				,contractId:""
+				,contractId:$filter('date')(new Date(), "yyyyMMddhhmmss")
 				,type:""
 				,content:""
 				,dept:""
@@ -73,6 +81,7 @@ myAppModule.controller('ContractController',
 				,company:""
 				,url:""
 				,serialid:""	
+				,remakes:""	
 				,editMode:"edit"
 			};
 			var myArray=new Array()
@@ -109,7 +118,7 @@ myAppModule.controller('ContractController',
 				alert("请填写对方部门");
 				return ;
 			}
-			if(!contractItem.cost){
+			if(contractItem.cost<0){
 				alert("请填写金额");
 				return ;
 			}
@@ -125,6 +134,10 @@ myAppModule.controller('ContractController',
 				alert("请填写外部订单号");
 				return ;
 			}
+			if(!contractItem.remakes){
+				alert("请填写备注");
+				return ;
+			}
 			var params = {
 				id:contractItem.id,
 				contractId:contractItem.contractId,
@@ -135,7 +148,8 @@ myAppModule.controller('ContractController',
 				company:contractItem.company,
 				url:contractItem.url,
 				status:contractItem.status,
-				serialid:contractItem.serialid
+				serialid:contractItem.serialid,
+				remakes:contractItem.remakes
 //				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd")
 //				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss")
 			};
@@ -176,7 +190,7 @@ myAppModule.controller('ContractController',
 					params:params
 					
 				}).then(function(res){
-					if(res.data.code == 1){
+					if(res.data.code == 0){
 						swal(res.data.msg);
 						self.getContractList();
 						//costItem.editMode="view";
