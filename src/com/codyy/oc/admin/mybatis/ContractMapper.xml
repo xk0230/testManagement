@@ -225,8 +225,8 @@
 			CONTRACT contract
 		where 1=1 
 			
-			<if test="map.type != null and  map.type != ''">
-				AND contract.type = #{map.type}
+			<if test="map.contactType != null and  map.contactType != ''">
+				AND contract.type = #{map.contactType}
 			</if>
 			
 			<if test="map.userId != null and  map.userId != ''">
