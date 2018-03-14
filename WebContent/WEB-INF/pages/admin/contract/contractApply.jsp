@@ -76,7 +76,7 @@
 													<td ng-switch-when="edit">
 				                                        <select id="type" style="width:90px;" ng-model="item.type"  class="form-control select2" 
 				                                            ng-options="cType.type as cType.name group by cType.group for cType in contractTypeList">
-				                                            <option value="">--收支类型--</option>
+				                                            <option value="">--类型--</option>
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
@@ -85,7 +85,7 @@
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:90px;" class="form-control select2" 
 														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
-														<option value="">--所属部门--</option>
+														<option value="">--部门--</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">
