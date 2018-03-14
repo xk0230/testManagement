@@ -12,7 +12,7 @@ public class Contract {
 
     private String contractId;
 
-    private String type;
+    private String contractType;
 
     private String content;
 
@@ -118,12 +118,12 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public String getType() {
-        return type;
+    public String getContractType() {
+        return contractType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setContractType(String contractType) {
+        this.contractType = contractType;
     }
 
     public String getContent() {

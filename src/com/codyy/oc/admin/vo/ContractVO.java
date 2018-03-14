@@ -152,13 +152,13 @@ public class ContractVO extends Contract {
 	 * @return the contractTypeName
 	 */
 	public String getContractTypeName() {
-		if(this.getType().equals("1")){
-			contractTypeName = "支出";
-		}else if(this.getType().equals("0")){
-			contractTypeName = "收入";
-		}else{
-			contractTypeName = "";
-		}
+//		if(this.getContractType().equals("1")){
+//			contractTypeName = "支出";
+//		}else if(this.getContractType().equals("0")){
+//			contractTypeName = "收入";
+//		}else{
+//			contractTypeName = "";
+//		}
 		return contractTypeName;
 	}
 

@@ -94,7 +94,7 @@ public class ContractManageService {
 	}
 	
 	/**
-	 * 成本列表查询
+	 * 合同列表查询
 	 * @param contract
 	 * @return
 	 */
@@ -104,8 +104,8 @@ public class ContractManageService {
 	    page.setEnd(contract.getEnd());
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
-	    
-	    map.put("contactType", contract.getType());
+
+	    map.put("contactType", contract.getContractType());
 	    map.put("userId", contract.getUserId());
 	    map.put("startTime", contract.getStartDate());
 	    map.put("endTime", contract.getEndDate());
