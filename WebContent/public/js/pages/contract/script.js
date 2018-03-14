@@ -12,8 +12,8 @@ myAppModule.controller('ContractController',
 		this.$onInit = function(){
 
 			$scope.contractTypeList = [
-				{type : "收入", name : "收入"},
-				{type : "支出", name : "支出"}
+				{contractType : "0", name : "收入"},
+				{contractType : "1", name : "支出"}
 			];
 			
 			$scope.deptList = [
@@ -50,7 +50,7 @@ myAppModule.controller('ContractController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/contract/page.do',
 				params:{
-					type:$scope.type,
+					contractType:$scope.contractType,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -74,7 +74,7 @@ myAppModule.controller('ContractController',
 				,createDate:new Date()
 				,id:""
 				,contractId:$filter('date')(new Date(), "yyyyMMddhhmmss")
-				,type:""
+				,contractType:""
 				,content:""
 				,dept:""
 				,cost:0
@@ -106,7 +106,7 @@ myAppModule.controller('ContractController',
 				alert("请填写合同订单");
 				return ;
 			}
-			if(!contractItem.type){
+			if(!contractItem.contractType){
 				alert("请填写合同类别");
 				return ;
 			}
@@ -141,7 +141,7 @@ myAppModule.controller('ContractController',
 			var params = {
 				id:contractItem.id,
 				contractId:contractItem.contractId,
-				type:contractItem.type,
+				contractType:contractItem.contractType,
 				content:contractItem.content,
 				cost:contractItem.cost,
 				dept:contractItem.dept,

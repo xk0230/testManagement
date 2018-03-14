@@ -21,9 +21,8 @@
 							<div class="widget-content">
 								<div class="row">
                                     <div class="span3">
-                                        <select id="type" ng-model="type"  class="form-control select2" 
-                                                ng-options="type as cType.name group by cType.group for cType in contractTypeList"
-                                                ng-change="costTypeChange()">
+                                        <select id="contractType" ng-model="contractType"  class="form-control select2" 
+                                                ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
                                             <option value="">--请选择收支类型--</option>
                                         </select>
                                     </div>
@@ -59,7 +58,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind="item.type"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.contractType"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
@@ -74,9 +73,9 @@
 													<!-- edit -->
 													
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:90px;" ng-model="item.type"  class="form-control select2" 
-				                                            ng-options="cType.type as cType.name group by cType.group for cType in contractTypeList">
-				                                            <option value="">--收支类型--</option>
+				                                        <select id="type" style="width:90px;" ng-model="item.contractType"  class="form-control select2" 
+				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
+				                                            <option value="">--类型--</option>
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
@@ -85,7 +84,7 @@
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:90px;" class="form-control select2" 
 														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
-														<option value="">--所属部门--</option>
+														<option value="">--部门--</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">
