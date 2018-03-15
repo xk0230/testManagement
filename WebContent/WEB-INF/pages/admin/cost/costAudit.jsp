@@ -59,11 +59,11 @@
 													<!-- view -->
 													<td ng-switch-when="view" >
 														<div class="comandDiv" >
+															<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')">编辑</a>
 															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">提交</a>
 															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">驳回</a>
 															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">提交</a>
 															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">驳回</a>
-															<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">编辑</a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">报废</a>
 														</div>
 													</td>

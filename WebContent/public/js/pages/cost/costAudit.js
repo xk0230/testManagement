@@ -79,12 +79,16 @@ myAppModule.controller('CostController',
 				swal("错误提示", "请填写金额！", "warning")
 				return ;
 			}
-			var depList = self.list[0].costDepList;
+			var depList = costItem.costDepList;
 			var sum = parseFloat(0);
 			angular.forEach(depList, function(dep, key) {
+				if (typeof(dep.costNum) == "undefined")
+				{ 
+					dep.costNum = parseFloat(0);
+				}
 				sum = sum + parseFloat(dep.costNum);
 			});
-			if(sum != parseFloat(self.list[0].costNum)){
+			if(sum != parseFloat(costItem.costNum)){
 				swal("错误提示", "各部门金额必须等于总金额！", "warning")
 				return ;
 			}
