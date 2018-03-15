@@ -357,6 +357,56 @@ public class CostService {
 	    return page;
 	}
 	
+	/**
+	 * 成本审核查询
+	 * @param cost
+	 * @return
+	 */
+	public Page getCostViewList(CostVO cost){
+	    Page page = new Page();
+	    page.setStart(cost.getStart());
+	    page.setEnd(cost.getEnd());
+	    
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    
+	    map.put("costType", cost.getCostType());
+	    map.put("depId", cost.getDepId());
+	    map.put("status", cost.getStatus());
+	    map.put("startTime", cost.getStartDate());
+	    map.put("endTime", cost.getEndDate());
+	    map.put("userId", cost.getUserId());
+	    
+	    page.setMap(map);
+	    
+	    List<CostVO> costPageList = costDaoMapper.getCostAuditPageList(page);
+	    
+	    for(CostVO costVO : costPageList) {
+	    	costVO.setCostDepList(costDaoMapper.getCostDepList(costVO.getCostId()));
+	    }
+	    page.setData(costPageList);
+	    return page;
+	}
+	
+	/**
+	 * @param sessionUser
+	 * @param costEntityBean
+	 * @return
+	 */
+	public JsonDto viewChart(AdminUser sessionUser, CostVO cost) {
+		
+		JsonDto jsonDto = new JsonDto();
+		
+		cost.setUserId(sessionUser.getUserId());
+	    
+	    List<CostEntityBean> costPageList = costDaoMapper.getViewChart(cost);
+	    
+	    jsonDto.setCode(0);
+	    jsonDto.setMsg("获取成功");
+	    jsonDto.setObjData(costPageList);
+	    
+	    return jsonDto;
+	}
+	
 	public CostChartsData getCostChartData(AdminUser user,int type,int curYear){
 	    
 	    CostChartsData costChartsData = new CostChartsData();
@@ -1098,5 +1148,4 @@ public class CostService {
 		
 		return depMonthTotal;
 	}
-	
 }

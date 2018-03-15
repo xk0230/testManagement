@@ -37,6 +37,8 @@ public interface CostDaoMapper {
 	
 	List<CostVO> getCostAuditPageList(Page page);
 	
+	List<CostVO> getCostViewPageList(Page page);
+	
 	List<CostMonthInOut> getCostOutlayType(CostVO cost);
 	
 	List<CostMonthInOut> getCostDepartIncomeType(CostVO cost);
@@ -59,4 +61,11 @@ public interface CostDaoMapper {
 	 * @return
 	 */
 	List<CostDepEntityBean> getCostDepList(String costId);
+
+	/**
+	 * 取查看的收入支出
+	 * @param cost
+	 * @return
+	 */
+	List<CostEntityBean> getViewChart(CostVO cost);
 }

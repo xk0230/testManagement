@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -14,13 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
-import com.codyy.oc.admin.entity.Department;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
@@ -66,6 +67,15 @@ public class CostController extends BaseController{
 	@RequestMapping("/costAudit.do")
 	public String costcostAudit(){
 		return "admin/cost/costAudit";
+	}
+	
+	/**
+	 * 成本查看
+	 * @return
+	 */
+	@RequestMapping("/costView.do")
+	public String costcostView(){
+		return "admin/cost/costView";
 	}
 	
 	@RequestMapping("/chart.do")
@@ -168,6 +178,34 @@ public class CostController extends BaseController{
         return costService.getCostAuditList(cost);
     }
 	
+	/**
+	 * 审批列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
+	@ResponseBody
+    @RequestMapping("/viewPage.do")
+    public Page getViewList(HttpServletRequest request,CostVO cost){
+		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		cost.setDepId(adminUser.getDepId());
+		cost.setUserId(adminUser.getUserId());
+		
+        return costService.getCostViewList(cost);
+    }
+	
+	/**
+	 * 更新成本表的状态，用于审核
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/viewChart.do",method = RequestMethod.POST)
+	public JsonDto viewChart(HttpServletRequest request,CostVO cost){
+		return costService.viewChart(this.getSessionUser(request),cost);
+	}
+	
 	@ResponseBody
     @RequestMapping("/outlay.do")
     public CostChartsData getChartDataByOutlayType(HttpServletRequest request,int curYear){
@@ -190,7 +228,6 @@ public class CostController extends BaseController{
 	@ResponseBody
     @RequestMapping("/depIncome.do")
     public CostChartsData getChartDataByDepIncome(HttpServletRequest request,int curYear){
-        
         return costService.getCostChartData(this.getSessionUser(request),1,curYear);
         
     }

@@ -24,8 +24,8 @@ myAppModule.controller('CostController',
 			}else if(self.admin=="ADMIN"){
 				$scope.depIdChangeAble = false;
 			}
-			self.getCostAuditList();
-
+			self.getCostList();
+			self.getCostViewChart();
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -37,10 +37,10 @@ myAppModule.controller('CostController',
 		};
 		
 		// 获取数据列表
-		this.getCostAuditList = function(){
+		this.getCostList = function(){
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+'/admin/cost/auditPage.do',
+				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					costType:$scope.costType,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
@@ -59,6 +59,41 @@ myAppModule.controller('CostController',
 			});
 		};
 		
+		// 获取数据列表
+		this.getCostViewChart = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/viewChart.do',
+				params:{
+					costType:$scope.costType,
+					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
+				}
+			}).then(function(res){
+				if(res){
+					var objData = res.data.objData;
+					var inNum = parseFloat(0);
+					var outNum = parseFloat(0);
+					angular.forEach(objData, function(data,index,array){
+						if(data.costType == "0"){
+							inNum = parseFloat(data.costNum);
+						}else{
+							outNum = parseFloat(data.costNum);
+						}
+					});
+					$scope.inPercent = inNum / (inNum + outNum) * 100;
+					$scope.outPercent = inNum / (inNum + outNum) * 100;
+					$scope.inStr = "收入：" + inNum;
+					$scope.outStr = "支出：" + outNum;
+					
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+		};
+		
 		//点击编辑
 		this.editCost = function (costItem) {
 			costItem.editMode = "edit";
@@ -68,28 +103,18 @@ myAppModule.controller('CostController',
 		//点击保存
 		this.save = function (costItem) {
 			if(!costItem.costType){
-				swal("错误提示", "请填写收支类型！", "warning")
+				alert("请填写收支类型");
 				return ;
 			}
 			if(!costItem.costDate){
-				swal("错误提示", "请填写成本产生时间！", "warning")
+				alert("请填写成本产生时间");
 				return ;
 			}
 			if(!costItem.costNum){
-				swal("错误提示", "请填写金额！", "warning")
+				alert("请填写金额");
 				return ;
 			}
-			var depList = self.list[0].costDepList;
-			var sum = parseFloat(0);
-			angular.forEach(depList, function(dep, key) {
-				sum = sum + parseFloat(dep.costNum);
-			});
-			if(sum != parseFloat(self.list[0].costNum)){
-				swal("错误提示", "各部门金额必须等于总金额！", "warning")
-				return ;
-			}
-				
-				
+			
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
@@ -109,7 +134,7 @@ myAppModule.controller('CostController',
 			}).then(function(res){
 				if(res.data.code == 0){
 					swal(res.data.msg);
-					self.getCostAuditList();
+					self.getCostList();
 				}else{
 					swal(res.data.msg);
 				}
@@ -203,7 +228,7 @@ myAppModule.controller('CostController',
 				if(res.data.code == 0){
 					swal(res.data.msg);
 					//重新加载列表
-					self.getCostAuditList();
+					self.getCostList();
 				}else{
 					swal(res.data.msg);
 				}
@@ -233,7 +258,7 @@ myAppModule.controller('CostController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal(res.data.msg);
-						self.getCostAuditList();
+						self.getCostList();
 					}else{
 						swal(res.data.msg);
 					}
