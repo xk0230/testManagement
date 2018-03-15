@@ -229,6 +229,14 @@
 				AND contract.type = #{map.contactType}
 			</if>
 			
+			<if test="map.contactId != null and  map.contactId != ''">
+				AND contract.contractId like '%' #{map.contactId} '%' 
+			</if>
+			
+			<if test="map.content != null and  map.content != ''">
+				AND contract.content like '%'   #{map.content}  '%' 
+			</if>
+			
 			<if test="map.userId != null and  map.userId != ''">
 				AND contract.create_user_id = #{map.userId}
 			</if>

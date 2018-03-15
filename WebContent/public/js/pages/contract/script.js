@@ -12,8 +12,8 @@ myAppModule.controller('ContractController',
 		this.$onInit = function(){
 
 			$scope.contractTypeList = [
-				{contractType : "0", name : "收入"},
-				{contractType : "1", name : "支出"}
+				{contractType : "收入", name : "收入"},
+				{contractType : "支出", name : "支出"}
 			];
 			
 			$scope.deptList = [
@@ -51,6 +51,8 @@ myAppModule.controller('ContractController',
 				url:$("#rootUrl").val()+'/contract/page.do',
 				params:{
 					contractType:$scope.contractType,
+					content:$scope.content,
+					contractId:$scope.contractId,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),

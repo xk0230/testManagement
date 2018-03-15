@@ -105,6 +105,8 @@ public class ContractManageService {
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 
+	    map.put("contractId", contract.getContractId());
+	    map.put("content", contract.getContent());
 	    map.put("contactType", contract.getContractType());
 	    map.put("userId", contract.getUserId());
 	    map.put("startTime", contract.getStartDate());

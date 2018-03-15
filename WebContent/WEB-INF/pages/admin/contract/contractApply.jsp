@@ -26,6 +26,14 @@
                                             <option value="">--请选择收支类型--</option>
                                         </select>
                                     </div>
+                                    <div class="span3">
+										<span class="searchSpan">合同内容:</span>
+                                        <input type="text" ng-model="content"  style="width:120px;" />
+                                    </div>
+                                    <div class="span3">
+										<span class="searchSpan">合同编号:</span>
+                                        <input type="text" ng-model="contractId"  style="width:120px;" />
+                                    </div>
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
 										<input type="date" ng-model="costStartDate" class="span2">
