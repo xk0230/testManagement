@@ -7,7 +7,7 @@ myAppModule.controller('CostController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 20;
+		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
 
@@ -117,7 +117,6 @@ myAppModule.controller('CostController',
 				if(res.data.code == 0){
 					swal(res.data.msg);
 					self.getCostList();
-					//costItem.editMode="view";
 				}else{
 					swal(res.data.msg);
 				}

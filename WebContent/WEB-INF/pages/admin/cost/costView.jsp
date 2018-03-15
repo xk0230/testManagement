@@ -36,13 +36,20 @@
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
 								</div>
 								<hr>
+									<div class="progress progress-striped active" style="height:18px;" >
+										<div class="bar" style="width: {{inPercent}}%;height:18px;" ><span style="display:inlie-block;height:18px;">{{inStr}}</span></div>
+									</div>
+									<div class="progress progress-striped active">
+										<div class="bar" style="width: {{outPercent}}%;">{{outStr}}</div>
+									</div>
+								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12" style="overflow:auto">
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="60px">操作</th>
+													<th width="60px">NO</th>
 													<th width="120px">成本单号</th>
 													<th width="60px">收支类型</th>
 													<th width="140px">成本产生时间</th>
@@ -57,16 +64,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view" >
-														<div class="comandDiv" >
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">提交</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">驳回</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">提交</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">驳回</a>
-															<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">编辑</a>
-															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">报废</a>
-														</div>
-													</td>
+													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
@@ -82,39 +80,6 @@
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
-													<!-- edit -->
-													<td ng-switch-when="edit">
-														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)">保存</a>
-													</td>
-													<td ng-switch-when="edit"><p ng-bind="item.costNo"></p></td>
-													<td ng-switch-when="edit">
-				                                        <select id="costType" style="width:60px;" ng-model="item.costType"  class="form-control select2" 
-				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
-				                                            <option value="">--收支类型--</option>
-				                                        </select>
-													</td>
-													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.costDate" style="width:125px;" >
-													</td>
-													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  min="1" style="width:110px;" />
-													</td>
-													<td ng-switch-when="edit">
-														<ul class="costnav" ng-repeat="depCost in item.costDepList" style="width:132px">
-															<li>
-																<span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:
-																<span style="display: inline-block;width:80px">
-																	<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
-																</span>
-															</li>
-														</ul>
-													</td>
-													<td ng-switch-when="edit">
-														<textarea rows="5" cols="10" ng-model="item.remark"></textarea>
-													</td>
-													<td ng-switch-when="edit"><p ng-bind="item.subUserName"></p></td>
-													<td ng-switch-when="edit"><p ng-bind="item.auditUserName"></p></td>
-													<td ng-switch-when="edit"><p ng-bind="item.statusName"></p></td>
 												</tr>
 											</tbody>
 										</table>
@@ -130,25 +95,9 @@
 				</div>
 			</div>
 		</div>
-	<!-- 弹框-删除 -->
-    <script type="text/ng-template" id="myModalDelContent.html">
-			<div class="modal-header">
-				<div class="row ">
-					<div class="col-lg-12 heading">
-						<ul id="crumb" class="breadcrumb">
-							确定删除成本记录吗？
-						</ul>
-					</div>
-				</div>
-			</div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">确定</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
-        </div>
-    </script>
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 
-	<script src="${root}/public/js/pages/cost/costAudit.js" type="text/javascript"></script>
+	<script src="${root}/public/js/pages/cost/costView.js" type="text/javascript"></script>
 </body>
 </html>

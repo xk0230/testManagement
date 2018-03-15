@@ -15,7 +15,7 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>我的成本申请</h3>
+								<h3>我的费用</h3>
 							</div>
 							
 							<div class="widget-content">
@@ -40,7 +40,7 @@
 								<div class="row">
 									<div class="span12">
 										<div style="width:1134px;">
-											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i> 新增</button>
+											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i>申请</button>
 										</div>
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
@@ -106,6 +106,6 @@
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 
-	<script src="${root}/public/js/pages/cost/script.js" type="text/javascript"></script>
+	<script src="${root}/public/js/pages/cost/cost.js" type="text/javascript"></script>
 </body>
 </html>

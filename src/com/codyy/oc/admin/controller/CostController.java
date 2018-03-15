@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
@@ -66,6 +69,15 @@ public class CostController extends BaseController{
 		return "admin/cost/costAudit";
 	}
 	
+	/**
+	 * 成本查看
+	 * @return
+	 */
+	@RequestMapping("/costView.do")
+	public String costcostView(){
+		return "admin/cost/costView";
+	}
+	
 	@RequestMapping("/chart.do")
     public String costChar(){
         return "admin/cost/costChart";
@@ -83,12 +95,37 @@ public class CostController extends BaseController{
 		return costService.getCostSubTypeList(castType);
 	}
 	
+	/**
+	 * 成本的新增和修改
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
 	public JsonDto insertOrUpdateCost(HttpServletRequest request,CostEntityBean costEntityBean){
 		return costService.insertOrUpdateCostEntity(this.getSessionUser(request),costEntityBean);
 	}
 	
+	/**
+	 * 成本的新增和修改
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/adminUpdate.do",method = RequestMethod.POST)
+	public JsonDto adminUpdate(HttpServletRequest request,CostEntityBean costEntityBean){
+		return costService.adminUpdateCostEntity(this.getSessionUser(request),costEntityBean);
+	}
+	
+	
+	/**
+	 * 更新成本表的状态，用于审核
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateCostStatus.do",method = RequestMethod.POST)
 	public JsonDto UpdateStatus(HttpServletRequest request,CostEntityBean costEntityBean){
@@ -111,6 +148,12 @@ public class CostController extends BaseController{
 		
 	}*/
 	
+	/**
+	 * 申请列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
 	@ResponseBody
     @RequestMapping("/page.do")
     public Page getCostPageList(HttpServletRequest request,CostVO cost){
@@ -119,16 +162,49 @@ public class CostController extends BaseController{
         return costService.getCostPageList(cost);
     }
 	
+	/**
+	 * 审批列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
 	@ResponseBody
     @RequestMapping("/auditPage.do")
     public Page getAuditList(HttpServletRequest request,CostVO cost){
 		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
-		
 		cost.setDepId(adminUser.getDepId());
 		cost.setUserId(adminUser.getUserId());
 		
         return costService.getCostAuditList(cost);
     }
+	
+	/**
+	 * 审批列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
+	@ResponseBody
+    @RequestMapping("/viewPage.do")
+    public Page getViewList(HttpServletRequest request,CostVO cost){
+		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		cost.setDepId(adminUser.getDepId());
+		cost.setUserId(adminUser.getUserId());
+		
+        return costService.getCostViewList(cost);
+    }
+	
+	/**
+	 * 更新成本表的状态，用于审核
+	 * @param request
+	 * @param costEntityBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/viewChart.do",method = RequestMethod.POST)
+	public JsonDto viewChart(HttpServletRequest request,CostVO cost){
+		return costService.viewChart(this.getSessionUser(request),cost);
+	}
 	
 	@ResponseBody
     @RequestMapping("/outlay.do")
@@ -152,7 +228,6 @@ public class CostController extends BaseController{
 	@ResponseBody
     @RequestMapping("/depIncome.do")
     public CostChartsData getChartDataByDepIncome(HttpServletRequest request,int curYear){
-        
         return costService.getCostChartData(this.getSessionUser(request),1,curYear);
         
     }

@@ -1,6 +1,9 @@
 package com.codyy.oc.admin.entity;
 
 import java.util.Date;
+import java.util.List;
+
+import net.sf.json.JSONArray;
 
 /**
  * 成本实体类
@@ -42,7 +45,28 @@ public class CostEntityBean {
 	//成本单号
 	private String costNo;
 	
+	//审核通过人
+	private String auditUser;
+	
+	private List<CostDepEntityBean> cosDepList;
+	
 
+
+
+	public List<CostDepEntityBean> getCosDepList() {
+		return cosDepList;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void setCosDepList(String jsonData) {
+		List list = (List)json2ObjectList(jsonData, CostDepEntityBean.class); 
+		this.cosDepList = list;
+	}
+
+	public static Object json2ObjectList(String strJson, @SuppressWarnings("rawtypes")Class beanClass) {
+		  return JSONArray.toCollection(JSONArray.fromObject(strJson), beanClass); 
+	}  
+	
 	public String getCostId() {
 		return costId;
 	}
@@ -138,5 +162,13 @@ public class CostEntityBean {
 	public void setCostNo(String costNo) {
 		this.costNo = costNo;
 	}
-    
+
+	public String getAuditUser() {
+		return auditUser;
+	}
+
+	public void setAuditUser(String auditUser) {
+		this.auditUser = auditUser;
+	}
+
 }

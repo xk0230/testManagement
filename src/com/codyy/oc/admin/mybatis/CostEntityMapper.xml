@@ -39,12 +39,46 @@
 				#{costNum},
 				#{depId},
 				#{remark},
-				'00',
+				#{status},
 				#{costNo}
 			)
 	</insert>
 	
+	<insert id="insertCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostDepEntityBean" >
+		INSERT INTO COST_DEP_DETAIL
+			(
+				cost_id,
+				cost_dep,
+				cost_year,
+				cost_month,
+				cost_date,
+				cost_num
+			)
+		VALUES
+			(
+				#{costId},
+				#{costDep},
+				#{costYear},
+				#{costMonth},
+				#{costDate},
+				#{costNum}
+			)
+	</insert>
+	
+	
 	<!-- 更新成本表 -->
+	<update id="updateCostDepEntity" parameterType="com.codyy.oc.admin.entity.CostDepEntityBean">
+		UPDATE COST_DEP_DETAIL
+		SET
+			cost_year = #{costYear},
+			cost_month = #{costMonth},
+			cost_date = #{costDate},
+			cost_num = #{costNum}
+		WHERE cost_id = #{costId}
+		AND cost_dep = #{costDep}
+	</update>
+	
+		<!-- 更新成本表 -->
 	<update id="updateCostEntity" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
 		UPDATE COST_DETAIL
 		SET
@@ -59,6 +93,9 @@
 	<!-- 更新成本状态 -->
 	<update id="updateCostStatus" parameterType="com.codyy.oc.admin.entity.CostEntityBean">
 		UPDATE COST_DETAIL SET status = #{status}
+		<if test="auditUser != null and auditUser != ''">
+			,audit_user = #{auditUser}
+		</if>
 		WHERE cost_id = #{costId}
 	</update>
 	
@@ -107,6 +144,21 @@
 			dep_id AS depId,
 			remark AS remark
 		FROM COST_DETAIL
+	 	WHERE cost_id = #{_parameter}
+	</select>
+	
+	<!-- 根据costID取成本部门划分信息 -->
+	<select id="getCostDepList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostDepEntityBean">
+		SELECT
+			a.cost_id AS costId,
+			a.cost_dep AS costDep,
+			b.name AS costDepName,
+			a.cost_year AS costYear,
+			a.cost_month AS costMonth,
+			a.cost_date AS costDate, 
+			a.cost_num AS costNum
+		FROM COST_DEP_DETAIL a
+		LEFT JOIN DEPARTMENT b on a.cost_dep = b.dep_id
 	 	WHERE cost_id = #{_parameter}
 	</select>
 	
@@ -171,6 +223,10 @@
 			costDetail.remark as remark,
 			costDetail.cost_no as costNo,
 			costDetail.status,
+			costDetail.audit_user as auditUser,
+			audit.realname AS auditUserName,
+			costDetail.create_user_id AS subUser,
+			subUser.realname as subUserName,
 			code.content as statusName,
 			'view' as editMode
 		FROM
@@ -178,6 +234,8 @@
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
 		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
 		LEFT JOIN CODE_CONTENT code on costDetail.status = code.id and codeName = 'CodeStatus'
+		LEFT JOIN ADMIN_USER audit on costDetail.audit_user = audit.user_id
+		LEFT JOIN ADMIN_USER subUser on costDetail.create_user_id = subUser.user_id
 		where 1=1 
 			
 			<if test="map.costType != null and  map.costType != ''">
@@ -186,12 +244,12 @@
 			
 			<!-- 管理员时 条件设定为部门领导审核通过的 -->
 			<if test="map.userId == 'admin'">
-				AND (costDetail.status = '03' or costDetail.status = '05')
+				AND (costDetail.status in ('03','04','05'))
 			</if>
 			
 			<if test="map.userId != 'admin'">
 				AND costDetail.dep_id = #{map.depId}
-				AND (costDetail.status = '01' or costDetail.status = '04')
+				AND (costDetail.status in ('01','02','03','04','05'))
 			</if>
 			
 			<if test="map.startTime != null and map.startTime !=''">
@@ -206,6 +264,81 @@
 	
 	</select>
 	
+	<!-- 成本查看列表 -->
+	<select id="getCostViewPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
+		SELECT
+			dep.`name` AS depName,
+			costSub.`name` AS costSubName,
+			costDetail.cost_id AS costId,
+			costDetail.cost_num AS costNum,
+			costDetail.cost_time AS costTime,
+			costDetail.cost_type AS costType,
+			costDetail.create_time AS createTime,
+			costDetail.remark as remark,
+			costDetail.cost_no as costNo,
+			costDetail.status,
+			costDetail.audit_user as auditUser,
+			audit.realname AS auditUserName,
+			costDetail.create_user_id AS subUser,
+			subUser.realname as subUserName,
+			code.content as statusName,
+			'view' as editMode
+		FROM
+			COST_DETAIL costDetail
+		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
+		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
+		LEFT JOIN CODE_CONTENT code on costDetail.status = code.id and codeName = 'CodeStatus'
+		LEFT JOIN ADMIN_USER audit on costDetail.audit_user = audit.user_id
+		LEFT JOIN ADMIN_USER subUser on costDetail.create_user_id = subUser.user_id
+		WHERE costDetail.status = '05'
+			
+			<if test="map.costType != null and  map.costType != ''">
+				AND costDetail.cost_type = #{map.costType}
+			</if>
+			
+			<if test="map.userId != 'admin'">
+				AND costDetail.dep_id = #{map.depId}
+			</if>
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				AND costDetail.cost_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+		
+		ORDER BY costDetail.create_time DESC
+	
+	</select>
+	
+		<!-- 成本查看列表 -->
+	<select id="getViewChart" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.entity.CostEntityBean">
+		SELECT
+			cost_type costType
+			,sum(cost_num) costNum 
+		FROM
+			COST_DETAIL costDetail
+		WHERE costDetail.status = '05'
+			
+			<if test="costType != null and  costType != ''">
+				AND costDetail.cost_type = #{costType}
+			</if>
+			
+			<if test="userId != 'admin'">
+				AND costDetail.dep_id = #{depId}
+			</if>
+			
+			<if test="startTime != null and startTime !=''">
+				AND costDetail.cost_time <![CDATA[ >= ]]> #{startTime}
+			</if>
+			
+			<if test="endTime != null and endTime != ''">
+				AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
+			</if>
+		
+		group BY cost_type
+	</select>
 	
 	<select id="getCostOutlayType" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.vo.CostMonthInOut">
 		SELECT costSubtype.name,DATE_FORMAT(costDetail.cost_time,'%m') month,sum(costDetail.cost_num) AS total
