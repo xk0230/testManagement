@@ -15,7 +15,7 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>我的合同申请</h3>
+								<h3>合同</h3>
 							</div>
 							
 							<div class="widget-content">
@@ -23,7 +23,7 @@
                                     <div class="span3">
                                         <select id="contractType" ng-model="contractType"  class="form-control select2" 
                                                 ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
-                                            <option value="">--请选择收支类型--</option>
+                                            <option value="">--请选择合同类型--</option>
                                         </select>
                                     </div>
                                     <div class="span3">
@@ -52,12 +52,13 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="100px">合同类型</th>
-													<th width="200px">合同内容</th>
-													<th width="100px">所属部门</th>
-													<th width="100px">花费金额</th>
+													<th width="100px">编号</th>
+													<th width="50px">类型</th>
+													<th width="200px">内容</th>
+													<th width="50px">部门</th>
+													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
-													<th width="140px">链接</th>
+													<th width="100px">扫描件</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
 													<th>操作</th>
@@ -66,6 +67,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.contractType"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
@@ -79,9 +81,9 @@
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">删除</a>
 													</td>
 													<!-- edit -->
-													
+													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:90px;" ng-model="item.contractType"  class="form-control select2" 
+				                                        <select id="type" style="width:50px;" ng-model="item.contractType"  class="form-control select2" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
 				                                            <option value="">--类型--</option>
 				                                        </select>
@@ -90,13 +92,13 @@
 														<input type="text" ng-model="item.content" style="width:190px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:90px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept"  style="width:50px;" class="form-control select2" 
 														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
 														<option value="">--部门--</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.cost" min="-1" style="width:90px;">
+														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.company"  style="width:120px;" />
