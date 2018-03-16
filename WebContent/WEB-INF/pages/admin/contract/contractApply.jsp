@@ -83,18 +83,18 @@
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:50px;" ng-model="item.contractType"  class="form-control select2" 
+				                                        <select id="type" style="width:70px;" ng-model="item.contractType"  class="form-control select2" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
-				                                            <option value="">--类型--</option>
+				                                            <option value="">-类型-</option>
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.content" style="width:190px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:50px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
 														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
-														<option value="">--部门--</option>
+														<option value="">-部门-</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">

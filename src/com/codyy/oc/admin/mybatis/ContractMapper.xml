@@ -230,7 +230,7 @@
 			</if>
 			
 			<if test="map.contractId != null and  map.contractId != ''">
-				AND contract.contract_id like '%' #{map.contactId} '%' 
+				AND contract.contract_id like '%' #{map.contractId} '%' 
 			</if>
 			
 			<if test="map.content != null and  map.content != ''">
