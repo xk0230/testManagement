@@ -93,7 +93,7 @@
 													</td>
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
-														ng-options="cType.type as cType.name group by cType.group for cType in deptList">
+														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 														<option value="">-部门-</option>
 														</select>
 													</td>

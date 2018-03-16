@@ -213,7 +213,7 @@
 			contract.contract_id AS contractId,
 			contract.type AS contractType,
 			contract.content AS content,
-			contract.dept AS dept,
+			dep.`name` AS dept,
 			contract.cost AS cost,
 			contract.company as company,
 			contract.url as url,
@@ -223,6 +223,7 @@
 			'view' as editMode
 		FROM
 			CONTRACT contract
+		LEFT JOIN DEPARTMENT dep ON contract.dept = dep.dep_id
 		where 1=1 
 			
 			<if test="map.contactType != null and  map.contactType != ''">

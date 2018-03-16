@@ -15,14 +15,15 @@ myAppModule.controller('ContractController',
 				{contractType : "收入", name : "收入"},
 				{contractType : "支出", name : "支出"}
 			];
-			
-			$scope.deptList = [
-			   	{type : "YSEC", name : "YSEC"},
-				{type : "GMO", name : "GMO"},
-				{type : "ATD", name : "ATD"},
-				{type : "CES", name : "CES"},
-			    {type : "SSC", name : "SSC"}
-			];
+
+			self.getDeparts();
+//			$scope.deptList = [
+//			   	{type : "YSEC", name : "YSEC"},
+//				{type : "GMO", name : "GMO"},
+//				{type : "ATD", name : "ATD"},
+//				{type : "CES", name : "CES"},
+//			    {type : "SSC", name : "SSC"}
+//			];
 			
 			//获取角色
 			self.admin =$("#sessionUserType").val();
@@ -67,6 +68,25 @@ myAppModule.controller('ContractController',
 					$scope.totalItems = 0;
 				}
 			});
+		};
+		
+		this.getDeparts = function(){
+			
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/dep/getAlldep.do',
+				params:{
+				}
+			
+			}).then(function(res){
+				if(res){
+					$scope.depList = res.data || [];
+				}else{
+					$scope.depList = [];
+				}
+			});
+			
+			
 		};
 		
 		//添加新申请
