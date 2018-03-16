@@ -79,6 +79,7 @@
 													<td ng-switch-when="view">
 														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editContract(item)" ng-if="item.status=='00'">编辑</a>
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">删除</a>
+														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">删除</a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
