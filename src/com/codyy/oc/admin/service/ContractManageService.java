@@ -111,7 +111,8 @@ public class ContractManageService {
 	    map.put("userId", contract.getUserId());
 	    map.put("startTime", contract.getStartDate());
 	    map.put("endTime", contract.getEndDate());
-	    
+	    map.put("userDepId", contract.getUserDepId());
+	    map.put("userPosition", contract.getUserPosition());
 	    
 	    page.setMap(map);
 	    

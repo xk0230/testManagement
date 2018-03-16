@@ -237,9 +237,16 @@
 				AND contract.content like '%'   #{map.content}  '%' 
 			</if>
 			
-			<if test="map.userId != null and  map.userId != ''">
-				AND contract.create_user_id = #{map.userId}
-			</if>
+			AND ( contract.create_user_id = #{map.userId}
+			
+				<if test="map.userPosition == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPosition == 'MANAGER'">
+					or contract.dept = #{map.userDepId}
+				</if>
+			
+			)
 			
 			<if test="map.startTime != null and map.startTime !=''">
 				AND contract.create_time <![CDATA[ >= ]]> #{map.startTime}

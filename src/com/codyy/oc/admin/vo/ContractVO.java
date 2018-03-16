@@ -50,6 +50,39 @@ public class ContractVO extends Contract {
 	
 	private String statusName;
 	
+	private String UserPosition;//用户类型
+	
+	private String UserDepId;//用户部门ID
+	
+	
+	/**
+	 * @return the userPosition
+	 */
+	public String getUserPosition() {
+		return UserPosition;
+	}
+
+	/**
+	 * @param userPosition the userPosition to set
+	 */
+	public void setUserPosition(String userPosition) {
+		UserPosition = userPosition;
+	}
+
+	/**
+	 * @return the userDepId
+	 */
+	public String getUserDepId() {
+		return UserDepId;
+	}
+
+	/**
+	 * @param userDepId the userDepId to set
+	 */
+	public void setUserDepId(String userDepId) {
+		UserDepId = userDepId;
+	}
+
 	/**
 	 * @return the startTime
 	 */

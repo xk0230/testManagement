@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
+import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Contract;
-import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.service.ContractManageService;
 import com.codyy.oc.admin.vo.ContractVO;
-import com.codyy.oc.admin.vo.CostVO;
 
 /**  
  * @author Jason(pjx48476) 
@@ -52,8 +51,10 @@ public class ContractController extends BaseController {
 	@ResponseBody
     @RequestMapping("/page.do")
     public Page getCostPageList(HttpServletRequest request,ContractVO contract){
-		String userId = getSessionUserId(request);
-		contract.setUserId(userId);
+		AdminUser user = getSessionUser(request);
+		contract.setUserId(user.getUserId());
+		contract.setUserPosition(user.getPosition());
+		contract.setUserDepId(user.getDepId());
         return contractManageService.getContractPageList(contract);
     }
 
