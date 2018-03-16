@@ -7,7 +7,7 @@
     <result column="type" jdbcType="VARCHAR" property="contractType" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="dept" jdbcType="VARCHAR" property="dept" />
-    <result column="cost" jdbcType="INTEGER" property="cost" />
+    <result column="cost" jdbcType="DOUBLE" property="cost" />
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="serialid" jdbcType="VARCHAR" property="serialid" />
@@ -43,7 +43,7 @@
       company, url, serialid, create_time, cost_time, create_user_id, status, remakes
       )
     values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{contractType,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, 
       #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{costTime,jdbcType=TIMESTAMP}
       , #{createUserId,jdbcType=VARCHAR}, '00', #{remakes,jdbcType=VARCHAR}
       )
@@ -111,7 +111,7 @@
         #{dept,jdbcType=VARCHAR},
       </if>
       <if test="cost != null">
-        #{cost,jdbcType=INTEGER},
+        #{cost,jdbcType=DOUBLE},
       </if>
       <if test="company != null">
         #{company,jdbcType=VARCHAR},
@@ -155,7 +155,7 @@
         dept = #{dept,jdbcType=VARCHAR},
       </if>
       <if test="cost != null">
-        cost = #{cost,jdbcType=INTEGER},
+        cost = #{cost,jdbcType=DOUBLE},
       </if>
       <if test="company != null">
         company = #{company,jdbcType=VARCHAR},
@@ -190,7 +190,7 @@
       type = #{contractType,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       dept = #{dept,jdbcType=VARCHAR},
-      cost = #{cost,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DOUBLE},
       company = #{company,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       serialid = #{serialid,jdbcType=VARCHAR},

@@ -18,7 +18,7 @@ public class Contract {
 
     private String dept;
 
-    private Integer cost;
+    private Double cost;
 
     private String company;
 
@@ -142,11 +142,11 @@ public class Contract {
         this.dept = dept;
     }
 
-    public Integer getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 

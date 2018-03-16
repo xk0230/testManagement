@@ -128,8 +128,8 @@ myAppModule.controller('ContractController',
 				alert("请填写对方公司");
 				return ;
 			}
-			if(!contractItem.url){
-				alert("请填写地址");
+			/*	if(!contractItem.url){
+				alert("请填写扫描件");
 				return ;
 			}
 			if(!contractItem.serialid){
@@ -139,7 +139,7 @@ myAppModule.controller('ContractController',
 			if(!contractItem.remakes){
 				alert("请填写备注");
 				return ;
-			}
+			}*/
 			var params = {
 				id:contractItem.id,
 				contractId:contractItem.contractId,

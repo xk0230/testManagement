@@ -15,7 +15,7 @@ import com.codyy.oc.admin.entity.Contract;
  */
 
 public class ContractVO extends Contract {
-
+		
 	private Timestamp startTime;
 	
 	private Timestamp endTime;
@@ -49,7 +49,7 @@ public class ContractVO extends Contract {
 	private String status;
 	
 	private String statusName;
-
+	
 	/**
 	 * @return the startTime
 	 */
