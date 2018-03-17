@@ -27,7 +27,7 @@ myAppModule.controller('AttachmentController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/admin/attachment/page.do',
 				params:{
-					fId:$("#userId").val(),
+					fId:$("#contractId").val(),
 					name:$scope.name,
 					type:$scope.type,
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
@@ -203,7 +203,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		 var fd = new FormData();
 	     var file = document.querySelector('input[type=file]').files[0];
 	     fd.append('uploadFile', file);
-	     fd.append('fId', $('#userId').val());
+	     fd.append('fId', $('#contractId').val());
 	     fd.append('type', $scope.attachmentEntity.type);
 	     if($scope.attachmentEntity.id){
 	    	 fd.append('id',$scope.attachmentEntity.id);

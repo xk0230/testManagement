@@ -211,7 +211,7 @@
 	</div>
 
 	
-	<input type="hidden" id="userId" value="${userId}">
+	<input type="hidden" id="contractId" value="${contractId}">
 	<input type="hidden" id="rootUrl" value="${root}">
 			
 	<script src="${root}/public/js/pages/attachment/contractScript.js" type="text/javascript"></script>

@@ -47,14 +47,22 @@ public class AttachmentController extends BaseController{
         dateFormat.setLenient(false);  
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
    }
-   
-   @RequestMapping("/manager.do")
-   public String attachmentManager(Model model,String userId){
-       
-       model.addAttribute("userId", userId);
-       
-       return "admin/attachment/attachmentManager";
-   }
+
+    @RequestMapping("/manager.do")
+    public String attachmentManager(Model model,String userId){
+        
+        model.addAttribute("userId", userId);
+        
+        return "admin/attachment/attachmentManager";
+    }
+
+    @RequestMapping("/contractManager.do")
+    public String contractAttachmentManager(Model model,String contractId){
+        
+        model.addAttribute("contractId", contractId);
+        
+        return "admin/attachment/contractAttachmentManager";
+    }
     
    @ResponseBody
    @RequestMapping("/page.do")
