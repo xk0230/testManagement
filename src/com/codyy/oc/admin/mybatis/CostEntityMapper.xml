@@ -26,7 +26,8 @@
 				dep_id,
 				remark,
 				status,
-				cost_no
+				cost_no,
+				contract_id
 			)
 		VALUES
 			(
@@ -40,7 +41,8 @@
 				#{depId},
 				#{remark},
 				#{status},
-				#{costNo}
+				#{costNo},
+				#{contractId}
 			)
 	</insert>
 	
@@ -86,7 +88,8 @@
 			cost_type = #{costType},
 			cost_num = #{costNum},
 			remark = #{remark},
-			status = #{status}
+			status = #{status},
+			contract_id = #{contractId}
 		WHERE cost_id = #{costId}
 	</update>
 	
@@ -182,7 +185,8 @@
 			costDetail.cost_no as costNo,
 			costDetail.status,
 			code.content as statusName,
-			'view' as editMode
+			'view' as editMode,
+			contract_id as contractId
 		FROM
 			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
@@ -228,7 +232,8 @@
 			costDetail.create_user_id AS subUser,
 			subUser.realname as subUserName,
 			code.content as statusName,
-			'view' as editMode
+			'view' as editMode,
+			contract_id as contractId
 		FROM
 			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id

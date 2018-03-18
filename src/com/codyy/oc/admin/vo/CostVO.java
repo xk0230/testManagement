@@ -53,6 +53,8 @@ public class CostVO extends CostEntityBean{
 	
 	private String subUserName;
 	
+	private String contractId;
+	
 	private List<CostDepEntityBean> costDepList;
 	
     public String getCostNo() {
@@ -238,6 +240,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setCostDepList(List<CostDepEntityBean> costDepList) {
 		this.costDepList = costDepList;
+	}
+
+	public String getContractId() {
+		return contractId;
+	}
+
+	public void setContractId(String contractId) {
+		this.contractId = contractId;
 	}
 
 }

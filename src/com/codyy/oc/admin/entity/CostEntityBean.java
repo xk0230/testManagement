@@ -48,6 +48,9 @@ public class CostEntityBean {
 	//审核通过人
 	private String auditUser;
 	
+	//合同id
+	private String contractId;
+	
 	private List<CostDepEntityBean> cosDepList;
 	
 
@@ -169,6 +172,14 @@ public class CostEntityBean {
 
 	public void setAuditUser(String auditUser) {
 		this.auditUser = auditUser;
+	}
+
+	public String getContractId() {
+		return contractId;
+	}
+
+	public void setContractId(String contractId) {
+		this.contractId = contractId;
 	}
 
 }
