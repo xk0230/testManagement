@@ -320,7 +320,7 @@ myAppModule.controller('ChartController',
 							$('#dep_'+xcategories[i]).after(html);
 						}
 						
-						//$('#depOutcome').append(html);
+						$('#depOutcome').append(html);
 						
 						
 						for(var i = 0;i<length;i++){
