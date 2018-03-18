@@ -20,8 +20,9 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span3">
-                                        <select id="costType" ng-model="costType"  class="form-control select2" 
+                                    <div class="span4">
+										<span class="searchSpan">收支类型:</span>
+                                        <select id="costType" ng-model="costType"  class="form-control span2" 
                                                 ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
                                                 ng-change="costTypeChange()">
                                             <option value="">--请选择收支类型--</option>
@@ -35,6 +36,16 @@
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
 								</div>
+								<div class="row">
+                                    <div class="span4">
+                                        <span class="searchSpan">单号:</span>
+                                        <input type="text" ng-model="costNo" class="span2">
+                                    </div>
+                                    <div class="span6">
+                                    	<span class="searchSpan">内容:</span>
+                                        <input type="text" ng-model="remark" class="span4">
+                                    </div>
+								</div>
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
@@ -45,10 +56,11 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="100px">成本单号</th>
 													<th width="120px">收支类型</th>
 													<th width="170px">成本产生时间</th>
 													<th width="120px">金额</th>
-													<th width="300px">成本详情</th>
+													<th width="200px">成本详情</th>
 													<th width="100px">状态</th>
 													<th>操作</th>
 												</tr>
@@ -56,6 +68,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
@@ -80,6 +93,7 @@
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">报废</a>
 													</td>
 													<!-- edit -->
+													<td ng-switch-when="edit"></td>
 													<td ng-switch-when="edit">
 				                                        <select id="costType" style="width:110px;" ng-model="item.costType"  class="form-control select2" 
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">

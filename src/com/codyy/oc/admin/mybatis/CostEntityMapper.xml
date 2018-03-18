@@ -198,6 +198,14 @@
 				AND costDetail.cost_type = #{map.costType}
 			</if>
 			
+			<if test="map.costNo != null and  map.costNo != ''">
+				AND costDetail.cost_no like '%${map.costNo}%'
+			</if>
+			
+			<if test="map.remark != null and  map.remark != ''">
+				AND costDetail.remark like '%${map.remark}%'
+			</if>
+			
 			<if test="map.userId != null and  map.userId != ''">
 				AND costDetail.create_user_id = #{map.userId}
 			</if>
@@ -245,6 +253,14 @@
 			
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
+			</if>
+			
+			<if test="map.costNo != null and  map.costNo != ''">
+				AND costDetail.cost_no like '%${map.costNo}%'
+			</if>
+			
+			<if test="map.remark != null and  map.remark != ''">
+				AND costDetail.remark like '%${map.remark}%'
 			</if>
 			
 			<!-- 管理员时 条件设定为部门领导审核通过的 -->
@@ -301,6 +317,14 @@
 				AND costDetail.cost_type = #{map.costType}
 			</if>
 			
+			<if test="map.costNo != null and  map.costNo != ''">
+				AND costDetail.cost_no like '%${map.costNo}%'
+			</if>
+			
+			<if test="map.remark != null and  map.remark != ''">
+				AND costDetail.remark like '%${map.remark}%'
+			</if>
+			
 			<if test="map.userId != 'admin'">
 				AND costDetail.dep_id = #{map.depId}
 			</if>
@@ -328,6 +352,14 @@
 			
 			<if test="costType != null and  costType != ''">
 				AND costDetail.cost_type = #{costType}
+			</if>
+			
+			<if test="costNo != null and  costNo != ''">
+				AND costDetail.cost_no like '%${costNo}%'
+			</if>
+			
+			<if test="remark != null and  map.remark != ''">
+				AND costDetail.remark like '%${remark}%'
 			</if>
 			
 			<if test="userId != 'admin'">

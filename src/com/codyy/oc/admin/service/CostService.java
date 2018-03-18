@@ -317,7 +317,8 @@ public class CostService {
 	    map.put("userId", cost.getUserId());
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
-	    
+	    map.put("costNo", cost.getCostNo());
+	    map.put("remark", cost.getRemark());
 	    
 	    page.setMap(map);
 	    
@@ -345,6 +346,8 @@ public class CostService {
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
 	    map.put("userId", cost.getUserId());
+	    map.put("costNo", cost.getCostNo());
+	    map.put("remark", cost.getRemark());
 	    
 	    page.setMap(map);
 	    
@@ -375,10 +378,12 @@ public class CostService {
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
 	    map.put("userId", cost.getUserId());
+	    map.put("costNo", cost.getCostNo());
+	    map.put("remark", cost.getRemark());
 	    
 	    page.setMap(map);
 	    
-	    List<CostVO> costPageList = costDaoMapper.getCostAuditPageList(page);
+	    List<CostVO> costPageList = costDaoMapper.getCostViewPageList(page);
 	    
 	    for(CostVO costVO : costPageList) {
 	    	costVO.setCostDepList(costDaoMapper.getCostDepList(costVO.getCostId()));

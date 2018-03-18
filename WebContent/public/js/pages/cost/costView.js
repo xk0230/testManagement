@@ -43,6 +43,8 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					costType:$scope.costType,
+					costNo:$scope.costNo,
+					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -59,6 +61,11 @@ myAppModule.controller('CostController',
 			});
 		};
 		
+		this.search= function(){
+			self.getCostList();
+			self.getCostViewChart();
+		}
+		
 		// 获取数据列表
 		this.getCostViewChart = function(){
 			$http({
@@ -66,6 +73,8 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/viewChart.do',
 				params:{
 					costType:$scope.costType,
+					costNo:$scope.costNo,
+					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 				}
@@ -82,7 +91,7 @@ myAppModule.controller('CostController',
 						}
 					});
 					$scope.inPercent = inNum / (inNum + outNum) * 100;
-					$scope.outPercent = inNum / (inNum + outNum) * 100;
+					$scope.outPercent = outNum / (inNum + outNum) * 100;
 					$scope.inStr = "收入：" + inNum;
 					$scope.outStr = "支出：" + outNum;
 					

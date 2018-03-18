@@ -20,8 +20,9 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span3">
-                                        <select id="costType" ng-model="costType"  class="form-control select2" 
+                                    <div class="span4">
+										<span class="searchSpan">收支类型:</span>
+                                        <select id="costType" ng-model="costType"  class="form-control span2" 
                                                 ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
                                                 ng-change="costTypeChange()">
                                             <option value="">--请选择收支类型--</option>
@@ -33,7 +34,17 @@
 										<span class="searchSpanMid">~</span>
 										<input type="date" ng-model="costEndDate" class="span2">
 									</div>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.search()" value="查询" /></div>
+								</div>
+								<div class="row">
+                                    <div class="span4">
+                                        <span class="searchSpan">单号:</span>
+                                        <input type="text" ng-model="costNo" class="span2">
+                                    </div>
+                                    <div class="span6">
+                                    	<span class="searchSpan">内容:</span>
+                                        <input type="text" ng-model="remark" class="span4">
+                                    </div>
 								</div>
 								<hr>
 									<div class="progress progress-striped active" style="height:18px;" >

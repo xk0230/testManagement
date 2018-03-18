@@ -33,7 +33,7 @@ myAppModule.controller('CostController',
 		};
 
 		$scope.pageChanged = function() {
-			self.getCostList();
+			self.getCostAuditList();
 		};
 		
 		// 获取数据列表
@@ -43,6 +43,8 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/auditPage.do',
 				params:{
 					costType:$scope.costType,
+					costNo:$scope.costNo,
+					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
