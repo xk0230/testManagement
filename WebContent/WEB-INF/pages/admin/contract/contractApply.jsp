@@ -34,6 +34,7 @@
 										<span class="searchSpan">合同编号:</span>
                                         <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
+                                    
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
 										<input type="date" ng-model="costStartDate" class="span2">
@@ -54,11 +55,11 @@
 												<tr>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
-													<th width="200px">内容</th>
+													<th width="120px">内容</th>
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
-													<th width="100px">扫描件</th>
+													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
 													<th>操作</th>
@@ -90,7 +91,7 @@
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.content" style="width:190px;" >
+														<input type="text" ng-model="item.content" style="width:120px;" >
 													</td>
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
@@ -105,7 +106,7 @@
 														<input type="text" ng-model="item.company"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.url"  style="width:90px;" />
+														<input type="date" ng-model="item.url"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:130px;" />

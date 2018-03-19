@@ -204,7 +204,7 @@
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
-													<th width="100px">扫描件</th>
+													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
 													<th>操作</th>

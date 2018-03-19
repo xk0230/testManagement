@@ -153,7 +153,7 @@ myAppModule.controller('ContractController',
 				return ;
 			}
 			/*	if(!contractItem.url){
-				alert("请填写扫描件");
+				alert("请填写签订时间");
 				return ;
 			}
 			if(!contractItem.serialid){
