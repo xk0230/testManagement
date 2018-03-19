@@ -62,14 +62,18 @@ setInterval("getNewsNum()","60000");
           <div class="nav-collapse pull-right">
             <img class="AvatarImg" src="${root}/public/img/message_avatar2.png"/>
           </div>
+            <input id="sessionUserId"  type="hidden" value="${adminUser.userId}">
+            <input id="sessionUserType"  type="hidden" value="${adminUser.position}">
+            <input id="sessionUserDepId"  type="hidden" value="${adminUser.depId}">
           <div class="nav-collapse" >
 	          <ul class="nav pull-right">
 	            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 22px;">
 	            <i class="icon-user"></i>
 	            &nbsp;&nbsp;&nbsp;${sessionScope.adminUser.realName }<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="javascript:;">Profile</a></li>
-	                <li><a href="javascript:logout();">Logout</a></li>
+	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">个人信息</a></li>
+	                <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.subnavbar')">修改密码</a></li>
+	                <li><a href="javascript:logout();">退出</a></li>
 	              </ul>
 	            </li>
 	           </ul>
@@ -141,5 +145,55 @@ setInterval("getNewsNum()","60000");
       <!-- /subnavbar-inner --> 
     </div>
     <!-- /导航栏 -->
+    <!-- Start .header-inner -->
+        <script type="text/ng-template" id="myModalEditContent.html">
+			<div class="modal-header">
+				<div class="row ">
+					<div class="col-lg-12 heading">
+						<h1 class="page-header"><i class="im-users2"></i> 修改密码</h1>
+						<ul id="crumb" class="breadcrumb">
+						</ul>
+					</div>
+				</div>
+
+				<!-- 个人信息 start here -->
+				<div class="outlet" >
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default toggle">
+								<!-- Start .panel -->
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="ec-pencil"></i>修改密码</h3>
+								</div>
+								<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="旧密码" ng-model="oldPwd">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="新密码" ng-model="newPwd1">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-12">
+												<input type="password" class="form-control" placeholder="再次输入新密码" ng-model="newPwd2">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+    </script>
 </div>
+
+ 
 <script src="${root}/public/js/pages/header.js" type="text/javascript"></script>
