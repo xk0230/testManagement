@@ -20,19 +20,12 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span3">
-                                        <select id="contractType" ng-model="contractType"  class="form-control select2" 
+                                    <div class="span4">
+										<span class="searchSpan">合同类型:</span>
+                                        <select id="contractType" ng-model="contractType"  class="form-control span2" 
                                                 ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
                                             <option value="">--请选择合同类型--</option>
                                         </select>
-                                    </div>
-                                    <div class="span3">
-										<span class="searchSpan">合同内容:</span>
-                                        <input type="text" ng-model="content"  style="width:120px;" />
-                                    </div>
-                                    <div class="span3">
-										<span class="searchSpan">合同编号:</span>
-                                        <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
                                     
 									<div class="span6" style="height:37px;">
@@ -41,7 +34,21 @@
 										<span class="searchSpanMid">~</span>
 										<input type="date" ng-model="costEndDate" class="span2">
 									</div>
+									
+									
+									
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getContractList()" value="查询" /></div>
+									
+								</div>
+								<div class="row">
+                                    <div class="span4">
+                                        <span class="searchSpan">单号:</span>
+                                        <input type="text" ng-model="contractId" class="span2">
+                                    </div>
+                                    <div class="span6">
+                                    	<span class="searchSpan">内容:</span>
+                                        <input type="text" ng-model="content" class="span4">
+                                    </div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
@@ -79,9 +86,9 @@
 													<td ng-switch-when="view"><p ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
-														<a href="javascript:;" class="btn btn-xs  icon-edit" ng-click="vm.editContract(item)" ng-if="item.status=='00'"></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"></a>
-														<button type="button" class="btn btn-xs btn-success icon-file " ng-click="vm.contractAttachmentList(item.contractId)"></button>
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
+														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
