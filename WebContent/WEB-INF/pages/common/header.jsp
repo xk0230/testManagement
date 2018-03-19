@@ -66,10 +66,10 @@ setInterval("getNewsNum()","60000");
 	          <ul class="nav pull-right">
 	            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 22px;">
 	            <i class="icon-user"></i>
-	            &nbsp;&nbsp;&nbsp;超级管理员<b class="caret"></b></a>
+	            &nbsp;&nbsp;&nbsp;${sessionScope.adminUser.realName }<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
 	                <li><a href="javascript:;">Profile</a></li>
-	                <li><a href="javascript:;">Logout</a></li>
+	                <li><a href="javascript:logout();">Logout</a></li>
 	              </ul>
 	            </li>
 	           </ul>
