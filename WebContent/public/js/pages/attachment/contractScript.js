@@ -117,6 +117,38 @@ myAppModule.controller('AttachmentController',
 		    	    	
 		    	    });
 		   };
+		   
+		 //报废
+			this.scrap = function (id) {
+				swal({ 
+						title: "确定报废吗？", 
+						text: "你将无法恢复该副歌信息！", 
+						type: "warning", 
+						showCancelButton: true, 
+						closeOnConfirm: true, 
+						showLoaderOnConfirm: true, 
+				},
+				function(){ 
+					var params = {
+							id:id
+						};
+					$http({
+						method:'POST',
+						url:$("#rootUrl").val()+"/admin/attachment/del/"+id+".do",
+						params:{}
+						
+					}).then(function(res){
+						if(res.data.code == 0){
+//							swal(res.data.msg);
+							self.getAttachmentEntityPageList();
+							//costItem.editMode="view";
+						}else{
+							swal(res.data.msg);
+						}
+					})
+				});
+			};
+
 		    	  
 		   this.delAttachment = function (id, parentSelector) {
 			    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
