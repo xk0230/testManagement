@@ -99,7 +99,7 @@ setInterval("getNewsNum()","60000");
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                     <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>我的费用</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审核</a></li>
+                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
