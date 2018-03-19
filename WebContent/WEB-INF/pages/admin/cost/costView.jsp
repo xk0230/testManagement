@@ -15,7 +15,7 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>我的成本审批</h3>
+								<h3>成本查看</h3>
 							</div>
 							
 							<div class="widget-content">
@@ -25,7 +25,7 @@
                                         <select id="costType" ng-model="costType"  class="form-control span2" 
                                                 ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
                                                 ng-change="costTypeChange()">
-                                            <option value="">--请选择收支类型--</option>
+                                            <option value="">--请选择--</option>
                                         </select>
                                     </div>
 									<div class="span6" style="height:37px;">
@@ -87,7 +87,27 @@
 														</ul>
 													</td>
 													
-													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
+													<td ng-switch-when="view">
+													
+														<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
+																	<label>合同：</label>
+																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
+																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																</span>
+															</li>
+															<li>
+																<label>备注：</label>{{item.remark}}
+															</li>
+														</ul>
+													
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
@@ -106,6 +126,99 @@
 				</div>
 			</div>
 		</div>
+		
+    <script type="text/ng-template" id="myModalEditContent.html">
+		  <div class="main-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>合同</h3>
+							</div>
+							
+							<div class="widget-content">
+								<div class="row">
+                                    <div class="span3">
+										<span class="searchSpan">合同类型:</span>
+                                        <select id="contractType" ng-model="contractType"  class="form-control span2" 
+                                                ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
+                                            <option value="">--请选择合同类型--</option>
+                                        </select>
+                                    </div>
+                                    <div class="span3">
+										<span class="searchSpan">合同内容:</span>
+                                        <input type="text" ng-model="content"  style="width:120px;" />
+                                    </div>
+                                    <div class="span3">
+										<span class="searchSpan">合同编号:</span>
+                                        <input type="text" ng-model="contractId"  style="width:120px;" />
+                                    </div>
+									<div class="span6" style="height:37px;">
+										<span class="searchSpan">申请日期:</span>
+										<input type="date" ng-model="costStartDate" class="span2">
+										<span class="searchSpanMid">~</span>
+										<input type="date" ng-model="costEndDate" class="span2">
+									</div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
+								</div>
+								<hr>
+								<!-- 查询结果 -->
+								<div class="row">
+									<div class="span12">
+										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+											<thead>
+												<tr>
+													<th width="100px">编号</th>
+													<th width="50px">类型</th>
+													<th width="200px">内容</th>
+													<th width="50px">部门</th>
+													<th width="50px">金额</th>
+													<th width="130px">对方公司</th>
+													<th width="100px">签订时间</th>
+													<th width="140px">外部订单</th>
+													<th width="100px">备注</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="odd gradeX" ng-repeat="item in list" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+													<!-- view -->
+													<td><p ng-bind="item.contractId"></p></td>
+													<td><p ng-bind="item.contractType"></p></td>
+													<td><p ng-bind="item.content"></p></td>
+													<td><p ng-bind="item.dept"></p></td>
+													<td><p ng-bind="item.cost"></p></td>
+													<td><p ng-bind="item.company"></p></td>
+													<td><p ng-bind="item.url"></p></td>
+													<td><p ng-bind="item.serialid"></p></td>
+													<td><p ng-bind="item.remakes"></p></td>
+													<td>
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)" ng-if="item.status=='00' && mode=='edit'">选择</a>
+													</td>
+													<!-- edit -->
+												</tr>
+											</tbody>
+										</table>
+										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+										<div style="width:1134px;">
+											<%@ include file="../../common/page.jsp"%>
+										</div>
+									</div>
+								</div>
+        						<div class="modal-footer">
+            						<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        						</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </script>
+		
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 

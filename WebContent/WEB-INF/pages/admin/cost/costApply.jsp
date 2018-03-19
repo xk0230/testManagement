@@ -25,7 +25,7 @@
                                         <select id="costType" ng-model="costType"  class="form-control span2" 
                                                 ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
                                                 ng-change="costTypeChange()">
-                                            <option value="">--请选择收支类型--</option>
+                                            <option value="">--请选择--</option>
                                         </select>
                                     </div>
 									<div class="span6" style="height:37px;">
@@ -82,15 +82,20 @@
 																</span>
 															</li>
 															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																</span>
+															</li>
+															<li>
 																<label>备注：</label>{{item.remark}}
 															</li>
 														</ul>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  icon-edit" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'"></a>
-														<a href="javascript:;" class="btn btn-xs  icon-share " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"></a>
+														<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-edit"></i></a>
+														<a href="javascript:;" class="btn btn-small " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-share"></i></a>
+														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class="icon-remove-sign"></i></a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit"></td>
@@ -116,6 +121,11 @@
 																</span>
 															</li>
 															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																</span>
+															</li>
+															<li>
 																<label>备注：</label>
 																<input type="text" ng-model="item.remark" style="width:240px;">
 															</li>
@@ -126,7 +136,7 @@
 													</td>
 													
 													<td ng-switch-when="edit">
-														<a href="javascript:;" class="btn btn-xs btn-success icon-ok" ng-click="vm.save(item)"></a>
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
 												</tr>
 											</tbody>
@@ -158,10 +168,11 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span3">
-                                        <select id="contractType" ng-model="contractType"  class="form-control select2" 
+                                    <div class="span4">
+										<span class="searchSpan">合同类型:</span>
+                                        <select id="contractType" ng-model="contractType"  class="form-control span2" 
                                                 ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
-                                            <option value="">--请选择合同类型--</option>
+                                            <option value="">--请选择--</option>
                                         </select>
                                     </div>
                                     <div class="span3">
@@ -178,7 +189,7 @@
 										<span class="searchSpanMid">~</span>
 										<input type="date" ng-model="costEndDate" class="span2">
 									</div>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getContractList()" value="查询" /></div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
