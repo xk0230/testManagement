@@ -125,7 +125,7 @@ myAppModule.controller('ContractController',
 			contractItem.editMode = "edit";
 			//contractItem.costDate = new Date(costItem.costDate);
 			contractItem.url = new Date(contractItem.url);
-			
+			contractItem.dept = contractItem.dept;
 		};
 		
 		//点击保存
