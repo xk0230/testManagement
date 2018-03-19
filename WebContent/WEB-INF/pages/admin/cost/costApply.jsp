@@ -75,9 +75,9 @@
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'">编辑</a>
-														<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'">提交</a>
-														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">报废</a>
+														<a href="javascript:;" class="btn btn-xs  icon-edit" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'"></a>
+														<a href="javascript:;" class="btn btn-xs  icon-share " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"></a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit">
@@ -110,8 +110,9 @@
 													<td ng-switch-when="edit">
 														
 													</td>
+													
 													<td ng-switch-when="edit">
-														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)">保存</a>
+														<a href="javascript:;" class="btn btn-xs btn-success icon-ok" ng-click="vm.save(item)"></a>
 													</td>
 												</tr>
 											</tbody>

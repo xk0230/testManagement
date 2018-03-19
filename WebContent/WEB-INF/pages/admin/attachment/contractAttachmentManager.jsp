@@ -51,8 +51,8 @@
 												<td><p ng-bind="item.typeName"></p></td>
 												<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
 												<td>
-													<button type="button" class="btn btn-small btn-success btn-support-ask" ng-click="vm.addAttachment(item.id,'.widget-content')" value="修改">修改</button>
-													<button type="button" class="btn btn-small btn-danger btn-support-ask" ng-click="vm.delAttachment(item.id,'.widget-content')" value="删除">删除</button>
+													<button type="button" class="btn btn-xs  icon-edit" ng-click="vm.addAttachment(item.id,'.widget-content')" value="修改"></button>
+													<button type="button" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.delAttachment(item.id,'.widget-content')" value="删除"></button>
 												</td>
 												
 											</tr>
