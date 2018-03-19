@@ -9,7 +9,7 @@
     <result column="dept" jdbcType="VARCHAR" property="dept" />
     <result column="cost" jdbcType="DOUBLE" property="cost" />
     <result column="company" jdbcType="VARCHAR" property="company" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="url" jdbcType="TIMESTAMP" property="url" />
     <result column="serialid" jdbcType="VARCHAR" property="serialid" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -44,7 +44,7 @@
       )
     values (#{id,jdbcType=VARCHAR}, #{contractId,jdbcType=VARCHAR}, #{contractType,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, 
-      #{company,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{serialid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{costTime,jdbcType=TIMESTAMP}
+      #{company,jdbcType=VARCHAR}, #{url,jdbcType=TIMESTAMP}, #{serialid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{costTime,jdbcType=TIMESTAMP}
       , #{createUserId,jdbcType=VARCHAR}, '00', #{remakes,jdbcType=VARCHAR}
       )
   </insert>
@@ -117,7 +117,7 @@
         #{company,jdbcType=VARCHAR},
       </if>
       <if test="url != null">
-        #{url,jdbcType=VARCHAR},
+        #{url,jdbcType=TIMESTAMP},
       </if>
       <if test="serialid != null">
         #{serialid,jdbcType=VARCHAR},
@@ -161,7 +161,7 @@
         company = #{company,jdbcType=VARCHAR},
       </if>
       <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
+        url = #{url,jdbcType=TIMESTAMP},
       </if>
       <if test="serialid != null">
         serialid = #{serialid,jdbcType=VARCHAR},
@@ -192,7 +192,7 @@
       dept = #{dept,jdbcType=VARCHAR},
       cost = #{cost,jdbcType=DOUBLE},
       company = #{company,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
+      url = #{url,jdbcType=TIMESTAMP},
       serialid = #{serialid,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       cost_time = #{costTime,jdbcType=TIMESTAMP},

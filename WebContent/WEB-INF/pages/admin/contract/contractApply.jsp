@@ -74,7 +74,7 @@
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.company"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.url"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.serialid"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">

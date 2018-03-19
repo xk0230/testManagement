@@ -3,10 +3,16 @@
  */
 package com.codyy.oc.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +37,13 @@ public class ContractController extends BaseController {
 	
 	@Resource
 	ContractManageService contractManageService;
+	
+	@InitBinder  
+	public void initBinder(WebDataBinder binder) {  
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+		dateFormat.setLenient(false);  
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true)); 
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
