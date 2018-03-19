@@ -275,8 +275,107 @@ myAppModule.controller('CostController',
 			});
 		};
 
+		this.editBook = function (item, parentSelector, mode) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalEditContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    			//好像必须得这么写
+		    	        item: function () {
+		    	        	item.mode = mode;
+		    	        	return item;
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result.then(function (selectedItem) {
+		    	    	
+		    	    	item.contractId = selectedItem.contractId;
+		    	    	item.contractContent = selectedItem.contractContent;
+		    	    	
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	
+		    	    });
+		   };
+		
+		
 	}
 );
+
+//编辑页面的control
+angular.module('myApp').controller('ModalInstanceCtrl', 
+		function ($scope,$http,$uibModalInstance,$filter, item) {
+		var $ctrl = this;
+		$scope.item = item;
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 10;
+		$ctrl.$onInit = function(){
+			//合同号
+			$scope.contractId = item.contractId;
+			$scope.mode = item.mode;
+			
+			$ctrl.contractTypeList = [
+				{contractType : "收入", name : "收入"},
+				{contractType : "支出", name : "支出"}
+			];
+				
+			$ctrl.getContractList();
+
+		};
+		
+		$ctrl.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+
+		$ctrl.pageChanged = function() {
+			$ctrl.getContractList();
+		};
+		
+		// 获取数据列表
+		$ctrl.getContractList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/contract/page.do',
+				params:{
+					contractType:$scope.contractType,
+					content:$scope.content,
+					contractId:$scope.contractId,
+					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					$scope.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					$scope.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+		};
+		
+	$scope.Choose = function (item) {
+		var selectItem = {contractId : item.contractId, contractContent : item.content};
+		$uibModalInstance.close(selectItem);
+	};
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+
+	});
 
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);

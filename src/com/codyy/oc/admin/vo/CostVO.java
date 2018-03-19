@@ -55,6 +55,8 @@ public class CostVO extends CostEntityBean{
 	
 	private String contractId;
 	
+	private String contractContent;
+	
 	private String remark;
 	
 	private List<CostDepEntityBean> costDepList;
@@ -258,6 +260,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getContractContent() {
+		return contractContent;
+	}
+
+	public void setContractContent(String contractContent) {
+		this.contractContent = contractContent;
 	}
 
 }

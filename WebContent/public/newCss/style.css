@@ -1107,6 +1107,13 @@ width: 11px;}
 height: 16px;
 width: 11px;}
 
+.line-limit-length {
+display:inline-block;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
 /*------------------------------------------------------------------
 [8. Miscellaneous]
 */

@@ -272,7 +272,8 @@ myAppModule.controller('CostController',
 
 		    	    modalInstance.result.then(function (selectedItem) {
 		    	    	
-		    	    	item.contractId = selectedItem;
+		    	    	item.contractId = selectedItem.contractId;
+		    	    	item.contractContent = selectedItem.contractContent;
 		    	    	
 		    	    }, function () {
 		    	    	//取消的回调函数
@@ -340,7 +341,8 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		};
 		
 	$scope.Choose = function (item) {
-		$uibModalInstance.close(item.contractId);
+		var selectItem = {contractId : item.contractId, contractContent : item.content};
+		$uibModalInstance.close(selectItem);
 	};
 
 	$scope.cancel = function () {
