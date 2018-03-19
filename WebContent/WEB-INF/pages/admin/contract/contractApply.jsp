@@ -34,6 +34,7 @@
 										<span class="searchSpan">合同编号:</span>
                                         <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
+                                    
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
 										<input type="date" ng-model="costStartDate" class="span2">
@@ -54,14 +55,14 @@
 												<tr>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
-													<th width="200px">内容</th>
+													<th width="120px">内容</th>
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
-													<th width="100px">扫描件</th>
+													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
-													<th>操作</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -73,13 +74,14 @@
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.company"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.url"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.serialid"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editContract(item)" ng-if="item.status=='00'">编辑</a>
-														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'">删除</a>
-														<button type="button" class="btn btn-xs btn-success" ng-click="vm.contractAttachmentList(item.contractId)">附件</button>
+													
+														<a href="javascript:;" class="btn btn-xs  icon-edit" ng-click="vm.editContract(item)" ng-if="item.status=='00'"></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"></a>
+														<button type="button" class="btn btn-xs btn-success icon-file " ng-click="vm.contractAttachmentList(item.contractId)"></button>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
@@ -90,7 +92,7 @@
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.content" style="width:190px;" >
+														<input type="text" ng-model="item.content" style="width:120px;" >
 													</td>
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
@@ -105,7 +107,7 @@
 														<input type="text" ng-model="item.company"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.url"  style="width:90px;" />
+														<input type="date" ng-model="item.url"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:130px;" />
@@ -113,8 +115,8 @@
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.remakes"  style="width:90px;" />
 													</td>
-													<td ng-switch-when="edit">
-														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)">保存</a>
+													<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success icon-ok "   ng-click="vm.save(item)"></a>
 													</td>
 												</tr>
 											</tbody>

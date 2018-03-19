@@ -70,12 +70,12 @@
 													<!-- view -->
 													<td ng-switch-when="view" >
 														<div class="comandDiv" >
-															<a href="javascript:;" class="btn btn-small btn-invert" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')">编辑</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">提交</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')">驳回</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">提交</a>
-															<a href="javascript:;" class="btn btn-small btn-info" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'">驳回</a>
-															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'">报废</a>
+															<a href="javascript:;" class="btn btn-xs  icon-edit" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"></a>
+															<a href="javascript:;" class="btn btn-xs btn-success icon-ok" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"></a>
+															<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"></a>
+															<a href="javascript:;" class="btn btn-xs btn-success icon-ok" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"></a>
+															<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"></a>
+															<a href="javascript:;" class="btn btn-xs btn-danger icon-remove-sign" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'"></a>
 														</div>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
@@ -215,7 +215,7 @@
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
-													<th width="100px">扫描件</th>
+													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
 													<th>操作</th>

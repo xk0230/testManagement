@@ -17,7 +17,7 @@ myAppModule2.controller('HeaderController',
 		}
 
 		this.ChangePwd = function (costId,parentSelector) {
-			var parentElem = parentSelector ? angular.element($document[0].querySelector('#header ' + parentSelector)) : undefined;
+			var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 					var modalInstance = $uibModal.open({
 					  animation: true,
 					  ariaLabelledBy: 'modal-title',

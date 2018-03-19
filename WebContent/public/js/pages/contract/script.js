@@ -105,7 +105,7 @@ myAppModule.controller('ContractController',
 				,dept:""
 				,cost:0
 				,company:""
-				,url:""
+				,url:new Date()
 				,serialid:""	
 				,remakes:""	
 				,editMode:"edit"
@@ -123,7 +123,9 @@ myAppModule.controller('ContractController',
 		//点击编辑
 		this.editContract = function (contractItem) {
 			contractItem.editMode = "edit";
-			contractItem.costDate = new Date(costItem.costDate);
+			//contractItem.costDate = new Date(costItem.costDate);
+			contractItem.url = new Date(contractItem.url);
+			
 		};
 		
 		//点击保存
@@ -153,7 +155,7 @@ myAppModule.controller('ContractController',
 				return ;
 			}
 			/*	if(!contractItem.url){
-				alert("请填写扫描件");
+				alert("请填写签订时间");
 				return ;
 			}
 			if(!contractItem.serialid){
@@ -172,7 +174,7 @@ myAppModule.controller('ContractController',
 				cost:contractItem.cost,
 				dept:contractItem.dept,
 				company:contractItem.company,
-				url:contractItem.url,
+				url:$filter('date')(contractItem.url, "yyyy-MM-dd"),
 				status:contractItem.status,
 				serialid:contractItem.serialid,
 				remakes:contractItem.remakes

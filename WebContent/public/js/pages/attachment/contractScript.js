@@ -86,7 +86,7 @@ myAppModule.controller('AttachmentController',
 		
 		
 		this.addAttachment = function (id, parentSelector) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
 		    	      ariaLabelledBy: 'modal-title',
@@ -99,7 +99,7 @@ myAppModule.controller('AttachmentController',
 		    	      //参数
 		    	      resolve: {
 		    	    	  //好像必须得这么写
-		    	        items: function () {
+		    	        id: function () {
 		    	          return id;
 		    	        }
 		    	      }
@@ -119,7 +119,7 @@ myAppModule.controller('AttachmentController',
 		   };
 		    	  
 		   this.delAttachment = function (id, parentSelector) {
-			    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 			    	    var modalInstance = $uibModal.open({
 			    	      animation: true,
 			    	      ariaLabelledBy: 'modal-title',
@@ -156,20 +156,19 @@ myAppModule.controller('AttachmentController',
 
 //编辑页面的control
 angular.module('myApp').controller('ModalInstanceCtrl', 
-		function ($scope,$http,$uibModalInstance,$filter, items) {
+		function ($scope,$http,$uibModalInstance,$filter, id) {
 	  var $ctrl = this;
-	  $ctrl.items = items;
-	  $ctrl.attachmentEntity = {
-				
+	  $scope.attachmentEntity = {
+				id:''
 			};
 	  
 	  this.$onInit = function(){
 		  
-		  if(items != ''){
-			  
+		  if(id != ''){
+			  $scope.attachmentEntity.id = id;
 			  $http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/admin/attachment/get/"+items+".do",
+					url:$("#rootUrl").val()+"/admin/attachment/get/"+$scope.attachmentEntity.id+".do",
 					params:{
 					}
 				
@@ -185,9 +184,6 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		  
 	  };
 		
-	  $ctrl.selected = {
-	    item: $ctrl.items[0]
-	  };
 
 	  $ctrl.ok = function () {
 		  
@@ -205,7 +201,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 	     fd.append('uploadFile', file);
 	     fd.append('fId', $('#contractId').val());
 	     fd.append('type', $scope.attachmentEntity.type);
-	     if($scope.attachmentEntity.id){
+	     if($scope ){
 	    	 fd.append('id',$scope.attachmentEntity.id);
 	     }
 		 

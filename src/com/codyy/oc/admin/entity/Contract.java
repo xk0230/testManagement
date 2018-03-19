@@ -22,7 +22,7 @@ public class Contract {
 
     private String company;
 
-    private String url;
+    private Date url;
 
     private String serialid;
     
@@ -158,11 +158,11 @@ public class Contract {
         this.company = company;
     }
 
-    public String getUrl() {
+    public Date getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(Date url) {
         this.url = url;
     }
 
