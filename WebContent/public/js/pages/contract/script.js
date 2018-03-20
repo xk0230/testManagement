@@ -125,7 +125,14 @@ myAppModule.controller('ContractController',
 			contractItem.editMode = "edit";
 			//contractItem.costDate = new Date(costItem.costDate);
 			contractItem.url = new Date(contractItem.url);
-			contractItem.dept = contractItem.dept;
+			var depid;
+			for(var i=0;i<$scope.depList.length;i++){
+				 if ($scope.depList[i].name == contractItem.dept){
+				    	depid = $scope.depList[i].depId;
+				    	break;
+				 };
+			}
+			contractItem.dept = depid;
 		};
 		
 		//点击保存
