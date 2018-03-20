@@ -116,7 +116,7 @@ setInterval("getNewsNum()","60000");
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
             </li>
-            <!-- 招聘管理 -->
+            <!-- 招聘 管理 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
