@@ -59,6 +59,17 @@ public class CostVO extends CostEntityBean{
 	
 	private String remark;
 	
+	private String createUserPosition;
+	
+
+	public String getCreateUserPosition() {
+		return createUserPosition;
+	}
+
+	public void setCreateUserPosition(String createUserPosition) {
+		this.createUserPosition = createUserPosition;
+	}
+
 	private List<CostDepEntityBean> costDepList;
 	
     public String getCostNo() {

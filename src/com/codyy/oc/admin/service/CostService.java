@@ -380,6 +380,7 @@ public class CostService {
 	    map.put("userId", cost.getUserId());
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
+	    map.put("createUserPosition", cost.getCreateUserPosition());
 	    
 	    page.setMap(map);
 	    
@@ -402,7 +403,9 @@ public class CostService {
 		JsonDto jsonDto = new JsonDto();
 		
 		cost.setUserId(sessionUser.getUserId());
-	    
+		cost.setDepId(sessionUser.getDepId());
+		cost.setCreateUserPosition(sessionUser.getPosition());
+		
 	    List<CostEntityBean> costPageList = costDaoMapper.getViewChart(cost);
 	    
 	    jsonDto.setCode(0);
