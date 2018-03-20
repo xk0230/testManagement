@@ -87,7 +87,7 @@
 																</span>
 															</li>
 															<li>
-																<label>备注：</label>{{item.remark}}
+																<label>备注：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
 															</li>
 														</ul>
 													</td>
@@ -200,7 +200,7 @@
 												<tr>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
-													<th width="200px">内容</th>
+													<th width="150px">内容</th>
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">对方公司</th>
@@ -215,13 +215,13 @@
 													<!-- view -->
 													<td><p ng-bind="item.contractId"></p></td>
 													<td><p ng-bind="item.contractType"></p></td>
-													<td><p ng-bind="item.content"></p></td>
+													<td><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td><p ng-bind="item.dept"></p></td>
 													<td><p ng-bind="item.cost"></p></td>
 													<td><p ng-bind="item.company"></p></td>
 													<td><p ng-bind="item.url"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
-													<td><p ng-bind="item.remakes"></p></td>
+													<td><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td>
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)" ng-if="item.status=='00' && mode=='edit'">选择</a>
 													</td>
