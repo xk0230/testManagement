@@ -25,7 +25,7 @@ myAppModule2.controller('HeaderController',
 					  templateUrl: 'myModalEditContent.html',
 					  controller: 'ModalInstanceCtrl',
 					  controllerAs: '$ctrl',
-					  size: 'modal-sm',
+					  size: 'sm',
 					  appendTo: parentElem,
 					  //参数
 					  resolve: {

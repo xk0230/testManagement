@@ -77,13 +77,13 @@
 													<!-- view -->
 													<td ng-switch-when="view"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.contractType"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.content"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.company"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.serialid"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.remakes"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
@@ -103,7 +103,9 @@
 													</td>
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
-														ng-options="cType.depid as cType.name group by cType.group for cType in depList">
+
+														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
+
 														<option value="">-部门-</option>
 														</select>
 													</td>

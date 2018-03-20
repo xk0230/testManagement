@@ -68,11 +68,11 @@ setInterval("getNewsNum()","60000");
           <div class="nav-collapse" >
 	          <ul class="nav pull-right">
 	            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 22px;">
-	            <i class="icon-user"></i>
+	            <i class="icon-user passwdChange"></i>
 	            &nbsp;&nbsp;&nbsp;${sessionScope.adminUser.realName }<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
 	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">个人信息</a></li>
-	                <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.subnavbar')">修改密码</a></li>
+	                <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.passwdChange')">修改密码</a></li>
 	                <li><a href="javascript:logout();">退出</a></li>
 	              </ul>
 	            </li>
@@ -104,7 +104,7 @@ setInterval("getNewsNum()","60000");
               <ul class="dropdown-menu">
                     <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>我的费用</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
+                    <li><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
             </li>
@@ -116,7 +116,7 @@ setInterval("getNewsNum()","60000");
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
             </li>
-            <!-- 招聘管理 -->
+            <!-- 招聘 管理 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
@@ -147,51 +147,45 @@ setInterval("getNewsNum()","60000");
     <!-- /导航栏 -->
     <!-- Start .header-inner -->
         <script type="text/ng-template" id="myModalEditContent.html">
-			<div class="modal-header">
-				<div class="row ">
-					<div class="col-lg-12 heading">
-						<h1 class="page-header"><i class="im-users2"></i> 修改密码</h1>
-						<ul id="crumb" class="breadcrumb">
-						</ul>
-					</div>
-				</div>
 
-				<!-- 个人信息 start here -->
-				<div class="outlet" >
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="panel panel-default toggle">
-								<!-- Start .panel -->
-								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-pencil"></i>修改密码</h3>
-								</div>
-								<div class="panel-body">
-									<div class="form-horizontal group-border" role="form">
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="旧密码" ng-model="oldPwd">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="新密码" ng-model="newPwd1">
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-xs-12">
-												<input type="password" class="form-control" placeholder="再次输入新密码" ng-model="newPwd2">
-											</div>
-										</div>
+		  <div class="main-inner" style="width:300px;">
+			<div class="container" style="width:300px;">
+				<div class="row" style="width:300px;">
+					<div class="span4">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>修改密码</h3>
+							</div>
+							
+							<div class="widget-content">
+								<div class="row">
+                                    <div class="span4">
+										<input type="password" class="form-control span3" placeholder="旧密码" ng-model="oldPwd">
 									</div>
 								</div>
+								<hr>
+								<div class="row">
+									<div class="span4">
+									<input type="password" class="form-control span3" placeholder="新密码" ng-model="newPwd1">
+									</div>
+								</div>
+								<div class="row">
+									<div class="span4">
+									<input type="password" class="form-control span3" placeholder="再次输入新密码" ng-model="newPwd2">
+									</div>
+								</div>
+        						<div class="modal-footer">
+            						<button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            						<button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        						</div>
 							</div>
 						</div>
 					</div>
 				</div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
-            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
-        </div>
+			</div>
+		</div>
     </script>
 </div>
 

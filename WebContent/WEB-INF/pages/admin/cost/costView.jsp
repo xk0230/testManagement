@@ -47,10 +47,10 @@
                                     </div>
 								</div>
 								<hr>
-									<div class="progress progress-striped active" style="height:18px;" >
+									收入:<div class="progress progress-striped active" style="height:18px;" >
 										<div class="bar" style="width: {{inPercent}}%;height:18px;" ><span style="display:inlie-block;height:18px;">{{inStr}}</span></div>
 									</div>
-									<div class="progress progress-striped active">
+									支出:<div class="progress progress-striped active">
 										<div class="bar" style="width: {{outPercent}}%;">{{outStr}}</div>
 									</div>
 								<hr>

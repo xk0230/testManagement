@@ -92,8 +92,8 @@ myAppModule.controller('CostController',
 					});
 					$scope.inPercent = inNum / (inNum + outNum) * 100;
 					$scope.outPercent = outNum / (inNum + outNum) * 100;
-					$scope.inStr = "收入：" + inNum;
-					$scope.outStr = "支出：" + outNum;
+					$scope.inStr = "" + inNum;
+					$scope.outStr = "" + outNum;
 					
 					$scope.totalItems = res.data.total;
 				}else{
