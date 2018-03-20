@@ -60,7 +60,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="100px">编号</th>
+												<!-- 	<th width="100px">单号</th>
 													<th width="50px">类型</th>
 													<th width="120px">内容</th>
 													<th width="50px">部门</th>
@@ -69,7 +69,17 @@
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
-													<th width="150px">操作</th>
+													<th width="150px">操作</th> -->
+													<th width="10%">单号1</th>
+													<th width="5%">类型</th>
+													<th width="10%">内容</th>
+													<th width="5%">部门</th>
+													<th width="5%">金额</th>
+													<th width="10%">对方公司</th>
+													<th width="10%">签订时间</th>
+													<th width="10%">外部订单</th>
+													<th width="10%">备注</th>
+													<th width="15%" style="min-width：100px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -82,7 +92,7 @@
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.company"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.serialid"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
@@ -93,34 +103,36 @@
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:70px;" ng-model="item.contractType"  class="form-control select2" 
+				                                        <select id="type" style="width:60px;" ng-model="item.contractType"  class="form-control select2" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
-				                                            <option value="">-类型-</option>
+				                                            <option value="">类型</option>
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.content" style="width:120px;" >
+														<input type="text" ng-model="item.content" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:70px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept"  style="width:60px;" class="form-control select2" 
 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 
-														<option value="">-部门-</option>
+														<option value="">部门</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.company"  style="width:120px;" />
+														<input type="text" ng-model="item.company"  style="width:100px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<input type="date" ng-model="item.url"  style="width:120px;" />
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.serialid"  style="width:130px;" />
+													
+														<input type="text" ng-model="item.serialid"  style="width:100px;" />
 													</td>
+													
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.remakes"  style="width:90px;" />
 													</td>
