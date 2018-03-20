@@ -122,7 +122,7 @@ myAppModule.controller('AttachmentController',
 			this.scrap = function (id) {
 				swal({ 
 						title: "确定报废吗？", 
-						text: "你将无法恢复该副歌信息！", 
+						text: "你将无法恢复该附近信息！", 
 						type: "warning", 
 						showCancelButton: true, 
 						closeOnConfirm: true, 
