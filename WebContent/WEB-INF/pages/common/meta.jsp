@@ -60,7 +60,9 @@
 <link href="${root}/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript"></script> 
 <script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script> 
-
+<!-- jquery-ui -->
+<script src="${root}/public/js/jquery-ui-1.12.1.custom/jquery-ui.js" type="text/javascript"></script> 
+<link type="text/css" rel="stylesheet" href="${root}/public/js/jquery-ui-1.12.1.custom/jquery-ui.css" media="screen">
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>
 <script src="${root}/public/js/extend.js" type="text/javascript"></script>
