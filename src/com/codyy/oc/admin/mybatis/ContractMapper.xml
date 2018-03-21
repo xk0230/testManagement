@@ -257,7 +257,7 @@
 				AND contract.create_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
 		
-		ORDER BY contract.create_time DESC
+		ORDER BY contract.contract_id DESC
 	
 	</select>
   

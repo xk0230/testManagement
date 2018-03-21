@@ -53,6 +53,8 @@
 <script src="${root}/public/js/angular/angular-animate.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular/angular-locale_zh-cn.js" type="text/javascript"></script> 
 <script src="${root}/public/js/angular-auto-validate-master/jcs-auto-validate.js" type="text/javascript"></script>
+<%-- <script src="${root}/public/js/angular/angular-sanitize.js"></script> --%>
+<script src="https://cdn.bootcss.com/angular-sanitize/1.6.4/angular-sanitize.js"></script>
 <!-- bootstrap部分 -->
 <script src="${root}/public/js/bootstrap/js/bootstrap.js" type="text/javascript"></script> 
 <script src="${root}/public/js/bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script> 
@@ -89,4 +91,21 @@
 	        }
     	}
     });
+    
+    
+    function HTMLDecode(text) { 
+        var temp = document.createElement("div"); 
+        temp.innerHTML = text; 
+        var output = temp.innerText || temp.textContent; 
+        temp = null; 
+        return output; 
+    } 
+    
+    function HTMLEncode(html) {
+        var temp = document.createElement("div");
+        (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+        var output = temp.innerHTML;
+        temp = null;
+        return output;
+    }
 </script>

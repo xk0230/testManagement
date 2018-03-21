@@ -104,7 +104,7 @@ setInterval("getNewsNum()","60000");
               <ul class="dropdown-menu">
                     <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>我的费用</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
+                    <li><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
             </li>
@@ -116,7 +116,7 @@ setInterval("getNewsNum()","60000");
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
             </li>
-            <!-- 招聘管理 -->
+            <!-- 招聘 管理 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>

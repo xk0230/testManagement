@@ -376,7 +376,7 @@
 				AND costDetail.cost_no like '%${costNo}%'
 			</if>
 			
-			<if test="remark != null and  map.remark != ''">
+			<if test="remark != null and  remark != ''">
 				AND costDetail.remark like '%${remark}%'
 			</if>
 			

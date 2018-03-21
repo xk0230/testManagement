@@ -2,6 +2,8 @@ package com.codyy.oc.admin.entity;
 
 import java.util.Date;
 
+import org.springframework.web.util.HtmlUtils;
+
 import com.codyy.commons.CommonsConstant;
 
 public class Position {
@@ -199,11 +201,11 @@ public class Position {
     }
 
     public String getName() {
-        return name;
+        return HtmlUtils.htmlUnescape(name);
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = HtmlUtils.htmlUnescape(name);
     }
 
     public String getDepId() {
