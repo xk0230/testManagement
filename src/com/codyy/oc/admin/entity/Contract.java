@@ -44,7 +44,7 @@ public class Contract {
 	 * @return the remakes
 	 */
 	public String getRemakes() {
-		return remakes;
+		return HtmlUtils.htmlUnescape(remakes);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Contract {
 	}
 
 	public String getStatus() {
-		return HtmlUtils.htmlUnescape(status);
+		return status;
 	}
 
 	public void setStatus(String status) {
