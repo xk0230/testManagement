@@ -90,9 +90,9 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind-html="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.cost"></p></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.company"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.company}}" ng-bind-html="item.company"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.url | date:'yyyy-MM-dd'"></p></td>
-													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind-html="item.serialid"></p></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind-html="item.serialid"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind-html="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
