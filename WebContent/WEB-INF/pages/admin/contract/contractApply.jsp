@@ -70,7 +70,7 @@
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
 													<th width="150px">操作</th> -->
-													<th width="10%">单号1</th>
+													<th width="10%">单号</th>
 													<th width="5%">类型</th>
 													<th width="10%">内容</th>
 													<th width="5%">部门</th>
