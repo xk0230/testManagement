@@ -2,6 +2,8 @@ package com.codyy.oc.admin.entity;
 
 import java.util.Date;
 
+import org.springframework.web.util.HtmlUtils;
+
 /**  
  * @author Jason
  * @version: $ id:Contract.java, v 0.1	2018年3月6日	下午8:45:23	Jason $
@@ -49,11 +51,11 @@ public class Contract {
 	 * @param remakes the remakes to set
 	 */
 	public void setRemakes(String remakes) {
-		this.remakes = remakes;
+		this.remakes = HtmlUtils.htmlUnescape(remakes);
 	}
 
 	public String getStatus() {
-		return status;
+		return HtmlUtils.htmlUnescape(status);
 	}
 
 	public void setStatus(String status) {

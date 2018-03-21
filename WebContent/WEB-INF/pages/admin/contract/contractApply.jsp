@@ -85,15 +85,15 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind="item.contractId"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.contractType"></p></td>
-													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.company"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
-													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></p></td>
-													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.contractId"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.contractType"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind-html="item.content"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.dept"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.cost"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.company"></p></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.url | date:'yyyy-MM-dd'"></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind-html="item.serialid"></p></p></td>
+													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind-html="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
@@ -101,7 +101,7 @@
 														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
+													<td ng-switch-when="edit"><p ng-bind-html="item.contractId"></p></td>
 													<td ng-switch-when="edit">
 				                                        <select id="type" style="width:60px;" ng-model="item.contractType"  class="form-control select2" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">

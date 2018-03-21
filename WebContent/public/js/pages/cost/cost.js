@@ -1,4 +1,5 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','ngSanitize']);
+
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
