@@ -54,6 +54,11 @@ myAppModule.controller('CostController',
 				if(res){
 					self.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
+					if(self.list.length > 0){
+						$scope.depLength = self.list[0].costDepList.length > 5?350:140;
+					}else{
+						$scope.depLength = 140;
+					}
 				}else{
 					self.list = [];
 					$scope.totalItems = 0;
@@ -62,9 +67,17 @@ myAppModule.controller('CostController',
 		};
 		
 		//点击编辑
-		this.editCost = function (costItem) {
+		this.editCost = function (costItem,index) {
 			costItem.editMode = "edit";
-			costItem.costDate = new Date(costItem.costDate);
+		    $( "#datepicker" +index ).datepicker({
+		        showOtherMonths: true,
+		        selectOtherMonths: true,
+		        dateFormat: 'yy-mm-dd',
+		        dayNamesMin: ['日','一','二','三','四','五','六'],
+		        monthNames: ['一月','二月','三月','四月','五月','六月',
+		            '七月','八月','九月','十月','十一月','十二月'],
+		    	altField: '#datepicker' + index
+		      });
 		};
 		
 		//点击保存

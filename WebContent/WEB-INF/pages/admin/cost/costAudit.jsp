@@ -57,7 +57,7 @@
 													<th width="40px">类型</th>
 													<th width="90px">成本产生时间</th>
 													<th width="60px">金额</th>
-													<th width="140px">各部门金额</th>
+													<th width="{{depLength}}px">各部门金额</th>
 													<th width="180px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
@@ -74,8 +74,11 @@
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													
 													<td ng-switch-when="view">
-														<ul class="costnav" ng-repeat="depCost in item.costDepList">
-															<li ><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+														<ul class="costnav pull-left" >
+															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+														</ul>
+														<ul class="costnav pull-left" >
+															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
 														</ul>
 													</td>
 													
@@ -104,7 +107,7 @@
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view" >
 														<div >
-															<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
+															<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-ok"></i></a>
@@ -120,8 +123,8 @@
 				                                            <option value="">--收支类型--</option>
 				                                        </select>
 													</td>
-													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.costDate" style="width:100px;" >
+													<td ng-show="item.editMode == 'edit'">
+														<input type="text" id="datepicker{{$index}}" ng-model="item.costDate" style="width:80px;">
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.costNum"  min="1" style="width:50px;" />

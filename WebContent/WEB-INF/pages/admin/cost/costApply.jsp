@@ -96,7 +96,7 @@
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-edit"></i></a>
+														<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item,$index)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-edit"></i></a>
 														<a href="javascript:;" class="btn btn-small " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-share"></i></a>
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class="icon-remove-sign"></i></a>
 													</td>
@@ -108,8 +108,8 @@
 				                                            <option value="">--收支类型--</option>
 				                                        </select>
 													</td>
-													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.costDate" style="width:160px;" >
+													<td ng-show="item.editMode == 'edit'">
+														<input type="text" id="datepicker{{$index}}" ng-model="item.costDate" style="width:80px;">
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.costNum"  min="1" style="width:60px;" />

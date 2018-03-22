@@ -48,10 +48,10 @@
 								</div>
 								<hr>
 									收入:<div class="progress progress-striped active" style="height:18px;" >
-										<div class="bar" style="width: {{inPercent}}%;height:18px;" ><span style="display:inlie-block;height:18px;">{{inStr}}</span></div>
+										<div class="bar"  ng-style="{'width' : inPercent}">{{inStr}}</div>
 									</div>
 									支出:<div class="progress progress-striped active">
-										<div class="bar" style="width: {{outPercent}}%;">{{outStr}}</div>
+										<div class="bar" ng-style="{'width' : outPercent}">{{outStr}}</div>
 									</div>
 								<hr>
 								<!-- 查询结果 -->
@@ -65,7 +65,7 @@
 													<th width="60px">收支类型</th>
 													<th width="140px">成本产生时间</th>
 													<th width="120px">金额</th>
-													<th width="140px">各部门金额</th>
+													<th width="{{depLength}}px">各部门金额</th>
 													<th width="180px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
@@ -82,8 +82,11 @@
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													
 													<td ng-switch-when="view">
-														<ul class="costnav" ng-repeat="depCost in item.costDepList">
-															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+														<ul class="costnav pull-left" >
+															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+														</ul>
+														<ul class="costnav pull-left" >
+															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
 														</ul>
 													</td>
 													

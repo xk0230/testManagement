@@ -54,6 +54,11 @@ myAppModule.controller('CostController',
 				if(res){
 					self.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
+					if(self.list.length > 0){
+						$scope.depLength = self.list[0].costDepList.length > 5?350:140;
+					}else{
+						$scope.depLength = 140;
+					}
 				}else{
 					self.list = [];
 					$scope.totalItems = 0;
@@ -90,8 +95,8 @@ myAppModule.controller('CostController',
 							outNum = parseFloat(data.costNum);
 						}
 					});
-					$scope.inPercent = inNum / (inNum + outNum) * 100;
-					$scope.outPercent = outNum / (inNum + outNum) * 100;
+					$scope.inPercent = inNum / (inNum + outNum) * 100 + '%';
+					$scope.outPercent = outNum / (inNum + outNum) * 100 + '%';
 					$scope.inStr = "" + inNum;
 					$scope.outStr = "" + outNum;
 					
