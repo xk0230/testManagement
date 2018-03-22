@@ -50,19 +50,19 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12" style="overflow:auto">
-										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
-											<thead>
-												<tr>
+										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
+											<thead >
+												<tr align="center">
 													<th width="120px">成本单号</th>
-													<th width="60px">收支类型</th>
-													<th width="140px">成本产生时间</th>
-													<th width="120px">金额</th>
+													<th width="40px">类型</th>
+													<th width="90px">成本产生时间</th>
+													<th width="60px">金额</th>
 													<th width="140px">各部门金额</th>
 													<th width="180px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
 													<th width="80px">状态</th>
-													<th width="80px">操作</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -75,26 +75,27 @@
 													
 													<td ng-switch-when="view">
 														<ul class="costnav" ng-repeat="depCost in item.costDepList">
-															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+															<li ><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
 														</ul>
 													</td>
 													
 													<td ng-switch-when="view">
 														<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<label>合同：</label>
-																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
-																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																		<span class="line-limit-length span4">合同：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																		</span>
+																</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
-															</li>
-															<li>
-																<label>备注：</label>{{item.remark}}
 															</li>
 														</ul>
 													</td>
@@ -120,10 +121,10 @@
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.costDate" style="width:125px;" >
+														<input type="date" ng-model="item.costDate" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  min="1" style="width:110px;" />
+														<input type="number" ng-model="item.costNum"  min="1" style="width:50px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<ul class="costnav" ng-repeat="depCost in item.costDepList" style="width:132px">
@@ -138,20 +139,21 @@
 													<td ng-switch-when="edit">
 														<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<label>合同：</label>
-																	<a href="javascript:;" style="width:160px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">{{item.contractId}}</a>
-																	<a href="javascript:;" style="width:160px;" ng-if="!item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">未选择</a>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">详情：
+																	<input type="text" ng-model="item.remark" style="width:240px;">
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	合同：
+																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">{{item.contractId}}</a>
+																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">未选择</a>
 																</span>
 															</li>
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
-															</li>
-															<li>
-																<label>备注：</label>
-																<input type="text" ng-model="item.remark" style="width:140px;">
 															</li>
 														</ul>
 													</td>

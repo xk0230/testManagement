@@ -54,31 +54,37 @@
 											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i>申请</button>
 										</div>
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
-											<thead>
+											<thead >
 												<tr>
 													<th width="100px">成本单号</th>
-													<th width="120px">收支类型</th>
-													<th width="170px">成本产生时间</th>
-													<th width="120px">金额</th>
+													<th width="100px">类型</th>
+													<th width="100px">成本产生时间</th>
+													<th width="100px">金额</th>
 													<th width="200px">成本详情</th>
 													<th width="100px">状态</th>
-													<th>操作</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind-html="item.costNo"></p></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.costDate"></p></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.costNum"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
-														<ul style="">
+															<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<label>合同：</label>
-																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
-																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																		<span class="line-limit-length span4">合同：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																		</span>
 																</span>
 															</li>
 															<li>
@@ -86,12 +92,9 @@
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
-															<li>
-																<label>备注：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
-															</li>
 														</ul>
 													</td>
-													<td ng-switch-when="view"><p ng-bind-html="item.statusName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view">
 														<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-edit"></i></a>
 														<a href="javascript:;" class="btn btn-small " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-share"></i></a>
@@ -109,13 +112,18 @@
 														<input type="date" ng-model="item.costDate" style="width:160px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  min="1" style="width:110px;" />
+														<input type="number" ng-model="item.costNum"  min="1" style="width:60px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<ul style="">
 															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">详情：
+																	<input type="text" ng-model="item.remark" style="width:240px;">
+																</span>
+															</li>
+															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<label>合同：</label>
+																	合同：
 																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">{{item.contractId}}</a>
 																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">未选择</a>
 																</span>
@@ -125,10 +133,7 @@
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
-															<li>
-																<label>备注：</label>
-																<input type="text" ng-model="item.remark" style="width:240px;">
-															</li>
+															
 														</ul>
 													</td>
 													<td ng-switch-when="edit">
@@ -213,15 +218,15 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in list" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td><p ng-bind-html="item.contractId"></p></td>
-													<td><p ng-bind-html="item.contractType"></p></td>
-													<td><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind-html="item.content"></p></td>
-													<td><p ng-bind-html="item.dept"></p></td>
-													<td><p ng-bind-html="item.cost"></p></td>
-													<td><p ng-bind-html="item.company"></p></td>
-													<td><p ng-bind-html="item.url"></p></td>
-													<td><p ng-bind-html="item.serialid"></p></td>
-													<td><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind-html="item.remakes"></p></td>
+													<td><p ng-bind="item.contractId"></p></td>
+													<td><p ng-bind="item.contractType"></p></td>
+													<td><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
+													<td><p ng-bind="item.dept"></p></td>
+													<td><p ng-bind="item.cost"></p></td>
+													<td><p ng-bind="item.company"></p></td>
+													<td><p ng-bind="item.url"></p></td>
+													<td><p ng-bind="item.serialid"></p></td>
+													<td><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td>
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)" ng-if="item.status=='00' && mode=='edit'">选择</a>
 													</td>
