@@ -121,10 +121,10 @@
 				                                        </select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.costDate" style="width:125px;" >
+														<input type="date" ng-model="item.costDate" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  min="1" style="width:110px;" />
+														<input type="number" ng-model="item.costNum"  min="1" style="width:50px;" />
 													</td>
 													<td ng-switch-when="edit">
 														<ul class="costnav" ng-repeat="depCost in item.costDepList" style="width:132px">
