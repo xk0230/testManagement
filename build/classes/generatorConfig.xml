@@ -21,7 +21,7 @@
 		<sqlMapGenerator targetPackage="com.codyy.oc.admin.mybatis"	targetProject="ccydManagement" />
 		<javaClientGenerator targetPackage="com.codyy.oc.admin.dao"	targetProject="ccydManagement" type="XMLMAPPER" />
 		
-		<table schema="" tableName="CONTRACT" enableCountByExample="false"
+		<table schema="" tableName="payment" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
