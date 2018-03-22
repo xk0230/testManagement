@@ -75,7 +75,7 @@
 													
 													<td ng-switch-when="view">
 														<ul class="costnav" ng-repeat="depCost in item.costDepList">
-															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+															<li ><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
 														</ul>
 													</td>
 													
@@ -88,15 +88,11 @@
 															</li>
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																		<span class="line-limit-length span4">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
-																	</span>
 																</span>
-															</li>
-															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>

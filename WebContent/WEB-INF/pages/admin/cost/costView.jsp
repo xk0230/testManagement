@@ -96,12 +96,10 @@
 															</li>
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																		<span class="line-limit-length span4">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
-																	</span>
 																</span>
 															</li>
 															<li>
