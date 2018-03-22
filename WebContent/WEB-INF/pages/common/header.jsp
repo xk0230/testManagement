@@ -138,6 +138,8 @@ setInterval("getNewsNum()","60000");
             <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书管理</span> </a> </li>
            	<!-- 合同管理 -->
             <li class="mainLi"><a href="${root}/contract/contractApply.do"><i class="icon-signal"></i><span>合同管理</span> </a> </li>
+           	<!-- 对方公司管理 -->
+            <li class="mainLi"><a href="${root}/payment/paymentApply.do"><i class="icon-signal"></i><span>对方公司管理</span> </a> </li>
           </ul>
         </div>
         <!-- /container --> 

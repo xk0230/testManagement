@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Payment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tax_no" jdbcType="VARCHAR" property="taxNo" />
+    <result column="bank_no" jdbcType="VARCHAR" property="bankNo" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, tax_no, bank_no, bank_name, create_time, create_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from payment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Payment">
+    insert into payment (id, name, tax_no, 
+      bank_no, bank_name, create_time, 
+      create_user)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{taxNo,jdbcType=VARCHAR}, 
+      #{bankNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Payment">
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="taxNo != null">
+        tax_no,
+      </if>
+      <if test="bankNo != null">
+        bank_no,
+      </if>
+      <if test="bankName != null">
+        bank_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null">
+        #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Payment">
+    update payment
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null">
+        tax_no = #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Payment">
+    update payment
+    set name = #{name,jdbcType=VARCHAR},
+      tax_no = #{taxNo,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+   <select id="getPaymentPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.PaymentVO">
+		SELECT
+			payment.id as id,
+			payment.name AS name,
+			payment.tax_no AS taxNo,
+			payment.bank_no AS bankNo,
+			payment.bank_name AS bankName,
+			'view' as editMode
+		FROM
+			payment payment
+		where 1=1 
+			
+			AND ( payment.create_user = #{map.userId}
+			
+				<if test="map.userPosition == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPosition == 'MANAGER'">
+					or payment.dept = #{map.userDepId}
+				</if>
+			
+			)
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				AND payment.create_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND payment.create_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+		
+	
+	</select>
+  
+</mapper>

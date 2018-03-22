@@ -16,29 +16,29 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.HtmlUtils;
 
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.Contract;
-import com.codyy.oc.admin.service.ContractManageService;
-import com.codyy.oc.admin.vo.ContractVO;
+import com.codyy.oc.admin.entity.Payment;
+import com.codyy.oc.admin.service.PaymentService;
+import com.codyy.oc.admin.vo.PaymentVO;
 
 /**  
  * @author Jason(pjx48476) 
- * @version: $ id:ContractController.java, v 0.1	2018年3月5日	下午5:47:35	Jason(pjx48476) $
+ * @version: $ id:PaymentController.java, v 0.1	2018年3月22日	下午9:03:49	Jason(pjx48476) $
  * @Description: TODO  
  */
 
 @Controller
-@RequestMapping("/contract")
-public class ContractController extends BaseController {
-	
+@RequestMapping("/payment")
+public class PaymentController extends BaseController {
+
 	@Resource
-	ContractManageService contractManageService;
+	PaymentService paymentService;
 	
+
 	@InitBinder  
 	public void initBinder(WebDataBinder binder) {  
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
@@ -48,34 +48,35 @@ public class ContractController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
-	public JsonDto insertOrUpdateContract(HttpServletRequest request,Contract contract){
-		return contractManageService.insertOrUpdateContract(this.getSessionUser(request),contract);
+	public JsonDto insertOrUpdateContract(HttpServletRequest request,Payment payment){
+		return paymentService.insertOrUpdatePayment(this.getSessionUser(request),payment);
 	}
 	
 	/**
 	 * 合同申请
 	 * @return
 	 */
-	@RequestMapping("/contractApply.do")
+	@RequestMapping("/paymentApply.do")
 	public String contractApply(){
-		return "admin/contract/contractApply";
+		return "admin/payment/paymentApply";
 	}
 	
 
 	@ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(HttpServletRequest request,ContractVO contract){
+    public Page getCostPageList(HttpServletRequest request,PaymentVO payment){
 		AdminUser user = getSessionUser(request);
-		contract.setUserId(user.getUserId());
-		contract.setUserPosition(user.getPosition());
-		contract.setUserDepId(user.getDepId());
-        return contractManageService.getContractPageList(contract);
-    }
-
-	@ResponseBody
-    @RequestMapping("/deleteContract.do")
-    public JsonDto deleteContract(HttpServletRequest request,ContractVO contract){
-		return contractManageService.deleteContract(contract);
+		payment.setUserId(user.getUserId());
+		payment.setUserPosition(user.getPosition());
+		payment.setUserDepId(user.getDepId());
+        return paymentService.getPaymentPageList(payment);
     }
 	
+
+	@ResponseBody
+    @RequestMapping("/deletePayment.do")
+    public JsonDto deleteContract(HttpServletRequest request,PaymentVO payment){
+		return paymentService.deletePayment(payment);
+    }
+
 }
