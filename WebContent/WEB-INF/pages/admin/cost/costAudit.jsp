@@ -82,6 +82,9 @@
 													<td ng-switch-when="view">
 														<ul style="">
 															<li>
+																<label>详情：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
+															</li>
+															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
 																	<label>合同：</label>
 																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
@@ -93,9 +96,7 @@
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
-															<li>
-																<label>备注：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
-															</li>
+															
 														</ul>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>

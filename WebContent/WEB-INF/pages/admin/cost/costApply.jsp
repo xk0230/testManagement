@@ -54,7 +54,7 @@
 											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i>申请</button>
 										</div>
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
-											<thead>
+											<thead >
 												<tr>
 													<th width="100px">成本单号</th>
 													<th width="100px">类型</th>
@@ -62,7 +62,7 @@
 													<th width="100px">金额</th>
 													<th width="200px">成本详情</th>
 													<th width="100px">状态</th>
-													<th>操作</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -75,6 +75,9 @@
 													<td ng-switch-when="view">
 														<ul style="">
 															<li>
+																<label>详情：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
+															</li>
+															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<label>合同：</label>
 																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
@@ -86,9 +89,7 @@
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
-															<li>
-																<label>备注：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
-															</li>
+															
 														</ul>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
