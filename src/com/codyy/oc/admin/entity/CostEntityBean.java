@@ -3,6 +3,8 @@ package com.codyy.oc.admin.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.util.HtmlUtils;
+
 import net.sf.json.JSONArray;
 
 /**
@@ -143,11 +145,11 @@ public class CostEntityBean {
     }
 
     public String getRemark() {
-        return remark;
+        return HtmlUtils.htmlUnescape(remark);
     }
 
     public void setRemark(String remark) {
-        this.remark = remark;
+        this.remark = HtmlUtils.htmlUnescape(remark);
     }
 
 	public String getStatus() {

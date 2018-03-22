@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'],['ngSanitize'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
 
 myAppModule.controller('ChartController',
 	function costListController($scope,$http,$uibModal,$document,$filter){
