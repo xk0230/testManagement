@@ -94,7 +94,7 @@
 																</span>
 															</li>
 															<li>
-																<label>备注：</label>{{item.remark}}
+																<label>备注：</label><span class="line-limit-length span4" title="{{item.remark}}">{{item.remark}}</span>
 															</li>
 														</ul>
 													</td>
