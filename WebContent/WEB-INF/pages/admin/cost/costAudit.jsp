@@ -50,19 +50,19 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12" style="overflow:auto">
-										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
-											<thead>
-												<tr>
+										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
+											<thead >
+												<tr align="center">
 													<th width="120px">成本单号</th>
-													<th width="60px">收支类型</th>
-													<th width="140px">成本产生时间</th>
-													<th width="120px">金额</th>
+													<th width="40px">类型</th>
+													<th width="90px">成本产生时间</th>
+													<th width="60px">金额</th>
 													<th width="140px">各部门金额</th>
 													<th width="180px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
 													<th width="80px">状态</th>
-													<th width="80px">操作</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -75,7 +75,7 @@
 													
 													<td ng-switch-when="view">
 														<ul class="costnav" ng-repeat="depCost in item.costDepList">
-															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
+															<li><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
 														</ul>
 													</td>
 													

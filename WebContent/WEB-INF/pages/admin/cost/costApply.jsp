@@ -57,9 +57,9 @@
 											<thead>
 												<tr>
 													<th width="100px">成本单号</th>
-													<th width="120px">收支类型</th>
-													<th width="170px">成本产生时间</th>
-													<th width="120px">金额</th>
+													<th width="100px">类型</th>
+													<th width="100px">成本产生时间</th>
+													<th width="100px">金额</th>
 													<th width="200px">成本详情</th>
 													<th width="100px">状态</th>
 													<th>操作</th>
