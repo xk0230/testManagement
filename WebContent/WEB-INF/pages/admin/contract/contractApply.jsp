@@ -65,7 +65,7 @@
 													<th width="100px">内容</th>
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
-													<th width="90px">对方公司</th>
+													<th width="90px">收款方</th>
 													<th width="100px">签订时间</th>
 													<th width="100px">外部订单</th>
 													<th width="90px">备注</th>
@@ -75,7 +75,7 @@
 													<th width="8%">内容</th>
 													<th width="5%">部门</th>
 													<th width="5%">金额</th>
-													<th width="3%">对方公司2</th>
+													<th width="3%">收款方</th>
 													
 													<th width="10%">签订时间</th>
 													<th width="10%">外部订单</th>

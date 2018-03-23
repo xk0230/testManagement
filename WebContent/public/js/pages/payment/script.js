@@ -83,15 +83,15 @@ myAppModule.controller('PaymentController',
 		//点击保存
 		this.save = function (paymentItem) {
 			if(!paymentItem.bankName){
-				alert("请填写合同订单");
+				alert("请填写开户行");
 				return ;
 			}
 			if(!paymentItem.bankNo){
-				alert("请填写合同类别");
+				alert("请填写银行账号");
 				return ;
 			}
 			if(!paymentItem.name){
-				alert("请填写对方公司");
+				alert("请填写公司名称");
 				return ;
 			}
 			var params = {

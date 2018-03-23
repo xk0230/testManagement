@@ -158,7 +158,7 @@ myAppModule.controller('ContractController',
 				return ;
 			}
 			if(!contractItem.company){
-				alert("请填写对方公司");
+				alert("请填写收款方");
 				return ;
 			}
 			/*	if(!contractItem.url){

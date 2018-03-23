@@ -15,14 +15,14 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>合同</h3>
+								<h3>付款信息</h3>
 							</div>
 							
 							<div class="widget-content">
 								<div class="row">
                                     
 									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
+										<span class="searchSpan">创建日期:</span>
 										<input type="date" ng-model="costStartDate" class="span2">
 										<span class="searchSpanMid">~</span>
 										<input type="date" ng-model="costEndDate" class="span2">
@@ -43,21 +43,11 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-												<!-- 	<th width="100px">单号</th>
-													<th width="50px">类型</th>
-													<th width="120px">内容</th>
-													<th width="50px">部门</th>
-													<th width="50px">金额</th>
-													<th width="130px">对方公司</th>
-													<th width="100px">签订时间</th>
-													<th width="140px">外部订单</th>
-													<th width="100px">备注</th>
-													<th width="150px">操作</th> -->
 													<th width="20%">公司名称</th>
-													<th width="15%">税号</th>
-													<th width="20%">银行号</th>
-													<th width="15%">开户行</th>
-													<th width="30%" style="min-width：100px">操作</th>
+													<th width="20%">税号</th>
+													<th width="20%">银行账号</th>
+													<th width="20%">开户行</th>
+													<th width="20%" style="min-width：100px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -73,15 +63,15 @@
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)"><i class='icon-remove-sign'></i></a>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit"><input type="text" ng-model="item.name" style="width:100px;" ></td>
+													<td ng-switch-when="edit"><input type="text" ng-model="item.name" style="width:200px;" ></td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.taxNo" style="width:100px;" >
+														<input type="text" ng-model="item.taxNo" style="width:200px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.bankNo" style="width:100px;" >
+														<input type="text" ng-model="item.bankNo" style="width:200px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.bankName" style="width:50px;">
+														<input type="text" ng-model="item.bankName" style="width:200px;">
 													</td>
 													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success icon-ok "   ng-click="vm.save(item)"></a>
