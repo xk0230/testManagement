@@ -17,21 +17,13 @@
 								<i class="icon-pushpin"></i>
 								<h3>付款信息</h3>
 							</div>
-							
 							<div class="widget-content">
 								<div class="row">
-                                    
-									<div class="span6" style="height:37px;">
-										<span class="searchSpan">创建日期:</span>
-										<input type="date" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="date" ng-model="costEndDate" class="span2">
-									</div>
-									
-									
-									
+                                    <div class="span4">
+                                        <span class="searchSpan">公司名称:</span>
+                                        <input type="text" ng-model="name" class="span2">
+                                    </div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getPaymentList()" value="查询" /></div>
-									
 								</div>
 								<hr>
 								<!-- 查询结果 -->

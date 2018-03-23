@@ -146,7 +146,16 @@
 			<if test="map.endTime != null and map.endTime != ''">
 				AND payment.create_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
+			
+			<if test="map.name != null and  map.name != ''">
+				AND payment.name like '%' #{map.name} '%' 
+			</if>
+			
+			<if test="map.bankName != null and  map.bankName != ''">
+				AND payment.bank_name like '%' #{map.bankName} '%' 
+			</if>
 		
+		order by create_time desc
 	
 	</select>
   

@@ -37,8 +37,7 @@ myAppModule.controller('PaymentController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/payment/page.do',
 				params:{
-					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
-					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
+					name:$scope.name,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
