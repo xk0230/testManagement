@@ -26,6 +26,9 @@ myAppModule.controller('CostController',
 			}
 			self.getCostList();
 			self.getCostViewChart();
+			//设置时间控件
+			setDatepicker("datepickerS")
+			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {

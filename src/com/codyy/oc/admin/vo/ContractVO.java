@@ -206,8 +206,8 @@ public class ContractVO extends Contract {
 	 * @return the contractDate
 	 */
 	public String getContractDate() {
-		if(this.getCostTime() != null){
-			contractDate = DateUtils.format(this.getCostTime(),DateUtils.PATTERN_DATE);
+		if(this.getUrl() != null){
+			contractDate = DateUtils.format(this.getUrl(),DateUtils.PATTERN_DATE);
 		}
 		return contractDate;
 	}

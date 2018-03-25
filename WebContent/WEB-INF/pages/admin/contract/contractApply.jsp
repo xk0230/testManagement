@@ -30,20 +30,18 @@
                                     
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
-										<input type="date" ng-model="costStartDate" class="span2">
+										<input type="text" id="datepickerS" ng-model="costStartDate" class="span2">
 										<span class="searchSpanMid">~</span>
-										<input type="date" ng-model="costEndDate" class="span2">
+										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
 									</div>
-									
-									
-									
+
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getContractList()" value="查询" /></div>
 									
 								</div>
 								<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">单号:</span>
-                                        <input type="text" ng-model="contractId" class="span2">
+                                        <input type="text" ng-model="contractId" class="span2" id="contractId">
                                     </div>
                                     <div class="span6">
                                     	<span class="searchSpan">内容:</span>
@@ -108,7 +106,7 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
 													
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
 													</td>
@@ -146,11 +144,10 @@
 															</li>
 														</ul>
 													</td>
-													<td ng-switch-when="edit">
-														<input type="date" ng-model="item.url"  style="width:120px;" />
+													<td ng-show="item.editMode == 'edit'">
+														<input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;">
 													</td>
 													<td ng-switch-when="edit">
-													
 														<input type="text" ng-model="item.serialid"  style="width:100px;" />
 													</td>
 													
@@ -158,7 +155,7 @@
 														<input type="text" ng-model="item.remakes"  style="width:90px;" />
 													</td>
 													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success icon-ok "   ng-click="vm.save(item)"></a>
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
 												</tr>
 											</tbody>

@@ -34,7 +34,9 @@ myAppModule.controller('ContractController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getContractList();
-
+			//设置时间控件
+			setDatepicker("datepickerS")
+			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -152,10 +154,10 @@ myAppModule.controller('ContractController',
 		};
 		
 		//点击编辑
-		this.editContract = function (contractItem) {
+		this.editContract = function (contractItem,index) {
 			contractItem.editMode = "edit";
-			//contractItem.costDate = new Date(costItem.costDate);
-			contractItem.url = new Date(contractItem.url);
+			//设置时间控件
+			setDatepicker("datepicker" + index)
 			var depid;
 			for(var i=0;i<$scope.depList.length;i++){
 				 if ($scope.depList[i].name == contractItem.dept){
@@ -164,6 +166,7 @@ myAppModule.controller('ContractController',
 				 };
 			}
 			contractItem.dept = depid;
+
 		};
 		
 		//点击保存
@@ -212,7 +215,7 @@ myAppModule.controller('ContractController',
 				cost:contractItem.cost,
 				dept:contractItem.dept,
 				company:contractItem.company,
-				url:$filter('date')(contractItem.url, "yyyy-MM-dd"),
+				url:$filter('date')(contractItem.contractDate, "yyyy-MM-dd"),
 				status:contractItem.status,
 				serialid:contractItem.serialid,
 				remakes:contractItem.remakes
