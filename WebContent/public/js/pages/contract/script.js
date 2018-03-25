@@ -69,6 +69,37 @@ myAppModule.controller('ContractController',
 				}
 			});
 		};
+		
+		this.editPayment = function (item, parentSelector, mode) {
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
+		    	    var modalInstance = $uibModal.open({
+		    	      animation: true,
+		    	      ariaLabelledBy: 'modal-title',
+		    	      ariaDescribedBy: 'modal-body',
+		    	      templateUrl: 'myModalEditContent.html',
+		    	      controller: 'ModalInstanceCtrl',
+		    	      controllerAs: '$ctrl',
+		    	      size: 'lg',
+		    	      appendTo: parentElem,
+		    	      //参数
+		    	      resolve: {
+		    			//好像必须得这么写
+		    	        item: function () {
+		    	        	item.mode = mode;
+		    	        	return item;
+		    	        }
+		    	      }
+		    	    });
+
+		    	    modalInstance.result.then(function (selectedItem) {
+		    	    	
+		    	    	item.company = selectedItem.company;
+		    	    	
+		    	    }, function () {
+		    	    	//取消的回调函数
+		    	    	
+		    	    });
+		   };
 
 		this.contractAttachmentList = function(id){
 			window.location.href="/ssc/admin/attachment/contractManager.do?contractId="+id; 
@@ -271,5 +302,59 @@ myAppModule.controller('ContractController',
 	}
 );
 
+angular.module('myApp').controller('ModalInstanceCtrl',
+		function ($scope,$http,$uibModalInstance,$filter, item){
+			var $ctrl = this;
+			$scope.item = item;
+			$scope.totalItems = 0;
+			$scope.currentPage = 1;
+			$scope.itemsPerPage = 10;
+			
+			$ctrl.$onInit = function(){
+
+				$scope.name = item.name;
+				$ctrl.getPaymentList();
+
+			};
+			
+			$ctrl.setPage = function (pageNo) {
+				$scope.currentPage = pageNo;
+			};
+
+			$ctrl.pageChanged = function() {
+				$ctrl.getPaymentList();
+			};
+			
+			// 获取数据列表
+			$ctrl.getPaymentList = function(){
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+'/payment/page.do',
+					params:{
+						name:$scope.company,
+						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+						end:$scope.currentPage * $scope.itemsPerPage -1
+					}
+				}).then(function(res){
+					if(res){
+						$scope.list = res.data.data || [];
+						$scope.totalItems = res.data.total;
+					}else{
+						$scope.list = [];
+						$scope.totalItems = 0;
+					}
+				});
+			};
+				
+			$scope.Choose = function (item) {
+				var selectItem = {company : item.name};
+				$uibModalInstance.close(selectItem);
+			};
+
+			$scope.cancel = function () {
+				$uibModalInstance.dismiss('cancel');
+			};
+			
+		});
 
 angular.bootstrap(document.getElementById("content"), ['myApp']);

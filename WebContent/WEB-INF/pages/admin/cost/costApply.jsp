@@ -124,8 +124,8 @@
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	合同：
-																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">{{item.contractId}}</a>
-																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">未选择</a>
+																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.contractId}}</a>
+																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 																</span>
 															</li>
 															<li>

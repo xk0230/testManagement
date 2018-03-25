@@ -91,7 +91,18 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
-													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.company}}" ng-bind="item.company"></p></td>
+													<td ng-switch-when="view">
+															<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:100px;">
+																		<span class="line-limit-length span4">公司：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')">{{item.company}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="!item.company"  ng-click="vm.editPayment(item,'.widget-content','view')">未选择</a>
+																		</span>
+																</span>
+															</li>
+														</ul>
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
@@ -124,7 +135,16 @@
 														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.company"  style="width:100px;" />
+															<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:100px;">
+																		<span class="line-limit-length span4">公司：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
+																		</span>
+																</span>
+															</li>
+														</ul>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="date" ng-model="item.url"  style="width:120px;" />
@@ -172,6 +192,71 @@
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
         </div>
     </script>
+    
+    <script type="text/ng-template" id="myModalEditContent.html">
+		  <div class="main-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>付款信息</h3>
+							</div>
+							<div class="widget-content">
+								<div class="row">
+                                    <div class="span4">
+                                        <span class="searchSpan">公司名称:</span>
+                                        <input type="text" ng-model="company" class="span2">
+                                    </div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getPaymentList()" value="查询" /></div>
+								</div>
+								<hr>
+								<!-- 查询结果 -->
+								<div class="row">
+									<div class="span12">
+										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+											<thead>
+												<tr>
+													<th width="20%">公司名称</th>
+													<th width="20%">税号</th>
+													<th width="20%">银行账号</th>
+													<th width="20%">开户行</th>
+													<th width="20%" style="min-width：100px">操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="odd gradeX" ng-repeat="item in list" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+													<!-- view -->
+													<td><p ng-bind-html="item.name"></p></td>
+													<td><p ng-bind-html="item.taxNo"></p></td>
+													<td><p ng-bind-html="item.bankNo"></p></td>
+													<td><p ng-bind-html="item.bankName"></p></td>
+													<td>
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)">选择</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="g-no-content" ng-if="list && list.length === 0">没有相关数据</div>
+										<div style="width:1134px;">
+											<%@ include file="../../common/page.jsp"%>
+										</div>
+									</div>
+								</div>
+        						<div class="modal-footer">
+            						<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        						</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </script>
+    
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
 
