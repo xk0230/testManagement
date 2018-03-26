@@ -92,9 +92,10 @@
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:100px;">
-																		<span class="line-limit-length span4">公司：
-																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')">{{item.company}}</a>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
+																
+																		<span class="line-limit-length span4">
+																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')">{{item.company}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company"  ng-click="vm.editPayment(item,'.widget-content','view')">未选择</a>
 																		</span>
 																</span>
@@ -135,9 +136,9 @@
 													<td ng-switch-when="edit">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:100px;">
-																		<span class="line-limit-length span4">公司：
-																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
+																		<span class="line-limit-length span4">
+																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 																		</span>
 																</span>
