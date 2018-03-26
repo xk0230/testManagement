@@ -94,7 +94,7 @@ myAppModule.controller('ContractController',
 		    	    });
 
 		    	    modalInstance.result.then(function (selectedItem) {
-		    	    	
+		    	    	item.mode = mode;
 		    	    	item.company = selectedItem.company;
 		    	    	
 		    	    }, function () {
@@ -314,7 +314,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			$scope.itemsPerPage = 10;
 			
 			$ctrl.$onInit = function(){
-
+				$scope.mode = item.mode;
 				$scope.name = item.name;
 				$ctrl.getPaymentList();
 
