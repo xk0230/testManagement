@@ -9,6 +9,38 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
+				<div class="row" id="printDiv" style="width:20cm;">
+					<div style="width:100%;">
+						<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">报销单</div>
+						<div style="font-size: 12px;font-weight: bold;text-align: center;width: 100%">2018年3月26日</div>
+					</div>
+					<table border="1" style="width:100%;">
+						<tr>
+							<td colspan="3" style="height:2cm;padding-left:0.5cm;">部门：abc
+							<input type="text" ng-model="vm.printList.length" onchange="vm.print2()" />
+							</td>
+						</tr>
+						
+						<tr class="odd gradeX" ng-repeat="item in vm.printList" my-repeat-directive>
+							<td ><p ng-bind="$index+1"></td>
+							<td ><p ng-bind="item.costNo"></p></td>
+							<td ><p ng-bind="item.costTypeName"></p></td>
+							<td ><p ng-bind="item.costDate"></p></td>
+							<td ><p ng-bind="item.costNum"></p></td>
+							
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td>申请人</td>
+							<td>部门主管</td>
+							<td>批准：李欢</td>
+						</tr>
+					</table>
+				</div>
 				<div class="row">
 					<div class="span12">
 						<div class="widget">
@@ -34,7 +66,9 @@
 										<span class="searchSpanMid">~</span>
 										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
 									</div>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.search()" value="查询" /></div>
+									<div class="span1 pull-right">
+									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.search()" value="查询" />
+									</div>
 								</div>
 								<div class="row">
                                     <div class="span4">
@@ -45,6 +79,9 @@
                                     	<span class="searchSpan">内容:</span>
                                         <input type="text" ng-model="remark" class="span4">
                                     </div>
+                                    <div class="span1 pull-right">
+									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" />
+									</div>
 								</div>
 								<hr>
 									收入:<div class="progress progress-striped active" style="height:18px;" >
@@ -57,9 +94,10 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12" style="overflow:auto">
-										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped tableBox" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="60px"><input type="checkbox" class="selectAll"  value="true" ></th>
 													<th width="60px">NO</th>
 													<th width="120px">成本单号</th>
 													<th width="60px">收支类型</th>
@@ -75,6 +113,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td><input type="checkbox"  ng-model="item.chk" ></td>
 													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
@@ -128,6 +167,7 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 		

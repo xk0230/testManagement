@@ -1,4 +1,23 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+.directive('myRepeatDirective', function() {
+	  return function(scope, element, attrs) {
+	    angular.element(element).css('color','blue');
+	    if (scope.$last){
+			$("#printDiv").print({
+				 	globalStyles: true,
+				    mediaPrint: false,
+				    stylesheet: null,
+				    noPrintSelector: ".no-print",
+				    iframe: true,
+				    append: null,
+				    prepend: null,
+				    manuallyCopyFormValues: true,
+				    deferred: $.Deferred(),
+				    timeout:5000
+           });
+	    }
+	  };
+	})
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
@@ -56,6 +75,11 @@ myAppModule.controller('CostController',
 			}).then(function(res){
 				if(res){
 					self.list = res.data.data || [];
+					
+					angular.forEach(self.list, function(item, key) {
+						item.chk = false;
+					});
+					
 					$scope.totalItems = res.data.total;
 					if(self.list.length > 0){
 						$scope.depLength = self.list[0].costDepList.length > 5?350:140;
@@ -72,6 +96,31 @@ myAppModule.controller('CostController',
 		this.search= function(){
 			self.getCostList();
 			self.getCostViewChart();
+		}
+		
+		this.print= function(){
+			var list = self.list;
+			
+			self.printList = new Array();
+			
+			angular.forEach(self.list, function(item, key) {
+				if(item.chk){
+					self.printList.push(item);
+				}
+			});
+			
+			/*$("#printDiv").print({
+				 globalStyles: true,
+				    mediaPrint: false,
+				    stylesheet: null,
+				    noPrintSelector: ".no-print",
+				    iframe: true,
+				    append: null,
+				    prepend: null,
+				    manuallyCopyFormValues: true,
+				    deferred: $.Deferred(),
+				    timeout:5000
+            });*/
 		}
 		
 		// 获取数据列表

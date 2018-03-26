@@ -63,9 +63,19 @@
 <script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript"></script> 
 <script src="${root}/public/js/bootstrap/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script> 
 <!-- jquery-ui -->
+<script src="${root}/public/js/angular-datepicker/moment.js"></script>
+<script src="${root}/public/js/angular-datepicker/angular-datepicker.js"></script>
+<link href="${root}/public/js/angular-datepicker/angular-datepicker.css" rel="stylesheet" type="text/css" />
+
+<script src="${root}/public/js/angular-datepicker/mbdatepicker.js"></script>
+<link href="${root}/public/js/angular-datepicker/mbdatepicker.css" rel="stylesheet" type="text/css" />
+
+
+
 <script src="${root}/public/js/jquery-ui/jquery-ui.js" type="text/javascript"></script> 
 <link type="text/css" rel="stylesheet" href="${root}/public/js/jquery-ui/jquery-ui.css" media="screen">
-
+<!-- 打印插件 -->
+<script src="${root}/public/js/print/jQuery.print.js" type="text/javascript"></script> 
 <script src="${root}/public/js/basiccheck.js" type="text/javascript"></script>
 <script src="${root}/public/upload/uploadfile.js" type="text/javascript"></script>
 <script src="${root}/public/js/extend.js" type="text/javascript"></script>

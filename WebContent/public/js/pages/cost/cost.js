@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker']);
 
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
@@ -9,6 +9,7 @@ myAppModule.controller('CostController',
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 10;
+		
 		
 		this.$onInit = function(){
 
@@ -67,7 +68,7 @@ myAppModule.controller('CostController',
 		//添加新申请
 		this.addCost = function(){
 			var newItem = {
-				costDate:new Date()
+				costDate:$filter('date')(new Date(), "yyyy-MM-dd")
 				,costNum:0
 				,costType:""
 				,remark:""
