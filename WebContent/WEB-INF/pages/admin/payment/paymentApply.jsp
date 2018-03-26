@@ -48,7 +48,7 @@
 													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.name}}">{{item.name}}</span></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.bankNo"></p></td>
-													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.bankName}}">{{item.bankName}}</span></p></td>
+													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.bankName}}">{{item.bankName}}</span></td>
 													<td ng-switch-when="view">
 													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editPayment(item)"><i class='icon-edit'></i></a>
