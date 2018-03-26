@@ -45,7 +45,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind-html="item.name"></p></td>
+													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.name}}">{{item.name}}</span></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.bankNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind-html="item.bankName"></p></td>
@@ -55,7 +55,7 @@
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)"><i class='icon-remove-sign'></i></a>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit"><input type="text" ng-model="item.name" style="width:200px;" ></td>
+													<td ng-switch-when="edit"><input type="text" ng-model="item.name" style="width:250px;" ></td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.taxNo" style="width:200px;" >
 													</td>
