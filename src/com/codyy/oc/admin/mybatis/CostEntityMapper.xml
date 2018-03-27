@@ -163,6 +163,7 @@
 		FROM COST_DEP_DETAIL a
 		LEFT JOIN DEPARTMENT b on a.cost_dep = b.dep_id
 	 	WHERE cost_id = #{_parameter}
+	 	order by b.order,b.name
 	</select>
 	
 	<delete id="delCostEntityById" parameterType="java.lang.String">
