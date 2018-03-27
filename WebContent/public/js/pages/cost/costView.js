@@ -1,23 +1,80 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
-.directive('myRepeatDirective', function() {
-	  return function(scope, element, attrs) {
-	    angular.element(element).css('color','blue');
-	    if (scope.$last){
-			$("#printDiv").print({
-				 	globalStyles: true,
-				    mediaPrint: false,
-				    stylesheet: null,
-				    noPrintSelector: ".no-print",
-				    iframe: true,
-				    append: null,
-				    prepend: null,
-				    manuallyCopyFormValues: true,
-				    deferred: $.Deferred(),
-				    timeout:5000
-           });
-	    }
-	  };
-	})
+myAppModule.filter('Chinese',function(){  
+    return function(input){  
+        var numberValue=new String(Math.round(input*100)); // 数字金额  
+        var chineseValue=""; // 转换后的汉字金额  
+        var String1 = "零壹贰叁肆伍陆柒捌玖"; // 汉字数字  
+        var String2 = "万仟佰拾亿仟佰拾万仟佰拾元角分"; // 对应单位  
+        var len=numberValue.length; // numberValue 的字符串长度  
+        var Ch1; // 数字的汉语读法  
+        var Ch2; // 数字位的汉字读法  
+        var nZero=0; // 用来计算连续的零值的个数  
+        var String3; // 指定位置的数值  
+        if(len>15){  
+        alert("超出计算范围");  
+        return "";  
+        }  
+        if (numberValue==0){  
+        chineseValue = "零元整";  
+        return chineseValue;  
+        }  
+  
+        String2 = String2.substr(String2.length-len, len); // 取出对应位数的STRING2的值  
+        for(var i=0; i<len; i++){  
+        String3 = parseInt(numberValue.substr(i, 1),10); // 取出需转换的某一位的值  
+        if ( i != (len - 3) && i != (len - 7) && i != (len - 11) && i !=(len - 15) ){  
+        if ( String3 == 0 ){  
+        Ch1 = "";  
+        Ch2 = "";  
+        nZero = nZero + 1;  
+        }  
+        else if ( String3 != 0 && nZero != 0 ){  
+        Ch1 = "零" + String1.substr(String3, 1);  
+        Ch2 = String2.substr(i, 1);  
+        nZero = 0;  
+        }  
+        else{  
+        Ch1 = String1.substr(String3, 1);  
+        Ch2 = String2.substr(i, 1);  
+        nZero = 0;  
+        }  
+        }  
+        else{ // 该位是万亿，亿，万，元位等关键位  
+        if( String3 != 0 && nZero != 0 ){  
+        Ch1 = "零" + String1.substr(String3, 1);  
+        Ch2 = String2.substr(i, 1);  
+        nZero = 0;  
+        }  
+        else if ( String3 != 0 && nZero == 0 ){  
+        Ch1 = String1.substr(String3, 1);  
+        Ch2 = String2.substr(i, 1);  
+        nZero = 0;  
+        }  
+        else if( String3 == 0 && nZero >= 3 ){  
+        Ch1 = "";  
+        Ch2 = "";  
+        nZero = nZero + 1;  
+        }  
+        else{  
+        Ch1 = "";  
+        Ch2 = String2.substr(i, 1);  
+        nZero = nZero + 1;  
+        }  
+        if( i == (len - 11) || i == (len - 3)){ // 如果该位是亿位或元位，则必须写上  
+        Ch2 = String2.substr(i, 1);  
+        }  
+        }  
+        chineseValue = chineseValue + Ch1 + Ch2;  
+        }  
+  
+        if ( String3 == 0 ){ // 最后一位（分）为0时，加上“整”  
+        chineseValue = chineseValue + "整";  
+        }  
+  
+        return chineseValue;  
+  
+    };  
+});  
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
@@ -76,6 +133,7 @@ myAppModule.controller('CostController',
 				if(res){
 					self.list = res.data.data || [];
 					
+					self.chkValue = false;
 					angular.forEach(self.list, function(item, key) {
 						item.chk = false;
 					});
@@ -97,20 +155,68 @@ myAppModule.controller('CostController',
 			self.getCostList();
 			self.getCostViewChart();
 		}
+		this.chkAll = function(){
+			angular.forEach(self.list, function(item, key) {
+				item.chk = self.chkValue;
+			});
+			this.createPrintList();
+		}
+		//选择变化
+		this.chkChange = function(){
+			this.createPrintList();
+		}
 		
-		this.print= function(){
-			var list = self.list;
-			
-			self.printList = new Array();
+		this.createPrintList = function(){
+			self.printList = [];
 			
 			angular.forEach(self.list, function(item, key) {
 				if(item.chk){
-					self.printList.push(item);
+					if(self.printList.length == 0){
+						self.printList.push({
+							"subUser": item.subUser,
+							"subUserName": item.subUserName,
+							"auditUserName": item.auditUserName,
+							"depName": item.depName,
+							"list":[item]
+						})
+					}else{
+						var hasPrint = false;
+						angular.forEach(self.printList, function(printItem, key) {
+							if(printItem.subUser == item.subUser){
+								hasPrint = true;
+								printItem.list.push(item);
+							}
+						});
+						if(!hasPrint){
+							self.printList.push({
+								"subUser": item.subUser,
+								"subUserName": item.subUserName,
+								"auditUserName": item.auditUserName,
+								"depName": item.depName,
+								"list":[item]
+							});
+						}
+					}
 				}
 			});
 			
-			/*$("#printDiv").print({
-				 globalStyles: true,
+			angular.forEach(self.printList, function(item, key) {
+				var sum = parseFloat(0);
+				angular.forEach(item.list, function(subItem, key) {
+					sum += parseFloat(subItem.costNum);
+				});
+				item.sum = sum;
+				for(var i = item.list.length + 1;i<15;i++){
+					item.list.push({});
+				};
+			});
+		}
+		
+		//打印
+		this.print= function(){
+			angular.forEach(self.printList, function(item, key) {
+				$("#printDiv" + key).print({
+				    globalStyles: true,
 				    mediaPrint: false,
 				    stylesheet: null,
 				    noPrintSelector: ".no-print",
@@ -118,9 +224,11 @@ myAppModule.controller('CostController',
 				    append: null,
 				    prepend: null,
 				    manuallyCopyFormValues: true,
-				    deferred: $.Deferred(),
-				    timeout:5000
-            });*/
+				    deferred: $.Deferred()
+            });
+			});
+			
+			
 		}
 		
 		// 获取数据列表

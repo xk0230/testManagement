@@ -9,35 +9,50 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
-				<div class="row hidden" id="printDiv" style="width:20cm;">
+				<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;" ng-repeat="item in vm.printList" >
 					<div style="width:100%;">
-						<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">报销单</div>
-						<div style="font-size: 12px;font-weight: bold;text-align: center;width: 100%">2018年3月26日</div>
+						<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
+						<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">2018年3月26日</div>
 					</div>
-					<table border="1" style="width:100%;">
+					<table style="height:1cm;width:100%" cellspacing="0" cellpadding="0">
 						<tr>
-							<td colspan="3" style="height:2cm;padding-left:0.5cm;">部门：abc
-							<input type="text" ng-model="vm.printList.length" onchange="vm.print2()" />
+							<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;padding-left:0.5cm;font-size: 20px;font-weight: bold;">
+							部门:{{item.depName}}
 							</td>
 						</tr>
-						
-						<tr class="odd gradeX" ng-repeat="item in vm.printList" my-repeat-directive>
-							<td ><p ng-bind="$index+1"></td>
-							<td ><p ng-bind="item.costNo"></p></td>
-							<td ><p ng-bind="item.costTypeName"></p></td>
-							<td ><p ng-bind="item.costDate"></p></td>
-							<td ><p ng-bind="item.costNum"></p></td>
-							
+					</table>
+					<table class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
+						<tr>
+							<th style="border-top:1px solid black;border-left:1px solid black;width:1cm">序号</th>
+							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本单号</th>
+							<th style="border-top:1px solid black;border-left:1px solid black;width:2cm">类型</th>
+							<th style="border-top:1px solid black;border-left:1px solid black;width:8cm;">详情</th>
+							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本产生时间</th>
+							<th style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
+						</tr>
+						<tr class="odd gradeX" ng-repeat="subitem in item.list">
+							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$index+1"></td>
+							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
+							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costTypeName"></p></td>
+							<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
+							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
+							<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: left;padding-left: 0.1cm"><p>{{subitem.costNum | currency:"¥"}}</p></td>
 						</tr>
 						<tr>
-							<td></td>
+							<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;">合计</td>
+							<td style="border-top:1px solid black;border-left:1px solid black;">小写</td>
+							<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | currency:"¥"}}</td>
+						</tr>
+						<tr>
+							<td style="border-top:1px solid black;border-left:1px solid black;">大写</td>
+							<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | Chinese}}</td>
 						</tr>
 					</table>
-					<table style="width:100%;">
+					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:20px;margin-top:0.5cm">
 						<tr>
-							<td>申请人</td>
-							<td>部门主管</td>
-							<td>批准：李欢</td>
+							<td style="width:33%;">申请人:{{item.subUserName}}</td>
+							<td style="width:33%;">部门主管:{{item.auditUserName}}</td>
+							<td style="width:33%;">批准：李欢</td>
 						</tr>
 					</table>
 				</div>
@@ -97,7 +112,7 @@
 										<table class="table table-condensed table-bordered table-striped tableBox" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="20px"><input type="checkbox" class="selectAll"  value="true" ></th>
+													<th width="20px"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()" ></th>
 													<th width="60px">NO</th>
 													<th width="120px">成本单号</th>
 													<th width="60px">类型</th>
@@ -113,7 +128,7 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td><input type="checkbox"  ng-model="item.chk" ></td>
+													<td><input type="checkbox"  ng-model="item.chk" ng-change="vm.chkChange()" ></td>
 													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
@@ -122,9 +137,9 @@
 													
 													<td ng-switch-when="view">
 													
-														<table  style="width:100%">
+														<table  style="width:100%;" >
 															<tr >
-																<td style="border-left:0">
+																<td style="border-left:0;border-top:0">
 																<ul class="costnav" style="width:100%" >
 																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
 																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
@@ -132,7 +147,7 @@
 																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
 																</ul>
 																</td>
-																<td style="border-left:0">
+																<td style="border-left:0;border-top:0">
 																<ul class="costnav pull-left" style="width:100%" >
 																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
 																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
