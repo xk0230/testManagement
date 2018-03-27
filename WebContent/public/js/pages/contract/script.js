@@ -96,7 +96,7 @@ myAppModule.controller('ContractController',
 		    	    modalInstance.result.then(function (selectedItem) {
 		    	    	item.mode = mode;
 		    	    	item.company = selectedItem.company;
-		    	    	
+		    	    	item.companyid = selectedItem.id;
 		    	    }, function () {
 		    	    	//取消的回调函数
 		    	    	
@@ -350,7 +350,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			};
 				
 			$scope.Choose = function (item) {
-				var selectItem = {company : item.name};
+				var selectItem = {id : item.name, company:item.id};
 				$uibModalInstance.close(selectItem);
 			};
 

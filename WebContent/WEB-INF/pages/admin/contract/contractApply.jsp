@@ -106,7 +106,6 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td ng-switch-when="view">
-													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
@@ -137,7 +136,7 @@
 															<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
-																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.companyid}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 																		</span>
 																</span>

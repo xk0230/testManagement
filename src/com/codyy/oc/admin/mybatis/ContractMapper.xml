@@ -215,7 +215,7 @@
 			contract.content AS content,
 			dep.`name` AS dept,
 			contract.cost AS cost,
-			contract.company as company,
+			payment.`name` as company,
 			contract.url as url,
 			contract.serialid as serialid,
 			contract.status as status,
@@ -224,6 +224,7 @@
 		FROM
 			CONTRACT contract
 		LEFT JOIN DEPARTMENT dep ON contract.dept = dep.dep_id
+		LEFT JOIN payment payment ON contract.company = payment.id
 		where 1=1 
 			
 			<if test="map.contactType != null and  map.contactType != ''">
