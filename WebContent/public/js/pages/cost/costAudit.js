@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker'])
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
@@ -26,8 +26,8 @@ myAppModule.controller('CostController',
 			}
 			self.getCostAuditList();
 			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
+			setDatepicker("datepickerS");
+			setDatepicker("datepickerE");
 		};
 		
 		$scope.setPage = function (pageNo) {

@@ -109,12 +109,7 @@
 				                                        </select>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-															<mb-datepicker element-id='date1' input-class="mb-date" 
-												               input-name="testName"
-												               arrows="arrows"
-												               calendar-header="header"
-												               date="item.costDate"
-												               date-format="YYYY-MM-DD"></mb-datepicker>
+															<mb-datepicker input-class="mb-date" date="item.costDate" date-format="YYYY-MM-DD"></mb-datepicker>
 														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.costDate" style="width:80px;"> -->
 													</td>
 													<td ng-switch-when="edit">

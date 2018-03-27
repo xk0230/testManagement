@@ -9,7 +9,7 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
-				<div class="row" id="printDiv" style="width:20cm;">
+				<div class="row hidden" id="printDiv" style="width:20cm;">
 					<div style="width:100%;">
 						<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">报销单</div>
 						<div style="font-size: 12px;font-weight: bold;text-align: center;width: 100%">2018年3月26日</div>
@@ -104,7 +104,7 @@
 													<th width="140px">成本产生时间</th>
 													<th width="120px">金额</th>
 													<th width="{{depLength}}px">各部门金额</th>
-													<th width="180px">成本详情</th>
+													<th width="120px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
 													<th width="100px">状态</th>
@@ -121,32 +121,47 @@
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													
 													<td ng-switch-when="view">
-														<ul class="costnav pull-left" >
-															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
-														</ul>
-														<ul class="costnav pull-left" >
-															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
-														</ul>
+													
+														<table  style="width:100%">
+															<tr >
+																<td style="border-left:0">
+																<ul class="costnav" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
+																</ul>
+																</td>
+																<td style="border-left:0">
+																<ul class="costnav pull-left" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
+																</ul>
+																</td>
+															</tr>
+														</table>
 													</td>
 													
 													<td ng-switch-when="view">
 													<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
 																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																		<span class="line-limit-length span4">合同：
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
+																		<span class="line-limit-length span3">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
-																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
+																		<label style="width:200px;" ng-if="!item.contractId" >未选择</label>
 																		</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
+																	<span class="line-limit-length span3" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
 														</ul>

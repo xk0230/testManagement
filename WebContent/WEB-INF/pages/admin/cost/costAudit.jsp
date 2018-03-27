@@ -31,8 +31,11 @@
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
 										<input type="text" id="datepickerS" ng-model="costStartDate" class="span2">
+										<!-- <span class="span2"><mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD"></mb-datepicker></span> -->
+
 										<span class="searchSpanMid">~</span>
 										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
+										
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostAuditList()" value="查询" /></div>
 								</div>
@@ -74,12 +77,26 @@
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													
 													<td ng-switch-when="view">
-														<ul class="costnav pull-left" >
-															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
-														</ul>
-														<ul class="costnav pull-left" >
-															<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1"><span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:&nbsp;&nbsp;<span style="display: inline-block;width:58px">{{depCost.costNum}}</span></li>
-														</ul>
+														<table  style="width:100%">
+															<tr >
+																<td style="border-left:0">
+																<ul class="costnav" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
+																</ul>
+																</td>
+																<td style="border-left:0">
+																<ul class="costnav pull-left" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
+																</ul>
+																</td>
+															</tr>
+														</table>
 													</td>
 													
 													<td ng-switch-when="view">
@@ -124,20 +141,39 @@
 				                                        </select>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<input type="text" id="datepicker{{$index}}" ng-model="item.costDate" style="width:80px;">
+														<mb-datepicker input-class="mb-date" date="item.costDate" date-format="YYYY-MM-DD"></mb-datepicker>
+														
+														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.costDate" style="width:80px;"> -->
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.costNum"  min="1" style="width:50px;" />
 													</td>
 													<td ng-switch-when="edit">
-														<ul class="costnav" ng-repeat="depCost in item.costDepList" style="width:132px">
-															<li>
-																<span style="display: inline-block;width:40px">{{depCost.costDepName}}</span>:
-																<span style="display: inline-block;width:80px">
-																	<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
-																</span>
-															</li>
-														</ul>
+														<table  style="width:100%">
+															<tr >
+																<td style="border-left:0">
+																<ul class="costnav" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:80px">
+																		<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
+																	</span>
+																</ul>
+																</td>
+																<td style="border-left:0">
+																<ul class="costnav pull-left" style="width:100%" >
+																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
+																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
+																	:
+																	<span style="display: inline-block;width:80px">
+																		<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
+																	</span>																</ul>
+																</td>
+															</tr>
+														</table>
+														
+														
 													</td>
 													<td ng-switch-when="edit">
 														<ul style="">
