@@ -58,10 +58,10 @@
 												<tr align="center">
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
-													<th width="90px">成本产生时间</th>
+													<th width="140px">成本产生时间</th>
 													<th width="60px">金额</th>
 													<th width="{{depLength}}px">各部门金额</th>
-													<th width="180px">成本详情</th>
+													<th width="120px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
 													<th width="80px">状态</th>
@@ -102,18 +102,18 @@
 													<td ng-switch-when="view">
 														<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
+																	<span class="line-limit-length span3" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
 																		<span class="line-limit-length span4">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
 																</span>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
@@ -168,30 +168,29 @@
 																	:
 																	<span style="display: inline-block;width:80px">
 																		<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
-																	</span>																</ul>
+																	</span>
+																</ul>
 																</td>
 															</tr>
 														</table>
-														
-														
 													</td>
 													<td ng-switch-when="edit">
-														<ul style="">
+														<ul style="width:100%">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">详情：
-																	<input type="text" ng-model="item.remark" style="width:240px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">详情：
+																	<input type="text" ng-model="item.remark" style="width:150px;">
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
 																	合同：
 																	<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">{{item.contractId}}</a>
 																	<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" ng-click="vm.editBook(item,'.widget-content','edit')">未选择</a>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
+																	<span class="line-limit-length span3" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
 														</ul>

@@ -100,7 +100,7 @@
 													<th width="20px"><input type="checkbox" class="selectAll"  value="true" ></th>
 													<th width="60px">NO</th>
 													<th width="120px">成本单号</th>
-													<th width="60px">收支类型</th>
+													<th width="60px">类型</th>
 													<th width="140px">成本产生时间</th>
 													<th width="120px">金额</th>
 													<th width="{{depLength}}px">各部门金额</th>
@@ -138,7 +138,7 @@
 																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
 																	:
 																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
-																</ul>
+																	</ul>
 																</td>
 															</tr>
 														</table>
@@ -148,12 +148,12 @@
 													<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
+																	<span class="line-limit-length span2" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																		<span class="line-limit-length span3">合同：
+																		<span class="line-limit-length span2">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<label style="width:200px;" ng-if="!item.contractId" >未选择</label>
 																		</span>
