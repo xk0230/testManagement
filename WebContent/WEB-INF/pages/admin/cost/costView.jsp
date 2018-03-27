@@ -97,7 +97,7 @@
 										<table class="table table-condensed table-bordered table-striped tableBox" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="60px"><input type="checkbox" class="selectAll"  value="true" ></th>
+													<th width="20px"><input type="checkbox" class="selectAll"  value="true" ></th>
 													<th width="60px">NO</th>
 													<th width="120px">成本单号</th>
 													<th width="60px">收支类型</th>

@@ -57,9 +57,9 @@ myAppModule.controller('CostController',
 					self.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
 					if(self.list.length > 0){
-						$scope.depLength = self.list[0].costDepList.length > 5?350:140;
+						$scope.depLength = self.list[0].costDepList.length > 5?350:180;
 					}else{
-						$scope.depLength = 140;
+						$scope.depLength = 180;
 					}
 				}else{
 					self.list = [];
