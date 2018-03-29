@@ -11,7 +11,7 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
-				<div class="row " id="printDiv{{$index}}" style="width:20cm;" ng-repeat="item in vm.printList" >
+				<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;" ng-repeat="item in vm.printList" >
 					<div style="width:100%;">
 						<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
 						<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">2018年3月26日</div>
