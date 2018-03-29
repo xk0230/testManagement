@@ -93,10 +93,9 @@
 															<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
-																
 																		<span class="line-limit-length span4">
-																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')">{{item.company}}</a>
-																		<a href="javascript:;" style="width:200px;" ng-if="!item.company"  >未选择</a>
+																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')" >{{item.company}}</a>
+																		<a href="javascript:;" class="line-limit-length span2"   ng-if="!item.company"  >未选择</a>
 																		</span>
 																</span>
 															</li>
@@ -136,7 +135,7 @@
 															<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
-																		<a href="javascript:;" style="width:200px;" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.companyid}}</a>
+																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 																		</span>
 																</span>

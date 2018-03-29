@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
-
+<style>
+    #printtable{font-size:2px;}
+</style>
 </head>
 <body>
 		<%@ include file="../../common/header.jsp"%>
@@ -14,15 +16,16 @@
 						<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
 						<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">2018年3月26日</div>
 					</div>
-					<table style="height:1cm;width:100%" cellspacing="0" cellpadding="0">
+					<!-- <table style="height:1cm;width:100%" cellspacing="0" cellpadding="0">
 						<tr>
 							<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;padding-left:0.5cm;font-size: 20px;font-weight: bold;">
 							部门:{{item.depName}}
 							</td>
 						</tr>
-					</table>
-					<table class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
-						<tr>
+					</table> -->
+					
+					<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
+						<tr style="height:10px;">
 							<th style="border-top:1px solid black;border-left:1px solid black;width:1cm">序号</th>
 							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本单号</th>
 							<th style="border-top:1px solid black;border-left:1px solid black;width:2cm">类型</th>
@@ -30,7 +33,7 @@
 							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本产生时间</th>
 							<th style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
 						</tr>
-						<tr class="odd gradeX" ng-repeat="subitem in item.list">
+						<tr class="odd gradeX" ng-repeat="subitem in item.list" style="height:10px;">
 							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$index+1"></td>
 							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
 							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costTypeName"></p></td>
@@ -48,7 +51,7 @@
 							<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | Chinese}}</td>
 						</tr>
 					</table>
-					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:20px;margin-top:0.5cm">
+					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:2px;margin-top:0.5cm">
 						<tr>
 							<td style="width:33%;">申请人:{{item.subUserName}}</td>
 							<td style="width:33%;">部门主管:{{item.auditUserName}}</td>
