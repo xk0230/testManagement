@@ -21,7 +21,7 @@
 								<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">公司名称:</span>
-                                        <input type="text" ng-model="name" class="span2">
+                                        <input type="text" ng-model="name" class="span2"  ng-change="vm.getPaymentList()">
                                     </div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getPaymentList()" value="查询" /></div>
 								</div>
