@@ -140,6 +140,8 @@ setInterval("getNewsNum()","60000");
             <li class="mainLi"><a href="${root}/contract/contractApply.do"><i class="icon-signal"></i><span>合同管理</span> </a> </li>
            	<!-- 付款信息管理 -->
             <li class="mainLi"><a href="${root}/payment/paymentApply.do"><i class="icon-user"></i><span>付款信息管理</span> </a> </li>
+            <!-- 入职必读 -->
+             <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
           </ul>
         </div>
         <!-- /container --> 

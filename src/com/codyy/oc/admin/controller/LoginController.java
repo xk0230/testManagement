@@ -49,4 +49,9 @@ public class LoginController {
 		return "defaultNewMode";
 	}
 	
+	@RequestMapping("admin/newin")
+	public String newin(){
+		return "newin";
+	}
+	
 }
