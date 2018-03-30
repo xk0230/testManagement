@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" scope="page"/>
 <style>
     #printtable{font-size:2px;}
 </style>
@@ -12,11 +14,12 @@
 		  <div class="main-inner">
 			<div class="container">
 				<div ng-repeat="pageItem in vm.printListPage">
-					<div class="row" id="printDiv{{$index}}" style="width:20cm;">
+				
+					<div class="row " id="printDiv{{$index}}" style="width:20cm;">
 						<div style="width:100%;height:145mm" ng-repeat="item in pageItem.pageList track by $index">
 							<div style="width:100%;">
 								<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
-								<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">2018年3月26日</div>
+								<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm"><fmt:formatDate value="${now}" pattern="yyyy年MM月dd日" /></div>
 							</div>
 							
 							<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
