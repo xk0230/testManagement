@@ -14,8 +14,7 @@
 		  <div class="main-inner">
 			<div class="container">
 				<div ng-repeat="pageItem in vm.printListPage">
-				
-					<div class="row " id="printDiv{{$index}}" style="width:20cm;">
+					<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;">
 						<div style="width:100%;height:145mm" ng-repeat="item in pageItem.pageList track by $index">
 							<div style="width:100%;">
 								<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>

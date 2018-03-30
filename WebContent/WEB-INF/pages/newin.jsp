@@ -22,12 +22,13 @@
 						<h3 style="text-align: center"><i class="icon-heart"></i>&nbsp;&nbsp;&nbsp;Welcome On Board!&nbsp;&nbsp;&nbsp;<i class="icon-heart"></i></h3>
                 <p style="text-align: center">请仔细阅读以下内容，并按照提示操作，完成入职必须要熟悉的各项模块!</p>
                 <nav style="text-align: center">
-  <a href= "file/handbook.pdf" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;阅读员工手册</a>
-  <a href=#outlook style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;Outlook设置</a>
-  <a href=#card style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;办理各类卡片</a>
-  <a href=#layout style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;熟悉办公环境</a>
-    <a href=#profile style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;完善入职资料</a> 
-   <a href=#contact style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;通讯录</a>                 
+  <a href= "${root}/public/file/handbook.pdf" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;阅读员工手册</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('outlook').scrollIntoView();" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;Outlook设置</a>
+  
+  <a href="javascript:void(0)" onclick="document.getElementById('card').scrollIntoView();" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;办理各类卡片</a>
+  <a href="javascript:void(0)" onclick="document.getElementById('layout').scrollIntoView();" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;熟悉办公环境</a>
+   <a href="javascript:void(0)" onclick="document.getElementById('profile').scrollIntoView();" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;完善入职资料</a> 
+   <a href="javascript:void(0)" onclick="document.getElementById('contact').scrollIntoView();" style="margin: 0 20px"><i class="icon-chevron-right "></i>&nbsp;&nbsp;通讯录</a>                 
 </nav>
                 
                 					</div> <!-- /widget-header -->
@@ -50,7 +51,7 @@
 					
 					<div class="widget-content">
 						<p><i class="icon-play"></i> SSC已引导您修改了exchange密码，该密码与用户名也是您的<strong> 域用户名与密码。请务必牢记。 </strong><i class="icon-play"></i> 如忘记密码请及时与SSC联系重置密码。</p>
-                        <p><i class="icon-play"></i> 请按照如下要求配置Outlook。<a href="file/Outlook.pdf">Outlook使用必读</a> </p>
+                        <p><i class="icon-play"></i> 请按照如下要求配置Outlook。<a href="${root}/public/file/Outlook.pdf">Outlook使用必读</a> </p>
                         <p><i class="icon-play"></i> 网页版本邮件系统地址：<a href="https://mail.ccydsz.com/owa">https://mail.ccydsz.com/owa</a></p>
                         <p><i class="icon-play"></i> 重置密码 （两种方式）</p>
                         <p style="margin-left: 8%">&nbsp;&nbsp;<i class="icon-star-empty"></i> 方法一 登陆&nbsp;&nbsp;<a href="https://mail.ccydsz.com/owa">https://mail.ccydsz.com/owa （IE浏览器打开）</a> </p>
