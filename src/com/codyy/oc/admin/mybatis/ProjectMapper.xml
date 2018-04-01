@@ -128,6 +128,9 @@
 			<if test="map.name != null and  map.name != ''">
 				AND project.name like '%' #{map.name} '%' 
 			</if>
+			<if test="map.pjNo != null and  map.pjNo != ''">
+				AND project.pj_no like '%' #{map.pjNo} '%' 
+			</if>
 			
 		
 		order by create_time desc

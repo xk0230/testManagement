@@ -149,7 +149,7 @@ public class ProjectService {
 		String today = dateFormat.format(new Date());
 
 		//取番
-		CostSeqBean costSeqBean = costDaoMapper.getCostNoSeq("2");
+		CostSeqBean costSeqBean = costDaoMapper.getCostNoSeq("PJ");
 		
 		if(costSeqBean != null) {
 			if(costSeqBean.getDate().equals(today)) {
@@ -162,11 +162,11 @@ public class ProjectService {
 			}
 		}else {
 			costSeqBean = new CostSeqBean();
-			costSeqBean.setType("2");
+			costSeqBean.setType("PJ");
 			costSeqBean.setDate(today);
 			costSeqBean.setSeq(1);
 			costDaoMapper.insertCostNoSeq(costSeqBean);
 		}
-		return "2" + today + "_" + String.format("%04d", costSeqBean.getSeq());
+		return "PJ" + today + String.format("%03d", costSeqBean.getSeq());
 	}
 }

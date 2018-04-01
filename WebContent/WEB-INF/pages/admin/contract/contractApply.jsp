@@ -143,7 +143,8 @@
 														</ul>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;">
+												<!-- 		<input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
+														<mb-datepicker input-class="mb-date" date="item.contractDate" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:100px;" />
@@ -204,9 +205,9 @@
 								<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">公司名称:</span>
-                                        <input type="text" ng-model="company" class="span2">
+                                        <input type="text" ng-model="company" class="span2" ng-change="$ctrl.getPaymentList()">
                                     </div>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getPaymentList()" value="查询" /></div>
+									<!-- <div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getPaymentList()" value="查询" /></div> -->
 								</div>
 								<hr>
 								<!-- 查询结果 -->

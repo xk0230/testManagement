@@ -141,7 +141,9 @@ setInterval("getNewsNum()","60000");
            	<!-- 付款信息管理 -->
             <li class="mainLi"><a href="${root}/payment/paymentApply.do"><i class="icon-user"></i><span>付款信息管理</span> </a> </li>
           	<!-- 项目信息管理 -->
-            <li class="mainLi"><a href="${root}/project/projectApply.do"><i class="icon-book"></i><span>付款信息管理</span> </a> </li>
+            <li class="mainLi"><a href="${root}/project/projectApply.do"><i class="icon-book"></i><span>项目信息管理</span> </a> </li>
+            <!-- 入职必读 -->
+             <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
           </ul>
         </div>
         <!-- /container --> 

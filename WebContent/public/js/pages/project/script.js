@@ -1,4 +1,4 @@
-var myAppModule = angular.module("myApp",['ui.bootstrap','ngSanitize'])
+var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker'])
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
@@ -40,9 +40,11 @@ myAppModule.controller('ProjectController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/project/page.do',
 				params:{
+					pjNo:$scope.pjNo,
 					name:$scope.name,
 					startTime:$scope.startTime,
 					endTime:$scope.endTime,
+					leader:$scope.leader,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -91,11 +93,12 @@ myAppModule.controller('ProjectController',
 		//添加新申请
 		this.addProject = function(){
 			var newItem = {
-				costDate:new Date()
-				,createDate:new Date()
+				costDate:$filter('date')(new Date(), "yyyy-MM-dd")
+				,createDate:$filter('date')(new Date(), "yyyy-MM-dd")
 				,name:""
-				,startTime:new Date()
-				,endTime:new Date()
+				,startTime:$filter('date')(new Date(), "yyyy-MM-dd")
+				,endTime:$filter('date')(new Date(), "yyyy-MM-dd")
+				,leader:""
 				,editMode:"edit"
 			};
 			var myArray=new Array()
@@ -112,6 +115,7 @@ myAppModule.controller('ProjectController',
 		this.editProject = function (projectItem,index) {
 			projectItem.editMode = "edit";
 			setDatepicker("datepicker" + index)
+			setDatepicker("datepickers" + index)
 		};
 		
 		//点击保存
@@ -128,11 +132,17 @@ myAppModule.controller('ProjectController',
 				alert("请填写项目结束时间");
 				return ;
 			}
+			if(!projectItem.leader){
+				alert("请填写项目负责人");
+				return ;
+			}
 			var params = {
 				id:projectItem.id,
+				pjNo:projectItem.pjNo,
 				name:projectItem.name,
 				startTime:$filter('date')(projectItem.startTime, "yyyy-MM-dd"),
 				endTime:$filter('date')(projectItem.endTime, "yyyy-MM-dd"),
+				leader:projectItem.leader,
 //				costTime:$filter('date')(contractItem.costDate, "yyyy-MM-dd")
 //				createTime:$filter('date')(contractItem.createDate, "yyyy-MM-dd hh:mm:ss")
 			};

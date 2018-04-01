@@ -169,6 +169,7 @@ myAppModule.controller('CostController',
 		this.createPrintList = function(){
 			self.printList = [];
 			
+			//遍历所有选中的项目，组成list
 			angular.forEach(self.list, function(item, key) {
 				if(item.chk){
 					if(self.printList.length == 0){
@@ -177,6 +178,7 @@ myAppModule.controller('CostController',
 							"subUserName": item.subUserName,
 							"auditUserName": item.auditUserName,
 							"depName": item.depName,
+							"sum":0,
 							"list":[item]
 						})
 					}else{
@@ -193,6 +195,7 @@ myAppModule.controller('CostController',
 								"subUserName": item.subUserName,
 								"auditUserName": item.auditUserName,
 								"depName": item.depName,
+								"sum":0,
 								"list":[item]
 							});
 						}
@@ -200,21 +203,65 @@ myAppModule.controller('CostController',
 				}
 			});
 			
+			var printPageList=[];
+			var lengthPerPage = 6;
+			//按每页显示数据条数拆分数据
 			angular.forEach(self.printList, function(item, key) {
-				var sum = parseFloat(0);
-				angular.forEach(item.list, function(subItem, key) {
-					sum += parseFloat(subItem.costNum);
+				var itemList = [];
+				var tempList = [];
+				//按每页显示数分割List并填满存到itemList中去
+				angular.forEach(item.list, function(subitem, subkey) {
+					if(subkey % lengthPerPage == 0){
+						tempList = [];
+					}
+					
+					tempList.push(subitem);
+
+					if(subkey % lengthPerPage == lengthPerPage -1 || subkey == item.list.length -1 ){
+						for(i = tempList.length;i<lengthPerPage;i++){
+							tempList.push({"costNum":null});
+						}
+						itemList.push({"list":tempList});
+					}
 				});
-				item.sum = sum;
-				for(var i = item.list.length + 1;i<15;i++){
-					item.list.push({});
-				};
+				//填上主属性，并填充到printPageList中
+				angular.forEach(itemList, function(subitem, subkey) {
+					//计算合计
+					var sum = parseFloat(0);
+					angular.forEach(subitem.list, function(subSubItem, subSubkey) {
+						if(null != subSubItem.costNum)
+							sum += parseFloat(subSubItem.costNum);
+					});
+					
+					printPageList.push({
+						"subUser": item.subUser,
+						"subUserName": item.subUserName,
+						"auditUserName": item.auditUserName,
+						"depName": item.depName,
+						"sum":sum,
+						"list":subitem.list
+					});
+				});
 			});
+			
+			//分成两页一组
+			self.printListPage = [];
+			var tempPerPage = [];
+			angular.forEach(printPageList, function(item, key) {
+				if(key % 2 ==0){
+					tempPerPage = [];
+				}
+				tempPerPage.push(item);
+				if(key % 2 ==1 || key == printPageList.length - 1 ){
+					self.printListPage.push({"pageList":tempPerPage});
+				}
+			});
+
 		}
 		
 		//打印
 		this.print= function(){
-			angular.forEach(self.printList, function(item, key) {
+			angular.forEach(self.printListPage, function(item, key) {
 				$("#printDiv" + key).print({
 				    globalStyles: true,
 				    mediaPrint: false,

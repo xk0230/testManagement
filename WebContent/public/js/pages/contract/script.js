@@ -214,7 +214,7 @@ myAppModule.controller('ContractController',
 				content:contractItem.content,
 				cost:contractItem.cost,
 				dept:contractItem.dept,
-				company:contractItem.company,
+				company:contractItem.companyid,
 				url:$filter('date')(contractItem.contractDate, "yyyy-MM-dd"),
 				status:contractItem.status,
 				serialid:contractItem.serialid,
@@ -350,7 +350,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			};
 				
 			$scope.Choose = function (item) {
-				var selectItem = {id : item.name, company:item.id};
+				var selectItem = {id : item.id, company:item.name};
 				$uibModalInstance.close(selectItem);
 			};
 

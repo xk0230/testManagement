@@ -34,7 +34,7 @@
 								<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">单号:</span>
-                                        <input type="text" ng-model="pj_no" class="span2" id="pjNo">
+                                        <input type="text" ng-model="pjNo" class="span2">
                                     </div>
                                     <div class="span6">
                                     	<span class="searchSpan">项目名:</span>
@@ -52,10 +52,11 @@
 											<thead>
 												<tr>
 												 	<th width="100px">单号</th>
-													<th width="50px">项目名</th>
-													<th width="100px">项目开始时间</th>
+													<th width="150px">项目名</th>
+													<th width="50px">项目开始时间</th>
 													<th width="50px">项目结束时间</th>
-													<th width="150px">操作</th> 
+													<th width="50px">项目负责人</th>
+													<th width="100px">操作</th> 
 												</tr>
 											</thead>
 											<tbody>
@@ -65,6 +66,7 @@
 													<td ng-switch-when="view"><p ng-bind="item.name"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.leader"></p></td>
 													<td ng-switch-when="view">
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editProject(item,$index)" ><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)"><i class='icon-remove-sign'></i></a>
@@ -72,16 +74,21 @@
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.pjNo"></p></td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.name" style="width:100px;" >
+														<input type="text" class="line-limit-length span4" ng-model="item.name" style="width:100px;" >
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<input type="text" id="datepicker{{$index}}" ng-model="item.startTime" style="width:120px;">
+														<!--<input type="text" id="datepicker{{$index}}" ng-model="item.startTime" style="width:120px;"> -->
+														<mb-datepicker input-class="mb-date" date="item.startTime" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<input type="text" id="datepicker{{$index}}" ng-model="item.endTime" style="width:120px;">
+														<!-- <input type="text" id="datepickers{{$index}}" ng-model="item.endTime" style="width:120px;"> -->
+														<mb-datepicker input-class="mb-date" date="item.endTime" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
+													</td>
+													<td ng-switch-when="edit">
+														<input type="text" class="line-limit-length span4" ng-model="item.leader" style="width:100px;" >
 													</td>
 												</tr>
 											</tbody>

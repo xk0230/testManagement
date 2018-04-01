@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" scope="page"/>
 <style>
     #printtable{font-size:2px;}
 </style>
@@ -11,53 +13,50 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="CostController as vm">
 		  <div class="main-inner">
 			<div class="container">
-				<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;" ng-repeat="item in vm.printList" >
-					<div style="width:100%;">
-						<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
-						<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">2018年3月26日</div>
+				<div ng-repeat="pageItem in vm.printListPage">
+					<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;">
+						<div style="width:100%;height:145mm" ng-repeat="item in pageItem.pageList track by $index">
+							<div style="width:100%;">
+								<div style="font-size: 40px;font-weight: bold;text-align: center;width: 100%">报销单</div>
+								<div style="font-size: 20px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm"><fmt:formatDate value="${now}" pattern="yyyy年MM月dd日" /></div>
+							</div>
+							
+							<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
+								<tr style="height:10px;">
+									<th style="border-top:1px solid black;border-left:1px solid black;width:1cm">序号</th>
+									<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本单号</th>
+									<th style="border-top:1px solid black;border-left:1px solid black;width:2cm">类型</th>
+									<th style="border-top:1px solid black;border-left:1px solid black;width:8cm;">详情</th>
+									<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本产生时间</th>
+									<th style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
+								</tr>
+								<tr class="odd gradeX" ng-repeat="subitem in item.list" style="height:10px;">
+									<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$index+1"></td>
+									<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
+									<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costTypeName"></p></td>
+									<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
+									<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
+									<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: left;padding-left: 0.1cm"><p>{{subitem.costNum | currency:"¥"}}</p></td>
+								</tr>
+								<tr>
+									<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;">合计</td>
+									<td style="border-top:1px solid black;border-left:1px solid black;">小写</td>
+									<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | currency:"¥"}}</td>
+								</tr>
+								<tr>
+									<td style="border-top:1px solid black;border-left:1px solid black;">大写</td>
+									<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | Chinese}}</td>
+								</tr>
+							</table>
+							<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:2px;margin-top:0.5cm">
+								<tr>
+									<td style="width:33%;">申请人:{{item.subUserName}}</td>
+									<td style="width:33%;">部门主管:{{item.auditUserName}}</td>
+									<td style="width:33%;">批准：李欢</td>
+								</tr>
+							</table>
+						</div>
 					</div>
-					<!-- <table style="height:1cm;width:100%" cellspacing="0" cellpadding="0">
-						<tr>
-							<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;padding-left:0.5cm;font-size: 20px;font-weight: bold;">
-							部门:{{item.depName}}
-							</td>
-						</tr>
-					</table> -->
-					
-					<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;" cellspacing="0" cellpadding="0">
-						<tr style="height:10px;">
-							<th style="border-top:1px solid black;border-left:1px solid black;width:1cm">序号</th>
-							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本单号</th>
-							<th style="border-top:1px solid black;border-left:1px solid black;width:2cm">类型</th>
-							<th style="border-top:1px solid black;border-left:1px solid black;width:8cm;">详情</th>
-							<th style="border-top:1px solid black;border-left:1px solid black;width:3cm">成本产生时间</th>
-							<th style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
-						</tr>
-						<tr class="odd gradeX" ng-repeat="subitem in item.list" style="height:10px;">
-							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$index+1"></td>
-							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
-							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costTypeName"></p></td>
-							<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
-							<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
-							<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: left;padding-left: 0.1cm"><p>{{subitem.costNum | currency:"¥"}}</p></td>
-						</tr>
-						<tr>
-							<td rowspan="2" style="border-top:1px solid black;border-left:1px solid black;">合计</td>
-							<td style="border-top:1px solid black;border-left:1px solid black;">小写</td>
-							<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | currency:"¥"}}</td>
-						</tr>
-						<tr>
-							<td style="border-top:1px solid black;border-left:1px solid black;">大写</td>
-							<td colspan="4" style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{item.sum | Chinese}}</td>
-						</tr>
-					</table>
-					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:2px;margin-top:0.5cm">
-						<tr>
-							<td style="width:33%;">申请人:{{item.subUserName}}</td>
-							<td style="width:33%;">部门主管:{{item.auditUserName}}</td>
-							<td style="width:33%;">批准：李欢</td>
-						</tr>
-					</table>
 				</div>
 				<div class="row">
 					<div class="span12">
