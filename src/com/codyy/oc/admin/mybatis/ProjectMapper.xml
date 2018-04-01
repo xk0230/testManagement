@@ -113,6 +113,7 @@
 			project.pj_no AS pjNo,
 			project.start_time AS startTime,
 			project.end_time AS endTime,
+			project.leader AS leader,
 			'view' as editMode
 		FROM
 			project project

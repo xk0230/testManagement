@@ -68,8 +68,8 @@
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.leader"></p></td>
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editProject(item,$index)" ><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)"><i class='icon-remove-sign'></i></a>
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editProject(item,$index)" ng-if="depIdChangeAble == false"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="depIdChangeAble == false"><i class='icon-remove-sign'></i></a>
 													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.pjNo"></p></td>
@@ -84,11 +84,11 @@
 														<!-- <input type="text" id="datepickers{{$index}}" ng-model="item.endTime" style="width:120px;"> -->
 														<mb-datepicker input-class="mb-date" date="item.endTime" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
-													</td>
 													<td ng-switch-when="edit">
 														<input type="text" class="line-limit-length span4" ng-model="item.leader" style="width:100px;" >
+													</td>
+													<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
 												</tr>
 											</tbody>
