@@ -18,7 +18,7 @@
 								<h3>我的费用</h3>
 							</div>
 							
-							<div class="widget-content">
+							<div class="widget-content" style="padding-bottom: 100px;">
 								<div class="row">
                                     <div class="span4">
 										<span class="searchSpan">收支类型:</span>
@@ -28,11 +28,15 @@
                                             <option value="">--请选择--</option>
                                         </select>
                                     </div>
-									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
-										<input type="text" id="datepickerS" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
 								</div>

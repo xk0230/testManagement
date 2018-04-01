@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker'])
 myAppModule.filter('Chinese',function(){  
     return function(input){  
         var numberValue=new String(Math.round(input*100)); // 数字金额  

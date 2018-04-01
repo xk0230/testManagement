@@ -1,20 +1,22 @@
 /* This was breaking out bootstrap! */
 mb-datepicker .form-control {
   width: 135px!important;
+  
 }
 .mb-datepicker {
-  width: 400px;
+  width: 200px;
   position: absolute;
-  margin-top: 10px;
   background-color: #f5f5f5;
   z-index: 3000;
   -webkit-box-shadow: 1px 1px 7px 0px rgba(37, 53, 50, 0.37);
   -moz-box-shadow:    1px 1px 7px 0px rgba(37, 53, 50, 0.37);
   box-shadow:         1px 1px 7px 0px rgba(37, 53, 50, 0.37);
+  border:1px solid #d6d6d6;
 }
 .mb-datepicker  table {
-  width: 400px;
+  width: 200px;
   table-layout:fixed;
+  border-radius: 2px;
 }
 .mb-datepicker table thead tr td{
   padding-bottom: 10px;
@@ -25,7 +27,7 @@ mb-datepicker .form-control {
 }
 .header-month {
   text-align: center;
-  width: 70%;
+  width: 40%;
   display: inline-block;
 }
 .header-right {
@@ -35,33 +37,37 @@ caption {
   padding: 0!important;
 }
 .header-year-wrapper {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: white;
   font-family: \"Open Sans\", sans-serif;
   font-size: 1.2em;
   background-color: #15A5DB;
 }
 .header-nav-wrapper {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   color: #626262;
   font-family: \"Open Sans\", sans-serif;
-  font-size: 1.2em;
+  font-size: 1em;
   background-color: #E8E8E8;
 }
 .header-year {
   padding-top: 1px;
   padding-bottom: 0!important;
   text-align: center;
-  width: 80%;
+  width: 40%;
   display: inline-block;
+}
+.mb-datepicker table tbody tr{
+	line-height:10px;
 }
 .mb-datepicker table tbody tr td{
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   color: #626262;
+  line-height:10px;
 }
 .mb-datepicker table tbody tr.days .day-item:hover{
   background-color: #15A5DB;
@@ -104,6 +110,6 @@ caption {
   user-select: none;
 }
 .mb-input-field {
-  border-radius: 0;
-  border-bottom: 1px solid red;
+  border-radius: 3px;
+  
 }
