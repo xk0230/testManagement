@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Project">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pj_no" jdbcType="VARCHAR" property="pjNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="leader" jdbcType="VARCHAR" property="leader" />
+  </resultMap>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Project">
+    insert into project (id, pj_no, name, 
+      start_time, end_time, create_time, 
+      leader)
+    values (#{id,jdbcType=VARCHAR}, #{pjNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{leader,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from project
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Project">
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pjNo != null">
+        pj_no,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="leader != null">
+        leader,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pjNo != null">
+        #{pjNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leader != null">
+        #{leader,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Project">
+    update project
+    <set>
+      <if test="pjNo != null">
+        #{pjNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leader != null">
+        #{leader,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Project">
+    update project
+    set name = #{name,jdbcType=VARCHAR},
+      pj_no = #{pjNo,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      leader = #{leader,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getProjectPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.ProjectVO">
+		SELECT
+			project.id as id,
+			project.name AS name,
+			project.pj_no AS pjNo,
+			project.start_time AS startTime,
+			project.end_time AS endTime,
+			project.leader AS leader,
+			'view' as editMode
+		FROM
+			project project
+		where 1=1 
+			<if test="map.startTime != null and map.startTime !=''">
+				AND project.create_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND project.create_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+			
+			<if test="map.name != null and  map.name != ''">
+				AND project.name like '%' #{map.name} '%' 
+			</if>
+			<if test="map.pjNo != null and  map.pjNo != ''">
+				AND project.pj_no like '%' #{map.pjNo} '%' 
+			</if>
+			
+		
+		order by create_time desc
+	
+	</select>
+</mapper>
