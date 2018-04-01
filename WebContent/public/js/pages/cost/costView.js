@@ -168,28 +168,15 @@ myAppModule.controller('CostController',
 		
 		this.createPrintList = function(){
 			self.printList = [];
-			
+			var choseContractList = [];
+			self.date = new Date();
 			//遍历所有选中的项目，组成list
 			angular.forEach(self.list, function(item, key) {
 				if(item.chk){
-					if(self.printList.length == 0){
-						self.printList.push({
-							"subUser": item.subUser,
-							"subUserName": item.subUserName,
-							"auditUserName": item.auditUserName,
-							"depName": item.depName,
-							"sum":0,
-							"list":[item]
-						})
+					if(item.contract != null){
+						choseContractList.push(item);
 					}else{
-						var hasPrint = false;
-						angular.forEach(self.printList, function(printItem, key) {
-							if(printItem.subUser == item.subUser){
-								hasPrint = true;
-								printItem.list.push(item);
-							}
-						});
-						if(!hasPrint){
+						if(self.printList.length == 0){
 							self.printList.push({
 								"subUser": item.subUser,
 								"subUserName": item.subUserName,
@@ -197,12 +184,31 @@ myAppModule.controller('CostController',
 								"depName": item.depName,
 								"sum":0,
 								"list":[item]
+							})
+						}else{
+							var hasPrint = false;
+							angular.forEach(self.printList, function(printItem, key) {
+								if(printItem.subUser == item.subUser){
+									hasPrint = true;
+									printItem.list.push(item);
+								}
 							});
+							if(!hasPrint){
+								self.printList.push({
+									"subUser": item.subUser,
+									"subUserName": item.subUserName,
+									"auditUserName": item.auditUserName,
+									"depName": item.depName,
+									"sum":0,
+									"list":[item]
+								});
+							}
 						}
 					}
 				}
 			});
 			
+			//设定日常打印
 			var printPageList=[];
 			var lengthPerPage = 6;
 			//按每页显示数据条数拆分数据
@@ -256,6 +262,20 @@ myAppModule.controller('CostController',
 					self.printListPage.push({"pageList":tempPerPage});
 				}
 			});
+			
+			//合同打印分成两页一组
+			self.printContractList = [];
+			tempPerPage = [];
+			angular.forEach(choseContractList, function(item, key) {
+				if(key % 2 ==0){
+					tempPerPage = [];
+				}
+				tempPerPage.push(item);
+				if(key % 2 ==1 || key == choseContractList.length - 1 ){
+					self.printContractList.push({"pageList":tempPerPage});
+				}
+			});
+			
 
 		}
 		
@@ -275,6 +295,19 @@ myAppModule.controller('CostController',
             });
 			});
 			
+			angular.forEach(self.printContractList, function(item, key) {
+				$("#printContract" + key).print({
+				    globalStyles: true,
+				    mediaPrint: false,
+				    stylesheet: null,
+				    noPrintSelector: ".no-print",
+				    iframe: true,
+				    append: null,
+				    prepend: null,
+				    manuallyCopyFormValues: true,
+				    deferred: $.Deferred()
+            });
+			});
 			
 		}
 		

@@ -54,7 +54,6 @@ public class ContractVO extends Contract {
 	
 	private String UserDepId;//用户部门ID
 	
-	
 	/**
 	 * @return the userPosition
 	 */
@@ -333,5 +332,4 @@ public class ContractVO extends Contract {
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
-	
 }

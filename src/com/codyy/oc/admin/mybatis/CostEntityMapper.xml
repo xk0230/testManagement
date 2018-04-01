@@ -290,6 +290,32 @@
 	
 	</select>
 	
+	<sql id="contract_Column_List">
+		 contract.id                 as 'contract.id'
+		,contract.contract_id        as 'contract.contractId'
+		,contract.type               as 'contract.type'
+		,contract.content            as 'contract.content'
+		,contract.dept               as 'contract.dept'
+		,contract.cost               as 'contract.cost'
+		,contract.company            as 'contract.company'
+		,contract.url                as 'contract.url'
+		,contract.serialid           as 'contract.serialid'
+		,contract.status             as 'contract.status'
+		,contract.create_time        as 'contract.createTime'
+		,contract.cost_time          as 'contract.costTime'
+		,contract.create_user_id     as 'contract.createUserId'
+		,contract.remakes            as 'contract.remakes'
+	</sql>
+	<sql id="payment_Column_List">
+		 ,payment.id          as 'contract.payment.id'
+		 ,payment.name        as 'contract.payment.name'
+		 ,payment.tax_no      as 'contract.payment.taxNo'
+		 ,payment.bank_no     as 'contract.payment.bankNo'
+		 ,payment.bank_name   as 'contract.payment.bankName'
+		 ,payment.create_time as 'contract.payment.createTime'
+		 ,payment.create_user as 'contract.payment.createUser'
+	</sql>
+	
 	<!-- 成本查看列表 -->
 	<select id="getCostViewPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.CostVO">
 		SELECT
@@ -310,7 +336,9 @@
 			code.content as statusName,
 			'view' as editMode,
 			costDetail.contract_id as contractId,
-			contract.content as contractContent
+			contract.content as contractContent,
+			<include refid="contract_Column_List" />
+			<include refid="payment_Column_List" />
 		FROM
 			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
@@ -319,6 +347,7 @@
 		LEFT JOIN ADMIN_USER audit on costDetail.audit_user = audit.user_id
 		LEFT JOIN ADMIN_USER subUser on costDetail.create_user_id = subUser.user_id
 		LEFT JOIN CONTRACT contract on costDetail.contract_id = contract.contract_id
+		LEFT JOIN payment on contract.company = payment.id
 		WHERE costDetail.status = '05'
 			
 			<if test="map.costType != null and  map.costType != ''">

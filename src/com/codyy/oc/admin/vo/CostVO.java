@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.codyy.commons.utils.DateUtils;
+import com.codyy.oc.admin.entity.Contract;
 import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 
@@ -60,6 +61,8 @@ public class CostVO extends CostEntityBean{
 	private String remark;
 	
 	private String createUserPosition;
+	
+	private Contract contract;
 	
 
 	public String getCreateUserPosition() {
@@ -279,6 +282,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setContractContent(String contractContent) {
 		this.contractContent = contractContent;
+	}
+
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
 	}
 
 }

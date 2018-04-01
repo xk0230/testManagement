@@ -40,6 +40,8 @@ public class Contract {
 	
 	private String remakes;
 	
+	private Payment payment;
+	
 	/**
 	 * @return the remakes
 	 */
@@ -175,4 +177,13 @@ public class Contract {
     public void setSerialid(String serialid) {
         this.serialid = serialid;
     }
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+    
 }
