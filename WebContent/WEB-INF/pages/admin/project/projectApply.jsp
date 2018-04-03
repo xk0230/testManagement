@@ -78,11 +78,11 @@
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<!--<input type="text" id="datepicker{{$index}}" ng-model="item.startTime" style="width:120px;"> -->
-														<mb-datepicker input-class="mb-date" date="item.startTime" date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.startTime | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<!-- <input type="text" id="datepickers{{$index}}" ng-model="item.endTime" style="width:120px;"> -->
-														<mb-datepicker input-class="mb-date" date="item.endTime" date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.endTime | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" class="line-limit-length span4" ng-model="item.leader" style="width:100px;" >
