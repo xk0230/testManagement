@@ -1,4 +1,4 @@
-var myAppModule = angular.module("myApp",['ui.bootstrap','ngSanitize'])
+var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker','ngSanitize'])
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
@@ -7,7 +7,7 @@ myAppModule.controller('ContractController',
 		var self = this;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 20;
+		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
 
