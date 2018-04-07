@@ -64,6 +64,9 @@ public class CostVO extends CostEntityBean{
 	
 	private Contract contract;
 	
+	private String costClass;
+	
+	private String costClassName;
 
 	public String getCreateUserPosition() {
 		return createUserPosition;
@@ -290,6 +293,19 @@ public class CostVO extends CostEntityBean{
 
 	public void setContract(Contract contract) {
 		this.contract = contract;
+	}
+
+	public String getCostClass() {
+		return costClass;
+	}
+
+	public void setCostClass(String costClass) {
+		this.costClass = costClass;
+	}
+
+	public String getCostClassName() {
+		this.costClassName = "0".equals(this.getCostClass())?"日常":"1".equals(this.getCostClass())?"合同":"2".equals(this.getCostClass())?"出差":"";
+		return costClassName;
 	}
 
 }

@@ -314,6 +314,7 @@ public class CostService {
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
 	    map.put("costType", cost.getCostType());
+	    map.put("costClass", cost.getCostClass());
 	    map.put("userId", cost.getUserId());
 	    map.put("startTime", cost.getStartDate());
 	    map.put("endTime", cost.getEndDate());
@@ -341,6 +342,7 @@ public class CostService {
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
 	    map.put("costType", cost.getCostType());
+	    map.put("costClass", cost.getCostClass());
 	    map.put("depId", cost.getDepId());
 	    map.put("status", cost.getStatus());
 	    map.put("startTime", cost.getStartDate());
@@ -373,6 +375,7 @@ public class CostService {
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    
 	    map.put("costType", cost.getCostType());
+	    map.put("costClass", cost.getCostClass());
 	    map.put("depId", cost.getDepId());
 	    map.put("status", cost.getStatus());
 	    map.put("startTime", cost.getStartDate());

@@ -28,6 +28,9 @@ public class CostEntityBean {
 	//成本类型,0:收入，1:支出
 	private String costType ;
 	
+	//成本分类,0:日常,1:合同,2:出差
+	private String costClass ;
+	
 	//成本子类型ID
 	private String costSubtypeId;
 	
@@ -182,6 +185,14 @@ public class CostEntityBean {
 
 	public void setContractId(String contractId) {
 		this.contractId = contractId;
+	}
+
+	public String getCostClass() {
+		return costClass;
+	}
+
+	public void setCostClass(String costClass) {
+		this.costClass = costClass;
 	}
 
 }

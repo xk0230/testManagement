@@ -170,6 +170,16 @@
 									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" />
 									</div>
 								</div>
+								<div class="row">
+                                    <div class="span4">
+										<span class="searchSpan">成本分类:</span>
+                                        <select id="costClass" ng-model="costClass"  class="form-control span2" 
+                                                ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList"
+                                                ng-change="costTypeChange()">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </div>
+								</div>
 								<hr>
 									收入:<div class="progress progress-striped active" style="height:18px;" >
 										<div class="bar"  ng-style="{'width' : inPercent}">{{inStr}}</div>
@@ -185,51 +195,28 @@
 											<thead>
 												<tr>
 													<th width="20px"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()" ></th>
-													<th width="60px">NO</th>
+													<th width="20px">NO</th>
 													<th width="120px">成本单号</th>
 													<th width="60px">类型</th>
+													<th width="60px">分类</th>
 													<th width="140px">成本产生时间</th>
 													<th width="120px">金额</th>
-													<th width="{{depLength}}px">各部门金额</th>
 													<th width="120px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
 													<th width="100px">状态</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
+												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td><input type="checkbox"  ng-model="item.chk" ng-change="vm.chkChange()" ></td>
-													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
+													<td rowspan="2"><input type="checkbox" ng-if="item.costType == 1" ng-model="item.chk" ng-change="vm.chkChange()" ></td>
+													<td rowspan="2" ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costClassName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
-													
-													<td ng-switch-when="view">
-													
-														<table  style="width:100%;" >
-															<tr >
-																<td style="border-left:0;border-top:0">
-																<ul class="costnav" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
-																</ul>
-																</td>
-																<td style="border-left:0;border-top:0">
-																<ul class="costnav pull-left" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
-																	</ul>
-																</td>
-															</tr>
-														</table>
-													</td>
 													
 													<td ng-switch-when="view">
 													<ul style="">
@@ -256,6 +243,13 @@
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
+												</tr>
+												<tr>
+													<td ng-switch-when="view" colspan="9" style="padding:8px;">
+														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
+															{{depCost.costDepName}}:￥{{depCost.costNum}}
+														</div>
+													</td>
 												</tr>
 											</tbody>
 										</table>

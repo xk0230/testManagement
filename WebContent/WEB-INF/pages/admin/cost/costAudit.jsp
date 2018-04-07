@@ -38,6 +38,7 @@
 											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
 									</div>
+									
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostAuditList()" value="查询" /></div>
 								</div>
 								<div class="row">
@@ -50,6 +51,16 @@
                                         <input type="text" ng-model="remark" class="span4">
                                     </div>
 								</div>
+								<div class="row">
+                                    <div class="span4">
+										<span class="searchSpan">成本分类:</span>
+                                        <select id="costClass" ng-model="costClass"  class="form-control span2" 
+                                                ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList"
+                                                ng-change="costTypeChange()">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </div>
+								</div>
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
@@ -59,9 +70,9 @@
 												<tr align="center">
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
+													<th width="40px">分类</th>
 													<th width="140px">成本产生时间</th>
 													<th width="60px">金额</th>
-													<th width="{{depLength}}px">各部门金额</th>
 													<th width="120px">成本详情</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
@@ -69,37 +80,14 @@
 													<th width="150px">操作</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
+												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
+													<td ng-switch-when="view" rowspan="2"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costClassName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
-													
-													<td ng-switch-when="view">
-														<table  style="width:100%">
-															<tr >
-																<td style="border-left:0">
-																<ul class="costnav" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
-																</ul>
-																</td>
-																<td style="border-left:0">
-																<ul class="costnav pull-left" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:38px">{{depCost.costNum}}</span></li>
-																</ul>
-																</td>
-															</tr>
-														</table>
-													</td>
-													
 													<td ng-switch-when="view">
 														<ul style="">
 															<li>
@@ -134,11 +122,18 @@
 														</div>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit"><p ng-bind="item.costNo"></p></td>
+													<td ng-switch-when="edit" rowspan="2"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="edit">
 				                                        <select id="costType" style="width:60px;" ng-model="item.costType"  class="form-control select2" 
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
 				                                            <option value="">--收支类型--</option>
+				                                        </select>
+													</td>
+													<td ng-switch-when="edit">
+				                                        <select id="costClass" style="width:60px;" ng-model="item.costClass" class="form-control select2" 
+				                                                ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList"
+				                                                ng-change="costTypeChange()">
+				                                            <option value="">--成本分类--</option>
 				                                        </select>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
@@ -148,32 +143,6 @@
 													</td>
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.costNum"  min="1" style="width:50px;" />
-													</td>
-													<td ng-switch-when="edit">
-														<table  style="width:100%">
-															<tr >
-																<td style="border-left:0">
-																<ul class="costnav" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 < 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:80px">
-																		<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
-																	</span>
-																</ul>
-																</td>
-																<td style="border-left:0">
-																<ul class="costnav pull-left" style="width:100%" >
-																	<li ng-repeat="depCost in item.costDepList" ng-if="$index / 5 >= 1">
-																	<span style="display: inline-block;width:65px" class="line-limit-length">{{depCost.costDepName}}</span>
-																	:
-																	<span style="display: inline-block;width:80px">
-																		<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
-																	</span>
-																</ul>
-																</td>
-															</tr>
-														</table>
 													</td>
 													<td ng-switch-when="edit">
 														<ul style="width:100%">
@@ -201,6 +170,18 @@
 													<td ng-switch-when="edit"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
+													</td>
+												</tr>
+												<tr>
+													<td ng-switch-when="view" colspan="9" style="padding:8px;">
+														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
+															{{depCost.costDepName}}:￥{{depCost.costNum}}
+														</div>
+													</td>
+													<td ng-switch-when="edit" colspan="9" style="padding:8px;">
+														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
+															{{depCost.costDepName}}:￥<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
+														</div>
 													</td>
 												</tr>
 											</tbody>
