@@ -17,7 +17,11 @@ myAppModule.controller('CostController',
 				{costType : "0", name : "收入"},
 				{costType : "1", name : "支出"}
 			];
-			
+			$scope.costClassList = [
+				{costClass : "0", name : "日常"},
+				{costClass : "1", name : "合同"},
+				{costClass : "2", name : "出差"}
+			];
 			//获取角色
 			self.admin =$("#sessionUserType").val();
 			if(self.admin=="MANAGER"){
@@ -47,6 +51,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/page.do',
 				params:{
 					costType:$scope.costType,
+					costClass:$scope.costClass,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
@@ -71,6 +76,7 @@ myAppModule.controller('CostController',
 				costDate:$filter('date')(new Date(), "yyyy-MM-dd")
 				,costNum:0
 				,costType:""
+				,costClass:""
 				,remark:""
 				,editMode:"edit"
 			};
@@ -109,6 +115,7 @@ myAppModule.controller('CostController',
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
+				costClass:costItem.costClass,
 				costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
 				createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
 				costNum:costItem.costNum,

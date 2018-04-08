@@ -21,6 +21,7 @@
 				cost_time,
 				create_user_id,
 				cost_type,
+				cost_class,
 				cost_subtype_id,
 				cost_num,
 				dep_id,
@@ -36,6 +37,7 @@
 				#{costTime},
 				#{createUserId},
 				#{costType},
+				#{costClass},
 				#{costSubtypeId},
 				#{costNum},
 				#{depId},
@@ -86,6 +88,7 @@
 		SET
 			cost_time = #{costTime},
 			cost_type = #{costType},
+			cost_class = #{costClass},
 			cost_num = #{costNum},
 			remark = #{remark},
 			status = #{status},
@@ -181,6 +184,7 @@
 			costDetail.cost_num AS costNum,
 			costDetail.cost_time AS costTime,
 			costDetail.cost_type AS costType,
+			costDetail.cost_class as costClass,
 			costDetail.create_time AS createTime,
 			costDetail.remark as remark,
 			costDetail.cost_no as costNo,
@@ -199,6 +203,9 @@
 			
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
+			</if>
+			<if test="map.costClass != null and  map.costClass != ''">
+				AND costDetail.cost_class = #{map.costClass}
 			</if>
 			
 			<if test="map.costNo != null and  map.costNo != ''">
@@ -234,6 +241,7 @@
 			costDetail.cost_num AS costNum,
 			costDetail.cost_time AS costTime,
 			costDetail.cost_type AS costType,
+			costDetail.cost_class as costClass,
 			costDetail.create_time AS createTime,
 			costDetail.remark as remark,
 			costDetail.cost_no as costNo,
@@ -259,7 +267,9 @@
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
-			
+			<if test="map.costClass != null and  map.costClass != ''">
+				AND costDetail.cost_class = #{map.costClass}
+			</if>
 			<if test="map.costNo != null and  map.costNo != ''">
 				AND costDetail.cost_no like '%${map.costNo}%'
 			</if>
@@ -325,6 +335,7 @@
 			costDetail.cost_num AS costNum,
 			costDetail.cost_time AS costTime,
 			costDetail.cost_type AS costType,
+			costDetail.cost_class as costClass,
 			costDetail.create_time AS createTime,
 			costDetail.remark as remark,
 			costDetail.cost_no as costNo,
@@ -353,7 +364,9 @@
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
-			
+			<if test="map.costClass != null and  map.costClass != ''">
+				AND costDetail.cost_class = #{map.costClass}
+			</if>
 			<if test="map.costNo != null and  map.costNo != ''">
 				AND costDetail.cost_no like '%${map.costNo}%'
 			</if>

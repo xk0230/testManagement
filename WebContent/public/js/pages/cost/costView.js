@@ -92,6 +92,12 @@ myAppModule.controller('CostController',
 				{costType : "1", name : "支出"}
 			];
 			
+			$scope.costClassList = [
+				{costClass : "0", name : "日常"},
+				{costClass : "1", name : "合同"},
+				{costClass : "2", name : "出差"}
+			];
+			
 			//获取角色
 			self.admin =$("#sessionUserType").val();
 			if(self.admin=="MANAGER"){
@@ -122,6 +128,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					costType:$scope.costType,
+					costClass:$scope.costClass,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
