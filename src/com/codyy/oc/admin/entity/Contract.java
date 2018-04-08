@@ -23,6 +23,8 @@ public class Contract {
     private Double cost;
 
     private String company;
+    
+    private String companyid;
 
     private Date url;
 
@@ -42,6 +44,20 @@ public class Contract {
 	
 	private Payment payment;
 	
+	/**
+	 * @return the companyid
+	 */
+	public String getCompanyid() {
+		return companyid;
+	}
+
+	/**
+	 * @param companyid the companyid to set
+	 */
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
+	}
+
 	/**
 	 * @return the remakes
 	 */

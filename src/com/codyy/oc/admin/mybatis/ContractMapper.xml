@@ -216,6 +216,7 @@
 			dep.`name` AS dept,
 			contract.cost AS cost,
 			payment.`name` as company,
+			payment.id as companyid,
 			contract.url as url,
 			contract.serialid as serialid,
 			contract.status as status,
