@@ -346,6 +346,8 @@ myAppModule.controller('CostController',
 					$scope.outPercent = outNum / (inNum + outNum) * 100 + '%';
 					$scope.inStr = "" + inNum;
 					$scope.outStr = "" + outNum;
+					$scope.yePercent = (inNum - outNum) / (inNum + outNum) * 100 + '%';
+					$scope.yeStr = ""+(inNum - outNum);
 					
 					$scope.totalItems = res.data.total;
 				}else{

@@ -187,6 +187,11 @@
 									支出:<div class="progress progress-striped active">
 										<div class="bar" ng-style="{'width' : outPercent}">{{outStr}}</div>
 									</div>
+									<div ng-show="${adminUser.position == 'ADMIN'}">
+									账户余额:<div class="progress progress-striped active" >
+										<div class="bar" ng-style="{'width' : yePercent}">{{yeStr}}</div>
+									</div>
+									</div>
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
