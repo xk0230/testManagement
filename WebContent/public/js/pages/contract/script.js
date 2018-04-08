@@ -166,6 +166,7 @@ myAppModule.controller('ContractController',
 				 };
 			}
 			contractItem.dept = depid;
+			contractItem.companyid = contractItem.company;
 
 		};
 		

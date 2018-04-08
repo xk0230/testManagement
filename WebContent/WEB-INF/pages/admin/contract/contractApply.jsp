@@ -137,14 +137,13 @@
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
 																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
-																		</span>
 																</span>
 															</li>
 														</ul>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
-														<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
+														 <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> 
+														<!--<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>-->
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:100px;" />
