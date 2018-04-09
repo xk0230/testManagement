@@ -109,7 +109,7 @@
 											<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{contractItem.costNum | currency:"¥"}}</td>
 										</tr>
 										<tr style="height:1cm;">
-											<td style="background-color:#FDF5E6;border-top:1px solid black;border-left:1px solid black;">大写</td>
+											<td style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;">大写</td>
 											<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-right: 0.2cm">{{contractItem.costNum | Chinese}}</td>
 										</tr>
 									</table>
