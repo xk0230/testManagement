@@ -42,22 +42,21 @@
 								</div>
 								<div class="row">
                                     <div class="span4">
+										<span class="searchSpan">成本分类:</span>
+	                                    <select id="costClass" ng-model="costSubtypeId"  class="form-control span2" 
+	                                        ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in costSubTypeList">
+	                                        <option value="">--成本分类--</option>
+	                                    </select>
+                                    </div>
+                                    <div class="span4">
                                         <span class="searchSpan">单号:</span>
                                         <input type="text" ng-model="costNo" class="span2">
                                     </div>
+								</div>
+								<div class="row">
                                     <div class="span6">
                                     	<span class="searchSpan">内容:</span>
                                         <input type="text" ng-model="remark" class="span4">
-                                    </div>
-								</div>
-								<div class="row">
-                                    <div class="span4">
-										<span class="searchSpan">成本分类:</span>
-                                        <select id="costClass" ng-model="costClass"  class="form-control span2" 
-                                                ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList"
-                                                ng-change="costTypeChange()">
-                                            <option value="">--请选择--</option>
-                                        </select>
                                     </div>
 								</div>
 								<hr>
@@ -85,7 +84,7 @@
 													<!-- view -->
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.costClassName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
@@ -119,15 +118,13 @@
 													<!-- edit -->
 													<td ng-switch-when="edit"></td>
 													<td ng-switch-when="edit">
-				                                        <select id="costType" style="width:110px;" ng-model="item.costType"  class="form-control select2" 
+				                                        <select id="costType" style="width:110px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
-				                                            <option value="">--收支类型--</option>
 				                                        </select>
 													</td>
-													<td ng-switch-when="edit">
-				                                        <select id="costClass" style="width:110px;" ng-model="item.costClass"  class="form-control select2" 
-				                                            ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList">
-				                                            <option value="">--成本分类--</option>
+													<td ng-show="item.editMode == 'edit'">
+				                                        <select style="width:110px;" ng-model="item.costSubtypeId"  class="form-control select2" 
+				                                            ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in item.costSubTypeList">
 				                                        </select>
 													</td>
 													<td ng-show="item.editMode == 'edit'">

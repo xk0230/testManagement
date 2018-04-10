@@ -31,9 +31,8 @@ myAppModule.controller('CostController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getCostList();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
+			//取成本分类
+			this.getCostSubTypeList();
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -44,6 +43,61 @@ myAppModule.controller('CostController',
 			self.getCostList();
 		};
 		
+		//收支类型变更
+		$scope.costTypeChange = function() {
+			var costTypeValue = $scope.costType;
+			if(costTypeValue == 0) {
+				$scope.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				$scope.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				$scope.costSubTypeList = [];
+			}
+		};
+		$scope.costTypeChangeInList = function(item) {
+			var costTypeValue = item.costType;
+			if(costTypeValue == 0) {
+				item.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				item.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				item.costSubTypeList = [];
+			}
+		};
+		
+		//成本分类查询
+		this.getCostSubTypeList = function(){
+			//收入
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/0.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.IncomeList = res.data.objData;
+				}else{
+					$scope.IncomeList = [];
+				}
+			});
+			//支出
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/1.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.ExpensesList = res.data.objData;
+				}else{
+					$scope.ExpensesList = [];
+				}
+			});
+		};
+		
+		
 		// 获取数据列表
 		this.getCostList = function(){
 			$http({
@@ -51,7 +105,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/page.do',
 				params:{
 					costType:$scope.costType,
-					costClass:$scope.costClass,
+					costSubtypeId:$scope.costSubtypeId,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
@@ -63,6 +117,10 @@ myAppModule.controller('CostController',
 				if(res){
 					self.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
+					angular.forEach(self.list, function(item, key) {
+						$scope.costTypeChangeInList(item);
+					});
+
 				}else{
 					self.list = [];
 					$scope.totalItems = 0;
@@ -76,7 +134,7 @@ myAppModule.controller('CostController',
 				costDate:$filter('date')(new Date(), "yyyy-MM-dd")
 				,costNum:0
 				,costType:""
-				,costClass:""
+				,costSubtypeId:""
 				,remark:""
 				,editMode:"edit"
 			};
@@ -93,9 +151,6 @@ myAppModule.controller('CostController',
 		//点击编辑
 		this.editCost = function (costItem,index) {
 			costItem.editMode = "edit";
-			
-			//设置时间控件
-			setDatepicker("datepicker" + index)
 		};
 		
 		//点击保存
@@ -115,7 +170,7 @@ myAppModule.controller('CostController',
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
-				costClass:costItem.costClass,
+				costSubtypeId:costItem.costSubtypeId,
 				costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
 				createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
 				costNum:costItem.costNum,

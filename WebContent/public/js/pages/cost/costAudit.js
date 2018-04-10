@@ -20,8 +20,6 @@ myAppModule.controller('CostController',
 				{costClass : "1", name : "合同"},
 				{costClass : "2", name : "出差"}
 			];
-			
-			
 			//获取角色
 			self.admin =$("#sessionUserType").val();
 			if(self.admin=="MANAGER"){
@@ -31,9 +29,8 @@ myAppModule.controller('CostController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getCostAuditList();
-			//设置时间控件
-			setDatepicker("datepickerS");
-			setDatepicker("datepickerE");
+			//取成本分类
+			this.getCostSubTypeList();
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -44,6 +41,60 @@ myAppModule.controller('CostController',
 			self.getCostAuditList();
 		};
 		
+		//收支类型变更
+		$scope.costTypeChange = function() {
+			var costTypeValue = $scope.costType;
+			if(costTypeValue == 0) {
+				$scope.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				$scope.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				$scope.costSubTypeList = [];
+			}
+		};
+		$scope.costTypeChangeInList = function(item) {
+			var costTypeValue = item.costType;
+			if(costTypeValue == 0) {
+				item.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				item.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				item.costSubTypeList = [];
+			}
+		};
+		
+		//成本分类查询
+		this.getCostSubTypeList = function(){
+			//收入
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/0.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.IncomeList = res.data.objData;
+				}else{
+					$scope.IncomeList = [];
+				}
+			});
+			//支出
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/1.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.ExpensesList = res.data.objData;
+				}else{
+					$scope.ExpensesList = [];
+				}
+			});
+		};
+		
 		// 获取数据列表
 		this.getCostAuditList = function(){
 			$http({
@@ -51,7 +102,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/auditPage.do',
 				params:{
 					costType:$scope.costType,
-					costClass:$scope.costClass,
+					costSubtypeId:$scope.costSubtypeId,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
@@ -63,11 +114,9 @@ myAppModule.controller('CostController',
 				if(res){
 					self.list = res.data.data || [];
 					$scope.totalItems = res.data.total;
-					if(self.list.length > 0){
-						$scope.depLength = self.list[0].costDepList.length > 5?350:180;
-					}else{
-						$scope.depLength = 180;
-					}
+					angular.forEach(self.list, function(item, key) {
+						$scope.costTypeChangeInList(item);
+					});
 				}else{
 					self.list = [];
 					$scope.totalItems = 0;
@@ -78,8 +127,7 @@ myAppModule.controller('CostController',
 		//点击编辑
 		this.editCost = function (costItem,index) {
 			costItem.editMode = "edit";
-			//设置时间控件
-			setDatepicker("datepicker" + index)
+			$scope.costTypeChangeInList(item);
 		};
 		
 		//点击保存
@@ -114,7 +162,7 @@ myAppModule.controller('CostController',
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
-				costClass:costItem.costClass,
+				costSubtypeId:costItem.costSubtypeId,
 				costTime:$filter('date')(costItem.costDate, "yyyy-MM-dd"),
 				createTime:$filter('date')(costItem.createDate, "yyyy-MM-dd hh:mm:ss"),
 				costNum:costItem.costNum,

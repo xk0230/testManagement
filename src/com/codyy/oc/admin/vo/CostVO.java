@@ -67,6 +67,8 @@ public class CostVO extends CostEntityBean{
 	private String costClass;
 	
 	private String costClassName;
+	
+	private String costSubTypeList;
 
 	public String getCreateUserPosition() {
 		return createUserPosition;
@@ -306,6 +308,14 @@ public class CostVO extends CostEntityBean{
 	public String getCostClassName() {
 		this.costClassName = "0".equals(this.getCostClass())?"日常":"1".equals(this.getCostClass())?"合同":"2".equals(this.getCostClass())?"出差":"";
 		return costClassName;
+	}
+
+	public String getCostSubTypeList() {
+		return costSubTypeList;
+	}
+
+	public void setCostSubTypeList(String costSubTypeList) {
+		this.costSubTypeList = costSubTypeList;
 	}
 
 }

@@ -181,15 +181,17 @@
                                     </div>
 								</div>
 								<hr>
+									<div style="font-weight: bold;font-size: 16px">
 									收入:<div class="progress progress-striped active" style="height:18px;" >
-										<div class="bar"  ng-style="{'width' : inPercent}">{{inStr}}</div>
+										<div class="bar"  ng-style="{'width' : inPercent}" >￥{{inStr}}</div>
 									</div>
 									支出:<div class="progress progress-striped active">
-										<div class="bar" ng-style="{'width' : outPercent}">{{outStr}}</div>
+										<div class="bar" ng-style="{'width' : outPercent}">￥{{outStr}}</div>
 									</div>
 									<div ng-show="${adminUser.position == 'ADMIN'}">
 									账户余额:<div class="progress progress-striped active" >
-										<div class="bar" ng-style="{'width' : yePercent}">{{yeStr}}</div>
+										<div class="bar" ng-style="{'width' : yePercent}">￥{{yeStr}}</div>
+									</div>
 									</div>
 									</div>
 								<hr>
@@ -219,7 +221,7 @@
 													<td rowspan="2" ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.costClassName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													
