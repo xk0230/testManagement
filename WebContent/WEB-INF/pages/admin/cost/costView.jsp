@@ -16,7 +16,7 @@
 				<!-- 日常打印 -->
 				<div ng-repeat="pageItem in vm.printListPage">
 					<div class="row hidden" id="printDiv{{$index}}" style="width:20cm;font: 宋体;">
-						<div style="width:100%;height:152mm" ng-repeat="item in pageItem.pageList track by $index">
+						<div style="width:100%;height:148mm" ng-repeat="item in pageItem.pageList track by $index">
 							<div style="width:100%;">
 								<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">报 销 单</div>
 								<div style="font-size: 12px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">打印日期：{{vm.date | date:'yyyy年MM月dd日'}}</div>
@@ -247,12 +247,12 @@
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
+													<td ng-switch-when="view"><p style="color:#7eb216" ng-bind="item.statusName"></p></td>
 												</tr>
 												<tr>
 													<td ng-switch-when="view" colspan="9" style="padding:8px;">
-														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
-															{{depCost.costDepName}}:￥{{depCost.costNum}}
+														<div style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="depCost in item.costDepList">
+														{{depCost.costDepName}} : <strong >{{depCost.costNum}}</strong>
 														</div>
 													</td>
 												</tr>
