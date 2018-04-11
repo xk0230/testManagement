@@ -60,7 +60,17 @@ public class AdminUser implements Serializable {
     
     private String postPc;//岗位默认pc等级
     
-    public String getPostPc() {
+    private String seatPhone;//分机号
+    
+    public String getSeatPhone() {
+		return seatPhone;
+	}
+
+	public void setSeatPhone(String seatPhone) {
+		this.seatPhone = seatPhone;
+	}
+
+	public String getPostPc() {
         return postPc;
     }
 

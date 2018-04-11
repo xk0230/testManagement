@@ -230,6 +230,12 @@ public class AdminUserManagerController extends BaseController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping("getAlladminlist")
+	public List<AdminUser> getAllAdminList(Page page,UserSearchModel userSearch){
+		return adminUserManagerService.getAllAdminList();
+	}
+	
 	/**
 	 * 
 		* @Title: deleteAdminUserById

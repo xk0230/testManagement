@@ -164,7 +164,7 @@
         
             <div class="span12">
 <table class="table  table-bordered  table-hover table-condensed " style="text-align: center;background-color: white">
-         <tbody><tr style="background-color:rgb(102,102,102);color: rgb(255,255,255)">
+         <tbody id="usertable"><tr style="background-color:rgb(102,102,102);color: rgb(255,255,255)">
      
        <th style="text-align: center;font-size: 15px">部 门</th>
        <th style="text-align: center;font-size: 15px">姓 名</th>
@@ -173,7 +173,7 @@
        <th style="text-align: center;font-size: 15px">分 机</th>
        <th style="text-align: center;font-size: 15px">邮 箱</th>
      </tr>
-     <tr>
+    <!--  <tr>
        
        <td>GMO</td>
       <td>孟庆洪</td>
@@ -299,7 +299,7 @@
      <td>15062653603</td>
       <td>606</td>
      <td><a href="mailto:steven.zhang@ccydsz.com">zero.zou@ccydsz.com</a></td>
-     </tr>  
+     </tr>   -->
    </tbody></table>
         
     </div>
@@ -352,7 +352,28 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/base.js"></script>
 <script>
-
+$.post('${root}/admin/adminuser/getAlladminlist.do', null, function(data){
+    console.log(data);
+    html="";
+    $.each(data,function(n,value) {
+    	html+="<tr>";
+    	html+="<td>"+value.depName+"</td>";
+    	html+="<td>"+value.realName+"</td>";
+    	html+="<td>"+value.postName+"</td>";
+    	if(value.adminUserDetail != null){
+	    	html+="<td>"+value.adminUserDetail.phone1+"</td>";
+    	}else{
+    		html+="<td>无</td>";
+    	}
+    	html+="       <td>"+value.seatPhone+"</td>";
+    	html+="<td><a href='mailto:"+value.userName+"@ccydsz.com'>"+value.userName+"@ccydsz.com</a></td>";
+    	html+="</tr>";
+        });
+    $("#usertable").html($("#usertable").html()+html);
+  console.log(html);
+});
+ 
+ 
     var pieData = [
 				{
 				    value: 30,
