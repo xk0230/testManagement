@@ -35,20 +35,21 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="20%">公司名称</th>
-													<th width="20%">税号</th>
-													<th width="20%">银行账号</th>
-													<th width="20%">开户行</th>
-													<th width="20%" style="min-width：100px">操作</th>
+													<th width="20%" style="text-align:center;font-size:12px;">公司名称</th>
+													<th width="20%" style="text-align:center;font-size:12px;">开户行</th>
+													<th width="20%" style="text-align:center;font-size:12px;">银行账号</th>
+													<th width="20%" style="text-align:center;font-size:12px;">税号</th>
+													<th width="20%" style="min-width：100px;text-align:center;font-size:12px;">操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.name}}">{{item.name}}</span></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
+													
 													<td ng-switch-when="view"><p ng-bind-html="item.bankNo"></p></td>
 													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.bankName}}">{{item.bankName}}</span></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
 													<td ng-switch-when="view">
 													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editPayment(item)"><i class='icon-edit'></i></a>
@@ -90,7 +91,7 @@
 				<div class="row ">
 					<div class="col-lg-12 heading">
 						<ul id="crumb" class="breadcrumb">
-							确定删除公司记录吗？
+							确定删除吗？
 						</ul>
 					</div>
 				</div>
