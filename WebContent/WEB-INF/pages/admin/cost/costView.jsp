@@ -202,16 +202,16 @@
 											<thead>
 												<tr style="font-size:16px;">
 													<th width="20px"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()" ></th>
-													<th style="text-align: center;width:20px;">NO</th>
-													<th style="text-align: center;width:120px;">成本单号</th>
-													<th style="text-align: center;width:60px;">类型</th>
-													<th style="text-align: center;width:60px;">分类</th>
-													<th style="text-align: center;width:140px;">成本产生时间</th>
-													<th style="text-align: center;width:120px;">金额</th>
-													<th style="text-align: center;width:120px;">成本详情</th>
-													<th style="text-align: center;width:50px;">提交人</th>
-													<th style="text-align: center;width:50px;">审核人</th>
-													<th style="text-align: center;width:100px;">状态</th>
+													<th style="text-align: center;width:20px;font-size:14px;">NO</th>
+													<th style="text-align: center;width:120px;font-size:14px;">成本单号</th>
+													<th style="text-align: center;width:60px;font-size:14px;">类型</th>
+													<th style="text-align: center;width:60px;font-size:14px;">分类</th>
+													<th style="text-align: center;width:120px;font-size:14px;">成本产生时间</th>
+													<th style="text-align: center;width:120px;font-size:14px;">金额</th>
+													<th style="text-align: center;width:140px;font-size:14px;">成本详情</th>
+													<th style="text-align: center;width:50px;font-size:14px;">提交人</th>
+													<th style="text-align: center;width:50px;font-size:14px;">审核人</th>
+													<!--  <th style="text-align: center;width:100px;font-size:14px;">状态</th>-->
 												</tr>
 											</thead>
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
@@ -228,28 +228,28 @@
 													<td ng-switch-when="view">
 													<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<span class="line-limit-length span2" title="{{item.remark}}">详情：{{item.remark}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																		<span class="line-limit-length span2">合同：
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																		<span class="line-limit-length span4">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<label style="width:200px;" ng-if="!item.contractId" >未选择</label>
 																		</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<span class="line-limit-length span3" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
 														</ul>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
-													<td ng-switch-when="view"><p style="color:#7eb216" ng-bind="item.statusName"></p></td>
+													<!--  <td ng-switch-when="view"><p style="color:#7eb216" ng-bind="item.statusName"></p></td>-->
 												</tr>
 												<tr>
 													<td ng-switch-when="view" colspan="9" style="padding:8px;">
