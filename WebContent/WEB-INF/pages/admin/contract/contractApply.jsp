@@ -63,6 +63,8 @@
 													<th width="100px">内容</th>
 													<th width="50px">部门</th>
 													<th width="50px">金额</th>
+													<th width="50px">附件数</th>
+													<th width="50px">汇总数</th>
 													<th width="90px">收款方</th>
 													<th width="100px">签订时间</th>
 													<th width="100px">外部订单</th>
@@ -89,6 +91,8 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.attachmentCnts"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costNumAll"></p></td>
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>
@@ -131,6 +135,8 @@
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
 													</td>
+													<td ng-switch-when="edit"><p ng-bind="item.attachmentCnts"></p></td>
+													<td ng-switch-when="edit"><p ng-bind="item.costNumAll"></p></td>
 													<td ng-switch-when="edit">
 															<ul style="">
 															<li>

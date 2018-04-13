@@ -44,6 +44,38 @@ public class Contract {
 	
 	private Payment payment;
 	
+	private int attachmentCnts;
+	
+	private Double costNumAll;
+	
+	/**
+	 * @return the costNumAll
+	 */
+	public Double getCostNumAll() {
+		return costNumAll;
+	}
+
+	/**
+	 * @param costNumAll the costNumAll to set
+	 */
+	public void setCostNumAll(Double costNumAll) {
+		this.costNumAll = costNumAll;
+	}
+
+	/**
+	 * @return the attachmentCnts
+	 */
+	public int getAttachmentCnts() {
+		return attachmentCnts;
+	}
+
+	/**
+	 * @param attachmentCnts the attachmentCnts to set
+	 */
+	public void setAttachmentCnts(int attachmentCnts) {
+		this.attachmentCnts = attachmentCnts;
+	}
+
 	/**
 	 * @return the companyid
 	 */
