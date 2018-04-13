@@ -9,10 +9,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/public/css/loginStyles.css">
 </head>
 <body>
-        <div class="ysec"><img src="${pageContext.request.contextPath}/public/img/login/logo.png" ></div>
+       <!--  <div class="ysec"><img src="${pageContext.request.contextPath}/public/img/login/logo.png" ></div>--> 
 		<div class="container">
 			<div class="welcome">
-			<div style="width:580px;"><h1>Welcome</h1></div>
+			<div style="width:170px;"><img src="${pageContext.request.contextPath}/public/img/login/logo.png" ></div>
 			<form id="loginForm" class="form">
 				<div style="margin-top:100px">
 					<input type="text" name="userName" placeholder="请输入用户名">
