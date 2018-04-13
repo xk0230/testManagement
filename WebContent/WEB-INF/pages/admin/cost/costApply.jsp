@@ -15,7 +15,7 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>我的费用</h3>
+								<h3>费用申请</h3>
 							</div>
 							
 							<div class="widget-content" style="padding-bottom: 100px;">
@@ -69,14 +69,14 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead >
 												<tr>
-													<th width="100px">成本单号</th>
-													<th width="100px">类型</th>
-													<th width="100px">分类</th>
-													<th width="100px">成本产生时间</th>
-													<th width="100px">金额</th>
-													<th width="200px">成本详情</th>
-													<th width="100px">状态</th>
-													<th width="150px">操作</th>
+													<th width="100px" style="text-align:center;font-size:12px;">成本单号</th>
+													<th width="100px" style="text-align:center;font-size:12px;">类型</th>
+													<th width="100px" style="text-align:center;font-size:12px;">分类</th>
+													<th width="100px" style="text-align:center;font-size:12px;">成本产生时间</th>
+													<th width="100px" style="text-align:center;font-size:12px;">金额</th>
+													<th width="200px" style="text-align:center;font-size:12px;">成本详情</th>
+													<th width="100px" style="text-align:center;font-size:12px;">状态</th>
+													<th width="150px" style="text-align:center;font-size:12px;">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -90,20 +90,20 @@
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
+																	<span class="line-limit-length span4" title="{{item.remark}}">费用说明：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
-																		<span class="line-limit-length span4">合同：
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
+																		<span class="line-limit-length span4">对应合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>

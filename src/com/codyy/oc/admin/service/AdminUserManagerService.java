@@ -487,6 +487,16 @@ public class AdminUserManagerService {
 		return page;
 	}
 	
+	
+	public List<AdminUser> getAllAdminList(){
+		Page page = new Page();
+		page.setStart(0);
+		page.setEnd(99999);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("orderby", "depid");
+	    page.setMap(map);
+		return  adminUserMapper.getAdminUserPageList(page);
+	}
 	/**
 	* @Title: selUserName
 	* @Description: (这里用一句话描述这个方法的作用)

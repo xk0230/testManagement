@@ -459,6 +459,7 @@
 	<!-- 获取用户列表  -->
 	<select id="getAdminUserPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AdminUser">
 		select
+		    au.seat_phone as seatPhone,
 			au.user_id    as userId,
 			au.username 			as userName,
 			au.password 			as password,
@@ -512,7 +513,11 @@
 				and au.position = #{map.position}
 			</if>
 			
-			order by postPc,au.create_time DESC 
+			order by 
+			 <if test="map.orderby != null and map.orderby !=''">
+				 ${map.orderby},
+			</if> 
+			postPc,au.create_time DESC 
 		
 	</select>
 	<!-- 获取用户数量 -->
