@@ -167,6 +167,9 @@ myAppModule.controller('CostController',
 				alert("请填写金额");
 				return ;
 			}
+			
+			var m= costItem.costSubtypeId == "";
+			
 			var params = {
 				costId:costItem.costId,
 				costType:costItem.costType,
@@ -178,6 +181,8 @@ myAppModule.controller('CostController',
 				status:costItem.status,
 				contractId:costItem.contractId
 			};
+			
+			var x = typeof params;
 			
 			$http({
 				method:'POST',

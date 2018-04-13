@@ -350,6 +350,7 @@ public class CostService {
 	    map.put("userId", cost.getUserId());
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
+	    map.put("auditStatus", cost.getAuditStatus());
 	    
 	    page.setMap(map);
 	    

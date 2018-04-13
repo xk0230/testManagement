@@ -70,6 +70,8 @@ public class CostVO extends CostEntityBean{
 	
 	private String costSubTypeList;
 
+	private String auditStatus;
+
 	public String getCreateUserPosition() {
 		return createUserPosition;
 	}
@@ -316,6 +318,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setCostSubTypeList(String costSubTypeList) {
 		this.costSubTypeList = costSubTypeList;
+	}
+
+	public String getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(String auditStatus) {
+		this.auditStatus = auditStatus;
 	}
 
 }

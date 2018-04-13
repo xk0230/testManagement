@@ -183,14 +183,14 @@
 								<hr>
 									<div style="font-weight: bold;font-size: 16px">
 									收入:<div class="progress progress-striped active" style="height:18px;" >
-										<div class="bar"  ng-style="{'width' : inPercent}" >￥{{inStr}}</div>
+										<div class="bar"  ng-style="{'width' : inPercent}" ><p ng-bind="inStr | currency:'￥':2 "></p></div>
 									</div>
 									支出:<div class="progress progress-striped active">
-										<div class="bar" ng-style="{'width' : outPercent}">￥{{outStr}}</div>
+										<div class="bar" ng-style="{'width' : outPercent}"><p ng-bind="outStr | currency:'￥':2"></p></div>
 									</div>
 									<div ng-show="${adminUser.position == 'ADMIN'}">
 									账户余额:<div class="progress progress-striped active" >
-										<div class="bar" ng-style="{'width' : yePercent}">￥{{yeStr}}</div>
+										<div class="bar" ng-style="{'width' : yePercent}"><p ng-bind="yeStr | currency:'￥':2"></p></div>
 									</div>
 									</div>
 									</div>

@@ -71,7 +71,7 @@
 												<tr>
 													<th width="100px">成本单号</th>
 													<th width="100px">类型</th>
-													<th width="100px">分类</th>
+													<th width="100px" ng-show="${sessionScope.adminUser.userId == 'admin'}">分类</th>
 													<th width="100px">成本产生时间</th>
 													<th width="100px">金额</th>
 													<th width="200px">成本详情</th>
@@ -84,7 +84,7 @@
 													<!-- view -->
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
+													<td ng-show="item.editMode == 'view' && ${sessionScope.adminUser.userId == 'admin'}"><p ng-bind="item.costSubName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
@@ -122,7 +122,7 @@
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
 				                                        </select>
 													</td>
-													<td ng-show="item.editMode == 'edit'">
+													<td ng-show="item.editMode == 'edit' && ${sessionScope.adminUser.userId == 'admin'}" >
 				                                        <select style="width:110px;" ng-model="item.costSubtypeId"  class="form-control select2" 
 				                                            ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in item.costSubTypeList">
 				                                        </select>
