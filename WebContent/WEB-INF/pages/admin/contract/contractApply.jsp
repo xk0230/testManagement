@@ -58,16 +58,16 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
 											<thead>
 												<tr>
-												 	<th width="100px">单号</th>
-													<th width="50px">类型</th>
-													<th width="100px">内容</th>
-													<th width="50px">部门</th>
-													<th width="50px">金额</th>
-													<th width="90px">收款方</th>
-													<th width="100px">签订时间</th>
-													<th width="100px">外部订单</th>
-													<th width="90px">备注</th>
-													<th width="150px">操作</th> 
+												 	<th width="100px" style="text-align:center;font-size:12px;">单号</th>
+													<th width="50px" style="text-align:center;font-size:12px;">类型</th>
+													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
+													<th width="50px" style="text-align:center;font-size:12px;">部门</th>
+													<th width="50px" style="text-align:center;font-size:12px;">金额</th>
+													<th width="90px" style="text-align:center;font-size:12px;">收款方</th>
+													<th width="100px" style="text-align:center;font-size:12px;">签订时间</th>
+													<th width="100px" style="text-align:center;font-size:12px;">外部订单</th>
+													<th width="90px" style="text-align:center;font-size:12px;">备注</th>
+													<th width="150px" style="text-align:center;font-size:12px;">操作</th> 
 												<!-- 	<th width="10%">单号</th>
 													<th width="5%">类型</th>
 													<th width="8%">内容</th>
@@ -92,7 +92,7 @@
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px; font-size:12px;">
 																		<span class="line-limit-length span4">
 																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')" >{{item.company}}</a>
 																		<a href="javascript:;" class="line-limit-length span2"   ng-if="!item.company"  >未选择</a>
