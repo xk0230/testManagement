@@ -167,7 +167,7 @@
                                         <input type="text" ng-model="remark" class="span4">
                                     </div>
                                     <div class="span1 pull-right">
-									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" />
+									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" ng-if="${adminUser.userId == 'admin'}" />
 									</div>
 								</div>
 								<div class="row">
@@ -180,7 +180,7 @@
                                         </select>
                                     </div>
                                     <div class="span1 pull-right">
-										<input type="button" style="margin-left:-32px;" class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.monthPrint('.widget-content','view')" value="月度打印" />
+										<input type="button" style="margin-left:-32px;" class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.monthPrint('.widget-content','view')" value="月度打印" ng-if="${adminUser.userId == 'admin'}" />
 									</div>
 								</div>
 								<hr>
@@ -204,7 +204,7 @@
 										<table class="table table-condensed table-bordered table-striped tableBox" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr style="font-size:16px;">
-													<th width="20px"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()" ></th>
+													<th width="20px" ng-if="${adminUser.userId == 'admin'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th>
 													<th style="text-align: center;width:20px;font-size:14px;">NO</th>
 													<th style="text-align: center;width:120px;font-size:14px;">成本单号</th>
 													<th style="text-align: center;width:60px;font-size:14px;">类型</th>
@@ -220,8 +220,8 @@
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
 												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td rowspan="2"><input type="checkbox" ng-if="item.costType == 1" ng-model="item.chk" ng-change="vm.chkChange()" ></td>
-													<td rowspan="2" ng-switch-when="view" ><p ng-bind="$index+1"></td>
+													<td ng-if="${adminUser.userId == 'admin'}"><input type="checkbox" ng-if="item.costType == 1" ng-model="item.chk" ng-change="vm.chkChange()" ></td>
+													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
@@ -255,7 +255,7 @@
 													<!--  <td ng-switch-when="view"><p style="color:#7eb216" ng-bind="item.statusName"></p></td>-->
 												</tr>
 												<tr>
-													<td ng-switch-when="view" colspan="9" style="padding:8px;">
+													<td ng-switch-when="view" colspan="11" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="depCost in item.costDepList">
 														{{depCost.costDepName}} : <strong >{{depCost.costNum}}</strong>
 														</div>
