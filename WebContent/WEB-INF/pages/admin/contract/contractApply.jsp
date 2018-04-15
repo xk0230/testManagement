@@ -148,8 +148,8 @@
 														</ul>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														 <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> 
-														<!--<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>-->
+														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
+														<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:100px;" />
