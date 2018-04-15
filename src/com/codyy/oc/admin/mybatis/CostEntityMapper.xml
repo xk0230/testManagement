@@ -291,10 +291,10 @@
 			<if test="map.userId == 'admin' and map.auditStatus == ''">
 				AND (costDetail.status in ('03','04','05'))
 			</if>
-			<if test="map.userId == 'admin' and map.auditStatus == '0'">
+			<if test="map.userId == 'admin' and map.auditStatus == 0">
 				AND (costDetail.status = '03')
 			</if>
-			<if test="map.userId == 'admin' and map.auditStatus == '1'">
+			<if test="map.userId == 'admin' and map.auditStatus == 1">
 				AND (costDetail.status = '05')
 			</if>
 			
@@ -304,12 +304,12 @@
 				AND (costDetail.status in ('01','02','03','04','05'))
 			</if>
 			
-			<if test="map.userId != 'admin' and map.auditStatus == '0' ">
+			<if test="map.userId != 'admin' and map.auditStatus == 0 ">
 				AND costDetail.dep_id = #{map.depId}
 				AND (costDetail.status = '01')
 			</if>
 			
-			<if test="map.userId != 'admin' and map.auditStatus == '1' ">
+			<if test="map.userId != 'admin' and map.auditStatus == 1 ">
 				AND costDetail.dep_id = #{map.depId}
 				AND (costDetail.status = '03')
 			</if>

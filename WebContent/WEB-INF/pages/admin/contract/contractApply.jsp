@@ -59,14 +59,14 @@
 											<thead>
 												<tr>
 												 	<th width="100px" style="text-align:center;font-size:12px;">单号</th>
-													<th width="50px" style="text-align:center;font-size:12px;">类型</th>
+													<th width="30px" style="text-align:center;font-size:12px;">类型</th>
 													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
 													<th width="50px" style="text-align:center;font-size:12px;">部门</th>
 													<th width="50px" style="text-align:center;font-size:12px;">金额</th>
-													<th width="50px" style="text-align:center;font-size:12px;">附件数</th>
-													<th width="50px" style="text-align:center;font-size:12px;">汇总款</th>
+													<th width="30px" style="text-align:center;font-size:12px;">附件</th>
+													<th width="30px" style="text-align:center;font-size:12px;">已付</th>
 													<th width="90px" style="text-align:center;font-size:12px;">收款方</th>
-													<th width="100px" style="text-align:center;font-size:12px;">签订时间</th>
+													<th width="80px" style="text-align:center;font-size:12px;">签订时间</th>
 													<th width="100px" style="text-align:center;font-size:12px;">外部订单</th>
 													<th width="90px" style="text-align:center;font-size:12px;">备注</th>
 													<th width="150px" style="text-align:center;font-size:12px;">操作</th> 
@@ -148,8 +148,8 @@
 														</ul>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														 <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> 
-														<!--<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>-->
+														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
+														<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:100px;" />
