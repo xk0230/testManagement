@@ -68,4 +68,10 @@ public interface CostDaoMapper {
 	 * @return
 	 */
 	List<CostEntityBean> getViewChart(CostVO cost);
+	
+	/**
+	 * 月度查询
+	 * @return
+	 */
+	List<String> getMonthList();
 }

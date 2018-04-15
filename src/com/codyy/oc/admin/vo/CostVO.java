@@ -71,6 +71,8 @@ public class CostVO extends CostEntityBean{
 	private String costSubTypeList;
 
 	private String auditStatus;
+	
+	private String searchMonth;
 
 	public String getCreateUserPosition() {
 		return createUserPosition;
@@ -326,6 +328,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setAuditStatus(String auditStatus) {
 		this.auditStatus = auditStatus;
+	}
+
+	public String getSearchMonth() {
+		return searchMonth;
+	}
+
+	public void setSearchMonth(String searchMonth) {
+		this.searchMonth = searchMonth;
 	}
 
 }

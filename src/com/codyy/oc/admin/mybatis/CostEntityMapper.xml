@@ -153,6 +153,13 @@
 	 	WHERE cost_id = #{_parameter}
 	</select>
 	
+	<!-- 查询月度信息 -->
+	<select id="getMonthList" resultType="java.lang.String">
+		SELECT distinct
+			DATE_FORMAT(cost_time,'%Y-%m') AS month
+		FROM COST_DETAIL
+	</select>
+	
 	<!-- 根据costID取成本部门划分信息 -->
 	<select id="getCostDepList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostDepEntityBean">
 		SELECT
@@ -393,6 +400,10 @@
 			
 			<if test="map.remark != null and  map.remark != ''">
 				AND costDetail.remark like '%${map.remark}%'
+			</if>
+			
+			<if test="map.searchMonth != null and  map.searchMonth != ''">
+				AND DATE_FORMAT(costDetail.cost_time,'%Y-%m') = '${map.searchMonth}'
 			</if>
 			
 		<!-- 	<if test="map.userId != 'admin'">
