@@ -45,7 +45,7 @@
 										<span class="searchSpan">成本分类:</span>
 	                                    <select id="costClass" ng-model="costSubtypeId"  class="form-control span2" 
 	                                        ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in costSubTypeList">
-	                                        <option value="">--成本分类--</option>
+	                                        <option value="">--请选择--</option>
 	                                    </select>
                                     </div>
                                     <div class="span4">

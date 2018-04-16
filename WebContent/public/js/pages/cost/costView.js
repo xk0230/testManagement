@@ -108,9 +108,6 @@ myAppModule.controller('CostController',
 			}
 			self.getCostList();
 			self.getCostViewChart();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -556,8 +553,6 @@ myAppModule.controller('CostController',
 		    	    	item.contractContent = selectedItem.contractContent;
 		    	    	
 		    	    }, function () {
-		    	    	//取消的回调函数
-		    	    	
 		    	    });
 		   };
 		
@@ -679,7 +674,15 @@ angular.module('myApp').controller('MonthPrint',
 		};
 
 		$scope.pageChanged = function() {
+			//取List
 			$ctrl.getCostList();
+		};
+		
+		$ctrl.monthChanged = function() {
+			//取List
+			$ctrl.getCostList();
+			//取打印List
+			$ctrl.getAllCostList();
 		};
 		
 		// 获取数据列表
@@ -715,7 +718,7 @@ angular.module('myApp').controller('MonthPrint',
 				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					searchMonth:$scope.searchMonth,
-					costType:1,
+					costType:'1',
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -745,12 +748,16 @@ angular.module('myApp').controller('MonthPrint',
 				if(res){
 					$scope.allList = res.data.data || [];
 					
-					$scope.monthPrintCount = 23;
+					$scope.monthPrintCount = 21;
 					$scope.allListPage = [];
 					
 					var tempList = [];
 					
+					$scope.sumCost = parseFloat(0);
+					$scope.checkTime = new Date();
 					angular.forEach($scope.allList, function(item,index,array){
+						tempList.push(item);
+						$scope.sumCost = $scope.sumCost + parseFloat(item.costNum);
 						if((index != 0 && index % $scope.monthPrintCount ==0) || (index==($scope.allList.length-1))){
 							if(tempList.length < $scope.monthPrintCount){
 								for(var i=tempList.length;i<$scope.monthPrintCount;i++){
@@ -759,8 +766,6 @@ angular.module('myApp').controller('MonthPrint',
 							}
 							$scope.allListPage.push({"list":tempList});
 							tempList = [];
-						}else{
-							tempList.push(item);
 						}
 					});
 					
