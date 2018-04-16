@@ -108,6 +108,8 @@ myAppModule.controller('CostController',
 			}
 			self.getCostList();
 			self.getCostViewChart();
+			//取成本分类
+			this.getCostSubTypeList();
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -116,6 +118,49 @@ myAppModule.controller('CostController',
 
 		$scope.pageChanged = function() {
 			self.getCostList();
+		};
+		
+		//收支类型变更
+		$scope.costTypeChange = function() {
+			var costTypeValue = $scope.costType;
+			if(costTypeValue == 0) {
+				$scope.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				$scope.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				$scope.costSubTypeList = [];
+			}
+		};
+		
+		//成本分类查询
+		this.getCostSubTypeList = function(){
+			//收入
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/0.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.IncomeList = res.data.objData;
+				}else{
+					$scope.IncomeList = [];
+				}
+			});
+			//支出
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/1.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.ExpensesList = res.data.objData;
+				}else{
+					$scope.ExpensesList = [];
+				}
+			});
 		};
 		
 		// 获取数据列表
