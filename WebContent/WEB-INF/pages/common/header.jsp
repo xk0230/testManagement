@@ -93,31 +93,23 @@ setInterval("getNewsNum()","60000");
           <ul class="mainnav">
             <li class="dropdown mainLi"><a href="${root}/admin/index.do"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
             <!-- 员工信息 -->
-            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>员工信息</span> <b class="caret"></b></a>
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>员工档案</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/adminuser/toadminlist.do"><i class="en-arrow-right7"></i>员工列表</a></li>
                 <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }"><i class="en-arrow-right7"></i>个人信息</a></li>
               </ul>
             </li>
-            <!-- 成本信息 -->
-            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-shopping-cart"></i><span>成本信息</span> <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>我的费用</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
-                    <li><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
-              </ul>
-            </li>
             <!-- 岗位信息 -->
-            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位信息</span> <b class="caret"></b></a>
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                    <li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>正式岗位目录</a></li>
+                    <li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>组织架构</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
             </li>
+            
             <!-- 招聘 管理 -->
-            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>Drops</span> <b class="caret"></b></a>
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>招聘</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/recruit/Recruitment.do?type=''"><i class="en-arrow-right7"></i>我要招人</a></li>
                 <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/recruit/Recruitment.do?type=myApproval"><i class="en-arrow-right7" ></i>待我审批</a></li>
@@ -125,7 +117,7 @@ setInterval("getNewsNum()","60000");
               </ul>
             </li>
             <!-- IPE管理 -->
-            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE管理</span> <b class="caret"></b></a>
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a></li>
                 <li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a></li>
@@ -133,13 +125,23 @@ setInterval("getNewsNum()","60000");
               </ul>
             </li>
             <!-- 绩效管理 -->
-            <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效管理</span> </a> </li>
+            <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效</span> </a> </li>
             <!-- 图书管理 -->
-            <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书管理</span> </a> </li>
+            <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书馆</span> </a> </li>
            	<!-- 合同管理 -->
-            <li class="mainLi"><a href="${root}/contract/contractApply.do"><i class="icon-signal"></i><span>合同管理</span> </a> </li>
+            <li class="mainLi"><a href="${root}/contract/contractApply.do"><i class="icon-signal"></i><span>合同信息</span> </a> </li>
            	<!-- 付款信息管理 -->
-            <li class="mainLi"><a href="${root}/payment/paymentApply.do"><i class="icon-user"></i><span>付款信息管理</span> </a> </li>
+            <li class="mainLi"><a href="${root}/payment/paymentApply.do"><i class="icon-user"></i><span>付款信息</span> </a> </li>
+          	<!-- 成本信息 -->
+            <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-credit-card"></i><span>成本中心</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                    <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>费用登记</a></li>
+                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
+                    <li><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
+                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
+              </ul>
+            </li>
+            
           	<!-- 项目信息管理 -->
             <li class="mainLi"><a href="${root}/project/projectApply.do"><i class="icon-book"></i><span>项目信息管理</span> </a> </li>
             <!-- 入职必读 -->

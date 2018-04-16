@@ -112,7 +112,7 @@
 																		</span>
 																</span>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																	<span class="line-limit-length span3" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
 														</ul>
@@ -179,12 +179,12 @@
 													</td>
 												</tr>
 												<tr>
-													<td ng-switch-when="view" colspan="10" style="padding:8px;">
+													<td ng-switch-when="view" colspan="10" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
 															{{depCost.costDepName}}:￥{{depCost.costNum}}
 														</div>
 													</td>
-													<td ng-switch-when="edit" colspan="10" style="padding:8px;">
+													<td ng-switch-when="edit" colspan="10" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
 															{{depCost.costDepName}}:￥<input type="number" name="costNum" ng-model="depCost.costNum"  min="1" style="width:78px;" />
 														</div>

@@ -65,14 +65,14 @@
 													<th width="30px" style="text-align:center;font-size:12px;">类型</th>
 													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
 													<th width="50px" style="text-align:center;font-size:12px;">部门</th>
-													<th width="50px" style="text-align:center;font-size:12px;">金额</th>
-													<th width="30px" style="text-align:center;font-size:12px;">附件</th>
+													<th width="50px" style="text-align:center;font-size:12px;">总金额</th>
 													<th width="30px" style="text-align:center;font-size:12px;">已付</th>
-													<th width="70px" style="text-align:center;font-size:12px;">收款方</th>
-													<th width="80px" style="text-align:center;font-size:12px;">签订时间</th>
-													<th width="70px" style="text-align:center;font-size:12px;">外部订单</th>
-													<th width="70px" style="text-align:center;font-size:12px;">备注</th>
-													<th width="170px" style="text-align:center;font-size:12px;">操作</th> 
+													<th width="30px" style="text-align:center;font-size:12px;">附件</th>
+													<th width="90px" style="text-align:center;font-size:12px;">收款方</th>
+													<th width="90px" style="text-align:center;font-size:12px;">签订时间</th>
+													<th width="80px" style="text-align:center;font-size:12px;">外部订单</th>
+													<th width="90px" style="text-align:center;font-size:12px;">备注</th>
+													<th width="160px" style="text-align:center;font-size:12px;">操作</th> 
 												<!-- 	<th width="10%">单号</th>
 													<th width="5%">类型</th>
 													<th width="8%">内容</th>
@@ -94,8 +94,8 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.dept"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.cost"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNumAll"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>

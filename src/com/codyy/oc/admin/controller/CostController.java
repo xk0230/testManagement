@@ -195,6 +195,18 @@ public class CostController extends BaseController{
     }
 	
 	/**
+	 * 成本表中的所有月度
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
+	@ResponseBody
+    @RequestMapping("/getMonthList.do")
+    public List<String> getMonthList(HttpServletRequest request,CostVO cost){
+        return costService.getMonthList();
+    }
+	
+	/**
 	 * 更新成本表的状态，用于审核
 	 * @param request
 	 * @param costEntityBean
