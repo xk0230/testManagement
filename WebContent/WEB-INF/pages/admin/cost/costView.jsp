@@ -159,25 +159,24 @@
 								</div>
 								<div class="row">
                                     <div class="span4">
+										<span class="searchSpan">成本分类:</span>
+	                                    <select id="costClass" ng-model="costSubtypeId"  class="form-control span2" 
+	                                        ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in costSubTypeList">
+	                                        <option value="">--请选择--</option>
+	                                    </select>
+                                    </div>
+                                    <div class="span4">
                                         <span class="searchSpan">单号:</span>
                                         <input type="text" ng-model="costNo" class="span2">
-                                    </div>
-                                    <div class="span6">
-                                    	<span class="searchSpan">内容:</span>
-                                        <input type="text" ng-model="remark" class="span4">
                                     </div>
                                     <div class="span1 pull-right">
 									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" ng-if="${adminUser.userId == 'admin'}" />
 									</div>
 								</div>
 								<div class="row">
-                                    <div class="span4">
-										<span class="searchSpan">成本分类:</span>
-                                        <select id="costClass" ng-model="costClass"  class="form-control span2" 
-                                                ng-options="cType.costClass as cType.name group by cType.group for cType in costClassList"
-                                                ng-change="costTypeChange()">
-                                            <option value="">--请选择--</option>
-                                        </select>
+                                    <div class="span6">
+                                    	<span class="searchSpan">内容:</span>
+                                        <input type="text" ng-model="remark" class="span4">
                                     </div>
                                     <div class="span1 pull-right">
 										<input type="button" style="margin-left:-32px;" class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.monthPrint('.widget-content','view')" value="月度打印" ng-if="${adminUser.userId == 'admin'}" />
@@ -389,7 +388,7 @@
 								<div class="row">
                                     <div class="span4">
 										<span class="searchSpan">所属期间:</span>
-                                        <select id="contractType" ng-model="searchMonth"  class="form-control span2" ng-change="$ctrl.getCostList()"
+                                        <select id="contractType" ng-model="searchMonth"  class="form-control span2" ng-change="$ctrl.monthChanged()"
                                                 ng-options="cType.month as cType.month group by cType.group for cType in $ctrl.monthList">
                                         </select>
                                     </div>
@@ -471,20 +470,29 @@
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">单号</th>
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:10cm;">费用说明</th>
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">发生日期</th>
-												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">金额</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">申请人</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm;border-right:1px solid black;">审核人</th>
 											</tr>
 											<tr class="odd gradeX" ng-repeat="subitem in Item.list track by $index" style="height:1cm;">
 												<td style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$parent.$index * monthPrintCount + $index + 1"></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
-												<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-left: 0.2cm"><p>{{subitem.costNum | currency:"¥:2"}}</p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;text-align: right;padding-left: 0.2cm"><p>{{subitem.costNum | currency:"¥:2"}}</p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.subUserName"></p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;"><p ng-bind="subitem.auditUserName"></p></td>
 											</tr>
 										</table>
-										<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:12px;margin-top:0.5cm" ng-if="$last">
+										<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:16px;font-weight: bold;margin-top:0.5cm" ng-if="$last">
 											<tr>
-												<td style="width:33%;">批准：</td>
-                                                
+												<td style="width:100%;" colspan="3">以上共计{{$parent.$index + 1}}页，总计发生金额{{sumCost | currency:"¥:2"}}元。</td>
+											</tr>
+											<tr><td></td></tr>
+											<tr>
+												<td style="width:20%;">批准：</td>
+												<td style="width:20%;">核对时间：</td>
+												<td style="width:60%;"></td>
 											</tr>
 										</table>
 									</div>

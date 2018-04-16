@@ -108,9 +108,8 @@ myAppModule.controller('CostController',
 			}
 			self.getCostList();
 			self.getCostViewChart();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
+			//取成本分类
+			this.getCostSubTypeList();
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -119,6 +118,49 @@ myAppModule.controller('CostController',
 
 		$scope.pageChanged = function() {
 			self.getCostList();
+		};
+		
+		//收支类型变更
+		$scope.costTypeChange = function() {
+			var costTypeValue = $scope.costType;
+			if(costTypeValue == 0) {
+				$scope.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				$scope.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				$scope.costSubTypeList = [];
+			}
+		};
+		
+		//成本分类查询
+		this.getCostSubTypeList = function(){
+			//收入
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/0.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.IncomeList = res.data.objData;
+				}else{
+					$scope.IncomeList = [];
+				}
+			});
+			//支出
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/admin/cost/subType/1.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.ExpensesList = res.data.objData;
+				}else{
+					$scope.ExpensesList = [];
+				}
+			});
 		};
 		
 		// 获取数据列表
@@ -556,8 +598,6 @@ myAppModule.controller('CostController',
 		    	    	item.contractContent = selectedItem.contractContent;
 		    	    	
 		    	    }, function () {
-		    	    	//取消的回调函数
-		    	    	
 		    	    });
 		   };
 		
@@ -679,7 +719,15 @@ angular.module('myApp').controller('MonthPrint',
 		};
 
 		$scope.pageChanged = function() {
+			//取List
 			$ctrl.getCostList();
+		};
+		
+		$ctrl.monthChanged = function() {
+			//取List
+			$ctrl.getCostList();
+			//取打印List
+			$ctrl.getAllCostList();
 		};
 		
 		// 获取数据列表
@@ -715,7 +763,7 @@ angular.module('myApp').controller('MonthPrint',
 				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					searchMonth:$scope.searchMonth,
-					costType:1,
+					costType:'1',
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}
@@ -745,12 +793,16 @@ angular.module('myApp').controller('MonthPrint',
 				if(res){
 					$scope.allList = res.data.data || [];
 					
-					$scope.monthPrintCount = 23;
+					$scope.monthPrintCount = 21;
 					$scope.allListPage = [];
 					
 					var tempList = [];
 					
+					$scope.sumCost = parseFloat(0);
+					$scope.checkTime = new Date();
 					angular.forEach($scope.allList, function(item,index,array){
+						tempList.push(item);
+						$scope.sumCost = $scope.sumCost + parseFloat(item.costNum);
 						if((index != 0 && index % $scope.monthPrintCount ==0) || (index==($scope.allList.length-1))){
 							if(tempList.length < $scope.monthPrintCount){
 								for(var i=tempList.length;i<$scope.monthPrintCount;i++){
@@ -759,8 +811,6 @@ angular.module('myApp').controller('MonthPrint',
 							}
 							$scope.allListPage.push({"list":tempList});
 							tempList = [];
-						}else{
-							tempList.push(item);
 						}
 					});
 					
