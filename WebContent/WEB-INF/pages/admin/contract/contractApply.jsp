@@ -29,12 +29,15 @@
                                     </div>
                                     
 									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
-										<input type="text" id="datepickerS" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
 									</div>
-
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getContractList()" value="查询" /></div>
 									
 								</div>
@@ -58,7 +61,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
 											<thead>
 												<tr>
-												 	<th width="100px" style="text-align:center;font-size:12px;">单号</th>
+												 	<th width="90px" style="text-align:center;font-size:12px;">单号</th>
 													<th width="30px" style="text-align:center;font-size:12px;">类型</th>
 													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
 													<th width="50px" style="text-align:center;font-size:12px;">部门</th>
@@ -114,9 +117,9 @@
 														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit"><p ng-bind="item.contractId"></p></td>
+													<td ng-switch-when="edit"><p ng-bind="item.contractId" style="width:90px;"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:60px;" ng-model="item.contractType"  class="form-control select2" 
+				                                        <select id="type" style="width:40px;" ng-model="item.contractType"  class="form-control select2" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
 				                                            <option value="">类型</option>
 				                                        </select>
@@ -125,7 +128,7 @@
 														<input type="text" ng-model="item.content" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:60px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept"  style="width:50px;" class="form-control select2" 
 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 
@@ -140,7 +143,7 @@
 													<td ng-switch-when="edit">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:30px;">
 																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 																</span>
@@ -152,11 +155,11 @@
 														<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.serialid"  style="width:100px;" />
+														<input type="text" ng-model="item.serialid"  style="width:60px;" />
 													</td>
 													
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.remakes"  style="width:90px;" />
+														<input type="text" ng-model="item.remakes"  style="width:50px;" />
 													</td>
 													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
