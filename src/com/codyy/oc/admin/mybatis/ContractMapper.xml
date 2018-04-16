@@ -215,6 +215,8 @@
 			contract.content AS content,
 			dep.`name` AS dept,
 			contract.cost AS cost,
+			attachment.`attachment_cnts` as attachmentCnts,
+			case when cost_dtl.`cost_num_all` is null then 0 else cost_dtl.`cost_num_all` end as costNumAll,
 			payment.`name` as company,
 			payment.id as companyid,
 			contract.url as url,
@@ -226,6 +228,8 @@
 			CONTRACT contract
 		LEFT JOIN DEPARTMENT dep ON contract.dept = dep.dep_id
 		LEFT JOIN payment payment ON contract.company = payment.id
+		LEFT JOIN (select f_id, count(1) as attachment_cnts from ATTACHMENT group by f_id) attachment ON contract.contract_id = attachment.f_id
+		LEFT JOIN (select contract_id, sum(cost_num) as cost_num_all from COST_DETAIL group by contract_id) cost_dtl ON contract.contract_id = cost_dtl.contract_id
 		where 1=1 
 			
 			<if test="map.contactType != null and  map.contactType != ''">

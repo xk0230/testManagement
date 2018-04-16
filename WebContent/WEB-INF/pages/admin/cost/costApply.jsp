@@ -69,14 +69,14 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead >
 												<tr>
-													<th width="100px" style="text-align:center;font-size:12px;">成本单号</th>
-													<th width="100px" style="text-align:center;font-size:12px;">类型</th>
-													<th width="100px" style="text-align:center;font-size:12px;">分类</th>
-													<th width="100px" style="text-align:center;font-size:12px;">成本产生时间</th>
-													<th width="100px" style="text-align:center;font-size:12px;">金额</th>
-													<th width="200px" style="text-align:center;font-size:12px;">成本详情</th>
-													<th width="100px" style="text-align:center;font-size:12px;">状态</th>
-													<th width="150px" style="text-align:center;font-size:12px;">操作</th>
+													<th width="100px">成本单号</th>
+													<th width="100px">类型</th>
+													<th width="100px" ng-show="${sessionScope.adminUser.userId == 'admin'}">分类</th>
+													<th width="100px">成本产生时间</th>
+													<th width="100px">金额</th>
+													<th width="200px">成本详情</th>
+													<th width="100px">状态</th>
+													<th width="150px">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -84,26 +84,26 @@
 													<!-- view -->
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
+													<td ng-show="item.editMode == 'view' && ${sessionScope.adminUser.userId == 'admin'}"><p ng-bind="item.costSubName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
 															<ul style="">
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
-																	<span class="line-limit-length span4" title="{{item.remark}}">费用说明：{{item.remark}}</span>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
-																		<span class="line-limit-length span4">对应合同：
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																		<span class="line-limit-length span4">合同：
 																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
 																</span>
 															</li>
 															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:300px;font-size:12px;">
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
@@ -122,7 +122,7 @@
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
 				                                        </select>
 													</td>
-													<td ng-show="item.editMode == 'edit'">
+													<td ng-show="item.editMode == 'edit' && ${sessionScope.adminUser.userId == 'admin'}" >
 				                                        <select style="width:110px;" ng-model="item.costSubtypeId"  class="form-control select2" 
 				                                            ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in item.costSubTypeList">
 				                                        </select>

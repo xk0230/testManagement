@@ -561,6 +561,37 @@ myAppModule.controller('CostController',
 		    	    });
 		   };
 		
+		   //月度打印页面
+			this.monthPrint = function (parentSelector, mode) {
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
+			    	    var modalInstance = $uibModal.open({
+			    	      animation: true,
+			    	      ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'monthPrint.html',
+			    	      controller: 'MonthPrint',
+			    	      controllerAs: '$ctrl',
+			    	      size: 'lg',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    			//好像必须得这么写
+			    	        item: function () {
+			    	        	return "";
+			    	        }
+			    	      }
+			    	    });
+
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	item.contractId = selectedItem.contractId;
+			    	    	item.contractContent = selectedItem.contractContent;
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    	
+			    	    });
+			   };
 		
 	}
 );
@@ -572,7 +603,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		$scope.item = item;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 5;
 		$ctrl.$onInit = function(){
 			//合同号
 			$scope.contractId = item.contractId;
@@ -627,6 +658,144 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
+	};
+
+	});
+
+//编辑页面的control
+angular.module('myApp').controller('MonthPrint', 
+		function ($scope,$http,$uibModalInstance,$filter, item) {
+		var $ctrl = this;
+		$scope.item = item;
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 3;
+		$ctrl.$onInit = function(){
+			$ctrl.getMonthList();
+		};
+		
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+
+		$scope.pageChanged = function() {
+			$ctrl.getCostList();
+		};
+		
+		// 获取数据列表
+		$ctrl.getMonthList = function(){
+			$ctrl.monthList = [];
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/getMonthList.do',
+				params:{
+				}
+			}).then(function(res){
+				if(res){
+					angular.forEach(res.data, function(item, key) {
+						$ctrl.monthList.push({"month":item});
+					});
+					if($ctrl.monthList.length > 0){
+						$scope.searchMonth = $ctrl.monthList[0]["month"];
+						//取List
+						$ctrl.getCostList();
+						//取打印List
+						$ctrl.getAllCostList();
+					}
+				}else{
+					$ctrl.monthList = [];
+				}
+			});
+		};
+		
+		// 获取数据列表
+		$ctrl.getCostList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
+				params:{
+					searchMonth:$scope.searchMonth,
+					costType:1,
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					$scope.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					$scope.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+		};
+		
+		// 获取月度全部数据列表
+		$ctrl.getAllCostList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
+				params:{
+					searchMonth:$scope.searchMonth,
+					costType:'1',
+					start:0,
+					end:9999
+				}
+			}).then(function(res){
+				if(res){
+					$scope.allList = res.data.data || [];
+					
+					$scope.monthPrintCount = 23;
+					$scope.allListPage = [];
+					
+					var tempList = [];
+					
+					angular.forEach($scope.allList, function(item,index,array){
+						if((index != 0 && index % $scope.monthPrintCount ==0) || (index==($scope.allList.length-1))){
+							if(tempList.length < $scope.monthPrintCount){
+								for(var i=tempList.length;i<$scope.monthPrintCount;i++){
+									tempList.push({});
+								}
+							}
+							$scope.allListPage.push({"list":tempList});
+							tempList = [];
+						}else{
+							tempList.push(item);
+						}
+					});
+					
+				}else{
+					$scope.allListPage = [];
+				}
+			});
+			
+
+			
+			
+		};
+		
+	$scope.Choose = function (item) {
+		var selectItem = {contractId : item.contractId, contractContent : item.content};
+		$uibModalInstance.close(selectItem);
+	};
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
+	$scope.printMonth = function () {
+		for(var i=0;i<$(".printMonthDiv").length;i++){
+			$("#printMonthDiv" + i).print({
+			    globalStyles: true,
+			    mediaPrint: false,
+			    stylesheet: null,
+			    noPrintSelector: ".no-print",
+			    iframe: true,
+			    append: null,
+			    prepend: null,
+			    manuallyCopyFormValues: true,
+			    deferred: $.Deferred()
+			});
+		}
 	};
 
 	});

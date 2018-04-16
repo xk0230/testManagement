@@ -7,17 +7,18 @@ package com.codyy.oc.admin.entity;
  */
 public class CostSubTypeBean {
 	
-	private int costSubTypeId;
+	private String costSubTypeId;
 	
 	private int costType = -1;
 	
 	private String name;
 
-	public int getCostSubTypeId() {
+
+	public String getCostSubTypeId() {
 		return costSubTypeId;
 	}
 
-	public void setCostSubTypeId(int costSubTypeId) {
+	public void setCostSubTypeId(String costSubTypeId) {
 		this.costSubTypeId = costSubTypeId;
 	}
 

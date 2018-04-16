@@ -2943,6 +2943,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endCo
 }
 .modal {
 	position: fixed;
+	top:50px;
 	z-index: 1050;
 	overflow: auto;
 	width: auto;

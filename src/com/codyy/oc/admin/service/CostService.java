@@ -350,6 +350,7 @@ public class CostService {
 	    map.put("userId", cost.getUserId());
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
+	    map.put("auditStatus", cost.getAuditStatus());
 	    
 	    page.setMap(map);
 	    
@@ -384,6 +385,7 @@ public class CostService {
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
 	    map.put("createUserPosition", cost.getCreateUserPosition());
+	    map.put("searchMonth", cost.getSearchMonth());
 	    
 	    page.setMap(map);
 	    
@@ -394,6 +396,15 @@ public class CostService {
 	    }
 	    page.setData(costPageList);
 	    return page;
+	}
+	
+	/**
+	 * 成本审核查询
+	 * @param cost
+	 * @return
+	 */
+	public List<String> getMonthList(){
+		return costDaoMapper.getMonthList();
 	}
 	
 	/**

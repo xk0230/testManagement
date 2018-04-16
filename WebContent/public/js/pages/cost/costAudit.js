@@ -20,6 +20,12 @@ myAppModule.controller('CostController',
 				{costClass : "1", name : "合同"},
 				{costClass : "2", name : "出差"}
 			];
+			
+			$scope.auditStatusList = [
+				{costType : "0", name : "未审核"},
+				{costType : "1", name : "已审核"}
+			];
+			
 			//获取角色
 			self.admin =$("#sessionUserType").val();
 			if(self.admin=="MANAGER"){
@@ -105,6 +111,7 @@ myAppModule.controller('CostController',
 					costSubtypeId:$scope.costSubtypeId,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
+					auditStatus:$scope.auditStatus,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -127,7 +134,6 @@ myAppModule.controller('CostController',
 		//点击编辑
 		this.editCost = function (costItem,index) {
 			costItem.editMode = "edit";
-			$scope.costTypeChangeInList(item);
 		};
 		
 		//点击保存
@@ -138,6 +144,10 @@ myAppModule.controller('CostController',
 			}
 			if(!costItem.costDate){
 				swal("错误提示", "请填写成本产生时间！", "warning")
+				return ;
+			}
+			if(!costItem.costSubtypeId){
+				swal("错误提示", "请填写成本分类！", "warning")
 				return ;
 			}
 			if(!costItem.costNum){
@@ -168,7 +178,7 @@ myAppModule.controller('CostController',
 				costNum:costItem.costNum,
 				remark:costItem.remark,
 				status:costItem.status,
-				cosDepList:JSON.stringify(self.list[0].costDepList),
+				cosDepList:JSON.stringify(costItem.costDepList),
 				contractId:costItem.contractId
 			};
 			
@@ -356,7 +366,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		$scope.item = item;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 5;
 		$ctrl.$onInit = function(){
 			//合同号
 			$scope.contractId = item.contractId;

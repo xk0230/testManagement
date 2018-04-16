@@ -48,13 +48,24 @@
 	                                        <option value="">--成本分类--</option>
 	                                    </select>
                                     </div>
+                                    <div class="span6">
+                                    	<span class="searchSpan">内容:</span>
+                                        <input type="text" ng-model="remark" class="span4">
+                                    </div>
+								</div>
+								<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">单号:</span>
                                         <input type="text" ng-model="costNo" class="span2">
                                     </div>
-								</div>
-								<div class="row">
-
+                                    <div class="span4">
+										<span class="searchSpan">审核状态:</span>
+                                        <select id="costType" ng-model="auditStatus"  class="form-control span2" 
+                                                ng-options="cType.costType as cType.name group by cType.group for cType in auditStatusList"
+                                                ng-change="costTypeChange()">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
@@ -66,7 +77,7 @@
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
 													<th width="40px">分类</th>
-													<th width="140px">成本产生时间</th>
+													<th width="120px">成本产生时间</th>
 													<th width="60px">金额</th>
 													<th width="120px">成本详情</th>
 													<th width="50px">提交人</th>
@@ -78,9 +89,12 @@
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
 												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view" rowspan="2"><p ng-bind="item.costNo"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
+													<td ng-switch-when="view">
+														<p ng-bind="item.costSubName" ng-if="${sessionScope.adminUser.userId == 'admin'}"></p>
+														<p ng-if="${sessionScope.adminUser.userId != 'admin'}">-</p>
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
@@ -98,7 +112,7 @@
 																		</span>
 																</span>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:200px;">
-																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																	<span class="line-limit-length span3" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
 														</ul>
@@ -117,14 +131,14 @@
 														</div>
 													</td>
 													<!-- edit -->
-													<td ng-switch-when="edit" rowspan="2"><p ng-bind="item.costNo"></p></td>
+													<td ng-switch-when="edit"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="costType" style="width:110px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
+				                                        <select id="costType" style="width:80px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
 				                                        </select>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-				                                        <select style="width:110px;" ng-model="item.costSubtypeId"  class="form-control select2" 
+				                                        <select style="width:80px;" ng-model="item.costSubtypeId"  class="form-control select2" 
 				                                            ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in item.costSubTypeList">
 				                                        </select>
 													</td>
@@ -165,14 +179,14 @@
 													</td>
 												</tr>
 												<tr>
-													<td ng-switch-when="view" colspan="9" style="padding:8px;">
+													<td ng-switch-when="view" colspan="10" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
 															{{depCost.costDepName}}:￥{{depCost.costNum}}
 														</div>
 													</td>
-													<td ng-switch-when="edit" colspan="9" style="padding:8px;">
+													<td ng-switch-when="edit" colspan="10" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
-															{{depCost.costDepName}}:￥<input type="number" ng-model="depCost.costNum"  min="1" style="width:78px;" />
+															{{depCost.costDepName}}:￥<input type="number" name="costNum" ng-model="depCost.costNum"  min="1" style="width:78px;" />
 														</div>
 													</td>
 												</tr>
@@ -219,11 +233,15 @@
 										<span class="searchSpan">合同编号:</span>
                                         <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
-									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
-										<input type="date" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="date" ng-model="costEndDate" class="span2">
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
 								</div>
@@ -254,8 +272,8 @@
 													<td><p ng-bind="item.content"></p></td>
 													<td><p ng-bind="item.dept"></p></td>
 													<td><p ng-bind="item.cost"></p></td>
-													<td><p ng-bind="item.company"></p></td>
-													<td><p ng-bind="item.url"></p></td>
+													<td><p ng-bind="item.company" class="line-limit-length span2"></p></td>
+													<td><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
 													<td><p ng-bind="item.remakes"></p></td>
 													<td>

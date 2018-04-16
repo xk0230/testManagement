@@ -167,7 +167,7 @@
                                         <input type="text" ng-model="remark" class="span4">
                                     </div>
                                     <div class="span1 pull-right">
-									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" />
+									<input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.print()" value="打印" ng-if="${adminUser.userId == 'admin'}" />
 									</div>
 								</div>
 								<div class="row">
@@ -179,18 +179,21 @@
                                             <option value="">--请选择--</option>
                                         </select>
                                     </div>
+                                    <div class="span1 pull-right">
+										<input type="button" style="margin-left:-32px;" class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.monthPrint('.widget-content','view')" value="月度打印" ng-if="${adminUser.userId == 'admin'}" />
+									</div>
 								</div>
 								<hr>
 									<div style="font-weight: bold;font-size: 16px">
 									收入:<div class="progress progress-striped active" style="height:18px;" >
-										<div class="bar"  ng-style="{'width' : inPercent}" >￥{{inStr}}</div>
+										<div class="bar"  ng-style="{'width' : inPercent}" ><p ng-bind="inStr | currency:'￥':2 "></p></div>
 									</div>
 									支出:<div class="progress progress-striped active">
-										<div class="bar" ng-style="{'width' : outPercent}">￥{{outStr}}</div>
+										<div class="bar" ng-style="{'width' : outPercent}"><p ng-bind="outStr | currency:'￥':2"></p></div>
 									</div>
 									<div ng-show="${adminUser.position == 'ADMIN'}">
 									账户余额:<div class="progress progress-striped active" >
-										<div class="bar" ng-style="{'width' : yePercent}">￥{{yeStr}}</div>
+										<div class="bar" ng-style="{'width' : yePercent}"><p ng-bind="yeStr | currency:'￥':2"></p></div>
 									</div>
 									</div>
 									</div>
@@ -201,7 +204,7 @@
 										<table class="table table-condensed table-bordered table-striped tableBox" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr style="font-size:16px;">
-													<th width="20px"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()" ></th>
+													<th width="20px" ng-if="${adminUser.userId == 'admin'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th>
 													<th style="text-align: center;width:20px;font-size:14px;">NO</th>
 													<th style="text-align: center;width:120px;font-size:14px;">成本单号</th>
 													<th style="text-align: center;width:60px;font-size:14px;">类型</th>
@@ -217,8 +220,8 @@
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
 												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td rowspan="2"><input type="checkbox" ng-if="item.costType == 1" ng-model="item.chk" ng-change="vm.chkChange()" ></td>
-													<td rowspan="2" ng-switch-when="view" ><p ng-bind="$index+1"></td>
+													<td ng-if="${adminUser.userId == 'admin'}"><input type="checkbox" ng-if="item.costType == 1" ng-model="item.chk" ng-change="vm.chkChange()" ></td>
+													<td ng-switch-when="view" ><p ng-bind="$index+1"></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costSubName"></p></td>
@@ -252,7 +255,7 @@
 													<!--  <td ng-switch-when="view"><p style="color:#7eb216" ng-bind="item.statusName"></p></td>-->
 												</tr>
 												<tr>
-													<td ng-switch-when="view" colspan="9" style="padding:8px;">
+													<td ng-switch-when="view" colspan="11" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="depCost in item.costDepList">
 														{{depCost.costDepName}} : <strong >{{depCost.costNum}}</strong>
 														</div>
@@ -272,7 +275,8 @@
 				</div>
 			</div>
 		</div>
-		
+	
+	<!-- 合同选择Modal -->
     <script type="text/ng-template" id="myModalEditContent.html">
 		  <div class="main-inner">
 			<div class="container">
@@ -302,11 +306,15 @@
 										<span class="searchSpan">合同编号:</span>
                                         <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
-									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
-										<input type="date" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="date" ng-model="costEndDate" class="span2">
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
 								</div>
@@ -364,6 +372,131 @@
 			</div>
 		</div>
     </script>
+
+	<!-- 月度汇总打印 -->
+    <script type="text/ng-template" id="monthPrint.html">
+		  <div class="main-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>月度汇总打印</h3>
+							</div>
+							<div class="widget-content">
+								<div class="row">
+                                    <div class="span4">
+										<span class="searchSpan">月度:</span>
+                                        <select id="contractType" ng-model="searchMonth"  class="form-control span2" ng-change="$ctrl.getCostList()"
+                                                ng-options="cType.month as cType.month group by cType.group for cType in $ctrl.monthList">
+                                        </select>
+                                    </div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="printMonth()" value="打印" /></div>
+								</div>
+								<hr>
+								<!-- 查询结果 -->
+								<div class="row">
+									<div class="span12">
+										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+											<thead>
+												<tr style="font-size:16px;">
+													<th style="text-align: center;width:20px;font-size:14px;">NO</th>
+													<th style="text-align: center;width:120px;font-size:14px;">成本单号</th>
+													<th style="text-align: center;width:60px;font-size:14px;">类型</th>
+													<th style="text-align: center;width:60px;font-size:14px;">分类</th>
+													<th style="text-align: center;width:120px;font-size:14px;">成本产生时间</th>
+													<th style="text-align: center;width:120px;font-size:14px;">金额</th>
+													<th style="text-align: center;width:140px;font-size:14px;">成本详情</th>
+
+												</tr>
+											</thead>
+											<tbody ng-repeat="item in list">
+												<tr class="odd gradeX">
+													<!-- view -->
+													<td rowspan="2" ><p ng-bind="$index + 1"></td>
+													<td ><p ng-bind="item.costNo"></p></td>
+													<td ><p ng-bind="item.costTypeName"></p></td>
+													<td ><p ng-bind="item.costSubName"></p></td>
+													<td ><p ng-bind="item.costDate"></p></td>
+													<td ><p ng-bind="item.costNum"></p></td>
+													<td >
+													<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																		<span class="line-limit-length span4">合同：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
+																		<label style="width:200px;" ng-if="!item.contractId" >未选择</label>
+																		</span>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 3px;width:200px;font-size:12px;">
+																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																</span>
+															</li>
+														</ul>
+													</td>
+												</tr>
+												<tr>
+													<td colspan="9" style="padding:8px;">
+														<div style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="depCost in item.costDepList">
+														{{depCost.costDepName}} : <strong >{{depCost.costNum}}</strong>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+										<div style="width:1134px;">
+											<%@ include file="../../common/page.jsp"%>
+										</div>
+									</div>
+								</div>
+									<div class="row hidden printMonthDiv" id="printMonthDiv{{$index}}" style="width:20cm;font: 宋体;" ng-repeat="Item in allListPage">
+										<div style="width:100%;">
+											<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">月度打印汇总</div>
+											<div style="font-size: 12px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">月度：{{searchMonth | date:'yyyy年MM月'}}</div>
+										</div>
+										
+										<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;margin-top:0.2cm" cellspacing="0" cellpadding="0">
+											<tr style="height:1cm;;">
+												<th style="background-color:#F2F2F2; border-top:1px solid black;border-left:1px solid black;width:2cm">NO.</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">单号</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:9cm;">详情</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">报销日期</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
+											</tr>
+											<tr class="odd gradeX" ng-repeat="subitem in Item.list track by $index" style="height:1cm;">
+												<td style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;"><p ng-bind="$parent.$index * monthPrintCount + $index + 1"></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;text-align: right;padding-left: 0.2cm"><p>{{subitem.costNum | currency:"¥:2"}}</p></td>
+											</tr>
+										</table>
+										<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:12px;margin-top:0.5cm" ng-if="$last">
+											<tr>
+												<td style="width:33%;">批准：</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+        						<div class="modal-footer">
+            						<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        						</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
 		
     </div>
 	<input type="hidden" id="rootUrl" value="${root}">
