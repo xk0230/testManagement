@@ -388,7 +388,7 @@
 							<div class="widget-content">
 								<div class="row">
                                     <div class="span4">
-										<span class="searchSpan">月度:</span>
+										<span class="searchSpan">所属期间:</span>
                                         <select id="contractType" ng-model="searchMonth"  class="form-control span2" ng-change="$ctrl.getCostList()"
                                                 ng-options="cType.month as cType.month group by cType.group for cType in $ctrl.monthList">
                                         </select>
@@ -459,7 +459,7 @@
 										</div>
 									</div>
 								</div>
-									<div class="row hidden printMonthDiv" id="printMonthDiv{{$index}}" style="width:20cm;font: 宋体;" ng-repeat="Item in allListPage">
+									<div class="row hidden printMonthDiv" id="printMonthDiv{{$index}}" style="width:20cm;font: 宋体;font-size:10px;" ng-repeat="Item in allListPage">
 										<div style="width:100%;">
 											<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">月度打印汇总</div>
 											<div style="font-size: 12px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">月度：{{searchMonth | date:'yyyy年MM月'}}</div>
@@ -467,10 +467,10 @@
 										
 										<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;margin-top:0.2cm" cellspacing="0" cellpadding="0">
 											<tr style="height:1cm;;">
-												<th style="background-color:#F2F2F2; border-top:1px solid black;border-left:1px solid black;width:2cm">NO.</th>
+												<th style="background-color:#F2F2F2; border-top:1px solid black;border-left:1px solid black;width:1cm">NO.</th>
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">单号</th>
-												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:9cm;">详情</th>
-												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">报销日期</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:10cm;">费用说明</th>
+												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">发生日期</th>
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;width:3cm">金额</th>
 											</tr>
 											<tr class="odd gradeX" ng-repeat="subitem in Item.list track by $index" style="height:1cm;">
