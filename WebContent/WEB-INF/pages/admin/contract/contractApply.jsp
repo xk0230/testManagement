@@ -58,7 +58,8 @@
 										<div style="width:1134px;">
 											<button class="btn btn-invert" ng-click="vm.addContract()"><i class="icon-plus"></i> 新增</button>
 										</div>
-										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
+										<div style="overflow:scroll">
+										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
 											<thead>
 												<tr>
 												 	<th width="90px" style="text-align:center;font-size:12px;">单号</th>
@@ -152,7 +153,7 @@
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
-														<mb-datepicker input-class="mb-date" date="item.url | date:'yyyy-MM-dd'" date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.contractDate" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.serialid"  style="width:60px;" />
@@ -167,6 +168,7 @@
 												</tr>
 											</tbody>
 										</table>
+										</div>
 										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
 										<div style="width:1134px;">
 											<%@ include file="../../common/page.jsp"%>
