@@ -458,13 +458,13 @@
 										</div>
 									</div>
 								</div>
-									<div class="row hidden printMonthDiv" id="printMonthDiv{{$index}}" style="width:20cm;font: 宋体;font-size:10px;" ng-repeat="Item in allListPage">
+									<div class="row hidden printMonthDiv" id="printMonthDiv{{$index}}" style="width:20cm;font: 宋体;" ng-repeat="Item in allListPage">
 										<div style="width:100%;">
 											<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">月度打印汇总</div>
-											<div style="font-size: 12px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">月度：{{searchMonth | date:'yyyy年MM月'}}</div>
+											<div style="font-size: 12px;font-weight: bold;text-align: right;width: 100%;margin-top:0.2cm">所属月度：{{searchMonth | date:'yyyy年MM月'}}</div>
 										</div>
 										
-										<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;margin-top:0.2cm" cellspacing="0" cellpadding="0">
+										<table id="printtable"class="printTable" style="width:20cm;border-bottom:1px solid black;text-align: center;margin-top:0.2cm;font-size:10px;" cellspacing="0" cellpadding="0">
 											<tr style="height:1cm;;">
 												<th style="background-color:#F2F2F2; border-top:1px solid black;border-left:1px solid black;width:1cm">NO.</th>
 												<th style="background-color:#F2F2F2;border-top:1px solid black;border-left:1px solid black;width:3cm">单号</th>
@@ -479,20 +479,22 @@
 												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costNo"></p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;text-align: left;padding-left: 0.1cm"><p ng-bind="subitem.remark"></p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.costDate"></p></td>
-												<td style="border-top:1px solid black;border-left:1px solid black;text-align: right;padding-left: 0.2cm"><p>{{subitem.costNum | currency:"¥:2"}}</p></td>
+												<td style="border-top:1px solid black;border-left:1px solid black;text-align: right;padding-left: 0.2cm"><p>{{subitem.costNum | currency:"¥: "}}</p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;"><p ng-bind="subitem.subUserName"></p></td>
 												<td style="border-top:1px solid black;border-left:1px solid black;border-right:1px solid black;"><p ng-bind="subitem.auditUserName"></p></td>
 											</tr>
 										</table>
-										<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:16px;font-weight: bold;margin-top:0.5cm" ng-if="$last">
+										<table border="0" cellspacing="0" cellpadding="0" style="width:100%;font-size:14px;font-weight: bold;margin-top:0.5cm" ng-if="$last">
 											<tr>
-												<td style="width:100%;" colspan="3">以上共计{{$parent.$index + 1}}页，总计发生金额{{sumCost | currency:"¥:2"}}元。</td>
+												<td style="width:100%;" colspan="3">以上共计{{$parent.$index + 1}}页，总计发生金额 {{sumCost | currency:"¥: "}}元。</td>
 											</tr>
 											<tr><td></td></tr>
+                                            <tr><td></td></tr>
 											<tr>
-												<td style="width:20%;">批准：</td>
-												<td style="width:20%;">核对时间：</td>
-												<td style="width:60%;"></td>
+                                                 
+												<td style="width:30%;">批准：</td>
+												<td style="width:30%;">核对时间：</td>
+												<td style="width:40%;"></td>
 											</tr>
 										</table>
 									</div>
