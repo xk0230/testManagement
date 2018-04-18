@@ -288,7 +288,7 @@
 			</if>
 			
 			<!-- 管理员时 条件设定为部门领导审核通过的 -->
-			<if test="map.userId == 'admin' and map.auditStatus == ''">
+			<if test="map.userId == 'admin' and map.auditStatus == null">
 				AND (costDetail.status in ('03','04','05'))
 			</if>
 			<if test="map.userId == 'admin' and map.auditStatus == 0">
@@ -299,7 +299,7 @@
 			</if>
 			
 			
-			<if test="map.userId != 'admin' and map.auditStatus == '' ">
+			<if test="map.userId != 'admin' and map.auditStatus == null ">
 				AND costDetail.dep_id = #{map.depId}
 				AND (costDetail.status in ('01','02','03','04','05'))
 			</if>
@@ -321,18 +321,6 @@
 			<if test="map.endTime != null and map.endTime != ''">
 				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
-			
-			AND ( costDetail.create_user_id = #{map.userId}
-			
-				<if test="map.userPostion == 'ADMIN'">
-					or 1 = 1
-				</if>
-				<if test="map.userPostion == 'MANAGER'">
-					or costDetail.dep_id = #{map.depId}
-				</if>
-			
-			)
-		
 		ORDER BY costDetail.create_time DESC
 	
 	</select>
