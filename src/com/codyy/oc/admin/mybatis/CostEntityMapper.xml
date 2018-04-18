@@ -321,6 +321,17 @@
 			<if test="map.endTime != null and map.endTime != ''">
 				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
+			
+			AND ( costDetail.create_user_id = #{map.userId}
+			
+				<if test="map.userPostion == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPostion == 'MANAGER'">
+					or costDetail.dep_id = #{map.depId}
+				</if>
+			
+			)
 		
 		ORDER BY costDetail.create_time DESC
 	

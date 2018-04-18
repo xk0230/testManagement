@@ -104,7 +104,8 @@ myAppModule.controller('ContractController',
 		   };
 
 		this.contractAttachmentList = function(id){
-			window.location.href="/ssc/admin/attachment/contractManager.do?contractId="+id; 
+			window.open("/ssc/admin/attachment/contractManager.do?contractId="+id);  
+//			window.location.href="/ssc/admin/attachment/contractManager.do?contractId="+id; 
 		};
 		
 		this.getDeparts = function(){
