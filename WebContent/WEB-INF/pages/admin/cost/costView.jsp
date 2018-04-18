@@ -144,7 +144,7 @@
                                         </select>
                                     </div>
 									<div class="span4" style="height:37px;">
-										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="searchSpan pull-left">申请日期 :</span>
 										<span class="pull-left">
 											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
@@ -159,14 +159,14 @@
 								</div>
 								<div class="row">
                                     <div class="span4">
-										<span class="searchSpan">成本分类:</span>
+										<span class="searchSpan">成本分类 :</span>
 	                                    <select id="costClass" ng-model="costSubtypeId"  class="form-control span2" 
 	                                        ng-options="cType.costSubTypeId as cType.name group by cType.group for cType in costSubTypeList">
 	                                        <option value="">--请选择--</option>
 	                                    </select>
                                     </div>
                                     <div class="span4">
-                                        <span class="searchSpan">单号:</span>
+                                        <span class="searchSpan">单号 :</span>
                                         <input type="text" ng-model="costNo" class="span2">
                                     </div>
                                     <div class="span1 pull-right">
@@ -175,7 +175,7 @@
 								</div>
 								<div class="row">
                                     <div class="span6">
-                                    	<span class="searchSpan">内容:</span>
+                                    	<span class="searchSpan">成本详情 :</span>
                                         <input type="text" ng-model="remark" class="span4">
                                     </div>
                                     <div class="span1 pull-right">
@@ -183,15 +183,16 @@
 									</div>
 								</div>
 								<hr>
+								<div>TIPS: 以下汇总均为截至目前的总计，与日期筛选无关。</div><br>
 									<div style="font-weight: bold;font-size: 16px">
-									收入:<div class="progress progress-striped active" style="height:18px;" >
+									收入 :<div class="progress progress-striped active" style="height:18px;" >
 										<div class="bar"  ng-style="{'width' : inPercent}" ><p ng-bind="inStr | currency:'￥':2 "></p></div>
 									</div>
-									支出:<div class="progress progress-striped active">
+									支出 :<div class="progress progress-striped active">
 										<div class="bar" ng-style="{'width' : outPercent}"><p ng-bind="outStr | currency:'￥':2"></p></div>
 									</div>
 									<div ng-show="${adminUser.position == 'ADMIN'}">
-									账户余额:<div class="progress progress-striped active" >
+									账户余额 :<div class="progress progress-striped active" >
 										<div class="bar" ng-style="{'width' : yePercent}"><p ng-bind="yeStr | currency:'￥':2"></p></div>
 									</div>
 									</div>
