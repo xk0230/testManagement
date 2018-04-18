@@ -212,8 +212,8 @@
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
-			<if test="map.costClass != null and  map.costClass != ''">
-				AND costDetail.cost_class = #{map.costClass}
+			<if test="map.costSubtypeId != null and  map.costSubtypeId != ''">
+				AND costDetail.cost_subtype_id = #{map.costSubtypeId}
 			</if>
 			
 			<if test="map.costNo != null and  map.costNo != ''">
@@ -276,8 +276,8 @@
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
-			<if test="map.costClass != null and  map.costClass != ''">
-				AND costDetail.cost_class = #{map.costClass}
+			<if test="map.costSubtypeId != null and  map.costSubtypeId != ''">
+				AND costDetail.cost_subtype_id = #{map.costSubtypeId}
 			</if>
 			<if test="map.costNo != null and  map.costNo != ''">
 				AND costDetail.cost_no like '%${map.costNo}%'
@@ -391,8 +391,8 @@
 			<if test="map.costType != null and  map.costType != ''">
 				AND costDetail.cost_type = #{map.costType}
 			</if>
-			<if test="map.costClass != null and  map.costClass != ''">
-				AND costDetail.cost_class = #{map.costClass}
+			<if test="map.costSubtypeId != null and  map.costSubtypeId != ''">
+				AND costDetail.cost_subtype_id = #{map.costSubtypeId}
 			</if>
 			<if test="map.costNo != null and  map.costNo != ''">
 				AND costDetail.cost_no like '%${map.costNo}%'
@@ -412,10 +412,10 @@
 			
 			AND ( costDetail.create_user_id = #{map.userId}
 			
-				<if test="map.createUserPosition == 'ADMIN'">
+				<if test="map.userPostion == 'ADMIN'">
 					or 1 = 1
 				</if>
-				<if test="map.createUserPosition == 'MANAGER'">
+				<if test="map.userPostion == 'MANAGER'">
 					or costDetail.dep_id = #{map.depId}
 				</if>
 			

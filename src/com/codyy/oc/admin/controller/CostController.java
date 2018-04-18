@@ -174,6 +174,7 @@ public class CostController extends BaseController{
 		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
 		cost.setDepId(adminUser.getDepId());
 		cost.setUserId(adminUser.getUserId());
+		cost.setUserPostion(adminUser.getPosition());
 		
         return costService.getCostAuditList(cost);
     }

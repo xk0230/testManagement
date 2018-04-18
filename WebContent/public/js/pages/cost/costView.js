@@ -170,7 +170,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/viewPage.do',
 				params:{
 					costType:$scope.costType,
-					costClass:$scope.costClass,
+					costSubtypeId:$scope.costSubtypeId,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),

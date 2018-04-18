@@ -36,6 +36,8 @@ public class CostVO extends CostEntityBean{
     
     private String UserId;
     
+    private String UserPostion;
+    
     private String editMode;
     
     private String costNo;
@@ -336,6 +338,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setSearchMonth(String searchMonth) {
 		this.searchMonth = searchMonth;
+	}
+
+	public String getUserPostion() {
+		return UserPostion;
+	}
+
+	public void setUserPostion(String userPostion) {
+		UserPostion = userPostion;
 	}
 
 }
