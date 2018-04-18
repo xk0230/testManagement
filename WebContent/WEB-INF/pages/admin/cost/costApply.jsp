@@ -208,11 +208,15 @@
 										<span class="searchSpan">合同编号:</span>
                                         <input type="text" ng-model="contractId"  style="width:120px;" />
                                     </div>
-									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
-										<input type="date" ng-model="costStartDate" class="span2">
-										<span class="searchSpanMid">~</span>
-										<input type="date" ng-model="costEndDate" class="span2">
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
 									</div>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
 								</div>
@@ -243,8 +247,8 @@
 													<td><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
 													<td><p ng-bind="item.dept"></p></td>
 													<td><p ng-bind="item.cost"></p></td>
-													<td><p ng-bind="item.company"></p></td>
-													<td><p ng-bind="item.url"></p></td>
+													<td><p class="line-limit-length span3" ng-bind="item.company"></p></td>
+													<td><p ng-bind="item.url  | date:'yyyy-MM-dd'"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
 													<td><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 													<td>

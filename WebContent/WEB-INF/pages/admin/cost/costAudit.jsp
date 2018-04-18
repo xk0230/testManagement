@@ -34,7 +34,7 @@
 										</span>
 										<span class="searchSpanMid pull-left">~</span>
 										<span class="pull-left">
-											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+											<mb-datepicker input-class="mb-date" date="costEndDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
 									</div>
 									

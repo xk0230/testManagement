@@ -18,7 +18,7 @@
 								<h3>合同</h3>
 							</div>
 							
-							<div class="widget-content">
+							<div class="widget-content" style="padding-bottom:100px;">
 								<div class="row">
                                     <div class="span4">
 										<span class="searchSpan">合同类型:</span>
@@ -63,9 +63,9 @@
 											<thead>
 												<tr>
 												 	<th width="90px" style="text-align:center;font-size:12px;">单号</th>
-													<th width="30px" style="text-align:center;font-size:12px;">类型</th>
+													<th width="60px" style="text-align:center;font-size:12px;">类型</th>
 													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
-													<th width="50px" style="text-align:center;font-size:12px;">部门</th>
+													<th width="100px" style="text-align:center;font-size:12px;">部门</th>
 													<th width="50px" style="text-align:center;font-size:12px;">总金额</th>
 													<th width="30px" style="text-align:center;font-size:12px;">已付</th>
 													<th width="30px" style="text-align:center;font-size:12px;">附件</th>
@@ -98,16 +98,8 @@
 													<td ng-switch-when="view"><p ng-bind="item.costNumAll"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="view">
-															<ul style="">
-															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:120px; font-size:12px;">
-																		<span class="line-limit-length span4">
-																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')" >{{item.company}}</a>
-																		<a href="javascript:;" class="line-limit-length span2"   ng-if="!item.company"  >未选择</a>
-																		</span>
-																</span>
-															</li>
-														</ul>
+														<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}" ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','view')" >{{item.company}}</a>
+														<a href="javascript:;" class="line-limit-length span2"   ng-if="!item.company"  >未选择</a>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></td>
@@ -120,7 +112,7 @@
 													<!-- edit -->
 													<td ng-switch-when="edit"><p ng-bind="item.contractId" style="width:90px;"></p></td>
 													<td ng-switch-when="edit">
-				                                        <select id="type" style="width:40px;" ng-model="item.contractType"  class="form-control select2" 
+				                                        <select id="type" style="width:60px;" ng-model="item.contractType"  class="form-control" 
 				                                            ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
 				                                            <option value="">类型</option>
 				                                        </select>
@@ -129,10 +121,8 @@
 														<input type="text" ng-model="item.content" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:50px;" class="form-control select2" 
-
+														<select id="dept" ng-model="item.dept"  style="width:100px;" class="form-control select2" 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
-
 														<option value="">部门</option>
 														</select>
 													</td>
@@ -142,14 +132,8 @@
 													<td ng-switch-when="edit"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.costNumAll"></p></td>
 													<td ng-switch-when="edit">
-															<ul style="">
-															<li>
-																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:30px;">
-																		<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
-																		<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
-																</span>
-															</li>
-														</ul>
+														<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
+														<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<!-- <input type="text" id="datepicker{{$index}}" ng-model="item.contractDate" style="width:120px;"> -->
