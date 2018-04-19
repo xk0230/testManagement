@@ -385,7 +385,7 @@ public class CostService {
 	    map.put("userId", cost.getUserId());
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
-	    map.put("createUserPosition", cost.getCreateUserPosition());
+	    map.put("userPostion", cost.getCreateUserPosition());
 	    map.put("searchMonth", cost.getSearchMonth());
 	    
 	    page.setMap(map);
