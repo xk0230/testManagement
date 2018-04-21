@@ -62,6 +62,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="160px" style="text-align:center;font-size:12px;">操作</th> 
 												 	<th width="90px" style="text-align:center;font-size:12px;">单号</th>
 													<th width="60px" style="text-align:center;font-size:12px;">类型</th>
 													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
@@ -73,7 +74,6 @@
 													<th width="90px" style="text-align:center;font-size:12px;">签订时间</th>
 													<th width="80px" style="text-align:center;font-size:12px;">外部订单</th>
 													<th width="90px" style="text-align:center;font-size:12px;">备注</th>
-													<th width="160px" style="text-align:center;font-size:12px;">操作</th> 
 												<!-- 	<th width="10%">单号</th>
 													<th width="5%">类型</th>
 													<th width="8%">内容</th>
@@ -90,6 +90,11 @@
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view">
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
+														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.contractId"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.contractType"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.content}}" ng-bind="item.content"></p></td>
@@ -104,12 +109,11 @@
 													<td ng-switch-when="view"><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.serialid}}" ng-bind="item.serialid"></p></td>
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
-													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
-														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
-													</td>
+												
 													<!-- edit -->
+													<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
+													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.contractId" style="width:90px;"></p></td>
 													<td ng-switch-when="edit">
 				                                        <select id="type" style="width:60px;" ng-model="item.contractType"  class="form-control" 
@@ -146,9 +150,7 @@
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.remakes"  style="width:50px;" />
 													</td>
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
-													</td>
+													
 												</tr>
 											</tbody>
 										</table>

@@ -51,27 +51,30 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:98%;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="100px">操作</th> 
 												 	<th width="100px">单号</th>
 													<th width="150px">项目名</th>
 													<th width="50px">项目开始时间</th>
 													<th width="50px">项目结束时间</th>
 													<th width="50px">项目负责人</th>
-													<th width="100px">操作</th> 
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view">
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editProject(item,$index)" ng-if="depIdChangeAble == false"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="depIdChangeAble == false"><i class='icon-remove-sign'></i></a>
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.pjNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.name"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.leader"></p></td>
-													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editProject(item,$index)" ng-if="depIdChangeAble == false"><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="depIdChangeAble == false"><i class='icon-remove-sign'></i></a>
-													</td>
 													<!-- edit -->
+													<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
+													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.pjNo"></p></td>
 													<td ng-switch-when="edit">
 														<input type="text" class="line-limit-length span4" ng-model="item.name" style="width:100px;" >
@@ -86,9 +89,6 @@
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" class="line-limit-length span4" ng-model="item.leader" style="width:100px;" >
-													</td>
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
 												</tr>
 											</tbody>

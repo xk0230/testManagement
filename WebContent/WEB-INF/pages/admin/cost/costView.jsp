@@ -325,6 +325,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th>操作</th>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
 													<th width="200px">内容</th>
@@ -334,12 +335,14 @@
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th width="100px">备注</th>
-													<th>操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in list" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td>
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)" ng-if="item.status=='00' && mode=='edit'">选择</a>
+													</td>
 													<td><p ng-bind="item.contractId"></p></td>
 													<td><p ng-bind="item.contractType"></p></td>
 													<td><p ng-bind="item.content"></p></td>
@@ -349,9 +352,6 @@
 													<td><p ng-bind="item.url"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
 													<td><p ng-bind="item.remakes"></p></td>
-													<td>
-														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)" ng-if="item.status=='00' && mode=='edit'">选择</a>
-													</td>
 													<!-- edit -->
 												</tr>
 											</tbody>
