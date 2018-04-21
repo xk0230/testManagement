@@ -35,27 +35,31 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="20%" style="min-width：100px;text-align:center;font-size:12px;">操作</th>
 													<th width="20%" style="text-align:center;font-size:12px;">公司名称</th>
 													<th width="20%" style="text-align:center;font-size:12px;">开户行</th>
 													<th width="20%" style="text-align:center;font-size:12px;">银行账号</th>
 													<th width="20%" style="text-align:center;font-size:12px;">税号</th>
-													<th width="20%" style="min-width：100px;text-align:center;font-size:12px;">操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.name}}">{{item.name}}</span></td>
-													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.bankName}}">{{item.bankName}}</span></td>
-													<td ng-switch-when="view"><p ng-bind-html="item.bankNo"></p></td>
-													
-													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
 													<td ng-switch-when="view">
 													
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editPayment(item)"><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)"><i class='icon-remove-sign'></i></a>
 													</td>
+													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.name}}">{{item.name}}</span></td>
+													<td ng-switch-when="view"><span class="line-limit-length span4" title="{{item.bankName}}">{{item.bankName}}</span></td>
+													<td ng-switch-when="view"><p ng-bind-html="item.bankNo"></p></td>
+													
+													<td ng-switch-when="view"><p ng-bind-html="item.taxNo"></p></td>
+												
 													<!-- edit -->
+													<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success icon-ok "   ng-click="vm.save(item)"></a>
+													</td>
 													<td ng-switch-when="edit"><input type="text" ng-model="item.name" style="width:250px;" ></td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.bankName" style="width:200px;">
@@ -66,9 +70,7 @@
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.taxNo" style="width:200px;" >
 													</td>
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success icon-ok "   ng-click="vm.save(item)"></a>
-													</td>
+												
 												</tr>
 											</tbody>
 										</table>
