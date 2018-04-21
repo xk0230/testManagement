@@ -6,10 +6,126 @@
 </head>
 <body  >
 		<%@ include file="../../common/header.jsp"%>
-		<%@ include file="../../common/side.jsp"%>
+		
+		<div id="content" class="main" ng-app = "myApp" ng-controller="UserListController as vm">
+			<div class="main-inner">
+				<div class="container">
+					<div class="row">
+						<div class="span12">
+							<div class="widget">
+								<!-- 标题 -->
+								<div class="widget-header">
+									<i class="icon-pushpin"></i>
+									<h3>员工列表</h3>
+								</div>
+								<div class="widget-content" style="padding-bottom: 100px;">
+									<div class="row">
+										<div class="col-lg-12 heading">
+											<div class="col-lg-4" style="padding:15px;">
+					                        	<div id="c1" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+					                        </div>
+					                        <div class="col-lg-4" style="padding:15px;">
+					                        	<div id="c2" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+					                        </div>
+					                        <div class="col-lg-4" style="padding:15px;">
+					                        	<div id="c3" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+					                        </div>
+					                        <div class="col-lg-4" style="padding:15px;">
+					                        	<div id="c4" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+					                        </div>
+					                        <div class="col-lg-4" style="padding:15px;">
+					                        	<div id="c5" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
+					                        </div>
+										</div>
+									</div>
+								<div class="widget-content" style="padding-bottom: 100px;">
+								
+								<div class="widget-content" style="padding-bottom: 100px;">
+									<div class="row">
+	                                    <div class="span4">
+											<span class="searchSpan">用户名:</span>
+	                                        <input type="text" class="form-control" name="userName" ng-model="userName" id="userName" />
+	                                    </div>
+										<div class="span4" style="height:37px;">
+											<span class="searchSpan pull-left">姓名:</span>
+											<input type="text" class="form-control" name="realName" ng-model="realName" id="realName" />
+										</div>
 
+										<div class="span1 pull-right"><input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getFinancingInfoList()" value="查询" /></div>
+									</div>
+									<div class="row">
+	                                    <div class="span4">
+											<span class="searchSpan">部门:</span>
+											<select class="form-control select2" ng-model="depId"  ng-change="vm.getPostionById()" ng-Disabled = "depIdChangeAble" >
+												<option value="">请选择</option>
+												<option value="{{dep.depId}}" ng-repeat="dep in vm.deplist">{{dep.name}}</option>
+											</select>
+	                                    </div>
+	                                    <div class="span4">
+											<span class="searchSpan">岗位:</span>
+											<select class="form-control select2" ng-model="postId" >
+												<option value="">请选择</option>
+												<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
+											</select>
+										</div>
+									</div>
+									<hr>
+									<!-- 查询结果 -->
+									<div class="row">
+										<div class="span12">
+											<div style="width:1134px;">
+												<button class="btn btn-invert" ng-click="vm.addNewUser('')" ng-if="${adminUser.userId == 'admin'}"><i class="icon-plus"></i>新增用户</button>
+											</div>
+											<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+												<thead >
+													<tr>
+														<th>用户名</th>
+														<th>姓名</th>
+														<th>部门</th>
+														<th>角色</th>
+														<th>岗位</th>
+														<th>状态</th>
+														<th>入职日期</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd gradeX" ng-repeat="item in vm.list">
+														<td><p ng-bind="item.userName"></p></td>
+														<td><p ng-bind="item.realName"></p></td>
+														<td><p ng-bind="item.depName"></p></td>
+														<td><p ng-bind="item.positionStr"></p></td>
+														<td><p ng-bind="item.postName"></p></td>
+														<td><p ng-bind="item.workStatus"></p></td>
+														<td><p ng-bind="item.entryDate | date:'yyyy-MM-dd'"></p></td>
+														<td>
+															<button type="button" class="btn btn-xs btn-success" ng-click="vm.edit(item.userId)"><i class="br-pencil"></i></button>
+															<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTrainList(item.userId)">培训</button>
+															<button type="button" class="btn btn-xs btn-success" ng-click="vm.userTransferPositionList(item.userId)">调岗/调薪</button>
+															<button type="button" class="btn btn-xs btn-success" ng-click="vm.userAttachmentList(item.userId)">附件</button>
+															<button type="button" class="btn btn-xs btn-success" ng-click="vm.bookHis(item.userId,'.outlet')">借书记录</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+											<div style="width:1134px;">
+												<%@ include file="../../common/page.jsp"%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    	</div>
+		
+		
+		
 		<!-- Start #content -->
-		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
+<!-- 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm"> -->
 			<!-- Start .content-wrapper -->
 			<div class="content-wrapper">
 				<div class="row">
@@ -20,25 +136,7 @@
                         </ul>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12 heading">
-						<div class="col-lg-4" style="padding:15px;">
-                        	<div id="c1" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
-                        </div>
-                        <div class="col-lg-4" style="padding:15px;">
-                        	<div id="c2" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
-                        </div>
-                        <div class="col-lg-4" style="padding:15px;">
-                        	<div id="c3" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
-                        </div>
-                        <div class="col-lg-4" style="padding:15px;">
-                        	<div id="c4" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
-                        </div>
-                        <div class="col-lg-4" style="padding:15px;">
-                        	<div id="c5" class="col-lg-12 panel panel-primary panelMove toggle panelRefresh panelClose"></div>
-                        </div>
-					</div>
-				</div>
+
 				
 				<!-- <div id="c2"></div>
 				<div id="c3"></div>
@@ -225,7 +323,7 @@
         </div>
     </script>	
 		<!-- End #content -->
-	</div>
+<!-- 	</div> -->
 
 
 
