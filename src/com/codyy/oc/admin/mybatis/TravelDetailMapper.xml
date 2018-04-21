@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.TravelDetailMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.TravelDetail">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="travel_id" jdbcType="VARCHAR" property="travelId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="start_place" jdbcType="VARCHAR" property="startPlace" />
+    <result column="end_place" jdbcType="VARCHAR" property="endPlace" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="cost_num" jdbcType="DOUBLE" property="costNum" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, travel_id, type, start_place, end_place, start_time, cost_num, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from travel_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from travel_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.TravelDetail">
+    insert into travel_detail (id, travel_id, type, 
+      start_place, end_place, start_time, 
+      cost_num, remark)
+    values (#{id,jdbcType=VARCHAR}, #{travelId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{startPlace,jdbcType=VARCHAR}, #{endPlace,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{costNum,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.TravelDetail">
+    insert into travel_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="travelId != null">
+        travel_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="startPlace != null">
+        start_place,
+      </if>
+      <if test="endPlace != null">
+        end_place,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="costNum != null">
+        cost_num,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="travelId != null">
+        #{travelId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startPlace != null">
+        #{startPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="endPlace != null">
+        #{endPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costNum != null">
+        #{costNum,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.TravelDetail">
+    update travel_detail
+    <set>
+      <if test="travelId != null">
+        travel_id = #{travelId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startPlace != null">
+        start_place = #{startPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="endPlace != null">
+        end_place = #{endPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costNum != null">
+        cost_num = #{costNum,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.TravelDetail">
+    update travel_detail
+    set travel_id = #{travelId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      start_place = #{startPlace,jdbcType=VARCHAR},
+      end_place = #{endPlace,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      cost_num = #{costNum,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
