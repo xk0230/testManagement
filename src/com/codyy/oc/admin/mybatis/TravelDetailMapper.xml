@@ -10,9 +10,10 @@
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="cost_num" jdbcType="DOUBLE" property="costNum" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, travel_id, type, start_place, end_place, start_time, cost_num, remark
+    id, travel_id, type, start_place, end_place, start_time, cost_num, remark,create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.TravelDetail">
     insert into travel_detail (id, travel_id, type, 
       start_place, end_place, start_time, 
-      cost_num, remark)
+      cost_num, remark,create_time)
     values (#{id,jdbcType=VARCHAR}, #{travelId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{startPlace,jdbcType=VARCHAR}, #{endPlace,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{costNum,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR})
+      #{costNum,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.TravelDetail">
     insert into travel_detail
@@ -122,7 +123,29 @@
       end_place = #{endPlace,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       cost_num = #{costNum,jdbcType=DOUBLE},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+      <select id="getTravelDetailPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.TravelDetailVO">
+		SELECT
+			td.id as id,
+			td.travel_id AS travelId,
+			td.type AS type,
+			tdt.`name` AS typeName,
+			td.start_place as startPlace,
+			td.end_place as endPlace,
+			td.start_time as startTime,
+			td.cost_num as costNum,
+			td.remark as remark,
+			'view' as editMode
+		FROM
+			travel_detail td
+		LEFT JOIN travel_detail_type tdt ON tdt.id = td.type
+		where 1=1 
+			<if test="map.travelId != null and map.travelId !=''">
+				AND td.travel_id = #{map.travelId}
+			</if>
+	</select>
 </mapper>

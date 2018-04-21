@@ -14,12 +14,15 @@ import org.springframework.stereotype.Component;
 
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.DateUtils;
+import com.codyy.oc.admin.dao.TravelDetailMapper;
 import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.Travel;
+import com.codyy.oc.admin.entity.TravelDetail;
 import com.codyy.oc.admin.entity.TravelDetailType;
+import com.codyy.oc.admin.vo.TravelDetailVO;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -28,8 +31,8 @@ import com.codyy.oc.admin.vo.TravelVO;
  * @Description: TODO  
  */
 
-@Component("TravelManageService")
-public class TravelManageService {
+@Component("TravelDetailManageService")
+public class TravelDetailManageService {
 
 	private static final String INSERT_SUCCESS = "新增成功";
 	private static final String INSERT_ERROR = "新增失败";
@@ -39,18 +42,18 @@ public class TravelManageService {
 	private static final String DELETE_ERROR = "删除失败";
 	
 	@Autowired
-	private TravelMapper travelMapper;
+	private TravelDetailMapper travelDetailMapper;
 	
 	@Autowired
 	private TravelDetailTypeMapper travelDetailTypeMapper;
 	
-	public void insertTravel(Travel record) {
-		travelMapper.insert(record);
+	public void insertTravelDetail(TravelDetail record) {
+		travelDetailMapper.insert(record);
 	}
 
-	public List<Travel> getAll() {
-		return travelMapper.getAll();
-	}
+/*	public List<TravelDetail> getAll() {
+		return travelDetailMapper.getAll();
+	}*/
 	
 	/**
 	 * 插入，更新合同数据
@@ -58,34 +61,24 @@ public class TravelManageService {
 	 * @param costEntityBean
 	 * @return
 	 */
-	public JsonDto insertOrUpdateTravel(AdminUser user,Travel travel){
+	public JsonDto insertOrUpdateTravelDetail(AdminUser user,TravelDetail traveldetail){
 		
 		JsonDto jsonDto = new JsonDto();
 		//CostID为空时执行插入
-		if(StringUtils.isBlank(travel.getId())){
+		if(StringUtils.isBlank(traveldetail.getId())){
 			//部门ID=当前用户的部门
-		    String depId = user.getDepId();
-			//创建时间和创建者
-		    travel.setCreateTime(DateUtils.getCurrentTimestamp());
-//		    travel.setCreateUserId(user.getUserId());
-			
-		    if(StringUtils.isNotBlank(depId)) {
-		    	travel.setId(UUID.randomUUID().toString());
+		    	traveldetail.setId(UUID.randomUUID().toString());
 		    	
 		    	//执行插入
-		    	int insertCostEntityNum = travelMapper.insert(travel);
+		    	int insertCostEntityNum = travelDetailMapper.insert(traveldetail);
 		    	if(insertCostEntityNum == 1) {
 					jsonDto.setCode(0);
 					jsonDto.setMsg(INSERT_SUCCESS);
 		    	}else {
 					jsonDto.setMsg(INSERT_ERROR);
 		    	}
-		    }
 		}else{
-			travel.setCreateTime(DateUtils.getCurrentTimestamp());
-//			travel.setCreateUserId(user.getUserId());
-		    
-			int updateCostEntityNum = travelMapper.updateByPrimaryKey(travel);
+			int updateCostEntityNum = travelDetailMapper.updateByPrimaryKey(traveldetail);
 			if(updateCostEntityNum == 1){
 				jsonDto.setCode(0);
 				jsonDto.setMsg(UPDATE_SUCCESS);
@@ -101,32 +94,32 @@ public class TravelManageService {
 	 * @param travel
 	 * @return
 	 */
-	public Page getTravelPageList(TravelVO travel){
+	public Page getTravelDetailPageList(TravelDetailVO travelDetail){
 	    Page page = new Page();
-	    page.setStart(travel.getStart());
-	    page.setEnd(travel.getEnd());
+	    page.setStart(travelDetail.getStart());
+	    page.setEnd(travelDetail.getEnd());
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 
-	    map.put("name", travel.getCreateUser());
-	    map.put("place", travel.getPlace());
-	    map.put("userId", travel.getUserId());
-	    map.put("startTime", travel.getStartDate());
-	    map.put("endTime", travel.getEndDate());
-	    map.put("userDepId", travel.getUserDepId());
-	    map.put("userPosition", travel.getUserPosition());
+//	    map.put("name", travel.getCreateUser());
+//	    map.put("place", travel.getPlace());
+//	    map.put("userId", travel.getUserId());
+//	    map.put("startTime", travel.getStartDate());
+//	    map.put("endTime", travel.getEndDate());
+//	    map.put("userDepId", travel.getUserDepId());
+	    map.put("travelId", travelDetail.getTravelId());
 	    
 	    page.setMap(map);
 	    
-	    List<TravelVO> travelPageList = travelMapper.getTravelPageList(page);
-	    page.setData(travelPageList);
+	    List<TravelDetailVO> travelDetailPageList = travelDetailMapper.getTravelDetailPageList(page);
+	    page.setData(travelDetailPageList);
 	    
 	    return page;
 	}
 	
-	public JsonDto deleteTravel(TravelVO travel){
+	public JsonDto deleteTravelDetail(TravelDetailVO traveldetail){
 		JsonDto jsonDto = new JsonDto();
-		int code = travelMapper.deleteByPrimaryKey(travel.getId());
+		int code = travelDetailMapper.deleteByPrimaryKey(traveldetail.getId());
 		if(code == 1) {
 			jsonDto.setCode(0);
 			jsonDto.setMsg(DELETE_SUCCESS);
@@ -136,5 +129,12 @@ public class TravelManageService {
 		return jsonDto;
 	}
 	
-
+	public JsonDto getTravelDetailType(){
+		JsonDto jsonDto = new JsonDto();
+		List<TravelDetailType> ls =  travelDetailTypeMapper.getAll();
+		jsonDto.setObjData(ls);
+		jsonDto.setCode(0);
+		jsonDto.setMsg(DELETE_SUCCESS);
+		return jsonDto;
+	}
 }

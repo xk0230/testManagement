@@ -1,5 +1,7 @@
 package com.codyy.oc.admin.dao;
 
+import java.util.List;
+
 import com.codyy.oc.admin.entity.TravelDetailType;
 
 public interface TravelDetailTypeMapper {
@@ -14,4 +16,6 @@ public interface TravelDetailTypeMapper {
     int updateByPrimaryKeySelective(TravelDetailType record);
 
     int updateByPrimaryKey(TravelDetailType record);
+    
+    List<TravelDetailType> getAll();
 }

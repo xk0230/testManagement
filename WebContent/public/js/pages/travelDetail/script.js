@@ -10,7 +10,7 @@ myAppModule.controller('TravelController',
 		$scope.itemsPerPage = 20;
 		
 		this.$onInit = function(){
-
+			self.getTravelDetailTypeList();
 			self.getDeparts();
 			
 			//获取角色
@@ -21,7 +21,7 @@ myAppModule.controller('TravelController',
 			}else if(self.admin=="ADMIN"){
 				$scope.depIdChangeAble = false;
 			}
-			self.getTravelList();
+			self.getTraveDetaillList();
 			//设置时间控件
 			setDatepicker("datepickerS")
 			setDatepicker("datepickerE")
@@ -32,14 +32,41 @@ myAppModule.controller('TravelController',
 		};
 
 		$scope.pageChanged = function() {
-			self.getTravelList();
+			self.getTraveDetaillList();
 		};
 		
-		// 获取数据列表
-		this.getTravelList = function(){
+		
+		//出差详情分类查询
+		this.getTravelDetailTypeList = function(){
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+'/travel/page.do',
+				url:$("#rootUrl").val()+"/traveldetail/getTravelDetailType.do",
+				params:{
+				}
+			}).then(function(res){
+				if(res.data.code == 0){
+					$scope.travelDetailTypeList = res.data.objData;
+				}else{
+					$scope.travelDetailTypeList = [];
+				}
+			});
+		};
+		$scope.costTypeChangeInList = function(item) {
+			var costTypeValue = item.costType;
+			if(costTypeValue == 0) {
+				item.costSubTypeList = $scope.IncomeList;
+			}else if (costTypeValue == 1){
+				item.costSubTypeList = $scope.ExpensesList;
+			}
+			else{
+				item.costSubTypeList = [];
+			}
+		};
+		// 获取数据列表
+		this.getTraveDetaillList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/traveldetail/page.do',
 				params:{
 					createUser:$scope.createUser,
 					place:$scope.place,
@@ -174,18 +201,6 @@ myAppModule.controller('TravelController',
 				alert("请填写收款方");
 				return ;
 			}
-			/*	if(!travelItem.url){
-				alert("请填写签订时间");
-				return ;
-			}
-			if(!travelItem.serialid){
-				alert("请填写外部订单号");
-				return ;
-			}
-			if(!travelItem.remarks){
-				alert("请填写备注");
-				return ;
-			}*/
 			var params = {
 				createUser:travelItem.createUser,
 				place:travelItem.place,
@@ -194,8 +209,6 @@ myAppModule.controller('TravelController',
 				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
 				status:travelItem.status,
 				remark:travelItem.remark
-//				costTime:$filter('date')(travelItem.costDate, "yyyy-MM-dd")
-//				createTime:$filter('date')(travelItem.createDate, "yyyy-MM-dd hh:mm:ss")
 			};
 			
 			$http({
@@ -206,8 +219,7 @@ myAppModule.controller('TravelController',
 			}).then(function(res){
 				if(res.data.code == 0){
 					swal(res.data.msg);
-					self.getTravelList();
-					//costItem.editMode="view";
+					self.getTraveDetaillList();
 				}else{
 					swal(res.data.msg);
 				}
@@ -236,8 +248,7 @@ myAppModule.controller('TravelController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal(res.data.msg);
-						self.getTravelList();
-						//costItem.editMode="view";
+						self.getTraveDetaillList();
 					}else{
 						swal(res.data.msg);
 					}
@@ -268,8 +279,7 @@ myAppModule.controller('TravelController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal("提交成功！");
-						self.getTravelList();
-						//costItem.editMode="view";
+						self.getTraveDetaillList();
 					}else{
 						swal("提交失败！");
 					}
