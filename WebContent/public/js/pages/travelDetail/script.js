@@ -2,7 +2,7 @@ var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker','n
 myAppModule.config(['$locationProvider', function($locationProvider) {  
 	  $locationProvider.html5Mode(true);  
 	}]); 
-myAppModule.controller('TravelController',
+myAppModule.controller('TravelDetailController',
 	function travelListController($scope,$http,$location,$uibModal,$document,$filter){
 		var self = this;
 		$scope.totalItems = 0;
@@ -134,7 +134,6 @@ myAppModule.controller('TravelController',
 				}
 			});
 			
-			
 		};
 		
 		//添加新申请
@@ -143,9 +142,10 @@ myAppModule.controller('TravelController',
 				startTime:new Date()
 				,createTime:new Date()
 				,create_user:""
-				,place:""
-				,dept:""
-				,endTime:new Date()
+				,startPlace:""
+				,endPlace:""
+				,costNum:""
+				,type:""
 				,remark:""	
 				,editMode:"edit"
 			};
@@ -177,43 +177,40 @@ myAppModule.controller('TravelController',
 		
 		//点击保存
 		this.save = function (travelItem) {
-			if(!travelItem.travelId){
-				alert("请填写合同订单");
+			if(!travelItem.typeName){
+				alert("请填写出差类型");
 				return ;
 			}
-			if(!travelItem.travelType){
-				alert("请填写合同类别");
+			if(!travelItem.startPlace){
+				alert("请填写出差出发地");
 				return ;
 			}
-			if(!travelItem.content){
-				alert("请填写合同内容");
+			if(!travelItem.endPlace){
+				alert("请填写出差到达地");
 				return ;
 			}
-			if(!travelItem.dept){
-				alert("请填写对方部门");
-				return ;
-			}
-			if(travelItem.cost<0){
+			if(travelItem.costNum<0){
 				alert("请填写金额");
 				return ;
 			}
-			if(!travelItem.company){
-				alert("请填写收款方");
+			if(!travelItem.remark){
+				alert("请填写备注");
 				return ;
 			}
 			var params = {
 				createUser:travelItem.createUser,
-				place:travelItem.place,
-				dept:travelItem.dept,
+				type:travelItem.typeName,
+				startPlace:travelItem.startPlace,
+				endPlace:travelItem.endPlace,
 				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
 				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
-				status:travelItem.status,
+				costNum:travelItem.costNum,
 				remark:travelItem.remark
 			};
 			
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+"/travel/saveOrUpdate.do",
+				url:$("#rootUrl").val()+"/traveldetail/saveOrUpdate.do",
 				params:params
 				
 			}).then(function(res){
@@ -242,7 +239,7 @@ myAppModule.controller('TravelController',
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/travel/deleteTravel.do",
+					url:$("#rootUrl").val()+"/traveldetail/deleteTravelDetail.do",
 					params:params
 					
 				}).then(function(res){

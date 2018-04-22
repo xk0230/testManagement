@@ -6,7 +6,7 @@
 </head>
 <body>
 		<%@ include file="../../common/header.jsp"%>
-		<div id="content" class="main" ng-app = "myApp" ng-controller="TravelController as vm">
+		<div id="content" class="main" ng-app = "myApp" ng-controller="TravelDetailController as vm">
 		  <div class="main-inner">
 			<div class="container">
 				<div class="row">
@@ -86,7 +86,7 @@
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
 													<td ng-switch-when="edit">
-				                                        <select ng-model="item.type"  class="form-control span2" 
+				                                        <select ng-model="item.typeName"  class="form-control span2" 
                                             			    ng-options="cType.id as cType.name group by cType.group for cType in  travelDetailTypeList">
                                          				   <option value="">--请选择出差详情类型--</option>
                                         				</select>

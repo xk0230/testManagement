@@ -68,6 +68,7 @@ public class TravelDetailManageService {
 		if(StringUtils.isBlank(traveldetail.getId())){
 			//部门ID=当前用户的部门
 		    	traveldetail.setId(UUID.randomUUID().toString());
+		    	traveldetail.setCreateTime(DateUtils.getCurrentTimestamp());
 		    	
 		    	//执行插入
 		    	int insertCostEntityNum = travelDetailMapper.insert(traveldetail);
