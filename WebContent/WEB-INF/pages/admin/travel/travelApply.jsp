@@ -62,40 +62,32 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
 											<thead>
 												<tr>
+													<th width="15%" style="text-align:center;font-size:12px;">操作</th> 
 												 	<th width="15%" style="text-align:center;font-size:12px;">创建用户</th>
 													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
 													<th width="5%" style="text-align:center;font-size:12px;">部门</th>
 													<th width="10%" style="text-align:center;font-size:12px;">开始时间</th>
 													<th width="10%" style="text-align:center;font-size:12px;">结束时间</th>
 													<th width="20%" style="text-align:center;font-size:12px;">备注</th>
-													<th width="15%" style="text-align:center;font-size:12px;">操作</th> 
-												<!-- 	<th width="10%">单号</th>
-													<th width="5%">类型</th>
-													<th width="8%">内容</th>
-													<th width="5%">部门</th>
-													<th width="5%">金额</th>
-													<th width="3%">收款方</th>
-													
-													<th width="10%">签订时间</th>
-													<th width="10%">外部订单</th>
-													<th width="8%">备注</th>
-													<th width="18%" style="min-width：100px">操作</th> -->
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view">
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
+													</td>
 													<td ng-switch-when="view"><p ng-bind="item.createUser"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.place"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.depName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p class="line-limit-length span2"  title="{{item.remark}}" ng-bind="item.remark"></p></td>
-													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
-													</td>
 													<!-- edit -->
+														<td ng-switch-when="edit" >
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
+													</td>
 													<td ng-switch-when="edit"><input type="text" ng-model="item.createUser" style="width:200px;"></td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.place" style="width:200px;" >
@@ -118,9 +110,7 @@
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.remark"  style="width:150px;" />
 													</td>
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
-													</td>
+												
 												</tr>
 											</tbody>
 										</table>
