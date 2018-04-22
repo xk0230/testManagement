@@ -13,7 +13,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, travel_id, type, start_place, end_place, start_time, cost_num, remark,create_time
+    id, travel_id, type, start_place, end_place, start_time, cost_num, remark, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,10 +28,10 @@
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.TravelDetail">
     insert into travel_detail (id, travel_id, type, 
       start_place, end_place, start_time, 
-      cost_num, remark,create_time)
+      cost_num, remark, create_time)
     values (#{id,jdbcType=VARCHAR}, #{travelId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{startPlace,jdbcType=VARCHAR}, #{endPlace,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{costNum,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP})
+      #{costNum,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.TravelDetail">
     insert into travel_detail
@@ -137,6 +137,7 @@
 			td.start_place as startPlace,
 			td.end_place as endPlace,
 			td.start_time as startTime,
+			td.create_time as createTime,
 			td.cost_num as costNum,
 			td.remark as remark,
 			'view' as editMode

@@ -150,27 +150,27 @@ myAppModule.controller('TravelController',
 		
 		//点击保存
 		this.save = function (travelItem) {
-			if(!travelItem.travelId){
+			if(!travelItem.createUser){
 				alert("请填写合同订单");
 				return ;
 			}
-			if(!travelItem.travelType){
+			if(!travelItem.place){
 				alert("请填写合同类别");
 				return ;
 			}
-			if(!travelItem.content){
+			if(!travelItem.deptName){
 				alert("请填写合同内容");
 				return ;
 			}
-			if(!travelItem.dept){
+			if(!travelItem.startTime){
 				alert("请填写对方部门");
 				return ;
 			}
-			if(travelItem.cost<0){
+			if(travelItem.endTime){
 				alert("请填写金额");
 				return ;
 			}
-			if(!travelItem.company){
+			if(!travelItem.remark){
 				alert("请填写收款方");
 				return ;
 			}
