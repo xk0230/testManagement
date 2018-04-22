@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codyy.oc.admin.dao.TravelMapper">
+  <resultMap id="BaseResultMap" type="com.codyy.oc.admin.entity.Travel">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="dep_id" jdbcType="VARCHAR" property="depId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="audit_user" jdbcType="VARCHAR" property="auditUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_user, start_time, remark, end_time, place, dep_id, create_time, status, 
+    audit_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from travel
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from travel
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.codyy.oc.admin.entity.Travel">
+    insert into travel (id, create_user, start_time, 
+      remark, end_time, place, 
+      dep_id, create_time, status, 
+      audit_user)
+    values (#{id,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, 
+      #{depId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, 
+      #{auditUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.codyy.oc.admin.entity.Travel">
+    insert into travel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="depId != null">
+        dep_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.codyy.oc.admin.entity.Travel">
+    update travel
+    <set>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        dep_id = #{depId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="auditUser != null">
+        audit_user = #{auditUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.codyy.oc.admin.entity.Travel">
+    update travel
+    set create_user = #{createUser,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      place = #{place,jdbcType=VARCHAR},
+      dep_id = #{depId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      audit_user = #{auditUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+    <select id="getTravelPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.TravelVO">
+		SELECT
+			travel.id as id,
+			travel.create_user AS createUser,
+			travel.start_time AS startTime,
+			dep.`name` AS depName,
+			travel.end_time as endTime,
+			travel.place as place,
+			travel.status as status,
+			travel.remark as remark,
+			'view' as editMode
+		FROM
+			travel travel
+		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		where 1=1 
+			
+			<if test="map.name != null and  map.name != ''">
+				AND travel.create_user like '%' #{map.name} '%' 
+			</if>
+			
+			<if test="map.place != null and  map.place != ''">
+				AND travel.place like '%'   #{map.place}  '%' 
+			</if>
+			
+				<if test="map.userPosition == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPosition == 'MANAGER'">
+					or travel.dep_id = #{map.userDepId}
+				</if>
+			
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				AND travel.create_time <![CDATA[ >= ]]> #{map.startTime}
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				AND travel.create_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+		
+	
+	</select>
+</mapper>

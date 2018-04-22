@@ -1,11 +1,1 @@
-/.svn/
-/app.properties
-/applicationcontext-spring.xml
 /com/
-/generatorConfig.xml
-/jdbc.properties
-/log4j.properties
-/mybatis-config.xml
-/redis.properties
-/securityFilter.properties
-/spring-mvc.xml
