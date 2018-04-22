@@ -178,7 +178,7 @@ myAppModule.controller('UserListController',
 					self.getPostionById();
 					//self.rzDayChanged(res.data.entryDate);
 					
-					console.log(self.user.adminUserDetail.pdpSjA);
+					//console.log(self.user.adminUserDetail.pdpSjA);
 					$('#containerpdp').highcharts({
 				        chart: {
 				            polar: true,
@@ -545,9 +545,9 @@ myAppModule.controller('UserListController',
 			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
 		
-		function rzDayChanged(){
+		function rzDayChanged(newValue, oldValue, scope){
 			if (!$scope.vm.user.entryDate){
-				time2 = new Date(t).valueOf()/1000
+				time2 = new Date().valueOf()/1000
 			}else{
 				time2 = Date.parse($scope.vm.user.entryDate)/1000;
 			}
