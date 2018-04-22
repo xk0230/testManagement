@@ -1,4 +1,4 @@
-﻿﻿var myAppModule = angular.module("myApp",['ui.bootstrap','jcs-autoValidate']);
+﻿﻿var myAppModule = angular.module("myApp",['ui.bootstrap','jcs-autoValidate','materialDatePicker']);
 /*$('#containerpdp').highcharts({
     chart: {
         polar: true,
@@ -176,7 +176,7 @@ myAppModule.controller('UserListController',
 					self.user = res.data;
 					self.getHasManager($scope.vm.user.depId);
 					self.getPostionById();
-					self.rzDayChanged(res.data.entryDate);
+					//self.rzDayChanged(res.data.entryDate);
 					
 					console.log(self.user.adminUserDetail.pdpSjA);
 					$('#containerpdp').highcharts({
@@ -545,8 +545,8 @@ myAppModule.controller('UserListController',
 			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
 		
-		self.rzDayChanged = function(t){
-			if (t != null){
+		function rzDayChanged(){
+			if (!$scope.vm.user.entryDate){
 				time2 = new Date(t).valueOf()/1000
 			}else{
 				time2 = Date.parse($scope.vm.user.entryDate)/1000;
@@ -557,6 +557,8 @@ myAppModule.controller('UserListController',
 		    var times = time1 - time2;
 		    $scope.vm.user.workingYears = (times/(3600*24*365)).toFixed(2);
 		}
+		
+		$scope.$watch($scope.vm.user.entryDate,rzDayChanged);
 		
 		$scope.setPage = function (pageNo) {
 			$scope.attachmentCurrentPage = pageNo;
