@@ -69,7 +69,7 @@
 									<div class="row">
 										<div class="span359">
 	                                        <span class="searchSpan pull-left">入职日期:</span>
-											<mb-datepicker input-class="mb-date" date="vm.user.entryDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly"></mb-datepicker>
+											<mb-datepicker input-name="abc" input-class="mb-date" date="vm.user.entryDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" action="alert(1)"></mb-datepicker>
                                     	</div>
 										<div class="span359">
 	                                        <span class="searchSpan">工龄:</span>
@@ -77,7 +77,7 @@
 										</div>
 										<div class="span359">
 	                                        <span class="searchSpan pull-left">起薪日:</span>
-											<mb-datepicker input-class="mb-date" date="vm.user.salaryBeginDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
+											<mb-datepicker input-class="mb-date" date="vm.user.salaryBeginDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly"  ></mb-datepicker>
 										</div>
 									</div>
 									<div class="row">

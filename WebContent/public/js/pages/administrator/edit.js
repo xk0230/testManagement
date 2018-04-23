@@ -558,7 +558,7 @@ myAppModule.controller('UserListController',
 		    $scope.vm.user.workingYears = (times/(3600*24*365)).toFixed(2);
 		}
 		
-		$scope.$watch($scope.vm.user.entryDate,rzDayChanged);
+		$scope.$watch('vm.user.entryDate',rzDayChanged);
 		
 		$scope.setPage = function (pageNo) {
 			$scope.attachmentCurrentPage = pageNo;
