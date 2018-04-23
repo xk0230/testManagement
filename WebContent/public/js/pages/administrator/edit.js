@@ -176,7 +176,9 @@ myAppModule.controller('UserListController',
 					self.user = res.data;
 					self.getHasManager($scope.vm.user.depId);
 					self.getPostionById();
-					//self.rzDayChanged(res.data.entryDate);
+					if(self.user.workingYears == null){
+						rzDayChanged('','','');
+					}
 					
 					//console.log(self.user.adminUserDetail.pdpSjA);
 					$('#containerpdp').highcharts({
@@ -538,18 +540,19 @@ myAppModule.controller('UserListController',
 		}
 
 		//获取岗位
-		self.birthDayChanged = function(){
+		function birthDayChanged(newValue, oldValue, scope){
 			var today = new Date();
-			var birthDay = $scope.vm.user.adminUserDetail.birthday;
+			var birthDay = new Date($scope.vm.user.adminUserDetail.birthday);
 			$scope.vm.user.adminUserDetail.age = today.getYear() - birthDay.getYear();
 			$scope.vm.user.adminUserDetail.birthdayMonth = birthDay.getMonth() + 1;
 		}
+		$scope.$watch('vm.user.adminUserDetail.birthday',birthDayChanged);
 		
 		function rzDayChanged(newValue, oldValue, scope){
 			if (!$scope.vm.user.entryDate){
 				time2 = new Date().valueOf()/1000
 			}else{
-				time2 = Date.parse($scope.vm.user.entryDate)/1000;
+				time2 = new Date($scope.vm.user.entryDate)/1000;
 			}
 		    time1 = Date.parse(new Date())/1000;
 		    console.log(time2);

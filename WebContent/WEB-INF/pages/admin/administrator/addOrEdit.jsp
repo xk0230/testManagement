@@ -22,16 +22,16 @@
 								<div class="widget-content" >
 									<!-- 岗位信息 -->
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">用户名:</span>
 											<input type="hidden" class="form-control"  ng-model="vm.user.userId" ng-show="false"  />
 											<input type="text" class="form-control"  ng-model="vm.user.userName"  ng-readonly="vm.readOnly" ng-required="true" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">姓名:</span>
 											<input type="text" class="form-control" ng-model="vm.user.realName"  value="" ng-readonly="vm.readOnly" ng-required="true" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">部门:</span>
 											<select class="form-control select2" ng-model="vm.user.depId"  ng-change="vm.getPostionById()" ng-disabled="vm.readOnly" ng-required="true" >
 												<option value="">请选择</option>
@@ -40,7 +40,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">角色:</span>
 											<select class="form-control select2" ng-model="vm.user.position" ng-disabled="vm.readOnly" ng-required="true">
 												<option value="">请选择</option>
@@ -50,13 +50,13 @@
 												<option value="STAFF" >员工</option>
 											</select>
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">岗位:</span>
 											<select class="form-control select2" ng-model="vm.user.postId" ng-disabled="vm.readOnly" ng-required="true">
 												<option value="">请选择</option>
 												<option value="{{pos.postId}}" ng-repeat="pos in vm.postlist">{{pos.name}}</option>
 											</select>                                    	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">状态:</span>
 											<select class="form-control select2" ng-model="vm.user.workStatus">
 												<option value="">请选择</option>
@@ -67,71 +67,71 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">入职日期:</span>
 											<mb-datepicker input-name="abc" input-class="mb-date" date="vm.user.entryDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" action="alert(1)"></mb-datepicker>
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">工龄:</span>
 											<input class="form-control" ng-model="vm.user.workingYears" id="position" ng-readonly="true" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">起薪日:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.salaryBeginDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly"  ></mb-datepicker>
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">试用期限:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.probationPeriod" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">转正日:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.expectedDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">服务期协议:</span>
 											<input type="text" class="form-control" ng-model="vm.user.fwqAgreement" id="position" ng-readonly="vm.readOnly" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">服务期金额:</span>
 											<input type="number" class="form-control"  ng-model="vm.user.fwqNum" id="userName" ng-readonly="vm.readOnly" style="margin-left:4px" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">劳动合同起:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.labourBeginTime" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">劳动合同止:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.labourEndTime" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">已签订次数:</span>
 											<input type="number" class="form-control" ng-model="vm.user.signTime" id="position" ng-readonly="vm.readOnly" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">缴费基数:</span>
 											<input type="number" class="form-control"  ng-model="vm.user.insuranceBase" id="userName" ng-readonly="vm.readOnly" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">备案日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.filingDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">离职日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.leaveDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">退工日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.retiredDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">薪级:</span>
 											<input type="number" class="form-control" ng-model="vm.user.salaryScale" ng-readonly="vm.readOnly" />
 										</div>
@@ -147,11 +147,11 @@
 								<div class="widget-content">
 									<!-- 岗位信息 -->
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">姓名:</span>
 											<input type="text" class="form-control" ng-model="vm.user.realName" id="realname" value="${user.realName}"/>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">性别:</span>
 											<select class="form-control select2" ng-model="vm.user.adminUserDetail.sex">
 												<option value="">请选择</option>
@@ -159,41 +159,41 @@
 												<option value="1" >女</option>
 											</select>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">出生日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.birthday" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">年龄:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.age"  readonly="readonly" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">出生月份:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.birthdayMonth" readonly="readonly"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">身份证号:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.idNumber"  />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">籍贯:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.origin" style="margin-left:4px;" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">户籍地:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.domicile"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">民族:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.nation" style="margin-left:4px;"/>
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">婚姻:</span>
 											<select class="form-control select2" ng-model="vm.user.adminUserDetail.marriage" style="margin-left:4px;">
 												<option value="">请选择</option>
@@ -201,7 +201,7 @@
 												<option value="未婚" >未婚</option>
 											</select>
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">政治面貌:</span>
 											<select class="form-control select2" ng-model="vm.user.adminUserDetail.political" style="margin-left:4px;">
 												<option value="">请选择</option>
@@ -210,7 +210,7 @@
 												<option value="党员" >党员</option>
 											</select>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">学历:</span>
 											<select class="form-control select2" ng-model="vm.user.adminUserDetail.education">
 												<option value="">请选择</option>
@@ -222,43 +222,43 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">专业:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.major" style="margin-left:4px;" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">毕业院校:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.university" style="margin-left:4px;" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">手机号码:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.phone1" style="margin-left:4px;" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">备用手机号码:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.phone2" />
                                     	</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan">英语水平:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.english" />	
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 	                                        <span class="searchSpan pull-left">其他语言水平:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.otherLanguage" style="margin-left:4px;" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">参加工作日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.firstWorkTime" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">家庭住址:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.address" style="margin-left:4px;" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											
 										</div>
 									</div>
@@ -272,15 +272,15 @@
 								</div>
 								<div class="widget-content">
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">市民卡:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.citizenCard"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">工资卡:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.payrollCard"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 										</div>
 									</div>
 								</div>
@@ -292,54 +292,54 @@
 								</div>
 								<div class="widget-content">
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">配偶姓名:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeName"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">学历:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeXl"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">专业:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeZy"  />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">出生日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.homeBirthday" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">工作单位:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeWork"  />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">职务:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeZw"  />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan pull-left">联系电话:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homePhone" style="margin-left:4px;" />
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">身份证号:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.homeIdcard"  />
 										</div>
-										<div class="span359"></div>
+										<div class="span359 form-group"></div>
 									</div>
 									<div class="row">
-										<div class="span3" style="width:200px;">
+										<div class="span3 form-group" style="width:200px;">
 											<span class="searchSpan">子女姓名:</span>
 											<input type="text" class="form-control" style="width:70px;" ng-model="vm.user.adminUserDetail.child1Name" />
 										</div>
-										<div class="span359" style="width:240px;">
+										<div class="span359 form-group" style="width:240px;">
 											<span class="searchSpan pull-left">出生日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.child1Birthday" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</div>
-										<div class="span359" style="width:200px;">
+										<div class="span359 form-group" style="width:200px;">
 											<span class="searchSpan pull-left" style="width:80px;">性别:</span>
 											<select class="form-control select2" style="width:70px;" ng-model="vm.user.adminUserDetail.child1Sex">
 												<option value="">请选择</option>
@@ -347,21 +347,21 @@
 												<option value="1" >女</option>
 											</select>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">单位:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child1Work"  />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span3" style="width:200px;">
+										<div class="span3 form-group" style="width:200px;">
 											<span class="searchSpan">子女姓名:</span>
 											<input type="text" class="form-control" style="width:70px;" ng-model="vm.user.adminUserDetail.child2Name" />
 										</div>
-										<div class="span359" style="width:240px;">
+										<div class="span359 form-group" style="width:240px;">
 											<span class="searchSpan pull-left">出生日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.child2Birthday" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
                                     	</div>
-										<div class="span359" style="width:200px;">
+										<div class="span359 form-group" style="width:200px;">
 											<span class="searchSpan pull-left" style="width:80px;">性别:</span>
 											<select class="form-control select2" style="width:70px;" ng-model="vm.user.adminUserDetail.child2Sex">
 												<option value="">请选择</option>
@@ -369,21 +369,21 @@
 												<option value="1" >女</option>
 											</select>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">单位:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child2Work"  />
 										</div>
 									</div>
 									<div class="row">
-										<div class="span3" style="width:200px;">
+										<div class="span3 form-group" style="width:200px;">
 											<span class="searchSpan">子女姓名:</span>
 											<input type="text" class="form-control" style="width:70px;" ng-model="vm.user.adminUserDetail.child3Name" />
 										</div>
-										<div class="span359" style="width:240px;">
+										<div class="span359 form-group" style="width:240px;">
 											<span class="searchSpan pull-left">出生日期:</span>
 											<mb-datepicker input-class="mb-date" date="vm.user.adminUserDetail.child3Birthday" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</div>
-										<div class="span359" style="width:200px;">
+										<div class="span359 form-group" style="width:200px;">
 											<span class="searchSpan pull-left" style="width:80px;">性别:</span>
 											<select class="form-control select2" style="width:70px;" ng-model="vm.user.adminUserDetail.child3Sex">
 												<option value="">请选择</option>
@@ -391,7 +391,7 @@
 												<option value="1" >女</option>
 											</select>
 										</div>
-										<div class="span359">
+										<div class="span359 form-group">
 											<span class="searchSpan">单位:</span>
 											<input type="text" class="form-control" ng-model="vm.user.adminUserDetail.child3Work"  />
 										</div>
