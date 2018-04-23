@@ -9,7 +9,12 @@ $(document).on("mouseenter", ".table tr.odd", function(){
 $(document).on("mouseleave", ".table tr.odd", function(){ 
     $(this).css("background-color","white");
 }); 
-
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
 function getNewsNum()
 {
     $.ajax({
@@ -125,7 +130,7 @@ setInterval("getNewsNum()","60000");
               </ul>
             </li>
             <!-- 绩效管理 -->
-            <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效</span> </a> </li>
+            <%-- <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效</span> </a> </li> --%>
             <!-- 图书管理 -->
             <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书馆</span> </a> </li>
            	<!-- 合同管理 -->
@@ -146,6 +151,8 @@ setInterval("getNewsNum()","60000");
             <li class="mainLi"><a href="${root}/project/projectApply.do"><i class="icon-book"></i><span>项目信息管理</span> </a> </li>
             <!-- 入职必读 -->
              <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
+             <!-- 出差管理 -->
+             <li class="mainLi"><a href="${root}/travel/travelApply.do"><i class=" icon-plane"></i><span>出差管理</span> </a> </li>
           </ul>
         </div>
         <!-- /container --> 

@@ -37,11 +37,12 @@ myAppModule.controller('TravelController',
 		
 		// 获取数据列表
 		this.getTravelList = function(){
+			console.log("查询啦");
 			$http({
 				method:'POST',
 				url:$("#rootUrl").val()+'/travel/page.do',
 				params:{
-					createUser:$scope.createUser,
+//					createUser:$scope.createUser,
 					place:$scope.place,
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),
@@ -148,12 +149,17 @@ myAppModule.controller('TravelController',
 
 		};
 		
+		//查看出差详情
+		this.toDetail = function (travelItem,index) {
+			window.open("/ssc/traveldetail/traveldetailApply.do?travelId="+travelItem.id);  
+		};
+		
 		//点击保存
 		this.save = function (travelItem) {
-			if(!travelItem.createUser){
+			/*if(!travelItem.createUser){
 				alert("请填写创建用户");
 				return ;
-			}
+			}*/
 			if(!travelItem.place){
 				alert("请填写出差地");
 				return ;
@@ -292,7 +298,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			$ctrl.$onInit = function(){
 				$scope.mode = item.mode;
 				$scope.name = item.name;
-				$ctrl.getPaymentList();
+				$ctrl.getTravelList();
 
 			};
 			
@@ -301,16 +307,18 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 			};
 
 			$ctrl.pageChanged = function() {
-				$ctrl.getPaymentList();
+				$ctrl.getTravelList();
 			};
 			
 			// 获取数据列表
-			$ctrl.getPaymentList = function(){
+			/*$ctrl.getTravelList = function(){
+				console.log("查询啦");
+				
 				$http({
 					method:'POST',
 					url:$("#rootUrl").val()+'/payment/page.do',
 					params:{
-						name:$scope.company,
+						place:$scope.place,
 						start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 						end:$scope.currentPage * $scope.itemsPerPage -1
 					}
@@ -323,7 +331,7 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 						$scope.totalItems = 0;
 					}
 				});
-			};
+			};*/
 				
 			$scope.Choose = function (item) {
 				var selectItem = {id : item.id, company:item.name};

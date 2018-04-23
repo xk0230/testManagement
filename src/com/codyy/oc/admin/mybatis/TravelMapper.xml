@@ -161,10 +161,12 @@
 			travel.place as place,
 			travel.status as status,
 			travel.remark as remark,
-			'view' as editMode
+			'view' as editMode,
+			au.realname as createUserName
 		FROM
 			travel travel
 		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
 		where 1=1 
 			
 			<if test="map.name != null and  map.name != ''">
@@ -175,20 +177,22 @@
 				AND travel.place like '%'   #{map.place}  '%' 
 			</if>
 			
+	
+			AND ( travel.create_user = #{map.userId}
 				<if test="map.userPosition == 'ADMIN'">
 					or 1 = 1
 				</if>
 				<if test="map.userPosition == 'MANAGER'">
 					or travel.dep_id = #{map.userDepId}
 				</if>
-			
+					)
 			
 			<if test="map.startTime != null and map.startTime !=''">
-				AND travel.create_time <![CDATA[ >= ]]> #{map.startTime}
+				And (travel.start_time <![CDATA[ <= ]]> #{map.startTime} and travel.end_time <![CDATA[ >= ]]> #{map.startTime})
 			</if>
 			
 			<if test="map.endTime != null and map.endTime != ''">
-				AND travel.create_time <![CDATA[ <= ]]> #{map.endTime}
+				And (travel.start_time <![CDATA[ <= ]]> #{map.endTime} and travel.end_time <![CDATA[ >= ]]> #{map.endTime})
 			</if>
 		
 	

@@ -53,6 +53,16 @@ public class TravelVO extends Travel {
 	
 	private String UserDepId;//用户部门ID
 
+	private String createUserName;
+	
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 	/**
 	 * @return the startTime
 	 */

@@ -67,7 +67,15 @@ public class TravelManageService {
 		    String depId = user.getDepId();
 			//创建时间和创建者
 		    travel.setCreateTime(DateUtils.getCurrentTimestamp());
-//		    travel.setCreateUserId(user.getUserId());
+		    travel.setCreateUser(user.getUserId());
+		    
+		    if(user.getPosition().equals("MANAGER")) {
+		    	travel.setStatus("03");
+			}else if(user.getUserId().equals("admin")) {
+				travel.setStatus("05");
+			}else {
+				travel.setStatus("00");
+			}
 			
 		    if(StringUtils.isNotBlank(depId)) {
 		    	travel.setId(UUID.randomUUID().toString());
