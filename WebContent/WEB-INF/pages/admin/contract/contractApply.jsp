@@ -125,7 +125,7 @@
 														<input type="text" ng-model="item.content" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept"  style="width:100px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept" ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:100px;" class="form-control select2" 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 														<option value="">部门</option>
 														</select>
