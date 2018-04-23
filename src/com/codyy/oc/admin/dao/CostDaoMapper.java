@@ -1,6 +1,7 @@
 package com.codyy.oc.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.CostDepEntityBean;
@@ -67,7 +68,7 @@ public interface CostDaoMapper {
 	 * @param cost
 	 * @return
 	 */
-	List<CostEntityBean> getViewChart(CostVO cost);
+	List<CostEntityBean> getViewChart(Map<String, Object> map);
 	
 	/**
 	 * 月度查询

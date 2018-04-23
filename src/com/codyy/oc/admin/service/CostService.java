@@ -421,7 +421,15 @@ public class CostService {
 		cost.setDepId(sessionUser.getDepId());
 		cost.setCreateUserPosition(sessionUser.getPosition());
 		
-	    List<CostEntityBean> costPageList = costDaoMapper.getViewChart(cost);
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("costType", cost.getCostType());
+	    map.put("costSubtypeId", cost.getCostSubtypeId());
+	    map.put("startTime", cost.getStartDate());
+	    map.put("endTime", cost.getEndDate());
+	    map.put("costNo", cost.getCostNo());
+	    map.put("remark", cost.getRemark());
+		
+	    List<CostEntityBean> costPageList = costDaoMapper.getViewChart(map);
 	    
 	    jsonDto.setCode(0);
 	    jsonDto.setMsg("获取成功");

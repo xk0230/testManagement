@@ -433,7 +433,7 @@
 	</select>
 	
 		<!-- 成本查看列表 -->
-	<select id="getViewChart" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.entity.CostEntityBean">
+	<select id="getViewChart" parameterType="java.util.Map" resultType="com.codyy.oc.admin.entity.CostEntityBean">
 		SELECT
 			cost_type costType
 			,sum(cost_num) costNum 
@@ -441,10 +441,12 @@
 			COST_DETAIL costDetail
 		WHERE costDetail.status = '05'
 			
-			<if test="costType != null and  costType != ''">
+			<if test="costType != null and costType != ''">
 				AND costDetail.cost_type = #{costType}
 			</if>
-			
+			<if test="costSubtypeId != null and costSubtypeId != ''">
+				AND costDetail.cost_subtype_id = #{costSubtypeId}
+			</if>
 			<if test="costNo != null and  costNo != ''">
 				AND costDetail.cost_no like '%${costNo}%'
 			</if>
@@ -452,21 +454,6 @@
 			<if test="remark != null and  remark != ''">
 				AND costDetail.remark like '%${remark}%'
 			</if>
-			
-		<!-- 	<if test="userId != 'admin'">
-				AND costDetail.dep_id = #{depId}
-			</if> -->
-			AND ( costDetail.create_user_id = #{userId}
-			
-				<if test="createUserPosition == 'ADMIN'">
-					or 1 = 1
-				</if>
-				<if test="createUserPosition == 'MANAGER'">
-					or costDetail.dep_id = #{depId}
-				</if>
-			
-			)
-			
 			
 			<if test="startTime != null and startTime !=''">
 				AND costDetail.cost_time <![CDATA[ >= ]]> #{startTime}
