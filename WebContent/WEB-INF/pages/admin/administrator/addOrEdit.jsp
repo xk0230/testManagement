@@ -138,7 +138,7 @@
 									</div>
 									
 								</div>
-
+<br>
 								<!-- 个人信息 -->
 								<div class="widget-header">
 									<i class="icon-pushpin"></i>
@@ -264,7 +264,7 @@
 									</div>
 									
 								</div>
-
+<br>
 								<!-- 银行信息 -->
 								<div class="widget-header">
 									<i class="icon-pushpin"></i>
@@ -284,7 +284,7 @@
 										</div>
 									</div>
 								</div>
-
+<br>
 								<!-- 家庭情况 -->
 								<div class="widget-header">
 									<i class="icon-pushpin"></i>
@@ -397,7 +397,7 @@
 										</div>
 									</div>
 								</div>
-
+<br>
 								<!-- 工作经历 -->
 								<div class="widget-header">
 									<i class="icon-pushpin"></i>
@@ -519,7 +519,7 @@
 										</table>
 									</div>
 								</div>
-
+<br>
 								<!-- PDP信息 -->
 								<div class="widget-header">
 									<i class="icon-pushpin"></i>
@@ -562,16 +562,16 @@
 											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpNjD" />
 										</div>
 									</div>
-									<div class="row">
+									<!--<div class="row">
 										<div class="span262 pull-left" style="width:554px">
-											<span class="searchSpan" style="width:140px;" >共享中心后续验证:</span>
+											  <span class="searchSpan" style="width:140px;" >共享中心后续验证:</span>
 											<input type="text" class="form-control" style="width:240px;" ng-model="vm.user.adminUserDetail.pdpNjA" />
 										</div>
 										<div class="span262 pull-left" style="width:554px">
 											<span class="searchSpan" style="width:140px;">直接上级后续验证:</span>
 											<input type="text" class="form-control" style="width:240px;" ng-model="vm.user.adminUserDetail.pdpNjB" />
 										</div>
-									</div>
+									</div>-->
 									<div class="row">
 										<div id="containerpdp"  ng-if="${adminUser.position != 'STAFF'}"></div>
 									</div>
@@ -579,7 +579,7 @@
 										<span class="pull-right"><input type="submit" class="btn btn-success " ladda = "submitting"  value="保存" /></span>
 									</div>
 								</div>
-								
+	<br>							
 								<!-- 附件信息  -->
 								<div class="widget-header" ng-if="${not empty user.userId }">
 									<i class="icon-pushpin"></i>
@@ -615,7 +615,7 @@
 										</div>
 									</div>
 								</div>
-
+<br>
 								<!-- 培训信息  -->
 								<div class="widget-header" ng-if="${not empty user.userId }">
 									<i class="icon-pushpin"></i>
@@ -651,7 +651,7 @@
 										</div>
 									</div>
 								</div>
-
+<br>
 								<!-- 调岗/调薪信息  -->
 								<div class="widget-header" ng-if="${not empty user.userId }">
 									<i class="icon-pushpin"></i>

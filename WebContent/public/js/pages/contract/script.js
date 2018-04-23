@@ -129,6 +129,7 @@ myAppModule.controller('ContractController',
 		
 		//添加新申请
 		this.addContract = function(){
+			
 			var newItem = {
 				costDate:new Date()
 				,createDate:new Date()
@@ -136,7 +137,7 @@ myAppModule.controller('ContractController',
 				,contractId:$filter('date')(new Date(), "yyyyMMddhhmmss")
 				,contractType:""
 				,content:""
-				,dept:""
+				,dept:$("#sessionUserDepId").val()
 				,cost:0
 				,company:""
 				,url:new Date()

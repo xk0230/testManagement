@@ -86,37 +86,6 @@ myAppModule.controller('TravelDetailController',
 			});
 		};
 		
-		this.editPayment = function (item, parentSelector, mode) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
-		    	    var modalInstance = $uibModal.open({
-		    	      animation: true,
-		    	      ariaLabelledBy: 'modal-title',
-		    	      ariaDescribedBy: 'modal-body',
-		    	      templateUrl: 'myModalEditContent.html',
-		    	      controller: 'ModalInstanceCtrl',
-		    	      controllerAs: '$ctrl',
-		    	      size: 'lg',
-		    	      appendTo: parentElem,
-		    	      //参数
-		    	      resolve: {
-		    			//好像必须得这么写
-		    	        item: function () {
-		    	        	item.mode = mode;
-		    	        	return item;
-		    	        }
-		    	      }
-		    	    });
-
-		    	    modalInstance.result.then(function (selectedItem) {
-		    	    	item.mode = mode;
-		    	    	item.company = selectedItem.company;
-		    	    	item.companyid = selectedItem.id;
-		    	    }, function () {
-		    	    	//取消的回调函数
-		    	    	
-		    	    });
-		   };
-
 		
 		this.getDeparts = function(){
 			
@@ -198,6 +167,7 @@ myAppModule.controller('TravelDetailController',
 				return ;
 			}
 			var params = {
+				id:travelItem.id,
 				createUser:travelItem.createUser,
 				type:travelItem.typeName,
 				startPlace:travelItem.startPlace,
@@ -270,7 +240,7 @@ myAppModule.controller('TravelDetailController',
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/travel/deleteTravel.do",
+					url:$("#rootUrl").val()+"/traveldetail/deleteTravelDetail.do",
 					params:params
 					
 				}).then(function(res){

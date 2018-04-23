@@ -55,11 +55,14 @@
                         <p><i class="icon-play"></i> 网页版本邮件系统地址：<a href="https://mail.ccydsz.com/owa">https://mail.ccydsz.com/owa</a></p>
                         <p><i class="icon-play"></i> 重置密码 （两种方式）</p>
                         <p style="margin-left: 8%">&nbsp;&nbsp;<i class="icon-star-empty"></i> 方法一 登陆&nbsp;&nbsp;<a href="https://mail.ccydsz.com/owa">https://mail.ccydsz.com/owa （IE浏览器打开）</a> </p>
-                        <img src="${root}/public/img/web1.png" style="width:20%;">&nbsp;&nbsp;&nbsp;<img src="${root}/public/img/web2.png" style="width:15%">&nbsp;&nbsp;&nbsp;<img src="${root}/public/img/web3.png" style="width:30%">&nbsp;&nbsp;&nbsp;<img src="${root}/public/img/web4.png" style="width:30%"> 
-                        <hr>
+                        <img src="${root}/public/img/web1.png" style="width:25%;">&nbsp;&nbsp;&nbsp;
+                        <img src="${root}/public/img/web2.png" style="width:25%">&nbsp;&nbsp;&nbsp;
+                        <img src="${root}/public/img/web3.png" style="width:40%">&nbsp;&nbsp;&nbsp;
+                        <img src="${root}/public/img/web4.png" style="width:60%"> 
+                        <hr><br>
                         <p style="margin-left: 8%">&nbsp;&nbsp;&nbsp;<i class="icon-star-empty"></i> 方法二 域用户登陆情况下，打开&nbsp;&nbsp;&nbsp;<strong>控制面板=>用户与账户</strong></p>
-                        <img src="${root}/public/img/local2.png" style="width:50%">
-                         <img src="${root}/public/img/local.png" style="width:23%;margin-left: 50px">         
+                        <img src="${root}/public/img/local2.png" style="width:80%">
+                         <img src="${root}/public/img/local.png" style="width:50%;margin-left: 50px">         
                      
 					</div> 
                     <!-- /outlook设置 -->
@@ -162,7 +165,7 @@
                         <p><i class="icon-play"></i> 通讯录<br><strong style="margin-left: 15px"> 1) 总机:0512-65078819&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;2) 拨打外线请先拨 " 9 "。&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;3) 代接其他电话请拨 " * # "。</strong></p>
                         <div class="row" style="width: 100%">
         
-            <div class="span12">
+            <div class="span11">
 <table class="table  table-bordered  table-hover table-condensed " style="text-align: center;background-color: white">
          <tbody id="usertable"><tr style="background-color:rgb(102,102,102);color: rgb(255,255,255)">
      
