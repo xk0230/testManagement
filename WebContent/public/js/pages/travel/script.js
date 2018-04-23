@@ -151,27 +151,27 @@ myAppModule.controller('TravelController',
 		//点击保存
 		this.save = function (travelItem) {
 			if(!travelItem.createUser){
-				alert("请填写合同订单");
+				alert("请填写创建用户");
 				return ;
 			}
 			if(!travelItem.place){
-				alert("请填写合同类别");
+				alert("请填写出差地");
 				return ;
 			}
-			if(!travelItem.deptName){
-				alert("请填写合同内容");
+			if(!travelItem.depName){
+				alert("请填写部门");
 				return ;
 			}
 			if(!travelItem.startTime){
-				alert("请填写对方部门");
+				alert("请填写开始时间");
 				return ;
 			}
-			if(travelItem.endTime){
-				alert("请填写金额");
+			if(!travelItem.endTime){
+				alert("请填写结束时间");
 				return ;
 			}
 			if(!travelItem.remark){
-				alert("请填写收款方");
+				alert("请填写备注");
 				return ;
 			}
 			/*	if(!travelItem.url){
@@ -187,9 +187,10 @@ myAppModule.controller('TravelController',
 				return ;
 			}*/
 			var params = {
+				id:travelItem.id,
 				createUser:travelItem.createUser,
 				place:travelItem.place,
-				dept:travelItem.dept,
+				depId:travelItem.depName,
 				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
 				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
 				status:travelItem.status,
