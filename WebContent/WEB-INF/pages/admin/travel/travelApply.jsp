@@ -20,16 +20,15 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span4">
+                             <!--        <div class="span4">
 										<span class="searchSpan">合同类型:</span>
                                         <select id="travelType" ng-model="travelType"  class="form-control span2" 
                                                 ng-options="cType.travelType as cType.name group by cType.group for cType in travelTypeList">
                                             <option value="">--请选择合同类型--</option>
                                         </select>
-                                    </div>
-                                    
+                                    </div> -->
 									<div class="span6" style="height:37px;">
-										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="searchSpan pull-left">出差日期:</span>
 										<span class="pull-left">
 											<mb-datepicker input-class="mb-date" date="startDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
@@ -42,10 +41,11 @@
 									
 								</div>
 								<div class="row">
-                                    <div class="span4">
+                                    <!-- <div class="span4">
                                         <span class="searchSpan">创建者名字:</span>
                                         <input type="text" ng-model="createUser" class="span2">
-                                    </div>
+                                    </div> -->
+                                    
                                     <div class="span6">
                                     	<span class="searchSpan">出差地:</span>
                                         <input type="text" ng-model="place" class="span4">
@@ -59,11 +59,11 @@
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<div style="overflow:scroll">
-										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped" style="width:1120px;margin-top:7px;" >
 											<thead>
 												<tr>
 													<th width="15%" style="text-align:center;font-size:12px;">操作</th> 
-												 	<th width="15%" style="text-align:center;font-size:12px;">创建用户</th>
+												 	<th width="5%" style="text-align:center;font-size:12px;">姓名</th>
 													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
 													<th width="5%" style="text-align:center;font-size:12px;">部门</th>
 													<th width="10%" style="text-align:center;font-size:12px;">开始时间</th>
@@ -75,10 +75,11 @@
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
+														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="item.createUser"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.createUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.place"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.depName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
@@ -88,7 +89,7 @@
 														<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
-													<td ng-switch-when="edit"><input type="text" ng-model="item.createUser" style="width:200px;"></td>
+													<td ng-switch-when="edit"><p ng-bind="item.createUserName"></p></td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.place" style="width:200px;" >
 													</td>

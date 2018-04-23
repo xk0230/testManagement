@@ -9,6 +9,8 @@ myAppModule.controller('TravelDetailController',
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 20;
 		
+		$scope.travelId = GetQueryString("travelId");
+		
 		this.$onInit = function(){
 			self.getTravelDetailTypeList();
 			self.getDeparts();
@@ -68,6 +70,7 @@ myAppModule.controller('TravelDetailController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/traveldetail/page.do',
 				params:{
+					travelId:$scope.travelId,
 					createUser:$scope.createUser,
 					place:$scope.place,
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),

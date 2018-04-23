@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.commons.page.Page;
@@ -24,7 +25,6 @@ import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.TravelDetail;
 import com.codyy.oc.admin.service.TravelDetailManageService;
 import com.codyy.oc.admin.vo.TravelDetailVO;
-import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
  * @author Jason(pjx48476) 
@@ -52,12 +52,8 @@ public class TravelDetailController extends BaseController {
 		return travelDetailManageService.insertOrUpdateTravelDetail(this.getSessionUser(request),traveldetail);
 	}
 	
-	/**
-	 * 合同申请
-	 * @return
-	 */
 	@RequestMapping("/traveldetailApply.do")
-	public String contractApply(){
+	public String contractApply(@RequestParam(required=true,value="travelId")String travelId){
 		return "admin/travel/travelDetailApply";
 	}
 	
