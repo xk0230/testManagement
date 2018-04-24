@@ -150,8 +150,6 @@ myAppModule.controller('TravelDetailController',
 		
 		//点击保存
 		this.save = function (travelItem) {
-
-			alert(travelItem.travelId);
 			if(!travelItem.typeName){
 				alert("请填写出差类型");
 				return ;
