@@ -8,7 +8,8 @@ myAppModule.controller('TravelDetailController',
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
 		$scope.itemsPerPage = 20;
-		
+//		self.travelItem.travelId = $location.search().travelId;
+
 		$scope.travelId = GetQueryString("travelId");
 		
 		this.$onInit = function(){
@@ -149,6 +150,8 @@ myAppModule.controller('TravelDetailController',
 		
 		//点击保存
 		this.save = function (travelItem) {
+
+			alert(travelItem.travelId);
 			if(!travelItem.typeName){
 				alert("请填写出差类型");
 				return ;
@@ -160,7 +163,7 @@ myAppModule.controller('TravelDetailController',
 			if(!travelItem.endPlace){
 				alert("请填写出差到达地");
 				return ;
-			}
+			} 
 			if(travelItem.costNum<0){
 				alert("请填写金额");
 				return ;
@@ -171,6 +174,7 @@ myAppModule.controller('TravelDetailController',
 			}
 			var params = {
 				id:travelItem.id,
+				travelId:$scope.travelId,
 				createUser:travelItem.createUser,
 				type:travelItem.typeName,
 				startPlace:travelItem.startPlace,
