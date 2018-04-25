@@ -148,5 +148,17 @@
 			<if test="map.travelId != null and map.travelId !=''">
 				AND td.travel_id = #{map.travelId}
 			</if>
+			<if test="map.type != null and map.type !=''">
+				AND td.type = #{map.type}
+			</if>
+			And (
+			1=1
+			<if test="map.startTime != null and map.startTime !=''">
+				 And td.start_time <![CDATA[ >= ]]> #{map.startTime} 
+			</if>
+			<if test="map.endTime != null and map.endTime != ''">
+				And td.start_time <![CDATA[ <= ]]> #{map.endTime}
+			</if>
+			)
 	</select>
 </mapper>

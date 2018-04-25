@@ -94,13 +94,15 @@
 														<input type="text" ng-model="item.place" style="width:200px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.depName"  style="width:150px;" class="form-control select2" 
+														<select id="dept" ng-model="item.depId"  style="width:150px;" class="form-control select2" 
 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 
 														<option value="">部门</option>
 														</select>
 													</td>
+													
+													
 													<td ng-show="item.editMode == 'edit'">
 														<mb-datepicker input-class="mb-date" date="item.startTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>

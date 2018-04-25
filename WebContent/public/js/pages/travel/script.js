@@ -140,12 +140,12 @@ myAppModule.controller('TravelController',
 			setDatepicker("datepicker" + index)
 			var depid;
 			for(var i=0;i<$scope.depList.length;i++){
-				 if ($scope.depList[i].name == travelItem.dept){
+				 if ($scope.depList[i].name == travelItem.depName){
 				    	depid = $scope.depList[i].depId;
 				    	break;
 				 };
 			}
-			travelItem.dept = depid;
+			travelItem.depId= depid;
 
 		};
 		
@@ -164,7 +164,7 @@ myAppModule.controller('TravelController',
 				alert("请填写出差地");
 				return ;
 			}
-			if(!travelItem.depName){
+			if(!travelItem.depId){
 				alert("请填写部门");
 				return ;
 			}
@@ -196,7 +196,7 @@ myAppModule.controller('TravelController',
 				id:travelItem.id,
 				createUser:travelItem.createUser,
 				place:travelItem.place,
-				depId:travelItem.depName,
+				depId:travelItem.depId,
 				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
 				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
 				status:travelItem.status,
@@ -225,7 +225,7 @@ myAppModule.controller('TravelController',
 		this.scrap = function (TravelItem) {
 			swal({ 
 					title: "确定报废吗？", 
-					text: "你将无法恢复该合同信息！", 
+					text: "你将无法恢复该出差信息！", 
 					type: "warning", 
 					showCancelButton: true, 
 					closeOnConfirm: true, 
