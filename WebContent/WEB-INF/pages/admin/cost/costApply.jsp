@@ -66,17 +66,20 @@
 										<div style="width:1134px;">
 											<button class="btn btn-invert" ng-click="vm.addCost()"><i class="icon-plus"></i>申请</button>
 										</div>
-										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+										<div style="width:1134px;overflow-x:scroll;">
+										<table class="table table-condensed table-bordered table-striped" style="width:2000px;margin-top:7px;" >
 											<thead >
 												<tr>
-													<th width="150px">操作</th>
+													<th width="110px">操作</th>
 													<th width="100px">成本单号</th>
-													<th width="100px">类型</th>
+													<th width="80px">类型</th>
 													<th width="100px" ng-show="${sessionScope.adminUser.userId == 'admin'}">分类</th>
 													<th width="100px">成本产生时间</th>
 													<th width="100px">金额</th>
-													<th width="200px">成本详情</th>
-													<th width="100px">状态</th>
+													<th width="300px">成本详情</th>
+													<th width="300px">合同</th>
+													<th width="300px">项目</th>
+													<th >状态</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -93,16 +96,20 @@
 													<td ng-switch-when="view"><p ng-bind="item.costDate"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNum"></p></td>
 													<td ng-switch-when="view">
-															<ul style="">
+														<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.remark}}">详情：{{item.remark}}</span>
 																</span>
 															</li>
+														</ul>
+													</td>
+													<td ng-switch-when="view">
+														<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																		<span class="line-limit-length span4">合同：
-																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editBook(item,'.widget-content','view')">{{item.contractId}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="item.contractId" ng-click="vm.editPayment(item,'.widget-content','view')">{{item.contractId}}</a>
 																		<a href="javascript:;" style="width:200px;" ng-if="!item.contractId" >未选择</a>
 																		</span>
 																</span>
@@ -110,6 +117,23 @@
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
+																</span>
+															</li>
+														</ul>
+													</td>
+													<td ng-switch-when="view">
+														<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																		<span class="line-limit-length span4">项目：
+																		<a href="javascript:;" style="width:200px;" ng-if="item.projectId" ng-click="vm.editProject(item,'.widget-content','view')">{{item.projectId}}</a>
+																		<a href="javascript:;" style="width:200px;" ng-if="!item.projectId" >未选择</a>
+																		</span>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.projectName}}">项目名：{{item.projectName}}</span>
 																</span>
 															</li>
 														</ul>
@@ -122,7 +146,7 @@
 													</td>
 													<td ng-switch-when="edit"></td>
 													<td ng-switch-when="edit">
-				                                        <select id="costType" style="width:110px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
+				                                        <select id="costType" style="width:60px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
 				                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList">
 				                                        </select>
 													</td>
@@ -145,6 +169,10 @@
 																	<input type="text" ng-model="item.remark" style="width:240px;">
 																</span>
 															</li>
+														</ul>
+													</td>
+													<td ng-switch-when="edit">
+														<ul style="">
 															<li>
 																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
 																	合同：
@@ -157,7 +185,22 @@
 																	<span class="line-limit-length span4" title="{{item.contractContent}}">合同内容：{{item.contractContent}}</span>
 																</span>
 															</li>
-															
+														</ul>
+													</td>
+													<td ng-switch-when="edit">
+														<ul style="">
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	项目单号：
+																	<a href="javascript:;" style="width:200px;" ng-if="item.projectId" ng-click="vm.editProject(item,'.widget-content','edit')">{{item.projectId}}</a>
+																	<a href="javascript:;" style="width:200px;" ng-if="!item.projectId" ng-click="vm.editProject(item,'.widget-content','edit')">未选择</a>
+																</span>
+															</li>
+															<li>
+																<span style="display:inline-block;vertical-align: bottom;padding-bottom: 8px;width:300px;">
+																	<span class="line-limit-length span4" title="{{item.projectName}}">项目名：{{item.projectName}}</span>
+																</span>
+															</li>
 														</ul>
 													</td>
 													<td ng-switch-when="edit">
@@ -166,6 +209,7 @@
 												</tr>
 											</tbody>
 										</table>
+										</div>
 										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
 										<div style="width:1134px;">
 											<%@ include file="../../common/page.jsp"%>
@@ -259,6 +303,85 @@
 											</tbody>
 										</table>
 										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+										<div style="width:1134px;">
+											<%@ include file="../../common/page.jsp"%>
+										</div>
+									</div>
+								</div>
+        						<div class="modal-footer">
+            						<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        						</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </script>
+    
+    <script type="text/ng-template" id="myModalProjectContent.html">
+		  <div class="main-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>合同</h3>
+							</div>
+							
+							<div class="widget-content">
+								<div class="row">
+                                    <div class="span4">
+										<span class="searchSpan">单号:</span>
+                                        <input type="text" ng-model="pjNo" class="span2">
+                                    </div>
+                                    <div class="span3">
+										<span class="searchSpan">项目名:</span>
+                                        <input type="text" ng-model="name" class="span2">
+                                    </div>
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+									</div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="$ctrl.getContractList()" value="查询" /></div>
+								</div>
+								<hr>
+								<!-- 查询结果 -->
+								<div class="row">
+									<div class="span12">
+										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
+											<thead>
+												<tr>
+													<th width="50px">操作</th> 
+												 	<th width="100px">单号</th>
+													<th>项目名</th>
+													<th width="200px">项目开始时间</th>
+													<th width="200px">项目结束时间</th>
+													<th width="100px">项目负责人</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="odd gradeX" ng-repeat="item in $project.list" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+													<td>
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="Choose(item)">选择</a>
+													</td>
+													<td><p ng-bind="item.pjNo"></p></td>
+													<td><p ng-bind="item.name"></p></td>
+													<td><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
+													<td><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
+													<td><p ng-bind="item.leader"></p></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="g-no-content" ng-if="$project.list && $project.list.length === 0">没有相关数据</div>
 										<div style="width:1134px;">
 											<%@ include file="../../common/page.jsp"%>
 										</div>

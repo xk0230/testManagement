@@ -23,9 +23,9 @@
                                     
 									<div class="span6" style="height:37px;">
 										<span class="searchSpan">申请日期:</span>
-										<input type="text" id="datepickerS" ng-model="costStartDate" class="span2">
+										<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										<span class="searchSpanMid">~</span>
-										<input type="text" id="datepickerE" ng-model="costEndDate" class="span2">
+										<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 									</div>
 
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getProjectList()" value="查询" /></div>

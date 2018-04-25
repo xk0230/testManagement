@@ -56,6 +56,9 @@ public class CostEntityBean {
 	//合同id
 	private String contractId;
 	
+	//项目id
+	private String projectId;
+	
 	private List<CostDepEntityBean> cosDepList;
 	
 
@@ -194,6 +197,14 @@ public class CostEntityBean {
 
 	public void setCostClass(String costClass) {
 		this.costClass = costClass;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 
 }

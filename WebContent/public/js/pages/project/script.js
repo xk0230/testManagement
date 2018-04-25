@@ -21,9 +21,6 @@ myAppModule.controller('ProjectController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getProjectList();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {

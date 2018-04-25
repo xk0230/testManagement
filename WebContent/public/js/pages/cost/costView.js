@@ -571,7 +571,7 @@ myAppModule.controller('CostController',
 			});
 		};
 
-		this.editBook = function (item, parentSelector, mode) {
+		this.editPayment = function (item, parentSelector, mode) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
@@ -600,6 +600,38 @@ myAppModule.controller('CostController',
 		    	    }, function () {
 		    	    });
 		   };
+		   
+			this.editProject = function (item, parentSelector, mode) {
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
+			    	    var modalInstance = $uibModal.open({
+			    	      animation: true,
+			    	      ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'myModalProjectContent.html',
+			    	      controller: 'ModalProjectCtrl',
+			    	      controllerAs: '$project',
+			    	      size: 'lg',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    			//好像必须得这么写
+			    	        item: function () {
+			    	        	item.mode = mode;
+			    	        	return item;
+			    	        }
+			    	      }
+			    	    });
+
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	item.projectId = selectedItem.id;
+			    	    	item.projectName = selectedItem.name;
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    	
+			    	    });
+			   };
 		
 		   //月度打印页面
 			this.monthPrint = function (parentSelector, mode) {
@@ -699,6 +731,67 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 	$scope.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
+
+	});
+
+//项目页面的control
+angular.module('myApp').controller('ModalProjectCtrl', 
+		function ($scope,$http,$uibModalInstance,$filter, item) {
+		var $project = this;
+		var self = $project;
+		$scope.item = item;
+		$scope.totalItems = 0;
+		$scope.currentPage = 1;
+		$scope.itemsPerPage = 10;
+		$project.$onInit = function(){
+			//合同号
+			$scope.contractId = item.contractId;
+			$scope.mode = item.mode;
+				
+			$project.getProjectList();
+
+		};
+		
+		$project.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
+
+		$project.pageChanged = function() {
+			$project.getProjectList();
+		};
+		
+		// 获取数据列表
+		$project.getProjectList = function(){
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+'/project/page.do',
+				params:{
+					pjNo:$scope.pjNo,
+					name:$scope.name,
+					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
+					endDate:$filter('date')($scope.costEndDate, "yyyy-MM-dd"),
+					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
+					end:$scope.currentPage * $scope.itemsPerPage -1
+				}
+			}).then(function(res){
+				if(res){
+					self.list = res.data.data || [];
+					$scope.totalItems = res.data.total;
+				}else{
+					self.list = [];
+					$scope.totalItems = 0;
+				}
+			});
+		};
+		
+		$scope.Choose = function (item) {
+			var selectItem = {id : item.pjNo, name : item.name};
+			$uibModalInstance.close(selectItem);
+		};
+	
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
 
 	});
 
