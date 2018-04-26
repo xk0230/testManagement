@@ -573,7 +573,7 @@
 										</div>
 									</div>-->
 									<div class="row">
-										<div id="containerpdp"  ng-if="${adminUser.position != 'STAFF'}"></div>
+										<div id="containerpdp"  ng-if="${adminUser.position != 'STAFF'}" style="margin-left:20px;"></div>
 									</div>
 									<div class="row">
 										<span class="pull-right"><input type="submit" class="btn btn-success " ladda = "submitting"  value="保存" /></span>
@@ -583,7 +583,7 @@
 								<!-- 附件信息  -->
 								<div class="widget-header" ng-if="${not empty user.userId }">
 									<i class="icon-pushpin"></i>
-									<h3>附件信息</h3>
+									<h3>附件</h3>
 								</div>
 								<div class="widget-content" ng-if="${not empty user.userId }">
 									<div class="row">
@@ -609,7 +609,7 @@
 												</tr>
 											</tbody> 
 										</table>
-										<div class="g-no-content" ng-if="vm.listAttachment && vm.listAttachment.length === 0">没有相关数据</div>
+										<div class="g-no-content" ng-if="vm.listAttachment && vm.listAttachment.length === 0" style="margin-left:20px;">没有相关数据</div>
 										<div class="page">
 											<ul style="float:right;" uib-pagination direction-links="false" boundary-links="true" total-items="attachmentTotalItems" ng-model="attachmentCurrentPage" first-text="第一页" last-text="最后一页" items-per-page="attachmentItemsPerPage" ng-change="attachmentPageChanged()"></ul>
 										</div>
@@ -645,7 +645,7 @@
 												</tr>
 											</tbody> 
 										</table>
-										<div class="g-no-content" ng-if="vm.listTrain && vm.listTrain.length === 0">没有相关数据</div>
+										<div class="g-no-content" ng-if="vm.listTrain && vm.listTrain.length === 0" style="margin-left:20px;">没有相关数据</div>
 										<div class="page">
 											<ul style="float:right;" uib-pagination direction-links="false" boundary-links="true" total-items="trainTotalItems" ng-model="trainCurrentPage" first-text="第一页" last-text="最后一页" items-per-page="trainItemsPerPage" ng-change="trainPageChanged()"></ul>
 										</div>
