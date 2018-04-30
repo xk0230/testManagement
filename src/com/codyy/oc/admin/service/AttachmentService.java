@@ -74,7 +74,7 @@ public class AttachmentService {
 
         JsonDto jsonDto = new JsonDto();
         
-        if(uploadFile.getSize() > 0){
+        if(uploadFile!=null){
             
             String uuid = UUID.randomUUID().toString();
             try {
@@ -102,10 +102,13 @@ public class AttachmentService {
                     attachmentEntity.setCreateTime(DateUtils.getCurrentTimestamp());
                     attachmentEntity.setId(uuid);
                     
-                    attachmentDaoMapper.insertAttachmentEntity(attachmentEntity);
-                    
-                    jsonDto.setCode(0);
-                    
+                    int insNum = attachmentDaoMapper.insertAttachmentEntity(attachmentEntity);
+                    if(insNum == 1){
+                        jsonDto.setCode(0);
+                        jsonDto.setMsg(INSERT_SUCCESS);
+                    }else{
+                        jsonDto.setMsg(INSERT_ERROR);
+                    }
                 }else{
                     int num = attachmentDaoMapper.updateAttachmentEntity(attachmentEntity);
                     if(num == 1){
@@ -115,17 +118,19 @@ public class AttachmentService {
                         jsonDto.setMsg(UPDATE_ERROR);
                     }
                 }
-                
             }catch (Exception e) {
-                
                 jsonDto.setMsg(INSERT_ERROR);
-                
                 e.printStackTrace();
             }
-            
-            
         }else{
-            jsonDto.setMsg("请选择上传文件"); 
+        	int num = attachmentDaoMapper.updateAttachmentEntity(attachmentEntity);
+            if(num == 1){
+                jsonDto.setCode(0);
+                jsonDto.setMsg(UPDATE_SUCCESS);
+            }else{
+                jsonDto.setMsg(UPDATE_ERROR);
+            }
+            //jsonDto.setMsg("请选择上传文件"); 
         }
         
         return jsonDto;

@@ -118,19 +118,19 @@ myAppModule.controller('ProjectController',
 		//点击保存
 		this.save = function (projectItem) {
 			if(!projectItem.name){
-				alert("请填写项目名");
+				swal("错误提示", "请填写项目名！", "warning");
 				return ;
 			}
 			if(!projectItem.startTime){
-				alert("请填写项目开始时间");
+				swal("错误提示", "请填写项目开始时间！", "warning");
 				return ;
 			}
 			if(!projectItem.endTime){
-				alert("请填写项目结束时间");
+				swal("错误提示", "请填写项目结束时间！", "warning");
 				return ;
 			}
 			if(!projectItem.leader){
-				alert("请填写项目负责人");
+				swal("错误提示", "请填写项目负责人！", "warning");
 				return ;
 			}
 			var params = {

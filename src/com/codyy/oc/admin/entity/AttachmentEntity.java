@@ -27,7 +27,17 @@ public class AttachmentEntity {
     
     private String startDate;
     
-    private String endDate;
+    public String getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(String editMode) {
+		this.editMode = editMode;
+	}
+
+	private String endDate;
+    
+    private String editMode;
 
     public String getId() {
         return id;
