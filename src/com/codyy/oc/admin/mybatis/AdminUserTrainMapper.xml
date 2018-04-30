@@ -62,8 +62,9 @@
 	
 	</select>
 	
-	<select id="getAdminUserTrainPageList" parameterType="com.codyy.commons.page.Page"
-									  resultType="com.codyy.oc.admin.entity.AdminUserTrain">
+	<select id="getAdminUserTrainPageList"
+			parameterType="com.codyy.commons.page.Page"
+			resultType="com.codyy.oc.admin.entity.AdminUserTrain">
 		SELECT id,
 			   create_time AS createTime,
 			   train_time AS trainTime,
@@ -72,26 +73,20 @@
 			   form,
 			   result,
 			   user_id AS userId,
-			   train_end_time as trainEndTime
-		
+			   train_end_time as trainEndTime,
+			   'view' as editMode
 		FROM TRAIN
-		
 		WHERE user_id = #{map.userId}
-		
 			<if test="map.startDate != null and map.startDate !=''">
 				AND train_time <![CDATA[ >= ]]> #{map.startDate}
 			</if>
-			
 			<if test="map.endDate != null and  map.endDate != ''">
 				AND train_time <![CDATA[ <= ]]> #{map.endDate}
 			</if>
-			
 			<if test="map.project != null and  map.project != ''">
 				AND project like concat('%',#{map.project,jdbcType=VARCHAR},'%') 
 			</if>
-		
 		ORDER BY train_time DESC
-	
 	</select>
 	
 </mapper>

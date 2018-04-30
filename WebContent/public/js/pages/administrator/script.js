@@ -316,7 +316,7 @@ angular.module('myApp').controller('AuditModalInstanceCtrl', function ($scope,$h
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 9999;
 	this.$onInit = function(){
-			self.getAuditList($ctrl.id);
+		self.getAuditList($ctrl.id);
 	};
 	
 	this.getAuditList = function(){

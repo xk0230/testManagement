@@ -32,6 +32,16 @@ public class AdminUserTrain {
     private String startDate;
     
     private String endDate;
+    
+    private String editMode;
+
+	public String getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(String editMode) {
+		this.editMode = editMode;
+	}
 
 	public String getId() {
 		return id;

@@ -67,14 +67,6 @@ public class AdminUserTrianController extends BaseController{
         return userTrainService.delTrainEntityById(id);
         
     }
-    
-    @ResponseBody
-    @RequestMapping("/get/{id}.do")
-    public JsonDto getTrainEntityById(@PathVariable String id){
-        
-        return userTrainService.getTrainEntityById(id);
-        
-    }
 	
 	
 }
