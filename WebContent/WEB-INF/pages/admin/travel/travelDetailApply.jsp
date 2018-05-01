@@ -20,6 +20,26 @@
 							
 							<div class="widget-content">
 								<div class="row">
+									<div class="span2">
+									 	<span>姓名:${travel.createUserName }</span>
+									</div>
+									<div class="span2">
+									 	<span>部门:${travel.depName }</span>
+									 </div>
+									 <div class="span2">
+									 	<span>出差地:${travel.place }</span>
+									 </div>
+									 <div class="span4">
+									 	<span>备注:${travel.remark }</span>
+									 </div>
+								</div>
+						<%-- 		<div class="row">
+									<div class="span8">
+									 	<span>时间:${travel.startTime }~${travel.endTime }</span>
+									 </div>
+								</div> --%>
+								<hr>
+								<div class="row">
                                     <div class="span4">
 										<span class="searchSpan">出差详情类型:</span>
 										

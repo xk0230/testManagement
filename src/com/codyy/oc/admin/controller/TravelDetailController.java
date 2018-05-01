@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.TravelDetail;
 import com.codyy.oc.admin.service.TravelDetailManageService;
+import com.codyy.oc.admin.service.TravelManageService;
 import com.codyy.oc.admin.vo.TravelDetailVO;
 
 /**  
@@ -38,6 +40,8 @@ public class TravelDetailController extends BaseController {
 	
 	@Resource
 	TravelDetailManageService travelDetailManageService;
+	@Resource
+	TravelManageService travelManageService;
 	
 	@InitBinder  
 	public void initBinder(WebDataBinder binder) {  
@@ -53,7 +57,8 @@ public class TravelDetailController extends BaseController {
 	}
 	
 	@RequestMapping("/traveldetailApply.do")
-	public String contractApply(@RequestParam(required=true,value="travelId")String travelId){
+	public String contractApply(@RequestParam(required=true,value="travelId")String travelId,Model model){
+		model.addAttribute("travel", travelManageService.getTravelById(travelId));
 		return "admin/travel/travelDetailApply";
 	}
 	

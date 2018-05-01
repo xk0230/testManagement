@@ -18,10 +18,7 @@ import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
-import com.codyy.oc.admin.entity.TravelDetailType;
-import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -289,4 +286,9 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 	}
 	return jsonDto;
 }
+
+
+	public  TravelVO getTravelById(String id){
+		return travelMapper.getById(id);
+	}
 }

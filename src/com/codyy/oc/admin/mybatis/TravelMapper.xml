@@ -326,6 +326,29 @@
 	
 	</select>
 	
+	
+	<select id="getById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.TravelVO">
+		SELECT
+			travel.id as id,
+			travel.create_user AS createUser,
+			travel.start_time AS startTime,
+			dep.`name` AS depName,
+			travel.end_time as endTime,
+			travel.place as place,
+			travel.status as status,
+			travel.remark as remark,
+			'view' as editMode,
+			au.realname as createUserName,
+			cc.content as statusName
+		FROM
+			travel travel
+		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
+		LEFT JOIN CODE_CONTENT cc on cc.id = travel.status
+		 where travel.id = #{id,jdbcType=VARCHAR}
+			 	
+	
+	</select>
 		<!-- 更新成本状态 -->
 	<update id="updateTravelStatus" parameterType="com.codyy.oc.admin.vo.TravelVO">
 		UPDATE travel SET status = #{status}
