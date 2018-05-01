@@ -8,9 +8,6 @@
 		<%@ include file="../../common/header.jsp"%>
 		<!-- Start #content -->
 		<div id="content" class="main" ng-app = "myApp" ng-controller="ChartController as vm">
-		
-		
-		
 		  <div class="main-inner">
 			<div class="container">
 				<div class="row">
@@ -29,17 +26,30 @@
 												<option value="">--请选择年度--</option>
 										</select>
                                     </div>
+                                    <span class="searchSpan">收支类型:</span>
+                                        <select id="costType" ng-model="costType"  class="form-control span2" 
+                                                ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
+                                                ng-change="costTypeChange()">
+                                        </select>
 									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
-									<div class="span12">
-										<div class="widget">
+									<div class="span12" style="width:1134px;">
+				                        <div class="widget">
 				                            <div class="widget-header">
 				                                <i class="icon-bar-chart"></i>
 				                                <h3>月度支出构成</h3>
 				                            </div>
+				                            <!-- /widget-header -->
+				                            <div class="widget-content">
+				                                <div id="depIncome"></div>
+				                                <!-- /line-chart -->
+				                            </div>
+				                            <!-- /widget-content -->
+				                        </div>
+										<div class="widget">
 				                            <!-- /widget-header -->
 				                            <div class="widget-content">
 												<table class="table display" id="datatable">
@@ -83,45 +93,6 @@
 				                            </div>
 				                            <!-- /widget-content -->
 				                        </div>
-				                        
-				                        <div class="widget">
-				                            <div class="widget-header">
-				                                <i class="icon-bar-chart"></i>
-				                                <h3>GMO</h3>
-				                            </div>
-				                            <!-- /widget-header -->
-				                            <div class="widget-content">
-				                                <div id="depIncome"></div>
-				                                <!-- /line-chart -->
-				                            </div>
-				                            <!-- /widget-content -->
-				                        </div>
-
-				                        <div class="widget">
-				                            <div class="widget-header">
-				                                <i class="icon-bar-chart"></i>
-				                                <h3>SSC</h3>
-				                            </div>
-				                            <!-- /widget-header -->
-				                            <div class="widget-content">
-				                                <div id="depOutcome"></div>
-				                                <!-- /line-chart -->
-				                            </div>
-				                            <!-- /widget-content -->
-				                        </div>
-				                        
-				                        <div class="widget" ng-show="${adminUser.position == 'ADMIN'}">
-				                            <div class="widget-header">
-				                                <i class="icon-bar-chart"></i>
-				                                <h3> 收入结余构成</h3>
-				                            </div>
-				                            <!-- /widget-header -->
-				                            <div class="widget-content">
-				                                <div id="container4"></div>
-				                            </div>
-				                            <!-- /widget-content -->
-				                        </div>
-
 									</div>
 								</div>
 							</div>

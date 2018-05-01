@@ -16,6 +16,36 @@ public class CostMonthInOut {
     
     private BigDecimal total;
     
+    private String costSubId;
+    
+    private String costSubName;
+    
+    public String getCostSubId() {
+		return costSubId;
+	}
+
+	public void setCostSubId(String costSubId) {
+		this.costSubId = costSubId;
+	}
+
+	public String getCostSubName() {
+		return costSubName;
+	}
+
+	public void setCostSubName(String costSubName) {
+		this.costSubName = costSubName;
+	}
+
+	public BigDecimal getCostNum() {
+		return costNum;
+	}
+
+	public void setCostNum(BigDecimal costNum) {
+		this.costNum = costNum;
+	}
+
+	private BigDecimal costNum;
+    
     public String getName() {
         return name;
     }

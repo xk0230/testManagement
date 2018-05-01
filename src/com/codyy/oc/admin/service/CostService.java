@@ -438,106 +438,43 @@ public class CostService {
 	    return jsonDto;
 	}
 	
-	public CostChartsData getCostChartData(AdminUser user,int type,int curYear){
-	    
+	public JsonDto getCostChartData(AdminUser user,int type,int curYear){
+		JsonDto jsonDto = new JsonDto();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
 	    CostChartsData costChartsData = new CostChartsData();
 	    
-	    List<String> xcategories = new ArrayList<String>();
-	    List<CostChartsSeriesData> seriesDatas = new ArrayList<CostChartsSeriesData>();
+	    /*子分类列表*/
+	    List<String> costSubStrList = costDaoMapper.getCostSubTypeStrList(type);
+	    resultMap.put("costSubStrList", costSubStrList);
 	    
-	    List<CostInOutlayType> departIncomeList = null;
-	    if(type == 1){
-	    	departIncomeList = this.getChartDataByDepIncome(user,curYear);
-	    }else if(type == 2){
-	        departIncomeList = this.getChartDataByDepOutcome(user,curYear);
-	    }else{
-	    	departIncomeList = this.getChartDataByOutlayType(user,curYear);
+	    List<CostSubTypeBean> costSubList = costDaoMapper.getCostSubTypeList(type);
+	    resultMap.put("costSubList", costSubList);
+	    
+	    
+	    
+	    /*查询结果列表*/
+	    Map<String, Object> costMap = new HashMap<String, Object>();
+	    
+	    Map<String, Object> paraMap = new HashMap<String, Object>();
+	    paraMap.put("costType", type);
+	    
+	    for(int i=1;i<=12;i++) {
+		    paraMap.put("month", i);
+		    if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(user.getPosition())){
+		    	paraMap.put("depId", user.getDepId());
+		    }else {
+		    	paraMap.put("depId", "");
+		    }
+		    List<CostMonthInOut> costChartList = costDaoMapper.getCostChart(paraMap);
+		    costMap.put("costChartList"+i, costChartList);
 	    }
+	    resultMap.put("costMaps", costMap);
 	    
-	    if(CollectionUtils.isNotEmpty(departIncomeList)){
-	        
-	        Map<String,Integer> monthMap = new HashMap<String,Integer>();
-	        for(CostInOutlayType costInOutlay : departIncomeList){
-                
-	            xcategories.add(costInOutlay.getName());
-	            
-	            List<CostMonthInOut> monthInOuts = costInOutlay.getMonthInOut();
-                for(CostMonthInOut costMonthInOut : monthInOuts){
-                    monthMap.put(costMonthInOut.getMonth(), 1);
-                }
-            }
-	        
-	        Map<String,List<BigDecimal>> map = new HashMap<String,List<BigDecimal>>();
-	        for(CostInOutlayType costInOutlay : departIncomeList){
-	            Map<String,Integer> costInOutMap = new HashMap<String,Integer>();
-	            List<CostMonthInOut> monthInOuts = costInOutlay.getMonthInOut();
-	            for(CostMonthInOut costMonthInOut : monthInOuts){
-	                List<BigDecimal> list = map.get(costMonthInOut.getMonth());
-                    if(list == null){
-                        list = new ArrayList<BigDecimal>();
-                    }
-	                
-                    list.add(costMonthInOut.getTotal());
-                    map.put(costMonthInOut.getMonth(), list);
-                    costInOutMap.put(costMonthInOut.getMonth(), 1);	                
-	            }
-	            
-	            //补齐数据
-	            for(String month : monthMap.keySet()){
-	                boolean flag = true;
-	                for(String key : costInOutMap.keySet()){
-	                    if(month.equals(key)){
-	                        flag = false;
-	                        break;
-	                    }
-	                }
-	                
-	                if(flag){
-	                    List<BigDecimal> list = map.get(month);
-	                    if(list == null){
-	                        list = new ArrayList<BigDecimal>();
-	                    }
-	                    list.add(new BigDecimal(0));
-	                    map.put(month, list);
-	                }
-	            }
-	            
-	        }
-	        
-	        if(map.size() > 0){
-	            
-	            for(String key : map.keySet()){
-	                CostChartsSeriesData seriesData = new CostChartsSeriesData();
-	                seriesData.setName(key);
-	                seriesData.setData(map.get(key));
-	                
-	                seriesDatas.add(seriesData);
-	            }
-	        }
-	    }
+	    jsonDto.setCode(0);
+	    jsonDto.setObjData(resultMap);
 	    
-	    CostChartsSeriesData cc = new CostChartsSeriesData();
-	    cc.setName("All");
-	    List<BigDecimal> alls = new ArrayList<BigDecimal>();
-	    for (int i = 0; i < xcategories.size(); i++) {
-	    	BigDecimal all = new BigDecimal(0);
-	    	for (CostChartsSeriesData c : seriesDatas) {
-				all  = all.add(c.getData().get(i));
-			}
-	    	alls.add(all.setScale(1, RoundingMode.HALF_UP));
-		}
-	    cc.setData(alls);
-//	    seriesDatas.add(cc);
-//	    for (String s : xcategories) {
-//			s=s
-//		}
-	    for (int i = 0; i < xcategories.size(); i++) {
-	    	xcategories.set(i,  xcategories.get(i)+"(总共: "+alls.get(i)+")");
-		}
-	    costChartsData.setXcategories(xcategories);
-	    costChartsData.setSeriesData(seriesDatas);
-	    
-	    return costChartsData;
+	    return jsonDto;
 	}
 	
 	/**

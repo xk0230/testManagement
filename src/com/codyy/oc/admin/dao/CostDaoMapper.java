@@ -20,6 +20,8 @@ public interface CostDaoMapper {
 	
 	List<CostSubTypeBean> getCostSubTypeList(int castType);
 
+	List<String> getCostSubTypeStrList(int castType);
+	
 	int insertCostEntity(CostEntityBean costEntityBean);
 	
 	int insertCostDepEntity(CostDepEntityBean costDepEntityBean);
@@ -75,4 +77,6 @@ public interface CostDaoMapper {
 	 * @return
 	 */
 	List<String> getMonthList();
+	
+	List<CostMonthInOut> getCostChart(Map<String, Object> map);
 }

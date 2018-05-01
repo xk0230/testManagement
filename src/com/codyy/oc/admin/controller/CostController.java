@@ -219,7 +219,7 @@ public class CostController extends BaseController{
 		return costService.viewChart(this.getSessionUser(request),cost);
 	}
 	
-	@ResponseBody
+/*	@ResponseBody
     @RequestMapping("/outlay.do")
     public CostChartsData getChartDataByOutlayType(HttpServletRequest request,int curYear){
 		CostChartsData c= costService.getCostChartData(this.getSessionUser(request),0,curYear);
@@ -227,20 +227,21 @@ public class CostController extends BaseController{
 		Collections.sort(ls, new CostChartsSeriesDataComparator());
         return c;
         
-    }
+    }*/
 	
 	@ResponseBody
     @RequestMapping("/depIncome.do")
-    public CostChartsData getChartDataByDepIncome(HttpServletRequest request,int curYear){
-        return costService.getCostChartData(this.getSessionUser(request),1,curYear);
+    public JsonDto getChartDataByDepIncome(HttpServletRequest request,int curYear,int costType){
+		int x = costType;
+        return costService.getCostChartData(this.getSessionUser(request),costType,curYear);
         
     }
 	
 	@ResponseBody
     @RequestMapping("/depOutcome.do")
-    public CostChartsData getChartDataByDepOutcome(HttpServletRequest request,int curYear){
+    public JsonDto getChartDataByDepOutcome(HttpServletRequest request,int curYear){
         
-        return costService.getCostChartData(this.getSessionUser(request),2,curYear);
+        return costService.getCostChartData(this.getSessionUser(request),1,curYear);
         
     }
 	
@@ -254,7 +255,7 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/depInOutcome.do")
-    public List<CostChartsData> getChartDataByDepInOutcome(HttpServletRequest request,int curYear){
+    public List<CostChartsData> getChartDataByDepInOutcome(HttpServletRequest request,int curYear,int costType){
         
         return costService.getDepCostChartData(this.getSessionUser(request),curYear);
         

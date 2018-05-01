@@ -10,6 +10,19 @@
 		<if test="_parameter == 0 || _parameter ==1">
 			AND cost_type = #{_parameter}
 		</if>
+		ORDER BY cost_subtype_id
+	
+	</select>
+	
+	<select id="getCostSubTypeStrList" parameterType="int" resultType="java.lang.String">
+		
+		SELECT name
+		FROM COST_SUBTYPE
+		WHERE 1=1
+		<if test="_parameter == 0 || _parameter ==1">
+			AND cost_type = #{_parameter}
+		</if>
+		ORDER BY cost_subtype_id
 	
 	</select>
 	
@@ -572,6 +585,29 @@
 			
 			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
 			  
+	</select>
+	
+	<select id="getCostChart" parameterType="java.util.Map" resultType="com.codyy.oc.admin.vo.CostMonthInOut">
+		SELECT 
+			a.cost_month as month,
+			b.cost_subtype_id as costSubId,
+			c.name as costSubName,
+			sum(a.cost_num) as costNum
+		FROM COST_DEP_DETAIL a
+		LEFT JOIN COST_DETAIL b
+		ON a.cost_id = b.cost_id
+		LEFT JOIN COST_SUBTYPE c
+		ON b.cost_subtype_id = c.cost_subtype_id
+		WHERE 1=1
+		<if test="depId !=null and depId!=''">
+			AND a.cost_dep = #{depId}
+		</if>
+		AND b.cost_type = #{costType}
+		AND a.cost_month = #{month}
+		AND a.cost_num > 0
+		group by a.cost_month,b.cost_subtype_id,c.name
+		order by a.cost_month,b.cost_subtype_id
+
 	</select>
 	
 </mapper>
