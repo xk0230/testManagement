@@ -18,6 +18,7 @@ import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
 import com.codyy.oc.admin.entity.TravelDetailType;
 import com.codyy.oc.admin.vo.TravelVO;
@@ -31,12 +32,18 @@ import com.codyy.oc.admin.vo.TravelVO;
 @Component("TravelManageService")
 public class TravelManageService {
 
+	private static final String DELETE_SUCCESS = "删除成功";
+	private static final String DELETE_ERROR = "删除失败";
 	private static final String INSERT_SUCCESS = "新增成功";
 	private static final String INSERT_ERROR = "新增失败";
 	private static final String UPDATE_SUCCESS = "修改成功";
 	private static final String UPDATE_ERROR = "修改失败";
-	private static final String DELETE_SUCCESS = "删除成功";
-	private static final String DELETE_ERROR = "删除失败";
+	private static final String SCRAP_SUCCESS = "报废成功";
+	private static final String SCRAP_ERROR = "报废失败";
+	private static final String SUB_SUCCESS = "提交成功";
+	private static final String SUB_ERROR = "提交失败";
+	private static final String REJ_SUCCESS = "提交成功";
+	private static final String REJ_ERROR = "提交失败";
 	
 	@Autowired
 	private TravelMapper travelMapper;
@@ -144,5 +151,37 @@ public class TravelManageService {
 		return jsonDto;
 	}
 	
+	
+public JsonDto updateTravelStatus(AdminUser user,TravelVO travel){
+		
+		JsonDto jsonDto = new JsonDto();
+		
+		String sucessResult = "";
+		String errResult = "";
+		
+		if(travel.getStatus().equals("99")) {
+			sucessResult = SCRAP_SUCCESS;
+			errResult = SCRAP_ERROR;
+		}else if(travel.getStatus().equals("03") || travel.getStatus().equals("05")|| travel.getStatus().equals("01")) {
+			sucessResult = SUB_SUCCESS;
+			errResult = SUB_ERROR;
+			
+		}else if(travel.getStatus().equals("02")|| travel.getStatus().equals("04")) {
+			sucessResult = REJ_SUCCESS;
+			errResult = REJ_ERROR;
+		}
+		if(user.getPosition().equals("MANAGER") && (travel.getStatus().equals("03") || travel.getStatus().equals("02"))) {
+			travel.setAuditUser(user.getUserId());
+		}
+		
+		int updateCostEntityNum = travelMapper.updateTravelStatus(travel);
+		if(updateCostEntityNum == 1){
+			jsonDto.setCode(0);
+			jsonDto.setMsg(sucessResult);
+		}else{
+			jsonDto.setMsg(errResult);
+		}
+		return jsonDto;
+	}
 
 }

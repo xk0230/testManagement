@@ -152,7 +152,14 @@ setInterval("getNewsNum()","60000");
             <!-- 入职必读 -->
              <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
              <!-- 出差管理 -->
-             <li class="mainLi"><a href="${root}/travel/travelApply.do"><i class=" icon-plane"></i><span>出差管理</span> </a> </li>
+              <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-plane"></i><span>出差管理</span> <b class="caret"></b></a>
+	             	<ul class="dropdown-menu">
+	                    <li><a href="${root}/travel/travelApply.do"><i class="en-arrow-right7"></i>出差登记</a></li>
+	                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/travel/travelAudit.do"><i class="en-arrow-right7"></i>出差审批</a></li>
+	                    <li><a href="${root}/travel/travelView.do"><i class="en-arrow-right7"></i>出差查看</a></li>
+	           	   </ul>
+              </li>
+             
           </ul>
         </div>
         <!-- /container --> 

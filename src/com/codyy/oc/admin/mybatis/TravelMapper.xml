@@ -197,4 +197,13 @@
 		
 	
 	</select>
+	
+		<!-- 更新成本状态 -->
+	<update id="updateTravelStatus" parameterType="com.codyy.oc.admin.vo.TravelVO">
+		UPDATE travel SET status = #{status}
+		<if test="auditUser != null and auditUser != ''">
+			,audit_user = #{auditUser}
+		</if>
+		WHERE id = #{id}
+	</update>
 </mapper>

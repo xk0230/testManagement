@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.Contract;
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
 import com.codyy.oc.admin.vo.TravelVO;
 
@@ -22,4 +23,6 @@ public interface TravelMapper {
     List<Travel> getAll();
     
     List<TravelVO> getTravelPageList(Page page);
+    
+	int updateTravelStatus(Travel record);
 }

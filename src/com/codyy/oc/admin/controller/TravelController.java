@@ -11,22 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.HtmlUtils;
 
 import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.Contract;
 import com.codyy.oc.admin.entity.Travel;
-import com.codyy.oc.admin.service.ContractManageService;
 import com.codyy.oc.admin.service.TravelManageService;
-import com.codyy.oc.admin.vo.ContractVO;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -60,7 +57,28 @@ public class TravelController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/travelApply.do")
-	public String contractApply(){
+	public String travelApply(Model model){
+		model.addAttribute("mode","apply");
+		return "admin/travel/travelApply";
+	}
+	
+	/**
+	 * 合同审批
+	 * @return
+	 */
+	@RequestMapping("/travelAudit.do")
+	public String travelAudit(Model model){
+		model.addAttribute("mode","audit");
+		return "admin/travel/travelApply";
+	}
+	
+	/**
+	 * 合同查看
+	 * @return
+	 */
+	@RequestMapping("/travelView.do")
+	public String travelView(Model model){
+		model.addAttribute("mode","view");
 		return "admin/travel/travelApply";
 	}
 	
@@ -80,5 +98,12 @@ public class TravelController extends BaseController {
     public JsonDto deleteContract(HttpServletRequest request,TravelVO travel){
 		return travelManageService.deleteTravel(travel);
     }
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateTravelStatus.do",method = RequestMethod.POST)
+	public JsonDto UpdateStatus(HttpServletRequest request,TravelVO travel){
+		return travelManageService.updateTravelStatus(this.getSessionUser(request),travel);
+	}
 	
 }
