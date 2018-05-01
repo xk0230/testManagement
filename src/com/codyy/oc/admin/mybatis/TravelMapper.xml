@@ -162,11 +162,63 @@
 			travel.status as status,
 			travel.remark as remark,
 			'view' as editMode,
-			au.realname as createUserName
+			au.realname as createUserName,
+			cc.content as statusName
 		FROM
 			travel travel
 		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
 		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
+		LEFT JOIN CODE_CONTENT cc on cc.id = travel.status
+		where 1=1 
+			
+			<if test="map.name != null and  map.name != ''">
+				AND travel.create_user like '%' #{map.name} '%' 
+			</if>
+			
+			<if test="map.place != null and  map.place != ''">
+				AND travel.place like '%'   #{map.place}  '%' 
+			</if>
+			
+	
+			AND  travel.create_user = #{map.userId}
+			<!-- 	<if test="map.userPosition == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPosition == 'MANAGER'">
+					or travel.dep_id = #{map.depId}
+				</if>
+					) -->
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				And (travel.start_time <![CDATA[ <= ]]> #{map.startTime} and travel.end_time <![CDATA[ >= ]]> #{map.startTime})
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				And (travel.start_time <![CDATA[ <= ]]> #{map.endTime} and travel.end_time <![CDATA[ >= ]]> #{map.endTime})
+			</if>
+		
+	
+	</select>
+	
+	
+	<select id="getTravelAuditPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.TravelVO">
+		SELECT
+			travel.id as id,
+			travel.create_user AS createUser,
+			travel.start_time AS startTime,
+			dep.`name` AS depName,
+			travel.end_time as endTime,
+			travel.place as place,
+			travel.status as status,
+			travel.remark as remark,
+			'view' as editMode,
+			au.realname as createUserName,
+			cc.content as statusName
+		FROM
+			travel travel
+		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
+		LEFT JOIN CODE_CONTENT cc on cc.id = travel.status
 		where 1=1 
 			
 			<if test="map.name != null and  map.name != ''">
@@ -183,7 +235,83 @@
 					or 1 = 1
 				</if>
 				<if test="map.userPosition == 'MANAGER'">
-					or travel.dep_id = #{map.userDepId}
+					or travel.dep_id = #{map.depId}
+				</if>
+					)
+			
+			<if test="map.startTime != null and map.startTime !=''">
+				And (travel.start_time <![CDATA[ <= ]]> #{map.startTime} and travel.end_time <![CDATA[ >= ]]> #{map.startTime})
+			</if>
+			
+			<if test="map.endTime != null and map.endTime != ''">
+				And (travel.start_time <![CDATA[ <= ]]> #{map.endTime} and travel.end_time <![CDATA[ >= ]]> #{map.endTime})
+			</if>
+			
+			<!-- 管理员时 条件设定为部门领导审核通过的 -->
+			<if test="map.userId == 'admin' and map.auditStatus == null">
+				AND (travel.status in ('03','04','05'))
+			</if>
+			<if test="map.userId == 'admin' and map.auditStatus == 0">
+				AND (travel.status = '03')
+			</if>
+			<if test="map.userId == 'admin' and map.auditStatus == 1">
+				AND (travel.status = '05')
+			</if>
+			
+			<if test="map.userId != 'admin' and map.auditStatus == null ">
+				AND travel.dep_id = #{map.depId}
+				AND (travel.status in ('01','02','03','04','05'))
+			</if>
+			
+			<if test="map.userId != 'admin' and map.auditStatus == 0 ">
+				AND travel.dep_id = #{map.depId}
+				AND (travel.status = '01')
+			</if>
+			
+			<if test="map.userId != 'admin' and map.auditStatus == 1 ">
+				AND travel.dep_id = #{map.depId}
+				AND (travel.status = '03')
+			</if>
+		
+	
+	</select>
+	
+	
+	<select id="getTravelViewPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.vo.TravelVO">
+		SELECT
+			travel.id as id,
+			travel.create_user AS createUser,
+			travel.start_time AS startTime,
+			dep.`name` AS depName,
+			travel.end_time as endTime,
+			travel.place as place,
+			travel.status as status,
+			travel.remark as remark,
+			'view' as editMode,
+			au.realname as createUserName,
+			cc.content as statusName
+		FROM
+			travel travel
+		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
+		LEFT JOIN CODE_CONTENT cc on cc.id = travel.status
+		where 1=1 
+			 AND travel.status = '05'
+			<if test="map.name != null and  map.name != ''">
+				AND travel.create_user like '%' #{map.name} '%' 
+			</if>
+			
+			<if test="map.place != null and  map.place != ''">
+				AND travel.place like '%'   #{map.place}  '%' 
+			</if>
+			
+	
+			AND ( travel.create_user = #{map.userId}
+				<if test="map.userPosition == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.userPosition == 'MANAGER'">
+					or travel.dep_id = #{map.depId}
 				</if>
 					)
 			
@@ -198,6 +326,29 @@
 	
 	</select>
 	
+	
+	<select id="getById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.TravelVO">
+		SELECT
+			travel.id as id,
+			travel.create_user AS createUser,
+			travel.start_time AS startTime,
+			dep.`name` AS depName,
+			travel.end_time as endTime,
+			travel.place as place,
+			travel.status as status,
+			travel.remark as remark,
+			'view' as editMode,
+			au.realname as createUserName,
+			cc.content as statusName
+		FROM
+			travel travel
+		LEFT JOIN DEPARTMENT dep ON travel.dep_id = dep.dep_id
+		LEFT JOIN ADMIN_USER au ON au.user_id = travel.create_user
+		LEFT JOIN CODE_CONTENT cc on cc.id = travel.status
+		 where travel.id = #{id,jdbcType=VARCHAR}
+			 	
+	
+	</select>
 		<!-- 更新成本状态 -->
 	<update id="updateTravelStatus" parameterType="com.codyy.oc.admin.vo.TravelVO">
 		UPDATE travel SET status = #{status}
@@ -206,4 +357,5 @@
 		</if>
 		WHERE id = #{id}
 	</update>
+	
 </mapper>

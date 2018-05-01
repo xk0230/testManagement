@@ -22,8 +22,10 @@ import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
 import com.codyy.oc.admin.service.TravelManageService;
+import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -85,13 +87,47 @@ public class TravelController extends BaseController {
 
 	@ResponseBody
     @RequestMapping("/page.do")
-    public Page getCostPageList(HttpServletRequest request,TravelVO travel){
+    public Page getTravelPageList(HttpServletRequest request,TravelVO travel){
 		AdminUser user = getSessionUser(request);
 		travel.setUserId(user.getUserId());
 		travel.setUserPosition(user.getPosition());
 		travel.setUserDepId(user.getDepId());
         return travelManageService.getTravelPageList(travel);
     }
+	
+	@ResponseBody
+    @RequestMapping("/auditPage.do")
+    public Page getAuditList(HttpServletRequest request,TravelVO travel){
+		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		travel.setUserDepId(adminUser.getDepId());
+		travel.setUserId(adminUser.getUserId());
+		travel.setUserPosition(adminUser.getPosition());
+		
+		
+        return travelManageService.getTravelAuditList(travel);
+    }
+	
+	/**
+	 * 审批列表的分页查询
+	 * @param request
+	 * @param cost
+	 * @return
+	 */
+	@ResponseBody
+    @RequestMapping("/viewPage.do")
+    public Page getViewList(HttpServletRequest request,TravelVO travel){
+		AdminUser adminUser = (AdminUser)request.getSession().getAttribute(AdminUser.ADMIN_SESSION_USER);
+		travel.setUserDepId(adminUser.getDepId());
+		travel.setUserId(adminUser.getUserId());
+		travel.setUserPosition(adminUser.getPosition());
+        return travelManageService.getTravelViewList(travel);
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateStatus.do",method = RequestMethod.POST)
+	public JsonDto UpdateStatus(HttpServletRequest request,TravelVO travel){
+		return travelManageService.updateStatus(this.getSessionUser(request),travel);
+	}
 
 	@ResponseBody
     @RequestMapping("/deleteTravel.do")
@@ -100,10 +136,5 @@ public class TravelController extends BaseController {
     }
 	
 	
-	@ResponseBody
-	@RequestMapping(value = "/updateTravelStatus.do",method = RequestMethod.POST)
-	public JsonDto UpdateStatus(HttpServletRequest request,TravelVO travel){
-		return travelManageService.updateTravelStatus(this.getSessionUser(request),travel);
-	}
 	
 }

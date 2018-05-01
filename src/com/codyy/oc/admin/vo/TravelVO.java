@@ -5,7 +5,6 @@ package com.codyy.oc.admin.vo;
 
 import java.sql.Timestamp;
 
-import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.entity.Travel;
 
 /**  
@@ -43,8 +42,6 @@ public class TravelVO extends Travel {
     
     private String editMode;
     
-    private String contractNo;
-    
 	private String status;
 	
 	private String statusName;
@@ -55,6 +52,10 @@ public class TravelVO extends Travel {
 
 	private String createUserName;
 	
+	
+	
+
+
 	public String getCreateUserName() {
 		return createUserName;
 	}
@@ -257,20 +258,6 @@ public class TravelVO extends Travel {
 	 */
 	public void setEditMode(String editMode) {
 		this.editMode = editMode;
-	}
-
-	/**
-	 * @return the contractNo
-	 */
-	public String getContractNo() {
-		return contractNo;
-	}
-
-	/**
-	 * @param contractNo the contractNo to set
-	 */
-	public void setContractNo(String contractNo) {
-		this.contractNo = contractNo;
 	}
 
 	/**

@@ -20,6 +20,26 @@
 							
 							<div class="widget-content">
 								<div class="row">
+									<div class="span2">
+									 	<span>姓名:${travel.createUserName }</span>
+									</div>
+									<div class="span2">
+									 	<span>部门:${travel.depName }</span>
+									 </div>
+									 <div class="span2">
+									 	<span>出差地:${travel.place }</span>
+									 </div>
+									 <div class="span4">
+									 	<span>备注:${travel.remark }</span>
+									 </div>
+								</div>
+						<%-- 		<div class="row">
+									<div class="span8">
+									 	<span>时间:${travel.startTime }~${travel.endTime }</span>
+									 </div>
+								</div> --%>
+								<hr>
+								<div class="row">
                                     <div class="span4">
 										<span class="searchSpan">出差详情类型:</span>
 										
@@ -71,10 +91,10 @@
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
+														<a href="javascript:;" class="btn btn-xs  " ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')" ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-if="${adminUser.userId == 'admin'} && item.status=='05'" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startPlace"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endPlace"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>

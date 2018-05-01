@@ -140,10 +140,12 @@
 			td.create_time as createTime,
 			td.cost_num as costNum,
 			td.remark as remark,
-			'view' as editMode
+			'view' as editMode,
+			t.status as status
 		FROM
 			travel_detail td
 		LEFT JOIN travel_detail_type tdt ON tdt.id = td.type
+		LEFT JOIN travel t on t.id = td.travel_id
 		where 1=1 
 			<if test="map.travelId != null and map.travelId !=''">
 				AND td.travel_id = #{map.travelId}

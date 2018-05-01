@@ -18,9 +18,7 @@ import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
-import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
-import com.codyy.oc.admin.entity.TravelDetailType;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -75,6 +73,7 @@ public class TravelManageService {
 			//创建时间和创建者
 		    travel.setCreateTime(DateUtils.getCurrentTimestamp());
 		    travel.setCreateUser(user.getUserId());
+		    travel.setDepId(user.getDepId());
 		    
 		    if(user.getPosition().equals("MANAGER")) {
 		    	travel.setStatus("03");
@@ -128,7 +127,7 @@ public class TravelManageService {
 	    map.put("userId", travel.getUserId());
 	    map.put("startTime", travel.getStartDate());
 	    map.put("endTime", travel.getEndDate());
-	    map.put("userDepId", travel.getUserDepId());
+	    map.put("depId", travel.getUserDepId());
 	    map.put("userPosition", travel.getUserPosition());
 	    
 	    page.setMap(map);
@@ -184,4 +183,112 @@ public JsonDto updateTravelStatus(AdminUser user,TravelVO travel){
 		return jsonDto;
 	}
 
+
+/**
+ * 出差审核查询
+ * @param cost
+ * @return
+ */
+public Page getTravelAuditList(TravelVO travel){
+    Page page = new Page();
+    page.setStart(travel.getStart());
+    page.setEnd(travel.getEnd());
+    
+    Map<String, Object> map = new HashMap<String, Object>();
+    
+//    map.put("costType", cost.getCostType());
+//    map.put("costSubtypeId", cost.getCostSubtypeId());
+    map.put("depId", travel.getUserDepId());
+    map.put("status", travel.getStatus());
+    map.put("startTime", travel.getStartDate());
+    map.put("endTime", travel.getEndDate());
+    map.put("userId", travel.getUserId());
+//    map.put("costNo", cost.getCostNo());
+//    map.put("remark", cost.getRemark());
+//    map.put("auditStatus", cost.getAuditStatus());
+    map.put("userPosition", travel.getUserPosition());
+    
+    page.setMap(map);
+    
+    List<TravelVO> pageList = travelMapper.getTravelAuditPageList(page);
+    
+//    for(TravelVO TravelVO : pageList) {
+//    	TravelVO.setCostDepList(travelMapper.getTravelDepList(TravelVO.getId()));
+//    }
+    page.setData(pageList);
+    return page;
+}
+
+/**
+ * 出差查看查询
+ * @param cost
+ * @return
+ */
+public Page getTravelViewList(TravelVO travel){
+    Page page = new Page();
+    page.setStart(travel.getStart());
+    page.setEnd(travel.getEnd());
+    
+    Map<String, Object> map = new HashMap<String, Object>();
+    
+//    map.put("costType", cost.getCostType());
+//    map.put("costSubtypeId", cost.getCostSubtypeId());
+    map.put("depId", travel.getUserDepId());
+    map.put("status", travel.getStatus());
+    map.put("startTime", travel.getStartDate());
+    map.put("endTime", travel.getEndDate());
+    map.put("userId", travel.getUserId());
+//    map.put("costNo", cost.getCostNo());
+//    map.put("remark", cost.getRemark());
+    map.put("userPosition", travel.getUserPosition());
+//    map.put("searchMonth", cost.getSearchMonth());
+    
+    page.setMap(map);
+    
+    List<TravelVO> pageList = travelMapper.getTravelViewPageList(page);
+    
+//    for(TravelVO travelvo : pageList) {
+//    	travelvo.setCostDepList(travelMapper.getTravelDepList(travelvo.getCostId()));
+//    }
+    page.setData(pageList);
+    return page;
+}
+
+
+public JsonDto updateStatus(AdminUser user,TravelVO travel){
+	
+	JsonDto jsonDto = new JsonDto();
+	
+	String sucessResult = "";
+	String errResult = "";
+	
+	if(travel.getStatus().equals("99")) {
+		sucessResult = SCRAP_SUCCESS;
+		errResult = SCRAP_ERROR;
+	}else if(travel.getStatus().equals("03") || travel.getStatus().equals("05")|| travel.getStatus().equals("01")) {
+		sucessResult = SUB_SUCCESS;
+		errResult = SUB_ERROR;
+		
+	}else if(travel.getStatus().equals("02")|| travel.getStatus().equals("04")) {
+		sucessResult = REJ_SUCCESS;
+		errResult = REJ_ERROR;
+	}
+	if(user.getPosition().equals("MANAGER") && (travel.getStatus().equals("03") || travel.getStatus().equals("02"))) {
+		travel.setAuditUser(user.getUserId());
+	}
+	
+	int updateCostEntityNum = travelMapper.updateTravelStatus(travel);
+	if(updateCostEntityNum == 1){
+		jsonDto.setCode(0);
+		jsonDto.setMsg(sucessResult);
+	}else{
+		jsonDto.setMsg(errResult);
+	}
+	return jsonDto;
+}
+
+
+	public  TravelVO getTravelById(String id){
+		return travelMapper.getById(id);
+	}
 }
