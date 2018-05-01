@@ -40,12 +40,16 @@ import com.codyy.oc.admin.vo.CostYearVO;
  */
 @Service("bookServer")
 public class BookService {
-	
+    private static final String INSERT_SUCCESS = "保存成功";
+    private static final String INSERT_ERROR = "保存失败";
+    private static final String UPDATE_SUCCESS = "修改成功";
+    private static final String UPDATE_ERROR = "修改失败";
 	private static final String DEL_SUCCESS = "删除成功";
 	private static final String DEL_ERROR = "删除失败";
 	private static final String NO_EXIT_DATA = "数据不存在";
 	private static final String BOOK_GET = "get";//借书
 	private static final String BOOK_BACK = "back";//还书
+	
 
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
@@ -65,11 +69,22 @@ public class BookService {
 			b.setCreateTime(DateUtils.getCurrentTimestamp());
 			Integer max = bookDaoMapper.getMaxBookNo();
 			b.setBookNo(max==null?1:max+1);
-			bookDaoMapper.insertSelective(b);
+			int insNum = bookDaoMapper.insertSelective(b);
+            if(insNum == 1){
+                jsonDto.setCode(0);
+                jsonDto.setMsg(INSERT_SUCCESS);
+            }else{
+                jsonDto.setMsg(INSERT_ERROR);
+            }
 		}else {
-			bookDaoMapper.updateByPrimaryKeySelective(b);
+			int updNum = bookDaoMapper.updateByPrimaryKeySelective(b);
+			if(updNum == 1){
+                jsonDto.setCode(0);
+                jsonDto.setMsg(UPDATE_SUCCESS);
+            }else{
+                jsonDto.setMsg(UPDATE_ERROR);
+            }
 		}
-		jsonDto.setCode(0);
 		return jsonDto;
 	}
 	

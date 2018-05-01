@@ -16,8 +16,18 @@ public class Book {
     private Date createTime;
     
     private String userName;//借阅人name
+    
+    private String editMode;
 
-    public String getUserName() {
+    public String getEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(String editMode) {
+		this.editMode = editMode;
+	}
+
+	public String getUserName() {
 		return userName;
 	}
 

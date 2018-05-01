@@ -24,9 +24,6 @@ import com.codyy.oc.admin.entity.BookHistory;
 import com.codyy.oc.admin.service.BookService;
 import com.codyy.oc.admin.service.CostService;
 import com.codyy.oc.admin.vo.BookVO;
-import com.codyy.oc.admin.vo.CostChartsData;
-import com.codyy.oc.admin.vo.CostTotalInOut;
-import com.codyy.oc.admin.vo.CostYearVO;
 
 /**
  * 图书管理

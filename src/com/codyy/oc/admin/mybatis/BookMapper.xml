@@ -106,7 +106,7 @@
   </update>
   
   <select id="getBookPageList" parameterType="com.codyy.commons.page.Page" resultMap="BaseResultMap">
-		SELECT b.*,au.realname as userName
+		SELECT b.*,au.realname as userName,'view' as editMode
 		FROM BOOK b left join ADMIN_USER au on b.user_id = au.user_id 
 			<where>
 			<if test="map.name != null and map.name !=''">
