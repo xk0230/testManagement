@@ -59,7 +59,7 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<div style="width:1134px;">
+										<div style="width:1134px;" ng-if="${mode == 'apply' }">
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<div style="overflow:scroll">
