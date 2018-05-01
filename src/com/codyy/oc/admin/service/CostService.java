@@ -907,7 +907,7 @@ public class CostService {
 	    return datas;
 	}
 
-	public List<DepMonthTotalVO> getDepMonthTotalOutcome(AdminUser user,int curYear) {
+	public List<DepMonthTotalVO> getDepMonthTotalOutcome(AdminUser user,int curYear,int costType) {
 		
 		List<DepMonthTotalVO> depMonthTotals = new ArrayList<>();
 		
@@ -922,7 +922,7 @@ public class CostService {
         }
         
         if(flag){
-        	cost.setCostType("1");
+        	cost.setCostType(String.valueOf(costType));
         	cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
             cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
         	

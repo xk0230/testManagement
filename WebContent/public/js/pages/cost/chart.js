@@ -40,7 +40,8 @@ myAppModule.controller('ChartController',
 				method:'POST',
 				url:$("#rootUrl").val()+'/admin/cost/depMonthOut.do',
 				params:{
-					curYear:$scope.year
+					curYear:$scope.year,
+					costType:$scope.costType
 				}
 			
 			}).then(function(res){
@@ -102,8 +103,6 @@ myAppModule.controller('ChartController',
 						json["name"] = i+"月";
 						json["data"] = dataTmp;
 						yy.push(json);
-						
-						//yy[i] = $.parseJSON('{"name":"月","data":"'+dataTmp+'"}');
 					}
 					
 				    $('#depIncome').highcharts({

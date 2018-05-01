@@ -27,11 +27,10 @@
 										</select>
                                     </div>
                                     <span class="searchSpan">收支类型:</span>
-                                        <select id="costType" ng-model="costType"  class="form-control span2" 
+                                        <select id="costType" ng-model="costType"  class="form-control span2" ng-change="costYearChange()"
                                                 ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
                                                 ng-change="costTypeChange()">
                                         </select>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getCostList()" value="查询" /></div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
