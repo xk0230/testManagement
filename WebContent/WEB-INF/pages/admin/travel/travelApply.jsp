@@ -15,7 +15,9 @@
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
-								<h3>出差</h3>
+								<h3 ng-if="${mode == 'apply' }">出差登记</h3>
+								<h3 ng-if="${mode == 'audit' }">出差审批</h3>
+								<h3 ng-if="${mode == 'view' }">出差查看</h3>
 								<!-- 模式 -->
 								<input type="hidden" id="mode" value="${mode}">
 							</div>
@@ -65,7 +67,8 @@
 											<thead>
 												<tr>
 													<th width="15%" ng-if="${mode !='view'}" style="text-align:center;font-size:12px;">操作</th>
-													<th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th> 
+													<th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th>
+													<th width="5%" style="text-align:center;font-size:12px;">状态</th> 
 												 	<th width="5%" style="text-align:center;font-size:12px;">姓名</th>
 													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
 													<th width="5%" style="text-align:center;font-size:12px;">部门</th>
@@ -85,18 +88,21 @@
 															<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 														</div>
 														<div ng-if="${mode=='audit'}">
-															<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-ok"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-remove-sign"></i></a>
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
+															<a href="javascript:;" class="btn btn-small" ng-click="vm.editTravel(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSub(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRej(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.adminSub(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-ok"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.adminRej(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-remove-sign"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'"><i class="icon-remove-sign"></i></a>
 														</div>
 														
 														<div ng-if="${mode=='view'}">
 															<input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" >
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
 														</div>
 													</td>
+													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.createUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.place"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.depName"></p></td>
@@ -104,9 +110,10 @@
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p class="line-limit-length span2"  title="{{item.remark}}" ng-bind="item.remark"></p></td>
 													<!-- edit -->
-														<td ng-switch-when="edit" >
+													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
+													<td ng-switch-when="edit">草稿</td>
 													<td ng-switch-when="edit"><p ng-bind="item.createUserName"></p></td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.place" style="width:200px;" >

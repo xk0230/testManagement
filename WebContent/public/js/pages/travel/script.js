@@ -37,10 +37,17 @@ myAppModule.controller('TravelController',
 		
 		// 获取数据列表
 		this.getTravelList = function(){
-			console.log("查询啦");
+			console.log($("#mode").val());
+			var url = '/travel/page.do';
+			if($("#mode").val() == 'audit'){
+				url = '/travel/auditPage.do';
+			}else if($("#mode").val() == 'view'){
+				url = '/travel/viewPage.do';
+			}
+			
 			$http({
 				method:'POST',
-				url:$("#rootUrl").val()+'/travel/page.do',
+				url:$("#rootUrl").val()+url,
 				params:{
 //					createUser:$scope.createUser,
 					place:$scope.place,
@@ -251,6 +258,65 @@ myAppModule.controller('TravelController',
 				})
 			});
 		};
+		
+		
+		//经理审核提交
+		this.managerSub = function (item) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将提交给管理员审核！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						id:item.id,
+						status:"03"
+					};
+				self.updateStatus(params);
+			});
+		};
+
+		//经理驳回
+		this.managerRej = function (costItem) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回给申请者修改！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						costId:costItem.costId,
+						status:"02"
+					};
+				self.updateStatus(params);
+			});
+		};
+		
+		
+		//更新状态
+		this.updateStatus = function (params) {
+			$http({
+				method:'POST',
+				url:$("#rootUrl").val()+"/travel/updateStatus.do",
+				params:params
+				
+			}).then(function(res){
+				if(res.data.code == 0){
+					swal(res.data.msg);
+					//重新加载列表
+					self.getTravelList();
+				}else{
+					swal(res.data.msg);
+				}
+			})
+		};
+		
 		
 		//提交
 		this.submitTravel = function (travelItem) {

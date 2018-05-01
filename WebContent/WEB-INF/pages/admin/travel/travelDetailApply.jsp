@@ -71,10 +71,10 @@
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
+														<a href="javascript:;" class="btn btn-xs  " ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')" ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-if="${adminUser.userId == 'admin'} && item.status=='05'" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startPlace"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endPlace"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
