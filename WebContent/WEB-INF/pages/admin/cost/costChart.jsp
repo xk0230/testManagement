@@ -8,6 +8,9 @@
 		<%@ include file="../../common/header.jsp"%>
 		<!-- Start #content -->
 		<div id="content" class="main" ng-app = "myApp" ng-controller="ChartController as vm">
+		
+		
+		
 		  <div class="main-inner">
 			<div class="container">
 				<div class="row">
@@ -31,7 +34,7 @@
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
-									<div class="span6">
+									<div class="span12">
 										<div class="widget">
 				                            <div class="widget-header">
 				                                <i class="icon-bar-chart"></i>
@@ -118,6 +121,7 @@
 				                            </div>
 				                            <!-- /widget-content -->
 				                        </div>
+
 									</div>
 								</div>
 							</div>

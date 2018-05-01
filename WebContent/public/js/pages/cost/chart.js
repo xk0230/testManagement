@@ -23,8 +23,8 @@ myAppModule.controller('ChartController',
 				
 				self.depMonthOut();
 				
-//				self.getDepIncome();
-//				self.getDepOutcome();
+				self.getDepIncome();
+				self.getDepOutcome();
 				
 				self.getDepInOutcome();
 				
