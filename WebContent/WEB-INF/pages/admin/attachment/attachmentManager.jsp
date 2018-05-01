@@ -6,129 +6,98 @@
 </head>
 <body  >
 		<%@ include file="../../common/header.jsp"%>
-		<%@ include file="../../common/side.jsp"%>
+		
+		
+		
 		<!-- Start #content -->
 		<div id="content" ng-app = "myApp" ng-controller="AttachmentController as vm">
-			<!-- Start .content-wrapper -->
-			<div class="content-wrapper">
+		  <div class="main-inner">
+			<div class="container">
 				<div class="row">
-					<div class="col-lg-12 heading">
-                        <h1 class="page-header"><i class="st-chart"></i> 附件信息</h1>
-                        <!-- Start .bredcrumb -->
-                        <ul id="crumb" class="breadcrumb">
-                        </ul>
-					</div>
-				</div>
-				<div class="outlet">
-					<!-- Start .outlet -->
-					<!-- Page start here ( usual with .row ) -->
-					<div class="row">
-						<div class="col-lg-12">
-							<!-- col-lg-12 start here -->
-							<div class="panel panel-default toggle">
-								<!-- Start .panel -->
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"></h3>
-                                </div>
-								<div class="panel-body">
-									<div class="form-horizontal group-border" role="form">
-										
-										<div class="form-group">
-											<div class="col-lg-3">
-												<label class="col-lg-4 control-label" >开始时间</label>
-												<div class="col-lg-8">
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="startDate" is-open="popup.opened1" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="true"  />
-														<span class="input-group-btn">
-														<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
-												</div>
-											</div>
-											<div class="col-lg-3">
-												<label class="col-lg-4 control-label" >结束时间</label>
-												<div class="col-lg-8">
-													<p class="input-group">
-														<input type="text" class="form-control" uib-datepicker-popup ng-model="endDate" is-open="popup.opened2" 
-														datepicker-options="dateOptions" current-text = "今日" close-text="关闭" clear-text="清空"
-														ng-required="true"  />
-														<span class="input-group-btn">
-														<button type="button" class="btn btn-default" ng-click="open(2)"><i class="glyphicon glyphicon-calendar"></i></button>
-														</span>
-													</p>
-												</div>
-											</div>
-											<div class="col-lg-3">
-											</div>
-											<div class="col-lg-3">
-												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-primary col-lg-12" name="query" ng-click="vm.getAttachmentEntityPageList()" value="查询" />
-												</div>
-												<div class="col-lg-6">
-													<input type="button"  class="btn btn-lg btn-success col-lg-12" name="query" ng-click="vm.addAttachment('', '.outlet')" value="新增记录" />
-												</div>
-											</div>
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3>附件信息</h3>
+							</div>
+							
+							<div class="widget-content" style="padding-bottom: 100px;">
+								<div class="row">
+									<div class="span4" style="height:37px;">
+										<span class="searchSpan pull-left">上传日期:</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="startDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+										<span class="searchSpanMid pull-left">~</span>
+										<span class="pull-left">
+											<mb-datepicker input-class="mb-date" date="endDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+										</span>
+									</div>
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getAttachmentEntityPageList()" value="查询" /></div>
+								</div>
+								<hr>
+								<!-- 查询结果 -->
+								<div class="row">
+									<div class="span12">
+										<div style="width:1134px;">
+											<button class="btn btn-invert" ng-click="vm.add()"><i class="icon-plus"></i>新增</button>
 										</div>
-										
+										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
+											<thead >
+												<tr>
+													<th width="110px">操作</th>
+													<th width="50px">序号</th>
+													<th width="610px">文件名称</th>
+													<th width="110px">类型</th>
+													<th>创建日期</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode">
+													<!-- view -->
+													<td ng-switch-when="view">
+														<a href="javascript:;" class="btn btn-small" ng-click="vm.edit(item)"><i class="icon-edit"></i></a>
+														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.del(item)" ><i class="icon-remove-sign"></i></a>
+													</td>
+													<td ng-switch-when="view"><p ng-bind="$index + 1"></p></td>
+													<td ng-switch-when="view"><a href="${root}/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p></a></td>
+													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
+ 													<!-- edit -->
+													<td ng-switch-when="edit">
+														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item,$index)"><i class="icon-ok"></i></a>
+													</td>
+													<td ng-switch-when="edit"><p ng-bind="$index + 1"></p></td>
+													<td ng-switch-when="edit">
+														<a href="${root}/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p>
+														<input type="file" id="fileUpload{{$index}}" class="form-control" file-model="myfile" />
+													</td>
+													<td ng-switch-when="edit">
+														<select ng-model="item.type"  class="form-control select2" >
+															<option value="">--请选择--</option>
+															<option value="0" >图片</option>
+															<option value="1" >PDF</option>
+														</select>
+													</td>
+													<td ng-switch-when="edit">
+														<mb-datepicker input-class="mb-date" date="item.createTime" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
+										<div style="width:1134px;">
+											<%@ include file="../../common/page.jsp"%>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- End .row -->
-				<div class="outlet">
-					<!-- Start .outlet -->
-					<!-- Page start here ( usual with .row ) -->
-					<div class="row">
-						<div class="col-lg-12">
-							<!-- col-lg-12 start here -->
-							<div class="panel panel-default toggle">
-								<!-- Start .panel -->
-								<div class="panel-heading">
-									<h3 class="panel-title"><i class="ec-list"></i>查询结果</h3>
-								</div>
-								<div class="panel-body">
-									<table class="table display" id="datatable">
-										<thead>
-											<tr>
-												<th>文件名称</th>
-												<th>类型</th>
-												<th>创建日期</th>
-												<th>操作</th>
-											</tr>
-										</thead>  
-										<tbody>
-											<tr class="odd gradeX" ng-repeat="item in vm.list">
-												
-												<td><a href="${root}/admin/attachment/download.do?id={{item.id}}"><p ng-bind="item.name"></p></a></td>
-												<td><p ng-bind="item.typeName"></p></td>
-												<td><p ng-bind="item.createTime | date:'yyyy-MM-dd'"></p></td>
-												<td>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.addAttachment(item.id,'.outlet')"><i class="fa-edit"></i></button>
-													<button type="button" class="btn btn-xs btn-success" ng-click="vm.delAttachment(item.id,'.outlet')"><i class="ec-trashcan"></i></button>
-												</td>
-												
-											</tr>
-										</tbody>
-									</table>
-									<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
-									<%@ include file="../../common/page.jsp"%>
-								</div>
-
-						</div>
-						<!-- col-lg-12 end here -->
-					</div>
-					<!-- Page End here -->
-				</div>
-				<!-- End .outlet -->
 			</div>
-			<!-- End .content-wrapper -->
-			<div class="clearfix"></div>
 		</div>
-		<!-- End #content -->
 		
 	<!-- 这里可以定义一个js文件放到public下面 -->
     <script type="text/ng-template" id="myModalEditContent.html">

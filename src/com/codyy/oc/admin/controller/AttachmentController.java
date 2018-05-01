@@ -75,7 +75,6 @@ public class AttachmentController extends BaseController{
    @ResponseBody
    @RequestMapping(value = "/saveOrUpdate.do",method = RequestMethod.POST)
    public JsonDto insertOrUpdateAttachmentEntity(HttpServletRequest request,MultipartFile uploadFile,AttachmentEntity attachmentEntity){
-       
        return attachmentService.insertOrUpdateAttachmentEntity(request,uploadFile,attachmentEntity);
    }
    

@@ -9,7 +9,7 @@ import com.codyy.oc.admin.entity.AttachmentEntity;
 
 public interface AttachmentDaoMapper {
     
-    void insertAttachmentEntity(AttachmentEntity attachment);
+	int insertAttachmentEntity(AttachmentEntity attachment);
 
     int updateAttachmentEntity(AttachmentEntity attachment);
     

@@ -28,7 +28,8 @@
 				remark,
 				status,
 				cost_no,
-				contract_id
+				contract_id,
+				project_id
 			)
 		VALUES
 			(
@@ -44,7 +45,8 @@
 				#{remark},
 				#{status},
 				#{costNo},
-				#{contractId}
+				#{contractId},
+				#{projectId}
 			)
 	</insert>
 	
@@ -92,7 +94,8 @@
 			cost_num = #{costNum},
 			remark = #{remark},
 			status = #{status},
-			contract_id = #{contractId}
+			contract_id = #{contractId},
+			project_id = #{projectId}
 		WHERE cost_id = #{costId}
 	</update>
 	
@@ -200,13 +203,16 @@
 			code.content as statusName,
 			'view' as editMode,
 			costDetail.contract_id as contractId,
-			contract.content as contractContent
+			contract.content as contractContent,
+			costDetail.project_id as projectId,
+			project.name as projectName
 		FROM
 			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
 		LEFT JOIN DEPARTMENT dep ON costDetail.dep_id = dep.dep_id
 		LEFT JOIN CODE_CONTENT code on costDetail.status = code.id and codeName = 'CodeStatus'
 		LEFT JOIN CONTRACT contract on costDetail.contract_id = contract.contract_id
+		LEFT JOIN project on costDetail.project_id = project.pj_no
 		where 1=1 
 			
 			<if test="map.costType != null and  map.costType != ''">
@@ -262,7 +268,9 @@
 			code.content as statusName,
 			'view' as editMode,
 			costDetail.contract_id as contractId,
-			contract.content as contractContent
+			contract.content as contractContent,
+			costDetail.project_id as projectId,
+			project.name as projectName
 		FROM
 			COST_DETAIL costDetail
 		LEFT JOIN COST_SUBTYPE costSub ON costDetail.cost_subtype_id = costSub.cost_subtype_id
@@ -271,6 +279,7 @@
 		LEFT JOIN ADMIN_USER audit on costDetail.audit_user = audit.user_id
 		LEFT JOIN ADMIN_USER subUser on costDetail.create_user_id = subUser.user_id
 		LEFT JOIN CONTRACT contract on costDetail.contract_id = contract.contract_id
+		LEFT JOIN project on costDetail.project_id = project.pj_no
 		where 1=1 
 			
 			<if test="map.costType != null and  map.costType != ''">
@@ -374,6 +383,8 @@
 			'view' as editMode,
 			costDetail.contract_id as contractId,
 			contract.content as contractContent,
+			costDetail.project_id as projectId,
+			project.name as projectName,
 			<include refid="contract_Column_List" />
 			<include refid="payment_Column_List" />
 		FROM
@@ -385,6 +396,7 @@
 		LEFT JOIN ADMIN_USER subUser on costDetail.create_user_id = subUser.user_id
 		LEFT JOIN CONTRACT contract on costDetail.contract_id = contract.contract_id
 		LEFT JOIN payment on contract.company = payment.id
+		LEFT JOIN project on costDetail.project_id = project.pj_no
 		WHERE costDetail.status = '05'
 			
 			<if test="map.costType != null and  map.costType != ''">

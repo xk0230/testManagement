@@ -22,9 +22,12 @@
 	</insert>
 	
 	<update id="updateAttachmentEntity" parameterType="com.codyy.oc.admin.entity.AttachmentEntity">
-		UPDATE ATTACHMENT SET  name = #{name},
-							   location = #{location},
-							   type = #{type}
+		UPDATE ATTACHMENT SET
+			<if test="name != null and name !=''">
+				name = #{name},
+			</if>
+			location = #{location},
+			type = #{type}
 		
 		WHERE id = #{id}
 	
@@ -44,7 +47,7 @@
 	</delete>
 	
 	<select id="getAttachmentEntityPageList" parameterType="com.codyy.commons.page.Page" resultType="com.codyy.oc.admin.entity.AttachmentEntity">
-		SELECT id,f_id AS fId,name,location,type,create_Time AS createTime
+		SELECT id,f_id AS fId,name,location,type,create_Time AS createTime,'view' AS editMode
 			 
 		FROM ATTACHMENT
 				

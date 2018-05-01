@@ -225,15 +225,6 @@ public class CostController extends BaseController{
 		CostChartsData c= costService.getCostChartData(this.getSessionUser(request),0,curYear);
 		List<CostChartsSeriesData>  ls = c.getSeriesData();
 		Collections.sort(ls, new CostChartsSeriesDataComparator());
-//		for (CostChartsSeriesData cc : ls) {
-//			List<BigDecimal> Datas = cc.getData();
-//			BigDecimal all = new BigDecimal(0.0);
-//			for (BigDecimal d : Datas) {
-//				all = all.add(d);
-//			}
-//			Datas.add(all);
-//		}
-//		c.getXcategories().add("总计");
         return c;
         
     }

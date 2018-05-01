@@ -322,11 +322,11 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 
 			};
 			
-			$ctrl.setPage = function (pageNo) {
+			$scope.setPage = function (pageNo) {
 				$scope.currentPage = pageNo;
 			};
 
-			$ctrl.pageChanged = function() {
+			$scope.pageChanged = function() {
 				$ctrl.getPaymentList();
 			};
 			

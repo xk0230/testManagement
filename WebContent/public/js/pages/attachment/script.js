@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker'])
 
 myAppModule.controller('AttachmentController',
 	function costListController($scope,$http,$uibModal,$document,$filter){
@@ -47,108 +47,98 @@ myAppModule.controller('AttachmentController',
 			});
 		};
 		
-		
-		//日期模块加载
-		$scope.today = function() {
-			$scope.dt = new Date();
-		};
-		$scope.clear = function() {
-			$scope.dt = null;
-		};
-
-		$scope.dateOptions = {
-			dateDisabled: "",
-			formatYear: 'yyyy',
-			maxDate: new Date(9999, 12, 31),
-			minDate: new Date(1000, 1,1),
-			startingDay: 1,
-		};
-
-		$scope.open = function(mode) {
-			if(mode == 1){
-				$scope.popup.opened1 = true;
-			}else if (mode == 2){
-				$scope.popup.opened2 = true;
-			}else if (mode == 3){
-				$scope.popup.opened3 = true;
-			}else if (mode == 4){
-				$scope.popup.opened4 = true;
+		/*上传*/
+		this.save = function (item,index) {
+			
+			if(!item){
+				swal("错误提示", "请填写完整信息！", "warning");
+				return ;
+			}
+			if(!item.type){
+				swal("错误提示", "请填写类型！", "warning");
+				return ;
 			}
 			
+			
+			var files = $("#fileUpload" + index)[0].files;
+			if(!item.id && files.length == 0){
+				swal("错误提示", "请选择文件！", "warning");
+				return ;
+			}
+			var fd = new FormData();
+			
+			fd.append('uploadFile', files[0]);
+			fd.append('fId', $('#userId').val());
+			fd.append('type', item.type);
+			if(item.id){
+				fd.append('id',item.id);
+			}
+			
+			$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/attachment/saveOrUpdate.do",
+					data: fd,
+					headers: {'Content-Type':undefined},
+				
+				}).then(function(res){
+					if(res.data.code == 0){
+						swal(res.data.msg);
+						self.getAttachmentEntityPageList();
+					}else{
+						swal(res.data.msg);
+					}
+			});
 		};
-	
-		$scope.popup = {
-			opened1: false,
-			opened2: false,
-			opened3: false,
-			opened4: false
+			
+		/*编辑*/
+		this.edit = function(item){
+			item.editMode = "edit"
+		}
+			
+		/*删除*/
+		this.del = function (item) {
+			swal({ 
+					title: "确定删除吗？", 
+					text: "你将无法恢复该附件信息！", 
+					type: "warning", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/attachment/del/"+item.id+".do",
+					params:{}
+					}).then(function(res){
+						if(res.data.code == 0){
+							swal(res.data.msg,"","success");
+							self.getTrainList();
+						}else{
+							swal(res.data.msg,"","error");
+						}
+				});
+			});
 		};
 		
-		
-		this.addAttachment = function (id, parentSelector) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
-		    	    var modalInstance = $uibModal.open({
-		    	      animation: true,
-		    	      ariaLabelledBy: 'modal-title',
-		    	      ariaDescribedBy: 'modal-body',
-		    	      templateUrl: 'myModalEditContent.html',
-		    	      controller: 'ModalInstanceCtrl',
-		    	      controllerAs: '$ctrl',
-		    	      size: 'lg',
-		    	      appendTo: parentElem,
-		    	      //参数
-		    	      resolve: {
-		    	    	  //好像必须得这么写
-		    	        items: function () {
-		    	          return id;
-		    	        }
-		    	      }
-		    	    });
-
-		    	    modalInstance.result.then(function (selectedItem) {
-		    	    	
-		    	    	//ok的回调函数
-		    	    	if(selectedItem == '0'){
-		    	    		self.getAttachmentEntityPageList();
-		    	    	}
-		    	    	
-		    	    }, function () {
-		    	    	//取消的回调函数
-		    	    	
-		    	    });
-		   };
-		    	  
-		   this.delAttachment = function (id, parentSelector) {
-			    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
-			    	    var modalInstance = $uibModal.open({
-			    	      animation: true,
-			    	      ariaLabelledBy: 'modal-title',
-			    	      ariaDescribedBy: 'modal-body',
-			    	      templateUrl: 'myModalDelContent.html',
-			    	      controller: 'ModalInstanceDel',
-			    	      controllerAs: '$ctrl',
-			    	      size: 'sm',
-			    	      appendTo: parentElem,
-			    	      //参数
-			    	      resolve: {
-			    	    	  //好像必须得这么写
-			    	        items: function () {
-			    	          return id;
-			    	        }
-			    	      }
-			    	    });
-
-			    	    modalInstance.result.then(function (selectedItem) {
-			    	    	
-			    	    	//ok的回调函数
-			    	    	if(selectedItem == '0'){
-			    	    		self.getAttachmentEntityPageList();
-			    	    	}
-			    	    	
-			    	    }, function () {
-			    	    	//取消的回调函数
-			    	    });
-			   };
+		/*添加*/
+		this.add = function(){
+			var newItem = {
+				name:""
+				,type:""
+				,editMode:"edit"
+				,createTime:$filter('date')(new Date(), "yyyy-MM-dd")
+			};
+			var myArray=new Array()
+			myArray.push(newItem);
+			
+			$.each(self.list,
+				function(index, value) {
+					myArray.push(value);
+				}
+			);
+			self.list = myArray;
+		}
 		
 	}
 );

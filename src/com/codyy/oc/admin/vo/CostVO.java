@@ -75,6 +75,8 @@ public class CostVO extends CostEntityBean{
 	private String auditStatus;
 	
 	private String searchMonth;
+	
+	private String projectName;
 
 	public String getCreateUserPosition() {
 		return createUserPosition;
@@ -346,6 +348,14 @@ public class CostVO extends CostEntityBean{
 
 	public void setUserPostion(String userPostion) {
 		UserPostion = userPostion;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 }

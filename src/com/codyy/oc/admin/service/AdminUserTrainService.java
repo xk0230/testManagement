@@ -39,17 +39,11 @@ public class AdminUserTrainService {
         
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("userId", train.getUserId());
-//        map.put("startDate", train.getStartDate());
-//        map.put("endDate", train.getEndDate());
         map.put("project", train.getProject());
         page.setMap(map);
         
         List<AdminUserTrain> trainList = userTrainDaoMapper.getAdminUserTrainPageList(page);
-        if(CollectionUtils.isNotEmpty(trainList)){
-            for(int i = 0;i<trainList.size();i++){
-            	trainList.get(i).setOrder(i+1);
-            }
-        }
+        
         page.setData(trainList);
         
         return page;
@@ -66,42 +60,39 @@ public class AdminUserTrainService {
         	train.setCreateTime(DateUtils.getCurrentTimestamp());
         	train.setId(UUID.randomUUID().toString());
             
-        	userTrainDaoMapper.saveUserTrain(train);
-            
-            jsonDto.setCode(0);
-            
+        	int insNum = userTrainDaoMapper.saveUserTrain(train);
+        	if(insNum == 1){
+	            jsonDto.setCode(0);
+	            jsonDto.setMsg(INSERT_SUCCESS);
+        	}else {
+        		jsonDto.setCode(1);
+        		jsonDto.setMsg(INSERT_ERROR);
+        	}
         }else{
             int num = userTrainDaoMapper.updateUserTrain(train);;
             if(num == 1){
                 jsonDto.setCode(0);
                 jsonDto.setMsg(UPDATE_SUCCESS);
             }else{
+            	jsonDto.setCode(1);
                 jsonDto.setMsg(UPDATE_ERROR);
             }
         }
-        
         return jsonDto;
 	}
 
 	public JsonDto delTrainEntityById(String id) {
 		JsonDto jsonDto = new JsonDto();
-		userTrainDaoMapper.deleteUserTrain(id);
-        jsonDto.setCode(0);
+		int delNum = userTrainDaoMapper.deleteUserTrain(id);
         
-        return jsonDto;
-	}
-
-	public JsonDto getTrainEntityById(String id) {
-		JsonDto jsonDto = new JsonDto();
-		AdminUserTrain train = userTrainDaoMapper.getAdminUserTrainById(id);
-        if(train != null){
+        if(delNum == 1){
             jsonDto.setCode(0);
-            jsonDto.setObjData(train);
+            jsonDto.setMsg(DEL_SUCCESS);
         }else{
-            jsonDto.setMsg(NO_EXIT_DATA);
+        	jsonDto.setCode(1);
+            jsonDto.setMsg(DEL_ERROR);
         }
         
         return jsonDto;
-	} 
-	
+	}
 }
