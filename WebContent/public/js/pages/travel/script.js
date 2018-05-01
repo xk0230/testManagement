@@ -269,7 +269,7 @@ myAppModule.controller('TravelController',
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/travel/deleteTravel.do",
+					url:$("#rootUrl").val()+"/travel/updateTravelStatus.do",
 					params:params
 					
 				}).then(function(res){

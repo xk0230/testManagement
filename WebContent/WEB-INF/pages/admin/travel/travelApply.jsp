@@ -16,6 +16,8 @@
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
 								<h3>出差</h3>
+								<!-- 模式 -->
+								<input type="hidden" id="mode" value="${mode}">
 							</div>
 							
 							<div class="widget-content">
@@ -62,7 +64,8 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1120px;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="15%" style="text-align:center;font-size:12px;">操作</th> 
+													<th width="15%" ng-if="${mode !='view'}" style="text-align:center;font-size:12px;">操作</th>
+													<th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th> 
 												 	<th width="5%" style="text-align:center;font-size:12px;">姓名</th>
 													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
 													<th width="5%" style="text-align:center;font-size:12px;">部门</th>
@@ -75,9 +78,24 @@
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
-														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
+														<div ng-if="${mode == 'apply' }">
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
+															<a href="javascript:;" class="btn btn-small " ng-click="vm.submitTravel(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-share"></i></a>
+															<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
+														</div>
+														<div ng-if="${mode=='audit'}">
+															<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.adminSubCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-ok"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.adminRejCost(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-remove-sign"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'"><i class="icon-remove-sign"></i></a>
+														</div>
+														
+														<div ng-if="${mode=='view'}">
+															<input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" >
+														</div>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.createUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.place"></p></td>
