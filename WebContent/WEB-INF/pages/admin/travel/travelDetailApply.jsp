@@ -39,15 +39,14 @@
 											<mb-datepicker input-class="mb-date" date="endDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
 									</div>
-									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getTravelList()" value="查询" /></div>
-									
+									<div class="span1 pull-right"><input type="button"  class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.getTravelDetailList()" value="查询" /></div>
 								</div>
-								<div class="row">
+							<!-- 	<div class="row">
                                     <div class="span4">
                                         <span class="searchSpan">类型:</span>
                                         <input type="text" ng-model="createUser" class="span2">
                                     </div>
-								</div>
+								</div> -->
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
@@ -56,15 +55,15 @@
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<div style="overflow:scroll">
-										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped" style="width:1150px;margin-top:7px;" >
 											<thead>
 												<tr>
 													<th width="15%" style="text-align:center;font-size:12px;">操作</th> 
-												 	<th width="15%" style="text-align:center;font-size:12px;">类型</th>
+												 	<th width="5%" style="text-align:center;font-size:12px;">类型</th>
 													<th width="5%" style="text-align:center;font-size:12px;">起始地</th>
 													<th width="5%" style="text-align:center;font-size:12px;">目的地</th>
-													<th width="10%" style="text-align:center;font-size:12px;">时间</th>
-													<th width="10%" style="text-align:center;font-size:12px;">金额</th>
+													<th width="8%" style="text-align:center;font-size:12px;">时间</th>
+													<th width="8%" style="text-align:center;font-size:12px;">金额</th>
 													<th width="20%" style="text-align:center;font-size:12px;">备注</th>
 												</tr>
 											</thead>
@@ -86,26 +85,26 @@
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
 													</td>
 													<td ng-switch-when="edit">
-				                                        <select ng-model="item.typeName"  class="form-control span2" 
+				                                        <select ng-model="item.type"  class="form-control span2" 
                                             			    ng-options="cType.id as cType.name group by cType.group for cType in  travelDetailTypeList">
-                                         				   <option value="">--请选择出差详情类型--</option>
+                                         				   <option value="">--出差详情类型--</option>
                                         				</select>
 													</td>
 												<!-- 	<td ng-switch-when="edit"><input type="text" ng-model="item.typeName" style="width:200px;"></td> -->
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.startPlace" style="width:200px;" >
+														<input type="text" ng-model="item.startPlace"  >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.endPlace" style="width:200px;" >
+														<input type="text" ng-model="item.endPlace"  >
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<mb-datepicker input-class="mb-date" date="item.startTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  style="width:150px;" />
+														<input type="number" ng-model="item.costNum"  />
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.remark"  style="width:150px;" />
+														<input type="text" ng-model="item.remark"  />
 													</td>
 													
 												</tr>

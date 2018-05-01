@@ -105,10 +105,12 @@ public class TravelDetailManageService {
 //	    map.put("name", travel.getCreateUser());
 //	    map.put("place", travel.getPlace());
 //	    map.put("userId", travel.getUserId());
-//	    map.put("startTime", travel.getStartDate());
-//	    map.put("endTime", travel.getEndDate());
+	    map.put("startTime", travelDetail.getStartDate());
+	    map.put("endTime", travelDetail.getEndDate());
 //	    map.put("userDepId", travel.getUserDepId());
 	    map.put("travelId", travelDetail.getTravelId());
+	    map.put("type", travelDetail.getType());
+	    
 	    
 	    page.setMap(map);
 	    

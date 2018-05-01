@@ -24,7 +24,7 @@ myAppModule.controller('TravelDetailController',
 			}else if(self.admin=="ADMIN"){
 				$scope.depIdChangeAble = false;
 			}
-			self.getTraveDetaillList();
+			self.getTravelDetailList();
 			//设置时间控件
 			setDatepicker("datepickerS")
 			setDatepicker("datepickerE")
@@ -35,7 +35,7 @@ myAppModule.controller('TravelDetailController',
 		};
 
 		$scope.pageChanged = function() {
-			self.getTraveDetaillList();
+			self.getTravelDetailList();
 		};
 		
 		
@@ -66,14 +66,13 @@ myAppModule.controller('TravelDetailController',
 			}
 		};
 		// 获取数据列表
-		this.getTraveDetaillList = function(){
+		this.getTravelDetailList = function(){
 			$http({
 				method:'POST',
 				url:$("#rootUrl").val()+'/traveldetail/page.do',
 				params:{
 					travelId:$scope.travelId,
-					createUser:$scope.createUser,
-					place:$scope.place,
+					type:$scope.travelDetailType,
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -137,20 +136,20 @@ myAppModule.controller('TravelDetailController',
 			travelItem.editMode = "edit";
 			//设置时间控件
 			setDatepicker("datepicker" + index)
-			var depid;
-			for(var i=0;i<$scope.depList.length;i++){
-				 if ($scope.depList[i].name == travelItem.dept){
-				    	depid = $scope.depList[i].depId;
+			var type;
+			for(var i=0;i<$scope.travelDetailTypeList.length;i++){
+				 if ($scope.travelDetailTypeList[i].name == travelItem.typeName){
+				    	type = $scope.travelDetailTypeList[i].id;
 				    	break;
 				 };
 			}
-			travelItem.dept = depid;
+			travelItem.type = type;
 
 		};
 		
 		//点击保存
 		this.save = function (travelItem) {
-			if(!travelItem.typeName){
+			if(!travelItem.type){
 				alert("请填写出差类型");
 				return ;
 			}
@@ -174,7 +173,7 @@ myAppModule.controller('TravelDetailController',
 				id:travelItem.id,
 				travelId:$scope.travelId,
 				createUser:travelItem.createUser,
-				type:travelItem.typeName,
+				type:travelItem.type,
 				startPlace:travelItem.startPlace,
 				endPlace:travelItem.endPlace,
 				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
@@ -191,7 +190,7 @@ myAppModule.controller('TravelDetailController',
 			}).then(function(res){
 				if(res.data.code == 0){
 					swal(res.data.msg);
-					self.getTraveDetaillList();
+					self.getTravelDetailList();
 				}else{
 					swal(res.data.msg);
 				}
@@ -202,7 +201,7 @@ myAppModule.controller('TravelDetailController',
 		this.scrap = function (TravelItem) {
 			swal({ 
 					title: "确定报废吗？", 
-					text: "你将无法恢复该合同信息！", 
+					text: "你将无法恢复该出差详情信息！", 
 					type: "warning", 
 					showCancelButton: true, 
 					closeOnConfirm: true, 
@@ -220,7 +219,7 @@ myAppModule.controller('TravelDetailController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal(res.data.msg);
-						self.getTraveDetaillList();
+						self.getTravelDetailList();
 					}else{
 						swal(res.data.msg);
 					}
@@ -251,7 +250,7 @@ myAppModule.controller('TravelDetailController',
 				}).then(function(res){
 					if(res.data.code == 0){
 						swal("提交成功！");
-						self.getTraveDetaillList();
+						self.getTravelDetailList();
 					}else{
 						swal("提交失败！");
 					}
