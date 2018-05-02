@@ -22,9 +22,6 @@ myAppModule.controller('TravelController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getTravelList();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {

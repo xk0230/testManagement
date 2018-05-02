@@ -163,4 +163,25 @@
 			</if>
 			)
 	</select>
+	
+      <select id="getTravelDetailList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.TravelDetailVO">
+		SELECT
+			td.id as id,
+			td.travel_id AS travelId,
+			td.type AS type,
+			tdt.`name` AS typeName,
+			td.start_place as startPlace,
+			td.end_place as endPlace,
+			td.start_time as startTime,
+			td.create_time as createTime,
+			td.cost_num as costNum,
+			td.remark as remark,
+			'view' as editMode,
+			t.status as status
+		FROM
+			travel_detail td
+		LEFT JOIN travel_detail_type tdt ON tdt.id = td.type
+		LEFT JOIN travel t on t.id = td.travel_id
+		where td.travel_id = #{travelId,jdbcType=VARCHAR}
+	</select>
 </mapper>

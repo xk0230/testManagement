@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.DateUtils;
+import com.codyy.oc.admin.dao.TravelDetailMapper;
 import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
@@ -45,6 +46,9 @@ public class TravelManageService {
 	
 	@Autowired
 	private TravelMapper travelMapper;
+	
+	@Autowired
+	private TravelDetailMapper travelDetailMapper;
 	
 	@Autowired
 	private TravelDetailTypeMapper travelDetailTypeMapper;
@@ -246,6 +250,10 @@ public Page getTravelViewList(TravelVO travel){
     page.setMap(map);
     
     List<TravelVO> pageList = travelMapper.getTravelViewPageList(page);
+    
+    for(TravelVO travelVO : pageList) {
+    	travelVO.setTravelDetailVOList(travelDetailMapper.getTravelDetailList(travelVO.getId()));
+    }
     
 //    for(TravelVO travelvo : pageList) {
 //    	travelvo.setCostDepList(travelMapper.getTravelDepList(travelvo.getCostId()));

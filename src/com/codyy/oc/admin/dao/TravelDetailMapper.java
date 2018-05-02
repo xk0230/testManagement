@@ -20,4 +20,6 @@ public interface TravelDetailMapper {
     int updateByPrimaryKey(TravelDetail record);
     
     List<TravelDetailVO> getTravelDetailPageList(Page page);
+    
+    List<TravelDetailVO> getTravelDetailList(String travelId);
 }
