@@ -602,6 +602,10 @@
 		<if test="depId !=null and depId!=''">
 			AND a.cost_dep = #{depId}
 		</if>
+		
+		<if test="depIds !=null and depIds!=''">
+			AND a.cost_dep in (${depIds})
+		</if>
 		AND b.cost_type = #{costType}
 		AND a.cost_year = #{year}
 		AND a.cost_month = #{month}

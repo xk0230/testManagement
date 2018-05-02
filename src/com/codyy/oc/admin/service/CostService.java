@@ -438,7 +438,7 @@ public class CostService {
 	    return jsonDto;
 	}
 	
-	public JsonDto getCostChartData(AdminUser user,int type,int curYear){
+	public JsonDto getCostChartData(AdminUser user,int type,int curYear,String depIds){
 		JsonDto jsonDto = new JsonDto();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -459,7 +459,7 @@ public class CostService {
 	    Map<String, Object> paraMap = new HashMap<String, Object>();
 	    paraMap.put("costType", type);
 	    paraMap.put("year", curYear);
-	    
+	    paraMap.put("depIds",depIds);
 	    for(int i=1;i<=12;i++) {
 		    paraMap.put("month", i);
 		    if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(user.getPosition())){
