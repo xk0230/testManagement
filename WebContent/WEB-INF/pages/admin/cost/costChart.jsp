@@ -74,7 +74,7 @@
 													<tbody>
 														<tr class="odd gradeX" ng-repeat="item in vm.list">
 															<td>
-																<input type="checkbox" ng-bind="item.checked" ng-checked="vm.checkDep()" />
+																<!-- <input type="checkbox" ng-bind="item.checked" ng-checked="vm.checkDep()" /> -->
 															</td>
 															<td><p ng-bind="item.depName"></p></td>
 															<td><p class ="a1" ng-bind="item.januaryTotal"></p></td>
