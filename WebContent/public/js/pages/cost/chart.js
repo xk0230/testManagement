@@ -80,7 +80,7 @@ myAppModule.controller('ChartController',
 				params:{
 					curYear:$scope.year,
 					costType:$scope.costType,
-					checkedDep:checkedDep
+					depIds:checkedDep
 				}
 			
 			}).then(function(res){
