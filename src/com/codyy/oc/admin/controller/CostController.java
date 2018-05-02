@@ -231,17 +231,17 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/depIncome.do")
-    public JsonDto getChartDataByDepIncome(HttpServletRequest request,int curYear,int costType){
+    public JsonDto getChartDataByDepIncome(HttpServletRequest request,int curYear,int costType,String depIds){
 		int x = costType;
-        return costService.getCostChartData(this.getSessionUser(request),costType,curYear);
+        return costService.getCostChartData(this.getSessionUser(request),costType,curYear,depIds);
         
     }
 	
 	@ResponseBody
     @RequestMapping("/depOutcome.do")
-    public JsonDto getChartDataByDepOutcome(HttpServletRequest request,int curYear){
+    public JsonDto getChartDataByDepOutcome(HttpServletRequest request,int curYear,String depIds){
         
-        return costService.getCostChartData(this.getSessionUser(request),1,curYear);
+        return costService.getCostChartData(this.getSessionUser(request),1,curYear,depIds);
         
     }
 	
