@@ -458,6 +458,7 @@ public class CostService {
 	    
 	    Map<String, Object> paraMap = new HashMap<String, Object>();
 	    paraMap.put("costType", type);
+	    paraMap.put("year", curYear);
 	    
 	    for(int i=1;i<=12;i++) {
 		    paraMap.put("month", i);

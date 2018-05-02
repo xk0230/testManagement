@@ -603,6 +603,7 @@
 			AND a.cost_dep = #{depId}
 		</if>
 		AND b.cost_type = #{costType}
+		AND a.cost_year = #{year}
 		AND a.cost_month = #{month}
 		AND a.cost_num > 0
 		group by a.cost_month,b.cost_subtype_id,c.name
