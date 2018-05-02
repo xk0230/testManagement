@@ -936,6 +936,7 @@ public class CostService {
             		if(null == depMonthTotal){
             			depMonthTotal = new DepMonthTotalVO();
             			depMonthTotal.setDepName(costVO.getDepName());
+            			depMonthTotal.setDepId(costVO.getDepId());
             		}
             		
             		deps.put(costVO.getDepName(), calculateDepMonthTotal(depMonthTotal, costVO));
