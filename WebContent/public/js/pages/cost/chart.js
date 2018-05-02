@@ -18,8 +18,9 @@ myAppModule.controller('ChartController',
 				$scope.curYear = res.data.curYear;
 				$scope.years = res.data.years;
 				$scope.year = res.data.curYear;
-
+				
 				self.depMonthOut();
+				
 				self.getDepIncome();
 
 			});
@@ -47,21 +48,39 @@ myAppModule.controller('ChartController',
 			}).then(function(res){
 				if(res){
 					self.list = res.data || [];
+					angular.forEach(self.list, function(item, key) {
+						item.checked = true;
+					});
 				}
 			});
 			
 		};
 		
+		this.checkDep = function(){
+			self.getDepIncome();
+		}
+		
 		this.getDepIncome = function(){
 			
 			$('#depIncome').html('');
+			
+			var checkedDep = "";
+			angular.forEach(self.list, function(item, key) {
+				if(item.checked){
+					checkedDep += item.depId + ",";
+				}
+			});
+			if(checkedDep.length > 0){
+				checkedDep = checkedDep.substring(0,checkedDep.length-1);
+			}
 			
 			$http({
 				method:'POST',
 				url:$("#rootUrl").val()+'/admin/cost/depIncome.do',
 				params:{
 					curYear:$scope.year,
-					costType:$scope.costType
+					costType:$scope.costType,
+					checkedDep:checkedDep
 				}
 			
 			}).then(function(res){

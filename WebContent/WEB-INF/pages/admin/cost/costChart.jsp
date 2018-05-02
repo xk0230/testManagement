@@ -54,6 +54,7 @@
 												<table class="table display" id="datatable">
 													<thead>
 														<tr>
+															<th>选择</th>
 															<th>部门名称</th>
 															<th>一月</th>
 															<th>二月</th>
@@ -72,6 +73,9 @@
 													</thead>  
 													<tbody>
 														<tr class="odd gradeX" ng-repeat="item in vm.list">
+															<td>
+																<input type="checkbox" ng-bind="item.checked" ng-checked="vm.checkDep()" />
+															</td>
 															<td><p ng-bind="item.depName"></p></td>
 															<td><p class ="a1" ng-bind="item.januaryTotal"></p></td>
 															<td><p class ="a2" ng-bind="item.februaryTotal"></p></td>
