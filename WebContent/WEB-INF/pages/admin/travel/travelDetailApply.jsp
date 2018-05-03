@@ -82,9 +82,9 @@
 												 	<th width="5%" style="text-align:center;font-size:12px;">类型</th>
 													<th width="5%" style="text-align:center;font-size:12px;">起始地</th>
 													<th width="5%" style="text-align:center;font-size:12px;">目的地</th>
-													<th width="8%" style="text-align:center;font-size:12px;">时间</th>
-													<th width="8%" style="text-align:center;font-size:12px;">金额</th>
-													<th width="20%" style="text-align:center;font-size:12px;">备注</th>
+													<th width="5%" style="text-align:center;font-size:12px;">时间</th>
+													<th width="5%" style="text-align:center;font-size:12px;">金额</th>
+													<th width="8%" style="text-align:center;font-size:12px;">备注</th>
 												</tr>
 											</thead>
 											<tbody>
