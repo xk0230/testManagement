@@ -180,10 +180,10 @@ myAppModule.controller('TravelController',
 				alert("请填写结束时间");
 				return ;
 			}
-			if(!travelItem.remark){
+			/*if(!travelItem.remark){
 				alert("请填写备注");
 				return ;
-			}
+			}*/
 			/*	if(!travelItem.url){
 				alert("请填写签订时间");
 				return ;
