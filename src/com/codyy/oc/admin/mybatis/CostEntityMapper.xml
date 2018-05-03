@@ -568,29 +568,27 @@
 	
 	</select>
 	
-	<select id="getCostVOList" parameterType="com.codyy.oc.admin.vo.CostVO" resultType="com.codyy.oc.admin.vo.CostVO">
-		SELECT dep.`name` AS depName,
-				costSub.`name` AS costSubName,
-				costDetail.cost_id AS costId,
-				costDetail.cost_num AS costNum,
-				costDetail.cost_time AS costTime,
-				costDetail.cost_type AS costType,
-				costDetail.create_time AS createTime
-				
-		FROM COST_DETAIL costDetail,COST_SUBTYPE costSub,DEPARTMENT dep
-		WHERE costDetail.cost_subtype_id = costSub.cost_subtype_id
-			  AND costDetail.dep_id = dep.dep_id
-			  
-			  <if test="depId !=null and depId!=''">
-				AND costDetail.dep_id = #{depId}
-			  </if>
-			  
-			AND costDetail.cost_type = #{costType}
-			
-			AND costDetail.cost_time <![CDATA[ >= ]]> #{startTime}
-			
-			AND costDetail.cost_time <![CDATA[ <= ]]> #{endTime}
-			  
+	<select id="getCostVOList" parameterType="java.util.Map" resultType="com.codyy.oc.admin.vo.CostChartVO">
+		SELECT 
+				a.cost_dep AS depId,
+				c.name AS depName,
+				sum(a.cost_num) AS costNum,
+				b.cost_type AS costType,
+				a.cost_month AS costMonth
+		FROM COST_DEP_DETAIL a
+		INNER JOIN COST_DETAIL b
+		ON a.cost_id = b.cost_id
+		INNER JOIN DEPARTMENT c
+		ON a.cost_dep = c.dep_id
+		WHERE 1=1
+			<if test="depId !=null and depId!=''">
+				AND a.cost_dep = #{depId}
+			</if>
+			AND b.cost_type = #{costType}
+			AND a.cost_year = #{curYear}
+			AND a.cost_num > 0
+		GROUP BY a.cost_dep,a.cost_month,c.name
+		ORDER BY a.cost_dep,a.cost_month
 	</select>
 	
 	<select id="getCostChart" parameterType="java.util.Map" resultType="com.codyy.oc.admin.vo.CostMonthInOut">
