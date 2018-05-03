@@ -122,7 +122,7 @@ myAppModule.controller('TravelController',
 				,createTime:new Date()
 				,create_user:""
 				,place:""
-				,dept:""
+				,depId:$("#sessionUserDepId").val()
 				,endTime:new Date()
 				,remark:""	
 				,editMode:"edit"
@@ -332,7 +332,7 @@ myAppModule.controller('TravelController',
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/travel/updateTravelStatus.do",
+					url:$("#rootUrl").val()+"/travel/updateStatus.do",
 					params:params
 					
 				}).then(function(res){
