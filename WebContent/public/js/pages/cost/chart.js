@@ -47,10 +47,11 @@ myAppModule.controller('ChartController',
 			
 			}).then(function(res){
 				if(res){
-					self.list = res.data || [];
-					angular.forEach(self.list, function(item, key) {
-						item.checked = true;
-					});
+					var costs = res.data.objData.costs;
+					var depList = res.data.objData.depList;
+					
+					self.list = costs;
+					
 				}
 			});
 			

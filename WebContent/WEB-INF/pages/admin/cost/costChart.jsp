@@ -74,22 +74,14 @@
 													<tbody>
 														<tr class="odd gradeX" ng-repeat="item in vm.list">
 															<td>
-																<!-- <input type="checkbox" ng-bind="item.checked" ng-checked="vm.checkDep()" /> -->
+																<input type="checkbox" ng-bind="item.checked" ng-click="vm.checkDep()" /> 
 															</td>
+															
 															<td><p ng-bind="item.depName"></p></td>
-															<td><p class ="a1" ng-bind="item.januaryTotal"></p></td>
-															<td><p class ="a2" ng-bind="item.februaryTotal"></p></td>
-															<td><p class ="a3" ng-bind="item.marchTotal"></p></td>
-															<td><p class ="a4" ng-bind="item.aprilTotal"></p></td>
-															<td><p class ="a5" ng-bind="item.mayTotal"></p></td>
-															<td><p class ="a6" ng-bind="item.juneTotal"></p></td>
-															<td><p class ="a7" ng-bind="item.julyTotal"></p></td>
-															<td><p class ="a8" ng-bind="item.augustTotal"></p></td>
-															<td><p class ="a9" ng-bind="item.septemberTotal"></p></td>
-															<td><p class ="a10" ng-bind="item.octoberTotal"></p></td>
-															<td><p class ="a11" ng-bind="item.novemberTotal"></p></td>
-															<td><p class ="a12" ng-bind="item.decemberTotal"></p></td>
-															<td><p class ="a13" ng-bind="item.decemberTotal+item.februaryTotal+item.marchTotal+item.aprilTotal+item.mayTotal+item.juneTotal+item.augustTotal+tem.septemberTotal+item.octoberTotal+item.novemberTotal+item.januaryTotal|number:1"></p></td>
+															
+															<td ng-repeat="mitem in item.chartList"><p ng-bind="mitem.costNum"></p></td>
+															
+															<td><p ng-bind="item.depTotal"></p></td>
 													</tbody>
 												</table>
 				                                <!-- /bar-chart -->

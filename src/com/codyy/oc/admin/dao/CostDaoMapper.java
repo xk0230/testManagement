@@ -8,6 +8,7 @@ import com.codyy.oc.admin.entity.CostDepEntityBean;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
+import com.codyy.oc.admin.vo.CostChartVO;
 import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostVO;
 
@@ -50,7 +51,7 @@ public interface CostDaoMapper {
 
 	List<CostMonthInOut> getCostDepartInOutcome(CostVO cost);
 
-	List<CostVO> getCostVOList(CostVO cost);
+	List<CostChartVO> getCostVOList(Map<String, Object> map);
 	
 	CostSeqBean getCostNoSeq(String costType);
 	

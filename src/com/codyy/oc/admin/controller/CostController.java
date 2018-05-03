@@ -263,7 +263,7 @@ public class CostController extends BaseController{
 	
 	@ResponseBody
     @RequestMapping("/depMonthOut.do")
-    public List<DepMonthTotalVO> getDepMonthTotalOutcome(HttpServletRequest request,int curYear,int costType){
+    public JsonDto getDepMonthTotalOutcome(HttpServletRequest request,int curYear,int costType){
         
         return costService.getDepMonthTotalOutcome(this.getSessionUser(request),curYear,costType);
         
