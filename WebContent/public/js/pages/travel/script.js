@@ -277,7 +277,7 @@ myAppModule.controller('TravelController',
 		};
 
 		//经理驳回
-		this.managerRej = function (costItem) {
+		this.managerRej = function (item) {
 			swal({ 
 					title: "确定驳回吗？", 
 					text: "将驳回给申请者修改！", 
@@ -288,14 +288,50 @@ myAppModule.controller('TravelController',
 			},
 			function(){ 
 				var params = {
-						costId:costItem.costId,
+						id:item.id,
 						status:"02"
 					};
 				self.updateStatus(params);
 			});
 		};
 		
-		
+		//管理员审核提交
+		this.adminSub = function (item) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将通过审核并计入成本！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						id:item.id,
+						status:"05"
+					};
+				self.updateStatus(params);
+			});
+		};
+
+		//管理员驳回
+		this.adminRej = function (item) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回至部门经理！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						id:item.id,
+						status:"04"
+					};
+				self.updateStatus(params);
+			});
+		};
 		//更新状态
 		this.updateStatus = function (params) {
 			$http({

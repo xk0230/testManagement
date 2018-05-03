@@ -72,6 +72,9 @@
 				cost_month,
 				cost_date,
 				cost_num
+				<if test="travelId != null and travelId != ''">
+					,travel_id
+				</if>
 			)
 		VALUES
 			(
@@ -81,6 +84,9 @@
 				#{costMonth},
 				#{costDate},
 				#{costNum}
+				<if test="travelId != null and travelId != ''">
+				,#{travelId}
+				</if>
 			)
 	</insert>
 	

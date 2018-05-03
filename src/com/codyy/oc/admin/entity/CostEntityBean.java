@@ -59,6 +59,17 @@ public class CostEntityBean {
 	//项目id
 	private String projectId;
 	
+	//出差id
+	private String travelId;
+	
+	public String getTravelId() {
+		return travelId;
+	}
+
+	public void setTravelId(String travelId) {
+		this.travelId = travelId;
+	}
+
 	private List<CostDepEntityBean> cosDepList;
 	
 

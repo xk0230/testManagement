@@ -12,7 +12,7 @@
 				<%@ include file="../print/CostTravel.jsp"%>
 				<div class="row">
 					<div class="span12">
-						<div class="widget">
+						<div class="widget" style="padding-bottom:100px;">
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
