@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/meta.jsp"%>
 <script type="text/javascript" src="${root }/public/js/customer.js"></script>
-
+<style>
+	th p {font-weight: bold;font-size: 30}
+</style>
 </head>
 <body >
 		<%@ include file="../../common/header.jsp"%>
@@ -26,11 +28,19 @@
 												<option value="">--请选择年度--</option>
 										</select>
                                     </div>
-                                    <span class="searchSpan">收支类型:</span>
-                                        <select id="costType" ng-model="costType"  class="form-control span2" ng-change="costYearChange()"
-                                                ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
-                                                ng-change="costTypeChange()">
-                                        </select>
+                                    <div class="span3">
+	                                    <span class="searchSpan">收支类型:</span>
+	                                    <select id="costType" ng-model="costType"  class="form-control span1" ng-change="costYearChange()"
+	                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
+	                                            ng-change="costTypeChange()">
+	                                    </select>
+                                    </div>
+                                    <div class="span5">
+										<span>月度：</span>
+										<span ng-repeat="item in monthCheckList">
+											{{item.month}}<input type="checkbox" ng-model="item.check" ng-click="vm.getDepIncome()" >
+										</span>
+                                    </div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->
@@ -53,35 +63,35 @@
 				                            <div class="widget-content">
 												<table class="table display" id="datatable">
 													<thead>
-														<tr>
-															<th>选择</th>
-															<th>部门名称</th>
-															<th>一月</th>
-															<th>二月</th>
-															<th>三月</th>
-															<th>四月</th>
-															<th>五月</th>
-															<th>六月</th>
-															<th>七月</th>
-															<th>八月</th>
-															<th>九月</th>
-															<th>十月</th>
-															<th>十一月</th>
-															<th>十二月</th>
-															<th>总计</th>
+														<tr align="right">
+															<th><p>选择</p></th>
+															<th><p>部门名称</p></th>
+															<th><p style="text-align: right;">一月</p></th>
+															<th><p style="text-align: right;">二月</p></th>
+															<th><p style="text-align: right;">三月</p></th>
+															<th><p style="text-align: right;">四月</p></th>
+															<th><p style="text-align: right;">五月</p></th>
+															<th><p style="text-align: right;">六月</p></th>
+															<th><p style="text-align: right;">七月</p></th>
+															<th><p style="text-align: right;">八月</p></th>
+															<th><p style="text-align: right;">九月</p></th>
+															<th><p style="text-align: right;">十月</p></th>
+															<th><p style="text-align: right;">十一月</p></th>
+															<th><p style="text-align: right;">十二月</p></th>
+															<th><p style="text-align: right;">总计</p></th>
 														</tr>
 													</thead>  
 													<tbody>
 														<tr class="odd gradeX" ng-repeat="item in vm.list">
 															<td>
-																<input type="checkbox" ng-bind="item.checked" ng-click="vm.checkDep()" /> 
+																<input type="checkbox" ng-bind="item.checked" ng-click="vm.checkDep()" ng-if="item.depName !='总计'" /> 
 															</td>
 															
 															<td><p ng-bind="item.depName"></p></td>
 															
-															<td ng-repeat="mitem in item.chartList"><p ng-bind="mitem.costNum"></p></td>
+															<td ng-repeat="mitem in item.chartList"><p ng-bind="mitem.costNum | currency:'￥':2" style="text-align: right;"></p></td>
 															
-															<td><p ng-bind="item.depTotal"></p></td>
+															<td><p ng-bind="item.depTotal | currency:'￥':2" style="text-align: right;"></p></td>
 													</tbody>
 												</table>
 				                                <!-- /bar-chart -->

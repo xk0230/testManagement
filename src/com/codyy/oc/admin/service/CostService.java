@@ -443,8 +443,6 @@ public class CostService {
 	public JsonDto getCostChartData(AdminUser user,int type,int curYear,String depIds){
 		JsonDto jsonDto = new JsonDto();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
-	    CostChartsData costChartsData = new CostChartsData();
 	    
 	    /*子分类列表*/
 	    List<String> costSubStrList = costDaoMapper.getCostSubTypeStrList(type);
@@ -452,12 +450,10 @@ public class CostService {
 	    
 	    List<CostSubTypeBean> costSubList = costDaoMapper.getCostSubTypeList(type);
 	    resultMap.put("costSubList", costSubList);
-	    
-	    
-	    
+
 	    /*查询结果列表*/
 	    Map<String, Object> costMap = new HashMap<String, Object>();
-	    
+	    /*参数设定*/
 	    Map<String, Object> paraMap = new HashMap<String, Object>();
 	    paraMap.put("costType", type);
 	    paraMap.put("year", curYear);
@@ -920,7 +916,6 @@ public class CostService {
 
 		/*取所有部门*/
 		List<Department> depList = depService.getAllDepartment();
-		resultMap.put("depList", depList);
 		
 		Map<String, Object> costMap = new HashMap<String, Object>();
 		
@@ -993,7 +988,7 @@ public class CostService {
 				if(chartList.size()==0) {
 					/*补全12个月的数据*/
 					for(int i=1;i<=12;i++) {
-						costChartVO.setCostMonth(String.valueOf(i));
+						
 						chartList.add(costChartVO);
 					}
 					/*设定到最终结果*/
@@ -1018,7 +1013,6 @@ public class CostService {
 						if(hasTheMonth) {
 							chartLisResutl.add(chartList.get(index));
 						}else {
-							costChartVO.setCostMonth(String.valueOf(i));
 							chartLisResutl.add(costChartVO);
 						}
 					}

@@ -29,6 +29,21 @@ myAppModule.controller('ChartController',
 				{costType : "0", name : "收入"},
 				{costType : "1", name : "支出"}
 			];
+			$scope.monthCheckList = [
+				{month : "1", check : true},
+				{month : "2", check : true},
+				{month : "3", check : true},
+				{month : "4", check : true},
+				{month : "5", check : true},
+				{month : "6", check : true},
+				{month : "7", check : true},
+				{month : "8", check : true},
+				{month : "9", check : true},
+				{month : "10", check : true},
+				{month : "11", check : true},
+				{month : "12", check : true}
+				];
+			
 			$scope.costType = "0";
 		};
 		$scope.costYearChange = function(){
@@ -48,10 +63,52 @@ myAppModule.controller('ChartController',
 			}).then(function(res){
 				if(res){
 					var costs = res.data.objData.costs;
-					var depList = res.data.objData.depList;
-					
 					self.list = costs;
+					console.log(costs);
+					var sum1=parseFloat(0);
+					var sum2=parseFloat(0);
+					var sum3=parseFloat(0);
+					var sum4=parseFloat(0);
+					var sum5=parseFloat(0);
+					var sum6=parseFloat(0);
+					var sum7=parseFloat(0);
+					var sum8=parseFloat(0);
+					var sum9=parseFloat(0);
+					var sum10=parseFloat(0);
+					var sum11=parseFloat(0);
+					var sum12=parseFloat(0);
+					var depTotal = parseFloat(0);
 					
+					angular.forEach(self.list, function(item, key) {
+						sum1 += item.chartList[0].costNum;
+						sum2 += item.chartList[1].costNum;
+						sum3 += item.chartList[2].costNum;
+						sum4 += item.chartList[3].costNum;
+						sum5 += item.chartList[4].costNum;
+						sum6 += item.chartList[5].costNum;
+						sum7 += item.chartList[6].costNum;
+						sum8 += item.chartList[7].costNum;
+						sum9 += item.chartList[8].costNum;
+						sum10 += item.chartList[9].costNum;
+						sum11 += item.chartList[10].costNum;
+						sum12 += item.chartList[11].costNum;
+						depTotal += item.depTotal;
+					});
+					var sumItem = {"depName":"总计"
+						,"chartList":[{"costNum":sum1},
+									{"costNum":sum2},
+									{"costNum":sum3},
+									{"costNum":sum4},
+									{"costNum":sum5},
+									{"costNum":sum6},
+									{"costNum":sum7},
+									{"costNum":sum8},
+									{"costNum":sum9},
+									{"costNum":sum10},
+									{"costNum":sum11},
+									{"costNum":sum12}]
+						,"depTotal":depTotal};
+					self.list["sum"] = sumItem;
 				}
 			});
 			
@@ -68,11 +125,16 @@ myAppModule.controller('ChartController',
 			var checkedDep = "";
 			angular.forEach(self.list, function(item, key) {
 				if(item.checked){
-					checkedDep += item.depId + ",";
+					checkedDep = checkedDep + item.depId + ",";
 				}
 			});
 			if(checkedDep.length > 0){
 				checkedDep = checkedDep.substring(0,checkedDep.length-1);
+			}else{
+				checkedDep ="";
+			}
+			if(!$scope.year){
+				return;
 			}
 			
 			$http({
@@ -92,38 +154,44 @@ myAppModule.controller('ChartController',
 					/*查询结果*/
 					var costMaps = res.data.objData.costMaps;
 					
+					var monthList = new Array();
+					
 					var yy = new Array();
-					for(var i=1;i<=12;i++){
-						var item = costMaps["costChartList" + i];
-						var dataTmp = new Array();
-						if(item.length == 0){
-							/*遍历所有的分类*/
-							angular.forEach(costSubList, function(item1, key1) {
-								/*设置为0*/
-								dataTmp.push(0);
-							});
-						}else{
-							/*遍历所有的分类*/
-							angular.forEach(costSubList, function(item1, key1) {
-								/*遍历结果*/
-								var hasData = false;
-								angular.forEach(item, function(item2, key2) {
-									if(item1.costSubTypeId == item2.costSubId){
-										hasData = true;
-										dataTmp.push(item2.costNum);
-									}
-								});
-								if(!hasData){
+					
+					angular.forEach($scope.monthCheckList, function(monthItem, key2) {
+						if(monthItem.check){
+							var i = monthItem.month;
+							var item = costMaps["costChartList" + i];
+							var dataTmp = new Array();
+							if(item.length == 0){
+								/*遍历所有的分类*/
+								angular.forEach(costSubList, function(item1, key1) {
+									/*设置为0*/
 									dataTmp.push(0);
-								}
-								
-							});
+								});
+							}else{
+								/*遍历所有的分类*/
+								angular.forEach(costSubList, function(item1, key1) {
+									/*遍历结果*/
+									var hasData = false;
+									angular.forEach(item, function(item2, key2) {
+										if(item1.costSubTypeId == item2.costSubId){
+											hasData = true;
+											dataTmp.push(item2.costNum);
+										}
+									});
+									if(!hasData){
+										dataTmp.push(0);
+									}
+									
+								});
+							}
+							var json = {};
+							json["name"] = monthItem.month+"月";
+							json["data"] = dataTmp;
+							yy.push(json);
 						}
-						var json = {};
-						json["name"] = i+"月";
-						json["data"] = dataTmp;
-						yy.push(json);
-					}
+					});
 					
 				    $('#depIncome').highcharts({
 				        chart: {
