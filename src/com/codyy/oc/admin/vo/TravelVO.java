@@ -4,6 +4,7 @@
 package com.codyy.oc.admin.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.codyy.oc.admin.entity.Travel;
 
@@ -52,9 +53,16 @@ public class TravelVO extends Travel {
 
 	private String createUserName;
 	
-	
+	private List<TravelDetailVO> travelDetailVOList;
 	
 
+	public List<TravelDetailVO> getTravelDetailVOList() {
+		return travelDetailVOList;
+	}
+
+	public void setTravelDetailVOList(List<TravelDetailVO> travelDetailVOList) {
+		this.travelDetailVOList = travelDetailVOList;
+	}
 
 	public String getCreateUserName() {
 		return createUserName;

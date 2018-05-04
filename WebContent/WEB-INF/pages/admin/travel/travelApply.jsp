@@ -9,9 +9,10 @@
 		<div id="content" class="main" ng-app = "myApp" ng-controller="TravelController as vm">
 		  <div class="main-inner">
 			<div class="container">
+				<%@ include file="../print/CostTravel.jsp"%>
 				<div class="row">
 					<div class="span12">
-						<div class="widget">
+						<div class="widget" style="padding-bottom:100px;">
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
@@ -100,6 +101,7 @@
 														<div ng-if="${mode=='view'}">
 															<input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" >
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.print(item)"><i class='icon-print'></i></a>
 														</div>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
@@ -119,7 +121,7 @@
 														<input type="text" ng-model="item.place" style="width:200px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.depId"  style="width:150px;" class="form-control select2" 
+														<select id="dept" ng-model="item.depId"  ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:150px;" class="form-control select2" 
 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 

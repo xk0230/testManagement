@@ -5,6 +5,7 @@ package com.codyy.oc.admin.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.TravelDetail;
 import com.codyy.oc.admin.service.TravelDetailManageService;
 import com.codyy.oc.admin.service.TravelManageService;
@@ -58,6 +60,8 @@ public class TravelDetailController extends BaseController {
 	
 	@RequestMapping("/traveldetailApply.do")
 	public String contractApply(@RequestParam(required=true,value="travelId")String travelId,Model model){
+		List<CostEntityBean> costs = travelManageService.getCostsById(travelId);
+		System.out.println(costs.size());
 		model.addAttribute("travel", travelManageService.getTravelById(travelId));
 		return "admin/travel/travelDetailApply";
 	}

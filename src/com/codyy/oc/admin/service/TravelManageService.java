@@ -14,11 +14,14 @@ import org.springframework.stereotype.Component;
 
 import com.codyy.commons.page.Page;
 import com.codyy.commons.utils.DateUtils;
+import com.codyy.oc.admin.dao.TravelDetailMapper;
 import com.codyy.oc.admin.dao.TravelDetailTypeMapper;
 import com.codyy.oc.admin.dao.TravelMapper;
 import com.codyy.oc.admin.dto.JsonDto;
 import com.codyy.oc.admin.entity.AdminUser;
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
+import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.TravelVO;
 
 /**  
@@ -47,7 +50,16 @@ public class TravelManageService {
 	private TravelMapper travelMapper;
 	
 	@Autowired
+	private TravelDetailMapper travelDetailMapper;
+	
+	@Autowired
 	private TravelDetailTypeMapper travelDetailTypeMapper;
+	
+	@Autowired
+	private CostService costService;
+	
+	@Autowired
+	AdminUserManagerService adminUserManagerService;
 	
 	public void insertTravel(Travel record) {
 		travelMapper.insert(record);
@@ -111,7 +123,7 @@ public class TravelManageService {
 	}
 	
 	/**
-	 * 合同列表查询
+	 * 出差列表查询
 	 * @param travel
 	 * @return
 	 */
@@ -247,6 +259,10 @@ public Page getTravelViewList(TravelVO travel){
     
     List<TravelVO> pageList = travelMapper.getTravelViewPageList(page);
     
+    for(TravelVO travelVO : pageList) {
+    	travelVO.setTravelDetailVOList(travelDetailMapper.getTravelDetailList(travelVO.getId()));
+    }
+    
 //    for(TravelVO travelvo : pageList) {
 //    	travelvo.setCostDepList(travelMapper.getTravelDepList(travelvo.getCostId()));
 //    }
@@ -268,7 +284,6 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 	}else if(travel.getStatus().equals("03") || travel.getStatus().equals("05")|| travel.getStatus().equals("01")) {
 		sucessResult = SUB_SUCCESS;
 		errResult = SUB_ERROR;
-		
 	}else if(travel.getStatus().equals("02")|| travel.getStatus().equals("04")) {
 		sucessResult = REJ_SUCCESS;
 		errResult = REJ_ERROR;
@@ -278,6 +293,20 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 	}
 	
 	int updateCostEntityNum = travelMapper.updateTravelStatus(travel);
+	
+	if(travel.getStatus().equals("05")) {
+		//如果是最终管理员通过，那么把出差明细的费用落地到成本中心。
+		List<CostEntityBean> costs = travelMapper.getCostsById(travel.getId());
+		AdminUser au = null;
+		for (CostEntityBean c : costs) {
+			if(au == null) {
+				au = adminUserManagerService.getselcAdminUserById(c.getCreateUserId());
+			}
+			costService.insertOrUpdateCostEntity(au, c);
+		}
+	}
+	
+	
 	if(updateCostEntityNum == 1){
 		jsonDto.setCode(0);
 		jsonDto.setMsg(sucessResult);
@@ -290,5 +319,10 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 
 	public  TravelVO getTravelById(String id){
 		return travelMapper.getById(id);
+	}
+	
+	public List<CostEntityBean> getCostsById(String id){
+		List<CostEntityBean> ls = travelMapper.getCostsById(id);
+		return ls;
 	}
 }

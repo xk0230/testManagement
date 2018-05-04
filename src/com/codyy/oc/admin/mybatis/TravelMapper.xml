@@ -358,4 +358,23 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getCostsById" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.CostEntityBean">
+		SELECT
+		'1' as costType,
+	travel_id AS travelId,
+	td.start_time AS costTime,
+	tdt.NAME AS remark,
+	sum( cost_num ) AS costNum,
+	t.create_user as createUserId
+FROM
+	travel_detail td
+	LEFT JOIN travel_detail_type tdt ON td.type = tdt.id 
+	left join travel t on t.id = td.travel_id
+GROUP BY
+	travel_id,
+	type 
+HAVING
+	travel_id = #{id,jdbcType=VARCHAR}
+	</select>
+	
 </mapper>

@@ -77,6 +77,16 @@ public class CostVO extends CostEntityBean{
 	private String searchMonth;
 	
 	private String projectName;
+	
+	private String costMonth;
+
+	public String getCostMonth() {
+		return costMonth;
+	}
+
+	public void setCostMonth(String costMonth) {
+		this.costMonth = costMonth;
+	}
 
 	public String getCreateUserPosition() {
 		return createUserPosition;

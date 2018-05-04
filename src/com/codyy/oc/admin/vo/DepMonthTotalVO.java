@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class DepMonthTotalVO {
 	
+	private String depId;
 	private String depName;
 
 	private BigDecimal januaryTotal; 
@@ -30,6 +31,14 @@ public class DepMonthTotalVO {
 	
 	private BigDecimal decemberTotal;
 	
+
+	public String getDepId() {
+		return depId;
+	}
+
+	public void setDepId(String depId) {
+		this.depId = depId;
+	}
 
 	public String getDepName() {
 		return depName;

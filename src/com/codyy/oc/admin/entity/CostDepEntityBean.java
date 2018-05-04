@@ -21,6 +21,14 @@ public class CostDepEntityBean {
 	//成本金额
 	private double costNum = 0.00;
 	
+	private String travelId;
+	
+	public String getTravelId() {
+		return travelId;
+	}
+	public void setTravelId(String travelId) {
+		this.travelId = travelId;
+	}
 	public String getCostId() {
 		return costId;
 	}

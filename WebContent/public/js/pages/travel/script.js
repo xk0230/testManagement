@@ -22,9 +22,6 @@ myAppModule.controller('TravelController',
 				$scope.depIdChangeAble = false;
 			}
 			self.getTravelList();
-			//设置时间控件
-			setDatepicker("datepickerS")
-			setDatepicker("datepickerE")
 		};
 		
 		$scope.setPage = function (pageNo) {
@@ -125,7 +122,7 @@ myAppModule.controller('TravelController',
 				,createTime:new Date()
 				,create_user:""
 				,place:""
-				,dept:""
+				,depId:$("#sessionUserDepId").val()
 				,endTime:new Date()
 				,remark:""	
 				,editMode:"edit"
@@ -183,10 +180,10 @@ myAppModule.controller('TravelController',
 				alert("请填写结束时间");
 				return ;
 			}
-			if(!travelItem.remark){
+			/*if(!travelItem.remark){
 				alert("请填写备注");
 				return ;
-			}
+			}*/
 			/*	if(!travelItem.url){
 				alert("请填写签订时间");
 				return ;
@@ -280,7 +277,7 @@ myAppModule.controller('TravelController',
 		};
 
 		//经理驳回
-		this.managerRej = function (costItem) {
+		this.managerRej = function (item) {
 			swal({ 
 					title: "确定驳回吗？", 
 					text: "将驳回给申请者修改！", 
@@ -291,14 +288,50 @@ myAppModule.controller('TravelController',
 			},
 			function(){ 
 				var params = {
-						costId:costItem.costId,
+						id:item.id,
 						status:"02"
 					};
 				self.updateStatus(params);
 			});
 		};
 		
-		
+		//管理员审核提交
+		this.adminSub = function (item) {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将通过审核并计入成本！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						id:item.id,
+						status:"05"
+					};
+				self.updateStatus(params);
+			});
+		};
+
+		//管理员驳回
+		this.adminRej = function (item) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回至部门经理！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				var params = {
+						id:item.id,
+						status:"04"
+					};
+				self.updateStatus(params);
+			});
+		};
 		//更新状态
 		this.updateStatus = function (params) {
 			$http({
@@ -335,7 +368,7 @@ myAppModule.controller('TravelController',
 					};
 				$http({
 					method:'POST',
-					url:$("#rootUrl").val()+"/travel/updateTravelStatus.do",
+					url:$("#rootUrl").val()+"/travel/updateStatus.do",
 					params:params
 					
 				}).then(function(res){

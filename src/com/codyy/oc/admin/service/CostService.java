@@ -31,6 +31,7 @@ import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.CostSeqBean;
 import com.codyy.oc.admin.entity.CostSubTypeBean;
 import com.codyy.oc.admin.entity.Department;
+import com.codyy.oc.admin.vo.CostChartVO;
 import com.codyy.oc.admin.vo.CostChartsData;
 import com.codyy.oc.admin.vo.CostChartsSeriesData;
 import com.codyy.oc.admin.vo.CostInOutlayType;
@@ -39,6 +40,7 @@ import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.CostYearVO;
 import com.codyy.oc.admin.vo.DepMonthTotalVO;
+import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
 
 /**
  * 成本控制server
@@ -438,7 +440,7 @@ public class CostService {
 	    return jsonDto;
 	}
 	
-	public JsonDto getCostChartData(AdminUser user,int type,int curYear){
+	public JsonDto getCostChartData(AdminUser user,int type,int curYear,String depIds){
 		JsonDto jsonDto = new JsonDto();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -458,7 +460,8 @@ public class CostService {
 	    
 	    Map<String, Object> paraMap = new HashMap<String, Object>();
 	    paraMap.put("costType", type);
-	    
+	    paraMap.put("year", curYear);
+	    paraMap.put("depIds",depIds);
 	    for(int i=1;i<=12;i++) {
 		    paraMap.put("month", i);
 		    if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(user.getPosition())){
@@ -907,213 +910,136 @@ public class CostService {
 	    return datas;
 	}
 
-	public List<DepMonthTotalVO> getDepMonthTotalOutcome(AdminUser user,int curYear,int costType) {
+	public JsonDto getDepMonthTotalOutcome(AdminUser user,int curYear,int costType) {
+		JsonDto jsonDto = new JsonDto();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		List<DepMonthTotalVO> depMonthTotals = new ArrayList<>();
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("costType", costType);
+		paraMap.put("curYear", curYear);
+
+		/*取所有部门*/
+		List<Department> depList = depService.getAllDepartment();
+		resultMap.put("depList", depList);
 		
-		CostVO cost = new CostVO();
-		boolean flag = false;
-        String position = user.getPosition();
-        if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(position)){
-            cost.setDepId(user.getDepId());
-            flag = true;
-        }else if(CommonsConstant.USER_TYPE_ADMIN.equalsIgnoreCase(position)){
-            flag = true;
-        }
-        
-        if(flag){
-        	cost.setCostType(String.valueOf(costType));
-        	cost.setStartTime(DateUtils.stringToTimestamp(curYear+"-01-01 00:00:00"));
-            cost.setEndTime(DateUtils.stringToTimestamp(curYear+"-12-31 23:59:59"));
-        	
-            List<CostVO> costs = costDaoMapper.getCostVOList(cost);
-            if(CollectionUtils.isNotEmpty(costs)){
-            	DepMonthTotalVO depMonthTotal = null;
-            	Map<String,DepMonthTotalVO> deps = new HashMap<>();
-            	for(CostVO costVO : costs){
-            		depMonthTotal = deps.get(costVO.getDepName());
-            		if(null == depMonthTotal){
-            			depMonthTotal = new DepMonthTotalVO();
-            			depMonthTotal.setDepName(costVO.getDepName());
-            		}
-            		
-            		deps.put(costVO.getDepName(), calculateDepMonthTotal(depMonthTotal, costVO));
-            	}
-            	
-            	for(String key : deps.keySet()){
-            		depMonthTotals.add(deps.get(key));
-            	}
-            }
-        }
+		Map<String, Object> costMap = new HashMap<String, Object>();
 		
-        
-//		for (CostChartsSeriesData cc : ls) {
-//		List<BigDecimal> Datas = cc.getData();
-//		BigDecimal all = new BigDecimal(0.0);
-//		for (BigDecimal d : Datas) {
-//			all = all.add(d);
-//		}
-//		Datas.add(all);
-//	}
-//	c.getXcategories().add("总计");
-        DepMonthTotalVO all = new DepMonthTotalVO();
-        		all.setAprilTotal(new BigDecimal(0.0));
-        		all.setAugustTotal(new BigDecimal(0.0));
-        		all.setDecemberTotal(new BigDecimal(0.0));
-        		all.setFebruaryTotal(new BigDecimal(0.0));
-        		all.setJanuaryTotal(new BigDecimal(0.0));
-        		all.setJulyTotal(new BigDecimal(0.0));
-        		all.setJuneTotal(new BigDecimal(0.0));
-        		all.setMarchTotal(new BigDecimal(0.0));
-        		all.setMayTotal(new BigDecimal(0.0));
-        		all.setNovemberTotal(new BigDecimal(0.0));
-        		all.setOctoberTotal(new BigDecimal(0.0));
-        		all.setSeptemberTotal(new BigDecimal(0.0));
-        for (DepMonthTotalVO d : depMonthTotals) {
-        	all.setAprilTotal(all.getAprilTotal().add(d.getAprilTotal()==null?new BigDecimal(0.0):d.getAprilTotal()));
-        	all.setAugustTotal(all.getAugustTotal().add(d.getAugustTotal()==null?new BigDecimal(0.0):d.getAugustTotal()));
-        	all.setDecemberTotal(all.getDecemberTotal().add(d.getDecemberTotal()==null?new BigDecimal(0.0):d.getDecemberTotal()));
-        	all.setFebruaryTotal(all.getFebruaryTotal().add(d.getFebruaryTotal()==null?new BigDecimal(0.0):d.getFebruaryTotal()));
-        	all.setJanuaryTotal(all.getJanuaryTotal().add(d.getJanuaryTotal()==null?new BigDecimal(0.0):d.getJanuaryTotal()));
-        	all.setJulyTotal(all.getJulyTotal().add(d.getJulyTotal()==null?new BigDecimal(0.0):d.getJulyTotal()));
-        	all.setJuneTotal(all.getJuneTotal().add(d.getJuneTotal()==null?new BigDecimal(0.0):d.getJuneTotal()));
-        	all.setMarchTotal(all.getMarchTotal().add(d.getMarchTotal()==null?new BigDecimal(0.0):d.getMarchTotal()));
-        	all.setMayTotal(all.getMayTotal().add(d.getMayTotal()==null?new BigDecimal(0.0):d.getMayTotal()));
-        	all.setNovemberTotal(all.getNovemberTotal().add(d.getNovemberTotal()==null?new BigDecimal(0.0):d.getNovemberTotal()));
-        	all.setOctoberTotal(all.getOctoberTotal().add(d.getOctoberTotal()==null?new BigDecimal(0.0):d.getOctoberTotal()));
-        	all.setSeptemberTotal(all.getSeptemberTotal().add(d.getSeptemberTotal()==null?new BigDecimal(0.0):d.getSeptemberTotal()));
-		}
-        
-        all.setAprilTotal(all.getAprilTotal().intValue()==0?null:all.getAprilTotal());
-		all.setAugustTotal(all.getAugustTotal().intValue()==0?null:all.getAugustTotal());
-		all.setDecemberTotal(all.getDecemberTotal().intValue()==0?null:all.getDecemberTotal());
-		all.setFebruaryTotal(all.getFebruaryTotal().intValue()==0?null:all.getFebruaryTotal());
-		all.setJanuaryTotal(all.getJanuaryTotal().intValue()==0?null:all.getJanuaryTotal());
-		all.setJulyTotal(all.getJulyTotal().intValue()==0?null:all.getJulyTotal());
-		all.setJuneTotal(all.getJuneTotal().intValue()==0?null:all.getJuneTotal());
-		all.setMarchTotal(all.getMarchTotal().intValue()==0?null:all.getMarchTotal());
-		all.setMayTotal(all.getMayTotal().intValue()==0?null:all.getMayTotal());
-		all.setNovemberTotal(all.getNovemberTotal().intValue()==0?null:all.getNovemberTotal());
-		all.setOctoberTotal(all.getOctoberTotal().intValue()==0?null:all.getOctoberTotal());
-		all.setSeptemberTotal(all.getSeptemberTotal().intValue()==0?null:all.getSeptemberTotal());
-        
-        all.setDepName("总计");
-        depMonthTotals.add(all);
-		return depMonthTotals;
-	}
-	
-	private DepMonthTotalVO calculateDepMonthTotal(DepMonthTotalVO depMonthTotal,CostVO costVO){
-		
-		Date costTime = costVO.getCostTime();
-		DateTimeFormatter formatter = DateTimeFormat.forPattern(DateUtils.PATTERN_DATETIME);
-		LocalDate localDate = formatter.parseLocalDate(DateUtils.format(costTime, DateUtils.PATTERN_DATETIME));
-		
-		int monthOfYear = localDate.getMonthOfYear();
-		if(monthOfYear == 1){
-			BigDecimal januaryTotal = depMonthTotal.getJanuaryTotal();
-			if(null == januaryTotal){
-				januaryTotal = new BigDecimal(0);
+		/*设定到最终结果*/
+		Map<String, Object> costDepMap = new HashMap<String, Object>();
+		//部门经理时设定所属部门
+		if(CommonsConstant.USER_TYPE_MANAGER.equalsIgnoreCase(user.getPosition())){
+			paraMap.put("depId", user.getDepId());
+			CostChartVO costChartVO = new CostChartVO();
+			costChartVO.setDepId(user.getDepId());
+			costChartVO.setDepName(user.getDepName());
+			costChartVO.setCostNum(0);
+			
+			List<CostChartVO> chartList = costDaoMapper.getCostVOList(paraMap);
+			if(chartList.size()==0) {
+				/*补全12个月的数据*/
+				for(int i=1;i<=12;i++) {
+					costChartVO.setCostMonth(String.valueOf(i));
+					chartList.add(costChartVO);
+				}
+				/*设定到最终结果*/
+				costDepMap.put("depTotal", 0);
+			}else {
+				double depCostNum = 0.00;
+				for(CostChartVO costChart : chartList) {
+					depCostNum = depCostNum + costChart.getCostNum();
+				}
+				List<CostChartVO> chartLisResutl = new ArrayList<CostChartVO>();
+				
+				for(int i=1;i<=12;i++) {
+					boolean hasTheMonth = false;
+					int index = 0;
+					for(int j=0;j<chartList.size();j++) {
+						if(chartList.get(j).getCostMonth().equals(String.valueOf(i))) {
+							hasTheMonth = true;
+							index = j;
+						}
+					}
+					if(hasTheMonth) {
+						chartLisResutl.add(chartList.get(index));
+					}else {
+						costChartVO.setCostMonth(String.valueOf(i));
+						chartLisResutl.add(costChartVO);
+					}
+				}
+				
+				chartList = chartLisResutl;
+				
+				
+				/*设定到最终结果*/
+				costDepMap.put("depTotal", depCostNum);
+				costDepMap.put("chartList", chartList);
 			}
-			januaryTotal = januaryTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJanuaryTotal(januaryTotal.setScale(1, RoundingMode.HALF_UP));
+			costMap.put(user.getDepName(), costDepMap);
 			
-		}else if(monthOfYear == 2){
-			BigDecimal februaryTotal = depMonthTotal.getFebruaryTotal();
-			if(null == februaryTotal){
-				februaryTotal = new BigDecimal(0);
+		}else {
+			for(Department dep : depList) {
+				paraMap.put("depId", dep.getDepId());
+				List<CostChartVO> chartList = costDaoMapper.getCostVOList(paraMap);
+				
+				/*设定到最终结果*/
+				costDepMap = new HashMap<String, Object>();
+				costDepMap.put("depId", dep.getDepId());
+				costDepMap.put("depName", dep.getName());
+				/*成本数据为空时填补一条空白数据*/
+				CostChartVO costChartVO = new CostChartVO();
+				costChartVO.setDepId(dep.getDepId());
+				costChartVO.setDepName(dep.getName());
+				costChartVO.setCostNum(0);
+				if(chartList.size()==0) {
+					/*补全12个月的数据*/
+					for(int i=1;i<=12;i++) {
+						costChartVO.setCostMonth(String.valueOf(i));
+						chartList.add(costChartVO);
+					}
+					/*设定到最终结果*/
+					costDepMap.put("depTotal", 0);
+					costDepMap.put("chartList", chartList);
+				}else {
+					double depCostNum = 0.00;
+					for(CostChartVO costChart : chartList) {
+						depCostNum = depCostNum + costChart.getCostNum();
+					}
+					List<CostChartVO> chartLisResutl = new ArrayList<CostChartVO>();
+					
+					for(int i=1;i<=12;i++) {
+						boolean hasTheMonth = false;
+						int index = 0;
+						for(int j=0;j<chartList.size();j++) {
+							if(chartList.get(j).getCostMonth().equals(String.valueOf(i))) {
+								hasTheMonth = true;
+								index = j;
+							}
+						}
+						if(hasTheMonth) {
+							chartLisResutl.add(chartList.get(index));
+						}else {
+							costChartVO.setCostMonth(String.valueOf(i));
+							chartLisResutl.add(costChartVO);
+						}
+					}
+					
+					chartList = chartLisResutl;
+					
+					
+					/*设定到最终结果*/
+					costDepMap.put("depTotal", depCostNum);
+					costDepMap.put("chartList", chartList);
+				}
+				costMap.put(dep.getName(), costDepMap);
 			}
-			februaryTotal = februaryTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setFebruaryTotal(februaryTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 3){
-			BigDecimal marchTotal = depMonthTotal.getMarchTotal();
-			if(null == marchTotal){
-				marchTotal = new BigDecimal(0);
-			}
-			marchTotal = marchTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setMarchTotal(marchTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 4){
-			
-			BigDecimal aprilTotal = depMonthTotal.getAprilTotal();
-			if(null == aprilTotal){
-				aprilTotal = new BigDecimal(0);
-			}
-			aprilTotal = aprilTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setAprilTotal(aprilTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 5){
-			
-			BigDecimal mayTotal = depMonthTotal.getMayTotal();
-			if(null == mayTotal){
-				mayTotal = new BigDecimal(0);
-			}
-			mayTotal = mayTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setMayTotal(mayTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 6){
-			
-			BigDecimal juneTotal = depMonthTotal.getJuneTotal();
-			if(null == juneTotal){
-				juneTotal = new BigDecimal(0);
-			}
-			juneTotal = juneTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJuneTotal(juneTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 7){
-			
-			BigDecimal julyTotal = depMonthTotal.getJulyTotal();
-			if(null == julyTotal){
-				julyTotal = new BigDecimal(0);
-			}
-			julyTotal = julyTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setJulyTotal(julyTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 8){
-			
-			BigDecimal augustTotal = depMonthTotal.getAugustTotal();
-			if(null == augustTotal){
-				augustTotal = new BigDecimal(0);
-			}
-			augustTotal = augustTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setAugustTotal(augustTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 9){
-			
-			BigDecimal septemberTotal = depMonthTotal.getSeptemberTotal();
-			if(null == septemberTotal){
-				septemberTotal = new BigDecimal(0);
-			}
-			septemberTotal = septemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setSeptemberTotal(septemberTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 10){
-			
-			BigDecimal octoberTotal = depMonthTotal.getOctoberTotal();
-			if(null == octoberTotal){
-				octoberTotal = new BigDecimal(0);
-			}
-			octoberTotal = octoberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setOctoberTotal(octoberTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 11){
-			
-			BigDecimal novemberTotal = depMonthTotal.getNovemberTotal();
-			if(null == novemberTotal){
-				novemberTotal = new BigDecimal(0);
-			}
-			novemberTotal = novemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setNovemberTotal(novemberTotal.setScale(1, RoundingMode.HALF_UP));
-			
-		}else if(monthOfYear == 12){
-			BigDecimal decemberTotal = depMonthTotal.getDecemberTotal();
-			if(null == decemberTotal){
-				decemberTotal = new BigDecimal(0);
-			}
-			decemberTotal = decemberTotal.add(new BigDecimal(costVO.getCostNum()));
-			depMonthTotal.setDecemberTotal(decemberTotal.setScale(1, RoundingMode.HALF_UP));
 		}
 		
-		return depMonthTotal;
+		
+		resultMap.put("costs", costMap);
+
+		/*设置返回值*/
+		jsonDto.setCode(0);
+		jsonDto.setObjData(resultMap);
+		return jsonDto;
 	}
 }
