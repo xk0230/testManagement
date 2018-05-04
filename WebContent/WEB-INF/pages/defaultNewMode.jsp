@@ -75,6 +75,7 @@
 	                <thead>
 	                  <tr>
 	                    <th> 名称 </th>
+	                    <th> 说明</th>
 	                    <th> Download</th>
 	                    
 	                  </tr>
@@ -82,36 +83,44 @@
 	                <tbody>
 	                  <tr>
 	                    <td> PPT模板 </td>
+	                    <td> 通用模板</td>
 	                    <td>下载链接</td>
 	                    </tr>
 	                  <tr>
 	                    <td> Word模板 </td>
+	                    <td> 通用模板</td>
 	                    <td> 下载链接</td>
 	                    
 	                  </tr>
 	                  <tr>
 	                    <td> EXCEL模板</td>
+	                    <td> 通用模板</td>
 	                    <td> 下载链接 </td>
 	                    
 	                  </tr>
 	                  <tr>
 	                    <td> 开票资料</td>
+	                    <td> 开具发票时使用</td>
 	                    <td> 下载链接 </td>
                       </tr>
                        <tr>
 	                    <td> 收入账户信息</td>
+	                    <td> 各产品线收入必须入此账户</td>
 	                    <td> 下载链接 </td>
                       </tr>
 	                  <tr>
 	                    <td> 在职证明模板</td>
+	                    <td> 自行下载后需至SSC盖章方生效</td>
 	                    <td> 下载链接 </td>
                       </tr>
                       <tr>
 	                    <td> M436(前台)激光一体机驱动</td>
+	                    <td> 打印，扫描驱动一体包 </td>
 	                    <td> 下载链接 </td>
                       </tr>
                       <tr>
 	                    <td> 专题报告模板</td>
+	                     <td> 向本部总经理汇报专题事项时使用</td>
 	                    <td> 下载链接 </td>
                       </tr>
 	                                
