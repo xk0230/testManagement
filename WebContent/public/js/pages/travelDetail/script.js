@@ -157,16 +157,8 @@ myAppModule.controller('TravelDetailController',
 				alert("请填写出差出发地");
 				return ;
 			}
-			if(!travelItem.endPlace){
-				alert("请填写出差到达地");
-				return ;
-			} 
 			if(travelItem.costNum<0){
 				alert("请填写金额");
-				return ;
-			}
-			if(!travelItem.remark){
-				alert("请填写备注");
 				return ;
 			}
 			var params = {
