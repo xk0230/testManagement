@@ -22,13 +22,13 @@
 	              <div class="widget big-stats-container">
 	                <div class="widget-content">
 	                  <div id="big_stats" class="cf">
-	                    <div class="stat">今日报销<i class="icon-anchor"></i> <span class="value">851</span> </div>
+	                    <div class="stat">今日费用（Release）<i class="icon-anchor"></i> <span class="value">851</span> </div>
 	                    <!-- .stat -->
 	                    
 	                    <!--<div class="stat">人力资源<i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
 	                      -->
 	                    
-	                    <div class="stat">待处理事项<i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
+	                    <div class="stat">待审批事项<i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
 	                    <!-- .stat -->
 	                    
 	                    <!--<div class="stat">年假剩余<i class="icon-bullhorn"></i> <span class="value">25%</span> </div>
@@ -46,16 +46,19 @@
 	            </div>
 	            <!-- /widget-header -->
 	            <div class="widget-content">
-	              <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i>
-		              <span class="shortcut-label">入职必读</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i>
-		              <span class="shortcut-label">书籍借阅</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i>
-		              <span class="shortcut-label">合同管理</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i>
-		              <span class="shortcut-label">日常费用申请</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i>
-		              <span class="shortcut-label">出差报销</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i>
-		              <!-- <span class="shortcut-label">招聘申请</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i>
-		             <span class="shortcut-label">团建照片</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i>
-		              <span class="shortcut-label">健康管理</span> </a>  -->
-	              </a></div>
+	              <div class="shortcuts">
+	               <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">组织架构</span> </a>
+	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">入职必读</span></a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i> <span class="shortcut-label">个人信息修改</span>  </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i> <span class="shortcut-label">书籍借阅</span> </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i>  <span class="shortcut-label">合同管理</span></a>
+		           <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">日常费用申请</span> </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">出差报销</span> </a>
+	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">差旅预定</span></a>
+		            
+		               
+		              
+	               </div>
 	              <!-- /shortcuts --> 
 	            </div>
 	            <!-- /widget-content --> 
@@ -92,9 +95,25 @@
 	                    
 	                  </tr>
 	                  <tr>
+	                    <td> 开票资料</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+                       <tr>
+	                    <td> 收入账户信息</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+	                  <tr>
 	                    <td> 在职证明模板</td>
 	                    <td> 下载链接 </td>
-
+                      </tr>
+                      <tr>
+	                    <td> M436(前台)激光一体机驱动</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+                      <tr>
+	                    <td> 专题报告模板</td>
+	                    <td> 下载链接 </td>
+                      </tr>
 	                                
 	                </tbody>
 	              </table>
@@ -119,7 +138,7 @@
 	            <!-- /widget-content --> 
 	          </div><div class="widget">
 	            <div class="widget-header"> <i class="icon-signal"></i>
-	              <h3> 成本概览</h3>
+	              <h3> 收支概览</h3>
 	            </div>
 	            <!-- /widget-header -->
 	            <div class="widget-content">
