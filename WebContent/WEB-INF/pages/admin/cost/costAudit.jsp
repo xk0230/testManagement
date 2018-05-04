@@ -77,7 +77,7 @@
 													<th width="150px">操作</th>
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
-													<th width="40px">分类</th>
+													<th width="60px">分类</th>
 													<th width="120px">成本产生时间</th>
 													<th width="60px">金额</th>
 													<th width="120px">成本详情</th>

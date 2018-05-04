@@ -22,17 +22,17 @@
 	              <div class="widget big-stats-container">
 	                <div class="widget-content">
 	                  <div id="big_stats" class="cf">
-	                    <div class="stat">今日报销<i class="icon-anchor"></i> <span class="value">851</span> </div>
+	                    <div class="stat">今日费用（Release）<i class="icon-anchor"></i> <span class="value">851</span> </div>
 	                    <!-- .stat -->
 	                    
-	                    <div class="stat">人力资源<i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
+	                    <!--<div class="stat">人力资源<i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
+	                      -->
+	                    
+	                    <div class="stat">待审批事项<i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
 	                    <!-- .stat -->
 	                    
-	                    <div class="stat">待处理事项<i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
-	                    <!-- .stat -->
-	                    
-	                    <div class="stat">年假剩余<i class="icon-bullhorn"></i> <span class="value">25%</span> </div>
-	                    <!-- .stat --> 
+	                    <!--<div class="stat">年假剩余<i class="icon-bullhorn"></i> <span class="value">25%</span> </div>
+	                     --> 
 	                  </div>
 	                </div>
 	                <!-- /widget-content --> 
@@ -40,18 +40,30 @@
 	              </div>
 	            </div>
 	          </div>
-	          <!-- /widget -->
-	          <div class="widget widget-nopad">
-	            <div class="widget-header"> <i class="icon-list-alt"></i>
-	              <h3> 近期日历</h3>
+	          <!-- /widget --><div class="widget">
+	            <div class="widget-header"> <i class="icon-bookmark"></i>
+	              <h3>快捷入口</h3>
 	            </div>
 	            <!-- /widget-header -->
 	            <div class="widget-content">
-	              <div id='calendar'>
-	              </div>
+	              <div class="shortcuts">
+	               <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">组织架构</span> </a>
+	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">入职必读</span></a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i> <span class="shortcut-label">个人信息修改</span>  </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i> <span class="shortcut-label">书籍借阅</span> </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i>  <span class="shortcut-label">合同管理</span></a>
+		           <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">日常费用申请</span> </a>
+		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">出差报销</span> </a>
+	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">差旅预定</span></a>
+		            
+		               
+		              
+	               </div>
+	              <!-- /shortcuts --> 
 	            </div>
 	            <!-- /widget-content --> 
 	          </div>
+	          
 	          <!-- /widget -->
 	          <div class="widget widget-table action-table">
 	            <div class="widget-header"> <i class="icon-th-list"></i>
@@ -62,40 +74,56 @@
 	              <table class="table table-striped table-bordered">
 	                <thead>
 	                  <tr>
-	                    <th> Free Resource </th>
+	                    <th> 名称 </th>
+	                    <th> 说明</th>
 	                    <th> Download</th>
-	                    <th class="td-actions"> </th>
+	                    
 	                  </tr>
 	                </thead>
 	                <tbody>
 	                  <tr>
-	                    <td> Fresh Web Development Resources </td>
-	                    <td> http://www.by EGrappler/ </td>
-	                    <td class="td-actions">
-	                    	<a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a>
-	                    	<a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+	                    <td> PPT模板 </td>
+	                    <td> 通用模板</td>
+	                    <td>下载链接</td>
+	                    </tr>
+	                  <tr>
+	                    <td> Word模板 </td>
+	                    <td> 通用模板</td>
+	                    <td> 下载链接</td>
+	                    
 	                  </tr>
 	                  <tr>
-	                    <td> Fresh Web Development Resources </td>
-	                    <td> http://www.by EGrappler/ </td>
-	                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+	                    <td> EXCEL模板</td>
+	                    <td> 通用模板</td>
+	                    <td> 下载链接 </td>
+	                    
 	                  </tr>
 	                  <tr>
-	                    <td> Fresh Web Development Resources </td>
-	                    <td> http://www.by EGrappler/ </td>
-	                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-	                  </tr>
+	                    <td> 开票资料</td>
+	                    <td> 开具发票时使用</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+                       <tr>
+	                    <td> 收入账户信息</td>
+	                    <td> 各产品线收入必须入此账户</td>
+	                    <td> 下载链接 </td>
+                      </tr>
 	                  <tr>
-	                    <td> Fresh Web Development Resources </td>
-	                    <td> http://www.by EGrappler/ </td>
-	                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-	                  </tr>
-	                  <tr>
-	                    <td> Fresh Web Development Resources </td>
-	                    <td> http://www.by EGrappler/ </td>
-	                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-	                  </tr>
-	                
+	                    <td> 在职证明模板</td>
+	                    <td> 自行下载后需至SSC盖章方生效</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+                      <tr>
+	                    <td> M436(前台)激光一体机驱动</td>
+	                    <td> 打印，扫描驱动一体包 </td>
+	                    <td> 下载链接 </td>
+                      </tr>
+                      <tr>
+	                    <td> 专题报告模板</td>
+	                     <td> 向本部总经理汇报专题事项时使用</td>
+	                    <td> 下载链接 </td>
+                      </tr>
+	                                
 	                </tbody>
 	              </table>
 	            </div>
@@ -105,30 +133,21 @@
 	        </div>
 	        <!-- /span6 -->
 	        <div class="span6">
-	          <div class="widget">
-	            <div class="widget-header"> <i class="icon-bookmark"></i>
-	              <h3>快捷入口</h3>
+	          
+	          <!-- /widget -->
+	          <div class="widget widget-nopad">
+	            <div class="widget-header"> <i class="icon-list-alt"></i>
+	              <h3> 近期日历</h3>
 	            </div>
 	            <!-- /widget-header -->
 	            <div class="widget-content">
-	              <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i>
-		              <span class="shortcut-label">入职必读</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i>
-		              <span class="shortcut-label">书籍借阅</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i>
-		              <span class="shortcut-label">合同管理</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i>
-		              <span class="shortcut-label">报销申请</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i>
-		              <span class="shortcut-label">岗位申请</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i>
-		              <span class="shortcut-label">招聘申请</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i>
-		              <span class="shortcut-label">团建照片</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i>
-		              <span class="shortcut-label">健康管理</span> </a>
+	              <div id="calendar">
 	              </div>
-	              <!-- /shortcuts --> 
 	            </div>
 	            <!-- /widget-content --> 
-	          </div>
-	          <!-- /widget -->
-	          <div class="widget">
+	          </div><div class="widget">
 	            <div class="widget-header"> <i class="icon-signal"></i>
-	              <h3> 成本概览</h3>
+	              <h3> 收支概览</h3>
 	            </div>
 	            <!-- /widget-header -->
 	            <div class="widget-content">
@@ -138,12 +157,12 @@
 	            <!-- /widget-content --> 
 	          </div>
 	          <!-- /widget -->
-	          <div class="widget widget-nopad">
+	         <!-- <div class="widget widget-nopad">
 	            <div class="widget-header"> <i class="icon-list-alt"></i>
 	              <h3> 公司大事件</h3>
 	            </div>
-	            <!-- /widget-header -->
-	            <div class="widget-content">
+	             /widget-header-->
+	            <!--<div class="widget-content">
 	              <ul class="news-items">
 	                <li>
 	                  
@@ -171,12 +190,12 @@
 	                </li>
 	              </ul>
 	            </div>
-	            <!-- /widget-content --> 
+	             /widget-content --> 
 	          </div>
 	          <!-- /widget -->
 	        </div>
 	        <!-- /span6 --> 
-	      </div>
+	      </div> 
 	      <!-- /row --> 
 	    </div>
 	    <!-- /container --> 
