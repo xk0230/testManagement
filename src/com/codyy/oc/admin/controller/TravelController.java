@@ -55,7 +55,7 @@ public class TravelController extends BaseController {
 	}
 	
 	/**
-	 * 合同申请
+	 * 出差申请
 	 * @return
 	 */
 	@RequestMapping("/travelApply.do")
@@ -65,7 +65,7 @@ public class TravelController extends BaseController {
 	}
 	
 	/**
-	 * 合同审批
+	 * 出差审批
 	 * @return
 	 */
 	@RequestMapping("/travelAudit.do")
@@ -75,7 +75,7 @@ public class TravelController extends BaseController {
 	}
 	
 	/**
-	 * 合同查看
+	 * 出差查看
 	 * @return
 	 */
 	@RequestMapping("/travelView.do")

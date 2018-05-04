@@ -12,7 +12,7 @@
 				<%@ include file="../print/CostTravel.jsp"%>
 				<div class="row">
 					<div class="span12">
-						<div class="widget">
+						<div class="widget" style="padding-bottom:100px;">
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
@@ -121,7 +121,7 @@
 														<input type="text" ng-model="item.place" style="width:200px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.depId"  style="width:150px;" class="form-control select2" 
+														<select id="dept" ng-model="item.depId"  ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:150px;" class="form-control select2" 
 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 

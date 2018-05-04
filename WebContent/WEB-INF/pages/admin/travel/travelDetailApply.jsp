@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="span12">
-						<div class="widget">
+						<div class="widget" style="padding-bottom:100px;">
 							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
@@ -32,6 +32,11 @@
 									 <div class="span4">
 									 	<span>备注:${travel.remark }</span>
 									 </div>
+								</div>
+								<div class="row">
+									<div class="span4">
+									 	<span>状态:${travel.statusName }</span>
+									</div>
 								</div>
 						<%-- 		<div class="row">
 									<div class="span8">
@@ -71,7 +76,7 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<div style="width:1134px;">
+										<div style="width:1134px;" ng-if="${(travel.status!='05' && travel.status!='03' && travel.status!='01')}">
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<div style="overflow:scroll">
@@ -91,8 +96,8 @@
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
-														<a href="javascript:;" class="btn btn-xs  " ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')" ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
-														<a href="javascript:;" class="btn btn-xs btn-danger" ng-if="${adminUser.userId == 'admin'} && item.status=='05'" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
+														<a href="javascript:;" class="btn btn-xs  " ng-if="(item.status!='05' && item.status!='03' && item.status!='01')" ng-click="vm.editTravel(item,$index)" ><i class='icon-edit'></i></a>
+														<a href="javascript:;" class="btn btn-xs btn-danger" ng-if=" (item.status!='05' && item.status!='03' && item.status!='01')" ng-click="vm.scrap(item)" ><i class='icon-remove-sign'></i></a>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.typeName"></p></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startPlace"></p></td>
