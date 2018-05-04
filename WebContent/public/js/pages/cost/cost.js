@@ -334,13 +334,13 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 		$scope.item = item;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 5;
 		$ctrl.$onInit = function(){
 			//合同号
 			$scope.contractId = item.contractId;
 			$scope.mode = item.mode;
 			
-			$ctrl.contractTypeList = [
+			$scope.contractTypeList = [
 				{contractType : "收入", name : "收入"},
 				{contractType : "支出", name : "支出"}
 			];
@@ -349,11 +349,11 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 
 		};
 		
-		$ctrl.setPage = function (pageNo) {
+		$scope.setPage = function (pageNo) {
 			$scope.currentPage = pageNo;
 		};
 
-		$ctrl.pageChanged = function() {
+		$scope.pageChanged = function() {
 			$ctrl.getContractList();
 		};
 		
@@ -402,7 +402,7 @@ angular.module('myApp').controller('ModalProjectCtrl',
 		$scope.item = item;
 		$scope.totalItems = 0;
 		$scope.currentPage = 1;
-		$scope.itemsPerPage = 10;
+		$scope.itemsPerPage = 5;
 		$project.$onInit = function(){
 			//合同号
 			$scope.contractId = item.contractId;

@@ -5,7 +5,6 @@
             checkboxs = $(this).parents(".tableBox").find("input[type=checkbox]");
         for (var i in checkboxs) checkboxs[i].checked = checkValue;
     });
-
     events.delegate($tag("body"), ".childChk", "click", function() {
         var e = arguments[0] || window.event,
             target = e.target || e.srcElement;

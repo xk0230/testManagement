@@ -234,7 +234,6 @@
 								<i class="icon-pushpin"></i>
 								<h3>合同</h3>
 							</div>
-							
 							<div class="widget-content">
 								<div class="row">
                                     <div class="span4">
@@ -267,7 +266,7 @@
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
-									<div class="span12">
+									<div class="span12;">
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
