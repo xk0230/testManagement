@@ -32,6 +32,24 @@ myAppModule.controller('TravelController',
 			self.getTravelList();
 		};
 		
+		//打印
+		this.print= function(key){
+			console.log(key)
+				$("#printDiv" + key).print({
+				    globalStyles: true,
+				    mediaPrint: false,
+				    stylesheet: null,
+				    noPrintSelector: ".no-print",
+				    iframe: true,
+				    append: null,
+				    prepend: null,
+				    manuallyCopyFormValues: true,
+				    deferred: $.Deferred()
+            });
+			
+		}
+		
+		
 		// 获取数据列表
 		this.getTravelList = function(){
 			console.log($("#mode").val());
