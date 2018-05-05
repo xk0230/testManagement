@@ -6,7 +6,7 @@
     .travelTable tr{height:1cm;}
 </style>
 <!-- 合同打印 -->
-<div class="row hidden" style="width:20cm;" >
+<div class="row " style="width:20cm;" >
 	<div style="width:100%;height:152mm;font: 宋体;" ng-repeat="item in vm.list" >
 		<div style="width:100%;">
 			<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">出差报销单</div>

@@ -497,6 +497,7 @@
 		left join POSITION po 
 		 on po.post_id = au.post_id 
 		where 1 = 1
+				and au.work_status != '离职'
 			<if test="map.userName!= null and  map.userName!=''">
 				and au.username like concat('%',#{map.userName},'%') 
 			</if>

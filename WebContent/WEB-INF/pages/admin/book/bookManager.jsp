@@ -40,7 +40,7 @@
 											<thead >
 												<tr>
 												<th width="110px">操作</th>
-												<th>序号</th>
+												<!-- <th>序号</th> -->
 												<th>图书编号</th>
 												<th>图书名称</th>
 												<th>当前借阅人</th>
@@ -53,7 +53,7 @@
 														<a href="javascript:;" class="btn btn-small" ng-click="vm.edit(item)" ng-if="${adminUser.position == 'ADMIN'}"><i class="icon-edit"></i></a>
 														<a href="javascript:;" class="btn btn-small btn-danger"  ng-click="vm.pullOrBackBook(item)" >借还</a>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="$index + 1"></p></td>
+													<!-- <td ng-switch-when="view"><p ng-bind="$index + 1"></p></td> -->
 													<td ng-switch-when="view"><p ng-bind="item.bookNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.name"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.userName"></p></td>

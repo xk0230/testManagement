@@ -67,8 +67,8 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1120px;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="15%" ng-if="${mode !='view'}" style="text-align:center;font-size:12px;">操作</th>
-													<th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th>
+													<th width="15%"  style="text-align:center;font-size:12px;">操作</th>
+													<%-- <th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th> --%>
 													<th width="5%" style="text-align:center;font-size:12px;">状态</th> 
 												 	<th width="5%" style="text-align:center;font-size:12px;">姓名</th>
 													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
@@ -99,7 +99,7 @@
 														</div>
 														
 														<div ng-if="${mode=='view'}">
-															<input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" >
+															<%-- <input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" > --%>
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.print(item)"><i class='icon-print'></i></a>
 														</div>

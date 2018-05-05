@@ -162,6 +162,8 @@
 				And td.start_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
 			)
+			
+			order by td.type,td.create_time
 	</select>
 	
       <select id="getTravelDetailList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.TravelDetailVO">

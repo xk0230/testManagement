@@ -117,16 +117,16 @@
 													</td>
 												<!-- 	<td ng-switch-when="edit"><input type="text" ng-model="item.typeName" style="width:200px;"></td> -->
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.startPlace"  >
+														<input  style="width:80px;" type="text" ng-model="item.startPlace"  >
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.endPlace"  >
+														<input style="width:80px;" type="text" ng-model="item.endPlace"  >
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<mb-datepicker input-class="mb-date" date="item.startTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.costNum"  />
+														<input style="width:80px;"  type="number" ng-model="item.costNum"  />
 													</td>
 													<td ng-switch-when="edit">
 														<input type="text" ng-model="item.remark"  />
