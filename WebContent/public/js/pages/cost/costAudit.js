@@ -123,6 +123,7 @@ myAppModule.controller('CostController',
 					$scope.totalItems = res.data.total;
 					angular.forEach(self.list, function(item, key) {
 						$scope.costTypeChangeInList(item);
+						item.checked = false;
 					});
 				}else{
 					self.list = [];
@@ -216,6 +217,29 @@ myAppModule.controller('CostController',
 				self.updateStatus(params);
 			});
 		};
+		
+		//经理批量审核提交
+		this.managebatchSub = function () {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将提交给管理员审核！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				angular.forEach(self.list, function(item, key) {
+					if(item.checked){
+						var params = {
+								costId:item.costId,
+								status:"03"
+							};
+						self.updateStatus(params);
+					}
+				});
+			});
+		};
 
 		//经理驳回
 		this.managerRejCost = function (costItem) {
@@ -233,6 +257,29 @@ myAppModule.controller('CostController',
 						status:"02"
 					};
 				self.updateStatus(params);
+			});
+		};
+		
+		//经理批量驳回
+		this.managebatchRej = function () {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回给申请者修改！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				angular.forEach(self.list, function(item, key) {
+					if(item.checked){
+						var params = {
+								costId:item.costId,
+								status:"02"
+							};
+						self.updateStatus(params);
+					}
+				});
 			});
 		};
 		
@@ -254,6 +301,29 @@ myAppModule.controller('CostController',
 				self.updateStatus(params);
 			});
 		};
+		
+		//管理员批量审核提交
+		this.batchSub = function () {
+			swal({ 
+					title: "确定提交吗？", 
+					text: "将通过审核并计入成本！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				angular.forEach(self.list, function(item, key) {
+					if(item.checked){
+						var params = {
+								costId:item.costId,
+								status:"05"
+							};
+						self.updateStatus(params);
+					}
+				});
+			});
+		};
 
 		//管理员驳回
 		this.adminRejCost = function (costItem) {
@@ -271,6 +341,29 @@ myAppModule.controller('CostController',
 						status:"04"
 					};
 				self.updateStatus(params);
+			});
+		};
+		
+		//管理员批量驳回
+		this.batchRej = function (costItem) {
+			swal({ 
+					title: "确定驳回吗？", 
+					text: "将驳回至部门经理！", 
+					type: "info", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				angular.forEach(self.list, function(item, key) {
+					if(item.checked){
+						var params = {
+								costId:item.costId,
+								status:"04"
+							};
+						self.updateStatus(params);
+					}
+				});
 			});
 		};
 		
