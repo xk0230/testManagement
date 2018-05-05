@@ -830,4 +830,54 @@ SELECT 'dep_ces' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '4' AND 
 UNION ALL
 SELECT 'dep_ssc' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '5' AND au.user_id != 'admin']]>  
 	</select>
+	
+	<select id="getTodayCost" resultType="java.lang.Integer">
+		select CAST(SUM(cost_num) as SIGNED) as todayCost from COST_DETAIL where cost_time >= CURDATE() 
+	</select>
+
+	<select id="getCostAudit" parameterType="com.codyy.oc.admin.entity.AdminUser" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		COST_DETAIL
+		WHERE 1=1
+		<if test="position == 'MANAGER'">
+			and `status` = '01'
+			AND create_user_id IN (
+			SELECT
+			user_id
+			FROM
+			ADMIN_USER au
+			WHERE
+			dep_id = ${depId}
+			)
+		</if>
+		<if test="position == 'ADMIN'">
+			and `status` = '03'
+		</if>
+	</select>
+	
+	<select id="getTravelAudit" parameterType="com.codyy.oc.admin.entity.AdminUser" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		travel
+		WHERE 1=1
+		<if test="position == 'MANAGER'">
+			and `status` = '01'
+			AND create_user IN (
+			SELECT
+			user_id
+			FROM
+			ADMIN_USER au
+			WHERE
+			dep_id = ${depId}
+			)
+		</if>
+		<if test="position == 'ADMIN'">
+			and `status` = '03'
+		</if>
+	</select>
+	
+	
 </mapper>

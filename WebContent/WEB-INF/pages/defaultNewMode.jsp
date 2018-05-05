@@ -8,7 +8,7 @@
 <body  >
 	<%@ include file="common/header.jsp"%>
 	<!-- Start #content -->
-	<div class="main" ng-app = "myApp" ng-controller="UserListController as vm">
+	<div class="main" ng-app = "myApp" ng-controller="defaultController as vm">
 	  <div class="main-inner">
 	    <div class="container">
 	      <div class="row">
@@ -27,8 +27,8 @@
 	                    
 	                    <!--<div class="stat">人力资源<i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
 	                      -->
-	                    
-	                    <div class="stat">待审批事项<i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
+	                    <div class="stat">待审批成本<i class="icon-credit-card"></i> <span class="value">3</span> </div>
+	                    <div class="stat">待审批出差<i class="icon-plane"></i> <span class="value">8</span> </div>
 	                    <!-- .stat -->
 	                    
 	                    <!--<div class="stat">年假剩余<i class="icon-bullhorn"></i> <span class="value">25%</span> </div>

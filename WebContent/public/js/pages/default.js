@@ -1,10 +1,20 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
-myAppModule.controller('UserListController',
-	function UserListController($scope,$http){
+
+console.log("ccccccccccc");
+myAppModule.controller('defaultController',
+	function defaultController($scope,$http){
 		var self = this;
 		self.sessionUserId =$("#sessionUserId").val();
-		
-		this.$onInit = function(){
+		console.log("初始化22222222");
+		self.$onInit = function(){
+			console.log("初始化啦");
+			$http({
+				method:'POST',
+				url:"/ssc/admin/indexData.do"
+			}).then(function(res){
+				console.log(res)
+			});
+			
 		}
 		
 		// 用户信息

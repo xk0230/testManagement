@@ -22,9 +22,9 @@
 								<div class="row">
                                     
 									<div class="span6" style="height:37px;">
-										<span class="searchSpan">申请日期:</span>
+										<span class="searchSpan  pull-left">申请日期:</span>
 										<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
-										<span class="searchSpanMid">~</span>
+										<span class="searchSpanMid pull-left">~</span>
 										<mb-datepicker input-class="mb-date" date="costEndDate"   date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 									</div>
 

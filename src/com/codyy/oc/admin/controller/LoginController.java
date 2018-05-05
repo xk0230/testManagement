@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codyy.commons.utils.ResultJson;
+import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.service.AdminUserManagerService;
+import com.codyy.oc.admin.vo.IndexDataVO;
+
+import sun.util.calendar.BaseCalendar;
 
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
 	
 	@Autowired
 	private AdminUserManagerService adminUserManagerService;
@@ -52,6 +56,19 @@ public class LoginController {
 	@RequestMapping("admin/newin")
 	public String newin(){
 		return "newin";
+	}
+	
+	
+	/**
+	 * 首页实时数据
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("admin/indexData")
+	@ResponseBody
+	public IndexDataVO indexData(HttpServletRequest request){
+		AdminUser au = getSessionUser(request);
+		return adminUserManagerService.getIndexDataVO(au);
 	}
 	
 }

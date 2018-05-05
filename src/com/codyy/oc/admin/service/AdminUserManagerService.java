@@ -26,6 +26,7 @@ import com.codyy.oc.admin.entity.AdminUserPermission;
 import com.codyy.oc.admin.entity.AdminUserRole;
 import com.codyy.oc.admin.entity.ChartPieData;
 import com.codyy.oc.admin.view.UserSearchModel;
+import com.codyy.oc.admin.vo.IndexDataVO;
 
 /**
  * 
@@ -535,6 +536,23 @@ public class AdminUserManagerService {
 	 */
 	public List<ChartPieData> getchartsdata(){
 		return adminUserMapper.getchartsdata();
+		
+	}
+	
+	/**
+	 * 获取首页动态数据
+	 * @return
+	 */
+	public IndexDataVO getIndexDataVO(AdminUser au){
+		IndexDataVO res = new IndexDataVO();
+		
+		
+		res.setTodayCostNum(adminUserMapper.getTodayCost());
+		res.setCostAuditNum(adminUserMapper.getCostAudit(au));
+		res.setTravelAuditNum(adminUserMapper.getTravelAudit(au));
+		
+		
+		return res;
 		
 	}
 }
