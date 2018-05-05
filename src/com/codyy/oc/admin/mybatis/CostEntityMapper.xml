@@ -42,7 +42,8 @@
 				status,
 				cost_no,
 				contract_id,
-				project_id
+				project_id	,
+				travel_id
 			)
 		VALUES
 			(
@@ -59,7 +60,8 @@
 				#{status},
 				#{costNo},
 				#{contractId},
-				#{projectId}
+				#{projectId},
+				#{travelId}
 			)
 	</insert>
 	
@@ -72,9 +74,7 @@
 				cost_month,
 				cost_date,
 				cost_num
-				<if test="travelId != null and travelId != ''">
-					,travel_id
-				</if>
+			
 			)
 		VALUES
 			(
@@ -84,9 +84,7 @@
 				#{costMonth},
 				#{costDate},
 				#{costNum}
-				<if test="travelId != null and travelId != ''">
-				,#{travelId}
-				</if>
+				
 			)
 	</insert>
 	

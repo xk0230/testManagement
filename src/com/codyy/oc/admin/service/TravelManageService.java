@@ -296,13 +296,21 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 	
 	if(travel.getStatus().equals("05")) {
 		//如果是最终管理员通过，那么把出差明细的费用落地到成本中心。
+		AdminUser admin = new AdminUser();
+		admin.setUserId("admin");
+		admin.setPosition("ADMIN");
+		
 		List<CostEntityBean> costs = travelMapper.getCostsById(travel.getId());
 		AdminUser au = null;
 		for (CostEntityBean c : costs) {
 			if(au == null) {
 				au = adminUserManagerService.getselcAdminUserById(c.getCreateUserId());
 			}
+			c.setTravelId(travel.getId());//设置出差id
+			c.setCostSubtypeId("6");//设置子分类为差旅费
 			costService.insertOrUpdateCostEntity(au, c);
+			c.setStatus("05");
+			costService.updateCostStatus(admin,c);
 		}
 	}
 	
