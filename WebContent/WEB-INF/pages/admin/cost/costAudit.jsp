@@ -70,11 +70,18 @@
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
+									<div style="width:1134px;padding-left: 30px">
+										<button class="btn btn-success" ng-click="vm.managebatchSub()" ng-if="${adminUser.position == 'MANAGER'}" ><i class="icon-ok"></i>批量审核</button>
+										<button class="btn btn-success" ng-click="vm.managebatchRej()" ng-if="${adminUser.position == 'MANAGER'}" ><i class="icon-ok"></i>批量驳回</button>
+										<button class="btn btn-success" ng-click="vm.batchSub()" ng-if="${adminUser.userId == 'admin'}" ><i class="icon-ok"></i>批量审核</button>
+										<button class="btn btn-success" ng-click="vm.batchRej()" ng-if="${adminUser.userId == 'admin'}" ><i class="icon-ok"></i>批量驳回</button>
+									</div>
 									<div style="width:1134px;overflow-x:scroll;margin-left:30px">
-										<table class="table table-condensed table-bordered table-striped" style="width:2000px;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped" style="width:1800px;margin-top:7px;" >
 											<thead >
 												<tr align="center">
-													<th width="150px">操作</th>
+													<th width="25px">选择</th>
+													<th width="120px">操作</th>
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
 													<th width="60px">分类</th>
@@ -85,14 +92,18 @@
 													<th width="300px">项目</th>
 													<th width="50px">提交人</th>
 													<th width="50px">审核人</th>
-													<th width="80px">状态</th>
+													<th >状态</th>
 												</tr>
 											</thead>
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
 												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
+													<td ng-switch-when="view">
+														<input type="checkbox" ng-model="item.checked"
+															ng-if="(${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')) || (${adminUser.userId == 'admin'} && item.status=='03')" />
+													</td>
 													<td ng-switch-when="view" >
-														<div >
+														<div>
 															<a href="javascript:;" class="btn btn-small" ng-click="vm.editCost(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSubCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRejCost(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
@@ -157,6 +168,7 @@
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													
 													<!-- edit -->
+													<td ng-switch-when="edit"></td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
@@ -226,12 +238,12 @@
 													
 												</tr>
 												<tr>
-													<td ng-switch-when="view" colspan="12" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
+													<td ng-switch-when="view" colspan="13" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
 															{{depCost.costDepName}}:￥{{depCost.costNum}}
 														</div>
 													</td>
-													<td ng-switch-when="edit" colspan="12" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
+													<td ng-switch-when="edit" colspan="13" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
 														<div style="float:left;margin-left:10px" ng-repeat="depCost in item.costDepList">
 															{{depCost.costDepName}}:￥<input type="number" name="costNum" ng-model="depCost.costNum"  min="1" style="width:78px;" />
 														</div>
