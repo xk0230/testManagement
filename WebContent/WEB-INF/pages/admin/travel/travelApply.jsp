@@ -101,7 +101,7 @@
 														<div ng-if="${mode=='view'}">
 															<%-- <input type="checkbox" ng-if="${adminUser.userId == 'admin'}" ng-model="item.chk" ng-change="vm.chkChange()" > --%>
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
-															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.print(item)"><i class='icon-print'></i></a>
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.print(item.id)"><i class='icon-print'></i></a>
 														</div>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
