@@ -48,13 +48,13 @@
 	            <div class="widget-content">
 	              <div class="shortcuts">
 	               <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">组织架构</span> </a>
-	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">入职必读</span></a>
-		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i> <span class="shortcut-label">个人信息修改</span>  </a>
-		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-bookmark"></i> <span class="shortcut-label">书籍借阅</span> </a>
-		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i>  <span class="shortcut-label">合同管理</span></a>
-		           <a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">日常费用申请</span> </a>
-		           <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">出差报销</span> </a>
-	               <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">差旅预定</span></a>
+	               <a href="${root}/admin/newin.do" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">入职必读</span></a>
+		           <a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }" class="shortcut"><i class="shortcut-icon icon-file"></i> <span class="shortcut-label">个人信息修改</span>  </a>
+		           <a href="${root}/admin/book/manager.do" class="shortcut"><i class="shortcut-icon icon-bookmark"></i> <span class="shortcut-label">书籍借阅</span> </a>
+		           <a href="${root}/contract/contractApply.do" class="shortcut"><i class="shortcut-icon icon-signal"></i>  <span class="shortcut-label">合同管理</span></a>
+		           <a href="${root}/admin/cost/costApply.do" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">日常费用申请</span> </a>
+		           <a href="${root}/travel/travelApply.do" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">出差报销</span> </a>
+	               <a href="http://www.luopan88.com"  target="_blank" class="shortcut"><i class="shortcut-icon icon-picture"></i><span class="shortcut-label">差旅预定</span></a>
 		            
 		               
 		              
@@ -84,44 +84,44 @@
 	                  <tr>
 	                    <td> PPT模板 </td>
 	                    <td> 通用模板</td>
-	                    <td>下载链接</td>
+	                    <td><a href="${root}/public/file/ppt模板.pptx">下载链接</a></td>
 	                    </tr>
 	                  <tr>
 	                    <td> Word模板 </td>
 	                    <td> 通用模板</td>
-	                    <td> 下载链接</td>
+	                    <td> <a href="${root}/public/file/Word模板.docx">下载链接</a></td>
 	                    
 	                  </tr>
 	                  <tr>
 	                    <td> EXCEL模板</td>
 	                    <td> 通用模板</td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/EXCEL模板.xlsx">下载链接</a> </td>
 	                    
 	                  </tr>
 	                  <tr>
 	                    <td> 开票资料</td>
 	                    <td> 开具发票时使用</td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/苏州开票资料.docx">下载链接</a> </td>
                       </tr>
                        <tr>
 	                    <td> 收入账户信息</td>
 	                    <td> 各产品线收入必须入此账户</td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/收入户信息.docx">下载链接</a> </td>
                       </tr>
 	                  <tr>
 	                    <td> 在职证明模板</td>
 	                    <td> 自行下载后需至SSC盖章方生效</td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/在职证明.docx">下载链接</a> </td>
                       </tr>
                       <tr>
 	                    <td> M436(前台)激光一体机驱动</td>
 	                    <td> 打印，扫描驱动一体包 </td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/前台打印机全套驱动.exe">下载链接</a> </td>
                       </tr>
                       <tr>
 	                    <td> 专题报告模板</td>
 	                     <td> 向本部总经理汇报专题事项时使用</td>
-	                    <td> 下载链接 </td>
+	                    <td> <a href="${root}/public/file/专题报告模板.DOC">下载链接</a> </td>
                       </tr>
 	                                
 	                </tbody>
