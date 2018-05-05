@@ -546,8 +546,8 @@ public class AdminUserManagerService {
 	public IndexDataVO getIndexDataVO(AdminUser au){
 		IndexDataVO res = new IndexDataVO();
 		
-		
-		res.setTodayCostNum(adminUserMapper.getTodayCost());
+		Integer tc = adminUserMapper.getTodayCost();
+		res.setTodayCostNum(tc==null?0:tc);
 		res.setCostAuditNum(adminUserMapper.getCostAudit(au));
 		res.setTravelAuditNum(adminUserMapper.getTravelAudit(au));
 		

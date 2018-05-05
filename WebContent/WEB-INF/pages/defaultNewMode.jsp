@@ -22,13 +22,13 @@
 	              <div class="widget big-stats-container">
 	                <div class="widget-content">
 	                  <div id="big_stats" class="cf">
-	                    <div class="stat">今日费用（Release）<i class="icon-anchor"></i> <span class="value">851</span> </div>
+	                    <div class="stat">今日费用（Release）<i class="icon-anchor"></i> <a href="${root}/admin/cost/costView.do" class="value" id="todayCostNum"></a> </div>
 	                    <!-- .stat -->
 	                    
 	                    <!--<div class="stat">人力资源<i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
 	                      -->
-	                    <div class="stat">待审批成本<i class="icon-credit-card"></i> <span class="value">3</span> </div>
-	                    <div class="stat">待审批出差<i class="icon-plane"></i> <span class="value">8</span> </div>
+	                    <div class="stat" ng-if="${adminUser.position != 'STAFF'}" >待审批成本<i class="icon-credit-card" ></i> <a href="${root}/admin/cost/costAudit.do" class="value" id="costAuditNum"></a> </div>
+	                    <div class="stat" ng-if="${adminUser.position != 'STAFF'}">待审批出差<i class="icon-plane"></i> <a href="${root}/travel/travelAudit.do" class="value" id="travelAuditNum"></a> </div>
 	                    <!-- .stat -->
 	                    
 	                    <!--<div class="stat">年假剩余<i class="icon-bullhorn"></i> <span class="value">25%</span> </div>

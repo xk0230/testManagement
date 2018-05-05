@@ -1,22 +1,24 @@
 ﻿var myAppModule = angular.module("myApp",['ui.bootstrap']);
 
-console.log("ccccccccccc");
 myAppModule.controller('defaultController',
 	function defaultController($scope,$http){
 		var self = this;
 		self.sessionUserId =$("#sessionUserId").val();
-		console.log("初始化22222222");
 		self.$onInit = function(){
-			console.log("初始化啦");
+			this.getNums();
+		}
+		
+		//获取实时信息
+		this.getNums = function(){
 			$http({
 				method:'POST',
 				url:"/ssc/admin/indexData.do"
 			}).then(function(res){
-				console.log(res)
+				$("#todayCostNum").html(res.data.todayCostNum);
+				$("#costAuditNum").html(res.data.costAuditNum);
+				$("#travelAuditNum").html(res.data.travelAuditNum);
 			});
-			
 		}
-		
 		// 用户信息
 		this.userInfo = function(id){
 			window.location.href="/ssc/admin/adminuser/toAddOrEditUser.do?id="+self.sessionUserId; 

@@ -832,7 +832,7 @@ SELECT 'dep_ssc' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '5' AND 
 	</select>
 	
 	<select id="getTodayCost" resultType="java.lang.Integer">
-		select CAST(SUM(cost_num) as SIGNED) as todayCost from COST_DETAIL where cost_time >= CURDATE() 
+		select CAST(SUM(cost_num) as SIGNED) as todayCost from COST_DETAIL where cost_time >= CURDATE()  AND `status`='05'
 	</select>
 
 	<select id="getCostAudit" parameterType="com.codyy.oc.admin.entity.AdminUser" resultType="java.lang.Integer">
