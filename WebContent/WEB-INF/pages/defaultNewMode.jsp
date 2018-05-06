@@ -8,7 +8,7 @@
 <body  >
 	<%@ include file="common/header.jsp"%>
 	<!-- Start #content -->
-	<div class="main" id="content" ng-app = "myApp" ng-controller="defaultController as vm">
+	<div id="content" ng-app = "myApp" ng-controller="defaultController as vm">
 	  <div class="main-inner">
 	    <div class="container">
 	      <div class="row">
