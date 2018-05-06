@@ -58,7 +58,7 @@
         },
         template:'<div id="dateSelectors" class="date-selectors" style="width:120px;margin-left:4px" outside-click="hidePicker()"> '
         			+'<label ng-bind="label" class="mb-input-label" for="{{inputName}}"></label>'
-        			+'<input name="{{inputName}}" type="text" ng-disabled="{{ngDisabled}}" ng-class="{disabled: ngDisabled}" style="width:100px;border-radius:3px" class="mb-input-field {{customInputClass}}"  ng-click="showPicker()"  class="form-control" id="{{inputName}}" value="{{date|date:\'yyyy-MM-dd\'}}" placeholder="{{ placeholder }}" ng-model="date">'
+        			+'<input name="{{inputName}}" type="text" ng-disabled="{{ngDisabled}}" ng-class="{disabled: ngDisabled}" style="width:100px;border-radius:3px" class="mb-input-field {{customInputClass}}"  ng-click="showPicker()"  class="form-control" id="{{inputName}}" placeholder="{{ placeholder }}" ng-model="date | date:\'yyyy-MM-dd\'">'
         			+'<div class="mb-datepicker" ng-show="isVisible">'
         			+'<table> <caption> <div class="header-year-wrapper">'
         			+'<span style="display: inline-block; float: left; padding-left:20px; cursor: pointer" class="noselect" ng-click="previousYear(currentDate)">'
