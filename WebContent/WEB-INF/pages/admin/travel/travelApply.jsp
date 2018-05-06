@@ -63,24 +63,22 @@
 										<div style="width:1134px;" ng-if="${mode == 'apply' }">
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
-										<div style="overflow:scroll">
-										<table class="table table-condensed table-bordered table-striped" style="width:1120px;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
 											<thead>
 												<tr>
 													<th width="15%"  style="text-align:center;font-size:12px;">操作</th>
 													<%-- <th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th> --%>
-													<th width="5%" style="text-align:center;font-size:12px;">状态</th> 
-												 	<th width="5%" style="text-align:center;font-size:12px;">姓名</th>
-													<th width="5%" style="text-align:center;font-size:12px;">地点</th>
-													<th width="5%" style="text-align:center;font-size:12px;">部门</th>
+													<th width="10%" style="text-align:center;font-size:12px;">状态</th> 
+												 	<th width="10%" style="text-align:center;font-size:12px;">姓名</th>
+													<th width="10%" style="text-align:center;font-size:12px;">地点</th>
+													<th width="10%" style="text-align:center;font-size:12px;">部门</th>
 													<th width="10%" style="text-align:center;font-size:12px;">开始时间</th>
 													<th width="10%" style="text-align:center;font-size:12px;">结束时间</th>
-													<th width="20%" style="text-align:center;font-size:12px;">备注</th>
-													<th width="20%" style="text-align:center;font-size:12px;">成本总计</th>
+													<th style="text-align:center;font-size:12px;">备注</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
+											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
+												<tr class="odd gradeX"  ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
 													<td ng-switch-when="view">
 														<div ng-if="${mode == 'apply' }">
@@ -112,13 +110,6 @@
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p class="line-limit-length span2"  title="{{item.remark}}" ng-bind="item.remark"></p></td>
-													
-													
-													<td ng-switch-when="view"  style="padding:1px;" >
-														<span style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="c in item.costs">
-														{{c.remark}} : <strong >{{c.costNum}}</strong>
-														</span>
-													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
@@ -130,9 +121,7 @@
 													</td>
 													<td ng-switch-when="edit">
 														<select id="dept" ng-model="item.depId"  ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:150px;" class="form-control select2" 
-
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
-
 														<option value="">部门</option>
 														</select>
 													</td>
@@ -150,10 +139,16 @@
 													</td>
 												
 												</tr>
+												<tr ng-switch-when="view" ng-if="item.costs">
+													<td colspan="8">
+														<span style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="c in item.costs">
+														{{c.remark}} : <strong >{{c.costNum}}</strong>
+														</span>
+													</td>
+												</tr>
 													
 											</tbody>
 										</table>
-										</div>
 										<div class="g-no-content" ng-if="vm.list && vm.list.length === 0">没有相关数据</div>
 										<div style="width:1134px;">
 											<%@ include file="../../common/page.jsp"%>
