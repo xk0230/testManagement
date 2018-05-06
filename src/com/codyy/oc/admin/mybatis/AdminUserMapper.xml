@@ -842,7 +842,7 @@ SELECT 'dep_ssc' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '5' AND 
 		COST_DETAIL
 		WHERE 1=1
 		<if test="position == 'MANAGER'">
-			and `status` = '01'
+			and (`status` = '01' or `status` = '04')
 			AND create_user_id IN (
 			SELECT
 			user_id
@@ -864,7 +864,7 @@ SELECT 'dep_ssc' as name ,count(*) FROM ADMIN_USER au where au.dep_id = '5' AND 
 		travel
 		WHERE 1=1
 		<if test="position == 'MANAGER'">
-			and `status` = '01'
+			and (`status` = '01' or `status` = '04')
 			AND create_user IN (
 			SELECT
 			user_id
