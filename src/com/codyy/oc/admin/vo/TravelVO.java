@@ -6,6 +6,7 @@ package com.codyy.oc.admin.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
 
 /**  
@@ -55,6 +56,17 @@ public class TravelVO extends Travel {
 	
 	private List<TravelDetailVO> travelDetailVOList;
 	
+	
+	private List<CostEntityBean> costs ;
+	
+
+	public List<CostEntityBean> getCosts() {
+		return costs;
+	}
+
+	public void setCosts(List<CostEntityBean> costs) {
+		this.costs = costs;
+	}
 
 	public List<TravelDetailVO> getTravelDetailVOList() {
 		return travelDetailVOList;

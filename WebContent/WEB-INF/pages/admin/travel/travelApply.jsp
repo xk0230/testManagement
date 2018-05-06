@@ -76,6 +76,7 @@
 													<th width="10%" style="text-align:center;font-size:12px;">开始时间</th>
 													<th width="10%" style="text-align:center;font-size:12px;">结束时间</th>
 													<th width="20%" style="text-align:center;font-size:12px;">备注</th>
+													<th width="20%" style="text-align:center;font-size:12px;">成本总计</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -111,6 +112,13 @@
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p class="line-limit-length span2"  title="{{item.remark}}" ng-bind="item.remark"></p></td>
+													
+													
+													<td ng-switch-when="view"  style="padding:1px;" >
+														<span style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="c in item.costs">
+														{{c.remark}} : <strong >{{c.costNum}}</strong>
+														</span>
+													</td>
 													<!-- edit -->
 													<td ng-switch-when="edit" >
 														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
@@ -142,6 +150,7 @@
 													</td>
 												
 												</tr>
+													
 											</tbody>
 										</table>
 										</div>

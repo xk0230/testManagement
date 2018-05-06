@@ -261,6 +261,8 @@ public Page getTravelViewList(TravelVO travel){
     
     for(TravelVO travelVO : pageList) {
     	travelVO.setTravelDetailVOList(travelDetailMapper.getTravelDetailList(travelVO.getId()));
+    	
+    	travelVO.setCosts(travelMapper.getCostsById(travelVO.getId()));
     }
     
 //    for(TravelVO travelvo : pageList) {
