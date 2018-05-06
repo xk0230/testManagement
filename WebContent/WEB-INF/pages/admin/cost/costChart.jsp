@@ -38,7 +38,7 @@
                                     <div class="span5">
 										<span>月度：</span>
 										<span ng-repeat="item in monthCheckList">
-											{{item.month}}<input type="checkbox" ng-model="item.check" ng-click="vm.getDepIncome()" >
+											{{item.month}}<input type="checkbox" ng-model="item.check" ng-click="vm.getDepIncome()" style="margin-right:5px;" >
 										</span>
                                     </div>
 								</div>
@@ -53,7 +53,7 @@
 				                            </div>
 				                            <!-- /widget-header -->
 				                            <div class="widget-content">
-				                                <div id="depIncome"></div>
+				                                <div id="depIncome" style="overflow-x: scroll;"></div>
 				                                <!-- /line-chart -->
 				                            </div>
 				                            <!-- /widget-content -->
