@@ -66,14 +66,14 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="15%"  style="text-align:center;font-size:12px;">操作</th>
+													<th width="18%"  style="text-align:center;font-size:12px;">操作</th>
 													<%-- <th width="5%" ng-if="${adminUser.userId == 'admin' and mode=='view'}"><input type="checkbox" ng-model="vm.chkValue" ng-change="vm.chkAll()"  ></th> --%>
 													<th width="10%" style="text-align:center;font-size:12px;">状态</th> 
 												 	<th width="10%" style="text-align:center;font-size:12px;">姓名</th>
 													<th width="10%" style="text-align:center;font-size:12px;">地点</th>
 													<th width="10%" style="text-align:center;font-size:12px;">部门</th>
-													<th width="10%" style="text-align:center;font-size:12px;">开始时间</th>
-													<th width="10%" style="text-align:center;font-size:12px;">结束时间</th>
+													<th width="8%" style="text-align:center;font-size:12px;">开始时间</th>
+													<th width="8%" style="text-align:center;font-size:12px;">结束时间</th>
 													<th style="text-align:center;font-size:12px;">备注</th>
 												</tr>
 											</thead>

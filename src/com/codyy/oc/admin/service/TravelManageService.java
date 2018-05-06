@@ -145,6 +145,9 @@ public class TravelManageService {
 	    page.setMap(map);
 	    
 	    List<TravelVO> travelPageList = travelMapper.getTravelPageList(page);
+	    for(TravelVO travelVO : travelPageList) {
+	    	travelVO.setCosts(travelMapper.getCostsById(travelVO.getId()));
+	    }
 	    page.setData(travelPageList);
 	    
 	    return page;
@@ -227,6 +230,9 @@ public Page getTravelAuditList(TravelVO travel){
 //    for(TravelVO TravelVO : pageList) {
 //    	TravelVO.setCostDepList(travelMapper.getTravelDepList(TravelVO.getId()));
 //    }
+    for(TravelVO travelVO : pageList) {
+    	travelVO.setCosts(travelMapper.getCostsById(travelVO.getId()));
+    }
     page.setData(pageList);
     return page;
 }
