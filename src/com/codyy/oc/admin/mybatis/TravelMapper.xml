@@ -196,7 +196,7 @@
 			<if test="map.endTime != null and map.endTime != ''">
 				And (travel.start_time <![CDATA[ <= ]]> #{map.endTime} and travel.end_time <![CDATA[ >= ]]> #{map.endTime})
 			</if>
-		
+			order by travel.create_time desc
 	
 	</select>
 	
@@ -272,8 +272,7 @@
 				AND travel.dep_id = #{map.depId}
 				AND (travel.status = '03')
 			</if>
-		
-	
+		order by travel.create_time desc
 	</select>
 	
 	
@@ -322,7 +321,7 @@
 			<if test="map.endTime != null and map.endTime != ''">
 				And (travel.start_time <![CDATA[ <= ]]> #{map.endTime} and travel.end_time <![CDATA[ >= ]]> #{map.endTime})
 			</if>
-		
+		order by travel.create_time desc
 	
 	</select>
 	

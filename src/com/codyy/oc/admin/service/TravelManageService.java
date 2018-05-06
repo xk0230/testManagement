@@ -315,7 +315,7 @@ public JsonDto updateStatus(AdminUser user,TravelVO travel){
 				au = adminUserManagerService.getselcAdminUserById(c.getCreateUserId());
 			}
 			c.setTravelId(travel.getId());//设置出差id
-			c.setCostSubtypeId("6");//设置子分类为差旅费
+			c.setCostSubtypeId("9");//设置子分类为差旅费
 			costService.insertOrUpdateCostEntity(au, c);
 			c.setStatus("05");
 			costService.updateCostStatus(admin,c);
