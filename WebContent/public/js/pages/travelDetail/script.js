@@ -111,8 +111,8 @@ myAppModule.controller('TravelDetailController',
 		//添加新申请
 		this.addTravel = function(){
 			var newItem = {
-				startTime:new Date()
-				,createTime:new Date()
+				startTime:$filter('date')(new Date(), "yyyy-MM-dd")
+				,createTime:$filter('date')(new Date(), "yyyy-MM-dd")
 				,create_user:""
 				,startPlace:""
 				,endPlace:""
