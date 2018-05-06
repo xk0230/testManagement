@@ -122,6 +122,8 @@
 		<if test="auditUser != null and auditUser != ''">
 			,audit_user = #{auditUser}
 		</if>
+		,cost_time = now()
+		
 		WHERE cost_id = #{costId}
 	</update>
 	
