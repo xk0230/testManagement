@@ -356,24 +356,22 @@
 <script src="js/base.js"></script>
 <script>
 $.post('${root}/admin/adminuser/getAlladminlist.do', null, function(data){
-    console.log(data);
     html="";
     $.each(data,function(n,value) {
     	html+="<tr>";
-    	html+="<td>"+value.depName+"</td>";
+    	html+="<td>"+(value.depName ==null ? ' ':value.depName)+"</td>";
     	html+="<td>"+value.realName+"</td>";
-    	html+="<td>"+value.postName+"</td>";
+    	html+="<td>"+(value.postName ==null ? ' ':value.postName)+"</td>";
     	if(value.adminUserDetail != null){
-	    	html+="<td>"+value.adminUserDetail.phone1+"</td>";
+	    	html+="<td>"+(value.adminUserDetail.phone1==null ? ' ':value.adminUserDetail.phone1)+"</td>";
     	}else{
-    		html+="<td>无</td>";
+    		html+="<td>  </td>";
     	}
-    	html+="       <td>"+value.seatPhone+"</td>";
+    	html+="       <td>"+(value.seatPhone==null ? ' ':value.seatPhone)+"</td>";
     	html+="<td><a href='mailto:"+value.userName+"@ccydsz.com'>"+value.userName+"@ccydsz.com</a></td>";
     	html+="</tr>";
         });
     $("#usertable").html($("#usertable").html()+html);
-  console.log(html);
 });
  
  
