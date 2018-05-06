@@ -519,7 +519,7 @@
 				 ${map.orderby},
 			</if> 
 			<!-- postPc,au.create_time DESC -->
-			au.dep_id,au.entry_date DESC 
+			dep.`order`,au.entry_date DESC 
 		
 	</select>
 	<!-- 获取用户数量 -->
