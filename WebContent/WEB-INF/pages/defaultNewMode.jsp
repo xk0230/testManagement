@@ -65,7 +65,13 @@
 	          </div>
 	          
 	          <!-- /widget -->
-	          <div class="widget widget-table action-table">
+	          
+	          <!-- /widget --> 
+	        </div>
+	        <!-- /span6 -->
+	        <div class="span6">
+	          
+	          <!-- /widget --><div class="widget widget-table action-table">
 	            <div class="widget-header"> <i class="icon-th-list"></i>
 	              <h3>常用下载</h3>
 	            </div>
@@ -129,33 +135,25 @@
 	            </div>
 	            <!-- /widget-content --> 
 	          </div>
-	          <!-- /widget --> 
-	        </div>
-	        <!-- /span6 -->
-	        <div class="span6">
-	          
-	          <!-- /widget -->
-	          <div class="widget widget-nopad">
+	         <!--  <div class="widget widget-nopad">
 	            <div class="widget-header"> <i class="icon-list-alt"></i>
 	              <h3> 近期日历</h3>
-	            </div>
-	            <!-- /widget-header -->
+	            </div>-->
+	            <!-- /widget-header 
 	            <div class="widget-content">
 	              <div id="calendar">
 	              </div>
 	            </div>
 	            <!-- /widget-content --> 
-	          </div><div class="widget">
+	         <!--  </div><div class="widget">
 	            <div class="widget-header"> <i class="icon-signal"></i>
 	              <h3> 收支概览</h3>
-	            </div>
+	            </div>-->
 	            <!-- /widget-header -->
-	            <div class="widget-content">
-	              <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>
-	              <!-- /area-chart --> 
-	            </div>
-	            <!-- /widget-content --> 
-	          </div>
+	            <!--  <div class="widget-content">
+	              <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>  
+
+	            </div> </div>-->
 	          <!-- /widget -->
 	         <!-- <div class="widget widget-nopad">
 	            <div class="widget-header"> <i class="icon-list-alt"></i>
@@ -203,6 +201,8 @@
 	  <!-- /main-inner --> 
 	</div>
 	<!-- /main -->
+	
+
 <script>     
 
         var lineChartData = {
