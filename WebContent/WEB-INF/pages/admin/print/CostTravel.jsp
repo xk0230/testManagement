@@ -9,7 +9,8 @@
 <div class="row hidden" style="width:20cm;" >
 	<div id="printDiv{{item.id }}" style="width:100%;height:152mm;font: 宋体;" ng-repeat="item in vm.list" >
 		<div style="width:100%;">
-			<div style="font-size: 20px;font-weight: bold;text-align: center;width: 100%">出差报销单</div>
+			<div style="font-size: 10px;font-weight: bold;text-align: center;width: 100%">出差费用清单</div>
+			<br>
 		</div>
 		<table id="printtable"class="printTable travelTable" style="width:20cm;border-collapse:collapse;" cellspacing="0" cellpadding="0">
 			<tr>
@@ -41,7 +42,7 @@
 			</tr>
 			<tr class="odd gradeX" >
 				<td colspan="4" style="border:none;">
-					<table class="travelTable" style="width:100%;border-collapse:collapse;" cellspacing="0" cellpadding="0">
+					<table class="travelTable" style="width:100%;border-collapse:collapse;text-align: center;" cellspacing="0" cellpadding="0">
 						<tr>
 							<th>序号</th>
 							<th>项目</th>

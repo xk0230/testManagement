@@ -362,7 +362,7 @@
 		'1' as costType,
 	travel_id AS travelId,
 	td.start_time AS costTime,
-	tdt.NAME AS remark,
+	CONCAT(t.place,'--',DATE_FORMAT(t.start_time,'%Y-%m-%d'),'~',DATE_FORMAT(t.end_time,'%Y-%m-%d'),'--',tdt.NAME) AS remark,
 	sum( cost_num ) AS costNum,
 	t.create_user as createUserId
 FROM

@@ -268,7 +268,6 @@ public class AdminUserManagerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("checkseluptename")
 	public List<AdminUser> checkSelUpteName(AdminUser adminUser){
-		
 		return adminUserManagerService.checkSelUpteName(adminUser);
 	}
 	
