@@ -72,6 +72,7 @@
 									</div>
 								</div>
 								<hr>
+								<div ng-show="${adminUser.position == 'ADMIN'}">
 								<div>TIPS: 以下汇总均为截至目前的总计，与日期筛选无关。</div><br>
 									<div style="font-weight: bold;font-size: 16px">
 									收入 :<div class="progress progress-striped active" style="height:18px;" >
@@ -86,6 +87,7 @@
 									</div>
 									</div>
 									</div>
+								</div>
 								<hr>
 								<!-- 查询结果 -->
 								<div class="row">
