@@ -76,7 +76,7 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<div style="width:1134px;" ng-if="${(travel.status!='05' && travel.status!='03' && travel.status!='01')}">
+										<div style="width:1134px;" ng-if="${(travel.status!='05' && travel.status!='01')}">
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<div style="overflow:scroll">

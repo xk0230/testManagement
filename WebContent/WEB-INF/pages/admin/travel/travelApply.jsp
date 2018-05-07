@@ -83,7 +83,7 @@
 													<td ng-switch-when="view">
 														<div ng-if="${mode == 'apply' }">
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
-															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00' || item.status=='02'|| item.status=='04'"><i class='icon-edit'></i></a>
+															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editTravel(item,$index)" ng-if="item.status=='00' || item.status=='02'|| item.status=='03'|| item.status=='04'"><i class='icon-edit'></i></a>
 															<a href="javascript:;" class="btn btn-small " ng-click="vm.submitTravel(item)" ng-if="item.status=='00' || item.status=='02'|| item.status=='04'"><i class="icon-share"></i></a>
 															<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 														</div>
