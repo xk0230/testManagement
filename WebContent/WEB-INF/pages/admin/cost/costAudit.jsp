@@ -311,7 +311,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th>操作</th>
+													<th width="55px">操作</th>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
 													<th width="200px">内容</th>
@@ -320,7 +320,7 @@
 													<th width="130px">收款方</th>
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
-													<th width="100px">备注</th>
+													<th>备注</th>
 												</tr>
 											</thead>
 											<tbody>
