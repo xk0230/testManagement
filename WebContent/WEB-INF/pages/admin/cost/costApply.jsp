@@ -72,7 +72,7 @@
 												<tr>
 													
 													<th width="110px">操作</th>
-													<th width="110px">状态</th>
+													
 													<th width="100px">成本单号</th>
 													<th width="80px">类型</th>
 													<th width="100px" ng-show="${sessionScope.adminUser.userId == 'admin'}">分类</th>
@@ -81,7 +81,7 @@
 													<th width="300px">成本详情</th>
 													<th width="300px">合同</th>
 													<th width="300px">项目</th>
-													
+													<th width="110px">状态</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -93,7 +93,7 @@
 														<a href="javascript:;" class="btn btn-small " ng-click="vm.submitCost(item)" ng-if="item.status=='00' || item.status=='02'"><i class="icon-share"></i></a>
 														<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class="icon-remove-sign"></i></a>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
+													
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-show="item.editMode == 'view' && ${sessionScope.adminUser.userId == 'admin'}"><p ng-bind="item.costSubName"></p></td>
@@ -144,7 +144,7 @@
 													</td>
 													
 												
-													<!-- edit -->
+													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td><!-- edit -->
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
