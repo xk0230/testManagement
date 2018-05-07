@@ -278,7 +278,8 @@ public class AdminUserManagerController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("getchartsdata")
-	public List<ChartPieData> getchartsdata(){
-		return adminUserManagerService.getchartsdata();
+	public List<ChartPieData> getchartsdata(HttpServletRequest request){
+		AdminUser au = getSessionUser(request);
+		return adminUserManagerService.getchartsdata(au);
 	}
 }
