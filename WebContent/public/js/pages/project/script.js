@@ -96,6 +96,7 @@ myAppModule.controller('ProjectController',
 				,startTime:$filter('date')(new Date(), "yyyy-MM-dd")
 				,endTime:$filter('date')(new Date(), "yyyy-MM-dd")
 				,leader:""
+				,remark:""
 				,editMode:"edit"
 			};
 			var myArray=new Array()
@@ -137,6 +138,7 @@ myAppModule.controller('ProjectController',
 				id:projectItem.id,
 				pjNo:projectItem.pjNo,
 				name:projectItem.name,
+				remark:projectItem.remark,
 				startTime:$filter('date')(projectItem.startTime, "yyyy-MM-dd"),
 				endTime:$filter('date')(projectItem.endTime, "yyyy-MM-dd"),
 				leader:projectItem.leader,
