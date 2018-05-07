@@ -417,7 +417,7 @@ myAppModule.controller('CostController',
 		};
 
 		
-		this.editBook = function (item, parentSelector, mode) {
+		this.editPayment = function (item, parentSelector, mode) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
