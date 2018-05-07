@@ -122,6 +122,8 @@ myAppModule.controller('ChartController',
 			
 			$('#depIncome').html('');
 			
+			var costTypeName = $scope.costType == "0"?"月度收入":"月度支出";
+			
 			var checkedDep = "";
 			angular.forEach(self.list, function(item, key) {
 				if(item.checked){
@@ -198,7 +200,7 @@ myAppModule.controller('ChartController',
 				            type: 'column'
 				        },
 				        title: {
-				            text: '月度支出'
+				            text: costTypeName
 				        },
 				        subtitle: {
 				            text: ''

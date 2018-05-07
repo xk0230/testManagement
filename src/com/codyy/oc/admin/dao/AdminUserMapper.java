@@ -289,7 +289,7 @@ public interface AdminUserMapper {
 	  * 获取统计数据
 	  * @return
 	  */
-	 public List<ChartPieData> getchartsdata();
+	 public List<ChartPieData> getchartsdata(AdminUser au);
 	 
 	 public Integer getTodayCost(AdminUser au); 
 	 

@@ -247,7 +247,7 @@ myAppModule.controller('PostionController',
 						alert("驳回成功");
 					}
 					self.getList();
-					getNewsNum();
+					//getNewsNum();
 				}else{
 					alert("操作失败 ");
 				}
@@ -482,7 +482,7 @@ angular.module('myApp').controller('AuditModalInstanceCtrl', function ($scope,$h
 					}
 				}).then(function(res){
 					if(res.data.result == true){
-						getNewsNum();
+						//getNewsNum();
 					}else{
 						alert("操作失败 ");
 					}
