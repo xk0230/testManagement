@@ -8,6 +8,8 @@ public class Project {
     private String pjNo;
 
     private String name;
+    
+    private String remark;
 
     private Date startTime;
 
@@ -16,8 +18,22 @@ public class Project {
     private Date createTime;
 
     private String leader;
+    
+    /**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
 
-    public String getId() {
+	/**
+	 * @param remark the remark to set
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getId() {
         return id;
     }
 
