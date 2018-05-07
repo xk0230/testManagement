@@ -23,22 +23,21 @@
 							
 							<div class="widget-content">
 								<div class="row">
-                                    <div class="span3">
-										<select ng-model="year"  class="form-control select2" ng-change="costYearChange()" ng-options="year for year in years">
-												<option value="">--请选择年度--</option>
+                                    <div class="span1">
+										<select ng-model="year"  class ng-change="costYearChange()" style="width:100%" ng-options="year for year in years">
 										</select>
                                     </div>
-                                    <div class="span3">
-	                                    <span class="searchSpan">收支类型:</span>
-	                                    <select id="costType" ng-model="costType"  class="form-control span1" ng-change="costYearChange()"
+                                    <div class="span2">
+	                                    <span class="pull-left">收支:</span>
+	                                    <select id="costType" ng-model="costType" class="form-control pull-left" style="width:60px; margin-left:15px;" ng-change="costYearChange()"
 	                                            ng-options="cType.costType as cType.name group by cType.group for cType in costTypeList"
 	                                            ng-change="costTypeChange()">
 	                                    </select>
                                     </div>
-                                    <div class="span5">
+                                    <div class="span8">
 										<span>月度：</span>
 										<span ng-repeat="item in monthCheckList">
-											{{item.month}}<input type="checkbox" ng-model="item.check" ng-click="vm.getDepIncome()" style="margin-right:5px;" >
+											{{item.month}}月<input type="checkbox" ng-model="item.check" ng-click="vm.getDepIncome()" style="margin-right:10px;" >
 										</span>
                                     </div>
 								</div>
@@ -60,7 +59,7 @@
 				                        </div>
 										<div class="widget">
 				                            <!-- /widget-header -->
-				                            <div class="widget-content">
+				                            <div class="widget-content" style="overflow-x: auto">
 												<table class="table display" id="datatable">
 													<thead>
 														<tr align="right">
