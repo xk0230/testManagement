@@ -60,7 +60,7 @@
 								<!-- 查询结果 -->
 								<div class="row">
 									<div class="span12">
-										<div style="width:1134px;" ng-if="${mode == 'apply' }">
+										<div style="width:1134px;" ng-if="${(adminUser.userId != 'admin') && (mode == 'apply') }">
 											<button class="btn btn-invert" ng-click="vm.addTravel()"><i class="icon-plus"></i> 新增</button>
 										</div>
 										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
