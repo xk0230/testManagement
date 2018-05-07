@@ -61,7 +61,7 @@
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
-													<td ng-switch-when="edit"><p ng-bind="$index + 1"></p></td>
+													<!-- <td ng-switch-when="edit"><p ng-bind="$index + 1"></p></td> -->
 													<td ng-switch-when="edit">
 														<p ng-bind="item.bookNo"></p>
 													</td>
