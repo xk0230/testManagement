@@ -58,7 +58,7 @@
 											</select>                                    	</div>
 										<div class="span359 form-group">
 	                                        <span class="searchSpan">状态:</span>
-											<select class="form-control select2" ng-model="vm.user.workStatus">
+											<select class="form-control select2" ng-model="vm.user.workStatus" ng-readonly="vm.readOnly">
 												<option value="">请选择</option>
 												<option value="试用期" >试用期</option>
 												<option value="正式" >正式</option>
@@ -67,9 +67,9 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="span359 form-group">
-	                                        <span class="searchSpan pull-left">入职日期:</span>
-											<mb-datepicker input-name="abc" input-class="mb-date" date="vm.user.entryDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" action="alert(1)"></mb-datepicker>
+										<div class="span359 form-group" >
+	                                        <span class="searchSpan pull-left">入职日期1:</span>
+											<mb-datepicker  input-name="abc" input-class="mb-date" date="vm.user.entryDate" date-format="YYYY-MM-DD" class="pull-left" ng-disabled="vm.readOnly" action="alert(1)"></mb-datepicker>
                                     	</div>
 										<div class="span359 form-group">
 	                                        <span class="searchSpan">工龄:</span>

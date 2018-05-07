@@ -534,8 +534,8 @@ public class AdminUserManagerService {
 	 * 获取charts统计数据
 	 * @return
 	 */
-	public List<ChartPieData> getchartsdata(){
-		return adminUserMapper.getchartsdata();
+	public List<ChartPieData> getchartsdata(AdminUser au){
+		return adminUserMapper.getchartsdata(au);
 		
 	}
 	
