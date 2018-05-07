@@ -291,7 +291,7 @@ public interface AdminUserMapper {
 	  */
 	 public List<ChartPieData> getchartsdata();
 	 
-	 public Integer getTodayCost(); 
+	 public Integer getTodayCost(AdminUser au); 
 	 
 	 public Integer getCostAudit(AdminUser au); 
 	 
