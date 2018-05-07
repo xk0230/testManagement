@@ -143,7 +143,7 @@ setInterval("getNewsNum()","60000");
                     <li><a href="${root}/admin/cost/costApply.do"><i class="en-arrow-right7"></i>费用登记</a></li>
                     <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/costAudit.do"><i class="en-arrow-right7"></i>成本审批</a></li>
                     <li><a href="${root}/admin/cost/costView.do"><i class="en-arrow-right7"></i>成本查看</a></li>
-                    <li ng-show="${adminUser.position != 'STAFF'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
+                    <li ng-show="${adminUser.position == 'ADMIN'}"><a href="${root}/admin/cost/chart.do"><i class="en-arrow-right7"></i>成本图表</a></li>
               </ul>
             </li>
             
