@@ -598,7 +598,7 @@
 			c.name as costSubName,
 			sum(a.cost_num) as costNum
 		FROM COST_DEP_DETAIL a
-		LEFT JOIN COST_DETAIL b
+		INNER JOIN COST_DETAIL b
 		ON a.cost_id = b.cost_id
 		LEFT JOIN COST_SUBTYPE c
 		ON b.cost_subtype_id = c.cost_subtype_id
@@ -614,6 +614,7 @@
 		AND a.cost_year = #{year}
 		AND a.cost_month = #{month}
 		AND a.cost_num > 0
+		AND b.status <![CDATA[ <> ]]> '99'
 		group by a.cost_month,b.cost_subtype_id,c.name
 		order by a.cost_month,b.cost_subtype_id
 
