@@ -140,11 +140,12 @@
 												
 												</tr>
 												<tr ng-switch-when="view" ng-if="item.costs">
-													<td colspan="8">
+													<!-- <td colspan="8">
 														<span style="float:left;margin-left:10px;margin-right:8px；" ng-repeat="c in item.costs">
 														{{c.remark}} : <strong >{{c.costNum}}</strong>
 														</span>
-													</td>
+													</td> -->
+													<td colspan="8">总计:<span ng-bind="item.costAll"></span>元</td>
 												</tr>
 													
 											</tbody>

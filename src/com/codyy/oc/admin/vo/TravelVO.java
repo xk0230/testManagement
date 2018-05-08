@@ -59,6 +59,22 @@ public class TravelVO extends Travel {
 	
 	private List<CostEntityBean> costs ;
 	
+	private Double costAll;
+
+	public Double getCostAll() {
+		Double all = 0.0;
+		if(this.getCosts() != null&& this.getCosts().size()!=0){
+			for (CostEntityBean c : this.getCosts()) {
+				all+=c.getCostNum();
+			}
+		}
+		costAll = all;
+		return costAll;
+	}
+
+	public void setCostAll(Double costAll) {
+		this.costAll = costAll;
+	}
 
 	public List<CostEntityBean> getCosts() {
 		return costs;

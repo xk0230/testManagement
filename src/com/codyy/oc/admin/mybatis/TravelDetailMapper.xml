@@ -163,7 +163,7 @@
 			</if>
 			)
 			
-			order by td.type,td.create_time
+			order by td.type,td.start_time
 	</select>
 	
       <select id="getTravelDetailList" parameterType="java.lang.String" resultType="com.codyy.oc.admin.vo.TravelDetailVO">
@@ -185,6 +185,6 @@
 		LEFT JOIN travel_detail_type tdt ON tdt.id = td.type
 		LEFT JOIN travel t on t.id = td.travel_id
 		where td.travel_id = #{travelId,jdbcType=VARCHAR}
-		order by td.type,td.create_time
+		order by td.type,td.start_time
 	</select>
 </mapper>
