@@ -53,7 +53,8 @@
 												<tr>
 													<th width="100px">操作</th> 
 												 	<th width="100px">单号</th>
-													<th width="150px">项目名</th>
+													<th width="50px">项目名</th>
+													<th width="100px">备注</th>
 													<th width="50px">项目开始时间</th>
 													<th width="50px">项目结束时间</th>
 													<th width="50px">项目负责人</th>
@@ -68,6 +69,7 @@
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.pjNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.name"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.remark"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.startTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.endTime | date:'yyyy-MM-dd'"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.leader"></p></td>
@@ -78,6 +80,9 @@
 													<td ng-switch-when="edit"><p ng-bind="item.pjNo"></p></td>
 													<td ng-switch-when="edit">
 														<input type="text" class="line-limit-length span4" ng-model="item.name" style="width:100px;" >
+													</td>
+													<td ng-switch-when="edit">
+														<input type="text" class="line-limit-length span4" ng-model="item.remark" style="width:100px;" >
 													</td>
 													<td ng-show="item.editMode == 'edit'">
 														<!--<input type="text" id="datepicker{{$index}}" ng-model="item.startTime" style="width:120px;"> -->

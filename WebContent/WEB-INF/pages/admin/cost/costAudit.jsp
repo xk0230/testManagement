@@ -77,22 +77,23 @@
 										<button class="btn btn-success" ng-click="vm.batchRej()" ng-if="${adminUser.userId == 'admin'}" ><i class="icon-ok"></i>批量驳回</button>
 									</div>
 									<div style="width:1134px;overflow-x:scroll;margin-left:30px">
-										<table class="table table-condensed table-bordered table-striped" style="width:1800px;margin-top:7px;" >
+										<table class="table table-condensed table-bordered table-striped" style="width:1850px;margin-top:7px;" >
 											<thead >
 												<tr align="center">
 													<th width="25px">选择</th>
 													<th width="120px">操作</th>
+													<th width="100px">状态</th>
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
 													<th width="60px">分类</th>
 													<th width="120px">成本产生时间</th>
 													<th width="60px">金额</th>
 													<th width="120px">成本详情</th>
-													<th width="300px">合同</th>
-													<th width="300px">项目</th>
-													<th width="50px">提交人</th>
-													<th width="50px">审核人</th>
-													<th >状态</th>
+													<th width="200px">合同</th>
+													<th width="200px">项目</th>
+													<th width="80px">提交人</th>
+													<th>审核人</th>
+
 												</tr>
 											</thead>
 											<tbody ng-repeat="item in vm.list" ng-switch="item.editMode">
@@ -112,6 +113,7 @@
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'"><i class="icon-remove-sign"></i></a>
 														</div>
 													</td>
+													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view">
@@ -165,13 +167,12 @@
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
-													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
-													
 													<!-- edit -->
 													<td ng-switch-when="edit"></td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
+													<td ng-switch-when="edit"><p ng-bind="item.statusName"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="edit">
 				                                        <select id="costType" style="width:80px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
@@ -234,8 +235,6 @@
 													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.auditUserName"></p></td>
-													<td ng-switch-when="edit"><p ng-bind="item.statusName"></p></td>
-													
 												</tr>
 												<tr>
 													<td ng-switch-when="view" colspan="13" style="padding:8px;" ng-if="${adminUser.userId == 'admin'}">
@@ -311,7 +310,7 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:97%;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th>操作</th>
+													<th width="55px">操作</th>
 													<th width="100px">编号</th>
 													<th width="50px">类型</th>
 													<th width="200px">内容</th>
@@ -320,7 +319,7 @@
 													<th width="130px">收款方</th>
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
-													<th width="100px">备注</th>
+													<th>备注</th>
 												</tr>
 											</thead>
 											<tbody>

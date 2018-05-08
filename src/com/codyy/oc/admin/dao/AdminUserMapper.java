@@ -9,7 +9,7 @@ import com.codyy.commons.page.Page;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.AdminUserRole;
 import com.codyy.oc.admin.entity.ChartPieData;
-import com.codyy.oc.admin.view.AdminUserView;
+import com.codyy.oc.admin.view.AdminUserView; 
 import com.codyy.oc.admin.vo.IndexDataVO;
 
 /**
@@ -289,7 +289,7 @@ public interface AdminUserMapper {
 	  * 获取统计数据
 	  * @return
 	  */
-	 public List<ChartPieData> getchartsdata();
+	 public List<ChartPieData> getchartsdata(AdminUser au);
 	 
 	 public Integer getTodayCost(AdminUser au); 
 	 

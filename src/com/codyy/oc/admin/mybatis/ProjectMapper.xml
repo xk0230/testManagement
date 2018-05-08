@@ -5,16 +5,17 @@
     <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="pj_no" jdbcType="VARCHAR" property="pjNo" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="leader" jdbcType="VARCHAR" property="leader" />
   </resultMap>
   <insert id="insert" parameterType="com.codyy.oc.admin.entity.Project">
-    insert into project (id, pj_no, name, 
+    insert into project (id, pj_no, name,remark, 
       start_time, end_time, create_time, 
       leader)
-    values (#{id,jdbcType=VARCHAR}, #{pjNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{pjNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{leader,jdbcType=VARCHAR})
   </insert>
@@ -33,6 +34,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="remark != null">
+        remark,
       </if>
       <if test="startTime != null">
         start_time,
@@ -57,6 +61,9 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -80,6 +87,9 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -99,6 +109,7 @@
     update project
     set name = #{name,jdbcType=VARCHAR},
       pj_no = #{pjNo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -111,6 +122,7 @@
 			project.id as id,
 			project.name AS name,
 			project.pj_no AS pjNo,
+			project.remark AS remark,
 			project.start_time AS startTime,
 			project.end_time AS endTime,
 			project.leader AS leader,

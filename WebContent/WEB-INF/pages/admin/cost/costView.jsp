@@ -71,8 +71,9 @@
 										<input type="button" style="margin-left:-32px;" class="btn btn-large btn-success btn-support-ask" name="query" ng-click="vm.monthPrint('.widget-content','view')" value="月度打印" ng-if="${adminUser.userId == 'admin'}" />
 									</div>
 								</div>
-								<hr>
+								
 								<div ng-show="${adminUser.position == 'ADMIN'}">
+								<hr>
 								<div>TIPS: 以下汇总均为截至目前的总计，与日期筛选无关。</div><br>
 									<div style="font-weight: bold;font-size: 16px">
 									收入 :<div class="progress progress-striped active" style="height:18px;" >

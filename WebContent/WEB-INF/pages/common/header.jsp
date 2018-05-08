@@ -51,8 +51,8 @@ function logout(){
         }
     })
 }
-getNewsNum();
-setInterval("getNewsNum()","60000");
+/* getNewsNum();
+setInterval("getNewsNum()","60000"); */
 </script>
 <div ng-app = "headerApp" ng-controller="HeaderController as header">
     <div class="navbar navbar-fixed-top" >
