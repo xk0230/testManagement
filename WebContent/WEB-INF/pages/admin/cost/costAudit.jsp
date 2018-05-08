@@ -83,6 +83,7 @@
 													<th width="25px">选择</th>
 													<th width="120px">操作</th>
 													<th width="100px">状态</th>
+													<th width="80px">提交人</th>
 													<th width="120px">成本单号</th>
 													<th width="40px">类型</th>
 													<th width="60px">分类</th>
@@ -91,7 +92,7 @@
 													<th width="120px">成本详情</th>
 													<th width="200px">合同</th>
 													<th width="200px">项目</th>
-													<th width="80px">提交人</th>
+													
 													<th>审核人</th>
 
 												</tr>
@@ -114,6 +115,7 @@
 														</div>
 													</td>
 													<td ng-switch-when="view"><p ng-bind="item.statusName"></p></td>
+													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.costTypeName"></p></td>
 													<td ng-switch-when="view">
@@ -165,7 +167,7 @@
 															</li>
 														</ul>
 													</td>
-													<td ng-switch-when="view"><p ng-bind="item.subUserName"></p></td>
+													
 													<td ng-switch-when="view"><p ng-bind="item.auditUserName"></p></td>
 													<!-- edit -->
 													<td ng-switch-when="edit"></td>
