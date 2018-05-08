@@ -60,11 +60,11 @@
 										<div class="widget">
 				                            <!-- /widget-header -->
 				                            <div class="widget-content" style="overflow-x: auto">
-												<table class="table display" id="datatable">
+												<table class="table display" id="datatable" style="width:auto;">
 													<thead>
 														<tr align="right">
-															<th><p>选择</p></th>
-															<th><p>部门名称</p></th>
+															<th style="width:60px;"><p>选择</p></th>
+															<th style="width:200px;"><p>部门名称</p></th>
 															<th><p style="text-align: right;">一月</p></th>
 															<th><p style="text-align: right;">二月</p></th>
 															<th><p style="text-align: right;">三月</p></th>
@@ -82,11 +82,11 @@
 													</thead>  
 													<tbody>
 														<tr class="odd gradeX" ng-repeat="item in vm.list">
-															<td>
-																<input type="checkbox" ng-bind="item.checked" ng-click="vm.checkDep()" ng-if="item.depName !='总计'" /> 
+															<td style="text-align: center;">
+																<input type="checkbox" ng-bind="item.checked" style="width:40px" ng-click="vm.checkDep()" ng-if="item.depName !='总计'" /> 
 															</td>
 															
-															<td><p ng-bind="item.depName"></p></td>
+															<td><p ng-bind="item.depName" style="width:120px;"></p></td>
 															
 															<td ng-repeat="mitem in item.chartList"><p ng-bind="mitem.costNum | currency:'￥':2" style="text-align: right;"></p></td>
 															

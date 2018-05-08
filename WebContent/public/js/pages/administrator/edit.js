@@ -132,6 +132,24 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res){
 					self.user = res.data;
+					/*日期格式化*/
+					self.user.entryDate = $filter('date')(self.user.entryDate, "yyyy-MM-dd");
+					self.user.salaryBeginDate = $filter('date')(self.user.salaryBeginDate, "yyyy-MM-dd");
+					self.user.probationPeriod = $filter('date')(self.user.probationPeriod, "yyyy-MM-dd");
+					self.user.expectedDate = $filter('date')(self.user.expectedDate, "yyyy-MM-dd");
+					self.user.labourBeginTime = $filter('date')(self.user.labourBeginTime, "yyyy-MM-dd");
+					self.user.labourEndTime = $filter('date')(self.user.labourEndTime, "yyyy-MM-dd");
+					self.user.filingDate = $filter('date')(self.user.filingDate, "yyyy-MM-dd");
+					self.user.leaveDate = $filter('date')(self.user.leaveDate, "yyyy-MM-dd");
+					self.user.retiredDate = $filter('date')(self.user.retiredDate, "yyyy-MM-dd");
+					if(self.user.adminUserDetail){
+						self.user.adminUserDetail.birthday = $filter('date')(self.user.adminUserDetail.birthday, "yyyy-MM-dd");
+						self.user.adminUserDetail.child1Birthday = $filter('date')(self.user.adminUserDetail.child1Birthday, "yyyy-MM-dd");
+						self.user.adminUserDetail.child2Birthday = $filter('date')(self.user.adminUserDetail.child2Birthday, "yyyy-MM-dd");
+						self.user.adminUserDetail.child3Birthday = $filter('date')(self.user.adminUserDetail.child3Birthday, "yyyy-MM-dd");
+						self.user.adminUserDetail.homeBirthday = $filter('date')(self.user.adminUserDetail.homeBirthday, "yyyy-MM-dd");
+						self.user.adminUserDetail.firstWorkTime = $filter('date')(self.user.adminUserDetail.firstWorkTime, "yyyy-MM-dd");
+					}
 					self.getHasManager($scope.vm.user.depId);
 					self.getPostionById();
 					if(self.user.workingYears == null){
