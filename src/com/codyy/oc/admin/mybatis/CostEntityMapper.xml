@@ -458,7 +458,8 @@
 				AND costDetail.cost_time <![CDATA[ <= ]]> #{map.endTime}
 			</if>
 		
-		ORDER BY costDetail.create_time DESC
+		<!-- ORDER BY costDetail.create_time DESC -->
+		ORDER BY costDetail.cost_time DESC
 	
 	</select>
 	
