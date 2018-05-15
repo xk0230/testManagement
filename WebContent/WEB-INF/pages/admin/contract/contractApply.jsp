@@ -133,8 +133,8 @@
 													<td ng-switch-when="edit">
 														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
 													</td>
-													<td ng-switch-when="edit"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.costNumAll"></p></td>
+													<td ng-switch-when="edit"><p ng-bind="item.attachmentCnts"></p></td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="line-limit-length span2"  title="{{item.company}}"   ng-if="item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">{{item.company}}</a>
 														<a href="javascript:;" style="width:200px;" ng-if="!item.company" ng-click="vm.editPayment(item,'.widget-content','edit')">未选择</a>
