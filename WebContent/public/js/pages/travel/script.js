@@ -219,8 +219,8 @@ myAppModule.controller('TravelController',
 				createUser:travelItem.createUser,
 				place:travelItem.place,
 				depId:travelItem.depId,
-				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
-				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
+				startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
+				endTime:$filter('date')(travelItem.endTimeStr, "yyyy-MM-dd"),
 				status:travelItem.status,
 				remark:travelItem.remark
 //				costTime:$filter('date')(travelItem.costDate, "yyyy-MM-dd")

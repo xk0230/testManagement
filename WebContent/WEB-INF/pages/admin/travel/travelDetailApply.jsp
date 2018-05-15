@@ -123,7 +123,7 @@
 														<input style="width:80px;" type="text" ng-model="item.endPlace"  >
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<mb-datepicker input-class="mb-date" date="item.startTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.startTimeStr" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
 														<input style="width:80px;"  type="number" ng-model="item.costNum"  />

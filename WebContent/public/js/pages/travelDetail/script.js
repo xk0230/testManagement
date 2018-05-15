@@ -176,8 +176,7 @@ myAppModule.controller('TravelDetailController',
 				type:travelItem.type,
 				startPlace:travelItem.startPlace,
 				endPlace:travelItem.endPlace,
-				startTime:$filter('date')(travelItem.startTime, "yyyy-MM-dd"),
-				endTime:$filter('date')(travelItem.endTime, "yyyy-MM-dd"),
+				startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
 				costNum:travelItem.costNum,
 				remark:travelItem.remark
 			};

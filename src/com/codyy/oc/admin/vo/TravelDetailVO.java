@@ -5,7 +5,7 @@ package com.codyy.oc.admin.vo;
 
 import java.sql.Timestamp;
 
-import com.codyy.oc.admin.entity.Travel;
+import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.entity.TravelDetail;
 
 /**  
@@ -19,7 +19,7 @@ public class TravelDetailVO extends TravelDetail {
 	
 	private String typeName;
 	
-	private Timestamp startTime;
+	private String startTimeStr;
 	
 	private Timestamp endTime;
 	
@@ -74,19 +74,21 @@ public class TravelDetailVO extends TravelDetail {
 	}
 
 	/**
-	 * @return the startTime
+	 * @return the startTimeStr
 	 */
-	public Timestamp getStartTime() {
-		return startTime;
+	public String getStartTimeStr() {
+		if(this.getStartTime() != null){
+			startTimeStr = DateUtils.format(this.getStartTime(),DateUtils.PATTERN_DATE);
+		}
+		return startTimeStr;
 	}
 
 	/**
-	 * @param startTime the startTime to set
+	 * @param startTimeStr the startTimeStr to set
 	 */
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
 	}
-
 	/**
 	 * @return the endTime
 	 */

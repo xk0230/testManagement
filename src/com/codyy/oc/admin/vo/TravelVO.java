@@ -6,6 +6,7 @@ package com.codyy.oc.admin.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.codyy.commons.utils.DateUtils;
 import com.codyy.oc.admin.entity.CostEntityBean;
 import com.codyy.oc.admin.entity.Travel;
 
@@ -16,9 +17,9 @@ import com.codyy.oc.admin.entity.Travel;
  */
 
 public class TravelVO extends Travel {
-	private Timestamp startTime;
+	private String startTimeStr;
 	
-	private Timestamp endTime;
+	private String endTimeStr;
 	
 	private String name;
 	
@@ -101,31 +102,37 @@ public class TravelVO extends Travel {
 	}
 
 	/**
-	 * @return the startTime
+	 * @return the startTimeStr
 	 */
-	public Timestamp getStartTime() {
-		return startTime;
+	public String getStartTimeStr() {
+		if(this.getStartTime() != null){
+			startTimeStr = DateUtils.format(this.getStartTime(),DateUtils.PATTERN_DATE);
+		}
+		return startTimeStr;
 	}
 
 	/**
-	 * @param startTime the startTime to set
+	 * @param startTimeStr the startTimeStr to set
 	 */
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
 	}
 
 	/**
-	 * @return the endTime
+	 * @return the endTimeStr
 	 */
-	public Timestamp getEndTime() {
-		return endTime;
+	public String getEndTimeStr() {
+		if(this.getEndTime() != null){
+			endTimeStr = DateUtils.format(this.getEndTime(),DateUtils.PATTERN_DATE);
+		}
+		return endTimeStr;
 	}
 
 	/**
-	 * @param endTime the endTime to set
+	 * @param endTimeStr the endTimeStr to set
 	 */
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
+	public void setEndTimeStr(String endTimeStr) {
+		this.endTimeStr = endTimeStr;
 	}
 
 	/**

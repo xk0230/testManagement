@@ -128,10 +128,10 @@
 													
 													
 													<td ng-show="item.editMode == 'edit'">
-														<mb-datepicker input-class="mb-date" date="item.startTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.startTimeStr" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-show="item.editMode == 'edit'">
-														<mb-datepicker input-class="mb-date" date="item.endTime" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
+														<mb-datepicker input-class="mb-date" date="item.endTimeStr" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													
 													<td ng-switch-when="edit">
