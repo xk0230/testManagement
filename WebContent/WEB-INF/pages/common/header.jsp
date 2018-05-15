@@ -105,13 +105,13 @@ setInterval("getNewsNum()","60000"); */
               </ul>
             </li>
             <!-- 岗位信息 -->
-            <li class="dropdown mainLi" ng-show="${adminUser.position != 'STAFF'}"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位</span> <b class="caret"></b></a>
+            <%-- <li class="dropdown mainLi" ng-show="${adminUser.position != 'STAFF'}"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                     <li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>组织架构</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
-            </li>
+            </li> --%>
             
             <!-- 招聘 管理 -->
              <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>招聘</span> <b class="caret"></b></a>
