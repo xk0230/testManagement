@@ -6,7 +6,6 @@
 </head>
 <body  >
 		<%@ include file="../../common/header.jsp"%>
-		<%@ include file="../../common/side.jsp"%>
 		<!-- Start #content -->
 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
 			<!-- Start .content-wrapper -->

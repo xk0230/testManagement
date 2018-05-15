@@ -3,7 +3,6 @@
 </head>
 <body	>
 		<%@ include file="../../common/header.jsp"%>
-		<%@ include file="../../common/side.jsp"%>
 		<div id="content" ng-app = "myApp" ng-controller="UserListController as vm">
 			<form ng-submit="vm.onSubmit()" novalidate="novalidate">
 			<div class="content-wrapper">

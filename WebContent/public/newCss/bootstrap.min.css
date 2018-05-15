@@ -2919,6 +2919,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endCo
   .modal-sm {
     width: 390px;
   }
+
 .modal-open .popover {
 	z-index: 2060;
 }
