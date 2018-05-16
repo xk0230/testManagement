@@ -61,6 +61,9 @@ public class TravelManageService {
 	@Autowired
 	AdminUserManagerService adminUserManagerService;
 	
+	@Autowired
+	DepartmentService departmentService;
+	
 	public void insertTravel(Travel record) {
 		travelMapper.insert(record);
 	}
@@ -93,6 +96,9 @@ public class TravelManageService {
 				travel.setStatus("05");
 			}else {
 				travel.setStatus("00");
+				if(departmentService.getDepManagerId(user.getDepId()) == null){
+					travel.setStatus("03");
+				}
 			}
 			
 		    if(StringUtils.isNotBlank(depId)) {

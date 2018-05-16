@@ -14,9 +14,6 @@ import java.util.UUID;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +36,6 @@ import com.codyy.oc.admin.vo.CostMonthInOut;
 import com.codyy.oc.admin.vo.CostTotalInOut;
 import com.codyy.oc.admin.vo.CostVO;
 import com.codyy.oc.admin.vo.CostYearVO;
-import com.codyy.oc.admin.vo.DepMonthTotalVO;
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
 
 /**
  * 成本控制server
@@ -66,6 +61,9 @@ public class CostService {
 	private static final String REJ_ERROR = "提交失败";
 	@Autowired
 	private CostDaoMapper costDaoMapper; 
+	
+	@Autowired
+	DepartmentService departmentService;
 	
 	@Autowired
 	private DepartmentService depService;
@@ -117,6 +115,9 @@ public class CostService {
 				costEntityBean.setStatus("05");
 			}else {
 				costEntityBean.setStatus("00");
+				if(departmentService.getDepManagerId(user.getDepId()) == null){
+					costEntityBean.setStatus("03");
+				}
 			}
 		    if(StringUtils.isNotBlank(depId)) {
 		    	//对CostID设定UUID

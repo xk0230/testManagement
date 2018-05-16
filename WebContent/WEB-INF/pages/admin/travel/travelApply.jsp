@@ -90,8 +90,8 @@
 														<div ng-if="${mode=='audit'}">
 															<a href="javascript:;" class="btn btn-xs  " ng-click="vm.toDetail(item,$index)"><i class='icon-list'></i></a>
 															<a href="javascript:;" class="btn btn-small" ng-click="vm.editTravel(item,$index)" ng-if="${adminUser.userId == 'admin'} && (item.status=='05' || item.status=='03')"><i class="icon-edit"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSub(item)" ng-if="${adminUser.position == 'MANAGER' or adminUser.position == 'ADMIN'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
-															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRej(item)" ng-if="${adminUser.position == 'MANAGER' or adminUser.position == 'ADMIN'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.managerSub(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-ok"></i></a>
+															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.managerRej(item)" ng-if="${adminUser.position == 'MANAGER'} && (item.status=='01' || item.status=='04')"><i class="icon-remove-sign"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.adminSub(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-ok"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.adminRej(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='03'"><i class="icon-remove-sign"></i></a>
 															<a href="javascript:;" class="btn btn-small btn-danger" ng-click="vm.scrap(item)" ng-if="${adminUser.userId == 'admin'} && item.status=='05'"><i class="icon-remove-sign"></i></a>
