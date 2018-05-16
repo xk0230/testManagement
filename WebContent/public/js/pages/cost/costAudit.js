@@ -26,6 +26,9 @@ myAppModule.controller('CostController',
 				{costType : "1", name : "已审核"}
 			];
 			
+			if($("#auditStatus").val() != null && $("#auditStatus").val()!= ''){
+				$scope.auditStatus = $("#auditStatus").val();
+			}
 			//获取角色
 			self.admin =$("#sessionUserType").val();
 			if(self.admin=="MANAGER"){

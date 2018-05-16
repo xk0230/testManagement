@@ -55,6 +55,16 @@
                                     	<span class="searchSpan">出差地:</span>
                                         <input type="text" ng-model="place" class="span4">
                                     </div>
+                                    
+                                    <div class="span4">
+										<span class="searchSpan">审核状态:</span>
+                                        <select id="costType" ng-model="auditStatus"  class="form-control span2" 
+                                                ng-options="cType.costType as cType.name group by cType.group for cType in auditStatusList"
+                                                ng-change="costTypeChange()">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                        <input id="auditStatus" type="hidden" value="${search}">
+                                    </div>
 								</div>
 								<hr>
 								<!-- 查询结果 -->

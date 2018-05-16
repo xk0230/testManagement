@@ -10,6 +10,15 @@ myAppModule.controller('TravelController',
 		$scope.itemsPerPage = 20;
 		
 		this.$onInit = function(){
+			
+			$scope.auditStatusList = [
+				{costType : "0", name : "未审核"},
+				{costType : "1", name : "已审核"}
+			];
+			
+			if($("#auditStatus").val() != null && $("#auditStatus").val()!= ''){
+				$scope.auditStatus = $("#auditStatus").val();
+			}
 
 			self.getDeparts();
 			
@@ -65,6 +74,7 @@ myAppModule.controller('TravelController',
 				url:$("#rootUrl").val()+url,
 				params:{
 //					createUser:$scope.createUser,
+					auditStatus:$scope.auditStatus,
 					place:$scope.place,
 					startDate:$filter('date')($scope.startDate, "yyyy-MM-dd"),
 					endDate:$filter('date')($scope.endDate, "yyyy-MM-dd"),

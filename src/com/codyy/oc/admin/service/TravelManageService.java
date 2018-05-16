@@ -217,16 +217,12 @@ public Page getTravelAuditList(TravelVO travel){
     
     Map<String, Object> map = new HashMap<String, Object>();
     
-//    map.put("costType", cost.getCostType());
-//    map.put("costSubtypeId", cost.getCostSubtypeId());
     map.put("depId", travel.getUserDepId());
     map.put("status", travel.getStatus());
     map.put("startTime", travel.getStartDate());
     map.put("endTime", travel.getEndDate());
     map.put("userId", travel.getUserId());
-//    map.put("costNo", cost.getCostNo());
-//    map.put("remark", cost.getRemark());
-//    map.put("auditStatus", cost.getAuditStatus());
+    map.put("auditStatus", travel.getAuditStatus());
     map.put("userPosition", travel.getUserPosition());
     
     page.setMap(map);

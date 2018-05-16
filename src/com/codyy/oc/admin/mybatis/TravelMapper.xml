@@ -265,12 +265,12 @@
 			
 			<if test="map.userId != 'admin' and map.auditStatus == 0 ">
 				AND travel.dep_id = #{map.depId}
-				AND (travel.status = '01')
+				AND (travel.status in ('01','04'))
 			</if>
 			
 			<if test="map.userId != 'admin' and map.auditStatus == 1 ">
 				AND travel.dep_id = #{map.depId}
-				AND (travel.status = '03')
+				AND (travel.status in ('03','02','05'))
 			</if>
 		order by travel.create_time desc
 	</select>

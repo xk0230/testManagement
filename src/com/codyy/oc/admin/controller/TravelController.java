@@ -59,7 +59,8 @@ public class TravelController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/travelApply.do")
-	public String travelApply(Model model){
+	public String travelApply(Model model,String search){
+		model.addAttribute("search", search);
 		model.addAttribute("mode","apply");
 		return "admin/travel/travelApply";
 	}
@@ -69,7 +70,8 @@ public class TravelController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/travelAudit.do")
-	public String travelAudit(Model model){
+	public String travelAudit(Model model,String search){
+		model.addAttribute("search", search);
 		model.addAttribute("mode","audit");
 		return "admin/travel/travelApply";
 	}
@@ -79,7 +81,8 @@ public class TravelController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/travelView.do")
-	public String travelView(Model model){
+	public String travelView(Model model,String search){
+		model.addAttribute("search", search);
 		model.addAttribute("mode","view");
 		return "admin/travel/travelApply";
 	}

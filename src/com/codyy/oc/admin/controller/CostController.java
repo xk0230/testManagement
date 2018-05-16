@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +66,8 @@ public class CostController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/costAudit.do")
-	public String costcostAudit(){
+	public String costcostAudit(String search,Model model){
+		model.addAttribute("search", search);
 		return "admin/cost/costAudit";
 	}
 	

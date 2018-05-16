@@ -61,6 +61,24 @@ public class TravelVO extends Travel {
 	private List<CostEntityBean> costs ;
 	
 	private Double costAll;
+	
+	private String auditStatus;
+	
+	
+
+	/**
+	 * @return the auditStatus
+	 */
+	public String getAuditStatus() {
+		return auditStatus;
+	}
+
+	/**
+	 * @param auditStatus the auditStatus to set
+	 */
+	public void setAuditStatus(String auditStatus) {
+		this.auditStatus = auditStatus;
+	}
 
 	public Double getCostAll() {
 		Double all = 0.0;

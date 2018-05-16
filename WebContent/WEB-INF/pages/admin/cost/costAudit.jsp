@@ -65,6 +65,7 @@
                                                 ng-change="costTypeChange()">
                                             <option value="">--请选择--</option>
                                         </select>
+                                        <input id="auditStatus" type="hidden" value="${search}">
                                     </div>
 								</div>
 								<hr>
