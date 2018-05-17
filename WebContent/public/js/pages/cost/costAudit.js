@@ -386,6 +386,7 @@ myAppModule.controller('CostController',
 					swal(res.data.msg);
 				}
 			})
+			return false;
 		};
 		
 		//报废
