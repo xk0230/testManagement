@@ -196,6 +196,7 @@ myAppModule.controller('CostController',
 					swal(res.data.msg);
 				}
 			});
+			return false;
 		};
 		
 		//报废
@@ -227,6 +228,7 @@ myAppModule.controller('CostController',
 					}
 				})
 			});
+			return false;
 		};
 		
 		//提交
@@ -258,6 +260,7 @@ myAppModule.controller('CostController',
 					}
 				})
 			});
+			return false;
 		};
 		
 		this.editPayment = function (item, parentSelector, mode) {

@@ -200,6 +200,7 @@ myAppModule.controller('CostController',
 					swal(res.data.msg);
 				}
 			});
+			return false;
 		};
 		
 		//经理审核提交
