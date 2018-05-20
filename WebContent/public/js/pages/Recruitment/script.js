@@ -52,6 +52,9 @@ myAppModule.controller('UserListController',
 			}).then(function(res){
 				if(res){
 					self.list = res.data.data || [];
+					angular.forEach(self.list, function(item, key) {
+						item.editMode = 'view';
+					});
 					$scope.totalItems = res.data.total
 				}else{
 					self.list = [];

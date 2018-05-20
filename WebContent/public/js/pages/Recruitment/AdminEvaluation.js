@@ -18,7 +18,6 @@ myAppModule.controller('UserListController',
 		
 		this.$onInit = function(){
 			//招聘需求Id
-			var xxx = $location.search();
 			self.Recruitment.id = $location.search().id;
 			if(self.Recruitment.id != "" && typeof(self.Recruitment.id)!="undefined"){
 				//招聘需求详情
@@ -48,14 +47,6 @@ myAppModule.controller('UserListController',
 				if(res){
 					//设置招聘需求
 					self.Recruitment = res.data || {};
-
-					/*$.each(self.Recruitment.competencys,function(n,value) {
-						var check = $("#competency" + value.id);
-						if(typeof(check)!="undefined"){
-							check[0].checked = true;
-						}
-				    });*/
-					
 				}else{
 					self.Recruitment = {};
 				}
@@ -139,7 +130,7 @@ myAppModule.controller('UserListController',
 		
 		//候选人编辑
 		this.show = function (item, parentSelector) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
 		    	      ariaLabelledBy: 'modal-title',
