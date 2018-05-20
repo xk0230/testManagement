@@ -41,7 +41,7 @@ myAppModule.controller('UserListController',
 					userName: $scope.userName,
 					realName: $scope.realName,
 					depId   : $scope.depId,
-					position: $scope.postId,
+					postId: $scope.postId,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),
 					end:$scope.currentPage * $scope.itemsPerPage -1
 				}

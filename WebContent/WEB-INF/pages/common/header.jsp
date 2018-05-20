@@ -122,13 +122,13 @@ setInterval("getNewsNum()","60000"); */
               </ul>
             </li> 
             <!-- IPE管理 -->
-          <%--   <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE</span> <b class="caret"></b></a>
+             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-rss"></i><span>IPE</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="${root}/admin/ipe/manager.do"><i class="en-arrow-right7"></i>IPE</a></li>
                 <li><a href="${root}/admin/ipe/trial.do"><i class="en-arrow-right7"></i>IPE试算</a></li>
                 <li><a href="${root}/admin/depPostLevel/distribute.do"><i class="en-arrow-right7"></i>标准岗位等级表</a></li>
               </ul>
-            </li> --%>
+            </li>
             <!-- 绩效管理 -->
             <%-- <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效</span> </a> </li> --%>
             <!-- 图书管理 -->

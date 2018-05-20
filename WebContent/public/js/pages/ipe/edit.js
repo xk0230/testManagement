@@ -45,7 +45,7 @@ myAppModule.controller('IpeController',
 		
 		
 		this.editIpe = function (id, parentSelector) {
-		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+		    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({
 		    	      animation: true,
 		    	      ariaLabelledBy: 'modal-title',
