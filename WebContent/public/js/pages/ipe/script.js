@@ -40,6 +40,7 @@ myAppModule.controller('UserListController',
 				params:{
 					userName: $scope.userName,
 					realName: $scope.realName,
+					isIpe: 'ture',
 					depId   : $scope.depId,
 					postId: $scope.postId,
 					start:(($scope.currentPage - 1) * $scope.itemsPerPage),

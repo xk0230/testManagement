@@ -498,6 +498,20 @@
 				and au.position = #{map.position}
 			</if>
 			
+			
+				
+			AND ( au.user_id = #{map.uid}
+			
+				<if test="map.up == 'ADMIN'">
+					or 1 = 1
+				</if>
+				<if test="map.up == 'MANAGER'">
+					or au.dep_id = #{map.did}
+				</if>
+			
+			)
+			
+			
 			order by 
 			 <if test="map.orderby != null and map.orderby !=''">
 				 ${map.orderby},

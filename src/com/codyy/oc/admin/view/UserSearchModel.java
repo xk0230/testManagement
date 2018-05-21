@@ -18,7 +18,59 @@ public class UserSearchModel {
 	private String userId;
 	private String depId;
 	private String postId;
+	private String isIpe;//是否为IPE查询
+	private String uid;
+	private String did;
+	private String userposition;
 	
+	/**
+	 * @return the uid
+	 */
+	public String getUid() {
+		return uid;
+	}
+	/**
+	 * @param uid the uid to set
+	 */
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+	/**
+	 * @return the did
+	 */
+	public String getDid() {
+		return did;
+	}
+	/**
+	 * @param did the did to set
+	 */
+	public void setDid(String did) {
+		this.did = did;
+	}
+	/**
+	 * @return the userposition
+	 */
+	public String getUserposition() {
+		return userposition;
+	}
+	/**
+	 * @param userposition the userposition to set
+	 */
+	public void setUserposition(String userposition) {
+		this.userposition = userposition;
+	}
+	/**
+	 * @return the isIpe
+	 */
+	public String getIsIpe() {
+		return isIpe;
+	}
+	/**
+	 * @param isIpe the isIpe to set
+	 */
+	public void setIsIpe(String isIpe) {
+		this.isIpe = isIpe;
+	}
 	public String getPostId() {
 		return postId;
 	}

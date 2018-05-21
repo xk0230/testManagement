@@ -225,7 +225,11 @@ public class AdminUserManagerController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("getadminlist")
-	public Page getAdminList(Page page,UserSearchModel userSearch){
+	public Page getAdminList(HttpServletRequest request,Page page,UserSearchModel userSearch){
+		AdminUser adUser=getSessionUser(request);
+		userSearch.setUid(adUser.getUserId());
+		userSearch.setDid(adUser.getDepId());
+		userSearch.setUserposition(adUser.getPosition());
 		return adminUserManagerService.getAdminList(page, userSearch);
 		
 	}
