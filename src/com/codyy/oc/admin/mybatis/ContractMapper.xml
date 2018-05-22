@@ -229,7 +229,7 @@
 		LEFT JOIN DEPARTMENT dep ON contract.dept = dep.dep_id
 		LEFT JOIN payment payment ON contract.company = payment.id
 		LEFT JOIN (select f_id, count(1) as attachment_cnts from ATTACHMENT group by f_id) attachment ON contract.contract_id = attachment.f_id
-		LEFT JOIN (select contract_id, sum(cost_num) as cost_num_all from COST_DETAIL group by contract_id) cost_dtl ON contract.contract_id = cost_dtl.contract_id
+		LEFT JOIN (select contract_id, sum(cost_num) as cost_num_all from COST_DETAIL where status='05' group by contract_id) cost_dtl ON contract.contract_id = cost_dtl.contract_id
 		where 1=1 
 			
 			<if test="map.contactType != null and  map.contactType != ''">
