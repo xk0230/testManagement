@@ -364,7 +364,8 @@
 	td.start_time AS costTime,
 	CONCAT(t.place,'--',DATE_FORMAT(t.start_time,'%Y-%m-%d'),'~',DATE_FORMAT(t.end_time,'%Y-%m-%d'),'--',tdt.NAME) AS remark,
 	sum( cost_num ) AS costNum,
-	t.create_user as createUserId
+	t.create_user as createUserId,
+	t.audit_user as auditUser
 FROM
 	travel_detail td
 	LEFT JOIN travel_detail_type tdt ON td.type = tdt.id 
