@@ -147,53 +147,67 @@ myAppModule.controller('TravelDetailController',
 
 		};
 		
+		self.updSucess = false;
 		//点击保存
 		this.save = function (travelItem) {
-			if(!travelItem.type){
-				alert("请填写出差类型");
-				return ;
-			}
-			if(!travelItem.startPlace){
-				alert("请填写出差出发地");
-				return ;
-			}
-			/*if(!travelItem.endPlace){
-				alert("请填写出差到达地");
-				return ;
-			} */
-			if(travelItem.costNum<0){
-				alert("请填写金额");
-				return ;
-			}
-			/*if(!travelItem.remark){
-				alert("请填写备注");
-				return ;
-			}*/
-			var params = {
-				id:travelItem.id,
-				travelId:$scope.travelId,
-				createUser:travelItem.createUser,
-				type:travelItem.type,
-				startPlace:travelItem.startPlace,
-				endPlace:travelItem.endPlace,
-				startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
-				costNum:travelItem.costNum,
-				remark:travelItem.remark
-			};
-			
-			$http({
-				method:'POST',
-				url:$("#rootUrl").val()+"/traveldetail/saveOrUpdate.do",
-				params:params
-				
-			}).then(function(res){
-				if(res.data.code == 0){
-					swal(res.data.msg);
+			self.updSucess = false;
+			this.updateData(0);
+		};
+		
+		//报废
+		this.updateData = function (index) {
+			if(index == self.list.length){
+				if(self.updSucess){
+					swal("保存成功！")
 					self.getTravelDetailList();
+					return;
 				}else{
-					swal(res.data.msg);
+					swal("保存失败！")
+					return;
 				}
-			});
+			}
+			var travelItem = self.list[index];
+			if(travelItem.editMode == "edit"){
+				if(!travelItem.type){
+					alert("请填写出差类型");
+					return ;
+				}
+				if(!travelItem.startPlace){
+					alert("请填写出差出发地");
+					return ;
+				}
+	
+				if(travelItem.costNum<0){
+					alert("请填写金额");
+					return ;
+				}
+				var params = {
+					id:travelItem.id,
+					travelId:$scope.travelId,
+					createUser:travelItem.createUser,
+					type:travelItem.type,
+					startPlace:travelItem.startPlace,
+					endPlace:travelItem.endPlace,
+					startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
+					costNum:travelItem.costNum,
+					remark:travelItem.remark
+				};
+			
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/traveldetail/saveOrUpdate.do",
+					params:params
+				}).then(function(res){
+					if(res.data.code == 0){
+						self.updSucess = true;
+					}else{
+						self.updSucess = false;
+					}
+					self.updateData(index+1);
+				});
+			}else{
+				self.updateData(index+1);
+			}
 		};
 		
 		//报废
