@@ -186,71 +186,69 @@ myAppModule.controller('TravelController',
 			window.open("/ssc/traveldetail/traveldetailApply.do?travelId="+travelItem.id);  
 		};
 		
+		self.updSucess = false;
 		//点击保存
 		this.save = function (travelItem) {
-			/*if(!travelItem.createUser){
-				alert("请填写创建用户");
-				return ;
-			}*/
-			if(!travelItem.place){
-				alert("请填写出差地");
-				return ;
-			}
-			if(!travelItem.depId){
-				alert("请填写部门");
-				return ;
-			}
-			if(!travelItem.startTime){
-				alert("请填写开始时间");
-				return ;
-			}
-			if(!travelItem.endTime){
-				alert("请填写结束时间");
-				return ;
-			}
-			/*if(!travelItem.remark){
-				alert("请填写备注");
-				return ;
-			}*/
-			/*	if(!travelItem.url){
-				alert("请填写签订时间");
-				return ;
-			}
-			if(!travelItem.serialid){
-				alert("请填写外部订单号");
-				return ;
-			}
-			if(!travelItem.remarks){
-				alert("请填写备注");
-				return ;
-			}*/
-			var params = {
-				id:travelItem.id,
-				createUser:travelItem.createUser,
-				place:travelItem.place,
-				depId:travelItem.depId,
-				startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
-				endTime:$filter('date')(travelItem.endTimeStr, "yyyy-MM-dd"),
-				status:travelItem.status,
-				remark:travelItem.remark
-//				costTime:$filter('date')(travelItem.costDate, "yyyy-MM-dd")
-//				createTime:$filter('date')(travelItem.createDate, "yyyy-MM-dd hh:mm:ss")
-			};
-			
-			$http({
-				method:'POST',
-				url:$("#rootUrl").val()+"/travel/saveOrUpdate.do",
-				params:params
-				
-			}).then(function(res){
-				if(res.data.code == 0){
-					swal(res.data.msg);
+			self.updSucess = false;
+			this.updateData(0);
+		};
+		
+		//报废
+		this.updateData = function (index) {
+			if(index == self.list.length){
+				if(self.updSucess){
+					swal("保存成功！")
 					self.getTravelList();
-					//costItem.editMode="view";
+					return;
 				}else{
-					swal(res.data.msg);
+					swal("保存失败！")
+					return;
 				}
-			});
+			}
+			var travelItem = self.list[index];
+			if(travelItem.editMode == "edit"){
+				if(!travelItem.place){
+					alert("请填写出差地");
+					return ;
+				}
+				if(!travelItem.depId){
+					alert("请填写部门");
+					return ;
+				}
+				if(!travelItem.startTime){
+					alert("请填写开始时间");
+					return ;
+				}
+				if(!travelItem.endTime){
+					alert("请填写结束时间");
+					return ;
+				}
+				var params = {
+					id:travelItem.id,
+					createUser:travelItem.createUser,
+					place:travelItem.place,
+					depId:travelItem.depId,
+					startTime:$filter('date')(travelItem.startTimeStr, "yyyy-MM-dd"),
+					endTime:$filter('date')(travelItem.endTimeStr, "yyyy-MM-dd"),
+					status:travelItem.status,
+					remark:travelItem.remark
+				};
+			
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/travel/saveOrUpdate.do",
+					params:params
+				}).then(function(res){
+					if(res.data.code == 0){
+						self.updSucess = true;
+					}else{
+						self.updSucess = false;
+					}
+					self.updateData(index+1);
+				});
+			}else{
+				self.updateData(index+1);
+			}
 		};
 		
 		//报废
