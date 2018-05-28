@@ -97,6 +97,8 @@ setInterval("getNewsNum()","60000"); */
         <div class="container">
           <ul class="mainnav">
             <li class="dropdown mainLi"><a href="${root}/admin/index.do"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
+            
+            <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
             <!-- 员工信息 -->
             <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>员工档案</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -105,13 +107,13 @@ setInterval("getNewsNum()","60000"); */
               </ul>
             </li>
             <!-- 岗位信息 -->
-            <%-- <li class="dropdown mainLi" ng-show="${adminUser.position != 'STAFF'}"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位</span> <b class="caret"></b></a>
+            <li class="dropdown mainLi" ng-show="${adminUser.position != 'STAFF'}"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-tags"></i><span>岗位</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                     <li><a href="${root}/admin/position/toPostionList.do?type=list"><i class="en-arrow-right7"></i>组织架构</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=mypost"><i class="en-arrow-right7"></i>申请新增岗位</a></li>
                     <li><a href="${root}/admin/position/toPostionList.do?type=audit"><i class="en-arrow-right7"></i>待我审批</a></li>
               </ul>
-            </li> --%>
+            </li> 
             
             <!-- 招聘 管理 -->
              <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-github"></i><span>招聘</span> <b class="caret"></b></a>
@@ -131,8 +133,8 @@ setInterval("getNewsNum()","60000"); */
             </li>
             <!-- 绩效管理 -->
             <%-- <li class="mainLi"><a href="${root}/admin/test/UnderConstruction.do"><i class=" icon-thumbs-up"></i><span>绩效</span> </a> </li> --%>
-            <!-- 图书管理 -->
-            <li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书馆</span> </a> </li>
+            
+            
            	<!-- 合同管理 -->
             <li class="mainLi"><a href="${root}/contract/contractApply.do"><i class="icon-signal"></i><span>合同信息</span> </a> </li>
            	<!-- 付款信息管理 -->
@@ -150,7 +152,7 @@ setInterval("getNewsNum()","60000"); */
           	<!-- 项目信息管理 -->
             <li class="mainLi"><a href="${root}/project/projectApply.do"><i class="icon-book"></i><span>项目信息管理</span> </a> </li>
             <!-- 入职必读 -->
-             <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
+             
              <!-- 出差管理 -->
               <li class="dropdown mainLi"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-plane"></i><span>出差管理</span> <b class="caret"></b></a>
 	             	<ul class="dropdown-menu">
@@ -159,6 +161,7 @@ setInterval("getNewsNum()","60000"); */
 	                    <li><a href="${root}/travel/travelView.do"><i class="en-arrow-right7"></i>出差查看</a></li>
 	           	   </ul>
               </li>
+              <!-- 图书管理 --><li class="mainLi"><a href="${root}/admin/book/manager.do"><i class="icon-book"></i><span>图书馆</span> </a> </li>
              
           </ul>
         </div>
