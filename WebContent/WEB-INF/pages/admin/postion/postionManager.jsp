@@ -30,7 +30,7 @@
 										</span>
 									</div>
 									<div class="span4" style="height:37px;">
-										<span class="searchSpan pull-left">所属部门:</span>
+										<span class="searchSpan pull-left">所属部门 :</span>
 										<span class="pull-left">
 											<select id="depId" ng-model="depId"  class="form-control select2" ng-Disabled = "depIdChangeAble"
 												ng-options="dep.depId as dep.name group by dep.group for dep in depList">
@@ -42,7 +42,7 @@
 								</div>
 								<div class="row">
 									<div class="span4" style="height:37px;">
-										<span class="searchSpan pull-left">岗位状态:</span>
+										<span class="searchSpan pull-left">岗位状态 :</span>
 										<span class="pull-left">
 											<select  id="status" ng-model="status" class="form-control">
 												<option value="">--请选择--</option>
@@ -51,7 +51,7 @@
 										</span>
 									</div>
 									<div class="span4" style="height:37px;">
-										<span class="searchSpan pull-left">审批状态:</span>
+										<span class="searchSpan pull-left">审批状态 :</span>
 										<span class="pull-left">
 											<select id="result" ng-model="result" class="form-control">
 												<option value="">--请选择--</option>
@@ -74,17 +74,17 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
 											<thead >
 												<tr>
-													<th>所属部门</th>
-													<th>岗位名称</th>
-													<th>编制</th>
-													<th ng-if="${type=='list' or type=='mypost'}">在岗人数</th>
-													<th ng-if="${type=='list' or type=='mypost'}">空缺</th>
-													<th ng-if="${type=='audit'}">创建人</th>
-													<th ng-if="${type=='audit' or type=='list'}">创建时间</th>
-													<th colspan="3" ng-if="${type=='list'}">操作</th>
-													<th ng-if="${type=='mypost'}">岗位状态</th>
-													<th ng-if="${type=='audit'}">审批状态</th>
-													<th colspan="2" ng-if="${type=='audit'}">操作</th>
+													<th style="text-align: center;font-size:14px;">所属部门</th>
+													<th style="text-align: center;font-size:14px;">岗位名称</th>
+													<th style="text-align: center;font-size:14px;">编制</th>
+													<th ng-if="${type=='list' or type=='mypost'}" style="text-align: center;font-size:14px;">在岗人数</th>
+													<th ng-if="${type=='list' or type=='mypost'}" style="text-align: center;font-size:14px;">空缺</th>
+													<th ng-if="${type=='audit'}" style="text-align: center;font-size:14px;">创建人</th>
+													<th ng-if="${type=='audit' or type=='list'}" style="text-align: center;font-size:14px;">创建时间</th>
+													<th colspan="3" ng-if="${type=='list'}" style="text-align: center;font-size:14px;">操作</th>
+													<th ng-if="${type=='mypost'}" style="text-align: center;font-size:14px;">岗位状态</th>
+													<th ng-if="${type=='audit'}" style="text-align: center;font-size:14px;">审批状态</th>
+													<th colspan="2" ng-if="${type=='audit'}" style="text-align: center;font-size:14px;">操作</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -173,9 +173,11 @@
                                         <input type="text" class="form-control" ng-model="costEntity.salaryScale" />
                                     </div>
 								</div>
+                                <br>
 								<div class="row">
 									<h3 class="span359">相关经历/成就要求</h3>
 								</div>
+<hr>
 								<div class="row">
 									<div class="span359">
 										<span class="searchSpan">过往职业:</span>
@@ -190,21 +192,23 @@
                                         <textarea class="form-control" ng-model="costEntity.recruitC"  rows="3" Placeholder="点击输入关键成就"  ng-required="true"></textarea>
                                     </div>
 								</div>
+<br>
 								<div class="row">
 									<h3 class="span359">技术/岗位要求</h3>
 								</div>
+<hr>
 								<div class="row">
 									<div class="span359">
 										<span class="searchSpan">基本要求1:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitD"  rows="5" Placeholder="点击输入基本要求1"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitD"  rows="10" Placeholder="点击输入基本要求1"></textarea>
                                     </div>
 									<div class="span359">
 										<span class="searchSpan">基本要求2:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitE"  rows="5" Placeholder="点击输入基本要求2"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitE"  rows="10" Placeholder="点击输入基本要求2"></textarea>
                                     </div>
 									<div class="span359">
 										<span class="searchSpan">IPE要求:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitF"  rows="5" Placeholder="点击输入IPE要求"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitF"  rows="10" Placeholder="点击输入IPE要求,选填"></textarea>
                                     </div>
 								</div>
 								<div class="row">
