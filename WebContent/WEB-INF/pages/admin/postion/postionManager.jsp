@@ -173,9 +173,11 @@
                                         <input type="text" class="form-control" ng-model="costEntity.salaryScale" />
                                     </div>
 								</div>
+                                <br>
 								<div class="row">
 									<h3 class="span359">相关经历/成就要求</h3>
 								</div>
+<hr>
 								<div class="row">
 									<div class="span359">
 										<span class="searchSpan">过往职业:</span>
@@ -190,21 +192,23 @@
                                         <textarea class="form-control" ng-model="costEntity.recruitC"  rows="3" Placeholder="点击输入关键成就"  ng-required="true"></textarea>
                                     </div>
 								</div>
+<br>
 								<div class="row">
 									<h3 class="span359">技术/岗位要求</h3>
 								</div>
+<hr>
 								<div class="row">
 									<div class="span359">
 										<span class="searchSpan">基本要求1:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitD"  rows="5" Placeholder="点击输入基本要求1"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitD"  rows="10" Placeholder="点击输入基本要求1"></textarea>
                                     </div>
 									<div class="span359">
 										<span class="searchSpan">基本要求2:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitE"  rows="5" Placeholder="点击输入基本要求2"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitE"  rows="10" Placeholder="点击输入基本要求2"></textarea>
                                     </div>
 									<div class="span359">
 										<span class="searchSpan">IPE要求:</span>
-                                        <textarea class="form-control" ng-model="costEntity.recruitF"  rows="5" Placeholder="点击输入IPE要求"></textarea>
+                                        <textarea class="form-control" ng-model="costEntity.recruitF"  rows="10" Placeholder="点击输入IPE要求,选填"></textarea>
                                     </div>
 								</div>
 								<div class="row">
