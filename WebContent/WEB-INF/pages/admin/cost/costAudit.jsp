@@ -176,6 +176,7 @@
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.statusName"></p></td>
+													<td ng-switch-when="edit"><p ng-bind="item.subUserName"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.costNo"></p></td>
 													<td ng-switch-when="edit">
 				                                        <select id="costType" style="width:80px;" ng-model="item.costType"  class="form-control select2" ng-change="costTypeChangeInList(item)"
