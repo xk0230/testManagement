@@ -501,6 +501,8 @@ public class AdminUserManagerService {
 		page.setEnd(99999);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("orderby", "dep.`order`,au.dep_id,au.position,au.post_id,au.seat_phone");
+		map.put("uid", "admin");
+		map.put("up", "ADMIN");
 	    page.setMap(map);
 		return  adminUserMapper.getAdminUserPageList(page);
 	}
