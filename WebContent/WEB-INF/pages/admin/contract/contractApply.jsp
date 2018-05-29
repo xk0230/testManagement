@@ -21,7 +21,7 @@
 							<div class="widget-content" style="padding-bottom:100px;">
 								<div class="row">
                                     <div class="span4">
-										<span class="searchSpan">合同类型:</span>
+										<span class="searchSpan">合同类型 :</span>
                                         <select id="contractType" ng-model="contractType"  class="form-control span2" 
                                                 ng-options="cType.contractType as cType.name group by cType.group for cType in contractTypeList">
                                             <option value="">--请选择合同类型--</option>
@@ -29,7 +29,7 @@
                                     </div>
                                     
 									<div class="span6" style="height:37px;">
-										<span class="searchSpan pull-left">申请日期:</span>
+										<span class="searchSpan pull-left">申请日期 :</span>
 										<span class="pull-left">
 											<mb-datepicker input-class="mb-date" date="costStartDate" date-format="YYYY-MM-DD" class="pull-left" ></mb-datepicker>
 										</span>
@@ -43,11 +43,11 @@
 								</div>
 								<div class="row">
                                     <div class="span4">
-                                        <span class="searchSpan">单号:</span>
+                                        <span class="searchSpan">单号 :</span>
                                         <input type="text" ng-model="contractId" class="span2" id="contractId">
                                     </div>
                                     <div class="span6">
-                                    	<span class="searchSpan">内容:</span>
+                                    	<span class="searchSpan">内容 :</span>
                                         <input type="text" ng-model="content" class="span4">
                                     </div>
 								</div>
@@ -62,35 +62,25 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1300px;margin-top:7px;" >
 											<thead>
 												<tr>
-													<th width="160px" style="text-align:center;font-size:12px;">操作</th> 
-												 	<th width="90px" style="text-align:center;font-size:12px;">单号</th>
-													<th width="60px" style="text-align:center;font-size:12px;">类型</th>
-													<th width="100px" style="text-align:center;font-size:12px;">内容</th>
-													<th width="100px" style="text-align:center;font-size:12px;">部门</th>
-													<th width="50px" style="text-align:center;font-size:12px;">总金额</th>
-													<th width="30px" style="text-align:center;font-size:12px;">已付</th>
-													<th width="30px" style="text-align:center;font-size:12px;">附件</th>
-													<th width="90px" style="text-align:center;font-size:12px;">收款方</th>
-													<th width="90px" style="text-align:center;font-size:12px;">签订时间</th>
-													<th width="80px" style="text-align:center;font-size:12px;">外部订单</th>
-													<th width="90px" style="text-align:center;font-size:12px;">备注</th>
-												<!-- 	<th width="10%">单号</th>
-													<th width="5%">类型</th>
-													<th width="8%">内容</th>
-													<th width="5%">部门</th>
-													<th width="5%">金额</th>
-													<th width="3%">收款方</th>
-													
-													<th width="10%">签订时间</th>
-													<th width="10%">外部订单</th>
-													<th width="8%">备注</th>
-													<th width="18%" style="min-width：100px">操作</th> -->
+													<th  style="text-align:center;font-size:14px; width:170px;">操作</th> 
+												 	<th  style="text-align:center;font-size:14px; width:90px">单号</th>
+													<th style="text-align:center;font-size:14px;width:40px">类型</th>
+													<th  style="text-align:center;font-size:14px;width:90px">内容</th>
+													<th style="text-align:center;font-size:14px;width:60px">部门</th>
+													<th style="text-align:center;font-size:14px;width:90px">总金额</th>
+													<th style="text-align:center;font-size:14px;width:90px">已付</th>
+													<th  style="text-align:center;font-size:14px;width:40px">附件</th>
+													<th style="text-align:center;font-size:14px;width:90px">收款方</th>
+													<th style="text-align:center;font-size:14px;width:100px">签订时间</th>
+													<th style="text-align:center;font-size:14px;width:90px">外部订单</th>
+													<th style="text-align:center;font-size:14px;width:90px">备注</th>
+												
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode" ng-class="item.status=='99' ? 'ScrapBackground' : ''" >
 													<!-- view -->
-													<td ng-switch-when="view">
+													<td ng-switch-when="view" >
 														<a href="javascript:;" class="btn btn-xs  " ng-click="vm.editContract(item,$index)" ng-if="item.status=='00'"><i class='icon-edit'></i></a>
 														<a href="javascript:;" class="btn btn-xs btn-danger" ng-click="vm.scrap(item)" ng-if="item.status=='00' && item.status!='99'"><i class='icon-remove-sign'></i></a>
 														<button type="button" class="btn btn-xs btn-success  " ng-click="vm.contractAttachmentList(item.contractId)"><i class='icon-file'></i></button>
@@ -111,8 +101,8 @@
 													<td ng-switch-when="view"><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
 												
 													<!-- edit -->
-													<td ng-switch-when="edit" >
-														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)"><i class='icon-ok'></i></a>
+													<td ng-switch-when="edit"  >
+														<a href="javascript:;" class="btn btn-xs btn-success " ng-click="vm.save(item)" style="width:100px;"><i class='icon-ok'></i></a>
 													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.contractId" style="width:90px;"></p></td>
 													<td ng-switch-when="edit">
@@ -125,13 +115,13 @@
 														<input type="text" ng-model="item.content" style="width:100px;" >
 													</td>
 													<td ng-switch-when="edit">
-														<select id="dept" ng-model="item.dept" ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:100px;" class="form-control select2" 
+														<select id="dept" ng-model="item.dept" ng-disabled="${sessionScope.adminUser.userId != 'admin'}" style="width:80px;" class="form-control select2" 
 														ng-options="cType.depId as cType.name group by cType.group for cType in depList">
 														<option value="">部门</option>
 														</select>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="number" ng-model="item.cost" min="-1" style="width:50px;">
+														<input type="number" ng-model="item.cost" min="-1" style="width:70px;">
 													</td>
 													<td ng-switch-when="edit"><p ng-bind="item.costNumAll"></p></td>
 													<td ng-switch-when="edit"><p ng-bind="item.attachmentCnts"></p></td>
@@ -144,11 +134,11 @@
 														<mb-datepicker input-class="mb-date" date="item.contractDate" class="pull-left"  date-format="YYYY-MM-DD"></mb-datepicker>
 													</td>
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.serialid"  style="width:60px;" />
+														<input type="text" ng-model="item.serialid"  style="width:80px;" />
 													</td>
 													
 													<td ng-switch-when="edit">
-														<input type="text" ng-model="item.remakes"  style="width:50px;" />
+														<input type="text" ng-model="item.remakes"  style="width:80px;" />
 													</td>
 													
 												</tr>
