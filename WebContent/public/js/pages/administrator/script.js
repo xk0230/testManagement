@@ -278,7 +278,7 @@ myAppModule.controller('UserListController',
 		};
 		
 		this.bookHis = function (id, parentSelector) {
-			var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
+			var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
 					var auditmodalInstance = $uibModal.open({
 						animation: true,
 						ariaLabelledBy: 'modal-title',

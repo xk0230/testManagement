@@ -367,6 +367,7 @@ myAppModule.controller('CostController',
 				url:$("#rootUrl").val()+'/admin/cost/viewChart.do',
 				params:{
 					costType:$scope.costType,
+					costSubtypeId:$scope.costSubtypeId,
 					costNo:$scope.costNo,
 					remark:$scope.remark,
 					startDate:$filter('date')($scope.costStartDate, "yyyy-MM-dd"),
