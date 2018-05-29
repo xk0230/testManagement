@@ -316,14 +316,15 @@
 												<tr>
 													<th width="55px">操作</th>
 													<th width="100px">编号</th>
-													<th width="50px">类型</th>
-													<th width="200px">内容</th>
-													<th width="50px">部门</th>
+													<th width="80px">类型</th>
+													<th width="100px">内容</th>
+													<th width="80px">部门</th>
 													<th width="50px">金额</th>
 													<th width="130px">收款方</th>
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th>备注</th>
+													<th width="50px">附件</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -341,6 +342,7 @@
 													<td><p ng-bind="item.url | date:'yyyy-MM-dd'"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
 													<td><p ng-bind="item.remakes"></p></td>
+													<td><p><button type="button" class="btn btn-xs btn-success  " ng-click="$ctrl.contractAttachmentList(item.contractId)">{{item.attachmentCnts}}</button></p></td>
 													<!-- edit -->
 												</tr>
 											</tbody>

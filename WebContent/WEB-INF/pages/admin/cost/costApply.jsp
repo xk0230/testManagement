@@ -278,6 +278,7 @@
 													<th width="100px">签订时间</th>
 													<th width="140px">外部订单</th>
 													<th >备注</th>
+													<th width="50px">附件</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -295,6 +296,7 @@
 													<td><p ng-bind="item.url  | date:'yyyy-MM-dd'"></p></td>
 													<td><p ng-bind="item.serialid"></p></td>
 													<td><p  class="line-limit-length span2"  title="{{item.remakes}}" ng-bind="item.remakes"></p></td>
+													<td><p><button type="button" class="btn btn-xs btn-success  " ng-click="$ctrl.contractAttachmentList(item.contractId)">{{item.attachmentCnts}}</button></p></td>
 													<!-- edit -->
 												</tr>
 											</tbody>

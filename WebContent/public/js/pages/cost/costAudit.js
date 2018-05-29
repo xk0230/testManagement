@@ -544,19 +544,22 @@ angular.module('myApp').controller('ModalInstanceCtrl',
 				}
 			});
 		};
+		$ctrl.contractAttachmentList = function(id){
+			window.open("/ssc/admin/attachment/contractManager.do?contractId="+id);  
+		};
 		
-	$scope.Choose = function (item) {
-		var selectItem = {contractId : item.contractId, contractContent : item.content};
-		$uibModalInstance.close(selectItem);
-	};
-	$scope.ChooseNull = function (item) {
-		var selectItem = {contractId : "", contractContent : ""};
-		$uibModalInstance.close(selectItem);
-	};
-
-	$scope.cancel = function () {
-		$uibModalInstance.dismiss('cancel');
-	};
+		$scope.Choose = function (item) {
+			var selectItem = {contractId : item.contractId, contractContent : item.content};
+			$uibModalInstance.close(selectItem);
+		};
+		$scope.ChooseNull = function (item) {
+			var selectItem = {contractId : "", contractContent : ""};
+			$uibModalInstance.close(selectItem);
+		};
+	
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
 
 	});
 
