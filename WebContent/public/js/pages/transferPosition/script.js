@@ -1,4 +1,4 @@
-﻿var myAppModule = angular.module("myApp",['ui.bootstrap'])
+﻿var myAppModule = angular.module("myApp",['ui.bootstrap','materialDatePicker'])
 
 myAppModule.controller('TransferPositionController',
 	function costListController($scope,$http,$uibModal,$document,$filter){
@@ -8,7 +8,6 @@ myAppModule.controller('TransferPositionController',
 		$scope.itemsPerPage = 10;
 		
 		this.$onInit = function(){
-			
 			self.getTransferPositionList();
 		};
 		
@@ -37,6 +36,9 @@ myAppModule.controller('TransferPositionController',
 			}).then(function(res){
 				if(res){
 					self.list = res.data.data || [];
+					angular.forEach(self.list, function(item, key) {
+						item.editMode = 'view';
+					});
 					$scope.totalItems = res.data.total;
 				}else{
 					self.list = [];
@@ -44,45 +46,107 @@ myAppModule.controller('TransferPositionController',
 				}
 			});
 		};
+		this.add = function(){
+			var newItem = {
+				id:"",
+				editMode:"edit",
+				transferTime:$filter('date')(new Date(), "yyyy-MM-dd"),
+				remark:""
+			};
+			var myArray=new Array()
+			myArray.push(newItem);
+			
+			$.each(self.list,
+				function(index, value) {
+					myArray.push(value);
+				}
+			);
+			self.list = myArray;
+		}
 		
-		
-		//日期模块加载
-		$scope.today = function() {
-			$scope.dt = new Date();
-		};
-		$scope.clear = function() {
-			$scope.dt = null;
-		};
-
-		$scope.dateOptions = {
-			dateDisabled: "",
-			formatYear: 'yyyy',
-			maxDate: new Date(9999, 12, 31),
-			minDate: new Date(1000, 1,1),
-			startingDay: 1,
-		};
-
-		$scope.open = function(mode) {
-			if(mode == 1){
-				$scope.popup.opened1 = true;
-			}else if (mode == 2){
-				$scope.popup.opened2 = true;
-			}else if (mode == 3){
-				$scope.popup.opened3 = true;
-			}else if (mode == 4){
-				$scope.popup.opened4 = true;
+		this.save = function (item) {
+			if(!item){
+				swal("请填写完整信息");
+				return ;
 			}
+			if(!item.postOld){
+				swal("请填写调整前岗位");
+				return ;
+			}
+			if(!item.postNew){
+				swal("请填写调整后岗位");
+				return ;
+			}
+			if(!item.salaryOld){
+				swal("请填写调整前薪酬");
+				return ;
+			}
+			if(!item.salaryNew){
+				swal("请填写调整后薪酬");
+				return ;
+			}
+			if(!item.transferTime){
+				swal("请选择调整时间");
+				return ;
+			}
+			var params = {
+				id:item.id,
+				postOld:item.postOld,
+				postNew:item.postNew,
+				salaryOld:item.salaryOld,
+				salaryNew:item.salaryNew,
+				transferTime:$filter('date')(item.transferTime, "yyyy-MM-dd"),
+				remark:item.remark,
+				userId:$('#userId').val()
+			}; 
+			 $http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/transferPosition/saveOrUpdate.do",
+					params:params
+			}).then(function(res){
+				if(res.data.code == 0){
+					swal(res.data.msg);
+					self.getTransferPositionList();
+				}else{
+					swal(res.data.msg);
+				}
+			});
 			
 		};
-	
-		$scope.popup = {
-			opened1: false,
-			opened2: false,
-			opened3: false,
-			opened4: false
+		
+		//报废
+		this.scrap = function (item) {
+			swal({ 
+					title: "确定删除吗？", 
+					text: "你将无法恢复该数据！", 
+					type: "warning", 
+					showCancelButton: true, 
+					closeOnConfirm: false, 
+					showLoaderOnConfirm: true, 
+			},
+			function(){ 
+				$http({
+					method:'POST',
+					url:$("#rootUrl").val()+"/admin/transferPosition/del/"+item.id+".do",
+					params:{}
+				}).then(function(res){
+					if(res.data.code == 0){
+						swal(res.data.msg);
+						self.getTransferPositionList();
+					}else{
+						swal(res.data.msg);
+					}
+				})
+			});
+			return false;
 		};
 		
-		
+		/*编辑*/
+		this.edit = function(item){
+			item.editMode = "edit"
+			item.transferTime = $filter('date')(item.transferTime, "yyyy-MM-dd")
+		}
+
 		this.addTransferPosition = function (id, parentSelector) {
 		    var parentElem = parentSelector ? angular.element($document[0].querySelector('.content-wrapper ' + parentSelector)) : undefined;
 		    	    var modalInstance = $uibModal.open({

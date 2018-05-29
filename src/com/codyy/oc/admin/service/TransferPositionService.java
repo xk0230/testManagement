@@ -80,7 +80,7 @@ public class TransferPositionService {
             transferPosition.setId(UUID.randomUUID().toString());
             
             transferPositionDaoMapper.insertTransferPositionEntity(transferPosition);
-            
+            jsonDto.setMsg(INSERT_SUCCESS);
             jsonDto.setCode(0);
             
         }else{
@@ -116,6 +116,7 @@ public class TransferPositionService {
         
         JsonDto jsonDto = new JsonDto();
         transferPositionDaoMapper.delTransferPositionEntityById(id);
+        jsonDto.setMsg(DEL_SUCCESS);
         jsonDto.setCode(0);
         
         return jsonDto;
