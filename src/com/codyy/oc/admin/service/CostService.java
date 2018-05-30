@@ -431,7 +431,10 @@ public class CostService {
 	    map.put("endTime", cost.getEndDate());
 	    map.put("costNo", cost.getCostNo());
 	    map.put("remark", cost.getRemark());
-		
+	    map.put("userPostion", cost.getCreateUserPosition());
+	    map.put("depId", cost.getDepId());
+	    map.put("userId", cost.getUserId());
+	    
 	    List<CostEntityBean> costPageList = costDaoMapper.getViewChart(map);
 	    
 	    jsonDto.setCode(0);
