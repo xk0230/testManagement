@@ -22,7 +22,7 @@
 							<div class="widget-content" style="padding-bottom: 100px;">
 								<div class="row">
 									<div class="span4" style="height:37px;">
-										<span class="searchSpan pull-left">图书名称:</span>
+										<span class="searchSpan pull-left">图书名称 :</span>
 										<span class="pull-left">
 											<input type="text" class="form-control" name="name" ng-model="name" id="name" />
 										</span>
@@ -39,32 +39,35 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
 											<thead >
 												<tr>
-												<th width="110px">操作</th>
+												<th style="width:5%; font-size:14px;text-align: center;">序号</th>
+												<th style="width:13%; font-size:14px;text-align: center;">操作</th>
 												<!-- <th>序号</th> -->
-												<th>图书编号</th>
-												<th>图书名称</th>
-												<th>当前借阅人</th>
+												
+												<th style="width:70%; font-size:14px;text-align: center;">图书名称</th>
+												<th style="width:12%; font-size:14px;text-align: center;">当前借阅人</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="odd gradeX" ng-repeat="item in vm.list" ng-switch="item.editMode">
 													<!-- view -->
+													<td ng-switch-when="view"><p ng-bind="item.bookNo"></p></td>
 													<td ng-switch-when="view">
 														<a href="javascript:;" class="btn btn-small" ng-click="vm.edit(item)" ng-if="${adminUser.position == 'ADMIN'}"><i class="icon-edit"></i></a>
-														<a href="javascript:;" class="btn btn-small btn-danger"  ng-click="vm.pullOrBackBook(item)" >借还</a>
+														<a href="javascript:;" class="btn btn-small btn-success"  ng-click="vm.pullOrBackBook(item)" >借还</a>
 													</td>
 													<!-- <td ng-switch-when="view"><p ng-bind="$index + 1"></p></td> -->
-													<td ng-switch-when="view"><p ng-bind="item.bookNo"></p></td>
+													
 													<td ng-switch-when="view"><p ng-bind="item.name"></p></td>
 													<td ng-switch-when="view"><p ng-bind="item.userName"></p></td>
  													<!-- edit -->
+ 													<td ng-switch-when="edit">
+														<p ng-bind="item.bookNo"></p>
+													</td>
 													<td ng-switch-when="edit">
 														<a href="javascript:;" class="btn btn-small btn-success" ng-click="vm.save(item)"><i class="icon-ok"></i></a>
 													</td>
 													<!-- <td ng-switch-when="edit"><p ng-bind="$index + 1"></p></td> -->
-													<td ng-switch-when="edit">
-														<p ng-bind="item.bookNo"></p>
-													</td>
+													
 													<td ng-switch-when="edit">
 														<input type="text" class="form-control" ng-model="item.name" />
 													</td>
