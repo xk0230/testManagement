@@ -529,37 +529,37 @@
 									<div class="row">
 										<div class="span262">
 											<span class="searchSpan">顺境-谦和:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpSjA" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpSjA" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">顺境-韧性:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpSjB" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpSjB" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">顺境-理性:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpSjC" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpSjC" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">顺境-自信:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpSjD" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpSjD" />
 										</div>
 									</div>
 									<div class="row">
 										<div class="span262">
 											<span class="searchSpan">逆境-谦和:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpNjA" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpNjA" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">逆境-韧性:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpNjB" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpNjB" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">逆境-理性:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpNjC" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpNjC" />
 										</div>
 										<div class="span262">
 											<span class="searchSpan">逆境-自信:</span>
-											<input type="text" class="form-control" style="width:140px;" ng-model="vm.user.adminUserDetail.pdpNjD" />
+											<input type="text" class="form-control" style="width:130px;" ng-model="vm.user.adminUserDetail.pdpNjD" />
 										</div>
 									</div>
 									<!--<div class="row">

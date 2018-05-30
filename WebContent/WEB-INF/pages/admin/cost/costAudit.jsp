@@ -81,18 +81,18 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1850px;margin-top:7px;" >
 											<thead >
 												<tr >
-													<th width="40px" style="text-align:center;">选择</th>
-													<th width="120px" style="text-align:center;">操作</th>
-													<th width="100px" style="text-align:center;">状态</th>
-													<th width="80px" style="text-align:center;">提交人</th>
-													<th width="120px" style="text-align:center;">成本单号</th>
-													<th width="40px" style="text-align:center;">类型</th>
-													<th width="60px" style="text-align:center;">分类</th>
-													<th width="120px" style="text-align:center;">成本产生时间</th>
-													<th width="60px" style="text-align:center;">金额</th>
-													<th width="120px" style="text-align:center;">成本详情</th>
-													<th width="200px" style="text-align:center;">合同</th>
-													<th width="200px" style="text-align:center;">项目</th>
+													<th width="40px;">选择</th>
+													<th width="120px" >操作</th>
+													<th width="100px" >状态</th>
+													<th width="80px" >提交人</th>
+													<th width="120px">成本单号</th>
+													<th width="40px" >类型</th>
+													<th width="60px" >分类</th>
+													<th width="120px">成本产生时间</th>
+													<th width="60px">金额</th>
+													<th width="120px" >成本详情</th>
+													<th width="200px" >合同</th>
+													<th width="200px" >项目</th>
 													
 													<th>审核人</th>
 

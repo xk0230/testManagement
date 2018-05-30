@@ -39,12 +39,12 @@
 										<table class="table table-condensed table-bordered table-striped" style="width:1134px;margin-top:7px;" >
 											<thead >
 												<tr>
-												<th style="width:5%; font-size:14px;text-align: center;">序号</th>
-												<th style="width:13%; font-size:14px;text-align: center;">操作</th>
+												<th style="width:5%; ">序号</th>
+												<th style="width:13%; ">操作</th>
 												<!-- <th>序号</th> -->
 												
-												<th style="width:70%; font-size:14px;text-align: center;">图书名称</th>
-												<th style="width:12%; font-size:14px;text-align: center;">当前借阅人</th>
+												<th style="width:70%;">图书名称</th>
+												<th style="width:12%; ">当前借阅人</th>
 												</tr>
 											</thead>
 											<tbody>
