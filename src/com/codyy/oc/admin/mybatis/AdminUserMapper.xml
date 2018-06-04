@@ -276,6 +276,7 @@
 		 on au.user_id = ad.user_id
 		where au.username = #{userName} 
 			and au.password = #{password}
+			and au.work_status != '离职' 
 	</select>
 	
 		<select id="getAdminUser2" resultType="com.codyy.oc.admin.entity.AdminUser"  parameterType="map">
