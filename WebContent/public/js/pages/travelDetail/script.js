@@ -169,14 +169,18 @@ myAppModule.controller('TravelDetailController',
 			var travelItem = self.list[index];
 			if(travelItem.editMode == "edit"){
 				if(!travelItem.type){
-					alert("请填写出差类型");
+					alert("请填写类型");
 					return ;
 				}
 				if(!travelItem.startPlace){
-					alert("请填写出差出发地");
+					alert("请填写起始地");
 					return ;
 				}
-	
+				if(!travelItem.startTimeStr){
+					alert("请填写时间");
+					return ;
+				}
+				
 				if(travelItem.costNum<0){
 					alert("请填写金额");
 					return ;
