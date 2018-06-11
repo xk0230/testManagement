@@ -97,6 +97,14 @@ public class AttachmentService {
                 File file = new File(realPath, fileName);
                 uploadFile.transferTo(file);
                 
+                //如果fid为myoc则为附件查找对应的id
+                if("myoc".equals(attachmentEntity.getfId())){
+                	List<AttachmentEntity> ats =  attachmentDaoMapper.getAttachmentEntityByFId(attachmentEntity.getfId());
+                	if(ats!=null &&ats.size()>0){
+                		attachmentEntity.setId(ats.get(0).getId());
+                	}
+                }
+                
                 if(StringUtils.isBlank(attachmentEntity.getId())){
                     
                     attachmentEntity.setCreateTime(DateUtils.getCurrentTimestamp());
@@ -150,6 +158,15 @@ public class AttachmentService {
         
         return jsonDto;
         
+    }
+    
+    public AttachmentEntity getAttachmentEntityByFId(String id){
+        List<AttachmentEntity> attachmentEntity = attachmentDaoMapper.getAttachmentEntityByFId(id);
+        if(attachmentEntity != null && attachmentEntity.size()>0 ){
+            return (attachmentEntity.get(0));
+        }else{
+            return null;
+        }
     }
 
     public JsonDto delAttachmentEntityById(String id){

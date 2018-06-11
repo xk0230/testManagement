@@ -40,6 +40,13 @@
 	 	WHERE id = #{_parameter}
 	</select>
 	
+	<select id="getAttachmentEntityByFId" parameterType="java.lang.String" resultType="com.codyy.oc.admin.entity.AttachmentEntity">
+		SELECT id,f_id AS fId,name,location,type,create_Time AS createTime
+		FROM ATTACHMENT
+	 	WHERE f_id = #{_parameter}
+	 	order by create_time desc 
+	</select>
+	
 	<delete id="delAttachmentEntityById" parameterType="java.lang.String">
 	
 		DELETE FROM ATTACHMENT WHERE id = #{_parameter}

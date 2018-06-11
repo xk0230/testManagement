@@ -78,8 +78,8 @@ setInterval("getNewsNum()","60000"); */
 	              <ul class="dropdown-menu">
 	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">个人信息</a></li>
 	                <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.passwdChange')">修改密码</a></li>
-	                <li ng-if="${adminUser.userId == 'admin'}"><a href="javascript:void(0);" ng-click="header.addOc('${sessionScope.adminUser.userId }','.passwdChange')">上传组织架构图</a></li>
-	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">组织架构</a></li>
+	                <li ng-if="${adminUser.userId == 'admin'}"><a href="javascript:void(0);" ng-click="header.addOc('${sessionScope.adminUser.userId }','.myoc')">上传组织架构图</a></li>
+	                <li><a href="${root}/admin/adminuser/toOc.do">组织架构</a></li>
 	                <li><a href="javascript:logout();">退出</a></li>
 	              </ul>
 	            </li>
@@ -97,7 +97,7 @@ setInterval("getNewsNum()","60000"); */
     <div class="subnavbar">
       <div class="subnavbar-inner">
         <div class="container">
-          <ul class="mainnav">
+          <ul class="mainnav myoc">
             <li class="dropdown mainLi"><a href="${root}/admin/index.do"><i class="icon-dashboard"></i><span>首页</span> </a> </li>
             
             <li class="mainLi"><a href="${root}/admin/newin.do"><i class="icon-user"></i><span>入职必读</span> </a> </li>
@@ -216,8 +216,8 @@ setInterval("getNewsNum()","60000"); */
     </script>
     <!-- 这里可以定义一个js文件放到public下面 -->
     <script type="text/ng-template" id="myOcEditContent.html">
-			<div class="main-inner" style="width:350px;">
-			<div class="container" style="width:350px;">
+			<div class="main-inner " style="width:350px;">
+			<div class="container " style="width:350px;">
 				<div class="row" style="width:350px;">
 					<div class="span4" style="width:350px;">
 						<div class="widget">

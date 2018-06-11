@@ -15,6 +15,8 @@ public interface AttachmentDaoMapper {
     
     AttachmentEntity getAttachmentEntityById(String id);
     
+    List<AttachmentEntity>  getAttachmentEntityByFId(String fid);
+    
     void delAttachmentEntityById(String id);
     
     List<AttachmentEntity> getAttachmentEntityPageList(Page page);

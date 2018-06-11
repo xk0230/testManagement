@@ -3,7 +3,6 @@ package com.codyy.oc.admin.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,9 +25,11 @@ import com.codyy.oc.admin.BaseController;
 import com.codyy.oc.admin.entity.AdminUser;
 import com.codyy.oc.admin.entity.AdminUserDetail;
 import com.codyy.oc.admin.entity.AdminUserPermission;
+import com.codyy.oc.admin.entity.AttachmentEntity;
 import com.codyy.oc.admin.entity.ChartPieData;
 import com.codyy.oc.admin.service.AdminUserManagerService;
 import com.codyy.oc.admin.service.AdminUserPermissionService;
+import com.codyy.oc.admin.service.AttachmentService;
 import com.codyy.oc.admin.view.UserSearchModel;
 
 @Controller
@@ -40,6 +41,9 @@ public class AdminUserManagerController extends BaseController {
 	
 	@Autowired
 	private AdminUserPermissionService adminUserPermissionService;
+	
+	@Autowired
+	private AttachmentService attachmentService;
 	
 	@InitBinder  
 	 public void initBinder(WebDataBinder binder) {  
@@ -293,6 +297,7 @@ public class AdminUserManagerController extends BaseController {
 	 */
 	@RequestMapping("toOc")
 	public String toOc(){
-		return "admin/administrator/addAdministrator";
+		AttachmentEntity a = attachmentService.getAttachmentEntityByFId("myoc");
+		return "redirect:/admin/attachment/download.do?id="+a.getId();
 	}
 }

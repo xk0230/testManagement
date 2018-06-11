@@ -161,7 +161,26 @@ myAppModule2.controller('OcInstanceCtrl',
 		
 
 	  $ctrl.ok = function () {
-		  alert("上传成功")
+		  var fd = new FormData();
+		     var file = document.querySelector('input[type=file]').files[0];
+		     fd.append('uploadFile', file);
+		     fd.append('fId', 'myoc');
+		     fd.append('type', '99');
+//		     fd.append('id','myoc');
+			 
+			 $http({
+					method:'POST',
+					url:"/ssc/admin/attachment/saveOrUpdate.do",
+					data: fd,
+					headers: {'Content-Type':undefined},
+				
+				}).then(function(res){
+					
+					if(res.data.code == 0){
+						$uibModalInstance.close('0');
+					}
+					
+				});
 	  };
 
 	  $ctrl.cancel = function () {
