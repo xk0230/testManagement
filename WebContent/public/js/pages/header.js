@@ -55,6 +55,40 @@ myAppModule2.controller('HeaderController',
 						
 					});
 		   };
+		   
+		  this.addOc = function (id, parentSelector) {
+				console.log("上传组织架构图")
+			    var parentElem = parentSelector ? angular.element($document[0].querySelector(parentSelector)) : undefined;
+			    	var modalInstance = $uibModal.open({
+			    		  animation: true,
+			    		  ariaLabelledBy: 'modal-title',
+			    	      ariaDescribedBy: 'modal-body',
+			    	      templateUrl: 'myOcEditContent.html',
+			    	      controller: 'OcInstanceCtrl',
+			    	      controllerAs: '$ctrl',
+			    	      size: 'lg',
+			    	      appendTo: parentElem,
+			    	      //参数
+			    	      resolve: {
+			    	    	  //好像必须得这么写
+			    	        id: function () {
+			    	          return id;
+			    	        }
+			    	      }
+			    	    });
+
+			    	    modalInstance.result.then(function (selectedItem) {
+			    	    	
+			    	    	//ok的回调函数
+//			    	    	if(selectedItem == '0'){
+//			    	    		self.getAttachmentEntityPageList();
+//			    	    	}
+			    	    	
+			    	    }, function () {
+			    	    	//取消的回调函数
+			    	    	
+			    	    });
+			   };
 	}
 );
 //编辑页面的control
@@ -103,6 +137,31 @@ myAppModule2.controller('ModalInstanceCtrl',
 				}
 				
 			});
+	  };
+
+	  $ctrl.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	  };
+
+	});
+
+
+myAppModule2.controller('OcInstanceCtrl', 
+		function ($scope,$http,$uibModalInstance,$filter, userId) {
+	  var $ctrl = this;
+	  //用户名
+	  $scope.userId = userId;
+	  
+	  this.$onInit = function(){
+		
+		if(userId != ''){
+			
+		}
+	  };
+		
+
+	  $ctrl.ok = function () {
+		  alert("上传成功")
 	  };
 
 	  $ctrl.cancel = function () {

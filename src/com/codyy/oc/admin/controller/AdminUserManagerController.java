@@ -285,4 +285,14 @@ public class AdminUserManagerController extends BaseController {
 		AdminUser au = getSessionUser(request);
 		return adminUserManagerService.getchartsdata(au);
 	}
+	
+	
+	/**
+	 * 显示组织架构图
+	 * @return
+	 */
+	@RequestMapping("toOc")
+	public String toOc(){
+		return "admin/administrator/addAdministrator";
+	}
 }

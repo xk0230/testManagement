@@ -78,6 +78,8 @@ setInterval("getNewsNum()","60000"); */
 	              <ul class="dropdown-menu">
 	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">个人信息</a></li>
 	                <li><a href="javascript:void(0);" ng-click="header.ChangePwd('${sessionScope.adminUser.userId }','.passwdChange')">修改密码</a></li>
+	                <li ng-if="${adminUser.userId == 'admin'}"><a href="javascript:void(0);" ng-click="header.addOc('${sessionScope.adminUser.userId }','.passwdChange')">上传组织架构图</a></li>
+	                <li><a href="${root}/admin/adminuser/toAddOrEditUser.do?id=${sessionScope.adminUser.userId }">组织架构</a></li>
 	                <li><a href="javascript:logout();">退出</a></li>
 	              </ul>
 	            </li>
@@ -211,6 +213,54 @@ setInterval("getNewsNum()","60000"); */
 				</div>
 			</div>
 		</div>
+    </script>
+    <!-- 这里可以定义一个js文件放到public下面 -->
+    <script type="text/ng-template" id="myOcEditContent.html">
+			<div class="main-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<div class="widget">
+							<!-- 标题 -->
+							<div class="widget-header">
+								<i class="icon-pushpin"></i>
+								<h3> 组织架构图</h3>
+							</div>
+							
+							<div class="widget-content">
+								<div class="row">
+									<div class="panel-body">
+									<div class="form-horizontal group-border" role="form">
+										<input type="hidden" ng-model="attachmentEntity.id">
+										<div class="form-group">
+											<div class="col-lg-6">
+												<label class="col-lg-4 control-label">选择文件</label>
+												<div class="col-lg-8">
+													<input type="file" class="form-control" file-model="myfile" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+								</div>
+											
+								<hr>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">取消</button>
+        </div>
+			
     </script>
 </div>
 
