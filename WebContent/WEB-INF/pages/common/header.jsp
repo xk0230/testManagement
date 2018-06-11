@@ -216,12 +216,11 @@ setInterval("getNewsNum()","60000"); */
     </script>
     <!-- 这里可以定义一个js文件放到public下面 -->
     <script type="text/ng-template" id="myOcEditContent.html">
-			<div class="main-inner">
-			<div class="container">
-				<div class="row">
-					<div class="span12">
+			<div class="main-inner" style="width:350px;">
+			<div class="container" style="width:350px;">
+				<div class="row" style="width:350px;">
+					<div class="span4" style="width:350px;">
 						<div class="widget">
-							<!-- 标题 -->
 							<div class="widget-header">
 								<i class="icon-pushpin"></i>
 								<h3> 组织架构图</h3>
@@ -234,27 +233,15 @@ setInterval("getNewsNum()","60000"); */
 										<input type="hidden" ng-model="attachmentEntity.id">
 										<div class="form-group">
 											<div class="col-lg-6">
-												<label class="col-lg-4 control-label">选择文件</label>
-												<div class="col-lg-8">
 													<input type="file" class="form-control" file-model="myfile" />
-												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-								</div>
-											
-								<hr>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+								   </div>
+					             </div>
+				            </div>
+ 		              </div>
+                  </div>
 
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">保存</button>

@@ -147,16 +147,16 @@ myAppModule2.controller('ModalInstanceCtrl',
 
 
 myAppModule2.controller('OcInstanceCtrl', 
-		function ($scope,$http,$uibModalInstance,$filter, userId) {
+		function ($scope,$http,$uibModalInstance,$filter, id) {
 	  var $ctrl = this;
 	  //用户名
-	  $scope.userId = userId;
+//	  $scope.userId = userId;
 	  
 	  this.$onInit = function(){
 		
-		if(userId != ''){
-			
-		}
+//		if(userId != ''){
+//			
+//		}
 	  };
 		
 
