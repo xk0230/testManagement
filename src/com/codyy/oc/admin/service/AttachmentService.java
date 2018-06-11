@@ -165,7 +165,7 @@ public class AttachmentService {
         if(attachmentEntity != null && attachmentEntity.size()>0 ){
             return (attachmentEntity.get(0));
         }else{
-            return null;
+            return new AttachmentEntity() ;
         }
     }
 
